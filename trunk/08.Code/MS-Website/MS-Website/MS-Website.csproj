@@ -126,12 +126,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-3.2.0\css\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-3.2.0\css\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-3.2.0\css\bootstrap.css" />
+    <Content Include="Content\bootstrap-3.2.0\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap-3.2.0\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\bootstrap-3.2.0\js\bootstrap.js" />
+    <Content Include="Content\bootstrap-3.2.0\js\bootstrap.min.js" />
+    <Content Include="Content\Image\favicon.ico" />
+    <Content Include="Content\Style\Home.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -188,6 +198,11 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\bootstrap-3.2.0\css\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-3.2.0\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-3.2.0\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-3.2.0\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\bootstrap-3.2.0\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -215,10 +230,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

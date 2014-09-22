@@ -4,8 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link rel="icon" href="@Url.Content("~/Content/Image/favicon.ico")"/>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @Styles.Render("~/Content/bootstrap-3.2.0/css/bootstrap.min.css")
+    @Styles.Render("~/Content/bootstrap-3.2.0/css/bootstrap-theme.min.css")
+    @Scripts.Render("~/Content/bootstrap-3.2.0/js/bootstrap.min.js")
+
 </head>
 <body>
     @RenderBody()
