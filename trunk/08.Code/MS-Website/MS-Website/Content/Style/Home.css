@@ -22,7 +22,7 @@
 .search {
     float: left;
     height: 100%;
-    width: 350px;
+    width: 30%;
     margin-left: 20px;
 }
 
@@ -30,7 +30,7 @@
     float: left;
     margin-left: 10px;
     height: 100%;
-    width: 175px;
+    width: 15%;
 }
 
 .siteLinks li {
@@ -173,11 +173,13 @@
 .searchInput {
     border-radius: 0px;
     height: 40px;
+
 }
 
 .banner {
     background: #DDD;
-    /*height: 200px;*/
+    background: #ffffff url('../../Content/Image/background_blur.jpg') no-repeat right;
+    background-size: 100% auto;
 }
 
 .banner .heading {
@@ -200,7 +202,7 @@
 .secondHeading {
     clear: left;
     font-size: 20px;
-    margin-left: 62px;
+    margin-left: 5px;
     margin-top: 3px;
     padding: 5px 20px 5px;
     background: #7bd454;
@@ -210,7 +212,6 @@
 
 .welcom {
     text-align: center;
-    margin-left: 337px;
 }
 
 .welcom .textWelcom {
@@ -218,11 +219,12 @@
     margin-right: 0;
     background: rgba(255, 255, 255, 0.6);
     width: 346px;
+    margin: 0 auto;
 }
 
 .shotcutButton {
     text-align: center;
-    padding-top: 15px;
+    padding: 15px 0 40px 0;
 }
 
 .shotcutButton .sb {
@@ -257,12 +259,32 @@
 
 .background .w1{
     float: left;
+    margin-top: -136px;
+    margin-left: 10px;
 }
 
 .background .w2{
     float: right;
+    margin-top: -108px;
+    margin-right: 10px;
 }
 
 .background .bg{
+
+}
+
+.footer{
+    background: #545454;
+    padding-top: 1.0625rem;
+    padding-bottom: 2.8125rem;
+    color: white;
+    text-align: center;
+}
+
+.footerLogo{
+
+}
+
+.footerLegal{
 
 }
