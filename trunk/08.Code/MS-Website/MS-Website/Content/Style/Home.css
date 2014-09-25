@@ -178,7 +178,7 @@
 
 .banner {
     background: #DDD;
-    background: #ffffff url('../../Content/Image/background_blur.jpg') no-repeat right;
+    background: #ffffff url('../../Content/Image/Home/background_blur.jpg') no-repeat right;
     background-size: 100% auto;
 }
 
@@ -274,7 +274,7 @@
 }
 
 .footer{
-    background: #545454;
+    background: #bdc3c7;
     padding-top: 1.0625rem;
     padding-bottom: 2.8125rem;
     color: white;
