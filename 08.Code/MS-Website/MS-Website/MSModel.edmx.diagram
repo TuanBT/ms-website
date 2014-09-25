@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d271603309d54900934d45b090316baa" Name="Diagram1">
+        <EntityTypeShape EntityType="MSModel.Account" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Comment" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Customer" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.JobRequest" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Maid" Width="1.5" PointX="8.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.MaidMediator" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Rating" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Recruitment" Width="1.5" PointX="8.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.SkillCategory" Width="1.5" PointX="1.5" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.SkillInstance" Width="1.5" PointX="0.75" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.SkillReference" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Staff" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="MSModel.FK_Customer_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_MaidRepresentation_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Staff_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Comment_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Comment_JobRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Rating_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Recruitment_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_JobRequest_Maid" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_JobRequest_MaidRepresentation" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_JobRequest_SkillReference" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_JobRequest_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Rating_JobRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Recruitment_JobRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Maid_MaidMediator" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Maid_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Recruitment_SkillReference1" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillInstance_SkillCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_Skill" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
