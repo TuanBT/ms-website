@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="MSModelStoreContainer">
           <EntitySet Name="Account" EntityType="MSModel.Store.Account" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Comment" EntityType="MSModel.Store.Comment" store:Type="Tables" Schema="dbo" />
@@ -201,7 +201,8 @@
           <Property Name="SkillValue" Type="int" Nullable="false" />
           <Property Name="SkillNormallized" Type="float" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
-          <Property Name="SkillStringValue" Type="nvarchar" MaxLength="50" />
+          <Property Name="SkillStringValue" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SkillNameVietnam" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="SkillReference">
           <Key>
@@ -444,8 +445,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MSModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -673,9 +673,10 @@
           <Property Name="SkillValue" Type="Int32" Nullable="false" />
           <Property Name="SkillNormallized" Type="Double" Nullable="false" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="SkillStringValue" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SkillStringValue" Type="String" MaxLength="50" Unicode="true" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="SkillCategory" Relationship="MSModel.FK_SkillInstance_SkillCategory" FromRole="SkillInstance" ToRole="SkillCategory" />
           <NavigationProperty Name="SkillReferences" Relationship="MSModel.FK_SkillReference_Skill" FromRole="SkillInstance" ToRole="SkillReference" />
+          <Property Type="String" Name="SkillNameVietnam" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SkillReference">
           <Key>
@@ -1042,6 +1043,7 @@
           <EntitySetMapping Name="SkillInstances">
             <EntityTypeMapping TypeName="MSModel.SkillInstance">
               <MappingFragment StoreEntitySet="SkillInstance">
+                <ScalarProperty Name="SkillNameVietnam" ColumnName="SkillNameVietnam" />
                 <ScalarProperty Name="SkillId" ColumnName="SkillId" />
                 <ScalarProperty Name="SkillName" ColumnName="SkillName" />
                 <ScalarProperty Name="SkillValue" ColumnName="SkillValue" />
@@ -1095,6 +1097,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

@@ -25,6 +25,7 @@ namespace MS_Website
         public double SkillNormallized { get; set; }
         public int CategoryId { get; set; }
         public string SkillStringValue { get; set; }
+        public string SkillNameVietnam { get; set; }
     
         public virtual SkillCategory SkillCategory { get; set; }
         public virtual ICollection<SkillReference> SkillReferences { get; set; }

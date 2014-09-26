@@ -3,6 +3,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/Style/Home.css" rel="stylesheet">
+<script>
+    $(document).ready(function () {
+        $('#recruitmentBtn').click(function () {
+            $.getJSON("/Home/GetJsonData", null, function (data) {
+                var div = $('#ajaxDiv');
+                console.debug(data);
+                div.html("<br/> " + "Persons received from server: " + "<br/>");
+                $.each(data, function (i, item) {
+                    div.append("<br/>" + "Username: " + item.Username + ", LName: " + item.Password);
+                });
+            });
+        });
+    });
+</script>
+
+<div id="ajaxDiv">
+    
+</div>
 
 <div class="header">
     <div class="rows">
@@ -71,7 +89,7 @@
     </div>
     <div class="rows">
             <div class="shotcutButton">
-                <a href="#" class="sb sb1 btn btn-default">Yêu cầu người giúp việc</a>
+                <a href="#" id="recruitmentBtn" class="sb sb1 btn btn-default">Yêu cầu người giúp việc</a>
                 <a href="#" class="sb sb2 btn btn-default">Làm sao để có việc</a>
             </div>
     </div>
