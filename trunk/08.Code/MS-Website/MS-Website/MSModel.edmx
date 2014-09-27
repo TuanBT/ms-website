@@ -7,6 +7,7 @@
     <Schema Namespace="MSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="MSModelStoreContainer">
           <EntitySet Name="Account" EntityType="MSModel.Store.Account" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Apply" EntityType="MSModel.Store.Apply" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Comment" EntityType="MSModel.Store.Comment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Customer" EntityType="MSModel.Store.Customer" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="JobRequest" EntityType="MSModel.Store.JobRequest" store:Type="Tables" Schema="dbo" />
@@ -19,6 +20,14 @@
           <EntitySet Name="SkillReference" EntityType="MSModel.Store.SkillReference" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Staff" EntityType="MSModel.Store.Staff" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="MSModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Apply_JobRequest" Association="MSModel.Store.FK_Apply_JobRequest">
+            <End Role="JobRequest" EntitySet="JobRequest" />
+            <End Role="Apply" EntitySet="Apply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Apply_Recruitment" Association="MSModel.Store.FK_Apply_Recruitment">
+            <End Role="Recruitment" EntitySet="Recruitment" />
+            <End Role="Apply" EntitySet="Apply" />
+          </AssociationSet>
           <AssociationSet Name="FK_Comment_Customer" Association="MSModel.Store.FK_Comment_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Comment" EntitySet="Comment" />
@@ -35,7 +44,7 @@
             <End Role="Maid" EntitySet="Maid" />
             <End Role="JobRequest" EntitySet="JobRequest" />
           </AssociationSet>
-          <AssociationSet Name="FK_JobRequest_MaidRepresentation" Association="MSModel.Store.FK_JobRequest_MaidRepresentation">
+          <AssociationSet Name="FK_JobRequest_MaidMediator1" Association="MSModel.Store.FK_JobRequest_MaidMediator1">
             <End Role="MaidMediator" EntitySet="MaidMediator" />
             <End Role="JobRequest" EntitySet="JobRequest" />
           </AssociationSet>
@@ -47,7 +56,7 @@
             <End Role="Staff" EntitySet="Staff" />
             <End Role="JobRequest" EntitySet="JobRequest" />
           </AssociationSet>
-          <AssociationSet Name="FK_Maid_MaidMediator" Association="MSModel.Store.FK_Maid_MaidMediator">
+          <AssociationSet Name="FK_Maid_MaidMediator1" Association="MSModel.Store.FK_Maid_MaidMediator1">
             <End Role="MaidMediator" EntitySet="MaidMediator" />
             <End Role="Maid" EntitySet="Maid" />
           </AssociationSet>
@@ -69,10 +78,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Recruitment_Customer" Association="MSModel.Store.FK_Recruitment_Customer">
             <End Role="Customer" EntitySet="Customer" />
-            <End Role="Recruitment" EntitySet="Recruitment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Recruitment_JobRequest" Association="MSModel.Store.FK_Recruitment_JobRequest">
-            <End Role="JobRequest" EntitySet="JobRequest" />
             <End Role="Recruitment" EntitySet="Recruitment" />
           </AssociationSet>
           <AssociationSet Name="FK_Recruitment_SkillReference1" Association="MSModel.Store.FK_Recruitment_SkillReference1">
@@ -101,7 +106,7 @@
           <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="JoinDate" Type="date" Nullable="false" />
-          <Property Name="Role" Type="nchar" MaxLength="10" />
+          <Property Name="Role" Type="nchar" MaxLength="20" />
           <Property Name="IsWebmaster" Type="nchar" Nullable="false" MaxLength="10" />
           <Property Name="Avatar" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
@@ -109,15 +114,23 @@
           <Property Name="Phone" Type="nchar" MaxLength="20" />
           <Property Name="FullName" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Apply">
+          <Key>
+            <PropertyRef Name="RecruitmentId" />
+          </Key>
+          <Property Name="RecruitmentId" Type="int" Nullable="false" />
+          <Property Name="JobRequestId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="CommentId" />
           </Key>
-          <Property Name="CommentId" Type="int" Nullable="false" />
+          <Property Name="CommentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="JobRequestId" Type="int" Nullable="false" />
-          <Property Name="PostDate" Type="datetime" Nullable="false" />
-          <Property Name="CommentContent" Type="nvarchar" MaxLength="500" />
+          <Property Name="PostTime" Type="datetime" Nullable="false" />
+          <Property Name="CommentContent" Type="nvarchar" Nullable="false" MaxLength="500" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -125,10 +138,7 @@
           </Key>
           <Property Name="AccountId" Type="int" Nullable="false" />
           <Property Name="Payment" Type="float" Nullable="false" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
-          <Property Name="RatingId" Type="int" />
-          <Property Name="CommentId" Type="int" />
         </EntityType>
         <EntityType Name="JobRequest">
           <Key>
@@ -137,10 +147,12 @@
           <Property Name="JobRequestId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="SkillRefId" Type="int" Nullable="false" />
           <Property Name="MaidMediatorId" Type="int" />
-          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="StaffId" Type="int" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="PostTime" Type="datetime" Nullable="false" />
           <Property Name="ExpiredTime" Type="datetime" Nullable="false" />
-          <Property Name="StaffId" Type="int" />
+          <Property Name="ApplyTimes" Type="datetime" />
+          <Property Name="MaidId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Maid">
           <Key>
@@ -149,21 +161,19 @@
           <Property Name="MaidId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="MaidName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="MaidMediatorId" Type="int" />
+          <Property Name="StaffId" Type="int" />
           <Property Name="PersonalImage" Type="nchar" MaxLength="100" />
           <Property Name="Experience" Type="float" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="RateAvg" Type="float" />
           <Property Name="FullName" Type="nvarchar" MaxLength="20" />
-          <Property Name="StaffId" Type="int" />
         </EntityType>
         <EntityType Name="MaidMediator">
           <Key>
             <PropertyRef Name="AccountId" />
           </Key>
           <Property Name="AccountId" Type="int" Nullable="false" />
-          <Property Name="ApplyTimes" Type="int" />
           <Property Name="Payment" Type="float" Nullable="false" />
-          <Property Name="MaidId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
@@ -181,7 +191,7 @@
           <Property Name="RecruitmentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="SkillRefId" Type="int" Nullable="false" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
-          <Property Name="JobRequestId" Type="int" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="PostRequestedTime" Type="datetime" Nullable="false" />
           <Property Name="ExpiredTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -191,27 +201,43 @@
           </Key>
           <Property Name="CategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CategoryNameVietnam" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="SkillInstance">
           <Key>
             <PropertyRef Name="SkillId" />
           </Key>
           <Property Name="SkillId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="SkillName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="SkillValue" Type="int" Nullable="false" />
-          <Property Name="SkillNormallized" Type="float" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
-          <Property Name="SkillStringValue" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SkillName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SkillString" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SkillNormallized" Type="int" Nullable="false" />
+          <Property Name="SkillStringValue" Type="float" Nullable="false" />
           <Property Name="SkillNameVietnam" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="SkillReference">
           <Key>
             <PropertyRef Name="SkillRefId" />
           </Key>
-          <Property Name="SkillRefId" Type="int" Nullable="false" />
-          <Property Name="Gender" Type="int" Nullable="false" />
-          <Property Name="Cooking" Type="int" Nullable="false" />
-          <Property Name="Babysister" Type="int" Nullable="false" />
+          <Property Name="SkillRefId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Language" Type="int" />
+          <Property Name="Experience" Type="int" />
+          <Property Name="Hometown" Type="int" />
+          <Property Name="Address" Type="int" />
+          <Property Name="Health" Type="int" />
+          <Property Name="Personality" Type="int" />
+          <Property Name="Stay" Type="int" />
+          <Property Name="Salary" Type="int" />
+          <Property Name="Work" Type="int" />
+          <Property Name="Exteriority" Type="int" />
+          <Property Name="Care" Type="int" />
+          <Property Name="Cooking" Type="int" />
+          <Property Name="Washing" Type="int" />
+          <Property Name="CleanHouse" Type="int" />
+          <Property Name="Time" Type="int" />
+          <Property Name="Day" Type="int" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -229,6 +255,30 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_Apply_JobRequest">
+          <End Role="JobRequest" Type="MSModel.Store.JobRequest" Multiplicity="1" />
+          <End Role="Apply" Type="MSModel.Store.Apply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobRequest">
+              <PropertyRef Name="JobRequestId" />
+            </Principal>
+            <Dependent Role="Apply">
+              <PropertyRef Name="JobRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Apply_Recruitment">
+          <End Role="Recruitment" Type="MSModel.Store.Recruitment" Multiplicity="1" />
+          <End Role="Apply" Type="MSModel.Store.Apply" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Recruitment">
+              <PropertyRef Name="RecruitmentId" />
+            </Principal>
+            <Dependent Role="Apply">
+              <PropertyRef Name="RecruitmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Comment_Customer">
           <End Role="Customer" Type="MSModel.Store.Customer" Multiplicity="1" />
           <End Role="Comment" Type="MSModel.Store.Comment" Multiplicity="*" />
@@ -266,18 +316,18 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_JobRequest_Maid">
-          <End Role="Maid" Type="MSModel.Store.Maid" Multiplicity="0..1" />
+          <End Role="Maid" Type="MSModel.Store.Maid" Multiplicity="1" />
           <End Role="JobRequest" Type="MSModel.Store.JobRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Maid">
               <PropertyRef Name="MaidId" />
             </Principal>
             <Dependent Role="JobRequest">
-              <PropertyRef Name="MaidMediatorId" />
+              <PropertyRef Name="MaidId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobRequest_MaidRepresentation">
+        <Association Name="FK_JobRequest_MaidMediator1">
           <End Role="MaidMediator" Type="MSModel.Store.MaidMediator" Multiplicity="0..1" />
           <End Role="JobRequest" Type="MSModel.Store.JobRequest" Multiplicity="*" />
           <ReferentialConstraint>
@@ -309,11 +359,11 @@
               <PropertyRef Name="AccountId" />
             </Principal>
             <Dependent Role="JobRequest">
-              <PropertyRef Name="MaidMediatorId" />
+              <PropertyRef Name="StaffId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Maid_MaidMediator">
+        <Association Name="FK_Maid_MaidMediator1">
           <End Role="MaidMediator" Type="MSModel.Store.MaidMediator" Multiplicity="0..1" />
           <End Role="Maid" Type="MSModel.Store.Maid" Multiplicity="*" />
           <ReferentialConstraint>
@@ -385,18 +435,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Recruitment_JobRequest">
-          <End Role="JobRequest" Type="MSModel.Store.JobRequest" Multiplicity="0..1" />
-          <End Role="Recruitment" Type="MSModel.Store.Recruitment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JobRequest">
-              <PropertyRef Name="JobRequestId" />
-            </Principal>
-            <Dependent Role="Recruitment">
-              <PropertyRef Name="JobRequestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Recruitment_SkillReference1">
           <End Role="SkillReference" Type="MSModel.Store.SkillReference" Multiplicity="1" />
           <End Role="Recruitment" Type="MSModel.Store.Recruitment" Multiplicity="*" />
@@ -422,7 +460,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SkillReference_Skill">
-          <End Role="SkillInstance" Type="MSModel.Store.SkillInstance" Multiplicity="1" />
+          <End Role="SkillInstance" Type="MSModel.Store.SkillInstance" Multiplicity="0..1" />
           <End Role="SkillReference" Type="MSModel.Store.SkillReference" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SkillInstance">
@@ -451,6 +489,7 @@
       <Schema Namespace="MSModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="MSEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="MSModel.Account" />
+          <EntitySet Name="Applies" EntityType="MSModel.Apply" />
           <EntitySet Name="Comments" EntityType="MSModel.Comment" />
           <EntitySet Name="Customers" EntityType="MSModel.Customer" />
           <EntitySet Name="JobRequests" EntityType="MSModel.JobRequest" />
@@ -475,6 +514,14 @@
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Staff" EntitySet="Staffs" />
           </AssociationSet>
+          <AssociationSet Name="FK_Apply_JobRequest" Association="MSModel.FK_Apply_JobRequest">
+            <End Role="JobRequest" EntitySet="JobRequests" />
+            <End Role="Apply" EntitySet="Applies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Apply_Recruitment" Association="MSModel.FK_Apply_Recruitment">
+            <End Role="Recruitment" EntitySet="Recruitments" />
+            <End Role="Apply" EntitySet="Applies" />
+          </AssociationSet>
           <AssociationSet Name="FK_Comment_Customer" Association="MSModel.FK_Comment_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Comment" EntitySet="Comments" />
@@ -495,7 +542,7 @@
             <End Role="Maid" EntitySet="Maids" />
             <End Role="JobRequest" EntitySet="JobRequests" />
           </AssociationSet>
-          <AssociationSet Name="FK_JobRequest_MaidRepresentation" Association="MSModel.FK_JobRequest_MaidRepresentation">
+          <AssociationSet Name="FK_JobRequest_MaidMediator1" Association="MSModel.FK_JobRequest_MaidMediator1">
             <End Role="MaidMediator" EntitySet="MaidMediators" />
             <End Role="JobRequest" EntitySet="JobRequests" />
           </AssociationSet>
@@ -511,11 +558,7 @@
             <End Role="JobRequest" EntitySet="JobRequests" />
             <End Role="Rating" EntitySet="Ratings" />
           </AssociationSet>
-          <AssociationSet Name="FK_Recruitment_JobRequest" Association="MSModel.FK_Recruitment_JobRequest">
-            <End Role="JobRequest" EntitySet="JobRequests" />
-            <End Role="Recruitment" EntitySet="Recruitments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Maid_MaidMediator" Association="MSModel.FK_Maid_MaidMediator">
+          <AssociationSet Name="FK_Maid_MaidMediator1" Association="MSModel.FK_Maid_MaidMediator1">
             <End Role="MaidMediator" EntitySet="MaidMediators" />
             <End Role="Maid" EntitySet="Maids" />
           </AssociationSet>
@@ -540,31 +583,41 @@
           <Key>
             <PropertyRef Name="AccountId" />
           </Key>
-          <Property Name="AccountId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Role" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
-          <Property Name="IsWebmaster" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
-          <Property Name="Avatar" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Status" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
-          <Property Name="Phone" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
-          <Property Name="FullName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="AccountId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTime" Name="JoinDate" Nullable="false" Precision="0" />
+          <Property Type="String" Name="Role" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="IsWebmaster" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Avatar" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Status" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Phone" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="FullName" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Customer" Relationship="MSModel.FK_Customer_Account" FromRole="Account" ToRole="Customer" />
           <NavigationProperty Name="MaidMediator" Relationship="MSModel.FK_MaidRepresentation_Account" FromRole="Account" ToRole="MaidMediator" />
           <NavigationProperty Name="Staff" Relationship="MSModel.FK_Staff_Account" FromRole="Account" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Apply">
+          <Key>
+            <PropertyRef Name="RecruitmentId" />
+          </Key>
+          <Property Type="Int32" Name="RecruitmentId" Nullable="false" />
+          <Property Type="Int32" Name="JobRequestId" Nullable="false" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="JobRequest" Relationship="MSModel.FK_Apply_JobRequest" FromRole="Apply" ToRole="JobRequest" />
+          <NavigationProperty Name="Recruitment" Relationship="MSModel.FK_Apply_Recruitment" FromRole="Apply" ToRole="Recruitment" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
             <PropertyRef Name="CommentId" />
           </Key>
-          <Property Name="CommentId" Type="Int32" Nullable="false" />
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="JobRequestId" Type="Int32" Nullable="false" />
-          <Property Name="PostDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CommentContent" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="CommentId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CustomerId" Nullable="false" />
+          <Property Type="Int32" Name="JobRequestId" Nullable="false" />
+          <Property Type="DateTime" Name="PostTime" Nullable="false" Precision="3" />
+          <Property Type="String" Name="CommentContent" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Customer" Relationship="MSModel.FK_Comment_Customer" FromRole="Comment" ToRole="Customer" />
           <NavigationProperty Name="JobRequest" Relationship="MSModel.FK_Comment_JobRequest" FromRole="Comment" ToRole="JobRequest" />
         </EntityType>
@@ -572,12 +625,9 @@
           <Key>
             <PropertyRef Name="AccountId" />
           </Key>
-          <Property Name="AccountId" Type="Int32" Nullable="false" />
-          <Property Name="Payment" Type="Double" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Address" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="RatingId" Type="Int32" />
-          <Property Name="CommentId" Type="Int32" />
+          <Property Type="Int32" Name="AccountId" Nullable="false" />
+          <Property Type="Double" Name="Payment" Nullable="false" />
+          <Property Type="String" Name="Address" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Account" Relationship="MSModel.FK_Customer_Account" FromRole="Customer" ToRole="Account" />
           <NavigationProperty Name="Comments" Relationship="MSModel.FK_Comment_Customer" FromRole="Customer" ToRole="Comment" />
           <NavigationProperty Name="Ratings" Relationship="MSModel.FK_Rating_Customer" FromRole="Customer" ToRole="Rating" />
@@ -587,58 +637,58 @@
           <Key>
             <PropertyRef Name="JobRequestId" />
           </Key>
-          <Property Name="JobRequestId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="SkillRefId" Type="Int32" Nullable="false" />
-          <Property Name="MaidMediatorId" Type="Int32" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="PostTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ExpiredTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="StaffId" Type="Int32" />
+          <Property Type="Int32" Name="JobRequestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="SkillRefId" Nullable="false" />
+          <Property Type="Int32" Name="MaidMediatorId" />
+          <Property Type="Int32" Name="StaffId" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="PostTime" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="ExpiredTime" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="ApplyTimes" Precision="3" />
+          <Property Type="Int32" Name="MaidId" Nullable="false" />
+          <NavigationProperty Name="Applies" Relationship="MSModel.FK_Apply_JobRequest" FromRole="JobRequest" ToRole="Apply" />
           <NavigationProperty Name="Comments" Relationship="MSModel.FK_Comment_JobRequest" FromRole="JobRequest" ToRole="Comment" />
           <NavigationProperty Name="Maid" Relationship="MSModel.FK_JobRequest_Maid" FromRole="JobRequest" ToRole="Maid" />
-          <NavigationProperty Name="MaidMediator" Relationship="MSModel.FK_JobRequest_MaidRepresentation" FromRole="JobRequest" ToRole="MaidMediator" />
+          <NavigationProperty Name="MaidMediator" Relationship="MSModel.FK_JobRequest_MaidMediator1" FromRole="JobRequest" ToRole="MaidMediator" />
           <NavigationProperty Name="SkillReference" Relationship="MSModel.FK_JobRequest_SkillReference" FromRole="JobRequest" ToRole="SkillReference" />
           <NavigationProperty Name="Staff" Relationship="MSModel.FK_JobRequest_Staff" FromRole="JobRequest" ToRole="Staff" />
           <NavigationProperty Name="Ratings" Relationship="MSModel.FK_Rating_JobRequest" FromRole="JobRequest" ToRole="Rating" />
-          <NavigationProperty Name="Recruitments" Relationship="MSModel.FK_Recruitment_JobRequest" FromRole="JobRequest" ToRole="Recruitment" />
         </EntityType>
         <EntityType Name="Maid">
           <Key>
             <PropertyRef Name="MaidId" />
           </Key>
-          <Property Name="MaidId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="MaidName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="MaidMediatorId" Type="Int32" />
-          <Property Name="PersonalImage" Type="String" MaxLength="100" Unicode="true" FixedLength="true" />
-          <Property Name="Experience" Type="Double" />
-          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
-          <Property Name="RateAvg" Type="Double" />
-          <Property Name="FullName" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="StaffId" Type="Int32" />
+          <Property Type="Int32" Name="MaidId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="MaidName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="MaidMediatorId" />
+          <Property Type="Int32" Name="StaffId" />
+          <Property Type="String" Name="PersonalImage" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Type="Double" Name="Experience" />
+          <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Double" Name="RateAvg" />
+          <Property Type="String" Name="FullName" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="JobRequests" Relationship="MSModel.FK_JobRequest_Maid" FromRole="Maid" ToRole="JobRequest" />
-          <NavigationProperty Name="MaidMediator" Relationship="MSModel.FK_Maid_MaidMediator" FromRole="Maid" ToRole="MaidMediator" />
+          <NavigationProperty Name="MaidMediator" Relationship="MSModel.FK_Maid_MaidMediator1" FromRole="Maid" ToRole="MaidMediator" />
           <NavigationProperty Name="Staff" Relationship="MSModel.FK_Maid_Staff" FromRole="Maid" ToRole="Staff" />
         </EntityType>
         <EntityType Name="MaidMediator">
           <Key>
             <PropertyRef Name="AccountId" />
           </Key>
-          <Property Name="AccountId" Type="Int32" Nullable="false" />
-          <Property Name="ApplyTimes" Type="Int32" />
-          <Property Name="Payment" Type="Double" Nullable="false" />
-          <Property Name="MaidId" Type="Int32" Nullable="false" />
+          <Property Type="Int32" Name="AccountId" Nullable="false" />
+          <Property Type="Double" Name="Payment" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="MSModel.FK_MaidRepresentation_Account" FromRole="MaidMediator" ToRole="Account" />
-          <NavigationProperty Name="JobRequests" Relationship="MSModel.FK_JobRequest_MaidRepresentation" FromRole="MaidMediator" ToRole="JobRequest" />
-          <NavigationProperty Name="Maids" Relationship="MSModel.FK_Maid_MaidMediator" FromRole="MaidMediator" ToRole="Maid" />
+          <NavigationProperty Name="JobRequests" Relationship="MSModel.FK_JobRequest_MaidMediator1" FromRole="MaidMediator" ToRole="JobRequest" />
+          <NavigationProperty Name="Maids" Relationship="MSModel.FK_Maid_MaidMediator1" FromRole="MaidMediator" ToRole="Maid" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
             <PropertyRef Name="RatingId" />
           </Key>
-          <Property Name="RatingId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="JobRequestId" Type="Int32" Nullable="false" />
-          <Property Name="Rate" Type="Double" Nullable="false" />
+          <Property Type="Int32" Name="RatingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CustomerId" Nullable="false" />
+          <Property Type="Int32" Name="JobRequestId" Nullable="false" />
+          <Property Type="Double" Name="Rate" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="MSModel.FK_Rating_Customer" FromRole="Rating" ToRole="Customer" />
           <NavigationProperty Name="JobRequest" Relationship="MSModel.FK_Rating_JobRequest" FromRole="Rating" ToRole="JobRequest" />
         </EntityType>
@@ -646,46 +696,62 @@
           <Key>
             <PropertyRef Name="RecruitmentId" />
           </Key>
-          <Property Name="RecruitmentId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="SkillRefId" Type="Int32" Nullable="false" />
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="JobRequestId" Type="Int32" />
-          <Property Name="PostRequestedTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ExpiredTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="RecruitmentId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="SkillRefId" Nullable="false" />
+          <Property Type="Int32" Name="CustomerId" Nullable="false" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="PostRequestedTime" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="ExpiredTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Apply" Relationship="MSModel.FK_Apply_Recruitment" FromRole="Recruitment" ToRole="Apply" />
           <NavigationProperty Name="Customer" Relationship="MSModel.FK_Recruitment_Customer" FromRole="Recruitment" ToRole="Customer" />
-          <NavigationProperty Name="JobRequest" Relationship="MSModel.FK_Recruitment_JobRequest" FromRole="Recruitment" ToRole="JobRequest" />
           <NavigationProperty Name="SkillReference" Relationship="MSModel.FK_Recruitment_SkillReference1" FromRole="Recruitment" ToRole="SkillReference" />
         </EntityType>
         <EntityType Name="SkillCategory">
           <Key>
             <PropertyRef Name="CategoryId" />
           </Key>
-          <Property Name="CategoryId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="CategoryId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CategoryNameVietnam" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SkillInstances" Relationship="MSModel.FK_SkillInstance_SkillCategory" FromRole="SkillCategory" ToRole="SkillInstance" />
         </EntityType>
         <EntityType Name="SkillInstance">
           <Key>
             <PropertyRef Name="SkillId" />
           </Key>
-          <Property Name="SkillId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="SkillName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="SkillValue" Type="Int32" Nullable="false" />
-          <Property Name="SkillNormallized" Type="Double" Nullable="false" />
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="SkillStringValue" Type="String" MaxLength="50" Unicode="true" FixedLength="false" Nullable="false" />
+          <Property Type="Int32" Name="SkillId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="String" Name="SkillName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SkillString" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="SkillNormallized" Nullable="false" />
+          <Property Type="Double" Name="SkillStringValue" Nullable="false" />
+          <Property Type="String" Name="SkillNameVietnam" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SkillCategory" Relationship="MSModel.FK_SkillInstance_SkillCategory" FromRole="SkillInstance" ToRole="SkillCategory" />
           <NavigationProperty Name="SkillReferences" Relationship="MSModel.FK_SkillReference_Skill" FromRole="SkillInstance" ToRole="SkillReference" />
-          <Property Type="String" Name="SkillNameVietnam" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SkillReference">
           <Key>
             <PropertyRef Name="SkillRefId" />
           </Key>
-          <Property Name="SkillRefId" Type="Int32" Nullable="false" />
-          <Property Name="Gender" Type="Int32" Nullable="false" />
-          <Property Name="Cooking" Type="Int32" Nullable="false" />
-          <Property Name="Babysister" Type="Int32" Nullable="false" />
+          <Property Type="Int32" Name="SkillRefId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Gender" />
+          <Property Type="Int32" Name="Age" />
+          <Property Type="Int32" Name="Language" />
+          <Property Type="Int32" Name="Experience" />
+          <Property Type="Int32" Name="Hometown" />
+          <Property Type="Int32" Name="Address" />
+          <Property Type="Int32" Name="Health" />
+          <Property Type="Int32" Name="Personality" />
+          <Property Type="Int32" Name="Stay" />
+          <Property Type="Int32" Name="Salary" />
+          <Property Type="Int32" Name="Work" />
+          <Property Type="Int32" Name="Exteriority" />
+          <Property Type="Int32" Name="Care" />
+          <Property Type="Int32" Name="Cooking" />
+          <Property Type="Int32" Name="Washing" />
+          <Property Type="Int32" Name="CleanHouse" />
+          <Property Type="Int32" Name="Time" />
+          <Property Type="Int32" Name="Day" />
           <NavigationProperty Name="JobRequests" Relationship="MSModel.FK_JobRequest_SkillReference" FromRole="SkillReference" ToRole="JobRequest" />
           <NavigationProperty Name="Recruitments" Relationship="MSModel.FK_Recruitment_SkillReference1" FromRole="SkillReference" ToRole="Recruitment" />
           <NavigationProperty Name="SkillInstance" Relationship="MSModel.FK_SkillReference_Skill" FromRole="SkillReference" ToRole="SkillInstance" />
@@ -694,7 +760,7 @@
           <Key>
             <PropertyRef Name="AccountId" />
           </Key>
-          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Type="Int32" Name="AccountId" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="MSModel.FK_Staff_Account" FromRole="Staff" ToRole="Account" />
           <NavigationProperty Name="JobRequests" Relationship="MSModel.FK_JobRequest_Staff" FromRole="Staff" ToRole="JobRequest" />
           <NavigationProperty Name="Maids" Relationship="MSModel.FK_Maid_Staff" FromRole="Staff" ToRole="Maid" />
@@ -703,15 +769,15 @@
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_Customer_Account">
-          <End Role="Account" Type="MSModel.Account" Multiplicity="1" />
-          <End Role="Customer" Type="MSModel.Customer" Multiplicity="0..1" />
+          <End Type="MSModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="MSModel.Customer" Role="Customer" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="AccountId" />
@@ -722,8 +788,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MaidRepresentation_Account">
-          <End Role="Account" Type="MSModel.Account" Multiplicity="1" />
-          <End Role="MaidMediator" Type="MSModel.MaidMediator" Multiplicity="0..1" />
+          <End Type="MSModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="MSModel.MaidMediator" Role="MaidMediator" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="AccountId" />
@@ -734,8 +800,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Staff_Account">
-          <End Role="Account" Type="MSModel.Account" Multiplicity="1" />
-          <End Role="Staff" Type="MSModel.Staff" Multiplicity="0..1" />
+          <End Type="MSModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="MSModel.Staff" Role="Staff" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Account">
               <PropertyRef Name="AccountId" />
@@ -745,9 +811,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Apply_JobRequest">
+          <End Type="MSModel.JobRequest" Role="JobRequest" Multiplicity="1" />
+          <End Type="MSModel.Apply" Role="Apply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobRequest">
+              <PropertyRef Name="JobRequestId" />
+            </Principal>
+            <Dependent Role="Apply">
+              <PropertyRef Name="JobRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Apply_Recruitment">
+          <End Type="MSModel.Recruitment" Role="Recruitment" Multiplicity="1" />
+          <End Type="MSModel.Apply" Role="Apply" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Recruitment">
+              <PropertyRef Name="RecruitmentId" />
+            </Principal>
+            <Dependent Role="Apply">
+              <PropertyRef Name="RecruitmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Comment_Customer">
-          <End Role="Customer" Type="MSModel.Customer" Multiplicity="1" />
-          <End Role="Comment" Type="MSModel.Comment" Multiplicity="*" />
+          <End Type="MSModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="MSModel.Comment" Role="Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="AccountId" />
@@ -758,8 +848,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Comment_JobRequest">
-          <End Role="JobRequest" Type="MSModel.JobRequest" Multiplicity="1" />
-          <End Role="Comment" Type="MSModel.Comment" Multiplicity="*" />
+          <End Type="MSModel.JobRequest" Role="JobRequest" Multiplicity="1" />
+          <End Type="MSModel.Comment" Role="Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="JobRequest">
               <PropertyRef Name="JobRequestId" />
@@ -770,8 +860,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Rating_Customer">
-          <End Role="Customer" Type="MSModel.Customer" Multiplicity="1" />
-          <End Role="Rating" Type="MSModel.Rating" Multiplicity="*" />
+          <End Type="MSModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="MSModel.Rating" Role="Rating" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="AccountId" />
@@ -782,8 +872,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Recruitment_Customer">
-          <End Role="Customer" Type="MSModel.Customer" Multiplicity="1" />
-          <End Role="Recruitment" Type="MSModel.Recruitment" Multiplicity="*" />
+          <End Type="MSModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="MSModel.Recruitment" Role="Recruitment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="AccountId" />
@@ -794,20 +884,20 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_JobRequest_Maid">
-          <End Role="Maid" Type="MSModel.Maid" Multiplicity="0..1" />
-          <End Role="JobRequest" Type="MSModel.JobRequest" Multiplicity="*" />
+          <End Type="MSModel.Maid" Role="Maid" Multiplicity="1" />
+          <End Type="MSModel.JobRequest" Role="JobRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Maid">
               <PropertyRef Name="MaidId" />
             </Principal>
             <Dependent Role="JobRequest">
-              <PropertyRef Name="MaidMediatorId" />
+              <PropertyRef Name="MaidId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobRequest_MaidRepresentation">
-          <End Role="MaidMediator" Type="MSModel.MaidMediator" Multiplicity="0..1" />
-          <End Role="JobRequest" Type="MSModel.JobRequest" Multiplicity="*" />
+        <Association Name="FK_JobRequest_MaidMediator1">
+          <End Type="MSModel.MaidMediator" Role="MaidMediator" Multiplicity="0..1" />
+          <End Type="MSModel.JobRequest" Role="JobRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MaidMediator">
               <PropertyRef Name="AccountId" />
@@ -818,8 +908,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_JobRequest_SkillReference">
-          <End Role="SkillReference" Type="MSModel.SkillReference" Multiplicity="1" />
-          <End Role="JobRequest" Type="MSModel.JobRequest" Multiplicity="*" />
+          <End Type="MSModel.SkillReference" Role="SkillReference" Multiplicity="1" />
+          <End Type="MSModel.JobRequest" Role="JobRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SkillReference">
               <PropertyRef Name="SkillRefId" />
@@ -830,20 +920,20 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_JobRequest_Staff">
-          <End Role="Staff" Type="MSModel.Staff" Multiplicity="0..1" />
-          <End Role="JobRequest" Type="MSModel.JobRequest" Multiplicity="*" />
+          <End Type="MSModel.Staff" Role="Staff" Multiplicity="0..1" />
+          <End Type="MSModel.JobRequest" Role="JobRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
               <PropertyRef Name="AccountId" />
             </Principal>
             <Dependent Role="JobRequest">
-              <PropertyRef Name="MaidMediatorId" />
+              <PropertyRef Name="StaffId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Rating_JobRequest">
-          <End Role="JobRequest" Type="MSModel.JobRequest" Multiplicity="1" />
-          <End Role="Rating" Type="MSModel.Rating" Multiplicity="*" />
+          <End Type="MSModel.JobRequest" Role="JobRequest" Multiplicity="1" />
+          <End Type="MSModel.Rating" Role="Rating" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="JobRequest">
               <PropertyRef Name="JobRequestId" />
@@ -853,21 +943,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Recruitment_JobRequest">
-          <End Role="JobRequest" Type="MSModel.JobRequest" Multiplicity="0..1" />
-          <End Role="Recruitment" Type="MSModel.Recruitment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JobRequest">
-              <PropertyRef Name="JobRequestId" />
-            </Principal>
-            <Dependent Role="Recruitment">
-              <PropertyRef Name="JobRequestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Maid_MaidMediator">
-          <End Role="MaidMediator" Type="MSModel.MaidMediator" Multiplicity="0..1" />
-          <End Role="Maid" Type="MSModel.Maid" Multiplicity="*" />
+        <Association Name="FK_Maid_MaidMediator1">
+          <End Type="MSModel.MaidMediator" Role="MaidMediator" Multiplicity="0..1" />
+          <End Type="MSModel.Maid" Role="Maid" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MaidMediator">
               <PropertyRef Name="AccountId" />
@@ -878,8 +956,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Maid_Staff">
-          <End Role="Staff" Type="MSModel.Staff" Multiplicity="0..1" />
-          <End Role="Maid" Type="MSModel.Maid" Multiplicity="*" />
+          <End Type="MSModel.Staff" Role="Staff" Multiplicity="0..1" />
+          <End Type="MSModel.Maid" Role="Maid" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
               <PropertyRef Name="AccountId" />
@@ -890,8 +968,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Recruitment_SkillReference1">
-          <End Role="SkillReference" Type="MSModel.SkillReference" Multiplicity="1" />
-          <End Role="Recruitment" Type="MSModel.Recruitment" Multiplicity="*" />
+          <End Type="MSModel.SkillReference" Role="SkillReference" Multiplicity="1" />
+          <End Type="MSModel.Recruitment" Role="Recruitment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SkillReference">
               <PropertyRef Name="SkillRefId" />
@@ -902,8 +980,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SkillInstance_SkillCategory">
-          <End Role="SkillCategory" Type="MSModel.SkillCategory" Multiplicity="1" />
-          <End Role="SkillInstance" Type="MSModel.SkillInstance" Multiplicity="*" />
+          <End Type="MSModel.SkillCategory" Role="SkillCategory" Multiplicity="1" />
+          <End Type="MSModel.SkillInstance" Role="SkillInstance" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SkillCategory">
               <PropertyRef Name="CategoryId" />
@@ -914,8 +992,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SkillReference_Skill">
-          <End Role="SkillInstance" Type="MSModel.SkillInstance" Multiplicity="1" />
-          <End Role="SkillReference" Type="MSModel.SkillReference" Multiplicity="*" />
+          <End Type="MSModel.SkillInstance" Role="SkillInstance" Multiplicity="0..1" />
+          <End Type="MSModel.SkillReference" Role="SkillReference" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SkillInstance">
               <PropertyRef Name="SkillId" />
@@ -925,7 +1003,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -934,109 +1012,116 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="MSModel.Account">
               <MappingFragment StoreEntitySet="Account">
-                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="IsWebmaster" ColumnName="IsWebmaster" />
-                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="IsWebmaster" ColumnName="IsWebmaster" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Applies">
+            <EntityTypeMapping TypeName="MSModel.Apply">
+              <MappingFragment StoreEntitySet="Apply">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="JobRequestId" ColumnName="JobRequestId" />
+                <ScalarProperty Name="RecruitmentId" ColumnName="RecruitmentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="MSModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
-                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="JobRequestId" ColumnName="JobRequestId" />
-                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
                 <ScalarProperty Name="CommentContent" ColumnName="CommentContent" />
+                <ScalarProperty Name="PostTime" ColumnName="PostTime" />
+                <ScalarProperty Name="JobRequestId" ColumnName="JobRequestId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="MSModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
-                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="JobRequests">
             <EntityTypeMapping TypeName="MSModel.JobRequest">
               <MappingFragment StoreEntitySet="JobRequest">
-                <ScalarProperty Name="JobRequestId" ColumnName="JobRequestId" />
-                <ScalarProperty Name="SkillRefId" ColumnName="SkillRefId" />
-                <ScalarProperty Name="MaidMediatorId" ColumnName="MaidMediatorId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="PostTime" ColumnName="PostTime" />
+                <ScalarProperty Name="MaidId" ColumnName="MaidId" />
+                <ScalarProperty Name="ApplyTimes" ColumnName="ApplyTimes" />
                 <ScalarProperty Name="ExpiredTime" ColumnName="ExpiredTime" />
+                <ScalarProperty Name="PostTime" ColumnName="PostTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="MaidMediatorId" ColumnName="MaidMediatorId" />
+                <ScalarProperty Name="SkillRefId" ColumnName="SkillRefId" />
+                <ScalarProperty Name="JobRequestId" ColumnName="JobRequestId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Maids">
             <EntityTypeMapping TypeName="MSModel.Maid">
               <MappingFragment StoreEntitySet="Maid">
-                <ScalarProperty Name="MaidId" ColumnName="MaidId" />
-                <ScalarProperty Name="MaidName" ColumnName="MaidName" />
-                <ScalarProperty Name="MaidMediatorId" ColumnName="MaidMediatorId" />
-                <ScalarProperty Name="PersonalImage" ColumnName="PersonalImage" />
-                <ScalarProperty Name="Experience" ColumnName="Experience" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="RateAvg" ColumnName="RateAvg" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="RateAvg" ColumnName="RateAvg" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="PersonalImage" ColumnName="PersonalImage" />
                 <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="MaidMediatorId" ColumnName="MaidMediatorId" />
+                <ScalarProperty Name="MaidName" ColumnName="MaidName" />
+                <ScalarProperty Name="MaidId" ColumnName="MaidId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MaidMediators">
             <EntityTypeMapping TypeName="MSModel.MaidMediator">
               <MappingFragment StoreEntitySet="MaidMediator">
-                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-                <ScalarProperty Name="ApplyTimes" ColumnName="ApplyTimes" />
                 <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="MaidId" ColumnName="MaidId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ratings">
             <EntityTypeMapping TypeName="MSModel.Rating">
               <MappingFragment StoreEntitySet="Rating">
-                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="JobRequestId" ColumnName="JobRequestId" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="JobRequestId" ColumnName="JobRequestId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Recruitments">
             <EntityTypeMapping TypeName="MSModel.Recruitment">
               <MappingFragment StoreEntitySet="Recruitment">
-                <ScalarProperty Name="RecruitmentId" ColumnName="RecruitmentId" />
-                <ScalarProperty Name="SkillRefId" ColumnName="SkillRefId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="JobRequestId" ColumnName="JobRequestId" />
-                <ScalarProperty Name="PostRequestedTime" ColumnName="PostRequestedTime" />
                 <ScalarProperty Name="ExpiredTime" ColumnName="ExpiredTime" />
+                <ScalarProperty Name="PostRequestedTime" ColumnName="PostRequestedTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="SkillRefId" ColumnName="SkillRefId" />
+                <ScalarProperty Name="RecruitmentId" ColumnName="RecruitmentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SkillCategories">
             <EntityTypeMapping TypeName="MSModel.SkillCategory">
               <MappingFragment StoreEntitySet="SkillCategory">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryNameVietnam" ColumnName="CategoryNameVietnam" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1044,22 +1129,37 @@
             <EntityTypeMapping TypeName="MSModel.SkillInstance">
               <MappingFragment StoreEntitySet="SkillInstance">
                 <ScalarProperty Name="SkillNameVietnam" ColumnName="SkillNameVietnam" />
-                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
-                <ScalarProperty Name="SkillName" ColumnName="SkillName" />
-                <ScalarProperty Name="SkillValue" ColumnName="SkillValue" />
-                <ScalarProperty Name="SkillNormallized" ColumnName="SkillNormallized" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="SkillStringValue" ColumnName="SkillStringValue" />
+                <ScalarProperty Name="SkillNormallized" ColumnName="SkillNormallized" />
+                <ScalarProperty Name="SkillString" ColumnName="SkillString" />
+                <ScalarProperty Name="SkillName" ColumnName="SkillName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="SkillId" ColumnName="SkillId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SkillReferences">
             <EntityTypeMapping TypeName="MSModel.SkillReference">
               <MappingFragment StoreEntitySet="SkillReference">
-                <ScalarProperty Name="SkillRefId" ColumnName="SkillRefId" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="CleanHouse" ColumnName="CleanHouse" />
+                <ScalarProperty Name="Washing" ColumnName="Washing" />
                 <ScalarProperty Name="Cooking" ColumnName="Cooking" />
-                <ScalarProperty Name="Babysister" ColumnName="Babysister" />
+                <ScalarProperty Name="Care" ColumnName="Care" />
+                <ScalarProperty Name="Exteriority" ColumnName="Exteriority" />
+                <ScalarProperty Name="Work" ColumnName="Work" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Stay" ColumnName="Stay" />
+                <ScalarProperty Name="Personality" ColumnName="Personality" />
+                <ScalarProperty Name="Health" ColumnName="Health" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Hometown" ColumnName="Hometown" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="SkillRefId" ColumnName="SkillRefId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1073,11 +1173,11 @@
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="MSModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

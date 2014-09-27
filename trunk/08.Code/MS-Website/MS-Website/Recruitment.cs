@@ -17,12 +17,12 @@ namespace MS_Website
         public int RecruitmentId { get; set; }
         public int SkillRefId { get; set; }
         public int CustomerId { get; set; }
-        public Nullable<int> JobRequestId { get; set; }
+        public string Status { get; set; }
         public System.DateTime PostRequestedTime { get; set; }
         public System.DateTime ExpiredTime { get; set; }
     
+        public virtual Apply Apply { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual JobRequest JobRequest { get; set; }
         public virtual SkillReference SkillReference { get; set; }
     }
 }

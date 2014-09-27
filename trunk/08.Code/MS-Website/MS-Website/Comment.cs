@@ -17,7 +17,7 @@ namespace MS_Website
         public int CommentId { get; set; }
         public int CustomerId { get; set; }
         public int JobRequestId { get; set; }
-        public System.DateTime PostDate { get; set; }
+        public System.DateTime PostTime { get; set; }
         public string CommentContent { get; set; }
     
         public virtual Customer Customer { get; set; }

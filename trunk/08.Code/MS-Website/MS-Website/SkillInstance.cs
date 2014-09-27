@@ -20,11 +20,11 @@ namespace MS_Website
         }
     
         public int SkillId { get; set; }
-        public string SkillName { get; set; }
-        public int SkillValue { get; set; }
-        public double SkillNormallized { get; set; }
         public int CategoryId { get; set; }
-        public string SkillStringValue { get; set; }
+        public string SkillName { get; set; }
+        public string SkillString { get; set; }
+        public int SkillNormallized { get; set; }
+        public double SkillStringValue { get; set; }
         public string SkillNameVietnam { get; set; }
     
         public virtual SkillCategory SkillCategory { get; set; }

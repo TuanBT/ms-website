@@ -12,19 +12,13 @@ namespace MS_Website
     using System;
     using System.Collections.Generic;
     
-    public partial class MaidMediator
+    public partial class Apply
     {
-        public MaidMediator()
-        {
-            this.JobRequests = new HashSet<JobRequest>();
-            this.Maids = new HashSet<Maid>();
-        }
+        public int RecruitmentId { get; set; }
+        public int JobRequestId { get; set; }
+        public string Description { get; set; }
     
-        public int AccountId { get; set; }
-        public double Payment { get; set; }
-    
-        public virtual Account Account { get; set; }
-        public virtual ICollection<JobRequest> JobRequests { get; set; }
-        public virtual ICollection<Maid> Maids { get; set; }
+        public virtual JobRequest JobRequest { get; set; }
+        public virtual Recruitment Recruitment { get; set; }
     }
 }

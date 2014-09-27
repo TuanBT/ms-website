@@ -26,6 +26,7 @@ namespace MS_Website
         }
     
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Apply> Applies { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<JobRequest> JobRequests { get; set; }
