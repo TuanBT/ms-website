@@ -16,25 +16,27 @@ namespace MS_Website
     {
         public JobRequest()
         {
+            this.Applies = new HashSet<Apply>();
             this.Comments = new HashSet<Comment>();
             this.Ratings = new HashSet<Rating>();
-            this.Recruitments = new HashSet<Recruitment>();
         }
     
         public int JobRequestId { get; set; }
         public int SkillRefId { get; set; }
         public Nullable<int> MaidMediatorId { get; set; }
-        public int Status { get; set; }
+        public Nullable<int> StaffId { get; set; }
+        public string Status { get; set; }
         public System.DateTime PostTime { get; set; }
         public System.DateTime ExpiredTime { get; set; }
-        public Nullable<int> StaffId { get; set; }
+        public Nullable<System.DateTime> ApplyTimes { get; set; }
+        public int MaidId { get; set; }
     
+        public virtual ICollection<Apply> Applies { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual Maid Maid { get; set; }
         public virtual MaidMediator MaidMediator { get; set; }
         public virtual SkillReference SkillReference { get; set; }
         public virtual Staff Staff { get; set; }
         public virtual ICollection<Rating> Ratings { get; set; }
-        public virtual ICollection<Recruitment> Recruitments { get; set; }
     }
 }

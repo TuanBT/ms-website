@@ -21,9 +21,24 @@ namespace MS_Website
         }
     
         public int SkillRefId { get; set; }
-        public int Gender { get; set; }
-        public int Cooking { get; set; }
-        public int Babysister { get; set; }
+        public Nullable<int> Gender { get; set; }
+        public Nullable<int> Age { get; set; }
+        public Nullable<int> Language { get; set; }
+        public Nullable<int> Experience { get; set; }
+        public Nullable<int> Hometown { get; set; }
+        public Nullable<int> Address { get; set; }
+        public Nullable<int> Health { get; set; }
+        public Nullable<int> Personality { get; set; }
+        public Nullable<int> Stay { get; set; }
+        public Nullable<int> Salary { get; set; }
+        public Nullable<int> Work { get; set; }
+        public Nullable<int> Exteriority { get; set; }
+        public Nullable<int> Care { get; set; }
+        public Nullable<int> Cooking { get; set; }
+        public Nullable<int> Washing { get; set; }
+        public Nullable<int> CleanHouse { get; set; }
+        public Nullable<int> Time { get; set; }
+        public Nullable<int> Day { get; set; }
     
         public virtual ICollection<JobRequest> JobRequests { get; set; }
         public virtual ICollection<Recruitment> Recruitments { get; set; }

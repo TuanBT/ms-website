@@ -23,10 +23,7 @@ namespace MS_Website
     
         public int AccountId { get; set; }
         public double Payment { get; set; }
-        public string Phone { get; set; }
         public string Address { get; set; }
-        public Nullable<int> RatingId { get; set; }
-        public Nullable<int> CommentId { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
