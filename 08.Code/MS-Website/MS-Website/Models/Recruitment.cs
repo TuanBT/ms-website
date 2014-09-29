@@ -7,20 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MS_Website
+namespace MS_Website.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Comment
+    public partial class Recruitment
     {
-        public int CommentId { get; set; }
+        public int RecruitmentId { get; set; }
+        public int SkillRefId { get; set; }
         public int CustomerId { get; set; }
-        public int JobRequestId { get; set; }
-        public System.DateTime PostTime { get; set; }
-        public string CommentContent { get; set; }
+        public string Status { get; set; }
+        public System.DateTime PostRequestedTime { get; set; }
+        public System.DateTime ExpiredTime { get; set; }
     
+        public virtual Apply Apply { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual JobRequest JobRequest { get; set; }
+        public virtual SkillReference SkillReference { get; set; }
     }
 }
