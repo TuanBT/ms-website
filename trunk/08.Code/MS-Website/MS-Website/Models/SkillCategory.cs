@@ -7,23 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MS_Website
+namespace MS_Website.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Staff
+    public partial class SkillCategory
     {
-        public Staff()
+        public SkillCategory()
         {
-            this.JobRequests = new HashSet<JobRequest>();
-            this.Maids = new HashSet<Maid>();
+            this.SkillInstances = new HashSet<SkillInstance>();
         }
     
-        public int AccountId { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public string CategoryNameVietnam { get; set; }
     
-        public virtual Account Account { get; set; }
-        public virtual ICollection<JobRequest> JobRequests { get; set; }
-        public virtual ICollection<Maid> Maids { get; set; }
+        public virtual ICollection<SkillInstance> SkillInstances { get; set; }
     }
 }

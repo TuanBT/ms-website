@@ -7,17 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MS_Website
+namespace MS_Website.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Rating
+    public partial class Comment
     {
-        public int RatingId { get; set; }
+        public int CommentId { get; set; }
         public int CustomerId { get; set; }
         public int JobRequestId { get; set; }
-        public double Rate { get; set; }
+        public System.DateTime PostTime { get; set; }
+        public string CommentContent { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual JobRequest JobRequest { get; set; }

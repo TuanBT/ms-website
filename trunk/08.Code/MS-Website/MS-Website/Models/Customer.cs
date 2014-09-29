@@ -7,24 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MS_Website
+namespace MS_Website.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class MaidMediator
+    public partial class Customer
     {
-        public MaidMediator()
+        public Customer()
         {
-            this.JobRequests = new HashSet<JobRequest>();
-            this.Maids = new HashSet<Maid>();
+            this.Comments = new HashSet<Comment>();
+            this.Ratings = new HashSet<Rating>();
+            this.Recruitments = new HashSet<Recruitment>();
         }
     
         public int AccountId { get; set; }
         public double Payment { get; set; }
+        public string Address { get; set; }
     
         public virtual Account Account { get; set; }
-        public virtual ICollection<JobRequest> JobRequests { get; set; }
-        public virtual ICollection<Maid> Maids { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Rating> Ratings { get; set; }
+        public virtual ICollection<Recruitment> Recruitments { get; set; }
     }
 }

@@ -7,18 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MS_Website
+namespace MS_Website.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Apply
+    public partial class sysdiagram
     {
-        public int RecruitmentId { get; set; }
-        public int JobRequestId { get; set; }
-        public string Description { get; set; }
-    
-        public virtual JobRequest JobRequest { get; set; }
-        public virtual Recruitment Recruitment { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

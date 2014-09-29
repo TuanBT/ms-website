@@ -7,17 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MS_Website
+namespace MS_Website.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Rating
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int RatingId { get; set; }
+        public int CustomerId { get; set; }
+        public int JobRequestId { get; set; }
+        public double Rate { get; set; }
+    
+        public virtual Customer Customer { get; set; }
+        public virtual JobRequest JobRequest { get; set; }
     }
 }
