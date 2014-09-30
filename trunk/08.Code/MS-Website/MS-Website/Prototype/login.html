@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Login</title>
-    <link rel="icon" href="../Content/Image/favicon.ico"/>
+    <link rel="icon" href="../Content/Image/favicon.ico" />
     <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <link href="../Content/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="../Content/bootstrap-3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
@@ -91,27 +91,6 @@
         element.style {
         }
 
-        body {
-            background-color: #ebebeb;
-        }
-
-        body {
-            position: relative;
-            min-width: 960px;
-            min-height: 100%;
-            padding-bottom: 150px;
-        }
-
-        body {
-            padding: 0;
-            margin: 0;
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 13px;
-            line-height: 1.4;
-            color: #252523;
-            word-wrap: break-word;
-        }
-
         body:before {
             background: #28b7ed;
             content: "";
@@ -130,7 +109,7 @@
             padding-bottom: 2.8125rem;
             color: white;
             text-align: center;
-	margin-top: 60px;
+            margin-top: 60px;
         }
 
         .linksContainer {
@@ -146,79 +125,83 @@
             color: #ffffff;
         }
 
-        a:hover, a:focus {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-        .FormFooter{
+            a:hover, a:focus {
+                color: #ffffff;
+                text-decoration: underline;
+            }
 
+        .FormFooter {
         }
-        #submitBtn{
 
+        #submitBtn {
         }
-        .RememberMe{
+
+        .RememberMe {
             float: right;
             margin-top: 5px;
         }
-        #remember_me{
 
+        #remember_me {
         }
-        .ForgotLinks{
+
+        .ForgotLinks {
             margin-top: 10px;
         }
-        .ForgotLinks a{
-            color: #28b7ed;
-        }
-        .text{
+
+            .ForgotLinks a {
+                color: #28b7ed;
+            }
+
+        .text {
             margin: 20px 0 20px 0;
         }
     </style>
 </head>
 <body>
-<div class="header">
-    <div class="rows">
-        <div class="logo">
-            <a href="#">
-                <img src="../Content/Image/MS-Logo-white.png" alt="Maid service"
-                     style="margin-top: -18px; margin-bottom: -14px; width: 80px;"></a>
-        </div>
-        <div class="linksContainer">
-            <a href="#" id="signup">Đăng ký</a>
+    <div class="header">
+        <div class="rows">
+            <div class="logo">
+                <a href="#">
+                    <img src="../Content/Image/MS-Logo-white.png" alt="Maid service"
+                        style="margin-top: -18px; margin-bottom: -14px; width: 80px;"></a>
+            </div>
+            <div class="linksContainer">
+                <a href="#" id="signup">Đăng ký</a>
+            </div>
         </div>
     </div>
-</div>
-<div id="main" role="main" class="oPageCentered oContentContainer">
+    <div id="main" role="main" class="oPageCentered oContentContainer">
 
-    <div class="oPageCentered oFormContainer">
-        <h1>Đăng nhập và sử dụng</h1>
+        <div class="oPageCentered oFormContainer">
+            <h1>Đăng nhập và sử dụng</h1>
 
-        <form action="/login" name="login" id="login" class="oForm-login" autocomplete="on" method="post"
-              novalidate="novalidate">
-            <input class="form-control input-lg text" type="text" name="username" id="username" value="" maxlength="1000" placeholder="Tên đăng nhập">
-            <input class="form-control input-lg text" type="password" name="password" id="password" value="" maxlength="1000" placeholder="Mật khẩu">
-            <footer class="FormFooter">
+            <form action="/login" name="login" id="login" class="oForm-login" autocomplete="on" method="post"
+                novalidate="novalidate">
+                <input class="form-control input-lg text" type="text" name="username" id="username" value="" maxlength="1000" placeholder="Tên đăng nhập">
+                <input class="form-control input-lg text" type="password" name="password" id="password" value="" maxlength="1000" placeholder="Mật khẩu">
+                <footer class="FormFooter">
                     <button id="submitBtn" type="button" class="btn btn-info">Đăng nhập</button>
                     <label class="RememberMe">
                         <input type="hidden" name="remember_me" value="0">
-                        <input type="checkbox" name="remember_me" id="remember_me" value="1"> Remember me
-                        next time
+                        <input type="checkbox" name="remember_me" id="remember_me" value="1">
+                       Ghi nhớ cho lần sau
                     </label>
-            </footer>
-            <input type="hidden" name="ioBB" id="ioBB">
-            <div class="ForgotLinks">
-                <a href="#">Forgot password?</a>
-            </div>
-        </form>
+                </footer>
+                <input type="hidden" name="ioBB" id="ioBB">
+                <div class="ForgotLinks">
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-<div class="footer">
-    <div class="rows">
-        <a class="footerLogo" href="#">
-            <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100">
-        </a>
+    <div class="footer">
+        <div class="rows">
+            <a class="footerLogo" href="#">
+                <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100">
+            </a>
 
-        <p class="footerLegal">© 2014 Maid Service.</p>
+            <p class="footerLegal">© 2014 Maid Service.</p>
+        </div>
     </div>
-</div>
 </body>
 </html>
