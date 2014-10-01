@@ -1,0 +1,330 @@
+﻿ /*header*/
+    .headerPage {
+        background: #00AEEC;
+        margin-bottom: 30px;
+        min-width: 960px;
+    }
+
+    .rows {
+        width: 960px;
+        margin: 0 auto;
+    }
+
+    .hFunction {
+        height: 80px;
+    }
+
+    .hLogo {
+        width: 80px;
+        height: 80px;
+        float: left;
+    }
+
+    .hMainFunction {
+        float: right;
+        line-height: 80px;
+        color: white;
+        font-size: 15px;
+    }
+
+    .hMenu {
+        padding-top: 15px;
+    }
+
+    .hFatherMenu {
+        padding-bottom: 11px;
+    }
+
+    .hChildMenu {
+        background: #fff;
+        border: 0;
+        -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+        -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    }
+
+    .hChildMenuList {
+        width: 960px;
+        margin: 0 auto;
+    }
+
+    .hChildMenuList > li {
+        display: inline-block;
+        line-height: 1em;
+        padding: 18px 0 18px 30px;
+        position: relative;
+    }
+
+    .hChildMenuList > li a {
+        text-decoration: none;
+        color: #949492;
+    }
+
+    .hChildMenuList > li a:hover {
+        color: #252523;
+    }
+
+    .hChildMenuList > .iscurent:before {
+        content: "";
+        display: inline-block;
+        background: #fff;
+        bottom: 0;
+        height: 10px;
+        left: 50%;
+        margin-left: 8px;
+        position: absolute;
+        width: 20px;
+        z-index: 1;
+    }
+
+    .hChildMenuList > .iscurent:after {
+        content: "";
+        display: inline-block;
+        background: #fff;
+        bottom: -5px;
+        left: 50%;
+        height: 10px;
+        width: 9px;
+        margin-left: 14px;
+        position: absolute;
+        -webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .28);
+        -moz-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .28);
+        box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .28);
+        -webkit-transform: rotate(56deg) skew(0deg, -20deg);
+        -moz-transform: rotate(56deg) skew(0deg, -20deg);
+        -ms-transform: rotate(56deg) skew(0deg, -20deg);
+        -o-transform: rotate(56deg) skew(0deg, -20deg);
+        transform: rotate(56deg) skew(0deg, -20deg);
+    }
+
+    .hChildMenuList > .iscurent a {
+        color: #252523;
+    }
+
+    .hChildMenuList > .iscurent a:hover {
+        color: #252523;
+    }
+
+    .hChildMenuList:hover {
+        color: #616160;
+    }
+
+    .hChContent {
+    }
+
+    .hmeTabList {
+        display: inline-block;
+    }
+
+    .hmeTabList > li {
+        display: inline-block;
+        vertical-align: bottom;
+        position: relative;
+        background: 0;
+        color: #00AEEC;
+        padding: 0;
+        margin: 0;
+    }
+
+    .hefaContent {
+        padding: 16px 20px 12px;
+        font-family: Adelle_Regular, sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 1em;
+        border-radius: 7px 7px 0 0;
+        color: #fff;
+        background: 0;
+        border: 0;
+        text-decoration: none;
+    }
+
+    .hefaContent.iscurent {
+        background: #fff;
+        color: #0093F0;
+    }
+
+    .hefaContent.iscurent:hover {
+        background: #fff;
+        color: #0093F0;
+    }
+
+    .hefaContent:hover {
+        background: #33BEF0;
+        text-decoration: none;
+        color: #fff;
+    }
+    .hUserName{}
+ /*End header*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /*body*/
+    .body {
+        padding-bottom: 30px;
+    }
+
+    .rows {
+        width: 960px;
+        margin: 0 auto;
+    }
+
+    .leftInfo {
+        width: 600px;
+        display: inline-block;
+    }
+
+    .mainInfo {
+        height: 100px;
+    }
+
+    .miPic {
+        height: 100px;
+        width: 100px;
+        float: left;
+        background: #ddd;
+        border-radius: 5px;
+    }
+
+    .mmiDetail {
+        float: left;
+        margin-left: 20px;
+    }
+
+    .miFullName {
+        font-family: Adelle_Regular,Georgia,serif;
+        font-weight: 400;
+        font-size: 31px;
+    }
+
+    .miAccount {
+        color: #8C8C89;
+        font-weight: 300;
+        font-family: monospace;
+        font-size: 18px;
+        margin-top: -5px;
+    }
+
+    .miRate {
+        margin-top: 8px;
+        font-size: 20px;
+        color: #f6a828;
+    }
+
+    .overView {
+        margin-top: 30px;
+        border: 1px solid #f2f2f0;
+        border-radius: 7px;
+    }
+
+    .ovTitle {
+        font-size: 18px;
+        font-weight: 300;
+        padding: 9px 10px 9px 16px;
+        background: #f2f2f0;
+        border-radius: 7px 7px 0 0;
+    }
+
+    .ovContent {
+        padding: 20px;
+        min-height: 100px;
+    }
+
+    .rightInfo {
+        width: 300px;
+        float: right;
+        padding: 24px;
+        background: #f5f5f2;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        -ms-border-radius: 7px;
+        -o-border-radius: 7px;
+        border-radius: 7px;
+        /* margin-right: 3px; */
+        display: inline-block;
+    }
+
+    .riDetail {
+    }
+
+    .rideRow {
+        height: 30px;
+        border-bottom: 1px solid #B2B2B2;
+        line-height: 30px;
+    }
+
+    .rideroTitle {
+        float: left;
+        white-space: nowrap;
+        color: #8C8C89;
+    }
+
+    .rideroContent {
+        float: right;
+    }
+
+    .riManager {
+        margin-top: 20px;
+        font-size: 13px;
+        padding-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .rimaTitle {
+    }
+
+    .rimaContent {
+        height: 50px;
+    }
+
+    .rimacoImage {
+        width: 50px;
+        height: 50px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+        border-radius: 5px;
+        float: left;
+    }
+
+    .rimacoFullname {
+        float: left;
+        line-height: 50px;
+        margin-left: 10px;
+    }
+
+    ul, li{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+    a{cursor: pointer;
+        color: #0093f0;
+        text-decoration: none;}
+  /*end body*/
+
+
+
+    /*footer*/
+    .footer {
+        background: #bdc3c7;
+        padding-top: 1.0625rem;
+        padding-bottom: 2.8125rem;
+        color: white;
+        text-align: center;
+    }
+    /*End footer*/
