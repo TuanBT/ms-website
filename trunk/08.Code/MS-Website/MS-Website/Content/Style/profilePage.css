@@ -253,7 +253,6 @@
         -ms-border-radius: 7px;
         -o-border-radius: 7px;
         border-radius: 7px;
-        /* margin-right: 3px; */
         display: inline-block;
     }
 
@@ -284,10 +283,12 @@
     }
 
     .rimaTitle {
+        margin-bottom: 15px;
     }
 
     .rimaContent {
-        height: 50px;
+        /*height: 50px;*/
+        margin-left: 20px;
     }
 
     .rimacoImage {
@@ -302,7 +303,7 @@
     }
 
     .rimacoFullname {
-        float: left;
+        /*float: left;*/
         line-height: 50px;
         margin-left: 10px;
     }
