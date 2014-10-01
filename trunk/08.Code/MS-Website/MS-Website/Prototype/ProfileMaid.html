@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>MaidProfile</title>
+    <link rel="icon" href="../Content/Image/favicon.ico"/>
+    <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <link href="../Content/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../Content/bootstrap-3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src="../Content/bootstrap-3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+    <style>
+        .body {
+            margin-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        .rows {
+            width: 960px;
+            margin: 0 auto;
+        }
+
+        .leftInfo {
+            width: 600px;
+            float: left;
+        }
+
+        .mainInfo {
+            height: 100px;
+        }
+
+        .miPic {
+            height: 100px;
+            width: 100px;
+            float: left;
+            background: #ddd;
+            border-radius: 5px;
+        }
+
+        .mmiDetail {
+            float: left;
+            margin-left: 20px;
+        }
+
+        .miFullName {
+            font-family: Adelle_Regular,Georgia,serif;
+            font-weight: 400;
+            font-size: 31px;
+        }
+
+        .miAccount {
+            color: #8C8C89;
+            font-weight: 300;
+            font-family: monospace;
+            font-size: 18px;
+            margin-top: -5px;
+        }
+
+        .miRate {
+            margin-top: 8px;
+            font-size: 20px;
+            color: #f6a828;
+        }
+
+        .overView {
+            margin-top: 30px;
+            border: 1px solid #f2f2f0;
+            border-radius: 7px;
+        }
+
+        .ovTitle {
+            font-size: 18px;
+            font-weight: 300;
+            padding: 9px 10px 9px 16px;
+            background: #f2f2f0;
+            border-radius: 7px 7px 0 0;
+        }
+
+        .ovContent {
+            padding: 20px;
+            min-height: 100px;
+        }
+
+        .rightInfo {
+            width: 300px;
+            float: left;
+            padding: 24px;
+            background: #f5f5f2;
+            -webkit-border-radius: 7px;
+            -moz-border-radius: 7px;
+            -ms-border-radius: 7px;
+            -o-border-radius: 7px;
+            border-radius: 7px;
+            margin-left: 20px;
+        }
+
+        .riDetail {
+        }
+
+        .rideRow {
+            height: 30px;
+            border-bottom: 1px solid #B2B2B2;
+            line-height: 30px;
+        }
+
+        .rideroTitle {
+            float: left;
+            white-space: nowrap;
+            color: #8C8C89;
+        }
+
+        .rideroContent {
+            float: right;
+        }
+
+        .riManager {
+            margin-top: 20px;
+            font-size: 13px;
+            padding-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .rimaTitle {
+        }
+
+        .rimaContent {
+            height: 50px;
+        }
+
+        .rimacoImage {
+            width: 50px;
+            height: 50px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            border-radius: 5px;
+            float: left;
+        }
+
+        .rimacoFullname {
+            float: left;
+            line-height: 50px;
+            margin-left: 10px;
+        }
+
+        ul, li{
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        a{cursor: pointer;
+            color: #0093f0;
+            text-decoration: none;}
+
+    </style>
+</head>
+<body>
+<div class="body">
+    <div class="rows">
+        <div class="leftInfo">
+            <div class="mainInfo">
+                <div class="miPic">
+                    <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100%">
+                </div>
+                <div class="mmiDetail">
+                    <div class="miFullName">
+                        Bùi Tiến Tuân
+                    </div>
+                    <div class="miAccount">
+                        tuan-abc
+                    </div>
+                    <div class="miRate">
+                        <div class="rate">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overView">
+                <div class="ovTitle">
+                    Tự bạch
+                </div>
+                <div class="ovContent">
+                    Sạch sẽ, tuyệt vời, ông mặt trời. Sạch sẽ, tuyệt vời, ông mặt trời.Sạch sẽ, tuyệt vời, ông mặt
+                    trời.Sạch sẽ, tuyệt vời, ông mặt trời.Sạch sẽ, tuyệt vời, ông mặt trời.Sạch sẽ, tuyệt vời, ông mặt
+                    trời.Sạch sẽ, tuyệt vời, ông mặt trời.Sạch sẽ, tuyệt vời, ông mặt trời.Sạch sẽ, tuyệt vời, ông mặt
+                    trời.Sạch sẽ, tuyệt vời, ông mặt trời.Sạch sẽ, tuyệt vời, ông mặt trời.Sạch sẽ, tuyệt vời, ông mặt
+                    trời.Sạch sẽ, tuyệt vời, ông mặt trời.
+                </div>
+            </div>
+        </div>
+        <div class="rightInfo">
+            <ul class="riDetail">
+                <li class="rideRow">
+                    <div class="rideroTitle">
+                        Quê quán
+                    </div>
+                    <div class="rideroContent">
+                        <strong>
+                        HCM
+                        </strong>
+                    </div>
+                </li>
+                <li class="rideRow">
+                    <div class="rideroTitle">
+                        Đang sống
+                    </div>
+                    <div class="rideroContent">
+                        <strong>
+                        Q12
+                        </strong>
+                    </div>
+                </li>
+            </ul>
+            <div class="riManager">
+                <div class="rimaTitle">
+                    Quản lý bởi
+                </div>
+                <div class="rimaContent">
+                    <div class="rimacoImage">
+                        <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100%">
+                    </div>
+                    <div class="rimacoFullname">
+                            <a href="#">Mediator or Staff</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
