@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-<title>Profile MaidMediator</title>
+<title>Profile customer</title>
 <link rel="icon" href="../Content/Image/favicon.ico"/>
 <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
 <link href="../Content/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -12,53 +12,10 @@
 <link href="../Content/style/profilePage.css" rel="stylesheet">
 
 <style>
-    .rimaMore {
-        cursor: pointer;
-        color: #bdc3c7;
-        text-align: center;
-    }
-
-    .rimaMore:hover {
-        color: black;
-        text-align: center;
-    }
-
-    .rimaMaidList {
-    }
 
     .rimaMaidList > li {
         height: 60px;
 
-    }
-
-    .liImage {
-        width: 50px;
-        height: 50px;
-        float: left;
-    }
-
-    .licoFullName {
-    }
-
-    .licoRate {
-    }
-
-    .ricoPost {
-        color: #8C8C89;
-        font-size: 10px;
-        font-weight: 300;
-    }
-
-    .ricoPostApply {
-    }
-
-    .ricoPostTotal {
-    }
-
-    .liMaidContent {
-        font-size: 14px;
-        line-height: 15px;
-        margin-left: 60px;
     }
 
     .rimaTitle > button {
@@ -121,91 +78,66 @@
             Bùi Tiến Tuân
         </div>
         <div class="miAccount">
-            tuan-Maid-Mediator
+            tuan-customer
         </div>
     </div>
 </div>
 <div class="boxListWork">
 <ul class="nav nav-tabs" role="tablist" id="myTab">
-    <li class><a href="#free" role="tab" data-toggle="tab">Chưa được nhận</a></li>
-    <li class="active"><a href="#applied" role="tab" data-toggle="tab">Đã được nhận</a></li>
+    <li class="active"><a href="#free" role="tab" data-toggle="tab">Chưa được nhận</a></li>
+    <li class><a href="#applied" role="tab" data-toggle="tab">Đã được nhận</a></li>
     <li class><a href="#expired" role="tab" data-toggle="tab">Hết hạn</a></li>
 </ul>
 
+
+
 <div class="tab-content">
-<div class="tab-pane fade  bFree" id="free">
-    <ul class="bFreeListWork">
-        <li class="isCurent">
-            <div class="blImage">
-                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-            </div>
-            <div class="blDetail">
-                <div class="blName">
-                    <a href="#">Bùi Tiến Tuân</a>
+<div class="tab-pane fade in active  bFree" id="free">
+    <div class="bTitle">
+        <div class="btWork">
+            Công việc
+        </div>
+        <div class="MaidListTitle btApply">
+            Người đang chờ
+        </div>
+    </div>
+    <ul class="bFreeCusListWork">
+        <li>
+            <div class="bfcWork">
+                <div class="blImage">
+                    <a href="#">
+                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                    </a>
                 </div>
-                <div class="blTime">
-                    <span class="blTimeTitle">Đăng: </span><span
-                        class="blTimeText">6:00 30/08/2014</span>
-                </div>
-                <div class="blTime">
-                    <span class="blTimeTitle">Tới: </span> <span
-                        class="blTimeText">6:00 30/08/2014</span>
-                </div>
-            </div>
-        </li>
-        <li class>
-            <div class="blImage">
-                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-            </div>
-            <div class="blDetail">
-                <div class="blName">
-                    <a href="#">Bùi Tiến Tuân</a>
-                </div>
-                <div class="blTime">
-                    <span class="blTimeTitle">Đăng: </span><span
-                        class="blTimeText">6:00 30/08/2014</span>
-                </div>
-                <div class="blTime">
-                    <span class="blTimeTitle">Tới: </span> <span
-                        class="blTimeText">6:00 30/08/2014</span>
+                <div class="blDetail">
+                    <div class="blTime">
+                        <span class="blTimeTitle">Đăng: </span><span
+                            class="blTimeText">6:00 30/08/2014</span>
+                    </div>
+                    <div class="blTime">
+                        <span class="blTimeTitle">Tới hạn: </span><span
+                            class="blTimeText">6:00 30/08/2014</span>
+                    </div>
                 </div>
             </div>
-        </li>
-        <li class>
-            <div class="blImage">
-                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-            </div>
-            <div class="blDetail">
-                <div class="blName">
-                    <a href="#">Bùi Tiến Tuân</a>
+            <ul class="bfMaid">
+                <li>
+                <div class="blImage">
+                     <a href="#"><img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%"></a>
                 </div>
-                <div class="blTime">
-                    <span class="blTimeTitle">Đăng: </span><span
-                        class="blTimeText">6:00 30/08/2014</span>
-                </div>
-                <div class="blTime">
-                    <span class="blTimeTitle">Tới: </span> <span
-                        class="blTimeText">6:00 30/08/2014</span>
-                </div>
-            </div>
-        </li>
-        <li class>
-            <div class="blImage">
-                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-            </div>
-            <div class="blDetail">
-                <div class="blName">
-                    <a href="#">Bùi Tiến Tuân</a>
-                </div>
-                <div class="blTime">
-                    <span class="blTimeTitle">Đăng: </span><span
-                        class="blTimeText">6:00 30/08/2014</span>
-                </div>
-                <div class="blTime">
-                    <span class="blTimeTitle">Tới: </span> <span
-                        class="blTimeText">6:00 30/08/2014</span>
-                </div>
-            </div>
+                </li>
+                <li>
+                    <div class="blImage">
+                        <a href="#"><img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%"></a>
+                    </div>
+                </li>
+                <li>
+                    <div class="blImage">
+                        <a href="#"><img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%"></a>
+                    </div>
+                </li>
+                <button type="button" class="btn btn-xs btn-success">...</button>
+            </ul>
         </li>
     </ul>
     <div class="blFooter">
@@ -226,13 +158,13 @@
         </div>
     </div>
 </div>
-<div class="tab-pane fade in active bApplied" id="applied">
+<div class="tab-pane fade bApplied" id="applied">
     <div class="bTitle">
         <div class="btWork">
             Công việc
         </div>
         <div class="btApply">
-            Người nhận
+            Người nhận việc
         </div>
     </div>
     <ul class="bApplyListWork">
@@ -428,62 +360,27 @@
                 </strong>
             </div>
         </li>
+        <li class="rideRow">
+            <div class="rideroTitle">
+                Đã đăng
+            </div>
+            <div class="rideroContent">
+                <strong>
+                    80
+                </strong>
+            </div>
+        </li>
+        <li class="rideRow">
+            <div class="rideroTitle">
+                Đã chấp nhận
+            </div>
+            <div class="rideroContent">
+                <strong>
+                    20
+                </strong>
+            </div>
+        </li>
     </ul>
-    <div class="riManager">
-        <div class="rimaTitle">
-            Đại diện cho:
-            <button type="button" class="btn btn-info">Thêm</button>
-        </div>
-        <div class="rimaContent">
-            <ul class="rimaMaidList">
-                <li>
-                    <div class="liImage">
-                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                    </div>
-                    <div class="liMaidContent">
-                        <div class="licoFullName">
-                            <a href="#">Bùi Tiến Tuân</a>
-                        </div>
-                        <div class="licoRate">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                        </div>
-                        <div class="ricoPost">
-                            Đăng/nhận
-                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="liImage">
-                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                    </div>
-                    <div class="liMaidContent">
-                        <div class="licoFullName">
-                            <a href="#">Bùi Tiến Tuân</a>
-                        </div>
-                        <div class="licoRate">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                        </div>
-                        <div class="ricoPost">
-                            Đăng/nhận
-                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="rimaMore">
-            <span class="glyphicon glyphicon-chevron-down"></span>
-        </div>
-    </div>
 </div>
 </div>
 </div>
