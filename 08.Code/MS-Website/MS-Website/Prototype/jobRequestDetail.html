@@ -96,132 +96,6 @@
                    width: 400px;
                }
     </style>
-    <style>
-        .suggestCus {
-            margin-top: 20px;
-        }
-
-        .suCuHeader {
-        }
-
-        .suTitle {
-            display: inline-block;
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .suNumber {
-            float: right;
-            display: inline-block;
-            color: #7c7c7a;
-            font-size: 18px;
-            margin-bottom: 24px;
-            font-weight: 300;
-            -webkit-font-smoothing: subpixel-antialiased;
-        }
-
-        .listSuggestCus {
-            margin-top: 20px;
-            margin-left: 50px;
-        }
-
-        .listSuggestCus > li {
-            float: left;
-            height: 100%;
-            padding: 0;
-            top: 5px;
-            left: 5px;
-            right: 5px;
-            bottom: 5px;
-            background: transparent;
-            overflow: hidden;
-            border-color: #d2d6de;
-            border-style: solid;
-            border-width: 1px;
-            position: relative;
-            display: inline-block;
-            background-color: #fff;
-            width: 228px;
-            border-radius: 7px;
-            vertical-align: top;
-            margin-right: 12px;
-            margin-bottom: 18px;
-            -webkit-transition: all .2s ease-in-out;
-            -moz-transition: all .2s ease-in-out;
-            -o-transition: all .2s ease-in-out;
-            transition: all .2s ease-in-out;
-        }
-
-        .listSuggestCus > li:hover {
-            -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, .3);
-            -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, .3);
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, .3);
-        }
-
-        .listSuggestCus > li > a {
-            text-decoration: none;
-        }
-
-        .listSuggestCus > li > a:hover {
-        }
-
-        .listSuCuImage {
-            display: block;
-            width: 228px;
-            height: 151px;
-            border-radius: 7px 7px 0 0;
-            background: #ecf0f1;
-            text-align: center;
-        }
-
-        .listSuCuDetail {
-            display: block;
-            padding: 23px;
-            color: #0093f0;
-        }
-
-        .listSuCuDetail:hover {
-
-        }
-
-        .liCuName {
-            font: 600 21px Adelle_Regular, Georgia, sans-serif;
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-            display: block;
-            height: 60px;
-        }
-
-        .liCuPostTime {
-            color: darkgrey;
-            font-size: 13px;
-            font-weight: 400;
-            display: block;
-        }
-
-        .lisuPre {
-            float: left;
-            margin-top: 160px;
-            font-size: 30px;
-            color: #DDD;
-
-        }
-
-        .lisuPre:hover {
-            color: black;
-        }
-
-        .lisuNex {
-            float: right;
-            margin-top: 140px;
-            font-size: 30px;
-            color: #DDD;
-        }
-        .lisuNex:hover {
-            color: black;
-        }
-
-    </style>
 </head>
 <body>
 <div class="headerPage">
@@ -264,76 +138,87 @@
 </div>
 <div class="body">
     <div class="rows">
-        <div class="leftInfo">
-            <div class="mainInfo">
-                <div class="miPic">
-                    <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100%">
-                </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="leftInfo">
+                    <div class="mainInfo">
+                        <div class="miPic">
+                            <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100%">
+                        </div>
 
-                <div class="miButton">
-                    <button type="button" class="btn btn-info">Thuê</button>
-                    <button type="button" class="btn btn-danger">Hủy</button>
-                </div>
-                <div class="mmiDetail">
-                    <div class="iStatus">
-                        <div class="iTitle">
-                            Tình Trạng:
+                        <div class="miButton">
+                            <button type="button" class="btn btn-info">Thuê</button>
+                            <button type="button" class="btn btn-danger">Hủy</button>
                         </div>
-                        <span class="label label-default">Đã chấp nhận</span>
-                        <span class="iStatusText">Bởi</span>
+                        <div class="mmiDetail">
+                            <div class="iStatus">
+                                <div class="iTitle">
+                                    Tình Trạng:
+                                </div>
+                                <span class="label label-default">Đã chấp nhận</span>
+                                <span class="iStatusText">Bởi</span>
 
-                        <div class="iStatusPic">
-                            <a href="#"><img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%"></a>
-                        </div>
-                    </div>
-                    <div class="iRating">
-                        <div class="iTitle">
-                            Đánh giá:
-                        </div>
-                        <div class="miRate">
-                            <div class="rate">
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
+                                <div class="iStatusPic">
+                                    <a href="#"><img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%"></a>
+                                </div>
+                            </div>
+                            <div class="iRating">
+                                <div class="iTitle">
+                                    Đánh giá:
+                                </div>
+                                <div class="miRate">
+                                    <div class="rate">
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="iSkill">
+                                <div class="iTitle">
+                                    Các kỹ năng:
+                                </div>
+                                <div class="iListKill">
+                                    Tôi có rất nhiều kỹ năng, như nấu ăn các kiểu, các kỹ năng của tôi phải được load từ database lên,
+                                    và viết lại câu hoàn chỉnh sao cho dễ đọc. Thánh nào có ý kiến gì giết không tha.
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="iSkill">
-                        <div class="iTitle">
-                            Các kỹ năng:
+                    <div class="overView">
+                        <div class="ovTitle">
+                            Các comment
                         </div>
-                        <div class="iListKill">
-                            Tôi có rất nhiều kỹ năng, như nấu ăn các kiểu, các kỹ năng của tôi phải được load từ database lên,
-                            và viết lại câu hoàn chỉnh sao cho dễ đọc. Thánh nào có ý kiến gì giết không tha.
+                        <div class="ovContent">
+                            Trình bày các comment vào đây
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="overView">
-                <div class="ovTitle">
-                    Các comment
-                </div>
-                <div class="ovContent">
-                    Trình bày các comment vào đây
-                </div>
-            </div>
-            <div class="suggestCus">
-                <div class="suCuHeader">
-                    <div class="suTitle">
-                        Những việc có thể hợp
-                    </div>
-                    <div class="suNumber">
-                        3/5
-                    </div>
-                </div>
-                <div class="lisuPre">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </div>
-                <ul class="listSuggestCus">
-                    <li>
-                        <a href="#">
+                    <div class="suggestCus">
+                        <div class="suCuHeader">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="suTitle">
+                                        Những việc có thể hợp
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="suNumber">
+                                        3/5
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lisuPre">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </div>
+                        <div class="lisuNex">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </div>
+                        <ul class="listSuggestCus">
+                            <li>
+                                <a href="#">
                            <span class="listSuCuImage">
                     <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
                            </span>
@@ -345,10 +230,10 @@
                                     Đăng: 6:00 30/08/2014
                                 </span>
                             </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
                            <span class="listSuCuImage">
                     <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
                            </span>
@@ -360,81 +245,85 @@
                                     Đăng: 6:00 30/08/2014
                                 </span>
                             </span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="lisuNex">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rightInfo">
+                    <ul class="riDetail">
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Đăng
+                            </div>
+                            <div class="rideroContent">
+                                <strong>
+                                    30/08/2012
+                                </strong>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="riManager">
+                        <div class="rimaTitle">
+                            Những yêu cầu giống
+                        </div>
+                        <ul class="rimaListSameJobRequest">
+                            <li>
+                                <div class="jrImage">
+                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                </div>
+                                <div class="jrDetail">
+                                    <div class="jrMaidFullname">
+                                        <a href="#">Maid name of job request</a>
+                                    </div>
+                                    <div class="jrMaidRate">
+                                        <div class="rate">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </div>
+                                    </div>
+                                    <div class="blTime">
+                                        <span class="blTimeTitle">Đăng: </span><span
+                                            class="blTimeText">6:00 30/08/2014</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="jrImage">
+                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                </div>
+                                <div class="jrDetail">
+                                    <div class="jrMaidFullname">
+                                        <a href="#">Maid name of job request</a>
+                                    </div>
+                                    <div class="jrMaidRate">
+                                        <div class="rate">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </div>
+                                    </div>
+                                    <div class="blTime">
+                                        <span class="blTimeTitle">Đăng: </span><span
+                                            class="blTimeText">6:00 30/08/2014</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="rightInfo">
-            <ul class="riDetail">
-                <li class="rideRow">
-                    <div class="rideroTitle">
-                        Đăng
-                    </div>
-                    <div class="rideroContent">
-                        <strong>
-                            30/08/2012
-                        </strong>
-                    </div>
-                </li>
-            </ul>
-            <div class="riManager">
-                <div class="rimaTitle">
-                    Những yêu cầu giống
-                </div>
-                <ul class="rimaListSameJobRequest">
-                    <li>
-                        <div class="jrImage">
-                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                        </div>
-                        <div class="jrDetail">
-                            <div class="jrMaidFullname">
-                                <a href="#">Maid name of job request</a>
-                            </div>
-                            <div class="jrMaidRate">
-                                <div class="rate">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </div>
-                            </div>
-                            <div class="blTime">
-                                <span class="blTimeTitle">Đăng: </span><span
-                                    class="blTimeText">6:00 30/08/2014</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="jrImage">
-                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                        </div>
-                        <div class="jrDetail">
-                            <div class="jrMaidFullname">
-                                <a href="#">Maid name of job request</a>
-                            </div>
-                            <div class="jrMaidRate">
-                                <div class="rate">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </div>
-                            </div>
-                            <div class="blTime">
-                                <span class="blTimeTitle">Đăng: </span><span
-                                    class="blTimeText">6:00 30/08/2014</span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
+
     </div>
 </div>
 <div class="footer">
