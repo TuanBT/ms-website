@@ -176,7 +176,7 @@
 }
 
 .mainInfo {
-    height: 100px;
+    min-height: 100px;
 }
 
 .miPic {
@@ -185,10 +185,11 @@
     float: left;
     background: #ddd;
     border-radius: 5px;
+    display: inline-block;
 }
 
 .mmiDetail {
-    float: left;
+    display: inline-block;
     margin-left: 20px;
 }
 
