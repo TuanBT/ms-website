@@ -17,8 +17,8 @@ namespace MS_Website.Controllers
         MSEntities ms = new MSEntities();
         public ActionResult Index()
         {
-            var acc = ms.Accounts.Select(a => a).ToArray();
-            ViewBag.me = acc[0].FullName;
+            //var acc = ms.Accounts.Select(a => a).ToArray();
+            //ViewBag.me = acc[0].FullName;
             return View();
         }
 
@@ -69,7 +69,7 @@ namespace MS_Website.Controllers
                     }
                     else
                     {
-                        ViewBag.Error = ;
+
                     }
                    
                 }
