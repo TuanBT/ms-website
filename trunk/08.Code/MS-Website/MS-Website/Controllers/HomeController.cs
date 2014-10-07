@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MS_Website.Models;
 using Twilio;
+using Account = MS_Website.Models.Account;
 
 namespace MS_Website.Controllers
 {
@@ -43,6 +45,36 @@ namespace MS_Website.Controllers
 
             return Json(apply, JsonRequestBehavior.AllowGet); ;
         }
-
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Account acc)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var ms = new MSEntities())
+                {
+                    var b =
+                        ms.Accounts.FirstOrDefault(
+                            a => a.Username.Equals(acc.Username) && a.Password.Equals(acc.Password));
+                    if (b != null)
+                    {
+                        Session["AccId"] = b.AccountId.ToString(CultureInfo.InvariantCulture);
+                        Session["Fullname"] = b.FullName.ToString(CultureInfo.InvariantCulture);
+                        Session["Role"] = b.Role.ToString(CultureInfo.InvariantCulture);
+                        return View("Index");
+                    }
+                    else
+                    {
+                        ViewBag.Error = ;
+                    }
+                   
+                }
+            }
+            return View(acc);
+        }
     }
 }
