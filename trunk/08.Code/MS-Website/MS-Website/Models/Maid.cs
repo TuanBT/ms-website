@@ -27,7 +27,8 @@ namespace MS_Website.Models
         public Nullable<double> Experience { get; set; }
         public string Description { get; set; }
         public Nullable<double> RateAvg { get; set; }
-        public string FullName { get; set; }
+        public string Phone { get; set; }
+        public string Gender { get; set; }
     
         public virtual ICollection<JobRequest> JobRequests { get; set; }
         public virtual MaidMediator MaidMediator { get; set; }

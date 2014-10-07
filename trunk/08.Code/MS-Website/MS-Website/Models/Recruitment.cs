@@ -14,6 +14,11 @@ namespace MS_Website.Models
     
     public partial class Recruitment
     {
+        public Recruitment()
+        {
+            this.Applies = new HashSet<Apply>();
+        }
+    
         public int RecruitmentId { get; set; }
         public int SkillRefId { get; set; }
         public int CustomerId { get; set; }
@@ -21,7 +26,7 @@ namespace MS_Website.Models
         public System.DateTime PostRequestedTime { get; set; }
         public System.DateTime ExpiredTime { get; set; }
     
-        public virtual Apply Apply { get; set; }
+        public virtual ICollection<Apply> Applies { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual SkillReference SkillReference { get; set; }
     }
