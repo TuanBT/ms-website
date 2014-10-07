@@ -1,0 +1,390 @@
+﻿@{
+    ViewBag.Title = "Maid Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Style/profilePage.css" rel="stylesheet">
+<div class="headerPage">
+    <div class="rows">
+        <div class="hFunction">
+            <div class="hLogo">
+                <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100%">
+            </div>
+            <div class="hMainFunction">
+                <div class="hUserName">
+                    Bùi Tiến Tuân
+                </div>
+            </div>
+        </div>
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    <li>
+                        <a href="#" class="hefaContent iscurent">Find Work</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Find Work</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li class="iscurent">
+                <a href="#" class="hChContent">Job Applications</a>
+            </li>
+            <li class>
+                <a href="#" class="hChContent">Job Applications</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="leftInfo">
+                    <div class="mainInfo">
+                        <div class="miPic">
+                            <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100%">
+                        </div>
+                        <div class="mmiDetail">
+                            <div class="miFullName">
+                                @Model.MaidName
+                            </div>
+                            <div class="miAccount">
+                                Người giúp việc
+                            </div>
+                            <div class="miRate">
+                                <div class="rate">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overView">
+                        <div class="ovTitle">
+                            Tự bạch
+                        </div>
+                        <div class="ovContent">
+                            @Model.Description
+                        </div>
+                    </div>
+                    <div class="boxListWork">
+                        <ul class="nav nav-tabs" role="tablist" id="myTab">
+                            <li class><a href="#free" role="tab" data-toggle="tab">Chưa được nhận</a></li>
+                            <li class="active"><a href="#applied" role="tab" data-toggle="tab">Đã được nhận</a></li>
+                            <li class><a href="#approved" role="tab" data-toggle="tab">Đã hoàn tất</a></li>
+                            <li class><a href="#expired" role="tab" data-toggle="tab">Hết hạn</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade  bFree" id="free">
+                                <ul class="bFreeListWork">
+                                    @foreach (var job in ViewBag.NotApplList)
+                                    {
+                                        <li id="@job.JobRequestId" onclick="chooseJob(@job.JobRequestId, 2)">
+                                            <div class="blImage">
+                                                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                            </div>
+                                            <div class="blDetail">
+                                                <div class="blName">
+                                                    <a href="#">@job.MaidName</a>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Đăng: </span><span
+                                                        class="blTimeText">6:00 30/08/2014</span>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Tới: </span><span
+                                                        class="blTimeText">6:00 30/08/2014</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="blFooter">
+                                    <div class="blfNumber">
+                                        <ul class="pagination pagination-sm">
+                                            <li><a href="#">&laquo;</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                    @using (Html.BeginForm("RemoveJob", "MaidMediator"))
+                                    {
+                                        <input id="hidden" type="hidden" value="" name="jobId" />
+                                        <div id="NotAppliedList" style="display: none;" class="blfbutton">
+                                            <button type="submit" class="btn btn-danger">Hủy</button>
+                                            <button type="button" class="btn btn-info">Gia hạn</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="tab-pane fade in active bApplied" id="applied">
+                                <div class="bTitle">
+                                    <div class="btWork">
+                                        Công việc
+                                    </div>
+                                    <div class="btApply">
+                                        Người nhận
+                                    </div>
+                                </div>
+                                <ul class="bApplyListWork">
+                                    @foreach (var job in ViewBag.ApplList)
+                                    {
+                                        <li>
+                                            <div class="bAWork">
+                                                <div class="blImage">
+                                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                </div>
+                                                <div class="blDetail">
+                                                    <div class="blName">
+                                                        <a href="#">@job.MaidName</a>
+                                                    </div>
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Đăng: </span><span
+                                                            class="blTimeText">6:00 30/08/2014</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="bACus">
+                                                <div class="blImage">
+                                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                </div>
+                                                <div class="blDetail">
+                                                    <div class="blName">
+                                                        <a href="#">@job.CustomerName</a>
+                                                    </div>
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Nhận: </span><span
+                                                            class="blTimeText">6:00 30/08/2014</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="blFooter">
+                                    <div class="blfNumber">
+                                        <ul class="pagination pagination-sm">
+                                            <li><a href="#">&laquo;</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade in active bApplied" id="approved">
+                                <div class="bTitle">
+                                    <div class="btWork">
+                                        Công việc
+                                    </div>
+                                    <div class="btApply">
+                                        Người nhận
+                                    </div>
+                                </div>
+                                <ul class="bApplyListWork">
+                                    @foreach (var job in ViewBag.ApprList)
+                                    {
+                                        <li>
+                                            <div class="bAWork">
+                                                <div class="blImage">
+                                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                </div>
+                                                <div class="blDetail">
+                                                    <div class="blName">
+                                                        <a href="#">@job.MaidName</a>
+                                                    </div>
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Đăng: </span><span
+                                                            class="blTimeText">6:00 30/08/2014</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="bACus">
+                                                <div class="blImage">
+                                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                </div>
+                                                <div class="blDetail">
+                                                    <div class="blName">
+                                                        <a href="#">@job.CustomerName</a>
+                                                    </div>
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Nhận: </span><span
+                                                            class="blTimeText">6:00 30/08/2014</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="blFooter">
+                                    <div class="blfNumber">
+                                        <ul class="pagination pagination-sm">
+                                            <li><a href="#">&laquo;</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade bExprred" id="expired">
+                                <ul class="bexpiredListWork">
+                                    @foreach (var job in ViewBag.ExpiredList)
+                                    {
+                                        <li id="@job.JobRequestId" onclick="chooseJob(@job.JobRequestId, 3)">
+                                            <div class="blImage">
+                                                <img src="../Content/Image/MS-Logo.png" alt="Maid service" height="100%">
+                                            </div>
+                                            <div class="blDetail">
+                                                <div class="blName">
+                                                    <a href="@Url.Action("ManageJobRequest", "MaidMediator", new { requestId = job.JobRequestId })">@job.MaidName</a>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Đăng: </span><span
+                                                        class="blTimeText">6:00 30/08/2014</span>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Tới: </span><span
+                                                        class="blTimeText">6:00 30/08/2014</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="blFooter">
+                                    <div class="blfNumber">
+                                        <ul class="pagination pagination-sm">
+                                            <li><a href="#">&laquo;</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                    @using (Html.BeginForm("RemoveJob", "MaidMediator"))
+                                    {
+                                        <input id="hidden" type="hidden" value="" name="jobId" />
+                                        <div id="ExpiredButton" style="display: none;" class="blfbutton">
+                                            <button type="button" class="btn btn-danger">Xóa</button>
+                                            <button type="button" class="btn btn-info">Gia hạn</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            $(function () {
+                                $('#myTab a:selected').tab('show');
+                            })
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rightInfo">
+                    <ul class="riDetail">
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Điện thoại
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@Model.Phone
+                                </strong>
+                            </div>
+                        </li>
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Kinh nghiệm
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@Model.Experience năm
+                                </strong>
+                            </div>
+                        </li>
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Đánh giá
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@Model.RateAvg điểm
+                                </strong>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="riManager">
+                        <div class="rimaTitle">
+                            Quản lý bởi
+                        </div>
+                        <div class="rimaContent">
+                            <div class="rimacoImage">
+                                <img src="@ViewBag.MaidManager.Avatar" alt="Maid sercive" height="100%">
+                            </div>
+                            <div class="rimacoFullname">
+                                <a href="#">@ViewBag.MaidManager.Fullname</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="rows">
+        <a class="footerLogo" href="#">
+            <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100">
+        </a>
+
+        <p class="footerLegal">© 2014 Maid Service.</p>
+    </div>
+</div>
+<script>
+    var chosenId = 0;
+    function chooseJob(jobId, type) {
+        if (chosenId != 0) {
+            document.getElementById(chosenId).setAttribute("class", "");
+        }
+        if (jobId != chosenId) {
+            document.getElementById(jobId).setAttribute("class", "isCurent");
+            chosenId = jobId;
+            document.getElementById("hidden").setAttribute("value", jobId);
+        } else {
+            document.getElementById(jobId).setAttribute("class", "");
+            chosenId = 0;
+            type = 0;
+        }
+        if (type == 2) {
+            document.getElementById("ExpiredButton").setAttribute("style", "display: none;");
+            document.getElementById("NotAppliedList").setAttribute("style", "");
+        } else if (type == 3) {
+            document.getElementById("ExpiredButton").setAttribute("style", "");
+            document.getElementById("NotAppliedList").setAttribute("style", "display: none;");
+        } else if (type == 0) {
+            document.getElementById("ExpiredButton").setAttribute("style", "display: none;");
+            document.getElementById("NotAppliedList").setAttribute("style", "display: none;");
+        }
+    }
+</script>
+
