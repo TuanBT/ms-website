@@ -4,40 +4,59 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d271603309d54900934d45b090316baa" Name="MSDiagram" ZoomLevel="63">
-        <EntityTypeShape EntityType="MSModel.Account" Width="1.5" PointX="11.079898813310964" PointY="17.534558572589681" />
-        <EntityTypeShape EntityType="MSModel.Apply" Width="1.5" PointX="7.8216663784448368" PointY="8.1275602169928884" />
-        <EntityTypeShape EntityType="MSModel.Comment" Width="1.5" PointX="5.8163894851768339" PointY="14.890320829530396" />
-        <EntityTypeShape EntityType="MSModel.Customer" Width="1.5" PointX="3.5709213780103815" PointY="17.291859336798947" />
-        <EntityTypeShape EntityType="MSModel.JobRequest" Width="1.5" PointX="0.39243022929524551" PointY="17.469885744838923" />
-        <EntityTypeShape EntityType="MSModel.Maid" Width="1.5" PointX="11.761126136296022" PointY="22.86701818875364" />
-        <EntityTypeShape EntityType="MSModel.MaidMediator" Width="1.5" PointX="6.5361483388283048" PointY="20.40420974251079" />
-        <EntityTypeShape EntityType="MSModel.Rating" Width="1.5" PointX="2.5396076638901643" PointY="0.067393198640734508" />
-        <EntityTypeShape EntityType="MSModel.Recruitment" Width="1.5" PointX="0.20067787738548493" PointY="18.589455151273615" />
-        <EntityTypeShape EntityType="MSModel.SkillCategory" Width="1.5" PointX="5.884061054272606" PointY="30.642106875144925" />
-        <EntityTypeShape EntityType="MSModel.SkillInstance" Width="1.5" PointX="7.66980601831796" PointY="20.482823902965908" />
-        <EntityTypeShape EntityType="MSModel.SkillReference" Width="1.5" PointX="11.039699909761408" PointY="5.9642232833263575" />
-        <EntityTypeShape EntityType="MSModel.Staff" Width="1.5" PointX="6.6560281620621806" PointY="1.9642005273905585" />
-        <EntityTypeShape EntityType="MSModel.sysdiagram" Width="1.5" PointX="4.5911569709848408" PointY="18.84802303595842" />
-        <AssociationConnector Association="MSModel.FK_Customer_Account" />
-        <AssociationConnector Association="MSModel.FK_MaidRepresentation_Account" />
-        <AssociationConnector Association="MSModel.FK_Staff_Account" />
-        <AssociationConnector Association="MSModel.FK_Apply_JobRequest" />
-        <AssociationConnector Association="MSModel.FK_Apply_Recruitment" />
-        <AssociationConnector Association="MSModel.FK_Comment_Customer" />
-        <AssociationConnector Association="MSModel.FK_Comment_JobRequest" />
-        <AssociationConnector Association="MSModel.FK_Rating_Customer" />
-        <AssociationConnector Association="MSModel.FK_Recruitment_Customer" />
-        <AssociationConnector Association="MSModel.FK_JobRequest_Maid" />
-        <AssociationConnector Association="MSModel.FK_JobRequest_MaidMediator1" />
-        <AssociationConnector Association="MSModel.FK_JobRequest_SkillReference" />
-        <AssociationConnector Association="MSModel.FK_JobRequest_Staff" />
-        <AssociationConnector Association="MSModel.FK_Rating_JobRequest" />
-        <AssociationConnector Association="MSModel.FK_Maid_MaidMediator1" />
-        <AssociationConnector Association="MSModel.FK_Maid_Staff" />
-        <AssociationConnector Association="MSModel.FK_Recruitment_SkillReference1" />
-        <AssociationConnector Association="MSModel.FK_SkillInstance_SkillCategory" />
-        <AssociationConnector Association="MSModel.FK_SkillReference_Skill" />
+      <Diagram DiagramId="4a09c90a780446e294ec505b63bf33b1" Name="Diagram1" ZoomLevel="48">
+        <EntityTypeShape EntityType="MSModel.Account" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Apply" Width="1.5" PointX="12.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Comment" Width="1.5" PointX="12.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Customer" Width="1.5" PointX="10.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.JobRequest" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Maid" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.MaidMediator" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Rating" Width="1.5" PointX="12.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Recruitment" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.SkillCategory" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.SkillInstance" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.SkillReference" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Staff" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <AssociationConnector Association="MSModel.FK_Customer_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_MaidRepresentation_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Staff_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Apply_JobRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Apply_Recruitment" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Comment_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Comment_JobRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Rating_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Recruitment_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_JobRequest_Maid" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_JobRequest_MaidMediator1" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_JobRequest_SkillReference" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_JobRequest_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Rating_JobRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Maid_MaidMediator1" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Maid_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_Recruitment_SkillReference1" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillInstance_SkillCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance1" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance10" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance11" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance12" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance13" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance14" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance15" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance16" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance17" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance18" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance19" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance2" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance20" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance3" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance4" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance5" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance6" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance7" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance8" ManuallyRouted="false" />
+        <AssociationConnector Association="MSModel.FK_SkillReference_SkillInstance9" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

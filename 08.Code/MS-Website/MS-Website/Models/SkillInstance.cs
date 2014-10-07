@@ -17,6 +17,26 @@ namespace MS_Website.Models
         public SkillInstance()
         {
             this.SkillReferences = new HashSet<SkillReference>();
+            this.SkillReferences1 = new HashSet<SkillReference>();
+            this.SkillReferences2 = new HashSet<SkillReference>();
+            this.SkillReferences3 = new HashSet<SkillReference>();
+            this.SkillReferences4 = new HashSet<SkillReference>();
+            this.SkillReferences5 = new HashSet<SkillReference>();
+            this.SkillReferences6 = new HashSet<SkillReference>();
+            this.SkillReferences7 = new HashSet<SkillReference>();
+            this.SkillReferences8 = new HashSet<SkillReference>();
+            this.SkillReferences9 = new HashSet<SkillReference>();
+            this.SkillReferences10 = new HashSet<SkillReference>();
+            this.SkillReferences11 = new HashSet<SkillReference>();
+            this.SkillReferences12 = new HashSet<SkillReference>();
+            this.SkillReferences13 = new HashSet<SkillReference>();
+            this.SkillReferences14 = new HashSet<SkillReference>();
+            this.SkillReferences15 = new HashSet<SkillReference>();
+            this.SkillReferences16 = new HashSet<SkillReference>();
+            this.SkillReferences17 = new HashSet<SkillReference>();
+            this.SkillReferences18 = new HashSet<SkillReference>();
+            this.SkillReferences19 = new HashSet<SkillReference>();
+            this.SkillReferences20 = new HashSet<SkillReference>();
         }
     
         public int SkillId { get; set; }
@@ -29,5 +49,25 @@ namespace MS_Website.Models
     
         public virtual SkillCategory SkillCategory { get; set; }
         public virtual ICollection<SkillReference> SkillReferences { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences1 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences2 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences3 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences4 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences5 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences6 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences7 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences8 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences9 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences10 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences11 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences12 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences13 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences14 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences15 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences16 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences17 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences18 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences19 { get; set; }
+        public virtual ICollection<SkillReference> SkillReferences20 { get; set; }
     }
 }
