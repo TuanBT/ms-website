@@ -1,0 +1,223 @@
+﻿@model MS_Website.Models.Account
+@{
+    ViewBag.Title = "Đăng nhập";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link rel="icon" href="~/Content/Image/favicon.ico" />
+    <script src="~/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <style>
+        .header {
+            background: #28b7ed;
+            line-height: 80px;
+            height: 80px;
+        }
+
+        .rows {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 0;
+            margin-bottom: 0;
+            width: 960px;
+        }
+
+        .header .logo {
+            float: left;
+            height: 100%;
+            margin-left: 10px;
+        }
+
+        .oContentContainer {
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px / 5px;
+            border-radius: 5px / 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+            background-color: #fff;
+            padding: 54px;
+        }
+
+        .oPageCentered {
+            margin: 0 auto;
+            position: relative;
+            width: 960px;
+        }
+
+        .oFormContainer {
+            width: 307px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            font-family: Adelle_Regular, Georgia, serif;
+        }
+
+        form {
+            line-height: inherit;
+            margin: 0 0 1.5em;
+        }
+
+        .oInputText {
+            margin-bottom: 19px;
+        }
+
+        .oFormJumbo {
+            height: 48px;
+            font-size: 16px;
+            border-radius: 7px;
+            width: 100%;
+        }
+
+        body {
+            background-color: #ebebeb;
+            position: relative;
+            min-width: 960px;
+            min-height: 100%;
+            padding-bottom: 150px;
+            padding: 0;
+            margin: 0;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #252523;
+            word-wrap: break-word;
+        }
+
+        element.style {
+        }
+
+        body:before {
+            background: #28b7ed;
+            content: "";
+            height: 200px;
+            width: 100%;
+            min-width: 960px;
+            position: absolute;
+            top: 0;
+            z-index: -1;
+            padding: 0;
+        }
+
+        .footer {
+            background: #bdc3c7;
+            padding-top: 1.0625rem;
+            padding-bottom: 2.8125rem;
+            color: white;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .linksContainer {
+            display: inline-block;
+            color: #fff;
+            text-align: right;
+            vertical-align: middle;
+            float: right;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+            a:hover, a:focus {
+                color: #ffffff;
+                text-decoration: underline;
+            }
+
+        .FormFooter {
+        }
+
+        #submitBtn {
+        }
+
+        .RememberMe {
+            float: right;
+            margin-top: 5px;
+        }
+
+        #remember_me {
+        }
+
+        .ForgotLinks {
+            margin-top: 10px;
+        }
+
+            .ForgotLinks a {
+                color: #28b7ed;
+            }
+
+        .text {
+            margin: 20px 0 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="rows">
+            <div class="logo">
+                <a href="#">
+                    <img src="~/Content/Image/MS-Logo-white.png" alt="Maid service"
+                        style="margin-top: -18px; margin-bottom: -14px; width: 80px;"></a>
+            </div>
+            <div class="linksContainer">
+                <a href="#" id="signup">Đăng ký</a>
+            </div>
+        </div>
+    </div>
+    <div id="main" role="main" class="oPageCentered oContentContainer">
+
+        <div class="oPageCentered oFormContainer">
+            <h1>Đăng nhập và sử dụng</h1>
+
+            @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { name = "loginForm" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.TextBoxFor(a => a.Username, new { @id = "txtUsername", @class = "form-control input-lg text", @placeholder = "Tên đăng nhập", maxlength = 1000 })
+                <div id="textBlank"></div>
+                @Html.PasswordFor(a => a.Password, new { @id = "txtPassword", @class = "form-control input-lg text", @placeholder = "Mật khẩu", maxlength = 1000 })
+                <div id="passwordBlank"></div><font color="red">@ViewBag.Error</font><br/>
+                    <button id="btnLogin" type="submit" class="btn btn-info" name="Login">Đăng nhập</button>
+                    <label class="RememberMe">
+                        <input type="hidden" name="remember_me" value="0">
+                        <input type="checkbox" name="remember_me" id="remember_me" value="1">
+                        Ghi nhớ cho lần sau
+                    </label>
+                
+                <input type="hidden" name="ioBB" id="ioBB">
+                <div class="ForgotLinks">
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+            }
+        </div>
+    </div>
+    <script type="text/javascript" language="javascript">
+
+        $("#btnLogin").click(function () {
+            console.debug("sdf");
+            var errText = "";
+            if ($("#txtUsername").val() == "") {
+                errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
+                document.getElementById("textBlank").innerHTML = errText;
+                return false;
+            } else {
+                errText = "";
+                document.getElementById("textBlank").innerHTML = errText;
+            } 
+            if ($("#txtPassword").val()=="") {
+                errText = "<font color='red'>Vui lòng nhập mật khẩu</font>";
+                document.getElementById("passwordBlank").innerHTML = errText;
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>
