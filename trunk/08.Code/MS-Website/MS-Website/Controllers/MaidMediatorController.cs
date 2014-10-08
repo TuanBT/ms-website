@@ -17,8 +17,17 @@ namespace MS_Website.Controllers
         {
             using (var db = new MSEntities())
             {
-                var account = db.Accounts.SingleOrDefault(a => a.AccountId == 41);
-                ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == 41).ToList();
+                var accId = (int)Session["AccId"];
+                var role = ((string)Session["Role"]).Trim();
+                var account = db.Accounts.SingleOrDefault(a => a.AccountId == accId);
+                if (role.Equals("MaidMediator"))
+                {
+                    ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
+                }
+                else if (role.Equals("Staff"))
+                {
+                    ViewBag.MaidList = db.Maids.Where(m => m.Staff.Account.AccountId == accId).ToList();
+                }
                 return View("MaidMediator", account);
             }
         }
@@ -27,7 +36,8 @@ namespace MS_Website.Controllers
         {
             using (var db = new MSEntities())
             {
-                var maid = new Maid { MaidName = fullname, MaidMediatorId = 41, Gender = "Nam"};
+                var accId = (int)Session["AccId"];
+                var maid = new Maid { MaidName = fullname, MaidMediatorId = accId, Gender = "Nam" };
                 db.Maids.Add(maid);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -92,12 +102,12 @@ namespace MS_Website.Controllers
             {
                 var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
                 if (jobRequest != null)
-                {                    
+                {
                     db.JobRequests.Remove(jobRequest);
                     var skillRefTmp = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == jobRequest.SkillRefId);
                     db.SkillReferences.Remove(skillRefTmp);
                     db.SaveChanges();
-                }                
+                }
             }
             return RedirectToAction("Index");
         }
