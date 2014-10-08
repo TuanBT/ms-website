@@ -67,14 +67,16 @@ namespace MS_Website.Controllers
                         Session["Role"] = b.Role.ToString(CultureInfo.InvariantCulture);
                         return View("Index");
                     }
-                    else
-                    {
-
-                    }
-                   
                 }
             }
             return View(acc);
+        }
+
+        [HttpPost]
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
