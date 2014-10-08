@@ -11,43 +11,6 @@
 
     <link href="../Content/Style/Home.css" rel="stylesheet">
     <link href="../Content/style/profilePage.css" rel="stylesheet">
-    <style>
-        .postJRSkill {
-        }
-
-        .postJRTime {
-        }
-
-        .postJRMaid {
-        }
-        .postJRTimeDetail{
-            font-size: 10px;
-            color: #999;
-            margin-left: 10px;
-        }
-        #postJRTimePrice{
-font-weight: bold;
-        }
-        .boxPostJRSkill{}
-        .liImage {
-            width: 50px;
-            height: 50px;
-            float: left;
-        }
-        .boxUser{
-            min-height: 50px;
-            min-width: 200px;
-            background: beige;
-        }
-        .BuImage{
-            height: 50px;
-            background: aqua;
-        }
-        .BuContent{}
-        .BuFullName{}
-        .BuRate{}
-        .BuPost{}
-    </style>
 </head>
 <body>
 <div class="headerPage">
@@ -62,6 +25,12 @@ font-weight: bold;
                 </div>
             </div>
         </div>
+
+    </div>
+
+</div>
+<div class="Menu">
+    <div class="rows">
         <div class="hMenu">
             <div class="hFatherMenu">
                 <ul class="hmeTabList">
@@ -73,8 +42,8 @@ font-weight: bold;
                     </li>
                 </ul>
             </div>
-
         </div>
+
     </div>
     <div class="hChildMenu">
         <ul class="hChildMenuList">
@@ -87,82 +56,386 @@ font-weight: bold;
         </ul>
     </div>
 </div>
+
+
 <div class="body">
-    <div class="rows">
-        <div class="row">
-            <div class="postJRSkill">
-                <div class="col-md-4">
-                    Các kỹ năng:
-                </div>
-                <div class="col-md-8">
-<div class="boxPostJRSkill">
-    <div class="skill">
-        <ul>
-            <li class="childSkill">Giới tính - Nam<span class="glyphicon glyphicon-remove"></span></li>
-            <li class="childSkill">Tuổi 18-25<span class="glyphicon glyphicon-remove"></span></li>
-            <li class="childSkill">Ngôn ngữ - Anh<span class="glyphicon glyphicon-remove"></span></li>
-        </ul>
+<div class="rows">
+<div class="row">
+<div class="titlePage">Đăng yêu cầu công việc</div>
+<div class="postJRRow">
+<div class="row">
+    <div class="col-md-4 poJRTtitle">
+        Các kỹ năng
     </div>
-</div>
+    <div class="col-md-8">
+        <div class="boxPostJRSkill">
+            <div class="skillPost">
+                <div class="postOpenButton">
+                    <button class="btn btn-primary" data-toggle="modal" data-target=".chooseSkillModel">Thêm kỹ năng
+                    </button>
                 </div>
-                </li>
-            </div>
-            <div class="postJRTime">
-                <div class="col-md-4">
-                    Thời hạn đăng:
-                </div>
-                <div class="col-md-8">
-                        <select class="form-control">
-                            <option>1 tuần</option>
-                            <option>2 tuần</option>
-                            <option>3 tuần</option>
-                            <option>4 tuần</option>
-                            <option>5 tuần</option>
-                        </select>
-                    <span class="postJRTimeDetail">Đơn giá hiện tại <span id="postJRTimePrice">25.000</span> Đồng/Tuần</span>
-                </div>
-                </li>
-            </div>
-            <div class="postJRMaid">
-                <div class="col-md-4">
-                    Đăng cho:
-                </div>
-                <div class="col-md-8">
-                    <div class="boxUser">
-                            <span class="BuImage">
-                                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                            </span>
-                            <span class="BuContent">
-                                <div class="BuFullName">
-                                    <a href="#">Bùi Tiến Tuân</a>
-                                </div>
-                                <div class="BuRate">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </div>
-                                <div class="BuPost">
-                                    Đăng/nhận
-                                    <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
-                                </div>
-                        </span>
-                    </div>
-                </div>
-                </li>
+                <ul>
+                    <li class="childSkill">Giới tính - Nam<span
+                            class="glyphicon glyphicon-remove"></span>
+                    </li>
+                    <li class="childSkill">Tuổi 18-25<span class="glyphicon glyphicon-remove"></span>
+                    </li>
+                    <li class="childSkill">Ngôn ngữ - Anh<span
+                            class="glyphicon glyphicon-remove"></span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="footer">
-        <a class="footerLogo" href="#">
-            <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100">
-        </a>
-
-        <p class="footerLegal">© 2014 Maid Service.</p>
+<div class="modal fade chooseSkillModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header chooseMaidModalTitle">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title"> Chọn các kỹ năng cho công việc</h4>
+            </div>
+            <div class="chooseMaidModalSkill">
+                <div class="moskCategory">
+                    <div class="moskCategoryName">
+                        Cá nhân
+                    </div>
+                    <div class="moskCategoryContent">
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                Giới tính
+                            </div>
+                            <div class="moskSkillContent">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Gender-nam" value="option1"
+                                               checked>
+                                        Nam
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Gender-nu" value="option2">
+                                        Nữ
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                Tuổi
+                            </div>
+                            <div class="moskSkillContent">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Age-15-20" value="option1" checked>
+                                        15-20
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Age-31-40" value="option2">
+                                        31-40
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Age-41-50" value="option2">
+                                        41-50
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Age-51-60" value="option2">
+                                        51-60
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        Biết tiếng Anh
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        Biết tiếng Trung
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        Biết tiếng Nhật
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="moskCategory">
+                    <div class="moskCategoryName">
+                        Cá nhân
+                    </div>
+                    <div class="moskCategoryContent">
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                Giới tính
+                            </div>
+                            <div class="moskSkillContent">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Gender-nam" value="option1"
+                                               checked>
+                                        Nam
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Gender-nu" value="option2">
+                                        Nữ
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                Tuổi
+                            </div>
+                            <div class="moskSkillContent">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Age-15-20" value="option1" checked>
+                                        15-20
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Age-31-40" value="option2">
+                                        31-40
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Age-41-50" value="option2">
+                                        41-50
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" id="Age-51-60" value="option2">
+                                        51-60
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        Biết tiếng Anh
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        Biết tiếng Trung
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        Biết tiếng Nhật
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+</div>
+<div class="postJRRow">
+    <div class="row">
+        <div class="col-md-4 poJRTtitle">
+            Thời hạn đăng
+        </div>
+        <div class="col-md-8">
+            <select class="form-control">
+                <option>1 tuần</option>
+                <option>2 tuần</option>
+                <option>3 tuần</option>
+                <option>4 tuần</option>
+                <option>5 tuần</option>
+            </select>
+                        <span class="postJRTimeTotal">Tổng <span>1</span> * <span
+                                class="postJRTimePrice">25.000</span> = <span class="postJRTimePriceTotal">25.000</span> đồng</span>
+                    <span class="postJRTimeDetail">Đơn giá hiện tại <span
+                            class="postJRTimePrice">25.000</span> đồng/Tuần</span>
+        </div>
+    </div>
+</div>
+<div class="postJRRow">
+    <div class="row">
+        <div class="col-md-4 poJRTtitle">
+            Đăng cho
+        </div>
+        <div class="col-md-8">
+            <div class="boxPostJRUser">
+                <div class="postOpenButton">
+                    <button class="btn btn-primary" data-toggle="modal" data-target=".chooseMaidModel">Chọn người
+                    </button>
+                </div>
+                <div>
+                    <div class="liImage">
+                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                    </div>
+                    <div class="liMaidContent">
+                        <div class="licoFullName">
+                            <a href="#">Bùi Tiến Tuân</a>
+                        </div>
+                        <div class="licoRate">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                        </div>
+                        <div class="ricoPost">
+                            Đăng/nhận
+                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header chooseMaidModalTitle">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="mySmallModalLabel"> Chọn một trong số những người mà bạn đang quản
+                        lý</h4>
+                </div>
+                <div class="chooseMaidModalMaid">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+
+                            <div>
+                                <div class="liImage">
+                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                </div>
+                                <div class="liMaidContent">
+                                    <div class="licoFullName">
+                                        <a href="#">Bùi Tiến Tuân</a>
+                                    </div>
+                                    <div class="licoRate">
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    </div>
+                                    <div class="ricoPost">
+                                        Đăng/nhận
+                                        <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+
+                            <div>
+                                <div class="liImage">
+                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                </div>
+                                <div class="liMaidContent">
+                                    <div class="licoFullName">
+                                        <a href="#">Bùi Tiến Tuân</a>
+                                    </div>
+                                    <div class="licoRate">
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    </div>
+                                    <div class="ricoPost">
+                                        Đăng/nhận
+                                        <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+
+                            <div>
+                                <div class="liImage">
+                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                </div>
+                                <div class="liMaidContent">
+                                    <div class="licoFullName">
+                                        <a href="#">Bùi Tiến Tuân</a>
+                                    </div>
+                                    <div class="licoRate">
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    </div>
+                                    <div class="ricoPost">
+                                        Đăng/nhận
+                                        <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <button type="button" class="btn btn-success btn-lg">Đăng yêu cầu</button>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>
