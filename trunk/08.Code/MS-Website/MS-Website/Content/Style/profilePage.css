@@ -1,8 +1,8 @@
 ﻿/*header*/
 .headerPage {
     background: #00AEEC;
-    margin-bottom: 30px;
-    min-width: 960px;
+    /*margin-bottom: 30px;
+    min-width: 960px;*/
 }
 
 .rows {
@@ -981,4 +981,122 @@ a {
 }
 .maidlistApply{
     margin-top: 40px;
+}
+
+
+.postJRTimeDetail {
+    font-size: 12px;
+    color: #999;
+    margin-right: 10px;
+    float: right;
+    margin-top: 5px;
+}
+
+.postJRTimePrice {
+    font-weight: bold;
+}
+
+.boxPostJRSkill {
+    border: 2px solid #999;
+    border-radius: 5px;
+}
+
+.postJRTimeTotal {
+    font-size: 12px;
+    color: #999;
+    margin-left: 10px;
+    float: left;
+    margin-top: 5px;
+}
+
+.liImage {
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+.postJRRow {
+    vertical-align: baseline;
+    position: relative;
+    margin-bottom: 20px;
+    clear: both;
+}
+
+.poJRTtitle {
+    display: block;
+    padding-bottom: 5px;
+    line-height: 1.5;
+    font-weight: 700;
+    width: 200px;
+    float: left;
+}
+
+.titlePage {
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    font-family: Adelle_Regular, Georgia, serif;
+}
+
+.skillPost {
+    padding: 10px;
+}
+
+.postOpenButton {
+    float: right;
+}
+
+.boxPostJRUser {
+    border: 2px solid #999;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.Menu {
+    background: #00AEEC;
+    margin-bottom: 30px;
+    min-width: 960px;
+}
+
+.chooseMaidModalTitle {
+    background: #e5e5e5;
+    border-radius: 5px 5px 0 0;
+}
+
+.chooseMaidModalMaid {
+    margin-left: 40px;
+}
+
+.chooseMaidModalSkill {
+    padding: 20px;
+}
+
+.moskCategory {
+    display: inline-block;
+}
+
+.moskCategoryName {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.moskCategoryContent {
+    margin-left: 10px;
+}
+
+.moskSkill {
+    margin-bottom: 5px;
+}
+
+.moskSkillName {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.moskSkillContent {
+    margin-left: 10px;
+}
+
+.moskSkillContent > .radio {
+    margin: 0;
 }
