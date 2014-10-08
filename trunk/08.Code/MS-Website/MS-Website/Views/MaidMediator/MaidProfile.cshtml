@@ -77,14 +77,14 @@
                     </div>
                     <div class="boxListWork">
                         <ul class="nav nav-tabs" role="tablist" id="myTab">
-                            <li class><a href="#free" role="tab" data-toggle="tab">Chưa được nhận</a></li>
-                            <li class="active"><a href="#applied" role="tab" data-toggle="tab">Đã được nhận</a></li>
+                            <li class="active"><a href="#free" role="tab" data-toggle="tab">Chưa được nhận</a></li>
+                            <li class><a href="#applied" role="tab" data-toggle="tab">Đã được nhận</a></li>
                             <li class><a href="#approved" role="tab" data-toggle="tab">Đã hoàn tất</a></li>
                             <li class><a href="#expired" role="tab" data-toggle="tab">Hết hạn</a></li>
                         </ul>
 
                         <div class="tab-content">
-                            <div class="tab-pane fade  bFree" id="free">
+                            <div class="tab-pane fade in active bFree" id="free">
                                 <ul class="bFreeListWork">
                                     @foreach (var job in ViewBag.NotApplList)
                                     {
@@ -94,7 +94,7 @@
                                             </div>
                                             <div class="blDetail">
                                                 <div class="blName">
-                                                    <a href="#">@job.MaidName</a>
+                                                    <a href="@Url.Action("Index", "Post", new { jobId = job.JobRequestId })">@job.MaidName</a>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
@@ -130,7 +130,7 @@
                                     }
                                 </div>
                             </div>
-                            <div class="tab-pane fade in active bApplied" id="applied">
+                            <div class="tab-pane fade bApplied" id="applied">
                                 <div class="bTitle">
                                     <div class="btWork">
                                         Công việc
@@ -188,7 +188,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade in active bApplied" id="approved">
+                            <div class="tab-pane fade bApplied" id="approved">
                                 <div class="bTitle">
                                     <div class="btWork">
                                         Công việc
@@ -256,7 +256,7 @@
                                             </div>
                                             <div class="blDetail">
                                                 <div class="blName">
-                                                    <a href="@Url.Action("ManageJobRequest", "MaidMediator", new { requestId = job.JobRequestId })">@job.MaidName</a>
+                                                    <a href="@Url.Action("Index", "Post", new { jobId = job.JobRequestId })">@job.MaidName</a>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
@@ -349,15 +349,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="footer">
-    <div class="rows">
-        <a class="footerLogo" href="#">
-            <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100">
-        </a>
-
-        <p class="footerLegal">© 2014 Maid Service.</p>
     </div>
 </div>
 <script>
