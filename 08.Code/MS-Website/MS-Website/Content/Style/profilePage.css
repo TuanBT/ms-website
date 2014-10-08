@@ -672,3 +672,313 @@ a {
 /*End footer*/
 
 
+.viewComment {
+}
+
+.miButton {
+    float: right;
+    width: 60px;
+    text-align: center;
+}
+.miButton>button{
+    margin: 10px 0 10px 0;
+}
+
+.iStatus {
+}
+
+.iTitle {
+    display: inline-block;
+    font-weight: 700;
+}
+
+.iStatusText {
+}
+
+.iStatusPic {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
+
+.iRating {
+    display: inline-block;
+}
+
+.iRating > .miRate {
+    display: inline-block;
+    margin-top: 0px;
+    font-size: 14px;
+}
+
+.iSkill {
+}
+
+.iListKill {
+    display: inline-block;
+}
+
+.rimaListSameJobRequest {
+    width: 220px;
+    margin-left: 10px;
+}
+
+.rimaListSameJobRequest > li {
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.jrImage {
+    height: 50px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.jrMaidFullname {
+}
+
+.jrMaidRate {
+}
+
+.jrMaidFullname > a {
+    text-decoration: none;
+}
+
+.jrMaidFullname > a:hover {
+
+}
+
+.jrDetail {
+    display: inline-block;
+    float: right;
+}
+.mmiDetail{
+    width: 400px;
+}
+
+.rimaMaidList > li {
+    height: 60px;
+
+}
+
+.rimaTitle > button {
+    float: right;
+}
+
+.rimaMore {
+    cursor: pointer;
+    color: #bdc3c7;
+    text-align: center;
+}
+
+.rimaMore:hover {
+    color: black;
+    text-align: center;
+}
+
+.rimaMaidList {
+}
+
+.rimaMaidList > li {
+    height: 60px;
+
+}
+
+.liImage {
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+.licoFullName {
+}
+
+.licoRate {
+}
+
+.ricoPost {
+    color: #8C8C89;
+    font-size: 10px;
+    font-weight: 300;
+}
+
+.ricoPostApply {
+}
+
+.ricoPostTotal {
+}
+
+.liMaidContent {
+    font-size: 14px;
+    line-height: 15px;
+    margin-left: 60px;
+}
+
+.rimaTitle > button {
+    float: right;
+}
+
+.rimaMore {
+    cursor: pointer;
+    color: #bdc3c7;
+    text-align: center;
+}
+
+.rimaMore:hover {
+    color: black;
+    text-align: center;
+}
+
+.rimaMaidList {
+}
+
+.rimaMaidList > li {
+    height: 60px;
+
+}
+
+.liImage {
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+.licoFullName {
+}
+
+.licoRate {
+}
+
+.ricoPost {
+    color: #8C8C89;
+    font-size: 10px;
+    font-weight: 300;
+}
+
+.ricoPostApply {
+}
+
+.ricoPostTotal {
+}
+
+.liMaidContent {
+    font-size: 14px;
+    line-height: 15px;
+    margin-left: 60px;
+}
+
+.rimaTitle > button {
+    float: right;
+}
+
+.viewComment {
+}
+
+.miButton {
+    float: right;
+    width: 60px;
+    text-align: center;
+}
+.miButton>button{
+    margin: 10px 0 10px 0;
+}
+
+.iStatus {
+}
+
+.iTitle {
+    display: inline-block;
+    font-weight: 700;
+}
+
+.iStatusText {
+}
+
+.iStatusPic {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
+
+.iRating {
+    display: inline-block;
+}
+
+.iRating > .miRate {
+    display: inline-block;
+    margin-top: 0px;
+    font-size: 14px;
+}
+
+.iSkill {
+}
+
+.iListKill {
+    display: inline-block;
+}
+
+.rimaListSameJobRequest {
+    width: 220px;
+    margin-left: 10px;
+}
+
+.rimaListSameJobRequest > li {
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.jrImage {
+    height: 50px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.jrMaidFullname {
+}
+
+.jrMaidRate {
+}
+
+.jrMaidFullname > a {
+    text-decoration: none;
+}
+
+.jrMaidFullname > a:hover {
+
+}
+
+.jrDetail {
+    display: inline-block;
+    /*float: right;*/
+}
+.mmiDetail{
+    width: 400px;
+}
+.maliApply>li{
+    display: inline-block;
+    padding: 10px 0px 10px 10px;
+    border-radius: 5px;
+}
+.maliApply>li:hover{
+    background: #ecf0f1;
+}
+.maliApply>.isActive{
+    background: rgba(0, 255, 173, 0.26);
+}
+.maliApply>.isActive:hover{
+    background: rgba(0, 255, 173, 0.26);
+}
+.maliPreNex{
+    float: right;
+    margin-top: 15px;
+    font-size: 30px;
+    color: #DDD;
+}
+.maliPreNex:hover{
+    color: black;
+}
+.maidlistApply{
+    margin-top: 40px;
+}
