@@ -63,9 +63,8 @@
                         Giới tính
                     </div>
                     <div class="scContent">
-                        <a href="#">Nam<br />
-                        </a>
-                        <a href="#">Nữ</a>
+                        <input type="radio" />Nam<br />
+                        <input type="radio" />Nữ
                     </div>
                 </div>
             </div>
@@ -75,10 +74,9 @@
                         Tuổi
                     </div>
                     <div class="scContent">
-                        <a href="#">30-35<br />
-                        </a>
-                        <a href="#">35-40</a><br />
-                        <a href="#">30-45</a>
+                        <input type="radio" />30-35<br />
+                        <input type="radio" />35-40<br />
+                        <input type="radio" />40-45
                     </div>
                 </div>
             </div>
@@ -88,10 +86,9 @@
                         Lương
                     </div>
                     <div class="scContent">
-                        <a href="#">Dưới 3 triệu<br />
-                        </a>
-                        <a href="#">3-5 triệu</a><br />
-                        <a href="#">Trên 5 triệu</a>
+                        <input type="radio" />Dưới 3 triệu<br />
+                        <input type="radio" />3-5 triệu<br />
+                        <input type="radio" />Trên 5 triệu
                     </div>
                 </div>
             </div>
@@ -101,9 +98,8 @@
                         Loại công việc
                     </div>
                     <div class="scContent">
-                        <a href="#">Nấu ăn<br />
-                        </a>
-                        <a href="#">chăm sóc</a>
+                        <input type="radio" />Nấu ăn<br />
+                        <input type="radio" />chăm sóc
                     </div>
                 </div>
             </div>
@@ -113,12 +109,12 @@
                         Thời gian đăng bài
                     </div>
                     <div class="scContent">
-                        <a href="#">Cách đây 1 ngày<br />
-                        </a>
-                        <a href="#">Cách đây 3 ngày</a><br />
-                        <a href="#">Cách đây 7 ngày</a><br />
-                        <a href="#">Cách đây 14 ngày</a><br />
-                        <a href="#">Cách đây 30 ngày</a>
+                        <input type="radio" />Cách đây 1 ngày<br />
+
+                        <input type="radio" />Cách đây 3 ngày<br />
+                        <input type="radio" />Cách đây 7 ngày<br />
+                        <input type="radio" />Cách đây 14 ngày<br />
+                        <input type="radio" />Cách đây 30 ngày
                     </div>
                 </div>
             </div>
@@ -157,56 +153,56 @@
                 </div>
                 <div class="mainContent">
                     <ul>
-                        @{if (ViewBag.JobRequest!=null)
+                        @{if (ViewBag.JobRequest != null)
                           {
 
                               foreach (var item in ViewBag.JobRequest)
                               {
-                                  <li class="childContent">
-                                      <div class="function">
-                                          <div class="image">
-                                              <img src="@item.MaidImg" alt="Maid service" style="width: 100%;">
-                                          </div>
-                                          <div class="button">
-                                              <button type="button" class="btn btn-default btn-xs">Thông tin <span class="glyphicon glyphicon-user"></span></button>
-                                              <button type="button" class="btn btn-success btn-xs">Thuê <span class="glyphicon glyphicon-ok"></span></button>
-                                              <button type="button" style="display: none" class="btn btn-warning btn-xs">Bỏ thuê <span class="glyphicon glyphicon-remove"></span></button>
-                                          </div>
+                            <li class="childContent">
+                                <div class="function">
+                                    <div class="image">
+                                        <img src="@item.MaidImg" alt="Maid service" style="width: 100%;">
+                                    </div>
+                                    <div class="button">
+                                        <button type="button" class="btn btn-default btn-xs">Thông tin <span class="glyphicon glyphicon-user"></span></button>
+                                        <button type="button" class="btn btn-success btn-xs">Thuê <span class="glyphicon glyphicon-ok"></span></button>
+                                        <button type="button" style="display: none" class="btn btn-warning btn-xs">Bỏ thuê <span class="glyphicon glyphicon-remove"></span></button>
+                                    </div>
 
-                                      </div>
+                                </div>
 
-                                      <div class="info">
-                                          <div class="name">
-                                              @item.MaidName
+                                <div class="info">
+                                    <div class="name">
+                                        @item.MaidName
 
-                                          </div>
-                                          <div class="love">
-                                              <span class="glyphicon glyphicon-heart"></span>
-                                          </div>
-                                          <div class="rate">
-                                              <span class="glyphicon glyphicon-star"></span>
-                                              <span class="glyphicon glyphicon-star"></span>
-                                              <span class="glyphicon glyphicon-star"></span>
-                                              <span class="glyphicon glyphicon-star"></span>
-                                              <span class="glyphicon glyphicon-star"></span>
-                                          </div>
-                                          <div class="detailInfo">
-                                              <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span><span> | </span><strong>Bình luận: </strong><span>3</span>
-                                          </div>
+                                    </div>
+                                    <div class="love">
+                                        <span class="glyphicon glyphicon-heart"></span>
+                                    </div>
+                                    <div class="rate">
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    </div>
+                                    <div class="detailInfo">
+                                        <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span><span> | </span><strong>Bình luận: </strong><span>3</span>
+                                    </div>
 
-                                          <div class="description">
-                                          </div>
-                                          <div class="skill">
-                                              <ul>
-                                                  @foreach (var skill in ViewBag.SkillList)
-                                                  {
-                                                      <li class="childSkill">@skill</li>
-                                                  }
+                                    <div class="description">
+                                    </div>
+                                    <div class="skill">
+                                        <ul>
+                                            @foreach (var skill in ViewBag.SkillList)
+                                            {
+                                                <li class="childSkill">@skill</li>
+                                            }
 
-                                              </ul>
-                                          </div>
-                                      </div>
-                                  </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
                               }
                           }
                         }
