@@ -435,6 +435,14 @@ ul {
         background: #00aeec;
     }
 
+.childSkill span{
+    margin-left: 5px;
+}
+
+.childSkill span:hover{
+    color: red;
+}
+
 .detailInfo {
     padding-top: 10px;
     font-size: 11px;
