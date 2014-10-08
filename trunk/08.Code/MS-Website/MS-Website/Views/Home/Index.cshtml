@@ -49,10 +49,12 @@
             {
                 <li>
                     <a href="#">Chào @Session["Fullname"].ToString()</a>
+                    @using (Html.BeginForm("LogOut", "Home"))
+                    {
+                        <button class="btn btn-lg" title="Log out" type="submit">Đăng xuất</button>
+                    }
                 </li>
-                <li>
-                    <a href="#">Đăng xuất</a>
-                </li>
+               
             }
             else
             {
