@@ -1,0 +1,218 @@
+﻿@{
+    ViewBag.Title = "Tìm kiếm";
+}
+<script src="~/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+
+<script src="~/Content/bootstrap-3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+
+<link href="~/Content/Style/Home.css" rel="stylesheet">
+
+<div class="header">
+    <div class="rows">
+        <div class="logo">
+            <a href="#">
+                <img src="~/Content/Image/MS-Logo-white.png" alt="Maid service"
+                    style="margin-top: -18px; margin-bottom: -14px; width: 80px;"></a>
+        </div>
+        <div class="search">
+
+            <div class="inputGroup">
+                <div class="row">
+                    <form method="GET">
+                        <input type="text" name="SearchString" placeholder="Tìm kiếm công việc" class="btn" />
+                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="userLinks">
+            <li>
+                <a href="#">Đăng nhập</a>
+
+            </li>
+            <li>
+                <a href="#">Đăng ký</a>
+
+            </li>
+            <li><a class="regisEscape" href="#">Đăng ký tìm việc</a></li>
+        </div>
+    </div>
+</div>
+
+<div class="banner">
+    <div class="rows">
+    </div>
+    <div class="rows">
+    </div>
+    <div class="rows">
+        <div class="shotcutButton">
+        </div>
+    </div>
+</div>
+
+<div id="body">
+    <div style="margin: 0 auto; width: 820px">
+        <div id="bodyLeft">
+            <div class="advertising">
+            </div>
+            <div class="shortCutLink">
+                <div class="scContentBox">
+                    <div class="scTitle">
+                        Giới tính
+                    </div>
+                    <div class="scContent">
+                        <a href="#">Nam<br />
+                        </a>
+                        <a href="#">Nữ</a>
+                    </div>
+                </div>
+            </div>
+            <div class="shortCutLink">
+                <div class="scContentBox">
+                    <<div class="scTitle">
+                        Tuổi
+                    </div>
+                    <div class="scContent">
+                        <a href="#">30-35<br />
+                        </a>
+                        <a href="#">35-40</a><br />
+                        <a href="#">30-45</a>
+                    </div>
+                </div>
+            </div>
+            <div class="shortCutLink">
+                <div class="scContentBox">
+                    <<div class="scTitle">
+                        Lương
+                    </div>
+                    <div class="scContent">
+                        <a href="#">Dưới 3 triệu<br />
+                        </a>
+                        <a href="#">3-5 triệu</a><br />
+                        <a href="#">Trên 5 triệu</a>
+                    </div>
+                </div>
+            </div>
+            <div class="shortCutLink">
+                <div class="scContentBox">
+                    <<div class="scTitle">
+                        Loại công việc
+                    </div>
+                    <div class="scContent">
+                        <a href="#">Nấu ăn<br />
+                        </a>
+                        <a href="#">chăm sóc</a>
+                    </div>
+                </div>
+            </div>
+            <div class="shortCutLink">
+                <div class="scContentBox">
+                    <<div class="scTitle">
+                        Thời gian đăng bài
+                    </div>
+                    <div class="scContent">
+                        <a href="#">Cách đây 1 ngày<br />
+                        </a>
+                        <a href="#">Cách đây 3 ngày</a><br />
+                        <a href="#">Cách đây 7 ngày</a><br />
+                        <a href="#">Cách đây 14 ngày</a><br />
+                        <a href="#">Cách đây 30 ngày</a>
+                    </div>
+                </div>
+            </div>
+            <div class="shortCutLink">
+                <div class="scContentBox">
+                    <div class="scTitle">
+                        Thông báo
+                    </div>
+                    <div class="scContent">
+                        <span>
+                            <strong>MS - Tuyển dụng lưu ý:</strong><br />
+                            Tài khoản tuyển dụng không đăng quá 05 tin cho cùng một chuyên mục. 
+                            Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền tổng đài, tin nhắn, đào tạo kỹ năng... <a href="#">Xem thêm</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bodyCenter">
+            <div id="maids">
+                <div class="listHeader">
+                    <div class="listRow">
+                        <div class="listTitle">
+                            Người giúp việc
+                        </div>
+                        <div class="listPage">
+                            <ul class="pagination">
+                                <li class="disabled"><a href="#">&laquo;</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="mainContent">
+                    <ul>
+                        @{if (ViewBag.JobRequest!=null)
+                          {
+
+                              foreach (var item in ViewBag.JobRequest)
+                              {
+                                  <li class="childContent">
+                                      <div class="function">
+                                          <div class="image">
+                                              <img src="@item.MaidImg" alt="Maid service" style="width: 100%;">
+                                          </div>
+                                          <div class="button">
+                                              <button type="button" class="btn btn-default btn-xs">Thông tin <span class="glyphicon glyphicon-user"></span></button>
+                                              <button type="button" class="btn btn-success btn-xs">Thuê <span class="glyphicon glyphicon-ok"></span></button>
+                                              <button type="button" style="display: none" class="btn btn-warning btn-xs">Bỏ thuê <span class="glyphicon glyphicon-remove"></span></button>
+                                          </div>
+
+                                      </div>
+
+                                      <div class="info">
+                                          <div class="name">
+                                              @item.MaidName
+
+                                          </div>
+                                          <div class="love">
+                                              <span class="glyphicon glyphicon-heart"></span>
+                                          </div>
+                                          <div class="rate">
+                                              <span class="glyphicon glyphicon-star"></span>
+                                              <span class="glyphicon glyphicon-star"></span>
+                                              <span class="glyphicon glyphicon-star"></span>
+                                              <span class="glyphicon glyphicon-star"></span>
+                                              <span class="glyphicon glyphicon-star"></span>
+                                          </div>
+                                          <div class="detailInfo">
+                                              <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span><span> | </span><strong>Bình luận: </strong><span>3</span>
+                                          </div>
+
+                                          <div class="description">
+                                          </div>
+                                          <div class="skill">
+                                              <ul>
+                                                  @foreach (var skill in ViewBag.SkillList)
+                                                  {
+                                                      <li class="childSkill">@skill</li>
+                                                  }
+
+                                              </ul>
+                                          </div>
+                                      </div>
+                                  </li>
+                              }
+                          }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
