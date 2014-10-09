@@ -158,7 +158,7 @@ public ActionResult RunKmean()
                 int i = 0;
                 foreach ( SkillReference skillReference in skillRefTable)
                 {
-                    skillReference.Group = kmeanDatas[i].group;
+                    //skillReference.Group = kmeanDatas[i].group;
                     i++;
                 }
                 db.SaveChanges();
@@ -182,9 +182,9 @@ public ActionResult RunKmean()
                             a => a.Username.Equals(acc.Username) && a.Password.Equals(acc.Password));
                     if (b != null)
                     {
-                        Session["AccId"] = b.AccountId.ToString(CultureInfo.InvariantCulture);
-                        Session["Fullname"] = b.FullName.ToString(CultureInfo.InvariantCulture);
-                        Session["Role"] = b.Role.ToString(CultureInfo.InvariantCulture);
+                        Session["AccId"] = b.AccountId;
+                        Session["Fullname"] = b.FullName;
+                        Session["Role"] = b.Role;
                         return View("Index");
                     }
                 }
