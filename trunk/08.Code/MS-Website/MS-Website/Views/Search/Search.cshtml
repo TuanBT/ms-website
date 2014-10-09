@@ -115,7 +115,7 @@
                                     Giới tính
                                 </div>
                                 <div class="scContent">
-                                    <input type="radio" name="gender" value="Nam" onclick="search()" />Nam<br />
+                                    <input type="radio" name="gender" value="Nam" onclick="search()" @(ViewBag.Gender != null && ViewBag.Gender.Equals("Nam") ? "checked":"true")/>Nam<br />
                                     <input type="radio" name="gender" value="Nữ" onclick="search()"/>Nữ
                                 </div>
                             </div>
