@@ -53,20 +53,20 @@ namespace MS_Website.Controllers
 
         public ActionResult Rate()
         {
-            double rate = 0;
-            int count = 0;
-            List<Rating> ratings = db.Ratings.Where(r => r.JobRequestId == 1).ToList();
+            var rating = db.Ratings.FirstOrDefault(r => r.JobRequestId == 1);
 
-            foreach (var item in ratings)
+            //rate = rate / count;
+            //rate = Math.Round(rate, MidpointRounding.AwayFromZero);
+            //rate = Math.Round(rate * 2, MidpointRounding.AwayFromZero) / 2;
+            if (rating.Rate != null)
             {
-                rate += item.Rate;
-                count++;
+                @ViewBag.AverageRating = rating.Rate;
             }
-
-            rate = rate / count;
-            rate = Math.Round(rate, MidpointRounding.AwayFromZero);
-            rate = Math.Round(rate * 2, MidpointRounding.AwayFromZero) / 2;
-            @ViewBag.AverageRating = rate;
+            else
+            {
+                @ViewBag.AverageRating = 0;
+            }
+            
             return PartialView("_Rate");
         }
 
@@ -80,9 +80,8 @@ namespace MS_Website.Controllers
             {
                 rating.Rate = rating.Rate / 10;
             }
-            double sum = 0;
-            int count = 0;
-            Rating custRating = db.Ratings.Where(r => r.JobRequestId == 1).FirstOrDefault(r => r.CustomerId == 7);
+           
+            Rating custRating = db.Ratings.FirstOrDefault(r => (r.JobRequestId == 1) && (r.CustomerId == 7));
             if (custRating != null)
             {
                 custRating.Rate = rating.Rate;
@@ -94,17 +93,7 @@ namespace MS_Website.Controllers
                 db.SaveChanges();
             }
 
-            List<Rating> ratings = db.Ratings.Where(r => r.JobRequestId == 1).ToList();
-
-            foreach (var item in ratings)
-            {
-                sum += item.Rate;
-                count++;
-            }
-
-            double rate = sum / count;
-            rate = Math.Round(rate * 2, MidpointRounding.AwayFromZero) / 2;
-            @ViewBag.AverageRating = rate;
+            @ViewBag.AverageRating = rating.Rate;
 
             return PartialView("_Rate");
         }
