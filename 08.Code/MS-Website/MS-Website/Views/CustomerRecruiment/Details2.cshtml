@@ -1,0 +1,103 @@
+﻿@model MS_Website.Models.JobRequest
+
+@{
+    ViewBag.Title = "Details2";
+    Layout = "~/Views/Shared/_CustomerLayout2.cshtml";
+}
+
+<link href="~/Content/bootstrap-star-rating-master/css/star-rating.min.css" rel="stylesheet" />
+<script src="~/Content/bootstrap-star-rating-master/js/star-rating.js"></script>
+
+<section class="content-header">
+    <h1>Quản lý tin tuyển dụng</h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+        <li class="active">Quản lý tin tuyển dụng</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.SkillRefId)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.SkillRefId)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.MaidMediatorId)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.MaidMediatorId)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.StaffId)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.StaffId)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Status)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Status)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.PostTime)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.PostTime)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.ExpiredTime)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.ExpiredTime)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.ApplyTimes)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.ApplyTimes)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.MaidId)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.MaidId)
+                    </div>
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.JobRequestId }) |
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
+                </div>
+            </div>
+
+             <div class="box box-danger">
+                @{Html.RenderAction("Rate", "Evaluate");}
+            </div>
+
+            <div class="box box-success">
+                @*@{Html.RenderAction("Index", "Evaluate", new { id = 1 });}
+                @{
+                    MS_Website.Models.MSEntities db = new MS_Website.Models.MSEntities();
+                    List<MS_Website.Models.Comment> comments = db.Comments.Where(c => c.JobRequestId == 1).ToList();
+                }
+                @Html.Partial("~/Views/Evaluate/_Index.cshtml", comments)*@
+                @{Html.RenderAction("Post", "Evaluate");}
+            </div>
+        </div>
+</section>
+
+
+
