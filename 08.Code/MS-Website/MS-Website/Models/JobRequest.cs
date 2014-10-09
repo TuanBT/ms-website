@@ -30,6 +30,7 @@ namespace MS_Website.Models
         public System.DateTime ExpiredTime { get; set; }
         public Nullable<System.DateTime> ApplyTimes { get; set; }
         public int MaidId { get; set; }
+        public bool IsActive { get; set; }
     
         public virtual ICollection<Apply> Applies { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
