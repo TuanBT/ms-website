@@ -21,7 +21,6 @@ namespace MS_Website.Models
     
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
-        public string CategoryNameVietnam { get; set; }
     
         public virtual ICollection<SkillInstance> SkillInstances { get; set; }
     }

@@ -23,7 +23,7 @@ namespace MS_Website.Models
         public int SkillRefId { get; set; }
         public int CustomerId { get; set; }
         public string Status { get; set; }
-        public System.DateTime PostRequestedTime { get; set; }
+        public System.DateTime PostTime { get; set; }
         public System.DateTime ExpiredTime { get; set; }
     
         public virtual ICollection<Apply> Applies { get; set; }

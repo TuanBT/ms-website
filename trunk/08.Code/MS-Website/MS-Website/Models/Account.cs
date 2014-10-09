@@ -20,10 +20,9 @@ namespace MS_Website.Models
         public bool IsActive { get; set; }
         public System.DateTime JoinDate { get; set; }
         public string Role { get; set; }
-        public string IsWebmaster { get; set; }
+        public bool IsWebmaster { get; set; }
         public string Avatar { get; set; }
         public string Email { get; set; }
-        public string Status { get; set; }
         public string Phone { get; set; }
         public string FullName { get; set; }
     
