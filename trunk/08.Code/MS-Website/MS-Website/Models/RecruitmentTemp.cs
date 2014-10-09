@@ -7,7 +7,7 @@ namespace MS_Website.Models
 {
     public class RecruitmentTemp
     {
-        public RecruitmentTemp(int recruitmentId, int skillRefId, int customerId, string status, DateTime postTime, DateTime expiredTime, string custImg, string customerName)
+        public RecruitmentTemp(int recruitmentId, int skillRefId, int customerId, string status, DateTime postTime, DateTime expiredTime, string custImg, string customerName, List<string> skillList)
         {
             this.RecruitmentId = recruitmentId;
             this.SkillRefId = skillRefId;
@@ -17,6 +17,7 @@ namespace MS_Website.Models
             this.ExpiredTime = expiredTime;
             this.CustImg = custImg;
             this.CustomerName = customerName;
+            this.SkillList = skillList;
         }
         public int RecruitmentId { get; set; }
         public int SkillRefId { get; set; }
@@ -26,5 +27,6 @@ namespace MS_Website.Models
         public DateTime ExpiredTime { get; set; }
         public string CustImg { get; set; }
         public string CustomerName { get; set; }
+        public List<string> SkillList { get; set; }
     }
 }
