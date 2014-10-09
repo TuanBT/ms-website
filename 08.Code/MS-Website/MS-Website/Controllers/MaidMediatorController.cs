@@ -111,10 +111,5 @@ namespace MS_Website.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        public ActionResult ManageJobRequest(int jobId)
-        {
-            return View("JobRequest");
-        }
     }
 }
