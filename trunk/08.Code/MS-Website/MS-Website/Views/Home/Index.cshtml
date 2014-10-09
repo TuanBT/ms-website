@@ -1,158 +1,169 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "";
 }
-<link href="~/Content/Style/Home.css" rel="stylesheet">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="icon" href="@Url.Content("~/Content/Image/favicon.ico")"/>
+    @Scripts.Render("~/Scripts/jquery-1.8.2.min.js")
+    @Styles.Render("~/Content/bootstrap-3.2.0/css/bootstrap.min.css")
+    @Scripts.Render("~/Content/bootstrap-3.2.0/js/bootstrap.min.js")
 
+    <link href="~/Content/Style/Home.css" rel="stylesheet">
+    @Styles.Render("~/Content/Style/profilePage.css")
+</head>
+<body>
+    <div class="header">
+        <div class="rows">
+            <div class="logo">
+                <a href="#">
+                    <img src="../Content/Image/MS-Logo-white.png" alt="Maid service"
+                        style="margin-top: -18px; margin-bottom: -14px; width: 80px;"></a>
+            </div>
+            <div class="search">
 
+                <div class="inputGroup">
+                    <span class="dropdown active">
+                        <span class="glyphicon glyphicon-chevron-down"
+                            style="z-index: 100; color: white; float: right; margin-top: 14px; margin-right: 6px;"></span>
+                        <input id="search-freelancers" type="radio" name="for" value="freelancers"
+                            data-action="/o/profiles/browse/" data-placeholder="Search freelancers"
+                            checked="checked">
+                        <label for="search-freelancers">Người giúp việc</label>
+                        <input id="search-jobs" type="radio" name="for" value="jobs" data-action="/o/jobs/browse/"
+                            data-placeholder="Search jobs">
+                        <label for="search-jobs">Công việc</label>
+                    </span>
 
-<div class="header">
-    <div class="rows">
-        <div class="logo">
-            <a href="#">
-                <img src="../Content/Image/MS-Logo-white.png" alt="Maid service"
-                    style="margin-top: -18px; margin-bottom: -14px; width: 80px;"></a>
-        </div>
-        <div class="search">
-
-            <div class="inputGroup">
-                <span class="dropdown active">
-                    <span class="glyphicon glyphicon-chevron-down"
-                        style="z-index: 100; color: white; float: right; margin-top: 14px; margin-right: 6px;"></span>
-                    <input id="search-freelancers" type="radio" name="for" value="freelancers"
-                        data-action="/o/profiles/browse/" data-placeholder="Search freelancers"
-                        checked="checked">
-                    <label for="search-freelancers">Người giúp việc</label>
-                    <input id="search-jobs" type="radio" name="for" value="jobs" data-action="/o/jobs/browse/"
-                        data-placeholder="Search jobs">
-                    <label for="search-jobs">Công việc</label>
-                </span>
-
-                <div class="input-group" style="margin-left: 120px;">
-                    <input type="text" class="searchInput form-control" placeholder="Tìm kiếm công việc">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                    <div class="input-group" style="margin-left: 120px;">
+                        <input type="text" class="searchInput form-control" placeholder="Tìm kiếm công việc">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="siteLinks">
-            <li>
-                <a href="#">Browse</a>
-
-            </li>
-            <li>
-                <a href="#">Browse</a>
-
-            </li>
-        </div>
-        <div class="userLinks">
-            @if (Session["Fullname"] != null)
-            {
+            <div class="siteLinks">
                 <li>
-                    <a href="#">Chào @Session["Fullname"].ToString()</a>
-                    @using (Html.BeginForm("LogOut", "Home"))
-                    {
-                        <button class="btn btn-lg" title="Log out" type="submit">Đăng xuất</button>
-                    }
+                    <a href="#">Browse</a>
+
                 </li>
+                <li>
+                    <a href="#">Browse</a>
+
+                </li>
+            </div>
+            <div class="userLinks">
+                @if (Session["Fullname"] != null)
+                {
+                    <li>
+                        <a href="#">Chào @Session["Fullname"].ToString()</a>
+                        @using (Html.BeginForm("LogOut", "Home"))
+                        {
+                            <button class="btn btn-lg" title="Log out" type="submit">Đăng xuất</button>
+                        }
+                    </li>
                
-            }
-            else
-            {
-                <li>
-                    <a href="Home/Login">Đăng nhập</a>
+                }
+                else
+                {
+                    <li>
+                        <a href="Home/Login">Đăng nhập</a>
 
-                </li>
-                <li>
-                    <a href="#">Đăng ký</a>
+                    </li>
+                    <li>
+                        <a href="#">Đăng ký</a>
 
-                </li>
-                <li><a class="regisEscape" href="#">Đăng ký tìm việc</a></li>
-            }
+                    </li>
+                    <li><a class="regisEscape" href="#">Đăng ký tìm việc</a></li>
+                }
+            </div>
         </div>
     </div>
-</div>
 
-<div class="banner">
-    <div class="rows">
-        <div class="heading">
-            <span class="firstHeading">Cuộc sống hiệu quả...</span>
-            <br />
-            <span class="secondHeading">khi sử dụng dịch vụ người giúp việc</span>
+    <div class="banner">
+        <div class="rows">
+            <div class="heading">
+                <span class="firstHeading">Cuộc sống hiệu quả...</span>
+                <br />
+                <span class="secondHeading">khi sử dụng dịch vụ người giúp việc</span>
+            </div>
+        </div>
+        <div class="rows">
+            <div class="welcom">
+                <p class="textWelcom">Chào mừng tới trang web <strong>dịch vụ người giúp việc</strong>, hiện có <strong>hơn 100</strong> người giúp việc và công việc yêu cầu hằng ngày.</p>
+            </div>
+        </div>
+        <div class="rows">
+            <div class="shotcutButton">
+                <a href="#" class="sb sb1 btn btn-default">Yêu cầu người giúp việc</a>
+                <a href="#" class="sb sb2 btn btn-default">Làm sao để có việc</a>
+            </div>
+        </div>
+        <div class="background">
+            <img class="w1" src="../Content/Image/Home/women2.png">
+            <img class="w2" src="../Content/Image/Home/women1.png">
+            <!--<img class="bg" src="../Content/Image/background_blur.jpg">-->
         </div>
     </div>
-    <div class="rows">
-        <div class="welcom">
-            <p class="textWelcom">Chào mừng tới trang web <strong>dịch vụ người giúp việc</strong>, hiện có <strong>hơn 100</strong> người giúp việc và công việc yêu cầu hằng ngày.</p>
-        </div>
-    </div>
-    <div class="rows">
-        <div class="shotcutButton">
-            <a href="#" class="sb sb1 btn btn-default">Yêu cầu người giúp việc</a>
-            <a href="#" class="sb sb2 btn btn-default">Làm sao để có việc</a>
-        </div>
-    </div>
-    <div class="background">
-        <img class="w1" src="../Content/Image/Home/women2.png">
-        <img class="w2" src="../Content/Image/Home/women1.png">
-        <!--<img class="bg" src="../Content/Image/background_blur.jpg">-->
-    </div>
-</div>
 
-<div id="body">
-    <div style="margin: 0 auto; width: 820px">
-        <div class="row">
-            <div class="col-md-3">
-                <div id="bodyLeft">
-                    <div class="advertising">
-                    </div>
-                    <div class="shortCutLink">
-                        <div class="scContentBox">
-                            <div class="scTitle">
-                                Bạn muốn có việc làm?
-                            </div>
-                            <div class="scContent">
-                                <img src="../Content/Image/Home/background_blur.jpg" style="width: 100%;">
-                                <button type="button" class="btn btn-info">Đăng</button>
+    <div id="body">
+        <div style="margin: 0 auto; width: 820px">
+            <div class="row">
+                <div class="col-md-3">
+                    <div id="bodyLeft">
+                        <div class="advertising">
+                        </div>
+                        <div class="shortCutLink">
+                            <div class="scContentBox">
+                                <div class="scTitle">
+                                    Bạn muốn có việc làm?
+                                </div>
+                                <div class="scContent">
+                                    <img src="../Content/Image/Home/background_blur.jpg" style="width: 100%;">
+                                    <button type="button" class="btn btn-info">Đăng</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="shortCutLink">
-                        <div class="scContentBox">
-                            <div class="scTitle">
-                                Bạn muốn tìm người giúp việc?
-                            </div>
-                            <div class="scContent">
-                                <img src="../Content/Image/Home/background_blur.jpg" style="width: 100%;">
-                                <button type="button" class="btn btn-info">Đăng</button>
+                        <div class="shortCutLink">
+                            <div class="scContentBox">
+                                <div class="scTitle">
+                                    Bạn muốn tìm người giúp việc?
+                                </div>
+                                <div class="scContent">
+                                    <img src="../Content/Image/Home/background_blur.jpg" style="width: 100%;">
+                                    <button type="button" class="btn btn-info">Đăng</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="shortCutLink">
-                        <div class="scContentBox">
-                            <div class="scTitle">
-                                Thông báo
-                            </div>
-                            <div class="scContent">
-                                <span>
-                                    <strong>MS - Tuyển dụng lưu ý:</strong><br />
-                                    Tài khoản tuyển dụng không đăng quá 05 tin cho cùng một chuyên mục.
+                        <div class="shortCutLink">
+                            <div class="scContentBox">
+                                <div class="scTitle">
+                                    Thông báo
+                                </div>
+                                <div class="scContent">
+                                    <span>
+                                        <strong>MS - Tuyển dụng lưu ý:</strong><br />
+                                        Tài khoản tuyển dụng không đăng quá 05 tin cho cùng một chuyên mục.
 Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền tổng đài, tin nhắn, đào tạo kỹ năng... <a href="#">Xem thêm</a>
-                                </span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-9">
-                <div id="bodyCenter">
-                    <div class="tab-content">
-                        <ul class="nav nav-tabs listTitle" role="tablist" id="myTab">
-                            <li class="active"><a href="#tabMaids" role="tab" data-toggle="tab">Việc tìm người thuê</a></li>
-                            <li><a href="#tabCustomer" role="tab" data-toggle="tab">Công việc cần người</a></li>
-                        </ul>
-                        <div class="tab-pane fade in active" id="tabMaids">
-                            <div class="listWork">
-                                @*<div class="listHeader">
+                <div class="col-md-9">
+                    <div id="bodyCenter">
+                        <div class="tab-content">
+                            <ul class="nav nav-tabs listTitle" role="tablist" id="myTab">
+                                <li class="active"><a href="#tabMaids" role="tab" data-toggle="tab">Việc tìm người thuê</a></li>
+                                <li><a href="#tabCustomer" role="tab" data-toggle="tab">Công việc cần người</a></li>
+                            </ul>
+                            <div class="tab-pane fade in active" id="tabMaids">
+                                <div class="listWork">
+                                    @*<div class="listHeader">
                                     <div class="listRow">
                                         <div class="listTitle">
                                             Việc tìm người thuê
@@ -168,116 +179,116 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
                                         </div>
                                     </div>
                                 </div>*@
-                                <div class="mainContent">
-                                    <ul>
-                                        <li class="childContent">
-                                            <div class="function">
-                                                <div class="image">
-                                                    <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
-                                                </div>
-                                                <div class="button">
-                                                    <button type="button" class="btn btn-success btn-xs">Thuê <span class="glyphicon glyphicon-ok"></span></button>
-                                                    <button type="button" style="display: none" class="btn btn-warning btn-xs">Bỏ thuê <span class="glyphicon glyphicon-remove"></span></button>
-                                                </div>
+                                    <div class="mainContent">
+                                        <ul>
+                                            <li class="childContent">
+                                                <div class="function">
+                                                    <div class="image">
+                                                        <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
+                                                    </div>
+                                                    <div class="button">
+                                                        <button type="button" class="btn btn-success btn-xs">Thuê <span class="glyphicon glyphicon-ok"></span></button>
+                                                        <button type="button" style="display: none" class="btn btn-warning btn-xs">Bỏ thuê <span class="glyphicon glyphicon-remove"></span></button>
+                                                    </div>
 
-                                            </div>
-                                            <div class="info">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="name">
-                                                            <a href="#">Bùi Maid 1</a>
+                                                </div>
+                                                <div class="info">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div class="name">
+                                                                <a href="#">Bùi Maid 1</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="love">
+                                                                <span class="glyphicon glyphicon-heart"></span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <div class="love">
-                                                            <span class="glyphicon glyphicon-heart"></span>
-                                                        </div>
+                                                    <div class="rate">
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                    </div>
+                                                    <div class="detailInfo">
+                                                        <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span><span> | </span><strong>Bình luận: </strong><span>3</span>
+                                                    </div>
+
+                                                    <div class="description">
+                                                        Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.
+                                                    </div>
+                                                    <div class="skill">
+                                                        <ul>
+                                                            <li class="childSkill">Giới tính - Nam</li>
+                                                            <li class="childSkill">Tuổi 18-25</li>
+                                                            <li class="childSkill">Ngôn ngữ - Anh</li>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                                <div class="rate">
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                </div>
-                                                <div class="detailInfo">
-                                                    <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span><span> | </span><strong>Bình luận: </strong><span>3</span>
-                                                </div>
+                                            </li>
+                                            <li class="childContent">
+                                                <div class="function">
+                                                    <div class="image">
+                                                        <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
+                                                    </div>
+                                                    <div class="button">
+                                                        <button type="button" style="display: none" class="btn btn-success btn-xs">Thuê <span class="glyphicon glyphicon-ok"></span></button>
+                                                        <button type="button" class="btn btn-warning btn-xs">Bỏ thuê <span class="glyphicon glyphicon-remove"></span></button>
+                                                    </div>
 
-                                                <div class="description">
-                                                    Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.
                                                 </div>
-                                                <div class="skill">
-                                                    <ul>
-                                                        <li class="childSkill">Giới tính - Nam</li>
-                                                        <li class="childSkill">Tuổi 18-25</li>
-                                                        <li class="childSkill">Ngôn ngữ - Anh</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="childContent">
-                                            <div class="function">
-                                                <div class="image">
-                                                    <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
-                                                </div>
-                                                <div class="button">
-                                                    <button type="button" style="display: none" class="btn btn-success btn-xs">Thuê <span class="glyphicon glyphicon-ok"></span></button>
-                                                    <button type="button" class="btn btn-warning btn-xs">Bỏ thuê <span class="glyphicon glyphicon-remove"></span></button>
-                                                </div>
-
-                                            </div>
-                                            <div class="info">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="name">
-                                                            <a href="#">Bùi Maid 2</a>
+                                                <div class="info">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div class="name">
+                                                                <a href="#">Bùi Maid 2</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="love">
+                                                                <span class="glyphicon glyphicon-heart"></span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <div class="love">
-                                                            <span class="glyphicon glyphicon-heart"></span>
-                                                        </div>
+                                                    <div class="rate">
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="glyphicon glyphicon-star"></span>
+                                                    </div>
+                                                    <div class="detailInfo">
+                                                        <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span><span> | </span><strong>Bình luận: </strong><span>3</span>
+                                                    </div>
+
+                                                    <div class="description">
+                                                        Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người. Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người. Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.
+                                                    </div>
+                                                    <div class="skill">
+                                                        <ul>
+                                                            <li class="childSkill">Giới tính - Nam</li>
+                                                            <li class="childSkill">Tuổi 18-25</li>
+                                                            <li class="childSkill">Ngôn ngữ - Anh</li>
+                                                            <li class="childSkill">Giới tính - Nam</li>
+                                                            <li class="childSkill">Tuổi 18-25</li>
+                                                            <li class="childSkill">Ngôn ngữ - Anh</li>
+                                                            <li class="childSkill">Giới tính - Nam</li>
+                                                            <li class="childSkill">Tuổi 18-25</li>
+                                                            <li class="childSkill">Ngôn ngữ - Anh</li>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                                <div class="rate">
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                </div>
-                                                <div class="detailInfo">
-                                                    <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span><span> | </span><strong>Bình luận: </strong><span>3</span>
-                                                </div>
+                                            </li>
+                                        </ul>
 
-                                                <div class="description">
-                                                    Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người. Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người. Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.
-                                                </div>
-                                                <div class="skill">
-                                                    <ul>
-                                                        <li class="childSkill">Giới tính - Nam</li>
-                                                        <li class="childSkill">Tuổi 18-25</li>
-                                                        <li class="childSkill">Ngôn ngữ - Anh</li>
-                                                        <li class="childSkill">Giới tính - Nam</li>
-                                                        <li class="childSkill">Tuổi 18-25</li>
-                                                        <li class="childSkill">Ngôn ngữ - Anh</li>
-                                                        <li class="childSkill">Giới tính - Nam</li>
-                                                        <li class="childSkill">Tuổi 18-25</li>
-                                                        <li class="childSkill">Ngôn ngữ - Anh</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="tabCustomer">
-                            <div class="listWork">
-                                @*<div class="listHeader">
+                            <div class="tab-pane fade" id="tabCustomer">
+                                <div class="listWork">
+                                    @*<div class="listHeader">
                                     <div class="listRow">
                                         <div class="listTitle">
                                             Công việc cần người
@@ -293,101 +304,115 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
                                         </div>
                                     </div>
                                 </div>*@
-                                <div class="mainContent">
-                                    <ul>
-                                        <li class="childContent">
-                                            <div class="function">
-                                                <div class="image">
-                                                    <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
-                                                </div>
-                                                <div class="button">
-                                                    <button type="button" class="btn btn-success btn-xs">Nhận việc <span class="glyphicon glyphicon-ok"></span></button>
-                                                    <button type="button" style="display: none" class="btn btn-success btn-xs">Hủy việc <span class="glyphicon glyphicon-remove"></span></button>
-                                                </div>
+                                    <div class="mainContent">
+                                        <ul>
+                                            <li class="childContent">
+                                                <div class="function">
+                                                    <div class="image">
+                                                        <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
+                                                    </div>
+                                                    <div class="button">
+                                                        <button type="button" class="btn btn-success btn-xs">Nhận việc <span class="glyphicon glyphicon-ok"></span></button>
+                                                        <button type="button" style="display: none" class="btn btn-success btn-xs">Hủy việc <span class="glyphicon glyphicon-remove"></span></button>
+                                                    </div>
 
-                                            </div>
-                                            <div class="info">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="name">
-                                                            <a href="#">Bùi Customer </a>
+                                                </div>
+                                                <div class="info">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div class="name">
+                                                                <a href="#">Bùi Customer </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="love">
+                                                                <span class="glyphicon glyphicon-heart"></span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <div class="love">
-                                                            <span class="glyphicon glyphicon-heart"></span>
-                                                        </div>
+                                                    <div class="detailInfo">
+                                                        <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span>
+                                                    </div>
+
+                                                    <div class="description">
+                                                        yêu cầu một người giúp việc sạch sẽ ơi là sạch sẽ. Còn tại sao gặp khắc biết.
+                                                    </div>
+                                                    <div class="skill">
+                                                        <ul>
+                                                            <li class="childSkill">Giới tính - Nam</li>
+                                                            <li class="childSkill">Tuổi 18-25</li>
+                                                            <li class="childSkill">Ngôn ngữ - Anh</li>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                                <div class="detailInfo">
-                                                    <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span>
-                                                </div>
+                                            </li>
+                                            <li class="childContent">
+                                                <div class="function">
+                                                    <div class="image">
+                                                        <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
+                                                    </div>
+                                                    <div class="button">
+                                                        <button type="button" style="display: none" class="btn btn-success btn-xs">Nhận việc <span class="glyphicon glyphicon-ok"></span></button>
+                                                        <button type="button" class="btn btn-warning btn-xs">Hủy việc <span class="glyphicon glyphicon-remove"></span></button>
+                                                    </div>
 
-                                                <div class="description">
-                                                    yêu cầu một người giúp việc sạch sẽ ơi là sạch sẽ. Còn tại sao gặp khắc biết.
                                                 </div>
-                                                <div class="skill">
-                                                    <ul>
-                                                        <li class="childSkill">Giới tính - Nam</li>
-                                                        <li class="childSkill">Tuổi 18-25</li>
-                                                        <li class="childSkill">Ngôn ngữ - Anh</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="childContent">
-                                            <div class="function">
-                                                <div class="image">
-                                                    <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
-                                                </div>
-                                                <div class="button">
-                                                    <button type="button" style="display: none" class="btn btn-success btn-xs">Nhận việc <span class="glyphicon glyphicon-ok"></span></button>
-                                                    <button type="button" class="btn btn-warning btn-xs">Hủy việc <span class="glyphicon glyphicon-remove"></span></button>
-                                                </div>
-
-                                            </div>
-                                            <div class="info">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="name">
-                                                            <a href="#">Bùi Customer 2</a>
+                                                <div class="info">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div class="name">
+                                                                <a href="#">Bùi Customer 2</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="love">
+                                                                <span class="glyphicon glyphicon-heart"></span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <div class="love">
-                                                            <span class="glyphicon glyphicon-heart"></span>
-                                                        </div>
+                                                    <div class="detailInfo">
+                                                        <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span>
+                                                    </div>
+
+                                                    <div class="description">
+                                                        yêu cầu một người giúp việc sạch sẽ ơi là sạch sẽ. Còn tại sao gặp khắc biết.
+                                                    </div>
+                                                    <div class="skill">
+                                                        <ul>
+                                                            <li class="childSkill">Giới tính - Nam</li>
+                                                            <li class="childSkill">Tuổi 18-25</li>
+                                                            <li class="childSkill">Ngôn ngữ - Anh</li>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                                <div class="detailInfo">
-                                                    <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span>
-                                                </div>
+                                            </li>
+                                        </ul>
 
-                                                <div class="description">
-                                                    yêu cầu một người giúp việc sạch sẽ ơi là sạch sẽ. Còn tại sao gặp khắc biết.
-                                                </div>
-                                                <div class="skill">
-                                                    <ul>
-                                                        <li class="childSkill">Giới tính - Nam</li>
-                                                        <li class="childSkill">Tuổi 18-25</li>
-                                                        <li class="childSkill">Ngôn ngữ - Anh</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="row">
+        <div class="footer">
+            <a class="footerLogo" href="#">
+                <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100">
+            </a>
+            <p class="footerLegal">© 2014 Maid Service.</p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
 <script>
     $(function () {
         $('#myTab a:selected').tab('show');
