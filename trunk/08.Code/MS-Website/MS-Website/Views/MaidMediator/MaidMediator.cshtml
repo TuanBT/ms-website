@@ -3,7 +3,66 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+	a.myToolTip
+    {
+        outline: none;
+    }
 
+        a.myToolTip strong
+        {
+            line-height: 30px;
+        }
+
+        a.myToolTip:hover
+        {
+            text-decoration: none;
+        }
+
+        a.myToolTip span
+        {
+            z-index: 10;
+            display: none;
+            padding: 14px 20px;
+            margin-top: 60px;
+            margin-left: -160px;
+            width: 300px;
+            line-height: 16px;
+        }
+
+        a.myToolTip:hover span
+        {
+            display: inline;
+            position: absolute;
+            border: 2px solid #FFF;
+            color: #EEE;
+            background: #333 url(cssttp/css-tooltip-gradient-bg.png) repeat-x 0 0;
+        }
+
+    .callout
+    {
+        z-index: 20;
+        position: absolute;
+        border: 0;
+        top: -14px;
+        left: 120px;
+    }
+
+    a.myToolTip .maidAva2
+    {
+        float: right;
+	    margin-right: -8px;
+        width: 60px;
+        height: 60px;
+    }
+    /*CSS3 extras*/
+    a.myToolTip span
+    {
+        border-radius: 2px;
+        box-shadow: 0px 0px 8px 4px #666;
+        /*opacity: 0.8;*/
+    }
+</style>
 <div class="Menu">
     <div class="rows">
         <div class="hMenu">
