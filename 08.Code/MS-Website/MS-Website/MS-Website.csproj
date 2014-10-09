@@ -139,25 +139,26 @@
     <Compile Include="Controllers\Kmean.cs" />
     <Compile Include="Controllers\MaidMediatorController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Models\Account.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Apply.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Models\Comment.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\JobRequest.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
@@ -185,14 +186,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MSModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\RecruitmentTemp.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Rating.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Recruitment.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RecruitmentTemp.cs" />
     <Compile Include="Models\SkillCategory.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
@@ -205,9 +205,7 @@
     <Compile Include="Models\Staff.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>MSModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AdminLTE-master\.gitignore" />
@@ -1741,23 +1739,6 @@
     <Content Include="Content\bootstrap-3.2.0\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-3.2.0\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\bootstrap-3.2.0\fonts\glyphicons-halflings-regular.woff" />
-    <EntityDeploy Include="Models\MSModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MSModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\MSModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MSModel.edmx</DependentUpon>
-      <LastGenOutput>MSModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\MSModel.edmx.diagram">
-      <DependentUpon>MSModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\MSModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MSModel.edmx</DependentUpon>
-      <LastGenOutput>MSModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\AdminLTE-master\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\AdminLTE-master\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\AdminLTE-master\fonts\fontawesome-webfont.woff" />
@@ -1857,6 +1838,23 @@
     <Content Include="Content\ionicons-1.5.2\scss\_ionicons-font.scss" />
     <Content Include="Content\ionicons-1.5.2\scss\_ionicons-icons.scss" />
     <Content Include="Content\ionicons-1.5.2\scss\_ionicons-variables.scss" />
+    <EntityDeploy Include="Models\MSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MSModel.edmx</DependentUpon>
+      <LastGenOutput>MSModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MSModel.edmx.diagram">
+      <DependentUpon>MSModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\MSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MSModel.edmx</DependentUpon>
+      <LastGenOutput>MSModel.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -1888,10 +1886,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\MaidMediator\JobRequest.cshtml" />
     <Content Include="Views\MaidMediator\MaidMediator.cshtml" />
     <Content Include="Views\MaidMediator\MaidProfile.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Post\JobRequest.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\MaidMediator\PostRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
