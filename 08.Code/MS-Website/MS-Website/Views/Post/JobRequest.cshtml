@@ -1,0 +1,343 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="../Content/style/Home.css" rel="stylesheet">
+<link href="../Content/style/profilePage.css" rel="stylesheet">
+<style>
+    .viewComment
+    {
+    }
+
+    .miButton
+    {
+        float: right;
+        width: 60px;
+        text-align: center;
+    }
+
+        .miButton > button
+        {
+            margin: 10px 0 10px 0;
+        }
+
+    .iStatus
+    {
+    }
+
+    .iTitle
+    {
+        display: inline-block;
+        font-weight: 700;
+    }
+
+    .iStatusText
+    {
+    }
+
+    .iStatusPic
+    {
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+    }
+
+    .iRating
+    {
+        display: inline-block;
+    }
+
+        .iRating > .miRate
+        {
+            display: inline-block;
+            margin-top: 0px;
+            font-size: 14px;
+        }
+
+    .iSkill
+    {
+    }
+
+    .iListKill
+    {
+        display: inline-block;
+    }
+
+    .rimaListSameJobRequest
+    {
+        width: 220px;
+        margin-left: 10px;
+    }
+
+        .rimaListSameJobRequest > li
+        {
+            border-bottom: 1px solid #DDD;
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+
+    .jrImage
+    {
+        height: 50px;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .jrMaidFullname
+    {
+    }
+
+    .jrMaidRate
+    {
+    }
+
+    .jrMaidFullname > a
+    {
+        text-decoration: none;
+    }
+
+        .jrMaidFullname > a:hover
+        {
+        }
+
+    .jrDetail
+    {
+        display: inline-block;
+        float: right;
+    }
+
+    .mmiDetail
+    {
+        width: 400px;
+    }
+</style>
+<div class="headerPage">
+    <div class="rows">
+        <div class="hFunction">
+            <div class="hLogo">
+                <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100%">
+            </div>
+            <div class="hMainFunction">
+                <div class="hUserName">
+                    Bùi Tiến Tuân
+                </div>
+            </div>
+        </div>
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    <li>
+                        <a href="#" class="hefaContent iscurent">Find Work</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Find Work</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li class="iscurent">
+                <a href="#" class="hChContent">Job Applications</a>
+            </li>
+            <li class>
+                <a href="#" class="hChContent">Job Applications</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="leftInfo">
+                    <div class="mainInfo">
+                        <div class="miPic">
+                            <img src="@Model.MaidImg" alt="Maid sercive" height="100%">
+                        </div>
+
+                        <div class="miButton">
+                            <button type="button" class="btn btn-info">Thuê</button>
+                            <button type="button" class="btn btn-danger">Hủy</button>
+                        </div>
+                        <div class="mmiDetail">
+                            <div class="iStatus">
+                                <div class="iTitle">
+                                    Tình Trạng:
+                                </div>
+                                <span class="label label-default">@Model.Status</span>
+                                @if (Model.Status == "Applied" || Model.Status == "Approved")
+                                {
+                                    <span class="iStatusText">Bởi</span>
+                                    <div class="iStatusPic">
+                                        <a href="#">
+                                            <img src="@ViewBag.CusAva" height="100%"></a>
+                                    </div>
+                                }
+                            </div>
+                            <div class="iRating">
+                                <div class="iTitle">
+                                    Đánh giá:
+                                </div>
+                                <div class="miRate">
+                                    <div class="rate">
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="iSkill">
+                                <div class="iTitle">
+                                    Các kỹ năng:
+                                </div>
+                                <div class="iListKill">
+                                    <div class="skill">
+                                        <ul>
+                                            @foreach (var skill in Model.SkillList)
+                                            {
+                                                <li class="childSkill">@skill</li>
+                                            }                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overView">
+                        <div class="ovTitle">
+                            Các comment
+                        </div>
+                        <div class="ovContent">
+                            Trình bày các comment vào đây
+                        </div>
+                    </div>
+                    <div class="suggestCus">
+                        <div class="suCuHeader">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="suTitle">
+                                        Những việc có thể hợp
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="suNumber">
+                                        3/5
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lisuPre">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </div>
+                        <div class="lisuNex">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </div>
+                        <ul class="listSuggestCus">
+                            <li>
+                                <a href="#">
+                                    <span class="listSuCuImage">
+                                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                    </span>
+                                    <span class="listSuCuDetail">
+                                        <span class="liCuName">Bùi Customer
+                                        </span>
+                                        <span class="liCuPostTime">Đăng: 6:00 30/08/2014
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="listSuCuImage">
+                                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                    </span>
+                                    <span class="listSuCuDetail">
+                                        <span class="liCuName">Bùi Customer
+                                        </span>
+                                        <span class="liCuPostTime">Đăng: 6:00 30/08/2014
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rightInfo">
+                    <ul class="riDetail">
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Đăng
+                            </div>
+                            <div class="rideroContent">
+                                <strong>30/08/2012
+                                </strong>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="riManager">
+                        <div class="rimaTitle">
+                            Những yêu cầu giống
+                        </div>
+                        <ul class="rimaListSameJobRequest">
+                            <li>
+                                <div class="jrImage">
+                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                </div>
+                                <div class="jrDetail">
+                                    <div class="jrMaidFullname">
+                                        <a href="#">Maid name of job request</a>
+                                    </div>
+                                    <div class="jrMaidRate">
+                                        <div class="rate">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </div>
+                                    </div>
+                                    <div class="blTime">
+                                        <span class="blTimeTitle">Đăng: </span><span
+                                            class="blTimeText">6:00 30/08/2014</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="jrImage">
+                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                </div>
+                                <div class="jrDetail">
+                                    <div class="jrMaidFullname">
+                                        <a href="#">Maid name of job request</a>
+                                    </div>
+                                    <div class="jrMaidRate">
+                                        <div class="rate">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </div>
+                                    </div>
+                                    <div class="blTime">
+                                        <span class="blTimeTitle">Đăng: </span><span
+                                            class="blTimeText">6:00 30/08/2014</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
