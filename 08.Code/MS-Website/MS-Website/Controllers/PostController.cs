@@ -298,7 +298,6 @@ namespace MS_Website.Controllers
                                 skillList.Add(skillStr);
                             }
                         }
-                        ViewBag.SkillList = skillList;
                     }
                     if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
                     {
@@ -306,13 +305,13 @@ namespace MS_Website.Controllers
                         if (recruitTmp != null)
                         {
                             ViewBag.CusAva = recruitTmp.Recruitment.Customer.Account.Avatar;
-                            var jobRequestTmp = new JobRequestTemp(job.JobRequestId, job.SkillRefId, job.MaidMediatorId, job.StaffId, job.Status, job.PostTime, job.ExpiredTime, job.ApplyTimes, job.MaidId, job.Maid.MaidName, job.Maid.PersonalImage, recruitTmp.Recruitment.CustomerId, recruitTmp.Recruitment.Customer.Account.FullName);
+                            var jobRequestTmp = new JobRequestTemp(job.JobRequestId, job.SkillRefId, job.MaidMediatorId, job.StaffId, job.Status, job.PostTime, job.ExpiredTime, job.ApplyTimes, job.MaidId, job.Maid.MaidName, job.Maid.PersonalImage, job.Maid.Description, job.Maid.RateAvg, recruitTmp.Recruitment.CustomerId, recruitTmp.Recruitment.Customer.Account.FullName, skillList);
                             return View("JobRequest", jobRequestTmp);
                         }   
                     }  
                     else
                     {
-                        var jobRequestTmp = new JobRequestTemp(job.JobRequestId, job.SkillRefId, job.MaidMediatorId, job.StaffId, job.Status, job.PostTime, job.ExpiredTime, job.ApplyTimes, job.MaidId, job.Maid.MaidName, job.Maid.PersonalImage, null, null);
+                        var jobRequestTmp = new JobRequestTemp(job.JobRequestId, job.SkillRefId, job.MaidMediatorId, job.StaffId, job.Status, job.PostTime, job.ExpiredTime, job.ApplyTimes, job.MaidId, job.Maid.MaidName, job.Maid.PersonalImage, job.Maid.Description, job.Maid.RateAvg, null, null, skillList);
                         return View("JobRequest", jobRequestTmp);
                     }                           
                 }                
