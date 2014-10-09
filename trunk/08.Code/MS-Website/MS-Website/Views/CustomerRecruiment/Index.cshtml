@@ -1,0 +1,268 @@
+﻿@model IEnumerable<MS_Website.Models.Recruitment>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<div class="rows">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="leftInfo">
+                <div class="mainInfo">
+                    <div class="miPic">
+                        <img src="~/Content/Image/MS-Logo-white.png" alt="Maid sercive" style="height: 100%">
+                    </div>
+                    <div class="mmiDetail">
+                        <div class="miFullName">
+                            Bùi Tiến Tuân
+                        </div>
+                        <div class="miAccount">
+                            tuan-customer
+                        </div>
+                    </div>
+                </div>
+                <div class="boxListWork">
+                    <ul class="nav nav-tabs" role="tablist" id="myTab">
+                        <li class="active"><a href="#free" role="tab" data-toggle="tab">Chưa được nhận</a></li>
+                        <li><a href="#applied" role="tab" data-toggle="tab">Đã được nhận</a></li>
+                        <li><a href="#expired" role="tab" data-toggle="tab">Hết hạn</a></li>
+                    </ul>
+
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active bFree" id="free">
+                            <div class="bTitle">
+                                <div class="btWork">
+                                    Công việc
+                                </div>
+                                <div class="MaidListTitle btApply">
+                                    Người đang chờ
+                                </div>
+                            </div>
+                            <ul class="bFreeCusListWork">
+                                @foreach (var item in Model)
+                                {
+                                    if (item.Status == "Waitting")
+                                    {
+                                    <li>
+                                        <a href='@Url.Action("Details", new { id = item.RecruitmentId })'>
+                                            <div class="bfcWork" style="cursor: pointer">
+                                                <div class="blImage">
+                                                    <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" style="height: 100%">
+                                                </div>
+                                                <div class="blDetail">
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Đăng: </span>
+                                                        <span class="blTimeText">@String.Format("{0:HH:mm d/M/yyyy}", item.PostRequestedTime)</span>
+                                                    </div>
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Tới hạn: </span>
+                                                        <span class="blTimeText">@String.Format("{0:HH:mm d/M/yyyy}", item.ExpiredTime)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <ul class="bfMaid">
+                                            <li>
+                                                <div class="blImage">
+                                                    <a href="#">
+                                                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%"></a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="blImage">
+                                                    <a href="#">
+                                                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%"></a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="blImage">
+                                                    <a href="#">
+                                                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%"></a>
+                                                </div>
+                                            </li>
+                                            <button type="button" class="btn btn-xs btn-success">...</button>
+                                        </ul>
+                                    </li>
+                                    }
+
+                                }
+                            </ul>
+                            <div class="blFooter">
+                                <div class="blfNumber">
+                                    <ul class="pagination pagination-sm">
+                                        <li><a href="#">&laquo;</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#">&raquo;</a></li>
+                                    </ul>
+                                </div>
+                                <div class="blfbutton">
+                                    <button type="button" class="btn btn-danger">Hủy</button>
+                                    <button type="button" class="btn btn-info">Gia hạn</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade bApplied" id="applied">
+                            <div class="bTitle">
+                                <div class="btWork">
+                                    Công việc
+                                </div>
+                                <div class="btApply">
+                                    Người nhận việc
+                                </div>
+                            </div>
+                            <ul class="bApplyListWork">
+                                @foreach (var item in Model)
+                                {
+                                    if (item.Status == "Applied")
+                                    {
+                                    <li>
+                                        <div class="bAWork">
+                                            <div class="blImage">
+                                                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" style="height: 100%">
+                                            </div>
+                                            <div class="blDetail">
+                                                <div class="blName">
+                                                    <a href='@Url.Action("Details", new { id = item.RecruitmentId })'>
+                                                        Bùi Tiến Tuân
+                                                    </a>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Đăng: </span><span
+                                                        class="blTimeText">@String.Format("{0:HH:mm d/M/yyyy }", item.PostRequestedTime)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bACus">
+                                            <div class="blImage">
+                                                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                            </div>
+                                            <div class="blDetail">
+                                                <div class="blName">
+                                                    <a href="#">Bùi Tiến Tuân</a>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Nhận: </span><span
+                                                        class="blTimeText">6:00 30/08/2014</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                    }
+                                }
+                            </ul>
+                            <div class="blFooter">
+                                <div class="blfNumber">
+                                    <ul class="pagination pagination-sm">
+                                        <li><a href="#">&laquo;</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#">&raquo;</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade bExprred" id="expired">
+                            <ul class="bexpiredListWork">
+                                @foreach (var item in Model)
+                                {
+                                    if (item.Status == "TimeOut")
+                                    {
+                                    <li>
+                                        <div class="blImage">
+                                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" style="height: 100%">
+                                        </div>
+                                        <div class="blDetail">
+                                            <div class="blName">
+                                                <a href='@Url.Action("Details", new { id = item.RecruitmentId })'>Bùi Tiến Tuân
+                                                </a>
+                                            </div>
+                                            <div class="blTime">
+                                                <span class="blTimeTitle">Đăng: </span><span
+                                                    class="blTimeText">@String.Format("{0:HH d/M/yyyy}", item.PostRequestedTime)</span>
+                                            </div>
+                                            <div class="blTime">
+                                                <span class="blTimeTitle">Tới: </span><span
+                                                    class="blTimeText">@String.Format("{0:HH d/M/yyyy}", item.ExpiredTime)</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    }
+                                }
+                            </ul>
+                            <div class="blFooter">
+                                <div class="blfNumber">
+                                    <ul class="pagination pagination-sm">
+                                        <li><a href="#">&laquo;</a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li><a href="#">&raquo;</a></li>
+                                    </ul>
+                                </div>
+                                <div class="blfbutton">
+                                    <button type="button" class="btn btn-danger">Xóa</button>
+                                    <button type="button" class="btn btn-info">Gia hạn</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        $(function () {
+                            $('#myTab a:selected').tab('show')
+                        })
+                    </script>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="rightInfo">
+                <ul class="riDetail">
+                    <li class="rideRow">
+                        <div class="rideroTitle">
+                            Tham gia
+                        </div>
+                        <div class="rideroContent">
+                            <strong>30/08/2014
+                            </strong>
+                        </div>
+                    </li>
+                    <li class="rideRow">
+                        <div class="rideroTitle">
+                            Đã đăng
+                        </div>
+                        <div class="rideroContent">
+                            <strong>80
+                            </strong>
+                        </div>
+                    </li>
+                    <li class="rideRow">
+                        <div class="rideroTitle">
+                            Đã chấp nhận
+                        </div>
+                        <div class="rideroContent">
+                            <strong>20
+                            </strong>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</div>
