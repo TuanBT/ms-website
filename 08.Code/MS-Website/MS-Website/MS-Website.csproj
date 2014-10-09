@@ -138,6 +138,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Kmean.cs" />
     <Compile Include="Controllers\MaidMediatorController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -1678,6 +1679,9 @@
     <Content Include="Content\ionicons-1.5.2\src\xbox.svg" />
     <Content Include="Content\Style\Home.css" />
     <Content Include="Content\Style\profilePage.css" />
+    <Content Include="Content\Style\Signup\create-account.css" />
+    <Content Include="Content\Style\Signup\globals.css" />
+    <Content Include="Content\Style\Signup\signup.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -1891,6 +1895,7 @@
     <Content Include="Views\Post\JobRequest.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\MaidMediator\PostRequest.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
