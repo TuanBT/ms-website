@@ -359,7 +359,7 @@ namespace MS_Website.Controllers
                             {
                                 var recruitmentTemp = new RecruitmentTemp(recruit.RecruitmentId, recruit.SkillRefId,
                                                                           recruit.CustomerId,
-                                                                          recruit.Status, recruit.PostRequestedTime,
+                                                                          recruit.Status, recruit.PostTime,
                                                                           recruit.ExpiredTime,
                                                                           recruit.Customer.Account.Avatar,
                                                                           recruit.Customer.Account.FullName, skillList);
@@ -552,11 +552,11 @@ namespace MS_Website.Controllers
                             var recruit = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId);
                             if (recruit != null)
                             {
-                                if (recruit.PostRequestedTime <= searchDate)
+                                if (recruit.PostTime <= searchDate)
                                 {
                                     var recruitmentTemp = new RecruitmentTemp(recruit.RecruitmentId, recruit.SkillRefId,
                                                                               recruit.CustomerId,
-                                                                              recruit.Status, recruit.PostRequestedTime,
+                                                                              recruit.Status, recruit.PostTime,
                                                                               recruit.ExpiredTime,
                                                                               recruit.Customer.Account.Avatar,
                                                                               recruit.Customer.Account.FullName,
@@ -570,6 +570,7 @@ namespace MS_Website.Controllers
                 ViewBag.Recruitment = recruitmentList;
                 ViewBag.JobRequest = jobRequestList;
             }
+            ViewBag.Gender = gender;
             return View("Search");
         }
     }

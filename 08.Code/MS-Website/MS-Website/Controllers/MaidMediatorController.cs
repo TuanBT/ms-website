@@ -111,5 +111,10 @@ namespace MS_Website.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult PostRequest()
+        {
+            return View();
+        }
     }
 }
