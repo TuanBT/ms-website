@@ -136,9 +136,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\SkillBusiness.cs" />
+    <Compile Include="Controllers\BasicController.cs" />
+    <Compile Include="Controllers\CustomerRecruimentController.cs" />
+    <Compile Include="Controllers\EvaluateController.cs" />
     <Compile Include="Controllers\Kmean.cs" />
     <Compile Include="Controllers\MaidMediatorController.cs" />
-    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -146,7 +149,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1909,6 +1911,17 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Staff\Staff.cshtml" />
     <Content Include="Views\Staff\MaidProfile.cshtml" />
+    <Content Include="Views\CustomerRecruiment\Create.cshtml" />
+    <Content Include="Views\CustomerRecruiment\Details.cshtml" />
+    <Content Include="Views\CustomerRecruiment\Details2.cshtml" />
+    <Content Include="Views\CustomerRecruiment\Index.cshtml" />
+    <Content Include="Views\CustomerRecruiment\_Details.cshtml" />
+    <Content Include="Views\Evaluate\_Index.cshtml" />
+    <Content Include="Views\Evaluate\_Post.cshtml" />
+    <Content Include="Views\Evaluate\_Rate.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Shared\_CustomerLayout.cshtml" />
+    <Content Include="Views\Shared\_CustomerLayout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

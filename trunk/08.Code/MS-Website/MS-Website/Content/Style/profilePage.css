@@ -180,12 +180,17 @@
 }
 
 .miPic {
-    height: 100px;
-    width: 100px;
-    float: left;
-    background: #ddd;
+   height: 100px;
+width: 100px;
+float: left;
+border: 1px solid #ddd;
+border-radius: 5px;
+display: inline-block;
+text-align: center;
+}
+
+.miPic>img {
     border-radius: 5px;
-    display: inline-block;
 }
 
 .mmiDetail {
@@ -723,11 +728,6 @@ a {
     margin-left: 10px;
 }
 
-.rimaListSameJobRequest > li {
-    border-bottom: 1px solid #DDD;
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
 
 .jrImage {
     height: 50px;
@@ -918,10 +918,6 @@ a {
     display: inline-block;
 }
 
-.rimaListSameJobRequest {
-    width: 220px;
-    margin-left: 10px;
-}
 
 .rimaListSameJobRequest > li {
     border-bottom: 1px solid #DDD;
