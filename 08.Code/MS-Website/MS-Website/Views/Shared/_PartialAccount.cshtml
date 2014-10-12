@@ -1,0 +1,35 @@
+﻿@if (Session["Fullname"] != null)
+{
+    <div class="hUserName">
+        <a href="#">@Session["Fullname"].ToString()</a>
+    </div>
+    <ul class="hUserFuncList">
+        <li>
+            <a href="#"><span class="glyphicon glyphicon-cog"></span></a>
+        </li>
+        <li>
+            <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a>
+        </li>
+        <li>
+            @using (Html.BeginForm("LogOut", "Home"))
+            {
+                <button class="btn btn-link" title="Log out" type="submit">Đăng xuất</button>
+            }
+        </li>
+    </ul>
+}
+else
+{
+    <li>
+        <a href="Home/Login">Đăng nhập</a>
+
+    </li>
+    <li>
+        <a href="#">Đăng ký</a>
+
+    </li>
+    <li><a class="regisEscape" href="#">Đăng ký tìm việc</a></li>
+}
+
+
+
