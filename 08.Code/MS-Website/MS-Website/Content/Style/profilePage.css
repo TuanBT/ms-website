@@ -1072,7 +1072,7 @@ a {
 }
 
 .moskCategoryName {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 700;
 }
 
@@ -1081,7 +1081,8 @@ a {
 }
 
 .moskSkill {
-    margin-bottom: 5px;
+    padding: 10px;
+    display: inline-block;
 }
 
 .moskSkillName {
@@ -1089,8 +1090,13 @@ a {
     font-weight: 700;
 }
 
+.moskSkillName label{
+    font-weight: 700;
+    font-size: 14px;
+}
+
 .moskSkillContent {
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 }
 
 .moskSkillContent > .radio {
