@@ -1,7 +1,7 @@
 ﻿@model MS_Website.Models.Account
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Đăng ký";
 }
 
 <!DOCTYPE html>
@@ -12,18 +12,8 @@
     <link href="~/Content/Style/Signup/create-account.css" rel="stylesheet" type="text/css">
     <link href="~/Content/Style/Signup/globals.css" rel="stylesheet" type="text/css">
     <link href="~/Content/Style/Signup/signup.css" rel="stylesheet" type="text/css">
-    <link href="~/Content/bootstrap-3.2.0/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap-3.2.0/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <header role="banner" class="oTransitionalHeader">
-        <div class="cols oPageCentered">
-            <div class="col col1of2 txtLeft">
-                <img class="oTransitionalPageLogo" src="~/Content/Image/MS-Logo.png" />
-            </div>
-        </div>
-    </header>
     <div id="main" role="main" class="oPageCentered oContentContainer">
 
 
@@ -47,24 +37,24 @@
                         </div>
                     </div>
                 </div>
-                @using(Html.BeginForm("Register","Register",FormMethod.Post, new {@class="oSignupForm", @name = "registerForm"}))
+                @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @class = "oSignupForm", @name = "registerForm" }))
                 {
                     <div class="oSignupHelp "></div>
                     <div class="oSignupFields">
-                        <article class="oSignupHelp oSignupHelpContractor "></article>         
+                        <article class="oSignupHelp oSignupHelpContractor "></article>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m=>m.FullName, new {@class="oInputText oFormMed", @id="txtFullName", @placeholder="Họ và tên"})
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "oInputText oFormMed", @id = "txtFullName", @placeholder = "Họ và tên" })
                         </div>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m=>m.Email, new {@class="oInputText oFormMed", @placeholder="Email",@id="txtEmail"})
+                            @Html.TextBoxFor(m => m.Email, new { @class = "oInputText oFormMed", @placeholder = "Email", @id = "txtEmail" })
                             <div id="emailError"></div>
                         </div>
                         <div class="oFormField">
-                            Ảnh đại diên:<img id="maidAvatar" src="~"/><input id="maidAva" type="file" onchange="uploadMaidAva()" name="Avatar">
-                              
+                            <span class="textAvar">Ảnh đại diện:</span>
+                            <img id="maidAvatar" src="~" /><input id="maidAva" type="file" onchange="uploadMaidAva()" name="Avatar">
                         </div>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m=>m.Phone, new {@class="oInputText oFormMed", @placeholder="Điện thoại"})
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "oInputText oFormMed", @placeholder = "Điện thoại" })
                         </div>
                         <div class="oFormField">
                             <select name="Role" class="oInputText oFormMed">
@@ -73,25 +63,26 @@
                             </select>
                         </div>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m=>m.Username, new {@class="oInputText oFormMed", @placeholder="Tên đăng nhập",@id="txtUsername"})
+                            @Html.TextBoxFor(m => m.Username, new { @class = "oInputText oFormMed", @placeholder = "Tên đăng nhập", @id = "txtUsername" })
                             <div id="usernameBlank"></div>
                         </div>
-                       
+
                         <div class="oFormField">
-                            @Html.PasswordFor(m=>m.Password, new {@class="oInputText oFormMed", @placeholder="Mật khẩu",@id="txtPassword"})
+                            @Html.PasswordFor(m => m.Password, new { @class = "oInputText oFormMed", @placeholder = "Mật khẩu", @id = "txtPassword" })
                             <div id="passwordBlank"></div>
-                            
+
                         </div>
-                    </div>
-                    <div class="oFormField oSupportInfo txtCenter oFieldValue-terms">
-                        Với việc tạo tài khoản
+
+                        <div class="oFormField oSupportInfo txtCenter oFieldValue-terms">
+                            Với việc tạo tài khoản
    
                         <a target="_blank" href="#" class="nowrap">Bạn đồng ý với các quy định</a>
-                        và <a target="_blank" href="#" class="nowrap">bảo mật của Maid Service</a>.       
-                    </div>
-                    <div class="oFormField">
-                        <div id="submit-element">
-                            <input type="submit" name="submit" id="btnSubmit" value="Đăng kí" class="oBtn oBtnVisitorPrimary oBtnLarge w100 oSignupSubmit">
+                            và <a target="_blank" href="#" class="nowrap">bảo mật của Maid Service</a>.       
+                        </div>
+                        <div class="oFormField">
+                            <div id="submit-element">
+                                <input type="submit" name="submit" id="btnSubmit" value="Đăng kí" class="oBtn oBtnVisitorPrimary oBtnLarge w100 oSignupSubmit">
+                            </div>
                         </div>
                     </div>
                 }
@@ -101,14 +92,14 @@
     <script type="text/javascript" language="javascript">
 
         $("#btnSubmit").click(function validateEmail(email) {
-            
-            var re =/^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            var re = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             var errText = "";
             if ($("#txtUsername").val() == "") {
                 errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
                 document.getElementById("usernameBlank").innerHTML = errText;
                 return false;
-            } 
+            }
             if ($("#txtPassword").val() == "") {
                 errText = "<font color='red'>Vui lòng nhập mật khẩu</font>";
                 document.getElementById("passwordBlank").innerHTML = errText;
@@ -152,7 +143,7 @@
                 preview.src = "";
             }
         }
-</script>
+    </script>
 </body>
 
 </html>
