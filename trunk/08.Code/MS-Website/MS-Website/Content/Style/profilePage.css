@@ -1001,7 +1001,7 @@ a {
     font-size: 12px;
     color: #999;
     margin-left: 10px;
-    float: left;
+    /*float: left;*/
     margin-top: 5px;
 }
 
@@ -1101,4 +1101,13 @@ a {
 
 .moskSkillContent > .radio {
     margin: 0;
+}
+
+.postRCAlertMoney{
+    margin-top: 10px;
+}
+
+.postRCAlertMoney button{
+    float: right;
+     margin-top: -7px;
 }
