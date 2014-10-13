@@ -1,0 +1,545 @@
+﻿@using MS_Website.Models
+@{
+    ViewBag.Title = "Maid Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="Menu">
+    <div class="rows">
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    <li>
+                        <a href="#" class="hefaContent iscurent">Find Work</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Find Work</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li class="iscurent">
+                <a href="#" class="hChContent">Job Applications</a>
+            </li>
+            <li class>
+                <a href="#" class="hChContent">Job Applications</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="titlePage">Đăng yêu cầu công việc</div>
+            @using (Html.BeginForm("AddRequest", "MaidMediator", FormMethod.Post))
+            {
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Các kỹ năng
+                        </div>
+                        <div class="col-md-8">
+                            <div class="boxPostJRSkill">
+                                <div class="skillPost">
+                                    <div class="postOpenButton">
+                                        <button class="btn btn-primary" data-toggle="modal" data-target=".chooseSkillModel" onclick="return cancel()">
+                                            Thêm kỹ năng
+                                        </button>
+                                    </div>
+                                    <ul id="chosenSkills">
+                                        <li class="childSkill">Giới tính - Nam<span class="glyphicon glyphicon-remove"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade chooseSkillModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header chooseMaidModalTitle">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">×</span><span
+                                                                             class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">Chọn các kỹ năng cho công việc</h4>
+                                </div>
+                                <div class="chooseMaidModalSkill">
+                                    <div class="moskCategory">
+                                        <div class="moskCategoryName">
+                                            Cá nhân
+                                        </div>
+                                        <div class="moskCategoryContent">
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Giới tính
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <div class="dropdown">
+                                                        <label>
+                                                            <select id="gender" name="gender">
+                                                                <option value="null">Không khai</option>
+                                                                @foreach (var item in ViewBag.GenderList)
+                                                                {
+                                                                    <option value="@item.SkillString">@item.SkillString</option>
+                                                                }
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Tuổi
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <div class="dropdown">
+                                                        <label>
+                                                            <select id="age" name="age">
+                                                                <option value="null">Không khai</option>
+                                                                @foreach (var item in ViewBag.AgeList)
+                                                                {
+                                                                    <option value="@item.SkillString">@item.SkillString</option>
+                                                                }
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkill">
+                                                    <div class="moskSkillName">
+                                                        Ngôn ngữ
+                                                    </div>
+                                                    <div class="moskSkillContent">
+                                                        <div class="dropdown">
+                                                            <label>
+                                                                @foreach (var item in ViewBag.LanguageList)
+                                                                {
+                                                                    <input class="language" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName"/>
+                                                                    @item.SkillNameVietnam<br />
+                                                                }
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Kinh nghiệm
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <div class="dropdown">
+                                                        <label>
+                                                            <select id="exp" name="exp">
+                                                                <option value="null">Không khai</option>
+                                                                @foreach (var item in ViewBag.ExpList)
+                                                                {
+                                                                    <option value="@item.SkillString">@item.SkillString</option>
+                                                                }
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Quên quán
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <div class="dropdown">
+                                                        <label>
+                                                            <select id="hometown" name="hometown">
+                                                                <option value="null">Không khai</option>
+                                                                @foreach (var item in ViewBag.HomeTownList)
+                                                                {
+                                                                    <option value="@item.SkillString">@item.SkillString</option>
+                                                                }
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Địa chỉ
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <div class="dropdown">
+                                                        <label>
+                                                            <select id="addr" name="addr">
+                                                                <option value="null">Không khai</option>
+                                                                @foreach (var item in ViewBag.AddrList)
+                                                                {
+                                                                    <option value="@item.SkillString">@item.SkillString</option>
+                                                                }
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Sức khỏe
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <div class="dropdown">
+                                                        <label>
+                                                            <select id="health" name="health">
+                                                                <option value="null">Không khai</option>
+                                                                @foreach (var item in ViewBag.HealthList)
+                                                                {
+                                                                    <option value="@item.SkillString">@item.SkillString</option>
+                                                                }
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Kết hôn
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <div class="dropdown">
+                                                        <label>
+                                                            <select id="marriage" name="marriage">
+                                                                <option value="null">Không khai</option>
+                                                                @foreach (var item in ViewBag.MarriageList)
+                                                                {
+                                                                    <option value="@item.SkillString">@item.SkillString</option>
+                                                                }
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="moskCategory">
+                                        <div class="moskCategoryName">
+                                            Yêu cầu
+                                        </div>
+                                        <div class="moskCategoryContent">
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Ở lại
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <div class="dropdown">
+                                                        <label>
+                                                            <select id="stay" name="stay">
+                                                                <option value="null">Không khai</option>
+                                                                @foreach (var item in ViewBag.StayList)
+                                                                {
+                                                                    <option value="@item.SkillString">@item.SkillString</option>
+                                                                }
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Mức lương
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <div class="dropdown">
+                                                        <label>
+                                                            <select id="salary" name="salary">
+                                                                <option value="null">Không khai</option>
+                                                                @foreach (var item in ViewBag.SalaryList)
+                                                                {
+                                                                    <option value="@item.SkillString">@item.SkillString</option>
+                                                                }
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Thời gian 
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <div class="dropdown">
+                                                        <label>
+                                                            <select id="work" name="work">
+                                                                <option value="null">Không khai</option>
+                                                                @foreach (var item in ViewBag.WorkList)
+                                                                {
+                                                                    <option value="@item.SkillString">@item.SkillString</option>
+                                                                }
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="moskCategory">
+                                        <div class="moskCategoryName">
+                                            Kĩ năng
+                                        </div>
+                                        <div class="moskCategoryContent">
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Ở lại
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <div class="dropdown">
+                                                        <label>
+                                                            @foreach (var item in ViewBag.SkillList)
+                                                            {
+                                                                <input class="skill" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName"/>
+                                                                @item.SkillNameVietnam<br />
+                                                            }
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-left: 400px; margin-bottom: 10px;" onclick="addSkill()">Đồng ý</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Thời hạn đăng
+                        </div>
+                        <div class="col-md-8">
+                            <select id="time" class="form-control" name="time">
+                                <option value="1">1 tuần</option>
+                                <option value="2">2 tuần</option>
+                                <option value="3">3 tuần</option>
+                                <option value="4">4 tuần</option>
+                                <option value="5">5 tuần</option>
+                            </select>
+                            <span class="postJRTimeTotal">Tổng <span>1</span> * <span
+                                                                                    class="postJRTimePrice">25.000</span> = <span class="postJRTimePriceTotal">25.000</span> đồng</span>
+                            <span class="postJRTimeDetail">Đơn giá hiện tại <span
+                                                                                class="postJRTimePrice">25.000</span> đồng/Tuần</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Đăng cho
+                        </div>
+                        <div class="col-md-8">
+                            <div class="boxPostJRUser">
+                                <div class="postOpenButton">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target=".chooseMaidModel" onclick="return cancel()">
+                                        Chọn người
+                                    </button>
+                                </div>
+                                <div>
+                                    <div class="liImage">
+                                        <img id="maidImg" src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                    </div>
+                                    <div class="liMaidContent">
+                                        <div class="licoFullName">
+                                            <a href="#" id="maidName">Tên người giúp việc</a>
+                                        </div>
+                                        <div class="licoRate">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        </div>
+                                        <div class="ricoPost">
+                                            Đăng/nhận
+                                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header chooseMaidModalTitle">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">×</span><span
+                                                                             class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
+                                        lý</h4>
+                                </div>
+                                <div class="chooseMaidModalMaid">
+                                    @foreach (var maid in ViewBag.MaidList)
+                                    {
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId">
+                                                <div>
+                                                    <div class="liImage">
+                                                        <img id="@maid.MaidId img" src="@maid.PersonalImage" alt="Maid sercive" height="100%">
+                                                    </div>
+                                                    <div class="liMaidContent">
+                                                        <div class="licoFullName">
+                                                            <a href="#" id="@maid.MaidId name">@maid.MaidName</a>
+                                                        </div>
+                                                        <div class="licoRate">
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                        </div>
+                                                        <div class="ricoPost">
+                                                            Đăng/nhận
+                                                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    }
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="chooseMaid()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>               
+                    <input id="chosenMaid" type="hidden" name="maidId"/>
+                    <button class="btn btn-success btn-lg" onclick="addRequest()">Đăng yêu cầu</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    var chosenList = new Array();
+    var chosenSkills = "";
+
+    function addSkill() {
+        var genderDr = document.getElementById("gender");
+        var gender = "Giới tính - " + genderDr.options[genderDr.selectedIndex].value;
+        var ageDr = document.getElementById("age");
+        var age = "Tuổi - " + ageDr.options[ageDr.selectedIndex].value;
+        var languageList = new Array();
+        var languageCount = 0;
+        var languageElements = document.getElementsByClassName("language");
+        for (var i = 0; i < languageElements.length; i++) {
+            if (languageElements[i].checked) {
+                languageList[languageCount++] = languageElements[i].value;
+            }
+        }
+        var expDr = document.getElementById("exp");
+        var exp = "Kinh nghiệm - " + expDr.options[expDr.selectedIndex].value;
+        var hometownDr = document.getElementById("hometown");
+        var hometown = "Quê quán - " + hometownDr.options[hometownDr.selectedIndex].value;
+        var addrDr = document.getElementById("addr");
+        var addr = "Địa chỉ - " + addrDr.options[addrDr.selectedIndex].value;
+        var healthDr = document.getElementById("health");
+        var health = "Sức khỏe - " + healthDr.options[healthDr.selectedIndex].value;
+        var marriageDr = document.getElementById("marriage");
+        var marriage = "Kết hôn - " + marriageDr.options[marriageDr.selectedIndex].value;
+        var stayDr = document.getElementById("stay");
+        var stay = "Ngủ lại - " + stayDr.options[stayDr.selectedIndex].value;
+        var salaryDr = document.getElementById("salary");
+        var salary = "Mức lương - " + salaryDr.options[salaryDr.selectedIndex].value;
+        var workDr = document.getElementById("work");
+        var work = "Công việc - " + workDr.options[workDr.selectedIndex].value;
+        var skillList = new Array();
+        var skillCount = 0;
+        var skillElements = document.getElementsByClassName("skill");
+        for (var i = 0; i < skillElements.length; i++) {
+            if (skillElements[i].checked) {
+                skillList[skillCount++] = skillElements[i].value;
+            }
+        }
+        var chosenCount = 0;
+        if (gender != "Giới tính - null") {
+            chosenList[chosenCount++] = gender;
+        }
+        if (age != "Tuổi - null") {
+            chosenList[chosenCount++] = age;
+        }
+        if (languageList.length > 0) {
+            for (var i = 0; i < languageList.length; i++) {
+                chosenList[chosenCount++] = languageList[i];
+            }
+        }
+        if (exp != "Kinh nghiệm - null") {
+            chosenList[chosenCount++] = exp;
+        }
+        if (hometown != "Quê quán - null") {
+            chosenList[chosenCount++] = hometown;
+        }
+        if (addr != "Địa chỉ - null") {
+            chosenList[chosenCount++] = addr;
+        }
+        if (health != "Sức khỏe - null") {
+            chosenList[chosenCount++] = health;
+        }
+        if (marriage != "Kết hôn - null") {
+            chosenList[chosenCount++] = marriage;
+        }
+        if (stay != "Ngủ lại - null") {
+            chosenList[chosenCount++] = stay;
+        }
+        if (salary != "Mức lương - null") {
+            chosenList[chosenCount++] = salary;
+        }
+        if (work != "Công việc - null") {
+            chosenList[chosenCount++] = work;
+        }
+        if (skillList.length > 0) {
+            for (var i = 0; i < skillList.length; i++) {
+                chosenList[chosenCount++] = skillList[i];
+            }
+        }
+        for (var i = 0; i < chosenList.length; i++) {
+            chosenSkills += "<li class='childSkill'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></li>";
+        }
+        document.getElementById("chosenSkills").innerHTML = chosenSkills;
+    }
+
+    function removeSkill(skillNo) {
+        if (chosenList.length > 0) {
+            chosenList.splice(skillNo, 1);
+            chosenSkills = "";
+            for (var i = 0; i < chosenList.length; i++) {
+                chosenSkills += "<li class='childSkill'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></li>";
+            }
+            document.getElementById("chosenSkills").innerHTML = chosenSkills;
+        }
+    }
+
+    function chooseMaid() {
+        var maidId;
+        var radio = document.getElementsByName("optionsRadios");
+        for (var i = 0; i < radio.length; i++) {
+            if (radio[i].checked) {
+                maidId = radio[i].value;
+                break;
+            }
+        }
+        var maidImg = document.getElementById(maidId + " img").getAttribute("src");
+        var maidName = document.getElementById(maidId + " name").innerHTML;
+        document.getElementById("maidImg").setAttribute("src", maidImg);
+        document.getElementById("maidName").innerHTML = maidName;
+        document.getElementById("chosenMaid").setAttribute("value", maidId);
+    }
+
+    function cancel() {
+        return false;
+    }
+</script>
+
