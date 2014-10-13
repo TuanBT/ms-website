@@ -370,10 +370,11 @@ ul {
 }
 
 .rate {
-    height: 20px;
+    /*height: 20px;*/
     margin-top: 10px;
     color: #f6a828;
     text-align: left;
+    display: inline-block;
 }
 
 .button {
@@ -483,4 +484,19 @@ ul {
 
 .scContent {
     padding: 10px;
+}
+
+
+.starRating1 {
+    display: block;
+    width: 65px;
+    height: 13px;
+    background: url(../Image/star-rating-sprite.png) 0 0;
+}
+
+.starRating2 {
+    display: block;
+    /*width: 47%;*/
+    height: 13px;
+    background: url(../Image/star-rating-sprite.png) 0 -13px;
 }

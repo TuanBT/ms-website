@@ -80,11 +80,11 @@
                                     {
                                         <li id="@job.JobRequestId" onclick="chooseJob(@job.JobRequestId, 2)">
                                             <div class="blImage">
-                                                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                <img src="@job.MaidImg" alt="Maid sercive" height="100%">
                                             </div>
                                             <div class="blDetail">
                                                 <div class="blName">
-                                                    <a href="@Url.Action("Index", "Post", new { jobId = job.JobRequestId })">@job.MaidName</a>
+                                                    <a href="@Url.Action("Index", "Post", new { jobId = job.JobRequestId })">Mã yêu cầu @job.JobRequestId</a>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
