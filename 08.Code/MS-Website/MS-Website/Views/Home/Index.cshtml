@@ -25,58 +25,19 @@
                         style="margin-top: -18px; margin-bottom: -14px; width: 80px;"></a>
             </div>
             <div class="search">
-
-                <div class="inputGroup">
-                    <span class="dropdown active">
-                        <span class="glyphicon glyphicon-chevron-down"
-                            style="z-index: 100; color: white; float: right; margin-top: 14px; margin-right: 6px;"></span>
-                        <input id="search-freelancers" type="radio" name="for" value="freelancers"
-                            data-action="/o/profiles/browse/" data-placeholder="Search freelancers"
-                            checked="checked">
-                        <label for="search-freelancers">Người giúp việc</label>
-                        <input id="search-jobs" type="radio" name="for" value="jobs" data-action="/o/jobs/browse/"
-                            data-placeholder="Search jobs">
-                        <label for="search-jobs">Công việc</label>
-                    </span>
-
-                    <div class="input-group" style="margin-left: 120px;">
-                        <input type="text" class="searchInput form-control" placeholder="Tìm kiếm công việc">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                    </div>
-                </div>
-            </div>
-            <div class="siteLinks">
-                <li>
-                    <a href="#">-</a>
-
-                </li>
-            </div>
-            <div class="userLinks">
-                @if (Session["Fullname"] != null)
-                {
-                    <li>
-                        <a href="#">Chào @Session["Fullname"].ToString()</a>
-                        @using (Html.BeginForm("LogOut", "Home"))
-                        {
-                            <button class="btn btn-lg" title="Log out" type="submit">Đăng xuất</button>
-                        }
-                    </li>
-               
-                }
-                else
-                {
-                    <li>
-                        <a href="Home/Login">Đăng nhập</a>
-
-                    </li>
-                    <li>
-                        <a style="color: rgb(123, 212, 84);text-transform: uppercase;padding: 16px 11px;background: white;height: 40px;border-radius: 3px;"  href="#">Đăng ký</a>
-
-                    </li>
-                    <li><a class="regisEscape" href="#">Đăng ký tìm việc</a></li>
-                }
+                @Html.Partial("_PartialSearch")
             </div>
         </div>
+        <div class="siteLinks">
+            <li>
+                <a href="#">-</a>
+
+            </li>
+        </div>
+        <div>
+            @Html.Partial("_PartialAccount")
+        </div>
+    </div>
     </div>
 
     <div class="banner">
@@ -396,7 +357,7 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
         </div>
     </div>
 
-    <div class="row">
+    <div class="row footerRow">
         <div class="footer">
             <a class="footerLogo" href="#">
                 <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100">
