@@ -110,215 +110,7 @@ namespace MS_Website.Controllers
                     foreach (var skillRef in skillRefList)
                     {
                         var skillList = new List<string>();
-                        string skillStr;
-                        if (skillRef.Gender != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.Gender);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.Age != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.Age);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.LanguageEnglish != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.LanguageEnglish);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.LanguageChina != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.LanguageChina);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.LanguageJapanese != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.LanguageJapanese);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.LanguageKorean != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.LanguageKorean);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.Experience != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.Experience);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.Hometown != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.Hometown);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.Address != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.Address);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.Health != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.Health);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.Stay != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.Stay);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.Salary != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.Salary);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.Work != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.Work);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.SickCare != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.SickCare);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.OldCare != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.OldCare);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
-                        if (skillRef.BabySister != null)
-                        {
-                            var skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.BabySister);
-                            if (skill != null)
-                            {
-                                skillStr = skill.SkillNameVietnam;
-                                if (skill.SkillString != null)
-                                {
-                                    skillStr += " - " + skill.SkillString;
-                                }
-                                skillList.Add(skillStr);
-                            }
-                        }
+                        PostController.LoadSkillList(skillRef, skillList, db);
                         var jobRequest = db.JobRequests.SingleOrDefault(jr => jr.SkillRefId == skillRef.SkillRefId);
                         if (jobRequest != null)
                         {
@@ -378,32 +170,47 @@ namespace MS_Website.Controllers
         {
             using (var db = new MSEntities())
             {
+                SkillInstance skillIns;
                 var skillInstanceList = new List<SkillInstance>();
                 var skillRefList = new List<SkillReference>();
                 var jobRequestList = new List<JobRequestTemp>();
                 var recruitmentList = new List<RecruitmentTemp>();
-                if (salary == null) 
+                if (salary != null)
                 {
-                    skillInstanceList = db.SkillInstances.Where(si => si.SkillString.Equals(gender) ||
-                        si.SkillString.Equals(age) || si.SkillNameVietnam.Equals(work)).ToList();
+                    if (salary.Equals("low"))
+                    {
+                        skillIns = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("<1 triệu"));
+                        skillInstanceList.Add(skillIns);
+                        skillIns = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("1 triệu - 2 triệu"));
+                        skillInstanceList.Add(skillIns);
+                        skillIns = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("2 triệu - 3 triệu"));
+                        skillInstanceList.Add(skillIns);
+                    }
+                    else if (salary.Equals("average"))
+                    {
+                        skillIns = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("3 triệu - 5 triệu"));
+                        skillInstanceList.Add(skillIns);
+                    }
+                    else if (salary.Equals("high"))
+                    {
+                        skillIns = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(">5 triệu"));
+                        skillInstanceList.Add(skillIns);
+                    }
                 }
-                else if (salary.Equals("low"))
+                if (gender != null)
                 {
-                    skillInstanceList = db.SkillInstances.Where(si => si.SkillString.Equals(gender) ||
-                        si.SkillString.Equals(age) || si.SkillString.Equals("1 triệu - 2 triệu") ||
-                        si.SkillString.Equals("1 triệu - 2 triệu") || si.SkillNameVietnam.Equals(work)).ToList();
+                    skillIns = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(gender));
+                    skillInstanceList.Add(skillIns);
                 }
-                else if (salary.Equals("average"))
+                if (age != null)
                 {
-                    skillInstanceList = db.SkillInstances.Where(si => si.SkillString.Equals(gender) ||
-                        si.SkillString.Equals(age) || si.SkillString.Equals("3 triệu - 5 triệu") ||
-                        si.SkillNameVietnam.Equals(work)).ToList();
+                    skillIns = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(age));
+                    skillInstanceList.Add(skillIns);
                 }
-                else if (salary.Equals("high"))
+                if (work != null)
                 {
-                    skillInstanceList = db.SkillInstances.Where(si => si.SkillString.Equals(gender) ||
-                        si.SkillString.Equals(age) || si.SkillString.Equals(">5 triệu") ||
-                        si.SkillNameVietnam.Equals(work)).ToList();
+                    skillIns = db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(work));
+                    skillInstanceList.Add(skillIns);
                 }
                 foreach (var skillInstance in skillInstanceList)
                 {
@@ -411,159 +218,470 @@ namespace MS_Website.Controllers
                     var skillId = skillInstance.SkillId;
                     if (skillName.Equals("Gender"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Gender == skillId).ToList();
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.Gender == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).Gender != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
                     }
                     else if (skillName.Equals("Age"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Age == skillId).ToList();
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.Age == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).Age != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
                     }
                     else if (skillName.Equals("LanguageEnglish"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.LanguageEnglish == skillId).ToList();
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.LanguageEnglish == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).LanguageEnglish != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
                     }
                     else if (skillName.Equals("LanguageChina"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.LanguageChina == skillId).ToList();
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.LanguageChina == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).LanguageChina != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
                     }
                     else if (skillName.Equals("LanguageJapanese"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.LanguageJapanese == skillId).ToList();
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.LanguageJapanese == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).LanguageJapanese != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
                     }
                     else if (skillName.Equals("LanguageKorean"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.LanguageKorean == skillId).ToList();
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.LanguageKorean == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).LanguageKorean != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
                     }
                     else if (skillName.Equals("Experience"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Experience == skillId).ToList();
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.Experience == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).Experience != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
                     }
                     else if (skillName.Equals("Hometown"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Hometown == skillId).ToList();
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.Hometown == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).Hometown != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
                     }
                     else if (skillName.Equals("Address"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Address == skillId).ToList();
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.Address == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).Address != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
                     }
                     else if (skillName.Equals("Health"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Health == skillId).ToList();
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.Health == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).Health != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
                     }
                     else if (skillName.Equals("Stay"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Stay == skillId).ToList();
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.Stay == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).Stay != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
                     }
                     else if (skillName.Equals("Salary"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Salary == skillId).ToList();
-                    }
-                    else if (skillName.Equals("Work"))
-                    {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Work == skillId).ToList();
-                    }
-                    else if (skillName.Equals("SickCare"))
-                    {
-                        skillRefList = db.SkillReferences.Where(sr => sr.SickCare == skillId).ToList();
-                    }
-                    else if (skillName.Equals("OldCare"))
-                    {
-                        skillRefList = db.SkillReferences.Where(sr => sr.OldCare == skillId).ToList();
-                    }
-                    else if (skillName.Equals("BabySister"))
-                    {
-                        skillRefList = db.SkillReferences.Where(sr => sr.BabySister == skillId).ToList();
-                    }
-                    else if (skillName.Equals("DisabilityCare"))
-                    {
-                        skillRefList = db.SkillReferences.Where(sr => sr.DisabilityCare == skillId).ToList();
-                    }
-                    else if (skillName.Equals("BonsaiCare"))
-                    {
-                        skillRefList = db.SkillReferences.Where(sr => sr.BonsaiCare == skillId).ToList();
-                    }
-                    else if (skillName.Equals("Cooking"))
-                    {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Cooking == skillId).ToList();
-                    }
-                    else if (skillName.Equals("Washing"))
-                    {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Washing == skillId).ToList();
-                    }
-                    else if (skillName.Equals("CleanHouse"))
-                    {
-                        skillRefList = db.SkillReferences.Where(sr => sr.CleanHouse == skillId).ToList();
-                    }
-                    foreach (var skillRef in skillRefList)
-                    {
-                        var skillList = new List<string>();
-                        PostController.LoadSkillList(skillRef, skillList, db);
-                        DateTime now = DateTime.Now;
-                        DateTime searchDate = now;
-                        if (time != null)
+                        if (salary.Equals("low"))
                         {
-                            searchDate = now.AddDays(int.Parse(time) * -1);
-                        }          
-                        var jobRequest = db.JobRequests.SingleOrDefault(jr => jr.SkillRefId == skillRef.SkillRefId);
-                        if (jobRequest != null)
-                        {
-                            if (jobRequest.PostTime <= searchDate)
+                            var salaryId1 = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("<1 triệu")).SkillId;
+                            var salaryId2 = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("1 triệu - 2 triệu")).SkillId;
+                            var salaryId3 = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("2 triệu - 3 triệu")).SkillId;
+                            if (!skillRefList.Any())
                             {
-                                if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
+                                skillRefList = db.SkillReferences.Where(sr => sr.Salary == salaryId1 || sr.Salary == salaryId2 || sr.Salary == salaryId3).ToList();
+                            }
+                            else
+                            {
+                                for (var i = 0; i < skillRefList.Count(); i++)
                                 {
-                                    var recruitTemp =
-                                        db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId);
-                                    var jobRequestTemp = new JobRequestTemp(jobRequest.JobRequestId,
-                                                                            jobRequest.SkillRefId,
-                                                                            jobRequest.MaidMediatorId,
-                                                                            jobRequest.StaffId,
-                                                                            jobRequest.Status,
-                                                                            jobRequest.PostTime, jobRequest.ExpiredTime,
-                                                                            jobRequest.ApplyTimes,
-                                                                            jobRequest.MaidId, jobRequest.Maid.MaidName,
-                                                                            jobRequest.Maid.PersonalImage,
-                                                                            jobRequest.Maid.Description,
-                                                                            jobRequest.Maid.RateAvg,
-                                                                            recruitTemp.Recruitment.CustomerId,
-                                                                            recruitTemp.Recruitment.Customer.Account.
-                                                                                FullName, skillList);
-                                    jobRequestList.Add(jobRequestTemp);
-                                }
-                                else
-                                {
-                                    var jobRequestTemp = new JobRequestTemp(jobRequest.JobRequestId,
-                                                                            jobRequest.SkillRefId,
-                                                                            jobRequest.MaidMediatorId,
-                                                                            jobRequest.StaffId,
-                                                                            jobRequest.Status,
-                                                                            jobRequest.PostTime, jobRequest.ExpiredTime,
-                                                                            jobRequest.ApplyTimes,
-                                                                            jobRequest.MaidId, jobRequest.Maid.MaidName,
-                                                                            jobRequest.Maid.PersonalImage,
-                                                                            jobRequest.Maid.Description,
-                                                                            jobRequest.Maid.RateAvg,
-                                                                            null,
-                                                                            null, skillList);
-                                    jobRequestList.Add(jobRequestTemp);
+                                    if (skillRefList.ElementAt(i).Salary != salaryId1 && skillRefList.ElementAt(i).Salary != salaryId2 && skillRefList.ElementAt(i).Salary != salaryId3)
+                                    {
+                                        skillRefList.RemoveAt(i);
+                                        i--;
+                                    }
                                 }
                             }
                         }
                         else
                         {
-                            var recruit = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId);
-                            if (recruit != null)
+                            if (!skillRefList.Any())
                             {
-                                if (recruit.PostTime <= searchDate)
+                                skillRefList = db.SkillReferences.Where(sr => sr.Salary == skillId).ToList();
+                            }
+                            else
+                            {
+                                for (var i = 0; i < skillRefList.Count(); i++)
                                 {
-                                    var recruitmentTemp = new RecruitmentTemp(recruit.RecruitmentId, recruit.SkillRefId,
-                                                                              recruit.CustomerId,
-                                                                              recruit.Status, recruit.PostTime,
-                                                                              recruit.ExpiredTime,
-                                                                              recruit.Customer.Account.Avatar,
-                                                                              recruit.Customer.Account.FullName,
-                                                                              skillList);
-                                    recruitmentList.Add(recruitmentTemp);
+                                    if (skillRefList.ElementAt(i).Salary != skillId)
+                                    {
+                                        skillRefList.RemoveAt(i);
+                                        i--;
+                                    }
                                 }
                             }
+                        }
+                    }
+                    else if (skillName.Equals("Work"))
+                    {
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.Work == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).Work != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                    else if (skillName.Equals("SickCare"))
+                    {
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.SickCare == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).SickCare != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                    else if (skillName.Equals("OldCare"))
+                    {
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.OldCare == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).OldCare != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                    else if (skillName.Equals("BabySister"))
+                    {
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.BabySister == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).BabySister != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                    else if (skillName.Equals("DisabilityCare"))
+                    {
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.DisabilityCare == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).DisabilityCare != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                    else if (skillName.Equals("BonsaiCare"))
+                    {
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.BonsaiCare == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).BonsaiCare != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                    else if (skillName.Equals("Cooking"))
+                    {
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.Cooking == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).Cooking != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                    else if (skillName.Equals("Washing"))
+                    {
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.Washing == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).Washing != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                    else if (skillName.Equals("CleanHouse"))
+                    {
+                        if (!skillRefList.Any())
+                        {
+                            skillRefList = db.SkillReferences.Where(sr => sr.CleanHouse == skillId).ToList();
+                        }
+                        else
+                        {
+                            for (var i = 0; i < skillRefList.Count(); i++)
+                            {
+                                if (skillRefList.ElementAt(i).CleanHouse != skillId)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+                            }
+                        }
+                    }
+                }
+                foreach (var skillRef in skillRefList)
+                {
+                    var skillList = new List<string>();
+                    PostController.LoadSkillList(skillRef, skillList, db);
+                    var now = DateTime.Now;
+                    var searchDate = now;
+                    if (time != null)
+                    {
+                        searchDate = now.AddDays(int.Parse(time) * -1);
+                    }
+                    var jobRequest = db.JobRequests.SingleOrDefault(jr => jr.SkillRefId == skillRef.SkillRefId);
+                    if (jobRequest != null)
+                    {
+                        if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
+                        {
+                            var recruitTemp =
+                                db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId);
+                            var jobRequestTemp = new JobRequestTemp(jobRequest.JobRequestId,
+                                                                    jobRequest.SkillRefId,
+                                                                    jobRequest.MaidMediatorId,
+                                                                    jobRequest.StaffId,
+                                                                    jobRequest.Status,
+                                                                    jobRequest.PostTime, jobRequest.ExpiredTime,
+                                                                    jobRequest.ApplyTimes,
+                                                                    jobRequest.MaidId, jobRequest.Maid.MaidName,
+                                                                    jobRequest.Maid.PersonalImage,
+                                                                    jobRequest.Maid.Description,
+                                                                    jobRequest.Maid.RateAvg,
+                                                                    recruitTemp.Recruitment.CustomerId,
+                                                                    recruitTemp.Recruitment.Customer.Account.
+                                                                        FullName, skillList);
+                            jobRequestList.Add(jobRequestTemp);
+                        }
+                        else
+                        {
+                            var jobRequestTemp = new JobRequestTemp(jobRequest.JobRequestId,
+                                                                    jobRequest.SkillRefId,
+                                                                    jobRequest.MaidMediatorId,
+                                                                    jobRequest.StaffId,
+                                                                    jobRequest.Status,
+                                                                    jobRequest.PostTime, jobRequest.ExpiredTime,
+                                                                    jobRequest.ApplyTimes,
+                                                                    jobRequest.MaidId, jobRequest.Maid.MaidName,
+                                                                    jobRequest.Maid.PersonalImage,
+                                                                    jobRequest.Maid.Description,
+                                                                    jobRequest.Maid.RateAvg,
+                                                                    null, null, skillList);
+                            jobRequestList.Add(jobRequestTemp);
+                        }
+                    }
+                    else
+                    {
+                        var recruit = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId);
+                        if (recruit != null)
+                        {
+                            var recruitmentTemp = new RecruitmentTemp(recruit.RecruitmentId, recruit.SkillRefId,
+                                                                      recruit.CustomerId,
+                                                                      recruit.Status, recruit.PostTime,
+                                                                      recruit.ExpiredTime,
+                                                                      recruit.Customer.Account.Avatar,
+                                                                      recruit.Customer.Account.FullName,
+                                                                      skillList);
+                            recruitmentList.Add(recruitmentTemp);
                         }
                     }
                 }
@@ -571,6 +689,10 @@ namespace MS_Website.Controllers
                 ViewBag.JobRequest = jobRequestList;
             }
             ViewBag.Gender = gender;
+            ViewBag.Age = age;
+            ViewBag.Salary = salary;
+            ViewBag.Work = work;
+            ViewBag.Time = time;
             return View("Search");
         }
     }
