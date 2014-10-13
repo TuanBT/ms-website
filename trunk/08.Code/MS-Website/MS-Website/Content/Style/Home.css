@@ -1,4 +1,4 @@
-﻿li {
+﻿.userLinksli {
     list-style-type: none;
 }
 
@@ -9,7 +9,7 @@ ul {
 
 .header {
     background: #7bd454;
-    line-height: 80px;
+    /*line-height: 80px;*/
     height: 80px;
 }
 
@@ -26,13 +26,15 @@ ul {
     float: left;
     height: 100%;
     margin-left: 10px;
+    margin-top: 15px;
 }
 
 .search {
     float: left;
     height: 100%;
-    width: 30%;
+    /*width: 30%;*/
     margin-left: 20px;
+    margin-top: 15px;
 }
 
 .siteLinks {
@@ -65,6 +67,7 @@ ul {
     float: right;
     height: 100%;
     /*width: 310px;*/
+    margin-top: 28px;
 }
 
     .userLinks li {
@@ -180,8 +183,9 @@ ul {
             }
 
 .searchInput {
-    border-radius: 0px;
-    height: 40px;
+    border-radius: 5px;
+    height: 48px;
+    width: 200px !important;
 }
 
 .banner {
@@ -435,13 +439,13 @@ ul {
         background: #00aeec;
     }
 
-.childSkill span{
-    margin-left: 5px;
-}
+    .childSkill span {
+        margin-left: 5px;
+    }
 
-.childSkill span:hover{
-    color: red;
-}
+        .childSkill span:hover {
+            color: red;
+        }
 
 .detailInfo {
     padding-top: 10px;
