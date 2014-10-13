@@ -529,6 +529,13 @@ a {
     width: 40px;
     height: 40px;
     float: left;
+    border: 1px solid #DDD;
+border-radius: 5px;
+    text-align: center;.iSkill
+}
+
+.blImage img{
+    border-radius: 5px;
 }
 
 .blName {
@@ -762,6 +769,7 @@ a {
     }
 
 .iSkill {
+    margin-top: 10px;
 }
 
 .iListKill {
