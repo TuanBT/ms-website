@@ -65,11 +65,11 @@
                                 <div class="miRate">
                                     <div class="rate">
                                         <span class="starRating1">
-                                            <span class="starRating2" style="width: 50%"></span>
+                                            <span class="starRating2" style="width: @(ViewBag.MaidRating / 10)"></span>
                                             
                                         </span>
                                     </div>
-                                    <span>3.5</span>
+                                    <span>@ViewBag.MaidRating</span>
                                 </div>
                             </div>
                             <div class="iSkill">
@@ -107,46 +107,41 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="suNumber">
-                                        3/5
+                                        <span id="currPage">1</span>/5
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="lisuPre">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="glyphicon glyphicon-chevron-left" onclick="loadBack()"></span>
                         </div>
                         <div class="lisuNex">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="glyphicon glyphicon-chevron-right" onclick="loadNext()"></span>
                         </div>
+                        <input id="currPos" type="hidden" value="1"/>
                         <ul class="listSuggestCus">
-                            <li>
-                                <a href="#">
-                                    <span class="listSuCuImage">
-                                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                                    </span>
-                                    <span class="listSuCuDetail">
-                                        <span class="liCuName">Bùi Customer
+                            @{
+                                var counter = 0;
+                            }
+                            @foreach (var recruit in ViewBag.Recommend)
+                            {
+                                <li id="@counter" style="display: @(counter > 1 ? "none" : "");">
+                                    <a href="#">
+                                        <span class="listSuCuImage">
+                                            <img src="@recruit.CustImg" alt="Maid sercive" height="100%">
                                         </span>
-                                        <span class="liCuPostTime">Đăng: 6:00 30/08/2014
+                                        <span class="listSuCuDetail">
+                                            <span class="liCuName">@recruit.CustomerName
+                                            </span>
+                                            <span class="liCuPostTime">Đăng: @recruit.PostTime
+                                            </span>
                                         </span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="listSuCuImage">
-                                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                                    </span>
-                                    <span class="listSuCuDetail">
-                                        <span class="liCuName">Bùi Customer
-                                        </span>
-                                        <span class="liCuPostTime">Đăng: 6:00 30/08/2014
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                                counter++;                                
+                            }
                         </ul>
-
+                        <input id="lastPos" type="hidden" value="@(counter - 1)"/>
                     </div>
                 </div>
             </div>
@@ -221,3 +216,31 @@
         </div>
     </div>
 </div>
+<script>
+    function loadNext() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        var lastPos = parseInt(document.getElementById("lastPos").getAttribute("value"));
+        if (currPos < lastPos) {
+            var currPage = parseInt(document.getElementById("currPage").innerHTML) + 1;
+            document.getElementById("currPage").innerHTML = currPage;
+            document.getElementById(currPos).setAttribute("style", "display: none;");
+            document.getElementById(currPos - 1).setAttribute("style", "display: none;");
+            document.getElementById(currPos + 1).setAttribute("style", "");
+            document.getElementById(currPos + 2).setAttribute("style", "");
+            document.getElementById("currPos").setAttribute("value", currPos + 2);
+        }
+    }
+    
+    function loadBack() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        if (currPos - 2 > 0) {
+            var currPage = parseInt(document.getElementById("currPage").innerHTML) - 1;
+            document.getElementById("currPage").innerHTML = currPage;
+            document.getElementById(currPos).setAttribute("style", "display: none;");
+            document.getElementById(currPos - 1).setAttribute("style", "display: none;");
+            document.getElementById(currPos - 2).setAttribute("style", "");
+            document.getElementById(currPos - 3).setAttribute("style", "");
+            document.getElementById("currPos").setAttribute("value", currPos - 2);
+        }
+    }
+</script>
