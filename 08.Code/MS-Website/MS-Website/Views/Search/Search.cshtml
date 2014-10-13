@@ -4,16 +4,10 @@
 }
 <link href="~/Content/Style/Home.css" rel="stylesheet">
 
-@ViewBag.test
 <div class="Menu">
     <div class="rows">
-        <div class="input-group" style="margin-left: 120px;">
-            @using (Html.BeginForm("Index", "Search"))
-            {
-                <input type="text" class="searchInput form-control" placeholder="Tìm kiếm công việc" name="searchString" />
-                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                <input type="submit" value="Search" />
-            }
+        <div class="searchOnPage">
+            @Html.Partial("_PartialSearch")
         </div>
         <div class="hMenu">
             <div class="hFatherMenu">
@@ -78,9 +72,9 @@
                                     Lương
                                 </div>
                                 <div class="scContent">
-                                    <input type="radio" name="salary" value="low" onclick="search()" @(ViewBag.Salary != null && ViewBag.Salary.Equals("low") ? "checked" : "true")/>Dưới 3 triệu<br />
-                                    <input type="radio" name="salary" value="average" onclick="search()" @(ViewBag.Salary != null && ViewBag.Salary.Equals("average") ? "checked" : "true")/>3-5 triệu<br />
-                                    <input type="radio" name="salary" value="high" onclick="search()" @(ViewBag.Salary != null && ViewBag.Salary.Equals("high") ? "checked" : "true")/>Trên 5 triệu
+                                    <input type="radio" name="salary" value="low" onclick="search()" @(ViewBag.Salary != null && ViewBag.Salary.Equals("low") ? "checked" : "")/>Dưới 3 triệu<br />
+                                    <input type="radio" name="salary" value="average" onclick="search()" @(ViewBag.Salary != null && ViewBag.Salary.Equals("average") ? "checked" : "")/>3-5 triệu<br />
+                                    <input type="radio" name="salary" value="high" onclick="search()" @(ViewBag.Salary != null && ViewBag.Salary.Equals("high") ? "checked" : "")/>Trên 5 triệu
                                 </div>
                             </div>
                         </div>
@@ -90,8 +84,8 @@
                                     Loại công việc
                                 </div>
                                 <div class="scContent">
-                                    <input type="radio" name="work" value="Biết nấu ăn" onclick="search()" @(ViewBag.Work != null && ViewBag.Work.Equals("Biết nấu ăn") ? "checked" : "true")/>Nấu ăn<br />
-                                    <input type="radio" name="work" value="Biết giặt giũ" onclick="search()" @(ViewBag.Work != null && ViewBag.Work.Equals("Biết giặt giũ") ? "checked" : "true")/>Giặt giũ
+                                    <input type="radio" name="work" value="Biết nấu ăn" onclick="search()" @(ViewBag.Work != null && ViewBag.Work.Equals("Biết nấu ăn") ? "checked" : "")/>Nấu ăn<br />
+                                    <input type="radio" name="work" value="Biết giặt giũ" onclick="search()" @(ViewBag.Work != null && ViewBag.Work.Equals("Biết giặt giũ") ? "checked" : "")/>Giặt giũ
                                 </div>
                             </div>
                         </div>
@@ -101,11 +95,11 @@
                                     Thời gian đăng bài
                                 </div>
                                 <div class="scContent">
-                                    <input type="radio" name="time" value="1" onclick="search()" @(ViewBag.Time != null && ViewBag.Time.Equals("1") ? "checked" : "true")/>Cách đây 1 ngày<br />
-                                    <input type="radio" name="time" value="3" onclick="search()" @(ViewBag.Time != null && ViewBag.Time.Equals("3") ? "checked" : "true")/>Cách đây 3 ngày<br />
-                                    <input type="radio" name="time" value="7" onclick="search()" @(ViewBag.Time != null && ViewBag.Time.Equals("7") ? "checked" : "true")/>Cách đây 7 ngày<br />
-                                    <input type="radio" name="time" value="14" onclick="search()" @(ViewBag.Time != null && ViewBag.Time.Equals("14") ? "checked" : "true")/>Cách đây 14 ngày<br />
-                                    <input type="radio" name="time" value="30" onclick="search()" @(ViewBag.Time != null && ViewBag.Time.Equals("30") ? "checked" : "true")/>Cách đây 30 ngày
+                                    <input type="radio" name="time" value="1" onclick="search()" @(ViewBag.Time != null && ViewBag.Time.Equals("1") ? "checked" : "")/>Cách đây 1 ngày<br />
+                                    <input type="radio" name="time" value="3" onclick="search()" @(ViewBag.Time != null && ViewBag.Time.Equals("3") ? "checked" : "")/>Cách đây 3 ngày<br />
+                                    <input type="radio" name="time" value="7" onclick="search()" @(ViewBag.Time != null && ViewBag.Time.Equals("7") ? "checked" : "")/>Cách đây 7 ngày<br />
+                                    <input type="radio" name="time" value="14" onclick="search()" @(ViewBag.Time != null && ViewBag.Time.Equals("14") ? "checked" : "")/>Cách đây 14 ngày<br />
+                                    <input type="radio" name="time" value="30" onclick="search()" @(ViewBag.Time != null && ViewBag.Time.Equals("30") ? "checked" : "")/>Cách đây 30 ngày
                                 </div>
                             </div>
                         </div>
@@ -130,12 +124,20 @@
                 <div id="bodyCenter">
                     <div class="tab-content">
                         <ul class="nav nav-tabs listTitle" role="tablist" id="myTab">
-                            <li class="active"><a href="#tabMaids" role="tab" data-toggle="tab">Việc tìm người thuê</a></li>
-                            <li><a href="#tabCustomer" role="tab" data-toggle="tab">Công việc cần người</a></li>
+                            @if (ViewBag.JobRequest != null)
+                            {
+                                <li class="active"><a href="#tabMaids" role="tab" data-toggle="tab">Việc tìm người thuê</a></li>
+                            }
+                            @if (ViewBag.Recruitment != null)
+                            {
+                                <li class="@(ViewBag.JobRequest == null ? "active" : "")" ><a href="#tabCustomer" role="tab" data-toggle="tab">Công việc cần người</a></li>
+                            }
                         </ul>
-                        <div class="tab-pane fade in active" id="tabMaids">
-                            <div class="listWork">
-                                @*<div class="listHeader">
+                        @if(ViewBag.JobRequest != null)
+                        {
+                            <div class="tab-pane fade in active" id="tabMaids">
+                                <div class="listWork">
+                                    @*<div class="listHeader">
                                     <div class="listRow">
                                         <div class="listTitle">
                                             Việc tìm người thuê
@@ -150,66 +152,69 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>*@
-                                <div class="mainContent">
-                                    <ul>
-                                        @foreach (var job in ViewBag.JobRequest)
-                                        {
-                                            <li class="childContent">
-                                                <div class="function">
-                                                    <div class="image">
-                                                        <img src="@job.MaidImg" alt="Maid service" style="width: 100%;">
-                                                    </div>
-                                                    <div class="button">
-                                                        <button type="button" class="btn btn-success btn-xs">Thuê <span class="glyphicon glyphicon-ok"></span></button>
-                                                        <button type="button" style="display: none" class="btn btn-warning btn-xs">Bỏ thuê <span class="glyphicon glyphicon-remove"></span></button>
-                                                    </div>
-                                                </div>
-                                                <div class="info">
-                                                    <div class="row">
-                                                        <div class="col-md-8">
-                                                            <div class="name">
-                                                                <a href="@Url.Action("Index", "Post", new { jobId = job.JobRequestId })">@job.MaidName</a>
-                                                            </div>
+                                </div>*@                               
+                                    <div class="mainContent">
+                                        <ul>
+                                            @foreach (var job in ViewBag.JobRequest)
+                                            {
+                                                <li class="childContent">
+                                                    <div class="function">
+                                                        <div class="image">
+                                                            <img src="@job.MaidImg" alt="Maid service" style="width: 100%;">
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <div class="love">
-                                                                <span class="glyphicon glyphicon-heart"></span>
-                                                            </div>
+                                                        <div class="button">
+                                                            <button type="button" class="btn btn-success btn-xs">Thuê <span class="glyphicon glyphicon-ok"></span></button>
+                                                            <button type="button" style="display: none" class="btn btn-warning btn-xs">Bỏ thuê <span class="glyphicon glyphicon-remove"></span></button>
                                                         </div>
                                                     </div>
-                                                    <div class="rate">
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                    </div>
-                                                    <div class="detailInfo">
-                                                        <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span><span> | </span><strong>Bình luận: </strong><span>3</span>
-                                                    </div>
+                                                    <div class="info">
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <div class="name">
+                                                                    <a href="@Url.Action("Index", "Post", new {jobId = job.JobRequestId})">@job.MaidName</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="love">
+                                                                    <span class="glyphicon glyphicon-heart"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="rate">
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            <span class="glyphicon glyphicon-star"></span>
+                                                        </div>
+                                                        <div class="detailInfo">
+                                                            <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span><span> | </span><strong>Bình luận: </strong><span>3</span>
+                                                        </div>
 
-                                                    <div class="description">
-                                                        @job.MaidDesc
+                                                        <div class="description">
+                                                            @job.MaidDesc
+                                                        </div>
+                                                        <div class="skill">
+                                                            <ul>
+                                                                @foreach (var skill in job.SkillList)
+                                                                {
+                                                                    <li class="childSkill">@skill</li>
+                                                                }
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                    <div class="skill">
-                                                        <ul>
-                                                            @foreach (var skill in job.SkillList)
-                                                            {
-                                                                <li class="childSkill">@skill</li>
-                                                            }
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        }
-                                    </ul>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="tabCustomer">
-                            <div class="listWork">
-                                @*<div class="listHeader">
+                        }
+                        @if(ViewBag.Recruitment != null)
+                        {
+                            <div class="@(ViewBag.JobRequest == null ? "tab-pane fade in active" : "tab-pane fade")" id="tabCustomer">
+                                <div class="listWork">
+                                    @*<div class="listHeader">
                                     <div class="listRow">
                                         <div class="listTitle">
                                             Công việc cần người
@@ -224,55 +229,56 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>*@
-                                <div class="mainContent">
-                                    <ul>
-                                        @foreach (var recruit in ViewBag.Recruitment)
-                                        {
-                                            <li class="childContent">
-                                                <div class="function">
-                                                    <div class="image">
-                                                        <img src="@recruit.CustImg" alt="Maid service" style="width: 100%;">
-                                                    </div>
-                                                    <div class="button">
-                                                        <button type="button" class="btn btn-success btn-xs">Nhận việc <span class="glyphicon glyphicon-ok"></span></button>
-                                                        <button type="button" style="display: none" class="btn btn-success btn-xs">Hủy việc <span class="glyphicon glyphicon-remove"></span></button>
-                                                    </div>
+                                </div>*@                               
+                                    <div class="mainContent">
+                                        <ul>
+                                            @foreach (var recruit in ViewBag.Recruitment)
+                                            {
+                                                <li class="childContent">
+                                                    <div class="function">
+                                                        <div class="image">
+                                                            <img src="@recruit.CustImg" alt="Maid service" style="width: 100%;">
+                                                        </div>
+                                                        <div class="button">
+                                                            <button type="button" class="btn btn-success btn-xs">Nhận việc <span class="glyphicon glyphicon-ok"></span></button>
+                                                            <button type="button" style="display: none" class="btn btn-success btn-xs">Hủy việc <span class="glyphicon glyphicon-remove"></span></button>
+                                                        </div>
 
-                                                </div>
-                                                <div class="info">
-                                                    <div class="row">
-                                                        <div class="col-md-8">
-                                                            <div class="name">
-                                                                <a href="#">@recruit.CustomerName</a>
+                                                    </div>
+                                                    <div class="info">
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <div class="name">
+                                                                    <a href="#">@recruit.CustomerName</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="love">
+                                                                    <span class="glyphicon glyphicon-heart"></span>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <div class="love">
-                                                                <span class="glyphicon glyphicon-heart"></span>
-                                                            </div>
+                                                        <div class="detailInfo">
+                                                            <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span>
+                                                        </div>
+                                                        <div class="description">
+                                                        </div>
+                                                        <div class="skill">
+                                                            <ul>
+                                                                @foreach (var skill in recruit.SkillList)
+                                                                {
+                                                                    <li class="childSkill">@skill</li>
+                                                                }
+                                                            </ul>
                                                         </div>
                                                     </div>
-                                                    <div class="detailInfo">
-                                                        <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span>
-                                                    </div>
-                                                    <div class="description">
-                                                    </div>
-                                                    <div class="skill">
-                                                        <ul>
-                                                            @foreach (var skill in recruit.SkillList)
-                                                            {
-                                                                <li class="childSkill">@skill</li>
-                                                            }
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        }
-                                    </ul>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
