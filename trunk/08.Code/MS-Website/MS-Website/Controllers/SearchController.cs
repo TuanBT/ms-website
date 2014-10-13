@@ -162,6 +162,27 @@ namespace MS_Website.Controllers
                 }
                 ViewBag.Recruitment = recruitmentList;
                 ViewBag.JobRequest = jobRequestList;
+                if (Session["Role"] != null)
+                {
+                    if (Session["Role"].Equals("MaidMediator"))
+                    {
+                        ViewBag.JobRequest = null;
+                    }
+                    else if (Session["Role"].Equals("Customer"))
+                    {
+                        ViewBag.Recruitment = null;
+                    }
+                    else if (Session["Role"].Equals("Staff"))
+                    {
+                        ViewBag.Recruitment = recruitmentList;
+                        ViewBag.JobRequest = jobRequestList;
+                    }
+                }
+                else
+                {
+                    ViewBag.Recruitment = recruitmentList;
+                    ViewBag.JobRequest = jobRequestList;
+                }
             }
             return View("Search");
         }
@@ -226,11 +247,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).Gender != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).Gender == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -244,11 +263,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).Age != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).Age == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -262,11 +279,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).LanguageEnglish != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).LanguageEnglish == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -280,11 +295,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).LanguageChina != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).LanguageChina == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -298,11 +311,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).LanguageJapanese != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).LanguageJapanese == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -316,11 +327,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).LanguageKorean != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).LanguageKorean == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -334,11 +343,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).Experience != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).Experience == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -352,11 +359,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).Hometown != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).Hometown == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -370,11 +375,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).Address != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).Address == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -388,11 +391,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).Health != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).Health == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -406,11 +407,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).Stay != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).Stay == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -429,11 +428,11 @@ namespace MS_Website.Controllers
                             {
                                 for (var i = 0; i < skillRefList.Count(); i++)
                                 {
-                                    if (skillRefList.ElementAt(i).Salary != salaryId1 && skillRefList.ElementAt(i).Salary != salaryId2 && skillRefList.ElementAt(i).Salary != salaryId3)
-                                    {
-                                        skillRefList.RemoveAt(i);
-                                        i--;
-                                    }
+                                    if (skillRefList.ElementAt(i).Salary == salaryId1 ||
+                                        skillRefList.ElementAt(i).Salary == salaryId2 ||
+                                        skillRefList.ElementAt(i).Salary == salaryId3) continue;
+                                    skillRefList.RemoveAt(i);
+                                    i--;
                                 }
                             }
                         }
@@ -447,11 +446,9 @@ namespace MS_Website.Controllers
                             {
                                 for (var i = 0; i < skillRefList.Count(); i++)
                                 {
-                                    if (skillRefList.ElementAt(i).Salary != skillId)
-                                    {
-                                        skillRefList.RemoveAt(i);
-                                        i--;
-                                    }
+                                    if (skillRefList.ElementAt(i).Salary == skillId) continue;
+                                    skillRefList.RemoveAt(i);
+                                    i--;
                                 }
                             }
                         }
@@ -466,11 +463,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).Work != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).Work == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -484,11 +479,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).SickCare != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).SickCare == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -502,11 +495,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).OldCare != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).OldCare == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -520,11 +511,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).BabySister != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).BabySister == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -538,11 +527,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).DisabilityCare != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).DisabilityCare == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -556,11 +543,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).BonsaiCare != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).BonsaiCare == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -574,11 +559,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).Cooking != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).Cooking == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -592,11 +575,9 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).Washing != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).Washing == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
                     }
@@ -610,49 +591,47 @@ namespace MS_Website.Controllers
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).CleanHouse != skillId)
-                                {
-                                    skillRefList.RemoveAt(i);
-                                    i--;
-                                }
+                                if (skillRefList.ElementAt(i).CleanHouse == skillId) continue;
+                                skillRefList.RemoveAt(i);
+                                i--;
                             }
                         }
-                    }
+                    }                    
                 }
+                if (time != null)
+                {
+                    var now = DateTime.Now;
+                    var searchDate = now.AddDays(-int.Parse(time));
+                    var jobRequestListTmp = db.JobRequests.Where(j => j.PostTime <= searchDate).ToList();
+                    var recruitmentListTmp = db.Recruitments.Where(r => r.PostTime <= searchDate).ToList();
+                    if (!skillRefList.Any())
+                    {
+                        skillRefList.AddRange(jobRequestListTmp.Select(jobRequest => db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == jobRequest.SkillRefId)));
+                        skillRefList.AddRange(recruitmentListTmp.Select(recruitment => db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId)));
+                    }
+                    else
+                    {
+                        for (var i = 0; i < skillRefList.Count(); i++)
+                        {
+                            var inListRefId = skillRefList.ElementAt(i).SkillRefId;
+                            var jobRequestTmp =
+                                db.JobRequests.SingleOrDefault(j => j.SkillRefId == inListRefId);
+                            if (jobRequestTmp != null) continue;
+                            var recruitmentTmp = db.Recruitments.SingleOrDefault(r => r.SkillRefId == inListRefId);
+                            if (recruitmentTmp != null) continue;
+                            skillRefList.RemoveAt(i);
+                            i--;
+                        }
+                    }
+                }                
                 foreach (var skillRef in skillRefList)
                 {
                     var skillList = new List<string>();
                     PostController.LoadSkillList(skillRef, skillList, db);
-                    var now = DateTime.Now;
-                    var searchDate = now;
-                    if (time != null)
-                    {
-                        searchDate = now.AddDays(int.Parse(time) * -1);
-                    }
                     var jobRequest = db.JobRequests.SingleOrDefault(jr => jr.SkillRefId == skillRef.SkillRefId);
                     if (jobRequest != null)
                     {
-                        if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
-                        {
-                            var recruitTemp =
-                                db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId);
-                            var jobRequestTemp = new JobRequestTemp(jobRequest.JobRequestId,
-                                                                    jobRequest.SkillRefId,
-                                                                    jobRequest.MaidMediatorId,
-                                                                    jobRequest.StaffId,
-                                                                    jobRequest.Status,
-                                                                    jobRequest.PostTime, jobRequest.ExpiredTime,
-                                                                    jobRequest.ApplyTimes,
-                                                                    jobRequest.MaidId, jobRequest.Maid.MaidName,
-                                                                    jobRequest.Maid.PersonalImage,
-                                                                    jobRequest.Maid.Description,
-                                                                    jobRequest.Maid.RateAvg,
-                                                                    recruitTemp.Recruitment.CustomerId,
-                                                                    recruitTemp.Recruitment.Customer.Account.
-                                                                        FullName, skillList);
-                            jobRequestList.Add(jobRequestTemp);
-                        }
-                        else
+                        if (jobRequest.Status.Equals("Waiting"))
                         {
                             var jobRequestTemp = new JobRequestTemp(jobRequest.JobRequestId,
                                                                     jobRequest.SkillRefId,
@@ -674,19 +653,41 @@ namespace MS_Website.Controllers
                         var recruit = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId);
                         if (recruit != null)
                         {
-                            var recruitmentTemp = new RecruitmentTemp(recruit.RecruitmentId, recruit.SkillRefId,
-                                                                      recruit.CustomerId,
-                                                                      recruit.Status, recruit.PostTime,
-                                                                      recruit.ExpiredTime,
-                                                                      recruit.Customer.Account.Avatar,
-                                                                      recruit.Customer.Account.FullName,
-                                                                      skillList);
-                            recruitmentList.Add(recruitmentTemp);
+                            if (recruit.Status.Equals("Waiting"))
+                            {
+                                var recruitmentTemp = new RecruitmentTemp(recruit.RecruitmentId, recruit.SkillRefId,
+                                                                          recruit.CustomerId,
+                                                                          recruit.Status, recruit.PostTime,
+                                                                          recruit.ExpiredTime,
+                                                                          recruit.Customer.Account.Avatar,
+                                                                          recruit.Customer.Account.FullName,
+                                                                          skillList);
+                                recruitmentList.Add(recruitmentTemp);
+                            }
                         }
                     }
                 }
-                ViewBag.Recruitment = recruitmentList;
-                ViewBag.JobRequest = jobRequestList;
+                if (Session["Role"] != null)
+                {
+                    if (Session["Role"].Equals("MaidMediator"))
+                    {
+                        ViewBag.Recruitment = recruitmentList;
+                    }
+                    else if (Session["Role"].Equals("Customer"))
+                    {
+                        ViewBag.JobRequest = jobRequestList;
+                    }
+                    else if (Session["Role"].Equals("Staff"))
+                    {
+                        ViewBag.Recruitment = recruitmentList;
+                        ViewBag.JobRequest = jobRequestList;
+                    }
+                }
+                else
+                {
+                    ViewBag.Recruitment = recruitmentList;
+                    ViewBag.JobRequest = jobRequestList;
+                }
             }
             ViewBag.Gender = gender;
             ViewBag.Age = age;
