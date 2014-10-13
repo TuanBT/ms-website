@@ -26,6 +26,11 @@ namespace MS_Website.Controllers
                     {
                         LoadSkillList(skillRef, skillList, db);
                     }
+                    var recSkillRefList =
+                        db.SkillReferences.Where(sr => sr.Type == 1 && sr.Group == job.SkillReference.Group).ToList();
+                    var recRecruitList = recSkillRefList.Select(skillReference => db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillReference.SkillRefId)).Select(recruitTmp => new RecruitmentTemp(recruitTmp.RecruitmentId, recruitTmp.SkillRefId, recruitTmp.CustomerId, recruitTmp.Status, recruitTmp.PostTime, recruitTmp.ExpiredTime, recruitTmp.Customer.Account.Avatar, recruitTmp.Customer.Account.FullName, null)).ToList();
+                    ViewBag.Recommend = recRecruitList;
+                    ViewBag.MaidRating = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId).RateAvg;
                     if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
                     {
                         var recruitTmp = db.Applies.SingleOrDefault(a => a.JobRequestId == job.JobRequestId);
