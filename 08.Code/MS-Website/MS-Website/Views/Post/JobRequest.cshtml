@@ -38,7 +38,6 @@
                         <div class="miPic">
                             <img src="@Model.MaidImg" alt="Maid sercive" height="100%">
                         </div>
-
                         <div class="miButton">
                             <button type="button" class="btn btn-info">Thuê</button>
                             <button type="button" class="btn btn-danger">Hủy</button>
@@ -63,14 +62,14 @@
                                     Đánh giá:
                                 </div>
                                 <div class="miRate">
-                                     @{Html.RenderAction("Rate", "Evaluate");}
+                                    @* @{Html.RenderAction("Rate", "Evaluate");}*@
                                     <div class="rate">
                                         <span class="starRating1">
                                             <span class="starRating2" style="width: @(ViewBag.MaidRating * 10)%"></span>
                                             
                                         </span>
                                     </div>
-                                    <span>@ViewBag.MaidRating</span>
+                                    <span class="ratingPoint">@ViewBag.MaidRating / 10 điểm</span>
                                 </div>
                             </div>
                             <div class="iSkill">
@@ -82,7 +81,9 @@
                                         <ul>
                                             @foreach (var skill in Model.SkillList)
                                             {
-                                                <li class="childSkill">@skill</li>
+                                                <li class="childSkill">
+                                                    <span class="skillText">@skill</span>
+                                                </li>
                                             }
                                         </ul>
                                     </div>
@@ -90,8 +91,18 @@
                             </div>
                         </div>
                     </div>
+                    
+                    @Html.Partial("_PartialRating")
                                 
-                    @{Html.RenderAction("Post", "Evaluate");}
+                    <div class="overView">
+                        <div class="ovTitle">
+                            Nhận xét của người thuê
+                        </div>
+                        <div class="ovContent">
+                            @Html.Partial("_PartialComment")
+                        </div>
+                    </div>
+                   @* @{Html.RenderAction("Post", "Evaluate");}*@
 
                     <div class="suggestCus">
                         <div class="suCuHeader">
