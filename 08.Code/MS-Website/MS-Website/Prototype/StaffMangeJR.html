@@ -45,7 +45,7 @@
                         <a href="#" class="hefaContent">Find Work</a>
                     </li>
                     <li>
-                        <a href="#" class="hefaContent iscurent">Quản lý</a>
+                    <a href="#" class="hefaContent iscurent">Quản lý yêu cầu</a>
                     </li>
                 </ul>
             </div>
@@ -55,10 +55,10 @@
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li class="iscurent">
-                <a href="#" class="hChContent">Yêu cầu công việc</a>
+                <a href="#" class="hChContent">Yêu cầu đang chờ</a>
             </li>
             <li class>
-                <a href="#" class="hChContent"> Job Applications</a>
+                <a href="#" class="hChContent">Yêu cầu đã xử lý</a>
             </li>
         </ul>
     </div>
@@ -77,129 +77,49 @@
                 <table id="JRTable" class="display" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>Mã yêu cầu</th>
+                    <th>STT</th>
+                    <th>Tiêu đề yêu cầu</th>
                     <th>Người đại diện</th>
-                    <th>Người giúp việc</th>
-                    <th>Ngày đăng</th>
-                    <th>Đã đóng tiền</th>
+                    <th>Thời gian đăng</th>
+                    <th>Xử lý</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr>
-                    <td><a href="#">15</a>
+                    <td>
+                        1
                     </td>
                     <td>
-                        <div class="liImage">
-                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                        </div>
-                        <div class="liMaidContent">
-                            <div class="licoFullName">
+                        <a href="#">Cần việc này lắm</a>
+                    </td>
+                    <td>
                                 <a href="#">Bùi Tiến Tuân</a>
-                            </div>
-                            </div>
                     </td>
+                    <td>9:00 2011/04/25</td>
                     <td>
-                        <div class="liImage">
-                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                        </div>
-                        <div class="liMaidContent">
-                            <div class="licoFullName">
-                                <a href="#">Bùi Tiến Tuân</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>2011/04/25</td>
-                    <td>
-                        <button type="button" class="btn btn-success">Success</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a href="#">15</a>
-                    </td>
-                    <td>
-                        <div class="liImage">
-                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                        </div>
-                        <div class="liMaidContent">
-                            <div class="licoFullName">
-                                <a href="#">Bùi Tiến Tuân</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="liImage">
-                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                        </div>
-                        <div class="liMaidContent">
-                            <div class="licoFullName">
-                                <a href="#">Bùi Tiến Tuân</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>2011/04/25</td>
-                    <td>
-                        <button type="button" class="btn btn-success">Success</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a href="#">15</a>
-                    </td>
-                    <td>
-                        <div class="liImage">
-                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                        </div>
-                        <div class="liMaidContent">
-                            <div class="licoFullName">
-                                <a href="#">Bùi Tiến Tuân</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="liImage">
-                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                        </div>
-                        <div class="liMaidContent">
-                            <div class="licoFullName">
-                                <a href="#">Bùi Tiến Tuân</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>2011/04/25</td>
-                    <td>
-                        <button type="button" class="btn btn-success">Success</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><a href="#">15</a>
-                    </td>
-                    <td>
-                        <div class="liImage">
-                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                        </div>
-                        <div class="liMaidContent">
-                            <div class="licoFullName">
-                                <a href="#">Bùi Tiến Tuân</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="liImage">
-                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                        </div>
-                        <div class="liMaidContent">
-                            <div class="licoFullName">
-                                <a href="#">Bùi Tiến Tuân</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>2011/04/25</td>
-                    <td>
-                        <button type="button" class="btn btn-success">Success</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg">Kích hoạt</button>
                     </td>
                 </tr>
                 </tbody>
                 </table>
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="myLargeModalLabel">Xác nhận kích hoạt</h4>
+                            </div>
+                            <div class="modal-body">
+                               Bạn thực sự đã nhận tiền từ người đại diện cho người giúp việc?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success">Chấp nhận</button>
+                                <button type="button" class="btn btn-warning">Hủy</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="rightInfo">
