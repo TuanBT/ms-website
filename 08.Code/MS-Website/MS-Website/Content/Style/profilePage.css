@@ -1125,7 +1125,7 @@ border-radius: 5px;
 }
 
 .chooseMaidModalMaid {
-    margin-left: 40px;
+   /* margin-left: 40px;*/
 }
 
 .chooseMaidModalSkill {
@@ -1148,6 +1148,7 @@ border-radius: 5px;
 .moskSkill {
     padding: 10px;
     display: inline-block;
+    min-width: 200px;
 }
 
 .moskSkillName {
