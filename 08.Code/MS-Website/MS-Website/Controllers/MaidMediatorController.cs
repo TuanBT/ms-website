@@ -17,7 +17,7 @@ namespace MS_Website.Controllers
         {
             using (var db = new MSEntities())
             {
-                var accId = (int)Session["AccId"];
+                var accId = 41;
                 var role = ((string)Session["Role"]).Trim();
                 var account = db.Accounts.SingleOrDefault(a => a.AccountId == accId);
                 if (role.Equals("MaidMediator"))
@@ -37,9 +37,9 @@ namespace MS_Website.Controllers
             using (var db = new MSEntities())
             {
                 var accId = (int)Session["AccId"];
-                var maid = new Maid { MaidName = fullname, MaidMediatorId = accId, Gender = "Nam" };
-                db.Maids.Add(maid);
-                db.SaveChanges();
+                //var maid = new Maid { MaidName = fullname, MaidMediatorId = accId, Gender = "Nam" };
+                //db.Maids.Add(maid);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
         }

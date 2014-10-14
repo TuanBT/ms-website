@@ -1,17 +1,18 @@
 ﻿@model MS_Website.Models.Rating
 
+<link href="~/Content/bootstrap-star-rating-master/css/star-rating.min.css" rel="stylesheet" />
+<script src="~/Content/bootstrap-star-rating-master/js/star-rating.js"></script>
+
 @using (Html.BeginForm())
 {
-    <div class="box-header" style="cursor: move;">
-        <i class="fa fa-comments-o"></i>
-        <h3 class="page-header">Đánh giá</h3>
+    <div class="col-md-10">
+        <input id="input-3" class="rating" data-show-clear="false" data-show-caption="true" value="" data-size="xs" />
     </div>
-    <div class="box-body">
-        <input id="input-3" class="rating" data-show-clear="false" data-show-caption="true" value="0">
+    <div class="col-md-2">
         <span class="label label-success">@ViewBag.AverageRating / 5 Điểm</span><br />
-        <input name="Rate" id="Rate" value="" type="hidden" />
-        <input name="JobRequestId" value="1" type="hidden" />
-        <input name="CustomerId" value="7" type="hidden" /><br />
-        <input type="submit" value="Cho điểm" class="btn btn-default btn-sm" />
+        <input type="submit" value="Cho điểm" class="btn btn-default btn-xs" />
     </div>
+    <input name="Rate" id="Rate" value="" type="hidden" />
+    <input name="JobRequestId" value="1" type="hidden" />
+    <input name="CustomerId" value="11" type="hidden" /><br />
 }

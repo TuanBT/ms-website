@@ -1,27 +1,27 @@
 ﻿@model MS_Website.Models.Comment
 
-@{
-    MS_Website.Models.MSEntities db = new MS_Website.Models.MSEntities();
-    List<MS_Website.Models.Comment> comments = db.Comments.Where(c => c.JobRequestId == 1).ToList();
-}
-@Html.Partial("~/Views/Evaluate/_Index.cshtml", comments)
+<link href="~/Content/AdminLTE-master/css/AdminLTE.css" rel="stylesheet" />
+<link href="~/Content/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet" />
 
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary(true)
+<div class="overView box box-success">
+    @{Html.RenderAction("Index", "Evaluate", new { id = 1 });}
 
-    <div class="box-footer">
-        <div class="input-group">
-            @Html.Hidden("CustomerId", "3")
-            @Html.Hidden("JobRequestId", "1")
-            <input class="form-control" name="CommentContent" placeholder="Bình luận...">
-            <div class="input-group-btn">
-                <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i></button>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+        <div class="box-footer">
+            <div class="input-group">
+                @Html.Hidden("CustomerId", "11")
+                @Html.Hidden("JobRequestId", "1")
+                <input class="form-control" name="CommentContent" placeholder="Bình luận...">
+                <div class="input-group-btn">
+                    <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i></button>
+                </div>
             </div>
         </div>
-    </div>
-
-}
+    }
+</div>
 
 
 

@@ -14,11 +14,11 @@ namespace MS_Website.Controllers
         //
         // GET: /Evaluate/
 
-        //public ActionResult Index(int id = 1)
-        //{
-        //    List<Comment> comments = db.Comments.Where(c => c.JobRequestId == 1).ToList();
-        //    return PartialView("_Index", comments);
-        //}
+        public ActionResult Index(int id = 0)
+        {
+            List<Comment> comments = db.Comments.Where(c => c.JobRequestId == id).ToList();
+            return PartialView("_Index", comments);
+        }
 
         //
         // GET: /Evaluate/Post/
@@ -58,7 +58,7 @@ namespace MS_Website.Controllers
             //rate = rate / count;
             //rate = Math.Round(rate, MidpointRounding.AwayFromZero);
             //rate = Math.Round(rate * 2, MidpointRounding.AwayFromZero) / 2;
-            if (rating.Rate != null)
+            if (rating != null)
             {
                 @ViewBag.AverageRating = rating.Rate;
             }
@@ -81,7 +81,7 @@ namespace MS_Website.Controllers
                 rating.Rate = rating.Rate / 10;
             }
            
-            Rating custRating = db.Ratings.FirstOrDefault(r => (r.JobRequestId == 1) && (r.CustomerId == 7));
+            Rating custRating = db.Ratings.FirstOrDefault(r => (r.JobRequestId == 1) && (r.CustomerId == 11));
             if (custRating != null)
             {
                 custRating.Rate = rating.Rate;

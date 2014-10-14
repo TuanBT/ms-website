@@ -34,9 +34,9 @@ namespace MS_Website.Controllers
             using (var db = new MSEntities())
             {
                 var accId = (int)Session["AccId"];
-                var maid = new Maid { MaidName = fullname, StaffId = accId, Gender = "Nam" };
-                db.Maids.Add(maid);
-                db.SaveChanges();
+                //var maid = new Maid { MaidName = fullname, StaffId = accId, Gender = "Nam" };
+                //db.Maids.Add(maid);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
         }

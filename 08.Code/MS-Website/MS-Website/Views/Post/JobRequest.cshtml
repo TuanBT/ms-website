@@ -63,6 +63,7 @@
                                     Đánh giá:
                                 </div>
                                 <div class="miRate">
+                                     @{Html.RenderAction("Rate", "Evaluate");}
                                     <div class="rate">
                                         <span class="starRating1">
                                             <span class="starRating2" style="width: @(ViewBag.MaidRating * 10)%"></span>
@@ -89,14 +90,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="overView">
-                        <div class="ovTitle">
-                            Các comment
-                        </div>
-                        <div class="ovContent">
-                            Trình bày các comment vào đây
-                        </div>
-                    </div>
+                                
+                    @{Html.RenderAction("Post", "Evaluate");}
+
                     <div class="suggestCus">
                         <div class="suCuHeader">
                             <div class="row">
