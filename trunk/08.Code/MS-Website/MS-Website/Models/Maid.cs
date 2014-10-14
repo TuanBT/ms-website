@@ -29,6 +29,14 @@ namespace MS_Website.Models
         public Nullable<double> RateAvg { get; set; }
         public string Phone { get; set; }
         public string Gender { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
+        public Nullable<bool> English { get; set; }
+        public Nullable<bool> Korean { get; set; }
+        public Nullable<bool> Japanese { get; set; }
+        public Nullable<bool> Chinese { get; set; }
+        public string Hometown { get; set; }
+        public string Address { get; set; }
+        public Nullable<bool> Married { get; set; }
     
         public virtual ICollection<JobRequest> JobRequests { get; set; }
         public virtual MaidMediator MaidMediator { get; set; }

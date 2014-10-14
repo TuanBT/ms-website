@@ -25,6 +25,7 @@ namespace MS_Website.Models
         public string Status { get; set; }
         public System.DateTime PostTime { get; set; }
         public System.DateTime ExpiredTime { get; set; }
+        public string Title { get; set; }
     
         public virtual ICollection<Apply> Applies { get; set; }
         public virtual Customer Customer { get; set; }
