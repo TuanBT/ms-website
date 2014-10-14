@@ -28,7 +28,7 @@ namespace MS_Website.Models
         public string Description { get; set; }
         public Nullable<double> RateAvg { get; set; }
         public string Phone { get; set; }
-        public string Gender { get; set; }
+        public Nullable<bool> Gender { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
         public Nullable<bool> English { get; set; }
         public Nullable<bool> Korean { get; set; }
