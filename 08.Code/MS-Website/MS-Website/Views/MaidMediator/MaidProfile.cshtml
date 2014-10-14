@@ -135,11 +135,11 @@
                                         <li>
                                             <div class="bAWork">
                                                 <div class="blImage">
-                                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                    <img src="@job.MaidImg" alt="Maid sercive" height="100%">
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="#">@job.MaidName</a>
+                                                        <a href="#">Mã yêu cầu @job.JobRequestId</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Đăng: </span><span
@@ -193,11 +193,11 @@
                                         <li>
                                             <div class="bAWork">
                                                 <div class="blImage">
-                                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                    <img src="@job.MaidImg" alt="Maid sercive" height="100%">
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="#">@job.MaidName</a>
+                                                        <a href="#">Mã yêu cầu @job.JobRequestId</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Đăng: </span><span
@@ -211,7 +211,7 @@
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="#">@job.CustomerName</a>
+                                                        <a href="#">Mã yêu cầu @job.JobRequestId</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Nhận: </span><span
@@ -242,11 +242,11 @@
                                     {
                                         <li id="@job.JobRequestId" onclick="chooseJob(@job.JobRequestId, 3)">
                                             <div class="blImage">
-                                                <img src="../Content/Image/MS-Logo.png" alt="Maid service" height="100%">
+                                                <img src="@job.MaidImg" alt="Maid service" height="100%">
                                             </div>
                                             <div class="blDetail">
                                                 <div class="blName">
-                                                    <a href="@Url.Action("Index", "Post", new { jobId = job.JobRequestId })">@job.MaidName</a>
+                                                    <a href="@Url.Action("Index", "Post", new { jobId = job.JobRequestId })">Mã yêu cầu @job.JobRequestId</a>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
