@@ -19,7 +19,6 @@
           <EntitySet Name="SkillInstance" EntityType="MSModel.Store.SkillInstance" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SkillReference" EntityType="MSModel.Store.SkillReference" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Staff" EntityType="MSModel.Store.Staff" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="sysdiagrams" EntityType="MSModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Apply_JobRequest" Association="MSModel.Store.FK_Apply_JobRequest">
             <End Role="JobRequest" EntitySet="JobRequest" />
             <End Role="Apply" EntitySet="Apply" />
@@ -249,7 +248,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="RateAvg" Type="float" />
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
-          <Property Name="Gender" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Gender" Type="bit" />
           <Property Name="BirthDate" Type="date" />
           <Property Name="English" Type="bit" />
           <Property Name="Korean" Type="bit" />
@@ -340,16 +339,6 @@
             <PropertyRef Name="AccountId" />
           </Key>
           <Property Name="AccountId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Apply_JobRequest">
           <End Role="JobRequest" Type="MSModel.Store.JobRequest" Multiplicity="1" />
@@ -838,7 +827,6 @@
           <EntitySet Name="SkillInstances" EntityType="MSModel.SkillInstance" />
           <EntitySet Name="SkillReferences" EntityType="MSModel.SkillReference" />
           <EntitySet Name="Staffs" EntityType="MSModel.Staff" />
-          <EntitySet Name="sysdiagrams" EntityType="MSModel.sysdiagram" />
           <AssociationSet Name="FK_Customer_Account" Association="MSModel.FK_Customer_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Customer" EntitySet="Customers" />
@@ -1086,7 +1074,7 @@
           <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="RateAvg" Type="Double" />
           <Property Name="Phone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Gender" Type="Boolean" />
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
           <Property Name="English" Type="Boolean" />
           <Property Name="Korean" Type="Boolean" />
@@ -1237,16 +1225,6 @@
           <NavigationProperty Name="Account" Relationship="MSModel.FK_Staff_Account" FromRole="Staff" ToRole="Account" />
           <NavigationProperty Name="JobRequests" Relationship="MSModel.FK_JobRequest_Staff" FromRole="Staff" ToRole="JobRequest" />
           <NavigationProperty Name="Maids" Relationship="MSModel.FK_Maid_Staff" FromRole="Staff" ToRole="Maid" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_Customer_Account">
           <End Role="Account" Type="MSModel.Account" Multiplicity="1" />
@@ -1895,17 +1873,6 @@
             <EntityTypeMapping TypeName="MSModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="MSModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
