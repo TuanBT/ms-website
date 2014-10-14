@@ -118,8 +118,28 @@ namespace MS_Website.Controllers
                     _db.MaidMediators.Add(newMaid);
                     _db.SaveChanges();
                 }
-                return RedirectToAction("Index", "Register");
+                return RedirectToAction("Login", "Home", acc);
             }
+        }
+
+        public ActionResult Redirect()
+        {
+            if (Session["Role"] != null)
+            {
+                if (Session["Role"].Equals("MaidMediator"))
+                {
+                    return RedirectToAction("Index", "MaidMediator");
+                }
+                if (Session["Role"].Equals("Staff"))
+                {
+
+                }
+                if (Session["Role"].Equals("Customer"))
+                {
+
+                }
+            }
+            return View("Login");
         }
     }
 }
