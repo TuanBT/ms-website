@@ -86,7 +86,7 @@
                                     <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
                                         lý</h4>
                                 </div>
-                                <div class="chooseMaidModalMaid">
+                                <div class="modal-body chooseMaidModalMaid">
                                     @foreach (var maid in ViewBag.MaidList)
                                     {
                                         <div class="radio">
@@ -116,8 +116,11 @@
                                             </label>
                                         </div>
                                     }
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="chooseMaid()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                    
                                 </div>
+                                <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="chooseMaid()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -136,6 +139,10 @@
                                         </button>
                                     </div>
                                     <ul id="chosenSkills">
+                                        <li class="childSkill"><span class="skillText">Giới tính - Nam<span class="glyphicon glyphicon-remove"></span></span>
+                                        </li>
+                                        <li class="childSkill"><span class="skillText">Giới tính - Nam<span class="glyphicon glyphicon-remove"></span></span>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -151,7 +158,7 @@
                                             class="sr-only">Close</span></button>
                                     <h4 class="modal-title">Chọn các kỹ năng cho công việc</h4>
                                 </div>
-                                <div class="chooseMaidModalSkill">
+                                <div class="modal-body chooseMaidModalSkill">
                                     <div class="moskCategory">
                                         <div class="moskCategoryName">
                                             Yêu cầu
@@ -206,19 +213,26 @@
                                             Kĩ năng
                                         </div>
                                         <div class="moskCategoryContent">
-                                            <div class="moskSkill">
-                                                <div class="moskSkillContent">
-                                                    @foreach (var item in ViewBag.SkillList)
-                                                    {
-                                                        <input class="skill" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName"/>
-                                                        @item.SkillNameVietnam
-                                                    }
+                                            @foreach (var item in ViewBag.SkillList)
+                                            {
+                                                <div class="moskSkill">
+                                                    <div class="moskSkillName">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input class="skill" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName"/>
+                                                                @item.SkillNameVietnam
+                                                            </label>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-left: 400px; margin-bottom: 10px;" onclick="addSkill()">Đồng ý</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-left: 400px; margin-bottom: 10px;" onclick="addSkill()">Đồng ý</button>
+                                </div>
+
                             </div>
                         </div>
                     </div>
