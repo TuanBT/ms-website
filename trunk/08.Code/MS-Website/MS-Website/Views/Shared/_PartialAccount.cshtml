@@ -2,7 +2,7 @@
 {
     <div class="hMainFunction">
     <div class="hUserName">
-        <a href="#">@Session["Fullname"].ToString()</a>
+        <a href="@Url.Action("Redirect", "Home")">@Session["Fullname"].ToString()</a>
     </div>
     <ul class="hUserFuncList">
         <li>
@@ -24,11 +24,11 @@ else
 {
     <div class="userLinks">
     <li>
-        <a href="Home/Login">Đăng nhập</a>
+        <a href="@Url.Action("Login", "Home")">Đăng nhập</a>
 
     </li>
     <li>
-        <a style="color: rgb(123, 212, 84); text-transform: uppercase; padding: 16px 11px; background: white; height: 40px; border-radius: 3px;" href="#">Đăng ký</a>
+        <a style="color: rgb(123, 212, 84); text-transform: uppercase; padding: 16px 11px; background: white; height: 40px; border-radius: 3px;" href="@Url.Action("Register", "Home")">Đăng ký</a>
 
     </li>
     <li><a class="regisEscape" href="#">Đăng ký tìm việc</a></li>
