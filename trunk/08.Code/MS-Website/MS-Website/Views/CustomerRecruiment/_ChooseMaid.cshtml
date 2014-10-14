@@ -1,0 +1,100 @@
+﻿@model MS_Website.Models.Maid
+
+@using (Ajax.BeginForm("ChooseMaid", "CustomerRecruiment", FormMethod.Post,
+    new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, new { id = "choose-maid-form" }))
+{
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header chooseMaidModalTitle">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
+                        lý</h4>
+            </div>
+            <div class="chooseMaidModalMaid">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+
+                        <div>
+                            <div class="liImage">
+                                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                            </div>
+                            <div class="liMaidContent">
+                                <div class="licoFullName">
+                                    <a href="#">Bùi Tiến Tuân</a>
+                                </div>
+                                <div class="licoRate">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </div>
+                                <div class="ricoPost">
+                                    Đăng/nhận
+                                        <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+
+                        <div>
+                            <div class="liImage">
+                                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                            </div>
+                            <div class="liMaidContent">
+                                <div class="licoFullName">
+                                    <a href="#">Bùi Tiến Tuân</a>
+                                </div>
+                                <div class="licoRate">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </div>
+                                <div class="ricoPost">
+                                    Đăng/nhận
+                                        <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+
+                        <div>
+                            <div class="liImage">
+                                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                            </div>
+                            <div class="liMaidContent">
+                                <div class="licoFullName">
+                                    <a href="#">Bùi Tiến Tuân</a>
+                                </div>
+                                <div class="licoRate">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </div>
+                                <div class="ricoPost">
+                                    Đăng/nhận
+                                        <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,192 @@
+﻿@model MS_Website.Models.SkillReference
+
+@using MS_Website.Models
+@{
+    List<SkillInstance> skillInstances = ViewBag.Skills;
+
+    var ages = skillInstances.Where(s => s.SkillName.Equals("Age")).ToList();
+    var genders = skillInstances.Where(s => s.SkillName.Equals("Gender")).ToList();
+    var hometown = skillInstances.Where(s => s.SkillName.Equals("Hometown")).ToList();
+    var addresses = skillInstances.Where(s => s.SkillName.Equals("Address")).ToList();
+    var health = skillInstances.Where(s => s.SkillName.Equals("Health")).ToList();
+    var married = skillInstances.Where(s => s.SkillName.Equals("Married")).ToList();
+    var stays = skillInstances.Where(s => s.SkillName.Equals("Stay")).ToList();
+    var salaries = skillInstances.Where(s => s.SkillName.Equals("Salary")).ToList();
+    var works = skillInstances.Where(s => s.SkillName.Equals("Work")).ToList();
+    var skills = skillInstances.Where(s => (s.CategoryId == 2)).ToList(); 
+}
+
+@using (Ajax.BeginForm("ChooseSkill", "CustomerRecruiment", FormMethod.Post,
+    new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, new { id = "choose-skill-form" }))
+{
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header chooseMaidModalTitle">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">Chọn các kỹ năng cho công việc</h4>
+            </div>
+
+            <div class="chooseMaidModalSkill row">
+                <div class="moskCategory col-md-4">
+                    <div class="moskCategoryName">
+                        Cá nhân
+                    </div>
+                    <div class="moskCategoryContent">
+                        <!-- Gender -->
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                Giới tính
+                            </div>
+                            <div class="moskSkillContent">
+                                @Html.DropDownListFor(model => model.Gender, new SelectList(genders, "SkillId", "SkillString"))
+                            </div>
+                        </div>
+
+                        <!-- Age -->
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                Tuổi
+                            </div>
+                            <div class="moskSkillContent">
+                                @Html.DropDownListFor(model => model.Age, new SelectList(ages, "SkillId", "SkillString"))
+                            </div>
+                        </div>
+                        @foreach (var item in skillInstances)
+                        {
+                            if (item.SkillName.StartsWith("Language"))
+                            {
+                            <div class="moskSkill">
+                                <div class="moskSkillName">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="@item.SkillId" name="@item.SkillName">
+                                            @item.SkillNameVietnam
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        }
+
+                        <!-- Hometown -->
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                Quê quán
+                            </div>
+                            <div class="moskSkillContent">
+                                @Html.DropDownListFor(model => model.Hometown, new SelectList(hometown, "SkillId", "SkillString"))
+                            </div>
+                        </div>
+
+                        <!-- address -->
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                Địa chỉ
+                            </div>
+                            <div class="moskSkillContent">
+                                @Html.DropDownListFor(model => model.Address, new SelectList(addresses, "SkillId", "SkillString"))
+                            </div>
+                        </div>
+
+                        <!-- Health -->
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                Sức khỏe
+                            </div>
+                            <div class="moskSkillContent">
+                                @Html.DropDownListFor(model => model.Health, new SelectList(health, "SkillId", "SkillString"))
+                            </div>
+                        </div>
+
+                        <!-- Married -->
+                        <div class="moskSkill">
+                            <div class="moskSkillName">
+                                Kết hôn
+                            </div>
+                            <div class="moskSkillContent">
+                                @Html.DropDownList("Married", new SelectList(married, "SkillId", "SkillString"))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="moskCategory col-md-4">
+                    <div class="moskCategory ">
+                        <div class="moskCategoryName">
+                            Kỹ năng
+                        </div>
+                        <div class="moskCategoryContent">
+                            @foreach (var item in skills)
+                            {
+                                <div class="moskSkill">
+                                    <div class="moskSkillName">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="@item.SkillId" name="@item.SkillName">
+                                                @item.SkillNameVietnam
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>	 
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="moskCategory col-md-4">
+                    <div class="moskCategory ">
+                        <div class="moskCategoryName">
+                            Nhóm
+                        </div>
+                        <div class="moskCategoryContent">
+                            <!-- Stay -->
+                            <div class="moskSkill">
+                                <div class="moskSkillName">
+                                    Ngủ lại
+                                </div>
+                                <div class="moskSkillContent">
+                                    @Html.DropDownListFor(model => model.Stay, new SelectList(stays, "SkillId", "SkillString"))
+                                </div>
+                            </div>
+
+                            <!-- Salary -->
+                            <div class="moskSkill">
+                                <div class="moskSkillName">
+                                    Mức lương
+                                </div>
+                                <div class="moskSkillContent">
+                                    @Html.DropDownListFor(model => model.Salary, new SelectList(salaries, "SkillId", "SkillString"))
+                                </div>
+                            </div>
+
+                            <!-- Work -->
+                            <div class="moskSkill">
+                                <div class="moskSkillName">
+                                    Làm việc
+                                </div>
+                                <div class="moskSkillContent">
+                                    @Html.DropDownListFor(model => model.Work, new SelectList(works, "SkillId", "SkillString"))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit">
+                    <i class="glyphicon glyphicon-save"></i>&nbsp;Lưu
+                </button>
+                 <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="glyphicon glyphicon-remove"></i>&nbsp;Bỏ Qua
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $("select").prepend("<option></option>").val("");
+</script>
