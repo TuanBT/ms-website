@@ -958,6 +958,7 @@ border-radius: 5px;
 
 .iRating {
     display: inline-block;
+    margin-top: 10px;
 }
 
     .iRating > .miRate {

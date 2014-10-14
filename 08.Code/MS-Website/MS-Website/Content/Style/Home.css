@@ -371,10 +371,24 @@ ul {
 
 .rate {
     /*height: 20px;*/
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     color: #f6a828;
     text-align: left;
     display: inline-block;
+}
+
+.ratingPoint {
+    display: inline;
+padding: .2em .6em .3em;
+font-size: 75%;
+font-weight: 700;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+border-radius: .25em;
+background-color: #5cb85c;
 }
 
 .button {
@@ -423,6 +437,11 @@ ul {
 }
 
 .childSkill {
+    min-width: 150px;
+    display: inline-block;
+}
+
+.skillText {
     font-size: 11px;
     padding: 5px 7px;
     line-height: 1;
@@ -435,16 +454,16 @@ ul {
     cursor: pointer;
 }
 
-    .childSkill:hover {
+    .skillText:hover {
         color: #fff;
         background: #00aeec;
     }
 
-    .childSkill span {
+    .skillText span {
         margin-left: 5px;
     }
 
-        .childSkill span:hover {
+        .skillText span:hover {
             color: red;
         }
 
