@@ -39,7 +39,7 @@ namespace MS_Website.Controllers
         {
             Recruitment recruiment = db.Recruitments.Find(id);
 
-          
+
 
             if (recruiment == null)
             {
@@ -56,13 +56,79 @@ namespace MS_Website.Controllers
 
         public ActionResult Post()
         {
+            //Session["skillRef"] = TempData["skillRef"];
             return View();
         }
 
-        public ActionResult Details2()
+        //
+        // POST: /CustomerRecruiment/Post
+        [HttpPost]
+        public ActionResult Post(Recruitment recruiment,FormCollection form)
         {
-            JobRequest jr = db.JobRequests.Find(1);
-            return View(jr);
+            SkillReference skillRef = (SkillReference)Session["skillRef"];
+            double timeSpan = double.Parse(form["TimeSpan"]);
+            try
+            {
+                db.SkillReferences.Add(skillRef);
+                db.SaveChanges();
+                recruiment.SkillRefId = skillRef.SkillRefId;
+                recruiment.CustomerId = 11;
+                recruiment.Status = "Waiting";
+                recruiment.PostTime = DateTime.Now;
+                recruiment.ExpiredTime = recruiment.PostTime.AddDays(timeSpan);
+                db.Recruitments.Add(recruiment);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        //
+        // GET: /CutomerRecruiment/ChooseSkill
+
+        public ActionResult ChooseSkill()
+        {
+            List<SkillInstance> skills = db.SkillInstances.ToList();
+            ViewBag.Skills = skills;
+            foreach (var item in skills)
+            {
+                if (item.SkillName.StartsWith("Language"))
+                {
+
+                }
+            }
+            return PartialView("_ChooseSkill");
+        }
+
+        //
+        // POST: /CustomerRecruiment/ChooseSkill
+
+        [HttpPost]
+        public ActionResult ChooseSkill(SkillReference skillRef)
+        {
+            Session["skillRef"] = skillRef;
+            return RedirectToAction("Post");
+        }
+
+        //
+        // GET: /CustomerRecruiment/ChooseMaid
+
+        public ActionResult ChooseMaid()
+        {
+            return PartialView("_ChooseMaid");
+        }
+
+        //
+        // POST: /CustomerRecruiment/ChooseMaid
+
+        [HttpPost]
+        public ActionResult ChooseMaid(SkillInstance skillInst)
+        {
+            return RedirectToAction("Post");
         }
 
     }

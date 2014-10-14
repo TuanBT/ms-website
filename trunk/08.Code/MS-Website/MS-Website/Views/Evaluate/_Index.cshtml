@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<MS_Website.Models.Comment>
 
-<div class="box-header ui-sortable-handle" style="cursor: move;">
+<div class="box-header" style="cursor: move;">
     <i class="fa fa-comments-o"></i>
     <h3 class="page-header">Bình luận</h3>
 </div>
+
 <div class="slimScrollDiv">
     <div class="box-body chat" id="chat-box">
         @foreach (var item in Model)
@@ -12,7 +13,9 @@
                 <img src="img/avatar.png" alt="user image" class="online">
                 <p class="message">
                     <a href="#" class="name">
-                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>2:15</small>
+                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>
+                            @String.Format("{0:d/M/yyyy}", item.PostTime)
+                        </small>
                         @item.CustomerId
                     </a>
                     @item.CommentContent
