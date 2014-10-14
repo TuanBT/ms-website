@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using MS_Website.Models;
 using Twilio;
@@ -14,7 +11,8 @@ namespace MS_Website.Controllers
     {
         //
         // GET: /Home/
-        MSEntities ms = new MSEntities();
+        private MSEntities _db = new MSEntities();
+
         public ActionResult Index()
         {
             //var acc = ms.Accounts.Select(a => a).ToArray();
@@ -22,13 +20,17 @@ namespace MS_Website.Controllers
             return View();
         }
 
+        public ActionResult Register()
+        {
+            return View("Register");
+        }
         public JsonResult GetJsonData()
         {
 
             /*var account = from a in ms.Accounts
                          select a;
            var abc = Json(account, JsonRequestBehavior.AllowGet);*/
-            var apply = from a in ms.Applies select a;
+            var apply = from a in _db.Applies select a;
 
             // Find your Account Sid and Auth Token at twilio.com/user/account
             string AccountSid = "AC439137c82934e09c6e8120d9ee085b2b";
@@ -43,13 +45,15 @@ namespace MS_Website.Controllers
                 // handle the error ...
             }
 
-            return Json(apply, JsonRequestBehavior.AllowGet); ;
+            return Json(apply, JsonRequestBehavior.AllowGet);
+            ;
         }
-        
+
         public ActionResult Login()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(Account acc)
@@ -78,6 +82,44 @@ namespace MS_Website.Controllers
         {
             Session.Abandon();
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult AddAccount(Account acc)
+        {
+            using (var _db=new MSEntities())
+            {
+                var newUser = _db.Accounts.Create();
+                newUser.Username = acc.Username;
+                newUser.Password = acc.Password;
+                newUser.Avatar = acc.Avatar;
+                newUser.Role = acc.Role;
+                newUser.Email = acc.Email;
+                newUser.Phone = acc.Phone;
+                newUser.FullName = acc.FullName;
+                newUser.JoinDate = DateTime.Now;
+                newUser.IsActive = true;
+                newUser.IsWebmaster = false;
+                _db.Accounts.Add(newUser);
+                _db.SaveChanges();
+                if (acc.Role.Equals("Customer"))
+                {
+                    var addedAcc = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                    var newCustomer = new Customer();
+                    newCustomer.AccountId = addedAcc.AccountId;
+                    newCustomer.Payment = 0;
+                    _db.Customers.Add(newCustomer);
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    var addedAcc = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                    var newMaid = new MaidMediator();
+                    newMaid.AccountId = addedAcc.AccountId;
+                    _db.MaidMediators.Add(newMaid);
+                    _db.SaveChanges();
+                }
+                return RedirectToAction("Index", "Register");
+            }
         }
     }
 }

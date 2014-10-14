@@ -52,7 +52,7 @@ namespace MS_Website.Controllers
                     _db.MaidMediators.Add(newMaid);
                     _db.SaveChanges();
                 }
-                return RedirectToAction("Index", "Register"); 
+                return RedirectToAction("Register", "Register"); 
             }
         }
     }
