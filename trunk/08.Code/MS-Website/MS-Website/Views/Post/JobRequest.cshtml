@@ -63,13 +63,7 @@
                                 </div>
                                 <div class="miRate">
                                     @* @{Html.RenderAction("Rate", "Evaluate");}*@
-                                    <div class="rate">
-                                        <span class="starRating1">
-                                            <span class="starRating2" style="width: @(ViewBag.MaidRating * 10)%"></span>
-                                            
-                                        </span>
-                                    </div>
-                                    <span class="ratingPoint">@ViewBag.MaidRating / 10 điểm</span>
+                                    @Html.Partial("_PartialStar",(int)ViewBag.MaidRating)
                                 </div>
                             </div>
                             <div class="iSkill">
