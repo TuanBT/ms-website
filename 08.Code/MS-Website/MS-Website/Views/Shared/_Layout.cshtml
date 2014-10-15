@@ -32,14 +32,7 @@
         </div>
         @RenderBody()
 
-        <div class="row footerRow">
-            <div class="footer">
-                <a class="footerLogo" href="#">
-                    <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100">
-                </a>
-                <p class="footerLegal">© 2014 Maid Service.</p>
-            </div>
-        </div>
+     @Html.Partial("_PartialFooter")
 
         @* @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)*@
