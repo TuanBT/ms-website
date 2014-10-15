@@ -143,6 +143,7 @@
     <Compile Include="Controllers\EvaluateController.cs" />
     <Compile Include="Controllers\Kmean.cs" />
     <Compile Include="Controllers\MaidMediatorController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -547,16 +548,6 @@
     <Content Include="Content\Image\Home\women2.png" />
     <Content Include="Content\Image\MS-Logo-white.png" />
     <Content Include="Content\Image\MS-Logo.png" />
-    <Content Include="Content\Image\Staff\1234590861_anh_the.jpg" />
-    <Content Include="Content\Image\Staff\anh-the.jpg" />
-    <Content Include="Content\Image\Staff\anh_the9112.jpg" />
-    <Content Include="Content\Image\Staff\dfd.jpg" />
-    <Content Include="Content\Image\Staff\gialonggroup.jpg" />
-    <Content Include="Content\Image\Staff\Hinh_3_x_4.JPG" />
-    <Content Include="Content\Image\Staff\images.jpg" />
-    <Content Include="Content\Image\Staff\nvt_6611652bdd9e5f6bf5572d0f2e15c36d_269583985.jpg" />
-    <Content Include="Content\Image\Staff\sic1375243254.JPG" />
-    <Content Include="Content\Image\Staff\tahotien.jpg" />
     <Content Include="Content\ionicons-1.5.2\.gitignore" />
     <Content Include="Content\ionicons-1.5.2\animation.html" />
     <Content Include="Content\ionicons-1.5.2\builder\cheatsheet\icon-row.html" />
@@ -1696,6 +1687,19 @@
     <Content Include="Content\Style\Signup\create-account.css" />
     <Content Include="Content\Style\Signup\globals.css" />
     <Content Include="Content\Style\Signup\signup.css" />
+    <Content Include="Content\TableJquery\css\jquery.dataTables.min.css" />
+    <Content Include="Content\TableJquery\images\back_disabled.png" />
+    <Content Include="Content\TableJquery\images\back_enabled.png" />
+    <Content Include="Content\TableJquery\images\back_enabled_hover.png" />
+    <Content Include="Content\TableJquery\images\forward_disabled.png" />
+    <Content Include="Content\TableJquery\images\forward_enabled.png" />
+    <Content Include="Content\TableJquery\images\forward_enabled_hover.png" />
+    <Content Include="Content\TableJquery\images\sort_asc.png" />
+    <Content Include="Content\TableJquery\images\sort_asc_disabled.png" />
+    <Content Include="Content\TableJquery\images\sort_both.png" />
+    <Content Include="Content\TableJquery\images\sort_desc.png" />
+    <Content Include="Content\TableJquery\images\sort_desc_disabled.png" />
+    <Content Include="Content\TableJquery\js\jquery.dataTables.min.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -1904,37 +1908,39 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\MaidMediator\JobRequest.cshtml" />
     <Content Include="Views\MaidMediator\MaidMediator.cshtml" />
     <Content Include="Views\MaidMediator\MaidProfile.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Views\Evaluate\_Index.cshtml" />
-    <Content Include="Views\Evaluate\_Post.cshtml" />
-    <Content Include="Views\Evaluate\_Rate.cshtml" />
     <Content Include="Views\Post\JobRequest.cshtml" />
-    <Content Include="Views\Shared\_CustomerLayout.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
-    <Content Include="Views\CustomerRecruiment\Post.cshtml" />
-    <Content Include="Views\CustomerRecruiment\_ChooseSkill.cshtml" />
-    <Content Include="Views\CustomerRecruiment\_ChooseMaid.cshtml" />
-    <Content Include="Views\Register\Index.cshtml" />
-    <Content Include="Views\Staff\Staff.cshtml" />
-    <Content Include="Views\Staff\MaidProfile.cshtml" />
+    <Content Include="Views\MaidMediator\PostRequest.cshtml" />
     <Content Include="Views\CustomerRecruiment\Create.cshtml" />
     <Content Include="Views\CustomerRecruiment\Details.cshtml" />
+    <Content Include="Views\CustomerRecruiment\Details2.cshtml" />
     <Content Include="Views\CustomerRecruiment\Index.cshtml" />
+    <Content Include="Views\CustomerRecruiment\Post.cshtml" />
+    <Content Include="Views\CustomerRecruiment\_ChooseMaid.cshtml" />
+    <Content Include="Views\CustomerRecruiment\_ChooseSkill.cshtml" />
     <Content Include="Views\CustomerRecruiment\_Details.cshtml" />
+    <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Evaluate\_Index.cshtml" />
     <Content Include="Views\Evaluate\_Post.cshtml" />
     <Content Include="Views\Evaluate\_Rate.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Views\Shared\_CustomerLayout2.cshtml" />
-    <Content Include="Views\Admin\Admin.cshtml" />
-    <Content Include="Views\Shared\_PartialAccount.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Shared\_CustomerLayout.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_CustomerLayout2.cshtml" />
+    <Content Include="Views\Shared\_PartialAccount.cshtml" />
+    <Content Include="Views\Shared\_PartialComment.cshtml" />
+    <Content Include="Views\Shared\_PartialRating.cshtml" />
+    <Content Include="Views\Shared\_PartialSearch.cshtml" />
+    <Content Include="Views\Staff\MaidProfile.cshtml" />
+    <Content Include="Views\Staff\Staff.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

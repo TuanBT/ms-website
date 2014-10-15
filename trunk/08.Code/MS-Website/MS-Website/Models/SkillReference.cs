@@ -24,13 +24,13 @@ namespace MS_Website.Models
         public Nullable<int> Gender { get; set; }
         public Nullable<int> Age { get; set; }
         public Nullable<int> LanguageEnglish { get; set; }
-        public Nullable<int> LanguageChina { get; set; }
+        public Nullable<int> LanguageChinese { get; set; }
         public Nullable<int> LanguageJapanese { get; set; }
         public Nullable<int> LanguageKorean { get; set; }
         public Nullable<int> Experience { get; set; }
         public Nullable<int> Hometown { get; set; }
         public Nullable<int> Address { get; set; }
-        public Nullable<int> Health { get; set; }
+        public Nullable<int> Married { get; set; }
         public Nullable<int> Stay { get; set; }
         public Nullable<int> Salary { get; set; }
         public Nullable<int> Work { get; set; }

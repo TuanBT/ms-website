@@ -47,9 +47,9 @@ namespace MS_Website.Controllers
                     double languageEnglishVl = languageEnglish != -1
                                          ? db.SkillInstances.FirstOrDefault(s => s.SkillId == languageEnglish).SkillNormallized
                                          : -1;
-                    int languageChina = skillRef.LanguageChina != null ? skillRef.LanguageChina.Value : -1;
-                    double languageChinaVl = languageChina != -1
-                                          ? db.SkillInstances.FirstOrDefault(s => s.SkillId == languageChina).SkillNormallized
+                    int LanguageChinese = skillRef.LanguageChinese != null ? skillRef.LanguageChinese.Value : -1;
+                    double LanguageChineseVl = LanguageChinese != -1
+                                          ? db.SkillInstances.FirstOrDefault(s => s.SkillId == LanguageChinese).SkillNormallized
                                           : 0;
                     int languageJapanese = skillRef.LanguageJapanese != null ? skillRef.LanguageJapanese.Value : -1;
                     double languageJapaneseVl = languageJapanese != -1
@@ -71,9 +71,9 @@ namespace MS_Website.Controllers
                     double addressVl = address != -1
                                           ? db.SkillInstances.FirstOrDefault(s => s.SkillId == address).SkillNormallized
                                           : 0;
-                    int health = skillRef.Health != null ? skillRef.Health.Value : -1;
-                    double healthVl = health != -1
-                                          ? db.SkillInstances.FirstOrDefault(s => s.SkillId == health).SkillNormallized
+                    int Married = skillRef.Married != null ? skillRef.Married.Value : -1;
+                    double MarriedVl = Married != -1
+                                          ? db.SkillInstances.FirstOrDefault(s => s.SkillId == Married).SkillNormallized
                                           : 0;
                     int stay = skillRef.Stay != null ? skillRef.Stay.Value : -1;
                     double stayVl = stay != -1
@@ -123,8 +123,8 @@ namespace MS_Website.Controllers
                     var kmeanData = new KmeanData
                     {
                         dataRowId = skillRef.SkillRefId,
-                        dataRow = new double[] { genderVl, ageVl, languageEnglishVl, languageChinaVl, languageJapaneseVl, languageKoreanVl, 
-                            experienceVl, hometownVl, addressVl, healthVl, stayVl, salaryVl, workVl, sickCareVl, oldCareVl, babySisterVl, disabilityCareVl, 
+                        dataRow = new double[] { genderVl, ageVl, languageEnglishVl, LanguageChineseVl, languageJapaneseVl, languageKoreanVl, 
+                            experienceVl, hometownVl, addressVl, MarriedVl, stayVl, salaryVl, workVl, sickCareVl, oldCareVl, babySisterVl, disabilityCareVl, 
                             bonsaiCareVl, cookingVl, washingVl, cleanHouseVl },
                         group = -1
                     };

@@ -198,7 +198,7 @@ namespace MS_Website.Controllers
                     }
                     if ((bool)maid.Chinese)
                     {
-                        skillRef.LanguageChina = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("LanguageChina")).SkillId;
+                        skillRef.LanguageChinese = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("LanguageChinese")).SkillId;
                     }
                     if ((bool)maid.Japanese)
                     {
