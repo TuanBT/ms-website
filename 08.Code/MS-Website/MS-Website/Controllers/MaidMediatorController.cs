@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using MS_Website.Models;
 
 namespace MS_Website.Controllers
@@ -17,22 +18,22 @@ namespace MS_Website.Controllers
         {
             using (var db = new MSEntities())
             {
-                if (Session["AccId"] == null)
+                if (Session["AccId"] != null)
                 {
-                    return RedirectToAction("Login", "Home");
+                    var accId = (int) Session["AccId"];
+                    var role = ((string) Session["Role"]).Trim();
+                    var account = db.Accounts.SingleOrDefault(a => a.AccountId == accId);
+                    if (role.Equals("MaidMediator"))
+                    {
+                        ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
+                        return View("MaidMediator", account);
+                    }
+                    if (role.Equals("Staff"))
+                    {
+                        ViewBag.MaidList = db.Maids.Where(m => m.Staff.Account.AccountId == accId).ToList();
+                    }
                 }
-                var accId = (int) Session["AccId"];
-                var role = ((string) Session["Role"]).Trim();
-                var account = db.Accounts.SingleOrDefault(a => a.AccountId == accId);
-                if (role.Equals("MaidMediator"))
-                {
-                    ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
-                }
-                else if (role.Equals("Staff"))
-                {
-                    ViewBag.MaidList = db.Maids.Where(m => m.Staff.Account.AccountId == accId).ToList();
-                }
-                return View("MaidMediator", account);
+                return RedirectToAction("Login", "Home");
             }
         }
 
@@ -59,14 +60,10 @@ namespace MS_Website.Controllers
                     var applJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.Status.Equals("Applied")).ToList();
                     var apprJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.Status.Equals("Approved")).ToList();
                     var expiredJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.Status.Equals("Expired")).ToList();
-                    var nAList = notApplJobList.Select(job => new JobRequestTemp(job.JobRequestId, job.SkillRefId, job.MaidMediatorId, job.StaffId, job.Status, job.PostTime, job.ExpiredTime, null, job.MaidId, job.Maid.MaidName, job.Maid.PersonalImage, job.Maid.Description, job.Maid.RateAvg, null, null, null)).ToList();
-                    var applList = (from job in applJobList let applTmp = db.Applies.SingleOrDefault(a => a.JobRequestId == job.JobRequestId) where applTmp != null let recruitTmp = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == applTmp.RecruitmentId) where recruitTmp != null select new JobRequestTemp(job.JobRequestId, job.SkillRefId, job.MaidMediatorId, job.StaffId, job.Status, job.PostTime, job.ExpiredTime, job.ApplyTimes, job.MaidId, job.Maid.MaidName, job.Maid.PersonalImage, job.Maid.Description, job.Maid.RateAvg, recruitTmp.CustomerId, recruitTmp.Customer.Account.FullName, null)).ToList();
-                    var apprList = (from job in apprJobList let apprTmp = db.Applies.SingleOrDefault(a => a.JobRequestId == job.JobRequestId) where apprTmp != null let recruitTmp = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apprTmp.RecruitmentId) where recruitTmp != null select new JobRequestTemp(job.JobRequestId, job.SkillRefId, job.MaidMediatorId, job.StaffId, job.Status, job.PostTime, job.ExpiredTime, job.ApplyTimes, job.MaidId, job.Maid.MaidName, job.Maid.PersonalImage, job.Maid.Description, job.Maid.RateAvg, recruitTmp.CustomerId, recruitTmp.Customer.Account.FullName, null)).ToList();
-                    var eList = expiredJobList.Select(job => new JobRequestTemp(job.JobRequestId, job.SkillRefId, job.MaidMediatorId, job.StaffId, job.Status, job.PostTime, job.ExpiredTime, null, job.MaidId, job.Maid.MaidName, job.Maid.PersonalImage, job.Maid.Description, job.Maid.RateAvg, null, null, null)).ToList();
-                    ViewBag.NotApplList = nAList;
-                    ViewBag.ApplList = applList;
-                    ViewBag.ApprList = apprList;
-                    ViewBag.ExpiredList = eList;
+                    ViewBag.NotApplList = notApplJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null)).ToList();
+                    ViewBag.ApplList = (from jobRequest in applJobList let apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId) let recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId) select new JobRequestTemp(jobRequest, maid, recruit, null)).ToList();
+                    ViewBag.ApprList = (from jobRequest in apprJobList let apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId) let recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId) select new JobRequestTemp(jobRequest, maid, recruit, null)).ToList();
+                    ViewBag.ExpiredList = expiredJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null)).ToList();
                     if (maid.MaidMediatorId != null)
                     {
                         var mUsername = maid.MaidMediator.Account.Username;

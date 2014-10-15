@@ -13,37 +13,34 @@ namespace MS_Website.Controllers
         //
         // GET: /JobRequest/
 
-        public ActionResult Index(int jobId)
+        public ActionResult GetJobRequest(int jobId)
         {
             using (var db = new MSEntities())
             {
-                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);                
                 if (job != null)
                 {
+                    var maid = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId);
+                    ViewBag.MaidImg = maid.PersonalImage;
                     var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == job.SkillRefId);
                     var skillList = new List<string>();
                     if (skillRef != null)
                     {
                         LoadSkillList(skillRef, skillList, db);
                     }
-                    var recSkillRefList =
-                        db.SkillReferences.Where(sr => sr.Type == 1 && sr.Group == job.SkillReference.Group).ToList();
-                    var recRecruitList = recSkillRefList.Select(skillReference => db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillReference.SkillRefId)).Select(recruitTmp => new RecruitmentTemp(recruitTmp.RecruitmentId, recruitTmp.SkillRefId, recruitTmp.CustomerId, recruitTmp.Status, recruitTmp.PostTime, recruitTmp.ExpiredTime, recruitTmp.Customer.Account.Avatar, recruitTmp.Customer.Account.FullName, null)).ToList();
-                    ViewBag.Recommend = recRecruitList;
                     ViewBag.MaidRating = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId).RateAvg;
                     if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
                     {
-                        var recruitTmp = db.Applies.SingleOrDefault(a => a.JobRequestId == job.JobRequestId);
-                        if (recruitTmp != null)
-                        {
-                            ViewBag.CusAva = recruitTmp.Recruitment.Customer.Account.Avatar;
-                            var jobRequestTmp = new JobRequestTemp(job.JobRequestId, job.SkillRefId, job.MaidMediatorId, job.StaffId, job.Status, job.PostTime, job.ExpiredTime, job.ApplyTimes, job.MaidId, job.Maid.MaidName, job.Maid.PersonalImage, job.Maid.Description, job.Maid.RateAvg, recruitTmp.Recruitment.CustomerId, recruitTmp.Recruitment.Customer.Account.FullName, skillList);
-                            return View("JobRequest", jobRequestTmp);
-                        }
+                        var apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobId);
+                        var recruitment = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId);
+                        ViewBag.CustImg =
+                            db.Accounts.SingleOrDefault(a => a.AccountId == recruitment.CustomerId).Avatar;
+                        var jobRequestTmp = new JobRequestTemp(job, maid, recruitment, skillList);
+                        return View("JobRequest", jobRequestTmp);
                     }
                     else
                     {
-                        var jobRequestTmp = new JobRequestTemp(job.JobRequestId, job.SkillRefId, job.MaidMediatorId, job.StaffId, job.Status, job.PostTime, job.ExpiredTime, job.ApplyTimes, job.MaidId, job.Maid.MaidName, job.Maid.PersonalImage, job.Maid.Description, job.Maid.RateAvg, null, null, skillList);
+                        var jobRequestTmp = new JobRequestTemp(job, maid, null, skillList);
                         return View("JobRequest", jobRequestTmp);
                     }
                 }
@@ -51,7 +48,60 @@ namespace MS_Website.Controllers
             return View("JobRequest");
         }
 
-        public static List<string> LoadSkillList(SkillReference skillRef, List<string>skillList, MSEntities db)
+        public ActionResult GetRecruitment(int recruitmentId)
+        {
+            using (var db = new MSEntities())
+            {
+                var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
+                if (recruitment != null)
+                {
+                    var customer = db.Customers.SingleOrDefault(m => m.AccountId == recruitment.CustomerId);
+                    ViewBag.CustImg = customer.Account.Avatar;
+                    var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId);
+                    var skillList = new List<string>();
+                    var recSkillRefList = new List<SkillReference>();
+                    var recJobReqList = new List<JobRequestTemp>();
+                    if (skillRef != null)
+                    {
+                        LoadSkillList(skillRef, skillList, db);
+                        recSkillRefList =
+                            db.SkillReferences.Where(sr => sr.Type == 0 && sr.Group == skillRef.Group).ToList();
+                        foreach (var skillReference in recSkillRefList)
+                        {
+                            var jobRequest =
+                                db.JobRequests.SingleOrDefault(j => j.SkillRefId == skillReference.SkillRefId && j.Status.Equals("Waiting"));
+                            if (jobRequest != null)
+                            {
+                                var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
+                                var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null);
+                                recJobReqList.Add(jobRequestTmp);
+                            }
+                        }
+                        if (recJobReqList.Any())
+                        {
+                            ViewBag.Recommend = recJobReqList;
+                        }
+                    }
+                    if (recruitment.Status.Equals("Applied") || recruitment.Status.Equals("Approved"))
+                    {
+                        var apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitmentId);
+                        var jobRequest = db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId);
+                        ViewBag.MaidImg =
+                            db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId).PersonalImage;
+                        var recruitmentTmp = new RecruitmentTemp(recruitment, customer, jobRequest, skillList);
+                        return View("Recruitment", recruitmentTmp);
+                    }
+                    else
+                    {
+                        var recruitmentTmp = new RecruitmentTemp(recruitment, customer, null, skillList);
+                        return View("Recruitment", recruitmentTmp);
+                    }
+                }
+            }
+            return View("JobRequest");
+        }
+
+        public static List<string> LoadSkillList(SkillReference skillRef, List<string> skillList, MSEntities db)
         {
             string skillStr;
             if (skillRef.Gender != null)
