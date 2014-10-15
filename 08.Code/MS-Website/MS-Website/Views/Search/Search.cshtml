@@ -1,11 +1,14 @@
 ﻿@{
-    ViewBag.Title = "Tìm kiếm";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/Style/Home.css" rel="stylesheet">
 
-@*<div class="Menu">
+<div class="Menu">
     <div class="rows">
+        <div class="searchOnPage">
+            @Html.Partial("_PartialSearch")
+        </div>
         <div class="hMenu">
             <div class="hFatherMenu">
                 <ul class="hmeTabList">
@@ -29,19 +32,10 @@
             </li>
         </ul>
     </div>
-</div>*@
+</div>
 
 <div id="body">
-    <div class="rows">
-        <div class="row" style="padding: 20px">
-            <div class="col-md-9">
-                 <h1 style="color: #47c3d3;font-size: 22px;margin-bottom: 0;">Kết quả tìm kiếm</h1>
-                <p>Có <span>10</span> kết quả</p>
-            </div>
-            <div class="col-md-3">
-                
-            </div>
-        </div>
+    <div style="margin: 0 auto; width: 820px">
         <div class="row">
             <div class="col-md-3">
                 <div id="bodyLeft">
@@ -55,8 +49,8 @@
                                     Giới tính
                                 </div>
                                 <div class="scContent">
-                                    <input type="radio" name="gender" value="Nam" onclick="search()" @(ViewBag.Gender != null && ViewBag.Gender.Equals("Nam") ? "checked" : "true")/>Nam<br />
-                                    <input type="radio" name="gender" value="Nữ" onclick="search()" @(ViewBag.Gender != null && ViewBag.Gender.Equals("Nữ") ? "checked" : "true")/>Nữ<br />
+                                    <input type="radio" name="gender" value="Nam" onclick="search()" @(ViewBag.Gender != null && ViewBag.Gender.Equals("Nam") ? "checked" : "")/>Nam<br />
+                                    <input type="radio" name="gender" value="Nữ" onclick="search()" @(ViewBag.Gender != null && ViewBag.Gender.Equals("Nữ") ? "checked" : "")/>Nữ<br />
                                     <input type="radio" name="gender" value="all" onclick="search()" @(ViewBag.Gender != null && ViewBag.Gender.Equals("all") ? "checked" : "")/>Tất cả
                                 </div>
                             </div>
@@ -67,9 +61,9 @@
                                     Tuổi
                                 </div>
                                 <div class="scContent">
-                                    <input type="radio" name="age" value="15-20" onclick="search()" @(ViewBag.Age != null && ViewBag.Age.Equals("15-20") ? "checked" : "true")/>15-20<br />
-                                    <input type="radio" name="age" value="21-30" onclick="search()" @(ViewBag.Age != null && ViewBag.Age.Equals("21-30") ? "checked" : "true")/>21-30<br />
-                                    <input type="radio" name="age" value="31-40" onclick="search()" @(ViewBag.Age != null && ViewBag.Age.Equals("31-40") ? "checked" : "true")/>31-40<br />
+                                    <input type="radio" name="age" value="15-20" onclick="search()" @(ViewBag.Age != null && ViewBag.Age.Equals("15-20") ? "checked" : "")/>15-20<br />
+                                    <input type="radio" name="age" value="21-30" onclick="search()" @(ViewBag.Age != null && ViewBag.Age.Equals("21-30") ? "checked" : "")/>21-30<br />
+                                    <input type="radio" name="age" value="31-40" onclick="search()" @(ViewBag.Age != null && ViewBag.Age.Equals("31-40") ? "checked" : "")/>31-40<br />
                                     <input type="radio" name="age" value="all" onclick="search()" @(ViewBag.Age != null && ViewBag.Age.Equals("all") ? "checked" : "")/>Tất cả
                                 </div>
                             </div>
@@ -94,22 +88,22 @@
                                 </div>
                                 <div class="scContent">
                                     @foreach (var skill in ViewBag.SkillList)
-                                    {
-                                        var isChecked = false;
-                                        if (ViewBag.CheckedList != null)
                                         {
-                                            foreach (var check in ViewBag.CheckedList)
+                                            var isChecked = false;
+                                            if (ViewBag.CheckedList != null)
                                             {
-                                                if (!check.Equals(skill.SkillNameVietnam))
+                                                foreach (var check in ViewBag.CheckedList)
                                                 {
-                                                    continue;
+                                                    if (!check.Equals(skill.SkillNameVietnam))
+                                                    {
+                                                        continue;
+                                                    }
+                                                    isChecked = true;
+                                                    break;
                                                 }
-                                                isChecked = true;
-                                                break;
                                             }
-                                        }
-                                        <input type="checkbox" name="@skill.SkillName" value="@skill.SkillNameVietnam" onclick="search()" @(isChecked ? "checked" : "")/>
-                                        @skill.SkillNameVietnam<br />
+                                            <input type="checkbox" name="@skill.SkillName" value="@skill.SkillNameVietnam" onclick="search()" @(isChecked ? "checked" : "")/>
+                                    @skill.SkillNameVietnam<br />
                                     }
                                 </div>
                             </div>
@@ -139,7 +133,7 @@
                                 <span>
                                     <strong>MS - Tuyển dụng lưu ý:</strong><br />
                                     Tài khoản tuyển dụng không đăng quá 05 tin cho cùng một chuyên mục. 
-                                    Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền tổng đài, tin nhắn, đào tạo kỹ năng... <a href="#">Xem thêm</a>
+                            Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền tổng đài, tin nhắn, đào tạo kỹ năng... <a href="#">Xem thêm</a>
                                 </span>
                             </div>
                         </div>
