@@ -1,6 +1,6 @@
 ﻿@using MS_Website.Models
 @{
-    ViewBag.Title = "Yêu cầu công việc";
+    ViewBag.Title = "Maid Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -139,10 +139,6 @@
                                         </button>
                                     </div>
                                     <ul id="chosenSkills">
-                                        <li class="childSkill"><span class="skillText">Giới tính - Nam<span class="glyphicon glyphicon-remove"></span></span>
-                                        </li>
-                                        <li class="childSkill"><span class="skillText">Giới tính - Nam<span class="glyphicon glyphicon-remove"></span></span>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -259,7 +255,7 @@
                 </div>                
                 <div>
                     <input id="chosenMaid" type="hidden" name="maidId" />
-                    <button class="btn btn-success btn-lg" onclick="addRequest()">Đăng yêu cầu</button>
+                    <button class="btn btn-success btn-lg">Đăng yêu cầu</button>
                 </div>
             }
         </div>
@@ -301,7 +297,7 @@
             }
         }
         for (var i = 0; i < chosenList.length; i++) {
-            chosenSkills += "<li class='childSkill'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></li>";
+            chosenSkills += "<li class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
         }
         document.getElementById("chosenSkills").innerHTML = chosenSkills;
     }
@@ -311,7 +307,7 @@
             chosenList.splice(skillNo, 1);
             chosenSkills = "";
             for (var i = 0; i < chosenList.length; i++) {
-                chosenSkills += "<li class='childSkill'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></li>";
+                chosenSkills += "<li class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
             }
             document.getElementById("chosenSkills").innerHTML = chosenSkills;
         }
