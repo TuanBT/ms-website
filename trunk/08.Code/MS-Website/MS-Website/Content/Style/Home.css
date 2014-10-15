@@ -364,8 +364,11 @@ ul {
 
 .image {
     width: 100px;
-    height: 100px;
-    background: #ddd;
+background: #FFF;
+border-radius: 5px;
+}
+
+.image img{
     border-radius: 5px;
 }
 
@@ -438,6 +441,10 @@ background-color: #5cb85c;
 
 .childSkill {
     min-width: 150px;
+    display: inline-block;
+}
+
+.childSkillNear {
     display: inline-block;
 }
 
