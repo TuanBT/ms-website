@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Người giúp việc";
+    ViewBag.Title = "Maid Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -78,21 +78,21 @@
                                 <ul class="bFreeListWork">
                                     @foreach (var job in ViewBag.NotApplList)
                                     {
-                                        <li id="@job.JobRequestId" onclick="chooseJob(@job.JobRequestId, 2)">
+                                        <li id="@job.Job.JobRequestId" onclick="chooseJob(@job.Job.JobRequestId, 2)">
                                             <div class="blImage">
-                                                <img src="@job.MaidImg" alt="Maid sercive" height="100%">
+                                                <img src="~/Content/Image/MS-Logo.png" alt="Maid service" height="100%">
                                             </div>
                                             <div class="blDetail">
                                                 <div class="blName">
-                                                    <a href="@Url.Action("Index", "Post", new { jobId = job.JobRequestId })">Mã yêu cầu @job.JobRequestId</a>
+                                                    <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
-                                                        class="blTimeText">6:00 30/08/2014</span>
+                                                        class="blTimeText">@job.Job.PostTime</span>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Tới: </span><span
-                                                        class="blTimeText">6:00 30/08/2014</span>
+                                                        class="blTimeText">@job.Job.ExpiredTime</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -135,29 +135,29 @@
                                         <li>
                                             <div class="bAWork">
                                                 <div class="blImage">
-                                                    <img src="@job.MaidImg" alt="Maid sercive" height="100%">
+                                                    <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="#">Mã yêu cầu @job.JobRequestId</a>
+                                                        <a href="#">@job.Job.Title</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Đăng: </span><span
-                                                            class="blTimeText">6:00 30/08/2014</span>
+                                                            class="blTimeText">@job.Job.PostTime</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="bACus">
                                                 <div class="blImage">
-                                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                    <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="#">@job.CustomerName</a>
+                                                        <a href="#">@job.Recruitment.Title</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Nhận: </span><span
-                                                            class="blTimeText">6:00 30/08/2014</span>
+                                                            class="blTimeText">@job.Job.ApplyTimes</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,29 +193,29 @@
                                         <li>
                                             <div class="bAWork">
                                                 <div class="blImage">
-                                                    <img src="@job.MaidImg" alt="Maid sercive" height="100%">
+                                                    <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="#">Mã yêu cầu @job.JobRequestId</a>
+                                                        <a href="#">@job.Job.Title</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Đăng: </span><span
-                                                            class="blTimeText">6:00 30/08/2014</span>
+                                                            class="blTimeText">@job.Job.PostTime</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="bACus">
                                                 <div class="blImage">
-                                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                    <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="#">Mã yêu cầu @job.JobRequestId</a>
+                                                        <a href="#">@job.Recruitment.Title</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Nhận: </span><span
-                                                            class="blTimeText">6:00 30/08/2014</span>
+                                                            class="blTimeText">@job.Job.ApplyTimes</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,21 +240,21 @@
                                 <ul class="bexpiredListWork">
                                     @foreach (var job in ViewBag.ExpiredList)
                                     {
-                                        <li id="@job.JobRequestId" onclick="chooseJob(@job.JobRequestId, 3)">
+                                        <li id="@job.Job.JobRequestId" onclick="chooseJob(@job.Job.JobRequestId, 3)">
                                             <div class="blImage">
-                                                <img src="@job.MaidImg" alt="Maid service" height="100%">
+                                                <img src="~/Content/Image/MS-Logo.png" alt="Maid service" height="100%">
                                             </div>
                                             <div class="blDetail">
                                                 <div class="blName">
-                                                    <a href="@Url.Action("Index", "Post", new { jobId = job.JobRequestId })">Mã yêu cầu @job.JobRequestId</a>
+                                                    <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
-                                                        class="blTimeText">6:00 30/08/2014</span>
+                                                        class="blTimeText">@job.Job.PostTime</span>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Tới: </span><span
-                                                        class="blTimeText">6:00 30/08/2014</span>
+                                                        class="blTimeText">@job.Job.ExpiredTime</span>
                                                 </div>
                                             </div>
                                         </li>
