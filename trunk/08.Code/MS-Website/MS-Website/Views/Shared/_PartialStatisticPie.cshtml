@@ -1,0 +1,25 @@
+﻿<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Yêu cầu', 'Yêu cầu'],
+            ['Đang chờ',2],
+            ['Đã nhận', 1],
+            ['Đã phản hồi', 2],
+            ['Hết hạn', 3]
+        ]);
+
+        var options = {
+            title: ''
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+<div id="piechart" style="width: 900px;height: 500px;margin-left: -126px;margin-top: -14px;position: relative;"></div>

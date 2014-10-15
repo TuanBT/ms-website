@@ -1,6 +1,7 @@
 ﻿/*header*/
 .headerPage {
-    background: #00AEEC;
+    /*background: #00AEEC;s*/
+    background: #7bd454;
     /*margin-bottom: 30px;
     min-width: 960px;*/
 }
@@ -122,7 +123,7 @@
         vertical-align: bottom;
         position: relative;
         background: 0;
-        color: #00AEEC;
+        color: #7bd454;
         padding: 0;
         margin: 0;
     }
@@ -142,16 +143,16 @@
 
     .hefaContent.iscurent {
         background: #fff;
-        color: #0093F0;
+        color: #7bd454;
     }
 
         .hefaContent.iscurent:hover {
             background: #fff;
-            color: #0093F0;
+            color: #7bd454;
         }
 
     .hefaContent:hover {
-        background: #33BEF0;
+        background: rgba(255, 255, 255, 0.2);
         text-decoration: none;
         color: #fff;
     }
@@ -1114,7 +1115,8 @@ border-radius: 5px;
 }
 
 .Menu {
-    background: #00AEEC;
+    /*background: #00AEEC;*/
+    background: #7bd454;
     margin-bottom: 30px;
     min-width: 960px;
 }
@@ -1184,7 +1186,33 @@ border-radius: 5px;
 }
 
 .searchOnPage {
-    float: right;
-    margin-top: -9px;
-    margin-right: 8px;
+   float: left;
+margin-top: 23px;
+margin-left: 38px;
+}
+
+.buttonSearch {
+    background: #477b20;
+border: 1px solid #477b20;
+padding: 0px;
+}
+
+.buttonSearch:hover {
+    background: #599B28;
+    border: 1px solid #599B28;
+}
+
+.buttonSearchLink {
+    color: white;
+text-decoration: none;
+}
+
+.buttonSearchLink:hover{
+    color: white;
+    text-decoration: none;
+}
+
+.buttonSearchLink:focus{
+    color: white;
+    text-decoration: none;
 }
