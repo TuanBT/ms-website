@@ -1,0 +1,257 @@
+﻿@{
+    ViewBag.Title = "Recruitment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="Menu">
+    <div class="rows">
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    <li>
+                        <a href="#" class="hefaContent iscurent">Find Work</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Find Work</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li class="iscurent">
+                <a href="#" class="hChContent">Job Applications</a>
+            </li>
+            <li class>
+                <a href="#" class="hChContent">Job Applications</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="leftInfo">
+                    <div class="mainInfo">
+                        <div class="miPic">
+                            <img src="@ViewBag.CustImg" alt="Maid sercive" height="100%">
+                        </div>
+
+                        <div class="miButton">
+                            <button type="button" class="btn btn-info">Nhận</button>
+                            <button type="button" class="btn btn-danger">Hủy</button>
+                        </div>
+                        <div class="mmiDetail">
+                            <div class="iStatus">
+                                <div class="iTitle">
+                                    Tình Trạng:
+                                </div>
+                                <span class="label label-default">@Model.Recruitment.Status</span>
+                                <span class="iStatusText">Bởi</span>
+
+                                <div class="iStatusPic">
+                                    <a href="#">
+                                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%"></a>
+                                </div>
+                            </div>
+                            <div class="iSkill">
+                                <div class="iTitle">
+                                    Các kỹ năng:
+                                </div>
+                                <div class="iListKill">
+                                    <div class="skill">
+                                        <ul>
+                                            @foreach (var skill in Model.SkillList)
+                                            {
+                                                <li class="childSkill">
+                                                    <span class="skillText">@skill</span>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @if (ViewBag.Recommend != null)
+                    {
+                        <div class="suggestCus">
+                            <div class="suCuHeader">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="suTitle">
+                                            Những việc có thể hợp
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="suNumber">
+                                            <span id="currPage">1</span>/5
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lisuPre">
+                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack()"></span>
+                            </div>
+                            <div class="lisuNex">
+                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext()"></span>
+                            </div>
+                            <input id="currPos" type="hidden" value="1" />
+                            <ul class="listSuggestCus">
+                                @{
+                        var counter = 0;
+                                }
+                                @foreach (var job in ViewBag.Recommend)
+                                {
+                                    <li id="@counter" style="display: @(counter > 1 ? "none" : "");">
+                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">
+                                            <span class="listSuCuImage">
+                                                <img src="@job.Maid.PersonalImage" alt="Maid sercive" height="100%">
+                                            </span>
+                                            <span class="listSuCuDetail">
+                                                <span class="liCuName">@job.Maid.MaidName
+                                                </span>
+                                                <span class="liCuPostTime">Đăng: @job.Job.PostTime
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    counter++;
+                                }
+                            </ul>
+                            <input id="lastPos" type="hidden" value="@(counter - 1)"/>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rightInfo">
+                    <ul class="riDetail">
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Đăng
+                            </div>
+                            <div class="rideroContent">
+                                <strong>30/08/2012
+                                </strong>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="riManager">
+                        <div class="rimaTitle">
+                            Những yêu cầu giống
+                        </div>
+                        <ul class="rimaListSameJobRequest">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="jrImage">
+                                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="jrDetail">
+                                            <div class="jrMaidFullname">
+                                                <a href="#">Customer name</a>
+                                            </div>
+                                            <div class="blTime">
+                                                <span class="blTimeTitle">Đăng: </span><span
+                                                    class="blTimeText">6:00 30/08/2014</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="jrImage">
+                                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="jrDetail">
+                                            <div class="jrMaidFullname">
+                                                <a href="#">Customer name</a>
+                                            </div>
+                                            <div class="blTime">
+                                                <span class="blTimeTitle">Đăng: </span><span
+                                                    class="blTimeText">6:00 30/08/2014</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="jrImage">
+                                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="jrDetail">
+                                            <div class="jrMaidFullname">
+                                                <a href="#">Customer name</a>
+                                            </div>
+                                            <div class="blTime">
+                                                <span class="blTimeTitle">Đăng: </span><span
+                                                    class="blTimeText">6:00 30/08/2014</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function loadNext() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        var lastPos = parseInt(document.getElementById("lastPos").getAttribute("value"));
+        if (currPos < lastPos) {
+            var currPage = parseInt(document.getElementById("currPage").innerHTML) + 1;
+            document.getElementById("currPage").innerHTML = currPage;
+            if (document.getElementById(currPos) != null) {
+                document.getElementById(currPos).setAttribute("style", "display: none;");
+            }
+            if (document.getElementById(currPos - 1) != null) {
+                document.getElementById(currPos - 1).setAttribute("style", "display: none;");
+            }
+            if (document.getElementById(currPos + 1) != null) {
+                document.getElementById(currPos + 1).setAttribute("style", "");
+            }
+            if (document.getElementById(currPos + 2) != null) {
+                document.getElementById(currPos + 2).setAttribute("style", "");
+            }
+            document.getElementById("currPos").setAttribute("value", currPos + 2);
+        }
+    }
+
+    function loadBack() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        if (currPos - 2 > 0) {
+            var currPage = parseInt(document.getElementById("currPage").innerHTML) - 1;
+            document.getElementById("currPage").innerHTML = currPage;
+            if (document.getElementById(currPos) != null) {
+                document.getElementById(currPos).setAttribute("style", "display: none;");
+            }
+            if (document.getElementById(currPos - 1) != null) {
+                document.getElementById(currPos - 1).setAttribute("style", "display: none;");
+            }
+            if (document.getElementById(currPos - 2) != null) {
+                document.getElementById(currPos - 2).setAttribute("style", "");
+            }
+            if (document.getElementById(currPos - 3) != null) {
+                document.getElementById(currPos - 3).setAttribute("style", "");
+            }
+            document.getElementById("currPos").setAttribute("value", currPos - 2);
+        }
+    }
+</script>

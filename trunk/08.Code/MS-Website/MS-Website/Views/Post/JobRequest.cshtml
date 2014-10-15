@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Yêu cầu công việc";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -36,7 +36,7 @@
                 <div class="leftInfo">
                     <div class="mainInfo">
                         <div class="miPic">
-                            <img src="@Model.MaidImg" alt="Maid sercive" height="100%">
+                            <img src="@ViewBag.MaidImg" alt="Maid sercive" height="100%">
                         </div>
                         <div class="miButton">
                             <button type="button" class="btn btn-info">Thuê</button>
@@ -47,13 +47,13 @@
                                 <div class="iTitle">
                                     Tình Trạng:
                                 </div>
-                                <span class="label label-default">@Model.Status</span>
-                                @if (Model.Status == "Applied" || Model.Status == "Approved")
+                                <span class="label label-default">@Model.Job.Status</span>
+                                @if (Model.Job.Status == "Applied" || Model.Job.Status == "Approved")
                                 {
                                     <span class="iStatusText">Bởi</span>
                                     <div class="iStatusPic">
                                         <a href="#">
-                                            <img src="@ViewBag.CusAva" height="100%"></a>
+                                            <img src="@ViewBag.CustImg" height="100%"></a>
                                     </div>
                                 }
                             </div>
@@ -63,7 +63,13 @@
                                 </div>
                                 <div class="miRate">
                                     @* @{Html.RenderAction("Rate", "Evaluate");}*@
-                                    @Html.Partial("_PartialStar",(int)ViewBag.MaidRating)
+                                    <div class="rate">
+                                        <span class="starRating1">
+                                            <span class="starRating2" style="width: @(ViewBag.MaidRating * 10)%"></span>
+                                            
+                                        </span>
+                                    </div>
+                                    <span class="ratingPoint">@ViewBag.MaidRating / 10 điểm</span>
                                 </div>
                             </div>
                             <div class="iSkill">
@@ -97,53 +103,6 @@
                         </div>
                     </div>
                    @* @{Html.RenderAction("Post", "Evaluate");}*@
-
-                    <div class="suggestCus">
-                        <div class="suCuHeader">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="suTitle">
-                                        Những việc có thể hợp
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="suNumber">
-                                        <span id="currPage">1</span>/5
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="lisuPre">
-                            <span class="glyphicon glyphicon-chevron-left" onclick="loadBack()"></span>
-                        </div>
-                        <div class="lisuNex">
-                            <span class="glyphicon glyphicon-chevron-right" onclick="loadNext()"></span>
-                        </div>
-                        <input id="currPos" type="hidden" value="1"/>
-                        <ul class="listSuggestCus">
-                            @{
-                                var counter = 0;
-                            }
-                            @foreach (var recruit in ViewBag.Recommend)
-                            {
-                                <li id="@counter" style="display: @(counter > 1 ? "none" : "");">
-                                    <a href="#">
-                                        <span class="listSuCuImage">
-                                            <img src="@recruit.CustImg" alt="Maid sercive" height="100%">
-                                        </span>
-                                        <span class="listSuCuDetail">
-                                            <span class="liCuName">@recruit.CustomerName
-                                            </span>
-                                            <span class="liCuPostTime">Đăng: @recruit.PostTime
-                                            </span>
-                                        </span>
-                                    </a>
-                                </li>
-                                counter++;                                
-                            }
-                        </ul>
-                        <input id="lastPos" type="hidden" value="@(counter - 1)"/>
-                    </div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -217,31 +176,4 @@
         </div>
     </div>
 </div>
-<script>
-    function loadNext() {
-        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
-        var lastPos = parseInt(document.getElementById("lastPos").getAttribute("value"));
-        if (currPos < lastPos) {
-            var currPage = parseInt(document.getElementById("currPage").innerHTML) + 1;
-            document.getElementById("currPage").innerHTML = currPage;
-            document.getElementById(currPos).setAttribute("style", "display: none;");
-            document.getElementById(currPos - 1).setAttribute("style", "display: none;");
-            document.getElementById(currPos + 1).setAttribute("style", "");
-            document.getElementById(currPos + 2).setAttribute("style", "");
-            document.getElementById("currPos").setAttribute("value", currPos + 2);
-        }
-    }
-    
-    function loadBack() {
-        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
-        if (currPos - 2 > 0) {
-            var currPage = parseInt(document.getElementById("currPage").innerHTML) - 1;
-            document.getElementById("currPage").innerHTML = currPage;
-            document.getElementById(currPos).setAttribute("style", "display: none;");
-            document.getElementById(currPos - 1).setAttribute("style", "display: none;");
-            document.getElementById(currPos - 2).setAttribute("style", "");
-            document.getElementById(currPos - 3).setAttribute("style", "");
-            document.getElementById("currPos").setAttribute("value", currPos - 2);
-        }
-    }
-</script>
+
