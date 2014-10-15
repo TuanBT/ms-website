@@ -1937,6 +1937,12 @@
     <Content Include="Views\Shared\_PartialSearch.cshtml" />
     <Content Include="Views\Staff\MaidProfile.cshtml" />
     <Content Include="Views\Staff\Staff.cshtml" />
+    <Content Include="Views\Shared\_PartialFooter.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_PartialStatisticPie.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

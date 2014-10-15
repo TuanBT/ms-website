@@ -14,7 +14,7 @@
     <link href="~/Content/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .header {
-            background: #28b7ed;
+            background: #7bd454;
             line-height: 80px;
             height: 80px;
         }
@@ -96,7 +96,7 @@
         }
 
         body:before {
-            background: #28b7ed;
+            background: #7bd454;
             content: "";
             height: 200px;
             width: 100%;
@@ -141,7 +141,7 @@
         }
 
         .RememberMe {
-            float: right;
+            float: left;
             margin-top: 5px;
         }
 
@@ -187,17 +187,18 @@
                 <div id="textBlank"></div>
                 @Html.PasswordFor(a => a.Password, new { @id = "txtPassword", @class = "form-control input-lg text", @placeholder = "Mật khẩu", maxlength = 1000 })
                 <div id="passwordBlank"></div><font color="red">@ViewBag.Error</font><br/>
-                    <button id="btnLogin" type="submit" class="btn btn-info" name="Login">Đăng nhập</button>
-                    <label class="RememberMe">
-                        <input type="hidden" name="remember_me" value="0">
-                        <input type="checkbox" name="remember_me" id="remember_me" value="1">
-                        Ghi nhớ cho lần sau
-                    </label>
+                    
+                <label class="RememberMe">
+                    @*<input type="hidden" name="remember_me" value="0">
+                        <input type="checkbox" name="remember_me" id="remember_me" value="1">*@
+                    Dịch vụ người giúp việc
+                </label>
+                <button id="btnLogin" type="submit" class="btn btn-success" name="Login" style="float:right">Đăng nhập</button>
                 
                 <input type="hidden" name="ioBB" id="ioBB">
-                <div class="ForgotLinks">
+                @*<div class="ForgotLinks">
                     <a href="#">Quên mật khẩu?</a>
-                </div>
+                </div>*@
             }
         </div>
     </div>

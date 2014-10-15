@@ -34,7 +34,7 @@ ul {
     height: 100%;
     /*width: 30%;*/
     margin-left: 20px;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .siteLinks {
@@ -184,7 +184,7 @@ ul {
 
 .searchInput {
     border-radius: 5px;
-    height: 48px;
+    height: 37px;
     width: 200px !important;
 }
 
