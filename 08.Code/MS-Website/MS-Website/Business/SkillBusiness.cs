@@ -60,9 +60,9 @@ namespace MS_Website.Business
                             skillList.Add(skillStr);
                         }
                     }
-                    if (skillRef.LanguageChina != null)
+                    if (skillRef.LanguageChinese != null)
                     {
-                        skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.LanguageChina);
+                        skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.LanguageChinese);
                         if (skill != null)
                         {
                             skillStr = skill.SkillNameVietnam;
@@ -138,9 +138,9 @@ namespace MS_Website.Business
                             skillList.Add(skillStr);
                         }
                     }
-                    if (skillRef.Health != null)
+                    if (skillRef.Married != null)
                     {
-                        skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.Health);
+                        skill = db.SkillInstances.SingleOrDefault(s => s.SkillId == skillRef.Married);
                         if (skill != null)
                         {
                             skillStr = skill.SkillNameVietnam;

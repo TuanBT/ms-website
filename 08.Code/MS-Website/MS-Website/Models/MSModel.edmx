@@ -313,13 +313,13 @@
           <Property Name="Gender" Type="int" />
           <Property Name="Age" Type="int" />
           <Property Name="LanguageEnglish" Type="int" />
-          <Property Name="LanguageChina" Type="int" />
+          <Property Name="LanguageChinese" Type="int" />
           <Property Name="LanguageJapanese" Type="int" />
           <Property Name="LanguageKorean" Type="int" />
           <Property Name="Experience" Type="int" />
           <Property Name="Hometown" Type="int" />
           <Property Name="Address" Type="int" />
-          <Property Name="Health" Type="int" />
+          <Property Name="Married" Type="int" />
           <Property Name="Stay" Type="int" />
           <Property Name="Salary" Type="int" />
           <Property Name="Work" Type="int" />
@@ -720,7 +720,7 @@
               <PropertyRef Name="SkillId" />
             </Principal>
             <Dependent Role="SkillReference">
-              <PropertyRef Name="LanguageChina" />
+              <PropertyRef Name="LanguageChinese" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -792,7 +792,7 @@
               <PropertyRef Name="SkillId" />
             </Principal>
             <Dependent Role="SkillReference">
-              <PropertyRef Name="Health" />
+              <PropertyRef Name="Married" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1173,13 +1173,13 @@
           <Property Name="Gender" Type="Int32" />
           <Property Name="Age" Type="Int32" />
           <Property Name="LanguageEnglish" Type="Int32" />
-          <Property Name="LanguageChina" Type="Int32" />
+          <Property Name="LanguageChinese" Type="Int32" />
           <Property Name="LanguageJapanese" Type="Int32" />
           <Property Name="LanguageKorean" Type="Int32" />
           <Property Name="Experience" Type="Int32" />
           <Property Name="Hometown" Type="Int32" />
           <Property Name="Address" Type="Int32" />
-          <Property Name="Health" Type="Int32" />
+          <Property Name="Married" Type="Int32" />
           <Property Name="Stay" Type="Int32" />
           <Property Name="Salary" Type="Int32" />
           <Property Name="Work" Type="Int32" />
@@ -1618,7 +1618,7 @@
               <PropertyRef Name="SkillId" />
             </Principal>
             <Dependent Role="SkillReference">
-              <PropertyRef Name="LanguageChina" />
+              <PropertyRef Name="LanguageChinese" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1690,7 +1690,7 @@
               <PropertyRef Name="SkillId" />
             </Principal>
             <Dependent Role="SkillReference">
-              <PropertyRef Name="Health" />
+              <PropertyRef Name="Married" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1846,13 +1846,13 @@
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="LanguageEnglish" ColumnName="LanguageEnglish" />
-                <ScalarProperty Name="LanguageChina" ColumnName="LanguageChina" />
+                <ScalarProperty Name="LanguageChinese" ColumnName="LanguageChinese" />
                 <ScalarProperty Name="LanguageJapanese" ColumnName="LanguageJapanese" />
                 <ScalarProperty Name="LanguageKorean" ColumnName="LanguageKorean" />
                 <ScalarProperty Name="Experience" ColumnName="Experience" />
                 <ScalarProperty Name="Hometown" ColumnName="Hometown" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Health" ColumnName="Health" />
+                <ScalarProperty Name="Married" ColumnName="Married" />
                 <ScalarProperty Name="Stay" ColumnName="Stay" />
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="Work" ColumnName="Work" />
@@ -1890,8 +1890,9 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

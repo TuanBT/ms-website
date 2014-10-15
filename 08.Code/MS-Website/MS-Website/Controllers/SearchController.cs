@@ -40,9 +40,9 @@ namespace MS_Website.Controllers
                     {
                         skillRefList = db.SkillReferences.Where(sr => sr.LanguageEnglish == skillId).ToList();
                     }
-                    else if (skillName.Equals("LanguageChina"))
+                    else if (skillName.Equals("LanguageChinese"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.LanguageChina == skillId).ToList();
+                        skillRefList = db.SkillReferences.Where(sr => sr.LanguageChinese == skillId).ToList();
                     }
                     else if (skillName.Equals("LanguageJapanese"))
                     {
@@ -64,9 +64,9 @@ namespace MS_Website.Controllers
                     {
                         skillRefList = db.SkillReferences.Where(sr => sr.Address == skillId).ToList();
                     }
-                    else if (skillName.Equals("Health"))
+                    else if (skillName.Equals("Married"))
                     {
-                        skillRefList = db.SkillReferences.Where(sr => sr.Health == skillId).ToList();
+                        skillRefList = db.SkillReferences.Where(sr => sr.Married == skillId).ToList();
                     }
                     else if (skillName.Equals("Stay"))
                     {
@@ -287,7 +287,7 @@ namespace MS_Website.Controllers
                 if (!skillInstanceList.Any())
                 {
                     skillInstanceList = db.SkillInstances.ToList();
-                }
+                } 
                 foreach (var skillInstance in skillInstanceList)
                 {
                     var skillName = skillInstance.SkillName;
@@ -340,17 +340,17 @@ namespace MS_Website.Controllers
                             }
                         }
                     }
-                    else if (skillName.Equals("LanguageChina"))
+                    else if (skillName.Equals("LanguageChinese"))
                     {
                         if (!skillRefList.Any())
                         {
-                            skillRefList = db.SkillReferences.Where(sr => sr.LanguageChina == skillId).ToList();
+                            skillRefList = db.SkillReferences.Where(sr => sr.LanguageChinese == skillId).ToList();
                         }
                         else
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).LanguageChina == skillId) continue;
+                                if (skillRefList.ElementAt(i).LanguageChinese == skillId) continue;
                                 skillRefList.RemoveAt(i);
                                 i--;
                             }
@@ -436,17 +436,17 @@ namespace MS_Website.Controllers
                             }
                         }
                     }
-                    else if (skillName.Equals("Health"))
+                    else if (skillName.Equals("Married"))
                     {
                         if (!skillRefList.Any())
                         {
-                            skillRefList = db.SkillReferences.Where(sr => sr.Health == skillId).ToList();
+                            skillRefList = db.SkillReferences.Where(sr => sr.Married == skillId).ToList();
                         }
                         else
                         {
                             for (var i = 0; i < skillRefList.Count(); i++)
                             {
-                                if (skillRefList.ElementAt(i).Health == skillId) continue;
+                                if (skillRefList.ElementAt(i).Married == skillId) continue;
                                 skillRefList.RemoveAt(i);
                                 i--;
                             }
