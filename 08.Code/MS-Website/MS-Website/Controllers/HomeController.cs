@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using MS_Website.Models;
@@ -7,16 +8,81 @@ using Account = MS_Website.Models.Account;
 
 namespace MS_Website.Controllers
 {
+    public class JreRcr
+    {
+        public List<RecruitmentTemp> recruitmentTemps { get; set; }
+        public List<JobRequestTemp> jobRequestTemps { get; set; }
+    }
+
     public class HomeController : Controller
     {
         //
         // GET: /Home/
-        private MSEntities _db = new MSEntities();
+        private readonly MSEntities _db = new MSEntities();
 
         public ActionResult Index()
         {
-            //var acc = ms.Accounts.Select(a => a).ToArray();
-            //ViewBag.me = acc[0].FullName;
+            /*List<RecruitmentTemp> recruitmentTemps = null;
+            List<JobRequestTemp> jobRequestTemps = null;
+            JreRcr jreRcr;
+            using (_db)
+            {
+                
+                var recruitments = _db.Recruitments.Where(r => r.Status == "Waiting").Take(5).ToList();
+                var jobRequests = _db.JobRequests.Where(j => j.Status == "Waiting").Take(5).ToList();
+
+                foreach(var recruitment in recruitments)
+                {
+                    var customer = _db.Accounts.FirstOrDefault(c => c.AccountId == recruitment.CustomerId);
+                    new RecruitmentTemp();
+                    var recruitmentTemp = new RecruitmentTemp
+                                                          {
+                                                              RecruitmentId = recruitment.RecruitmentId,
+                                                              CustomerId = recruitment.CustomerId,
+                                                              PostTime = recruitment.PostTime,
+                                                              ExpiredTime = recruitment.ExpiredTime,
+                                                              SkillRefId = recruitment.SkillRefId,
+                                                              Status = recruitment.Status,
+                                                              CustomerName = customer!=null?customer.FullName:"NULL",
+                                                              CustImg = customer != null ? customer.Avatar : "NULL",
+                                                              SkillList = {"1","2"}
+                                                          };
+                    recruitmentTemps.Add(recruitmentTemp);
+                }
+
+                foreach (var jobRequest in jobRequests)
+                {
+                    var maid = _db.Maids.FirstOrDefault(m => m.MaidId == jobRequest.MaidId);
+                    new JobRequestTemp();
+                   var jobRequestTemp = new JobRequestTemp
+                                              {
+                                                  JobRequestId = jobRequest.JobRequestId,
+                                                  SkillRefId = jobRequest.SkillRefId,
+                                                  MaidMediatorId = jobRequest.MaidMediatorId,
+                                                  StaffId = jobRequest.StaffId,
+                                                  PostTime = jobRequest.PostTime,
+                                                  ExpiredTime = jobRequest.ExpiredTime,
+                                                  ApplyTimes = jobRequest.ApplyTimes,
+                                                  MaidId = jobRequest.MaidId,
+                                                  Status = jobRequest.Status,
+                                                  MaidName = maid.MaidName,
+                                                  MaidDesc = maid.Description,
+                                                  MaidImg = maid.PersonalImage,
+                                                  MaidRate = maid.RateAvg,
+                                                  CustomerID = 0,
+                                                  CustomerName = "",
+                                                  SkillList = { "1", "2" }
+                                              };
+                    jobRequestTemps.Add(jobRequestTemp);
+                }
+                
+                jreRcr = new JreRcr
+                                    {
+                                        jobRequestTemps = jobRequestTemps,
+                                        recruitmentTemps = recruitmentTemps
+                                    };
+            }
+            ViewBag.JreRcr = jreRcr;*/
             return View();
         }
 
@@ -86,7 +152,7 @@ namespace MS_Website.Controllers
 
         public ActionResult AddAccount(Account acc)
         {
-            using (var _db=new MSEntities())
+            using (var _db = new MSEntities())
             {
                 var newUser = _db.Accounts.Create();
                 newUser.Username = acc.Username;
