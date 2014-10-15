@@ -129,15 +129,10 @@ namespace MS_Website.Controllers
                 Session["StayList"] = db.SkillInstances.Where(si => si.SkillName.Equals("Stay")).ToList();
                 Session["SalaryList"] = db.SkillInstances.Where(si => si.SkillName.Equals("Salary")).ToList();
                 Session["WorkList"] = db.SkillInstances.Where(si => si.SkillName.Equals("Work")).ToList();
-                var skillList = db.SkillInstances.Where(si => si.SkillNameVietnam.Contains("Chăm sóc") 
-                    || si.SkillNameVietnam.Contains("Biết")).ToList();
-                for (var i = 0; i < skillList.Count; i++)
+                if (Session["SkillList"] == null)
                 {
-                    if (!skillList.ElementAt(i).SkillNameVietnam.Contains("Biết tiếng")) continue;
-                    skillList.RemoveAt(i);
-                    i--;
+                    Session["SkillList"] = db.SkillInstances.Where(si => si.CategoryId == 2).ToList();
                 }
-                Session["SkillList"] = skillList;
                 if (role.Equals("MaidMediator"))
                 {
                     var maidList = db.Maids.Where(m => m.MaidMediatorId == maidManagerId).ToList();
@@ -153,9 +148,7 @@ namespace MS_Website.Controllers
             return View("PostRequest");
         }
 
-        public ActionResult AddRequest(string gender, string age, string LanguageEnglish, string LanguageChina,
-            string LanguageJapanese, string LanguageKorean, string exp, string hometown, string addr,
-            string health, string marriage, string stay, string salary, string work, string SickCare,
+        public ActionResult AddRequest(string stay, string salary, string work, string SickCare,
             string OldCare, string BabySister, string DisabilityCare, string BonsaiCare, string Cooking,
             string Washing, string CleanHouse, string maidId, string time)
         {
