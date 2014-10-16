@@ -39,56 +39,63 @@
                             <img src="@ViewBag.MaidImg" alt="Maid sercive" height="100%">
                         </div>
                         <div class="miButton">
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target=".chooseMaidModel">Thuê</button>
-                            <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-sm">
-                                    <div class="modal-content">
-                                        <div class="modal-header chooseMaidModalTitle">
-                                            <button type="button" class="close" data-dismiss="modal">
-                                                <span aria-hidden="true">×</span><span
-                                                    class="sr-only">Close</span></button>
-                                            <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
-                                        lý</h4>
-                                        </div>
-                                        <div class="modal-body chooseMaidModalMaid">
-                                            @foreach (var recruit in ViewBag.RecruitmentList)
-                                            {
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="@recruit.RecruitmentId">
-                                                        <div>
-                                                            <div class="liImage">
-                                                                <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                                                            </div>
-                                                            <div class="liMaidContent">
-                                                                <div class="licoFullName">
-                                                                    <a href="#" id="@recruit.RecruitmentId name">@recruit.Title</a>
-                                                                </div>
-                                                                <div class="licoRate">
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                    <span class="glyphicon glyphicon-star"></span>
-                                                                </div>
-                                                                <div class="ricoPost">
-                                                                    Đăng/nhận
-                                                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </label>
+                            @{
+                                if (Model.Job.Status == "Waiting")
+                                {
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target=".chooseMaidModel">Thuê</button>
+                                    <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header chooseMaidModalTitle">
+                                                    <button type="button" class="close" data-dismiss="modal">
+                                                        <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
+                                                        lý</h4>
                                                 </div>
-                                            }
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="chooseMaid()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                                <div class="modal-body chooseMaidModalMaid">
+                                                    @foreach (var recruit in ViewBag.RecruitmentList)
+                                                    {
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="@recruit.RecruitmentId">
+                                                                <div>
+                                                                    <div class="liImage">
+                                                                        <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                                    </div>
+                                                                    <div class="liMaidContent">
+                                                                        <div class="licoFullName">
+                                                                            <a href="#" id="@recruit.RecruitmentId name">@recruit.Title</a>
+                                                                        </div>
+                                                                        <div class="licoRate">
+                                                                            <span class="glyphicon glyphicon-star"></span>
+                                                                            <span class="glyphicon glyphicon-star"></span>
+                                                                            <span class="glyphicon glyphicon-star"></span>
+                                                                            <span class="glyphicon glyphicon-star"></span>
+                                                                            <span class="glyphicon glyphicon-star"></span>
+                                                                        </div>
+                                                                        <div class="ricoPost">
+                                                                            Đăng/nhận
+                                                                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="chooseMaid()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-danger">Hủy</button>
+                                }
+                                if (ViewBag.Remove == "true")
+                                {
+                                    <button type="button" class="btn btn-danger">Hủy</button>
+                                }
+                            }
                         </div>
                         <div class="mmiDetail">
                             <div class="iStatus">
