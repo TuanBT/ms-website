@@ -123,7 +123,7 @@ namespace MS_Website.Controllers
                         Session["AccId"] = b.AccountId;
                         Session["Fullname"] = b.FullName;
                         Session["Role"] = b.Role;
-                        return View("Index");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
             }
