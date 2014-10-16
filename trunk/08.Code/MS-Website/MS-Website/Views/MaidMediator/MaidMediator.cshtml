@@ -189,11 +189,14 @@
                         </div>
                         <div class="rimaContent">
                             <ul class="rimaMaidList">
-                                @foreach (var maid in ViewBag.MaidList)
+                                @{
+                                    List<MS_Website.Models.Maid> Maid = ViewBag.MaidList;
+                                }
+                                @foreach (var maid in Maid)
                                 {                      
                                     <li>
                                         <div class="liImage">
-                                            <img src="@maid.PersonalImage" height="100%">
+                                            <img src="@maid.PersonalImage">
                                         </div>
                                         <div class="liMaidContent">
                                             <div class="licoFullName">
@@ -206,16 +209,14 @@
                                                     </span>
                                                 </a>
                                                 <div class="licoRate">
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
-                                                    <span class="glyphicon glyphicon-star"></span>
+                                                    @Html.Partial("_PartialStar",(float) maid.RateAvg)
                                                 </div>
-                                                <div class="ricoPost">
-                                                    Đăng/nhận
-                                                    <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender==true?"Nam":"Nữ")</span>
                                                 </div>
+                                                @*<div class="ricoPost">
+                                                    Đăng/nhận <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </li>
