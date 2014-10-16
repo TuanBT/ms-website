@@ -458,7 +458,7 @@ background-color: #5cb85c;
     color: #646165;
     background-color: #f2f2ed;
     border-radius: 4px;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
     .skillText:hover {
