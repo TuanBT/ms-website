@@ -39,7 +39,55 @@
                             <img src="@ViewBag.MaidImg" alt="Maid sercive" height="100%">
                         </div>
                         <div class="miButton">
-                            <button type="button" class="btn btn-info">Thuê</button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target=".chooseMaidModel">Thuê</button>
+                            <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header chooseMaidModalTitle">
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span aria-hidden="true">×</span><span
+                                                    class="sr-only">Close</span></button>
+                                            <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
+                                        lý</h4>
+                                        </div>
+                                        <div class="modal-body chooseMaidModalMaid">
+                                            @foreach (var recruit in ViewBag.RecruitmentList)
+                                            {
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="@recruit.RecruitmentId">
+                                                        <div>
+                                                            <div class="liImage">
+                                                                <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                            </div>
+                                                            <div class="liMaidContent">
+                                                                <div class="licoFullName">
+                                                                    <a href="#" id="@recruit.RecruitmentId name">@recruit.Title</a>
+                                                                </div>
+                                                                <div class="licoRate">
+                                                                    <span class="glyphicon glyphicon-star"></span>
+                                                                    <span class="glyphicon glyphicon-star"></span>
+                                                                    <span class="glyphicon glyphicon-star"></span>
+                                                                    <span class="glyphicon glyphicon-star"></span>
+                                                                    <span class="glyphicon glyphicon-star"></span>
+                                                                </div>
+                                                                <div class="ricoPost">
+                                                                    Đăng/nhận
+                                                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            }
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="chooseMaid()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <button type="button" class="btn btn-danger">Hủy</button>
                         </div>
                         <div class="mmiDetail">
@@ -63,13 +111,7 @@
                                 </div>
                                 <div class="miRate">
                                     @* @{Html.RenderAction("Rate", "Evaluate");}*@
-                                    <div class="rate">
-                                        <span class="starRating1">
-                                            <span class="starRating2" style="width: @(ViewBag.MaidRating * 10)%"></span>
-                                            
-                                        </span>
-                                    </div>
-                                    <span class="ratingPoint">@ViewBag.MaidRating / 10 điểm</span>
+                                    @Html.Partial("_PartialStar", (float)ViewBag.MaidRating)
                                 </div>
                             </div>
                             <div class="iSkill">
@@ -91,9 +133,9 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     @Html.Partial("_PartialRating")
-                                
+
                     <div class="overView">
                         <div class="ovTitle">
                             Nhận xét của người thuê
@@ -102,7 +144,7 @@
                             @Html.Partial("_PartialComment")
                         </div>
                     </div>
-                   @* @{Html.RenderAction("Post", "Evaluate");}*@
+                    @* @{Html.RenderAction("Post", "Evaluate");}*@
                 </div>
             </div>
             <div class="col-md-4">
