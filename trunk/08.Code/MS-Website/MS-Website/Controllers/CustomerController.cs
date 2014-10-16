@@ -44,11 +44,12 @@ namespace MS_Website.Controllers
             }
         }
 
-        public ActionResult RemoveRecruitment(int recruitmentId)
+        public ActionResult RemoveRecruitment(string recruitmentId)
         {
             using (var db = new MSEntities())
             {
-                var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
+                int recruit = int.Parse(recruitmentId);
+                var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruit);
                 if (recruitment != null)
                 {
                     db.Recruitments.Remove(recruitment);
@@ -99,8 +100,6 @@ namespace MS_Website.Controllers
                 {
                     var skillRef = new SkillReference();
                     skillRef.Type = 2;
-                    var custIdInt = int.Parse(custId);
-                    var customer = db.Customers.SingleOrDefault(c => c.AccountId == custIdInt);
                     if (!gender.Equals("null"))
                     {
                         skillRef.Gender = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(gender)).SkillId;

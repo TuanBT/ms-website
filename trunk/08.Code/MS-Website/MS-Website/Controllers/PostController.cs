@@ -29,6 +29,10 @@ namespace MS_Website.Controllers
                         LoadSkillList(skillRef, skillList, db);
                     }
                     ViewBag.MaidRating = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId).RateAvg;
+                    if (job.Maid.MaidMediatorId == (int)Session["AccId"] || job.Maid.StaffId == (int)Session["AccId"])
+                    {
+                        ViewBag.Remove = "true";
+                    }
                     if (Session["Role"].Equals("Customer"))
                     {
                         var custId = (int)Session["AccId"];
