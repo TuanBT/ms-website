@@ -21,7 +21,7 @@
     <div class="header">
         <div class="rows">
             <div class="logo">
-                <a href="@Url.Action("Index","Home")">
+                <a href="@Url.Action("Index", "Home")">
                     <img src="../Content/Image/MS-Logo-white.png" alt="Maid service"
                         style="margin-top: -18px; margin-bottom: -14px; width: 80px;"></a>
             </div>
@@ -144,7 +144,7 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
                                                             </div>
                                                         </div>
                                                         <div class="rate">
-                                                            @(jobRequestTemp.Maid.RateAvg != null ? Html.Partial("_PartialStar", (float) jobRequestTemp.Maid.RateAvg) : Html.Partial("_PartialStar", 0))
+                                                            @(jobRequestTemp.Maid.RateAvg != null ? Html.Partial("_PartialStar", (float)jobRequestTemp.Maid.RateAvg) : Html.Partial("_PartialStar", 0))
 
                                                         </div>
                                                         <div class="detailInfo">
@@ -155,11 +155,11 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
                                                         </div>
                                                         <div class="skill">
                                                             <ul>
-                                                                @foreach(var skill in jobRequestTemp.SkillList)
+                                                                @foreach (var skill in jobRequestTemp.SkillList)
                                                                 {
-                                                                     <li class="childSkill">
-                                                                <span class="skillText">@skill</span>
-                                                            </li>
+                                                                    <li class="childSkill">
+                                                                        <span class="skillText">@skill</span>
+                                                                    </li>
                                                                 }
                                                             </ul>
                                                         </div>
@@ -174,48 +174,45 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
                                 <div class="listWork">
                                     <div class="mainContent">
                                         <ul>
-                                            <li class="childContent">
-                                                <div class="function">
-                                                    <div class="image">
-                                                        <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
-                                                    </div>
-                                                    <div class="button">
-                                                        <button type="button" style="display: none" class="btn btn-success btn-xs">Nhận việc <span class="glyphicon glyphicon-ok"></span></button>
-                                                        <button type="button" class="btn btn-warning btn-xs">Hủy việc <span class="glyphicon glyphicon-remove"></span></button>
-                                                    </div>
-
-                                                </div>
-                                                <div class="info">
-                                                    <div class="row">
-                                                        <div class="col-md-8">
-                                                            <div class="name">
-                                                                <a href="#">Bùi Customer 2</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="love">
-                                                                <span class="glyphicon glyphicon-heart"></span>
-                                                            </div>
+                                            @foreach (var recruitmentTemp in JreRcr.recruitmentTemps)
+                                            {
+                                                <li class="childContent">
+                                                    <div class="function">
+                                                        <div class="image">
+                                                            <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
                                                         </div>
                                                     </div>
-                                                    <div class="detailInfo">
-                                                        <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span>
+                                                    <div class="info">
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <div class="name">
+                                                                    <a href="#">@recruitmentTemp.Recruitment.Title</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="love">
+                                                                    <span class="glyphicon glyphicon-heart"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="detailInfo">
+                                                            <strong>Đăng lúc: </strong><span>@recruitmentTemp.Recruitment.PostTime</span>
+                                                        </div>
+                                                        <div class="skill">
+                                                            <ul>
+                                                               @foreach (var skill in recruitmentTemp.SkillList)
+                                                                {
+                                                                    <li class="childSkill">
+                                                                        <span class="skillText">@skill</span>
+                                                                    </li>
+                                                                }
+                                                            </ul>
+                                                        </div>
                                                     </div>
+                                                </li>
+                                            }
 
-                                                    <div class="description">
-                                                        yêu cầu một người giúp việc sạch sẽ ơi là sạch sẽ. Còn tại sao gặp khắc biết.
-                                                    </div>
-                                                    <div class="skill">
-                                                        <ul>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Giới tính - Nam</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
                                         </ul>
-
                                     </div>
                                 </div>
                             </div>
