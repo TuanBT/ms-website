@@ -15,6 +15,11 @@ namespace MS_Website.Models
             this.SkillList = skillList;
         }
 
+        public JobRequestTemp()
+        {
+            
+        }
+
         public JobRequest Job { get; set; }
         public Maid Maid { get; set; }
         public Recruitment Recruitment { get; set; }
