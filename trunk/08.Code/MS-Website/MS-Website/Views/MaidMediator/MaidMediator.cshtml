@@ -114,7 +114,11 @@
                             Thống kê các yêu cầu
                         </div>
                         <div class="ovContent">
-                           @Html.Partial("_PartialStatisticPie")
+                            @{
+                                //watting,expired,approved,applied
+                                var numberStatistic = new int[4] {1, 2, 3, 4};
+                              }
+                            @Html.Partial("_PartialStatisticPie",numberStatistic)
                         </div>
                     </div>
                 </div>
