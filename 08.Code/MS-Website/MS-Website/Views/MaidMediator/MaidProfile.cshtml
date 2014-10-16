@@ -1,7 +1,10 @@
 ﻿@{
     ViewBag.Title = "Maid Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    MS_Website.Models.Maid maid = Model;
 }
+
+
 
 <div class="Menu">
     <div class="rows">
@@ -9,10 +12,10 @@
             <div class="hFatherMenu">
                 <ul class="hmeTabList">
                     <li>
-                        <a href="#" class="hefaContent iscurent">Find Work</a>
+                        <a href="#" class="hefaContent iscurent">Thông tin</a>
                     </li>
                     <li>
-                        <a href="#" class="hefaContent"> Find Work</a>
+                        <a href="#" class="hefaContent">Đăng yêu cầu công việc</a>
                     </li>
                 </ul>
             </div>
@@ -21,10 +24,10 @@
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li class="iscurent">
-                <a href="#" class="hChContent"> Job Applications</a>
+                <a href="#" class="hChContent">Các thông tin</a>
             </li>
             <li class>
-                <a href="#" class="hChContent"> Job Applications</a>
+                <a href="#" class="hChContent">Sửa thông tin</a>
             </li>
         </ul>
     </div>
@@ -47,13 +50,7 @@
                                 Người giúp việc
                             </div>
                             <div class="miRate">
-                                <div class="rate">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </div>
+                                @Html.Partial("_PartialStar",(float)maid.RateAvg)
                             </div>
                         </div>
                     </div>
