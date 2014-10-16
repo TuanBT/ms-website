@@ -69,7 +69,7 @@
             <div class="hFatherMenu">
                 <ul class="hmeTabList">
                     <li>
-                        <a href="#" class="hefaContent iscurent">Find Work</a>
+                        <a href="#" class="hefaContent iscurent">Thông tin</a>
                     </li>
                     <li>
                         <a href="/MaidMediator/PostRequest" class="hefaContent"> Đăng yêu cầu kiếm việc</a>
@@ -81,10 +81,10 @@
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li class="iscurent">
-                <a href="#" class="hChContent"> Job Applications</a>
+                <a href="#" class="hChContent">Các thông tin</a>
             </li>
             <li class>
-                <a href="#" class="hChContent"> Job Applications</a>
+                <a href="#" class="hChContent">Sửa thông tin</a>
             </li>
         </ul>
     </div>
@@ -206,11 +206,11 @@
                                             <div class="licoFullName">
                                                 <a href="@Url.Action("ManageMaidProfile", "MaidMediator", new { maidId = maid.MaidId })" class="myToolTip">
                                                     @maid.MaidName
-                                                    <span>
+                                                    @*<span>
                                                         <img class="callout" src="../Content/Image/callout_black.gif" /><img class="maidAva2" src="@maid.PersonalImage" /><strong>Tên đầy đủ: </strong>@maid.MaidName<br />
                                                         <strong>Số điện thoại: </strong>
                                                         <br/>
-                                                    </span>
+                                                    </span>*@
                                                 </a>
                                                 <div class="licoRate">
                                                     @Html.Partial("_PartialStar",(float) maid.RateAvg)
