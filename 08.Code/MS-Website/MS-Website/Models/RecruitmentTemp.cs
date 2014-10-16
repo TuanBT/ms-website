@@ -19,5 +19,7 @@ namespace MS_Website.Models
         public Customer Customer { get; set; }
         public JobRequest JobRequest { get; set; }
         public List<string> SkillList { get; set; }
+
+        public RecruitmentTemp(){}
     }
 }

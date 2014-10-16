@@ -22,8 +22,8 @@ namespace MS_Website.Controllers
 
         public ActionResult Index()
         {
-            /*List<RecruitmentTemp> recruitmentTemps = null;
-            List<JobRequestTemp> jobRequestTemps = null;
+            List<RecruitmentTemp> recruitmentTemps = new List<RecruitmentTemp>();
+            List<JobRequestTemp> jobRequestTemps = new List<JobRequestTemp>();
             JreRcr jreRcr;
             using (_db)
             {
@@ -33,19 +33,16 @@ namespace MS_Website.Controllers
 
                 foreach(var recruitment in recruitments)
                 {
-                    var customer = _db.Accounts.FirstOrDefault(c => c.AccountId == recruitment.CustomerId);
-                    new RecruitmentTemp();
+                    var customer = _db.Customers.FirstOrDefault(c => c.AccountId == recruitment.CustomerId);
+                    var skillRef = _db.SkillReferences.FirstOrDefault(s => s.SkillRefId == recruitment.SkillRefId);
+                    var skillList = new List<string>();
+                    ///new RecruitmentTemp();
                     var recruitmentTemp = new RecruitmentTemp
                                                           {
-                                                              RecruitmentId = recruitment.RecruitmentId,
-                                                              CustomerId = recruitment.CustomerId,
-                                                              PostTime = recruitment.PostTime,
-                                                              ExpiredTime = recruitment.ExpiredTime,
-                                                              SkillRefId = recruitment.SkillRefId,
-                                                              Status = recruitment.Status,
-                                                              CustomerName = customer!=null?customer.FullName:"NULL",
-                                                              CustImg = customer != null ? customer.Avatar : "NULL",
-                                                              SkillList = {"1","2"}
+                                                              Customer = customer,
+                                                              Recruitment = recruitment,
+                                                              JobRequest = null,
+                                                              SkillList = PostController.LoadSkillList(skillRef, skillList,_db)
                                                           };
                     recruitmentTemps.Add(recruitmentTemp);
                 }
@@ -53,25 +50,15 @@ namespace MS_Website.Controllers
                 foreach (var jobRequest in jobRequests)
                 {
                     var maid = _db.Maids.FirstOrDefault(m => m.MaidId == jobRequest.MaidId);
-                    new JobRequestTemp();
+                    var skillRef = _db.SkillReferences.FirstOrDefault(s => s.SkillRefId == jobRequest.SkillRefId);
+                    var skillList = new List<string>();
+                    //new JobRequestTemp();
                    var jobRequestTemp = new JobRequestTemp
                                               {
-                                                  JobRequestId = jobRequest.JobRequestId,
-                                                  SkillRefId = jobRequest.SkillRefId,
-                                                  MaidMediatorId = jobRequest.MaidMediatorId,
-                                                  StaffId = jobRequest.StaffId,
-                                                  PostTime = jobRequest.PostTime,
-                                                  ExpiredTime = jobRequest.ExpiredTime,
-                                                  ApplyTimes = jobRequest.ApplyTimes,
-                                                  MaidId = jobRequest.MaidId,
-                                                  Status = jobRequest.Status,
-                                                  MaidName = maid.MaidName,
-                                                  MaidDesc = maid.Description,
-                                                  MaidImg = maid.PersonalImage,
-                                                  MaidRate = maid.RateAvg,
-                                                  CustomerID = 0,
-                                                  CustomerName = "",
-                                                  SkillList = { "1", "2" }
+                                                  Recruitment = null,
+                                                  Job = jobRequest,
+                                                  Maid = maid,
+                                                  SkillList = PostController.LoadSkillList(skillRef, skillList, _db)
                                               };
                     jobRequestTemps.Add(jobRequestTemp);
                 }
@@ -82,7 +69,7 @@ namespace MS_Website.Controllers
                                         recruitmentTemps = recruitmentTemps
                                     };
             }
-            ViewBag.JreRcr = jreRcr;*/
+            ViewBag.JreRcr = jreRcr;
             return View();
         }
 

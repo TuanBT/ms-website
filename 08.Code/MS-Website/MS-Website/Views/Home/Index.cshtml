@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "";
+    MS_Website.Controllers.JreRcr JreRcr = ViewBag.JreRcr;
 }
 <!DOCTYPE html>
 <html>
@@ -119,209 +120,60 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
                             </ul>
                             <div class="tab-pane fade in active" id="tabMaids">
                                 <div class="listWork">
-                                    @*<div class="listHeader">
-                                    <div class="listRow">
-                                        <div class="listTitle">
-                                            Việc tìm người thuê
-                                        </div>
-                                        <div class="listPage">
-                                            <ul class="pagination">
-                                                <li class="disabled"><a href="#">&laquo;</a></li>
-                                                <li class="active"><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">&raquo;</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>*@
                                     <div class="mainContent">
                                         <ul>
-                                            <li class="childContent">
-                                                <div class="function">
-                                                    <div class="image">
-                                                        <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
-                                                    </div>
-                                                    <div class="button">
-                                                        <button type="button" class="btn btn-success btn-xs">Thuê <span class="glyphicon glyphicon-ok"></span></button>
-                                                        <button type="button" style="display: none" class="btn btn-warning btn-xs">Bỏ thuê <span class="glyphicon glyphicon-remove"></span></button>
-                                                    </div>
-
-                                                </div>
-                                                <div class="info">
-                                                    <div class="row">
-                                                        <div class="col-md-8">
-                                                            <div class="name">
-                                                                <a href="#">Bùi Maid 1</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="love">
-                                                                <span class="glyphicon glyphicon-heart"></span>
-                                                            </div>
+                                            @foreach (var jobRequestTemp in JreRcr.jobRequestTemps)
+                                            {
+                                                <li class="childContent">
+                                                    <div class="function">
+                                                        <div class="image">
+                                                            <img src="@jobRequestTemp.Maid.PersonalImage" alt="Maid service" style="width: 100%;">
                                                         </div>
                                                     </div>
-                                                    <div class="rate">
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                    </div>
-                                                    <div class="detailInfo">
-                                                        <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span><span> | </span><strong>Bình luận: </strong><span>3</span>
-                                                    </div>
-
-                                                    <div class="description">
-                                                        Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.
-                                                    </div>
-                                                    <div class="skill">
-                                                        <ul>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Giới tính - Nam</span>
-                                                            </li>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Tuổi 18-25</span>
-                                                            </li>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Ngôn ngữ - Anh</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="childContent">
-                                                <div class="function">
-                                                    <div class="image">
-                                                        <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
-                                                    </div>
-                                                    <div class="button">
-                                                        <button type="button" style="display: none" class="btn btn-success btn-xs">Thuê <span class="glyphicon glyphicon-ok"></span></button>
-                                                        <button type="button" class="btn btn-warning btn-xs">Bỏ thuê <span class="glyphicon glyphicon-remove"></span></button>
-                                                    </div>
-
-                                                </div>
-                                                <div class="info">
-                                                    <div class="row">
-                                                        <div class="col-md-8">
-                                                            <div class="name">
-                                                                <a href="#">Bùi Maid 2</a>
+                                                    <div class="info">
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <div class="name">
+                                                                    <a href="#">@jobRequestTemp.Job.Title</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="love">
+                                                                    <span class="glyphicon glyphicon-heart"></span>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <div class="love">
-                                                                <span class="glyphicon glyphicon-heart"></span>
-                                                            </div>
+                                                        <div class="rate">
+                                                            @(jobRequestTemp.Maid.RateAvg != null ? Html.Partial("_PartialStar", (float) jobRequestTemp.Maid.RateAvg) : Html.Partial("_PartialStar", 0))
+
+                                                        </div>
+                                                        <div class="detailInfo">
+                                                            <strong>Đăng lúc: </strong><span>@jobRequestTemp.Job.PostTime</span>
+                                                        </div>
+                                                        <div class="description">
+                                                            @jobRequestTemp.Maid.Description
+                                                        </div>
+                                                        <div class="skill">
+                                                            <ul>
+                                                                @foreach(var skill in jobRequestTemp.SkillList)
+                                                                {
+                                                                     <li class="childSkill">
+                                                                <span class="skillText">@skill</span>
+                                                            </li>
+                                                                }
+                                                            </ul>
                                                         </div>
                                                     </div>
-                                                    <div class="rate">
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                    </div>
-                                                    <div class="detailInfo">
-                                                        <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span><span> | </span><strong>Bình luận: </strong><span>3</span>
-                                                    </div>
-
-                                                    <div class="description">
-                                                        Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người. Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người. Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.Ước mơ của tôi là trở thành một người có thể đem lại hạnh phúc cho mọi người.
-                                                    </div>
-                                                    <div class="skill">
-                                                        <ul>
-                                                             <li class="childSkill">
-                                                                <span class="skillText">Giới tính - Nam</span>
-                                                            </li>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Tuổi 18-25</span>
-                                                            </li>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Ngôn ngữ - Anh</span>
-                                                            </li> <li class="childSkill">
-                                                                <span class="skillText">Giới tính - Nam</span>
-                                                            </li>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Tuổi 18-25</span>
-                                                            </li>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Ngôn ngữ - Anh</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                                </li>
+                                            }
                                         </ul>
-
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tabCustomer">
                                 <div class="listWork">
-                                    @*<div class="listHeader">
-                                    <div class="listRow">
-                                        <div class="listTitle">
-                                            Công việc cần người
-                                        </div>
-                                        <div class="listPage">
-                                            <ul class="pagination">
-                                                <li class="disabled"><a href="#">&laquo;</a></li>
-                                                <li class="active"><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">&raquo;</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>*@
                                     <div class="mainContent">
                                         <ul>
-                                            <li class="childContent">
-                                                <div class="function">
-                                                    <div class="image">
-                                                        <img src="../Content/Image/MS-Logo-white.png" alt="Maid service" style="width: 100%;">
-                                                    </div>
-                                                    <div class="button">
-                                                        <button type="button" class="btn btn-success btn-xs">Nhận việc <span class="glyphicon glyphicon-ok"></span></button>
-                                                        <button type="button" style="display: none" class="btn btn-success btn-xs">Hủy việc <span class="glyphicon glyphicon-remove"></span></button>
-                                                    </div>
-
-                                                </div>
-                                                <div class="info">
-                                                    <div class="row">
-                                                        <div class="col-md-8">
-                                                            <div class="name">
-                                                                <a href="#">Bùi Customer </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="love">
-                                                                <span class="glyphicon glyphicon-heart"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="detailInfo">
-                                                        <strong>Đăng lúc: </strong><span>6:00 20/08/1991</span>
-                                                    </div>
-
-                                                    <div class="description">
-                                                        yêu cầu một người giúp việc sạch sẽ ơi là sạch sẽ. Còn tại sao gặp khắc biết.
-                                                    </div>
-                                                    <div class="skill">
-                                                        <ul>
-                                                             <li class="childSkill">
-                                                                <span class="skillText">Giới tính - Nam</span>
-                                                            </li>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Tuổi 18-25</span>
-                                                            </li>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Ngôn ngữ - Anh</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
                                             <li class="childContent">
                                                 <div class="function">
                                                     <div class="image">
@@ -355,14 +207,8 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
                                                     </div>
                                                     <div class="skill">
                                                         <ul>
-                                                             <li class="childSkill">
+                                                            <li class="childSkill">
                                                                 <span class="skillText">Giới tính - Nam</span>
-                                                            </li>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Tuổi 18-25</span>
-                                                            </li>
-                                                            <li class="childSkill">
-                                                                <span class="skillText">Ngôn ngữ - Anh</span>
                                                             </li>
                                                         </ul>
                                                     </div>
