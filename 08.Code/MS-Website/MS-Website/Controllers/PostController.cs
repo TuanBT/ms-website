@@ -54,6 +54,7 @@ namespace MS_Website.Controllers
                     }
                 }
             }
+            ViewBag.JobReqId = jobId;
             return View("JobRequest");
         }
 

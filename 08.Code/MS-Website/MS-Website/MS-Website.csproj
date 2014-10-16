@@ -143,7 +143,7 @@
     <Compile Include="Controllers\EvaluateController.cs" />
     <Compile Include="Controllers\Kmean.cs" />
     <Compile Include="Controllers\MaidMediatorController.cs" />
-    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\PayPalController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -191,6 +191,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MSModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PayPalModel.cs" />
     <Compile Include="Models\Rating.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
@@ -541,12 +542,84 @@
     <Content Include="Content\font-awesome-4.2.0\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.2.0\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome-4.2.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Image\default-avatar.png" />
     <Content Include="Content\Image\favicon.ico" />
     <Content Include="Content\Image\Home\background_blur.jpg" />
     <Content Include="Content\Image\Home\women1.png" />
     <Content Include="Content\Image\Home\women2.png" />
+    <Content Include="Content\Image\Maid\001.jpg" />
+    <Content Include="Content\Image\Maid\002.jpg" />
+    <Content Include="Content\Image\Maid\003.jpg" />
+    <Content Include="Content\Image\Maid\004.jpg" />
+    <Content Include="Content\Image\Maid\005.jpg" />
+    <Content Include="Content\Image\Maid\006.jpg" />
+    <Content Include="Content\Image\Maid\007.jpg" />
+    <Content Include="Content\Image\Maid\008.jpg" />
+    <Content Include="Content\Image\Maid\009.jpg" />
+    <Content Include="Content\Image\Maid\010.jpg" />
+    <Content Include="Content\Image\Maid\011.jpg" />
+    <Content Include="Content\Image\Maid\012.jpg" />
+    <Content Include="Content\Image\Maid\013.jpg" />
+    <Content Include="Content\Image\Maid\014.jpg" />
+    <Content Include="Content\Image\Maid\015.jpg" />
+    <Content Include="Content\Image\Maid\016.jpg" />
+    <Content Include="Content\Image\Maid\017.jpg" />
+    <Content Include="Content\Image\Maid\018.jpg" />
+    <Content Include="Content\Image\Maid\019.jpg" />
+    <Content Include="Content\Image\Maid\020.jpg" />
+    <Content Include="Content\Image\Maid\021.jpg" />
+    <Content Include="Content\Image\Maid\022.jpg" />
+    <Content Include="Content\Image\Maid\023.jpg" />
+    <Content Include="Content\Image\Maid\024.jpg" />
+    <Content Include="Content\Image\Maid\025.jpg" />
+    <Content Include="Content\Image\Maid\026.jpg" />
+    <Content Include="Content\Image\Maid\027.jpg" />
+    <Content Include="Content\Image\Maid\028.jpg" />
+    <Content Include="Content\Image\Maid\029.jpg" />
+    <Content Include="Content\Image\Maid\030.jpg" />
     <Content Include="Content\Image\MS-Logo-white.png" />
     <Content Include="Content\Image\MS-Logo.png" />
+    <Content Include="Content\Image\Profile\congtv.jpg" />
+    <Content Include="Content\Image\Profile\cuongnc.jpg" />
+    <Content Include="Content\Image\Profile\dangth.jpg" />
+    <Content Include="Content\Image\Profile\danhtc.jpg" />
+    <Content Include="Content\Image\Profile\diepbv.jpg" />
+    <Content Include="Content\Image\Profile\dongtd.jpg" />
+    <Content Include="Content\Image\Profile\duyk.jpg" />
+    <Content Include="Content\Image\Profile\haidv.jpg" />
+    <Content Include="Content\Image\Profile\haihv.jpg" />
+    <Content Include="Content\Image\Profile\haotc.jpg" />
+    <Content Include="Content\Image\Profile\hiendb.jpg" />
+    <Content Include="Content\Image\Profile\hiennp.jpg" />
+    <Content Include="Content\Image\Profile\hoanav.jpg" />
+    <Content Include="Content\Image\Profile\huett.jpg" />
+    <Content Include="Content\Image\Profile\lanht.jpg" />
+    <Content Include="Content\Image\Profile\lannt.jpg" />
+    <Content Include="Content\Image\Profile\lanvtn.jpg" />
+    <Content Include="Content\Image\Profile\lapbt.jpg" />
+    <Content Include="Content\Image\Profile\loctq.jpg" />
+    <Content Include="Content\Image\Profile\maimt.jpg" />
+    <Content Include="Content\Image\Profile\mypt.jpg" />
+    <Content Include="Content\Image\Profile\nhuvt.jpg" />
+    <Content Include="Content\Image\Profile\ninhqt.jpg" />
+    <Content Include="Content\Image\Profile\phitp.jpg" />
+    <Content Include="Content\Image\Profile\quankm.jpg" />
+    <Content Include="Content\Image\Profile\sutnt.jpg" />
+    <Content Include="Content\Image\Profile\tuanbt.jpg" />
+    <Content Include="Content\Image\Profile\tuanlq.jpg" />
+    <Content Include="Content\Image\Profile\tuantq.JPG" />
+    <Content Include="Content\Image\Profile\vutt.jpg" />
+    <Content Include="Content\Image\Staff\1234590861_anh_the.jpg" />
+    <Content Include="Content\Image\Staff\anh-the.jpg" />
+    <Content Include="Content\Image\Staff\anh_the9112.jpg" />
+    <Content Include="Content\Image\Staff\dfd.jpg" />
+    <Content Include="Content\Image\Staff\gialonggroup.jpg" />
+    <Content Include="Content\Image\Staff\Hinh_3_x_4.JPG" />
+    <Content Include="Content\Image\Staff\images.jpg" />
+    <Content Include="Content\Image\Staff\nvt_6611652bdd9e5f6bf5572d0f2e15c36d_269583985.jpg" />
+    <Content Include="Content\Image\Staff\sic1375243254.JPG" />
+    <Content Include="Content\Image\Staff\tahotien.jpg" />
+    <Content Include="Content\Image\star-rating-sprite.png" />
     <Content Include="Content\ionicons-1.5.2\.gitignore" />
     <Content Include="Content\ionicons-1.5.2\animation.html" />
     <Content Include="Content\ionicons-1.5.2\builder\cheatsheet\icon-row.html" />
@@ -1913,9 +1986,6 @@
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\MaidMediator\PostRequest.cshtml" />
     <Content Include="Views\Admin\Admin.cshtml" />
-    <Content Include="Views\Evaluate\_Index.cshtml" />
-    <Content Include="Views\Evaluate\_Post.cshtml" />
-    <Content Include="Views\Evaluate\_Rate.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Shared\_CustomerLayout.cshtml">
@@ -1938,6 +2008,22 @@
     <Content Include="Views\Shared\_PartialStar.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Shared\_CustomerLayout.cshtml" />
+    <Content Include="Views\Shared\_PartialSearch.cshtml" />
+    <Content Include="Views\CustomerRecruiment\Details.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\CustomerRecruiment\Pay.cshtml" />
+    <Content Include="Views\Customer\CustomerProfile.cshtml" />
+    <Content Include="Views\Customer\PostRecruitment.cshtml" />
+    <Content Include="Views\PayPal\Index.cshtml" />
+    <Content Include="Views\PayPal\ValidateCommand.cshtml" />
+    <Content Include="Views\PayPal\RedirectFromPaypal.cshtml" />
+    <Content Include="Views\PayPal\CancelFromPaypal.cshtml" />
+    <Content Include="Views\PayPal\NotifyFromPaypal.cshtml" />
+    <Content Include="Views\Evaluate\_Index.cshtml" />
+    <Content Include="Views\Evaluate\_Post.cshtml" />
+    <Content Include="Views\Evaluate\_Rate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

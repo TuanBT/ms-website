@@ -116,9 +116,8 @@
                                 <div class="iTitle">
                                     Đánh giá:
                                 </div>
-                                <div class="miRate">
-                                    @* @{Html.RenderAction("Rate", "Evaluate");}*@
-                                    @Html.Partial("_PartialStar", (float)ViewBag.MaidRating)
+                                <div class="miRate">                     
+                                   @Html.Partial("_PartialStar", (float)ViewBag.MaidRating)
                                 </div>
                             </div>
                             <div class="iSkill">
@@ -141,17 +140,16 @@
                         </div>
                     </div>
 
-                    @Html.Partial("_PartialRating")
+                   @{Html.RenderAction("Rate", "Evaluate", new { jobReqId = 1 });}
 
                     <div class="overView">
                         <div class="ovTitle">
                             Nhận xét của người thuê
                         </div>
                         <div class="ovContent">
-                            @Html.Partial("_PartialComment")
+                             @{Html.RenderAction("Post", "Evaluate");}
                         </div>
                     </div>
-                    @* @{Html.RenderAction("Post", "Evaluate");}*@
                 </div>
             </div>
             <div class="col-md-4">

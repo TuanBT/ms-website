@@ -51,20 +51,17 @@ namespace MS_Website.Controllers
         //
         // GET: /Evaluate/Rate
 
-        public ActionResult Rate()
+        public ActionResult Rate(int jobReqId)
         {
             var rating = db.Ratings.FirstOrDefault(r => r.JobRequestId == 1);
 
-            //rate = rate / count;
-            //rate = Math.Round(rate, MidpointRounding.AwayFromZero);
-            //rate = Math.Round(rate * 2, MidpointRounding.AwayFromZero) / 2;
             if (rating != null)
             {
-                @ViewBag.AverageRating = rating.Rate;
+                @ViewBag.AverageRate = rating.Rate / 2;
             }
             else
             {
-                @ViewBag.AverageRating = 0;
+                @ViewBag.AverageRate = "";
             }
             
             return PartialView("_Rate");
@@ -84,16 +81,41 @@ namespace MS_Website.Controllers
             Rating custRating = db.Ratings.FirstOrDefault(r => (r.JobRequestId == 1) && (r.CustomerId == 11));
             if (custRating != null)
             {
-                custRating.Rate = rating.Rate;
+                custRating.Rate = rating.Rate * 2;
                 db.SaveChanges();
             }
             else
             {
+                rating.Rate = rating.Rate * 2;
                 db.Ratings.Add(rating);
                 db.SaveChanges();
             }
 
-            @ViewBag.AverageRating = rating.Rate;
+            @ViewBag.AverageRate = rating.Rate;
+
+            double sum = 0;
+            int count = 0;
+            List<JobRequest> jobReqs = db.JobRequests.Where(j => j.MaidId == 1).ToList();
+            foreach (var item in jobReqs)
+            {
+                var rat = db.Ratings.FirstOrDefault(r => r.JobRequestId == item.JobRequestId);
+                if (rat != null)
+                {
+                    sum += rat.Rate;
+                    count++;
+                }
+            }
+
+            if (count != 0)
+            {
+                double averageRate = sum / count;
+                var maid = db.Maids.Find(1);
+                maid.RateAvg = Math.Round(averageRate * 2, MidpointRounding.AwayFromZero) / 2;
+                db.SaveChanges();
+
+            }
+            //rate = Math.Round(rate, MidpointRounding.AwayFromZero);
+            //rate = Math.Round(rate * 2, MidpointRounding.AwayFromZero) / 2;
 
             return PartialView("_Rate");
         }
