@@ -29,6 +29,11 @@ namespace MS_Website.Controllers
                         LoadSkillList(skillRef, skillList, db);
                     }
                     ViewBag.MaidRating = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId).RateAvg;
+                    if (Session["Role"].Equals("Customer"))
+                    {
+                        var custId = (int)Session["AccId"];
+                        ViewBag.RecruitmentList = db.Recruitments.Where(r => r.CustomerId == custId).ToList();
+                    }
                     if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
                     {
                         var apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobId);
