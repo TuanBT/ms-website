@@ -272,11 +272,11 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
-                                    @using (Html.BeginForm("RemoveJob", "MaidMediator"))
+                                    @using (Html.BeginForm("RemoveJob", "MaidMediator", FormMethod.Get, new { name = "RemoveJobForm" }))
                                     {
-                                        <input id="hidden" type="hidden" value="" name="jobId" />
+                                        <input id="jobId" type="hidden" value="" name="jobId" />
                                         <div id="ExpiredButton" style="display: none;" class="blfbutton">
-                                            <button type="button" class="btn btn-danger">Xóa</button>
+                                            <button type="button" class="btn btn-danger" onclick="removeJob()">Xóa</button>
                                             <button type="button" class="btn btn-info">Gia hạn</button>
                                         </div>
                                     }
@@ -350,7 +350,7 @@
         if (jobId != chosenId) {
             document.getElementById(jobId).setAttribute("class", "isCurent");
             chosenId = jobId;
-            document.getElementById("hidden").setAttribute("value", jobId);
+            document.getElementById("jobId").setAttribute("value", jobId);
         } else {
             document.getElementById(jobId).setAttribute("class", "");
             chosenId = 0;
@@ -366,6 +366,10 @@
             document.getElementById("ExpiredButton").setAttribute("style", "display: none;");
             document.getElementById("NotAppliedList").setAttribute("style", "display: none;");
         }
+    }
+
+    function removeJob() {
+        document.forms["RemoveJobForm"].submit();
     }
 </script>
 
