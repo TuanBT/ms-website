@@ -5,14 +5,22 @@
 
 @using (Html.BeginForm())
 {
-    <div class="col-md-10">
-        <input id="input-3" class="rating" data-show-clear="false" data-show-caption="true" value="" data-size="xs" />
-    </div>
-    <div class="col-md-2">
-        <span class="label label-success">@ViewBag.AverageRating / 5 Điểm</span><br />
-        <input type="submit" value="Cho điểm" class="btn btn-default btn-xs" />
-    </div>
+    <input id="input-3" class="rating" data-size="sm" value="@ViewBag.AverageRate" />
     <input name="Rate" id="Rate" value="" type="hidden" />
     <input name="JobRequestId" value="1" type="hidden" />
-    <input name="CustomerId" value="11" type="hidden" /><br />
+    <input name="CustomerId" value="11" type="hidden" />
+    
+    <button type="submit" class="btn btn-primary">Chấm điểm</button>
 }
+
+<script type="text/javascript">
+    replaceStr();
+    function replaceStr() {
+        var str = $("#input-3").val();
+        var rep = str.replace(",", ".");
+        $("#input-3").val(rep);
+    };
+    $("#input-3").change(function () {
+        replaceStr();
+    })
+</script>
