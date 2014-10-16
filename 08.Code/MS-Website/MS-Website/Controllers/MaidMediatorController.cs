@@ -97,11 +97,11 @@ namespace MS_Website.Controllers
             }
         }
 
-        public ActionResult RemoveJob(int jobId)
+        public ActionResult RemoveJob(string jobId)
         {
             using (var db = new MSEntities())
             {
-                var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == int.Parse(jobId));
                 if (jobRequest != null)
                 {
                     db.JobRequests.Remove(jobRequest);
