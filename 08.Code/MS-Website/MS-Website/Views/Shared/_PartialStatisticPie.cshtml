@@ -1,4 +1,14 @@
-﻿<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+﻿@model int[]
+
+@*//watting,expired,approved,applied
+var numberStatistic = new int[4] {1, 2, 3, 4};*@
+
+<input value=@Model[0] type="number" id="wattingInput" hidden/>
+<input value=@Model[1] type="number" id="expiredInput" hidden/>
+<input value=@Model[2] type="number" id="approvedInput" hidden/>
+<input value=@Model[3] type="number" id="appliedInput" hidden/>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
     google.load("visualization", "1", {packages:["corechart"]});
     google.setOnLoadCallback(drawChart);
@@ -6,10 +16,10 @@
 
         var data = google.visualization.arrayToDataTable([
             ['Yêu cầu', 'Yêu cầu'],
-            ['Đang chờ',2],
-            ['Đã nhận', 1],
-            ['Đã phản hồi', 2],
-            ['Hết hạn', 3]
+            ['Đang chờ', parseInt($('#wattingInput').val())],
+            ['Hết hạn', parseInt($('#expiredInput').val())],
+            ['Đã phản hồi', parseInt($('#approvedInput').val())],
+            ['Đã nhận', parseInt($('#appliedInput').val())]
         ]);
 
         var options = {
