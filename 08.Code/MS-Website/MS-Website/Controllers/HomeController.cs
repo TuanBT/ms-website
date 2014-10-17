@@ -36,8 +36,9 @@ namespace MS_Website.Controllers
             JreRcr jreRcr;
             using (_db)
             {
-                ViewBag.NumPageRec = _db.Recruitments.Count(r => r.Status == "Waiting")/numResultOnPage;
-                ViewBag.NumPageJob = _db.JobRequests.Count(r => r.Status == "Waiting") / numResultOnPage;
+                ViewBag.NumPageRec = (int) Math.Ceiling((_db.Recruitments.Count(r => r.Status == "Waiting") / (double)numResultOnPage));
+                ViewBag.NumPageJob = Convert.ToInt32(Math.Ceiling((decimal)(_db.JobRequests.Count(r => r.Status == "Waiting") / (double)numResultOnPage)));
+
 
                 var recruitments = _db.Recruitments.Where(r => r.Status == "Waiting").OrderBy(r => r.RecruitmentId).Skip((pageRec - 1) * numResultOnPage).Take(numResultOnPage).ToList();
                 var jobRequests = _db.JobRequests.Where(j => j.Status == "Waiting").OrderBy(r => r.JobRequestId).Skip((pageJob - 1) * numResultOnPage).Take(numResultOnPage).ToList();
