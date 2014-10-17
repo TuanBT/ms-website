@@ -316,6 +316,7 @@ ul {
 
 .listWork {
     max-width: 1300px;
+    min-width: 600px;
     /*padding: 10px 0 20px 0;*/
 }
 
@@ -525,4 +526,19 @@ border-radius: 8px;
     /*width: 47%;*/
     height: 13px;
     background: url(../Image/star-rating-sprite.png) 0 -13px;
+}
+
+
+.pagingIndex {
+    float: right;
+margin: 6px 0 0 0;
+    display: block;
+}
+
+#pagingTabMaid {
+    display: block;
+}
+
+#pagingtabCustomer {
+    display: none;   
 }

@@ -114,11 +114,55 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
                 <div class="col-md-9">
                     <div id="bodyCenter">
                         <div class="tab-content">
-                            <ul class="nav nav-tabs listTitle" role="tablist" id="myTab">
-                                <li class="active"><a href="#tabMaids" role="tab" data-toggle="tab">Việc tìm người thuê</a></li>
-                                <li><a href="#tabCustomer" role="tab" data-toggle="tab">Công việc cần người</a></li>
+                            @{
+                                string cssActiveTabMaid = "";
+                                string cssActiveTabCus = "";
+                                string pagingMaid = "none";
+                                string pagingCus = "none";
+                                if (ViewBag.flagRec)
+                                {
+                                    cssActiveTabCus = "in active";
+                                    cssActiveTabMaid = "";
+                                    pagingMaid = "none";
+                                    pagingCus = "block";
+                                }
+                                if (ViewBag.flagJob)
+                                {
+                                    cssActiveTabCus = "";
+                                    cssActiveTabMaid = "in active";
+                                    pagingMaid = "block";
+                                    pagingCus = "none";
+                                }
+                                if (!ViewBag.flagRec && !ViewBag.flagJob)
+                                {
+                                    cssActiveTabMaid = "in active";
+                                    pagingMaid = "block";
+                                }
+                                int pageJob = (int)ViewBag.pageJob;
+                                int pageRec = (int)ViewBag.pageRec;
+                            }
+                            <ul class="pagination pagination-sm pagingIndex" id="pagingTabMaid" style="display: @pagingMaid">
+                                @{
+                                    for (int i = 1; i <= (int) ViewBag.NumPageRec; i++)
+                                    {
+                                        <li class="@(pageJob == i ? "active" : "")"><a href="@Url.Action("Index", "Home", new { pageJob = i, job = true, rec = false })">@i</a></li>
+                                    }
+                                }
                             </ul>
-                            <div class="tab-pane fade in active" id="tabMaids">
+                            <ul class="pagination pagination-sm pagingIndex" id="pagingtabCustomer" style="display: @pagingCus">
+                                @{
+                                    for (int i = 1; i <= (int)ViewBag.NumPageJob; i++)
+                                    {
+                                     <li class="@(pageRec == i ? "active" : "")"><a href="@Url.Action("Index", "Home", new { pageRec = i, job = false, rec = true })">@i</a></li>
+                                    }
+                                }
+                               </ul>
+                            <ul class="nav nav-tabs listTitle" role="tablist" id="myTab">
+                                <li class="@cssActiveTabMaid" id="tabMaidsLi"><a href="#tabMaids" role="tab" data-toggle="tab">Việc tìm người thuê</a></li>
+                                <li class="@cssActiveTabCus" id="tabCustomerLi"><a href="#tabCustomer" role="tab" data-toggle="tab">Công việc cần người</a></li>
+                            </ul>
+
+                            <div class="tab-pane fade @cssActiveTabMaid" id="tabMaids">
                                 <div class="listWork">
                                     <div class="mainContent">
                                         <ul>
@@ -170,7 +214,7 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="tabCustomer">
+                            <div class="tab-pane fade @cssActiveTabCus" id="tabCustomer">
                                 <div class="listWork">
                                     <div class="mainContent">
                                         <ul>
@@ -200,7 +244,7 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
                                                         </div>
                                                         <div class="skill">
                                                             <ul>
-                                                               @foreach (var skill in recruitmentTemp.SkillList)
+                                                                @foreach (var skill in recruitmentTemp.SkillList)
                                                                 {
                                                                     <li class="childSkill">
                                                                         <span class="skillText">@skill</span>
@@ -241,5 +285,15 @@ Bạn không phải trả bất kỳ khoản phí nào hay phải mất tiền t
 <script>
     $(function () {
         $('#myTab a:selected').tab('show');
-    })
+
+    });
+    $('#tabMaidsLi').click(function () {
+        $('#pagingTabMaid').css({ display: "block" });
+        $('#pagingtabCustomer').css({ display: "none" });
+    });
+    $('#tabCustomerLi').click(function () {
+        $('#pagingTabMaid').css({ display: "none" });
+        $('#pagingtabCustomer').css({ display: "block" });
+    });
+
 </script>
