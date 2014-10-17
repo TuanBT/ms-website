@@ -22,14 +22,25 @@ namespace MS_Website.Controllers
 
         public ActionResult Index()
         {
-            List<RecruitmentTemp> recruitmentTemps = new List<RecruitmentTemp>();
-            List<JobRequestTemp> jobRequestTemps = new List<JobRequestTemp>();
+            int pageRec = Convert.ToInt32(Request["pageRec"]) == 0 ? 1 : Convert.ToInt32(Request["pageRec"]);
+            int pageJob = Convert.ToInt32(Request["pageJob"]) == 0 ? 1 : Convert.ToInt32(Request["pageJob"]);
+            bool flagRec = Convert.ToBoolean(Request["rec"]);
+            bool flagJob = Convert.ToBoolean(Request["job"]);
+            ViewBag.flagRec = flagRec;
+            ViewBag.flagJob = flagJob;
+            ViewBag.pageRec = pageRec;
+            ViewBag.pageJob = pageJob;
+            const int numResultOnPage = 5;
+            var recruitmentTemps = new List<RecruitmentTemp>();
+            var jobRequestTemps = new List<JobRequestTemp>();
             JreRcr jreRcr;
             using (_db)
             {
-                
-                var recruitments = _db.Recruitments.Where(r => r.Status == "Waiting").Take(5).ToList();
-                var jobRequests = _db.JobRequests.Where(j => j.Status == "Waiting").Take(5).ToList();
+                ViewBag.NumPageRec = _db.Recruitments.Count(r => r.Status == "Waiting")/numResultOnPage;
+                ViewBag.NumPageJob = _db.JobRequests.Count(r => r.Status == "Waiting") / numResultOnPage;
+
+                var recruitments = _db.Recruitments.Where(r => r.Status == "Waiting").OrderBy(r => r.RecruitmentId).Skip((pageRec - 1) * numResultOnPage).Take(numResultOnPage).ToList();
+                var jobRequests = _db.JobRequests.Where(j => j.Status == "Waiting").OrderBy(r => r.JobRequestId).Skip((pageJob - 1) * numResultOnPage).Take(numResultOnPage).ToList();
 
                 foreach(var recruitment in recruitments)
                 {
