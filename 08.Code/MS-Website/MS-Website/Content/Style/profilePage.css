@@ -751,6 +751,7 @@ border-radius: 5px;
 .iTitle {
     display: inline-block;
     font-weight: 700;
+    min-width: 100px;
 }
 
 .iStatusText {
@@ -947,10 +948,6 @@ border-radius: 5px;
 .iStatus {
 }
 
-.iTitle {
-    display: inline-block;
-    font-weight: 700;
-}
 
 .iStatusText {
 }
@@ -1220,4 +1217,8 @@ text-decoration: none;
 .buttonSearchLink:focus{
     color: white;
     text-decoration: none;
+}
+
+.labelStatus {
+    font-size: 15px;
 }
