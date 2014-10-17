@@ -116,7 +116,8 @@
                         <div class="ovContent">
                             @{
                                 //watting,expired,approved,applied
-                                var numberStatistic = new int[4] {1, 2, 3, 4};
+                               int[] numStatus = ViewBag.MaidMediatorStatusStatistic;
+                               var numberStatistic = new int[4] { numStatus[0], numStatus[1], numStatus[2], numStatus[3] };
                               }
                             @Html.Partial("_PartialStatisticPie",numberStatistic)
                         </div>

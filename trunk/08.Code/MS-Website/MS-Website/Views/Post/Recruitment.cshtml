@@ -48,7 +48,29 @@
                                 <div class="iTitle">
                                     Tình Trạng:
                                 </div>
-                                <span class="label label-default">@Model.Recruitment.Status</span>
+                                @*<span class="label label-primary">Đang chờ</span>
+                                <span class="label label-success">Đã tuyển</span>
+                                <span class="label label-danger">Hết hạn</span>*@
+                                @{string color = "default";
+                                    string status = "";
+                                  }
+                                @if (Model.Recruitment.Status == "Waiting")
+                                {
+                                    color = "primary";
+                                    status = "Đang chờ được nhận";
+                                }
+                                @if (Model.Recruitment.Status == "Applied")
+                                {
+                                    color = "success";
+                                    status = "Đã được nhận";
+                                }
+                                    else if (Model.Recruitment.Status == "Expired")
+                                {
+                                    color = "danger";
+                                    status = "Hết hạn";
+                                }
+
+                                <span class="labelStatus label label-@color">@status</span>
                                 <span class="iStatusText">Bởi</span>
 
                                 <div class="iStatusPic">

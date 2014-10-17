@@ -102,7 +102,35 @@
                                 <div class="iTitle">
                                     Tình Trạng:
                                 </div>
-                                <span class="label label-default">@Model.Job.Status</span>
+                                @*<span class="label label-primary">Đang chờ</span>
+                                <span class="label label-success">Đã tuyển</span>
+                                <span class="label label-warning">Đã hoàn tất</span>
+                                <span class="label label-danger">Hết hạn</span>*@
+                                @{string color = "default";
+                                    string status = "";
+                                  }
+                                @if (Model.Job.Status == "Waiting")
+                                {
+                                    color = "primary";
+                                    status = "Đang chờ được nhận";
+                                }
+                                @if (Model.Job.Status == "Applied")
+                                {
+                                    color = "success";
+                                    status = "Đã được nhận";
+                                }
+                                    @if (Model.Job.Status == "Approved")
+                                {
+                                    color = "warning";
+                                    status = "Đã hoàn tất";
+                                }
+                                else if (Model.Job.Status == "Expired")
+                                {
+                                    color = "danger";
+                                    status = "Hết hạn";
+                                }
+
+                                <span class="labelStatus label label-@color">@status</span>
                                 @if (Model.Job.Status == "Applied" || Model.Job.Status == "Approved")
                                 {
                                     <span class="iStatusText">Bởi</span>
