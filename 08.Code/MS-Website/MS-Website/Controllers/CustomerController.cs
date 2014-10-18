@@ -206,7 +206,7 @@ namespace MS_Website.Controllers
                     recruitment.PostTime = DateTime.Now;
                     recruitment.ExpiredTime = DateTime.Now.AddDays(7 * int.Parse(time));
                     recruitment.Title = "Tuân ngu";
-                    skillRef.Type = 0;
+                    skillRef.Type = 1;
                     db.Recruitments.Add(recruitment);
                     db.SaveChanges();
                     LoadItems();
@@ -228,6 +228,20 @@ namespace MS_Website.Controllers
             ViewBag.SalaryList = Session["SalaryList"];
             ViewBag.WorkList = Session["WorkList"];
             ViewBag.SkillList = Session["SkillList"];
+        }
+
+        public ActionResult ApplyJobRequest(int jobRequestId, int recruitId)
+        {
+            var apply = new Apply();
+            apply.JobRequestId = jobRequestId;
+            apply.RecruitmentId = recruitId;
+            db.Applies.Add(apply);
+            var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
+            var recruit = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
+            jobRequest.Status = "Applied";
+            recruit.Status = "Applied";
+            db.SaveChanges();
+            return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
         }
     }
 }

@@ -29,14 +29,24 @@ namespace MS_Website.Controllers
                         LoadSkillList(skillRef, skillList, db);
                     }
                     ViewBag.MaidRating = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId).RateAvg;
-                    if (job.Maid.MaidMediatorId == (int)Session["AccId"] || job.Maid.StaffId == (int)Session["AccId"])
+                    if (job.Maid.MaidMediatorId != null)
                     {
-                        ViewBag.Remove = "true";
+                        if (job.Maid.MaidMediatorId == (int)Session["AccId"])
+                        {
+                            ViewBag.Remove = "true";
+                        }
+                    }
+                    else
+                    {
+                        if (job.Maid.StaffId == (int)Session["AccId"])
+                        {
+                            ViewBag.Remove = "true";
+                        }
                     }
                     if (Session["Role"].Equals("Customer"))
                     {
                         var custId = (int)Session["AccId"];
-                        ViewBag.RecruitmentList = db.Recruitments.Where(r => r.CustomerId == custId).ToList();
+                        ViewBag.RecruitmentList = db.Recruitments.Where(r => r.CustomerId == custId && r.Status.Equals("Waiting")).ToList();
                     }
                     if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
                     {
@@ -71,6 +81,10 @@ namespace MS_Website.Controllers
                     var skillList = new List<string>();
                     var recSkillRefList = new List<SkillReference>();
                     var recJobReqList = new List<JobRequestTemp>();
+                    if (recruitment.CustomerId == (int)Session["AccId"])
+                    {
+                        ViewBag.Remove = "true";
+                    }
                     if (skillRef != null)
                     {
                         LoadSkillList(skillRef, skillList, db);

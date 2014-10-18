@@ -71,6 +71,20 @@ namespace MS_Website.Controllers
                     ViewBag.ExpiredList = expiredJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null)).ToList();
                     if (maid.MaidMediatorId != null)
                     {
+                        if (maid.MaidMediatorId == (int)Session["AccId"])
+                        {
+                            ViewBag.Remove = "true";
+                        }
+                    }
+                    else
+                    {
+                        if (maid.StaffId == (int)Session["AccId"])
+                        {
+                            ViewBag.Remove = "true";
+                        }
+                    }
+                    if (maid.MaidMediatorId != null)
+                    {
                         var mUsername = maid.MaidMediator.Account.Username;
                         var isActive = maid.MaidMediator.Account.IsActive;
                         var joinDate = maid.MaidMediator.Account.JoinDate;
