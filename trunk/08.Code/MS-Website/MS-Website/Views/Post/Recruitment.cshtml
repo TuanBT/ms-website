@@ -38,11 +38,12 @@
                         <div class="miPic">
                             <img src="@ViewBag.CustImg" alt="Maid sercive" height="100%">
                         </div>
-
-                        <div class="miButton">
-                            <button type="button" class="btn btn-info">Nhận</button>
-                            <button type="button" class="btn btn-danger">Hủy</button>
-                        </div>
+                        @if(ViewBag.Remove == "true")
+                        {
+                            <div class="miButton">
+                                <button type="button" class="btn btn-danger">Hủy</button>
+                            </div>
+                        }
                         <div class="mmiDetail">
                             <div class="iStatus">
                                 <div class="iTitle">

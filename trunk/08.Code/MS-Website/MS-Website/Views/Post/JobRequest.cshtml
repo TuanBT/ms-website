@@ -53,40 +53,44 @@
                                                     <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
                                                         lý</h4>
                                                 </div>
-                                                <div class="modal-body chooseMaidModalMaid">
-                                                    @foreach (var recruit in ViewBag.RecruitmentList)
-                                                    {
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="@recruit.RecruitmentId">
-                                                                <div>
-                                                                    <div class="liImage">
-                                                                        <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                @using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new { name = "ApplyForm" }))
+                                                {
+                                                    <div class="modal-body chooseMaidModalMaid">
+                                                        @foreach (var recruit in ViewBag.RecruitmentList)
+                                                        {
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input type="radio" name="recruitId" id="optionsRadios2" value="@recruit.RecruitmentId">
+                                                                    <div>
+                                                                        <div class="liImage">
+                                                                            <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                                        </div>
+                                                                        <div class="liMaidContent">
+                                                                            <div class="licoFullName">
+                                                                                <a href="#" id="@recruit.RecruitmentId name">@recruit.Title</a>
+                                                                            </div>
+                                                                            <div class="licoRate">
+                                                                                <span class="glyphicon glyphicon-star"></span>
+                                                                                <span class="glyphicon glyphicon-star"></span>
+                                                                                <span class="glyphicon glyphicon-star"></span>
+                                                                                <span class="glyphicon glyphicon-star"></span>
+                                                                                <span class="glyphicon glyphicon-star"></span>
+                                                                            </div>
+                                                                            <div class="ricoPost">
+                                                                                Đăng/nhận
+                                                                                <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="liMaidContent">
-                                                                        <div class="licoFullName">
-                                                                            <a href="#" id="@recruit.RecruitmentId name">@recruit.Title</a>
-                                                                        </div>
-                                                                        <div class="licoRate">
-                                                                            <span class="glyphicon glyphicon-star"></span>
-                                                                            <span class="glyphicon glyphicon-star"></span>
-                                                                            <span class="glyphicon glyphicon-star"></span>
-                                                                            <span class="glyphicon glyphicon-star"></span>
-                                                                            <span class="glyphicon glyphicon-star"></span>
-                                                                        </div>
-                                                                        <div class="ricoPost">
-                                                                            Đăng/nhận
-                                                                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                    }
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="chooseMaid()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
-                                                </div>
+                                                                </label>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="hidden" name="jobRequestId" value="@Model.Job.JobRequestId"/>
+                                                        <button class="btn btn-primary" data-dismiss="modal" onclick="chooseRecruit()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +112,7 @@
                                 <span class="label label-danger">Hết hạn</span>*@
                                 @{string color = "default";
                                     string status = "";
-                                  }
+                                }
                                 @if (Model.Job.Status == "Waiting")
                                 {
                                     color = "primary";
@@ -119,7 +123,7 @@
                                     color = "success";
                                     status = "Đã được nhận";
                                 }
-                                    @if (Model.Job.Status == "Approved")
+                                @if (Model.Job.Status == "Approved")
                                 {
                                     color = "warning";
                                     status = "Đã hoàn tất";
@@ -145,7 +149,7 @@
                                     Đánh giá:
                                 </div>
                                 <div class="miRate">                     
-                                   @Html.Partial("_PartialStar", (float)ViewBag.MaidRating)
+                                    @Html.Partial("_PartialStar", (float)ViewBag.MaidRating)
                                 </div>
                             </div>
                             <div class="iSkill">
@@ -168,14 +172,14 @@
                         </div>
                     </div>
 
-                   @{Html.RenderAction("Rate", "Evaluate", new { jobReqId = 1 });}
+                    @{Html.RenderAction("Rate", "Evaluate", new { jobReqId = 1 });}
 
                     <div class="overView">
                         <div class="ovTitle">
                             Nhận xét của người thuê
                         </div>
                         <div class="ovContent">
-                             @{Html.RenderAction("Post", "Evaluate");}
+                            @{Html.RenderAction("Post", "Evaluate");}
                         </div>
                     </div>
                 </div>
@@ -251,4 +255,9 @@
         </div>
     </div>
 </div>
+<script>
+    function chooseRecruit() {
+        document.forms["ApplyForm"].submit();
+    }
+</script>
 
