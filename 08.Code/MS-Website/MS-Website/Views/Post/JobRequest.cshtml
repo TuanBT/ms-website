@@ -1,6 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Chi tiết yêu cầu công việc";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    MS_Website.Models.JobRequestTemp JobRequestTemp = Model;
 }
 
 <div class="Menu">
@@ -36,68 +37,68 @@
                 <div class="leftInfo">
                     <div class="mainInfo">
                         <div class="miPic">
-                            <img src="@ViewBag.MaidImg" alt="Maid sercive" height="100%">
+                            <img src="../Content/Image/jr.png" alt="Maid sercive" width="100%">
                         </div>
                         <div class="miButton">
                             @{
                                 if (Model.Job.Status == "Waiting")
                                 {
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target=".chooseMaidModel">Thuê</button>
-                                    <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog modal-sm">
-                                            <div class="modal-content">
-                                                <div class="modal-header chooseMaidModalTitle">
-                                                    <button type="button" class="close" data-dismiss="modal">
-                                                        <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                                    <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target=".chooseMaidModel">Thuê</button>
+                                <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header chooseMaidModalTitle">
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
                                                         lý</h4>
-                                                </div>
-                                                @using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new { name = "ApplyForm" }))
-                                                {
-                                                    <div class="modal-body chooseMaidModalMaid">
-                                                        @foreach (var recruit in ViewBag.RecruitmentList)
-                                                        {
-                                                            <div class="radio">
-                                                                <label>
-                                                                    <input type="radio" name="recruitId" id="optionsRadios2" value="@recruit.RecruitmentId">
-                                                                    <div>
-                                                                        <div class="liImage">
-                                                                            <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                            </div>
+                                            @using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new { name = "ApplyForm" }))
+                                            {
+                                                <div class="modal-body chooseMaidModalMaid">
+                                                    @foreach (var recruit in ViewBag.RecruitmentList)
+                                                    {
+                                                        <div class="radio">
+                                                            <label>
+                                                                <input type="radio" name="recruitId" id="optionsRadios2" value="@recruit.RecruitmentId">
+                                                                <div>
+                                                                    <div class="liImage">
+                                                                        <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                                    </div>
+                                                                    <div class="liMaidContent">
+                                                                        <div class="licoFullName">
+                                                                            <a href="#" id="@recruit.RecruitmentId name">@recruit.Title</a>
                                                                         </div>
-                                                                        <div class="liMaidContent">
-                                                                            <div class="licoFullName">
-                                                                                <a href="#" id="@recruit.RecruitmentId name">@recruit.Title</a>
-                                                                            </div>
-                                                                            <div class="licoRate">
-                                                                                <span class="glyphicon glyphicon-star"></span>
-                                                                                <span class="glyphicon glyphicon-star"></span>
-                                                                                <span class="glyphicon glyphicon-star"></span>
-                                                                                <span class="glyphicon glyphicon-star"></span>
-                                                                                <span class="glyphicon glyphicon-star"></span>
-                                                                            </div>
-                                                                            <div class="ricoPost">
-                                                                                Đăng/nhận
+                                                                        <div class="licoRate">
+                                                                            <span class="glyphicon glyphicon-star"></span>
+                                                                            <span class="glyphicon glyphicon-star"></span>
+                                                                            <span class="glyphicon glyphicon-star"></span>
+                                                                            <span class="glyphicon glyphicon-star"></span>
+                                                                            <span class="glyphicon glyphicon-star"></span>
+                                                                        </div>
+                                                                        <div class="ricoPost">
+                                                                            Đăng/nhận
                                                                                 <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
-                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </label>
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <input type="hidden" name="jobRequestId" value="@Model.Job.JobRequestId"/>
-                                                        <button class="btn btn-primary" data-dismiss="modal" onclick="chooseRecruit()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
-                                                    </div>
-                                                }
-                                            </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="hidden" name="jobRequestId" value="@Model.Job.JobRequestId"/>
+                                                    <button class="btn btn-primary" data-dismiss="modal" onclick="chooseRecruit()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
+                                </div>
                                 }
                                 if (ViewBag.Remove == "true")
                                 {
-                                    <button type="button" class="btn btn-danger">Hủy</button>
+                                <button type="button" class="btn btn-danger">Hủy</button>
                                 }
                             }
                         </div>
@@ -111,7 +112,7 @@
                                 <span class="label label-warning">Đã hoàn tất</span>
                                 <span class="label label-danger">Hết hạn</span>*@
                                 @{string color = "default";
-                                    string status = "";
+                                  string status = "";
                                 }
                                 @if (Model.Job.Status == "Waiting")
                                 {
@@ -148,7 +149,7 @@
                                 <div class="iTitle">
                                     Đánh giá:
                                 </div>
-                                <div class="miRate">                     
+                                <div class="miRate">
                                     @Html.Partial("_PartialStar", (float)ViewBag.MaidRating)
                                 </div>
                             </div>
@@ -189,7 +190,7 @@
                     <ul class="riDetail">
                         <li class="rideRow">
                             <div class="rideroTitle">
-                                Đăng
+                                Đăng lúc
                             </div>
                             <div class="rideroContent">
                                 <strong>30/08/2012
@@ -197,59 +198,37 @@
                             </div>
                         </li>
                     </ul>
-                    @*<div class="riManager">
+                    <div class="riManager">
                         <div class="rimaTitle">
-                            Những yêu cầu giống
+                            Công việc của
                         </div>
                         <ul class="rimaListSameJobRequest">
                             <li>
-                                <div class="jrImage">
-                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                                </div>
-                                <div class="jrDetail">
-                                    <div class="jrMaidFullname">
-                                        <a href="#">Maid name of job request</a>
-                                    </div>
-                                    <div class="jrMaidRate">
-                                        <div class="rate">
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="jrImage">
+                                            <img src="@ViewBag.MaidImg" alt="Maid sercive" width="100%">
                                         </div>
                                     </div>
-                                    <div class="blTime">
-                                        <span class="blTimeTitle">Đăng: </span><span
-                                            class="blTimeText">6:00 30/08/2014</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="jrImage">
-                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                                </div>
-                                <div class="jrDetail">
-                                    <div class="jrMaidFullname">
-                                        <a href="#">Maid name of job request</a>
-                                    </div>
-                                    <div class="jrMaidRate">
-                                        <div class="rate">
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
+                                    <div class="col-md-9">
+                                        <div class="jrDetail">
+                                            <div class="jrMaidFullname">
+                                                <a href="@Url.Action("ManageMaidProfile", "MaidMediator", new { maidId = JobRequestTemp.Maid.MaidId })">@JobRequestTemp.Maid.MaidName</a>
+                                            </div>
+                                            <div class="jrMaidRate">
+                                                <div class="rate">
+                                                    @Html.Partial("_PartialStar", (float)JobRequestTemp.Maid.RateAvg)
+                                                </div>
+                                            </div>
+                                            <div class="blTime">
+                                                <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@JobRequestTemp.Maid.Gender</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="blTime">
-                                        <span class="blTimeTitle">Đăng: </span><span
-                                            class="blTimeText">6:00 30/08/2014</span>
                                     </div>
                                 </div>
                             </li>
                         </ul>
-                    </div>*@
+                    </div>
                 </div>
             </div>
         </div>

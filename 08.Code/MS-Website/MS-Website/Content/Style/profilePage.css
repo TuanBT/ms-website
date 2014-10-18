@@ -788,9 +788,9 @@ border-radius: 5px;
 
 
 .jrImage {
-    height: 50px;
     display: inline-block;
     margin-right: 10px;
+    width: 50px;
 }
 
 .jrMaidFullname {
@@ -806,10 +806,6 @@ border-radius: 5px;
     .jrMaidFullname > a:hover {
     }
 
-.jrDetail {
-    display: inline-block;
-    float: right;
-}
 
 .mmiDetail {
     width: 400px;
@@ -983,11 +979,6 @@ border-radius: 5px;
     padding-top: 10px;
 }
 
-.jrImage {
-    height: 50px;
-    display: inline-block;
-    margin-right: 10px;
-}
 
 .jrMaidFullname {
 }
