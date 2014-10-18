@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Người đại diện";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    MS_Website.Models.Account account = Model;
 }
 
 <style>
@@ -107,11 +108,11 @@
                 <div class="leftInfo">
                     <div class="mainInfo">
                         <div class="miPic">
-                            <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100%">
+                            <img src="@account.Avatar" alt="Maid sercive">
                         </div>
                         <div class="mmiDetail">
                             <div class="miFullName">
-                                @Model.FullName
+                                @account.FullName
                             </div>
                             <div class="miAccount">
                                 Đại diện người giúp việc
@@ -141,7 +142,7 @@
                                 Tham gia
                             </div>
                             <div class="rideroContent">
-                                <strong>@Model.JoinDate
+                                <strong>@account.JoinDate
                                 </strong>
                             </div>
                         </li>
