@@ -50,7 +50,7 @@
                                 Người giúp việc
                             </div>
                             <div class="miRate">
-                                @Html.Partial("_PartialStar",(float)maid.RateAvg)
+                                @Html.Partial("_PartialStar", (float)maid.RateAvg)
                             </div>
                         </div>
                     </div>
@@ -107,13 +107,16 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
-                                    @using (Html.BeginForm("RemoveJob", "MaidMediator"))
+                                    @if (ViewBag.Remove == "true")
                                     {
+                                        using (Html.BeginForm("RemoveJob", "MaidMediator"))
+                                        {
                                         <input id="hidden" type="hidden" value="" name="jobId" />
                                         <div id="NotAppliedList" style="display: none;" class="blfbutton">
                                             <button type="submit" class="btn btn-danger">Hủy</button>
                                             <button type="button" class="btn btn-info">Gia hạn</button>
                                         </div>
+                                        }
                                     }
                                 </div>
                             </div>
@@ -269,13 +272,16 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
-                                    @using (Html.BeginForm("RemoveJob", "MaidMediator", FormMethod.Get, new { name = "RemoveJobForm" }))
+                                    @if (ViewBag.Remove == "true")
                                     {
+                                        using (Html.BeginForm("RemoveJob", "MaidMediator", FormMethod.Get, new { name = "RemoveJobForm" }))
+                                        {
                                         <input id="jobId" type="hidden" value="" name="jobId" />
                                         <div id="ExpiredButton" style="display: none;" class="blfbutton">
                                             <button type="button" class="btn btn-danger" onclick="removeJob()">Xóa</button>
                                             <button type="button" class="btn btn-info">Gia hạn</button>
                                         </div>
+                                        }
                                     }
                                 </div>
                             </div>
