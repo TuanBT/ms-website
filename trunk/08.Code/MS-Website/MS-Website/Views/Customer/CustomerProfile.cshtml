@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@*@{MS_Website.Models.JobRequestTemp NotApplList = ViewBag.NotApplList};
+@NotApplList.*@
 <div class="Menu">
     <div class="rows">
         <div class="hMenu">
@@ -58,7 +60,7 @@
                                 <ul class="bFreeListWork">
                                     @foreach (var recruit in ViewBag.NotApplList)
                                     {
-                                        <li class="isCurent">
+                                        <li id="@recruit.Recruitment.RecruitmentId" onclick="chooseJob(@recruit.Recruitment.RecruitmentId, 2)">
                                             <div class="blImage">
                                                 <img src="../Content/Image/MS-Logo.png" alt="Maid service" height="100%">
                                             </div>
@@ -170,7 +172,7 @@
                                 <ul class="bexpiredListWork">
                                     @foreach (var recruit in ViewBag.ExpiredList)
                                     {
-                                        <li class="isCurent">
+                                        <li id="@recruit.Recruitment.RecruitmentId" onclick="chooseJob(@recruit.Recruitment.RecruitmentId, 2)">
                                             <div class="blImage">
                                                 <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
                                             </div>
@@ -202,11 +204,11 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
-                                    @using (Html.BeginForm("RemoveRecruitment", "Customer"))
+                                    @using (Html.BeginForm("RemoveRecruitment", "Customer", FormMethod.Get, new { name = "RemoveRecruitForm"}))
                                     {
-                                        <input id="hidden" type="hidden" value="" name="jobId" />
+                                        <input id="recruitId" type="hidden" value="" name="recruitmentId" />
                                         <div id="ExpiredButton" style="display: none;" class="blfbutton">
-                                            <button type="submit" class="btn btn-danger">Hủy</button>
+                                            <button type="submit" class="btn btn-danger" onclick="removeRecruit()">Hủy</button>
                                             <button type="button" class="btn btn-info">Gia hạn</button>
                                         </div>
                                     }
@@ -257,22 +259,20 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 <script>
     var chosenId = 0;
-    function chooseJob(jobId, type) {
+    function chooseJob(recruitId, type) {
         if (chosenId != 0) {
             document.getElementById(chosenId).setAttribute("class", "");
         }
-        if (jobId != chosenId) {
-            document.getElementById(jobId).setAttribute("class", "isCurent");
-            chosenId = jobId;
-            document.getElementById("hidden").setAttribute("value", jobId);
+        if (recruitId != chosenId) {
+            document.getElementById(recruitId).setAttribute("class", "isCurent");
+            chosenId = recruitId;
+            document.getElementById("recruitId").setAttribute("value", recruitId);
         } else {
-            document.getElementById(jobId).setAttribute("class", "");
+            document.getElementById(recruitId).setAttribute("class", "");
             chosenId = 0;
             type = 0;
         }
@@ -286,6 +286,10 @@
             document.getElementById("ExpiredButton").setAttribute("style", "display: none;");
             document.getElementById("NotAppliedList").setAttribute("style", "display: none;");
         }
+    }
+    
+    function removeRecruit() {
+        document.forms["RemoveRecruitForm"].submit();
     }
 </script>
 
