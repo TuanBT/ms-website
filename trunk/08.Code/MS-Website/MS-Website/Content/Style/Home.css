@@ -286,11 +286,20 @@ height: 300px;
     }
 
 .footer {
+
+}
+.footerRow{
     background: #bdc3c7;
-    padding-top: 1.0625rem;
-    padding-bottom: 2.8125rem;
+    /*padding-top: 1.0625rem;
+    padding-bottom: 2.8125rem;*/
     color: white;
     text-align: center;
+    margin-top: 20px;
+}
+
+.imgWorkFooter{
+   height: 30px;
+margin-top: 54px;
 }
 
 .footerLogo {

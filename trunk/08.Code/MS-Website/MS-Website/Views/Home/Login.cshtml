@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Login</title>
+    <title>@ViewBag.Title</title>
     <link rel="icon" href="~/Content/Image/favicon.ico" />
     <script src="~/Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <link href="~/Content/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -107,14 +107,19 @@
             padding: 0;
         }
 
-        .footer {
-            background: #bdc3c7;
-            padding-top: 1.0625rem;
-            padding-bottom: 2.8125rem;
-            color: white;
-            text-align: center;
-            margin-top: 60px;
-        }
+        .footerRow{
+    background: #bdc3c7;
+    /*padding-top: 1.0625rem;
+    padding-bottom: 2.8125rem;*/
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.imgWorkFooter{
+   height: 30px;
+margin-top: 54px;
+}
 
         .linksContainer {
             display: inline-block;
@@ -165,7 +170,7 @@
     <div class="header">
         <div class="rows">
             <div class="logo">
-                <a href="#">
+                <a href="@Url.Action("Index","Home")">
                     <img src="~/Content/Image/MS-Logo-white.png" alt="Maid service"
                         style="margin-top: -18px; margin-bottom: -14px; width: 80px;"></a>
             </div>
