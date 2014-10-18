@@ -36,14 +36,15 @@ namespace MS_Website.Controllers
             JreRcr jreRcr;
             using (_db)
             {
-                ViewBag.NumPageRec = (int) Math.Ceiling((_db.Recruitments.Count(r => r.Status == "Waiting") / (double)numResultOnPage));
-                ViewBag.NumPageJob = Convert.ToInt32(Math.Ceiling((decimal)(_db.JobRequests.Count(r => r.Status == "Waiting") / (double)numResultOnPage)));
-
+                int NumPageRec = (int)Math.Ceiling((_db.Recruitments.Count(r => r.Status == "Waiting") / (double)numResultOnPage));
+                int NumPageJob = (int)Math.Ceiling((_db.JobRequests.Count(r => r.Status == "Waiting") / (double)numResultOnPage));
+                ViewBag.NumPageRec = NumPageRec > 5 ? 5 : NumPageRec;
+                ViewBag.NumPageJob = NumPageJob > 5 ? 5 : NumPageJob;
 
                 var recruitments = _db.Recruitments.Where(r => r.Status == "Waiting").OrderBy(r => r.RecruitmentId).Skip((pageRec - 1) * numResultOnPage).Take(numResultOnPage).ToList();
                 var jobRequests = _db.JobRequests.Where(j => j.Status == "Waiting").OrderBy(r => r.JobRequestId).Skip((pageJob - 1) * numResultOnPage).Take(numResultOnPage).ToList();
 
-                foreach(var recruitment in recruitments)
+                foreach (var recruitment in recruitments)
                 {
                     var customer = _db.Customers.FirstOrDefault(c => c.AccountId == recruitment.CustomerId);
                     var skillRef = _db.SkillReferences.FirstOrDefault(s => s.SkillRefId == recruitment.SkillRefId);
@@ -54,7 +55,7 @@ namespace MS_Website.Controllers
                                                               Customer = customer,
                                                               Recruitment = recruitment,
                                                               JobRequest = null,
-                                                              SkillList = PostController.LoadSkillList(skillRef, skillList,_db)
+                                                              SkillList = PostController.LoadSkillList(skillRef, skillList, _db)
                                                           };
                     recruitmentTemps.Add(recruitmentTemp);
                 }
@@ -65,16 +66,16 @@ namespace MS_Website.Controllers
                     var skillRef = _db.SkillReferences.FirstOrDefault(s => s.SkillRefId == jobRequest.SkillRefId);
                     var skillList = new List<string>();
                     //new JobRequestTemp();
-                   var jobRequestTemp = new JobRequestTemp
-                                              {
-                                                  Recruitment = null,
-                                                  Job = jobRequest,
-                                                  Maid = maid,
-                                                  SkillList = PostController.LoadSkillList(skillRef, skillList, _db)
-                                              };
+                    var jobRequestTemp = new JobRequestTemp
+                                               {
+                                                   Recruitment = null,
+                                                   Job = jobRequest,
+                                                   Maid = maid,
+                                                   SkillList = PostController.LoadSkillList(skillRef, skillList, _db)
+                                               };
                     jobRequestTemps.Add(jobRequestTemp);
                 }
-                
+
                 jreRcr = new JreRcr
                                     {
                                         jobRequestTemps = jobRequestTemps,
@@ -200,6 +201,10 @@ namespace MS_Website.Controllers
 
                 }
                 if (Session["Role"].Equals("Customer"))
+                {
+                    return RedirectToAction("Index", "Customer");
+                }
+                if (Session["Role"].Equals("Admin"))
                 {
 
                 }
