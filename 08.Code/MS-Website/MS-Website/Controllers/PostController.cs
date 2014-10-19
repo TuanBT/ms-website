@@ -33,14 +33,20 @@ namespace MS_Website.Controllers
                     {
                         if (job.Maid.MaidMediatorId == (int)Session["AccId"])
                         {
-                            ViewBag.Remove = "true";
+                            if (job.Status.Equals("Waiting") || job.Status.Equals("Expired"))
+                            {
+                                ViewBag.Remove = "true";
+                            }
                         }
                     }
                     else
                     {
                         if (job.Maid.StaffId == (int)Session["AccId"])
                         {
-                            ViewBag.Remove = "true";
+                            if (job.Status.Equals("Waiting") || job.Status.Equals("Expired"))
+                            {
+                                ViewBag.Remove = "true";
+                            }
                         }
                     }
                     if (Session["Role"].Equals("Customer"))
@@ -52,8 +58,8 @@ namespace MS_Website.Controllers
                     {
                         var apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobId);
                         var recruitment = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId);
-                        ViewBag.CustImg =
-                            db.Accounts.SingleOrDefault(a => a.AccountId == recruitment.CustomerId).Avatar;
+                        ViewBag.Customer =
+                            db.Accounts.SingleOrDefault(a => a.AccountId == recruitment.CustomerId);
                         var jobRequestTmp = new JobRequestTemp(job, maid, recruitment, skillList);
                         return View("JobRequest", jobRequestTmp);
                     }
@@ -83,7 +89,10 @@ namespace MS_Website.Controllers
                     var recJobReqList = new List<JobRequestTemp>();
                     if (recruitment.CustomerId == (int)Session["AccId"])
                     {
-                        ViewBag.Remove = "true";
+                        if (recruitment.Status.Equals("Waiting") || recruitment.Status.Equals("Expired"))
+                        {
+                            ViewBag.Remove = "true";
+                        }
                     }
                     if (skillRef != null)
                     {
@@ -110,8 +119,8 @@ namespace MS_Website.Controllers
                     {
                         var apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitmentId);
                         var jobRequest = db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId);
-                        ViewBag.MaidImg =
-                            db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId).PersonalImage;
+                        ViewBag.Maid =
+                            db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
                         var recruitmentTmp = new RecruitmentTemp(recruitment, customer, jobRequest, skillList);
                         return View("Recruitment", recruitmentTmp);
                     }
