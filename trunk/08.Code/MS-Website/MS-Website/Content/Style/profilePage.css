@@ -246,6 +246,7 @@
 .mmiDetail {
     display: inline-block;
     margin-left: 20px;
+    width: 480px;
 }
 
 .miFullName {
@@ -736,8 +737,8 @@ border-radius: 5px;
 }
 
 .miButton {
-    float: right;
-    width: 60px;
+    /*float: right;
+    width: 60px;*/
     text-align: center;
 }
 
@@ -754,24 +755,6 @@ border-radius: 5px;
     min-width: 100px;
 }
 
-.iStatusText {
-}
-
-.iStatusPic {
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-}
-
-.iRating {
-    display: inline-block;
-}
-
-    .iRating > .miRate {
-        display: inline-block;
-        margin-top: 0px;
-        font-size: 14px;
-    }
 
 .iSkill {
     margin-top: 10px;
@@ -806,10 +789,6 @@ border-radius: 5px;
     .jrMaidFullname > a:hover {
     }
 
-
-.mmiDetail {
-    width: 400px;
-}
 
 .rimaMaidList > li {
     height: 60px;
@@ -931,27 +910,31 @@ border-radius: 5px;
 .viewComment {
 }
 
-.miButton {
-    float: right;
-    width: 60px;
-    text-align: center;
-}
-
-    .miButton > button {
-        margin: 10px 0 10px 0;
-    }
-
-.iStatus {
-}
 
 
 .iStatusText {
+    font-weight: 700;
+margin: 0 5px;
+padding: 5px;
+background: #DDD;
+border-radius: 100%;
+}
+
+.istatusHire {
+    display: inline-block;
+border: 1px solid #DDD;
+padding: 0 5px 0 0;
 }
 
 .iStatusPic {
-    width: 30px;
+    /*width: 30px;*/
     height: 30px;
     display: inline-block;
+}
+
+.iStatusName {
+    display: inline-block;
+font-weight: 700;
 }
 
 .iRating {
@@ -998,9 +981,6 @@ border-radius: 5px;
     /*float: right;*/
 }
 
-.mmiDetail {
-    width: 400px;
-}
 
 .maliApply > li {
     display: inline-block;

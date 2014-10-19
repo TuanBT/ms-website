@@ -1,6 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Recruitment";
+    ViewBag.Title = "Tin tìm người";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    MS_Website.Models.RecruitmentTemp RecruitmentTemp = Model;
 }
 
 <div class="Menu">
@@ -36,9 +37,9 @@
                 <div class="leftInfo">
                     <div class="mainInfo">
                         <div class="miPic">
-                            <img src="@ViewBag.CustImg" alt="Maid sercive" height="100%">
+                            <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
                         </div>
-                        @if(ViewBag.Remove == "true")
+                        @if (ViewBag.Remove == "true")
                         {
                             <div class="miButton">
                                 <button type="button" class="btn btn-danger">Hủy</button>
@@ -53,19 +54,19 @@
                                 <span class="label label-success">Đã tuyển</span>
                                 <span class="label label-danger">Hết hạn</span>*@
                                 @{string color = "default";
-                                    string status = "";
-                                  }
+                                  string status = "";
+                                }
                                 @if (Model.Recruitment.Status == "Waiting")
                                 {
                                     color = "primary";
-                                    status = "Đang chờ được nhận";
+                                    status = "Đang chờ người làm";
                                 }
                                 @if (Model.Recruitment.Status == "Applied")
                                 {
                                     color = "success";
-                                    status = "Đã được nhận";
+                                    status = "Đã thuê";
                                 }
-                                    else if (Model.Recruitment.Status == "Expired")
+                                else if (Model.Recruitment.Status == "Expired")
                                 {
                                     color = "danger";
                                     status = "Hết hạn";
@@ -75,9 +76,14 @@
                                 @if (Model.JobRequest != null)
                                 {
                                     <span class="iStatusText">Bởi</span>
-                                    <div class="iStatusPic">
-                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = Model.JobRequest.JobRequestId })">
-                                            <img src="@ViewBag.Maid.PersonalImage" height="100%">@ViewBag.Maid.MaidName</a>                                        
+                                    <div class="istatusHire">
+                                        <div class="iStatusPic">
+                                            <img src="@ViewBag.Maid.PersonalImage" height="100%">
+                                        </div>
+                                        <div class="iStatusName">
+                                            <a href="@Url.Action("GetJobRequest", "Post", new { jobId = Model.JobRequest.JobRequestId })">
+                                                @ViewBag.Maid.MaidName</a>
+                                            </div>
                                     </div>
                                 }
                             </div>
@@ -156,7 +162,7 @@
                     <ul class="riDetail">
                         <li class="rideRow">
                             <div class="rideroTitle">
-                                Đăng
+                                Đăng lúc
                             </div>
                             <div class="rideroContent">
                                 <strong>30/08/2012
@@ -166,70 +172,33 @@
                     </ul>
                     <div class="riManager">
                         <div class="rimaTitle">
-                            Những yêu cầu giống
+                            Người đăng việc
                         </div>
                         <ul class="rimaListSameJobRequest">
                             <li>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="jrImage">
-                                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                            <img src="@ViewBag.CustImg" alt="Maid sercive" width="100%">
                                         </div>
                                     </div>
                                     <div class="col-md-9">
                                         <div class="jrDetail">
                                             <div class="jrMaidFullname">
-                                                <a href="#">Customer name</a>
+                                                <a href="@Url.Action("Index", "Customer", new { customerId = RecruitmentTemp.Customer.AccountId })">@RecruitmentTemp.Customer.Account.FullName</a>
                                             </div>
                                             <div class="blTime">
-                                                <span class="blTimeTitle">Đăng: </span><span
-                                                    class="blTimeText">6:00 30/08/2014</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="jrImage">
-                                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="jrDetail">
-                                            <div class="jrMaidFullname">
-                                                <a href="#">Customer name</a>
+                                                <span class="blTimeText">Khách hàng</span>
                                             </div>
                                             <div class="blTime">
-                                                <span class="blTimeTitle">Đăng: </span><span
-                                                    class="blTimeText">6:00 30/08/2014</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="jrImage">
-                                            <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="jrDetail">
-                                            <div class="jrMaidFullname">
-                                                <a href="#">Customer name</a>
-                                            </div>
-                                            <div class="blTime">
-                                                <span class="blTimeTitle">Đăng: </span><span
-                                                    class="blTimeText">6:00 30/08/2014</span>
+                                                <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">(Chưa biết)</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
                         </ul>
+
                     </div>
                 </div>
             </div>
