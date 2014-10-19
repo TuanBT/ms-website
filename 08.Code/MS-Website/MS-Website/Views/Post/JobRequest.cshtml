@@ -41,7 +41,7 @@
                         </div>
                         <div class="miButton">
                             @{
-                                if (Model.Job.Status == "Waiting")
+                                if (ViewBag.RecruitmentList != null)
                                 {
                                 <button type="button" class="btn btn-info" data-toggle="modal" data-target=".chooseMaidModel">Thuê</button>
                                 <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"

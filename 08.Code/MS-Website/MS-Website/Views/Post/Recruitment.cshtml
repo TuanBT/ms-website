@@ -72,7 +72,7 @@
                                 }
 
                                 <span class="labelStatus label label-@color">@status</span>
-                                @if (Model.JobRequest.Status == "Applied" || Model.JobRequest.Status == "Approved")
+                                @if (Model.JobRequest != null)
                                 {
                                     <span class="iStatusText">Bởi</span>
                                     <div class="iStatusPic">
