@@ -60,7 +60,7 @@
                                 <ul class="bFreeListWork">
                                     @foreach (var recruit in ViewBag.NotApplList)
                                     {
-                                        <li id="@recruit.Recruitment.RecruitmentId" onclick="chooseJob(@recruit.Recruitment.RecruitmentId, 2)">
+                                        <li id="@recruit.Recruitment.RecruitmentId" onclick="chooseRecruit(@recruit.Recruitment.RecruitmentId, 2)">
                                             <div class="blImage">
                                                 <img src="../Content/Image/MS-Logo.png" alt="Maid service" height="100%">
                                             </div>
@@ -92,14 +92,6 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
-                                    @using (Html.BeginForm("RemoveRecruitment", "Customer"))
-                                    {
-                                        <input id="hidden" type="hidden" value="" name="jobId" />
-                                        <div id="NotAppliedList" style="display: none;" class="blfbutton">
-                                            <button type="submit" class="btn btn-danger">Hủy</button>
-                                            <button type="button" class="btn btn-info">Gia hạn</button>
-                                        </div>
-                                    }
                                 </div>
                             </div>
                             <div class="tab-pane fade bApplied" id="applied">
@@ -172,7 +164,7 @@
                                 <ul class="bexpiredListWork">
                                     @foreach (var recruit in ViewBag.ExpiredList)
                                     {
-                                        <li id="@recruit.Recruitment.RecruitmentId" onclick="chooseJob(@recruit.Recruitment.RecruitmentId, 2)">
+                                        <li id="@recruit.Recruitment.RecruitmentId" onclick="chooseRecruit(@recruit.Recruitment.RecruitmentId, 2)">
                                             <div class="blImage">
                                                 <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
                                             </div>
@@ -204,7 +196,7 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
-                                    @using (Html.BeginForm("RemoveRecruitment", "Customer", FormMethod.Get, new { name = "RemoveRecruitForm"}))
+                                    @using (Html.BeginForm("RemoveRecruitment", "Customer", FormMethod.Get, new { name = "RemoveRecruitForm" }))
                                     {
                                         <input id="recruitId" type="hidden" value="" name="recruitmentId" />
                                         <div id="ExpiredButton" style="display: none;" class="blfbutton">
@@ -263,7 +255,7 @@
 </div>
 <script>
     var chosenId = 0;
-    function chooseJob(recruitId, type) {
+    function chooseRecruit(recruitId, type) {
         if (chosenId != 0) {
             document.getElementById(chosenId).setAttribute("class", "");
         }
