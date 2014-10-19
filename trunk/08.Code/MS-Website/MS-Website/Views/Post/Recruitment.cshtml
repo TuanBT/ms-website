@@ -72,12 +72,14 @@
                                 }
 
                                 <span class="labelStatus label label-@color">@status</span>
-                                <span class="iStatusText">Bởi</span>
-
-                                <div class="iStatusPic">
-                                    <a href="#">
-                                        <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%"></a>
-                                </div>
+                                @if (Model.JobRequest.Status == "Applied" || Model.JobRequest.Status == "Approved")
+                                {
+                                    <span class="iStatusText">Bởi</span>
+                                    <div class="iStatusPic">
+                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = Model.JobRequest.JobRequestId })">
+                                            <img src="@ViewBag.Maid.PersonalImage" height="100%">@ViewBag.Maid.MaidName</a>                                        
+                                    </div>
+                                }
                             </div>
                             <div class="iSkill">
                                 <div class="iTitle">
