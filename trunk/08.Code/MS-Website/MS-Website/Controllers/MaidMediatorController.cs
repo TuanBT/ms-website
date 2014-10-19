@@ -166,7 +166,7 @@ namespace MS_Website.Controllers
 
         public ActionResult AddRequest(string stay, string salary, string work, string SickCare,
             string OldCare, string BabySister, string DisabilityCare, string BonsaiCare, string Cooking,
-            string Washing, string CleanHouse, string maidId, string time)
+            string Washing, string CleanHouse, int maidId, string time)
         {
             if (maidId != null)
             {
@@ -174,38 +174,37 @@ namespace MS_Website.Controllers
                 {
                     var skillRef = new SkillReference();
                     skillRef.Type = 2;
-                    var maidIdInt = int.Parse(maidId);
-                    var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidIdInt);
+                    var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidId);
                     if ((bool)maid.Gender)
                     {
-                        skillRef.Gender = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("Nam")).SkillId;
+                        skillRef.Gender = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("Nam") && si.SkillName.Equals("Gender")).SkillId;
                     }
                     else
                     {
-                        skillRef.Gender = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("Nữ")).SkillId;
+                        skillRef.Gender = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("Nữ") && si.SkillName.Equals("Gender")).SkillId;
                     }
                     if (maid.BirthDate != null)
                     {
                         var skillRefAge = DateTime.Now.Year - DateTime.Parse(maid.BirthDate.ToString()).Year;
                         if (skillRefAge >= 15 && skillRefAge <= 20)
                         {
-                            skillRef.Age = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("15-20")).SkillId;
+                            skillRef.Age = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("15-20") && si.SkillName.Equals("Age")).SkillId;
                         }
                         else if (skillRefAge > 20 && skillRefAge <= 30)
                         {
-                            skillRef.Age = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("21-30")).SkillId;
+                            skillRef.Age = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("21-30") && si.SkillName.Equals("Age")).SkillId;
                         }
                         else if (skillRefAge > 30 && skillRefAge <= 40)
                         {
-                            skillRef.Age = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("31-40")).SkillId;
+                            skillRef.Age = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("31-40") && si.SkillName.Equals("Age")).SkillId;
                         }
                         else if (skillRefAge > 40 && skillRefAge <= 50)
                         {
-                            skillRef.Age = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("41-50")).SkillId;
+                            skillRef.Age = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("41-50") && si.SkillName.Equals("Age")).SkillId;
                         }
                         else if (skillRefAge > 50 && skillRefAge <= 60)
                         {
-                            skillRef.Age = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("51-60")).SkillId;
+                            skillRef.Age = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("51-60") && si.SkillName.Equals("Age")).SkillId;
                         }
                     }
                     if ((bool)maid.English)
@@ -226,35 +225,35 @@ namespace MS_Website.Controllers
                     }
                     if (maid.Experience < 1)
                     {
-                        skillRef.Experience = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("<1 năm")).SkillId;
+                        skillRef.Experience = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("<1 năm") && si.SkillName.Equals("Experience")).SkillId;
                     }
                     else if (maid.Experience >= 1 && maid.Experience <= 3)
                     {
-                        skillRef.Experience = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("1-3 năm")).SkillId;
+                        skillRef.Experience = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals("1-3 năm") && si.SkillName.Equals("Experience")).SkillId;
                     }
                     else if (maid.Experience > 3)
                     {
-                        skillRef.Experience = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(">3 năm")).SkillId;
+                        skillRef.Experience = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(">3 năm") && si.SkillName.Equals("Experience")).SkillId;
                     }
                     if (maid.Hometown != null)
                     {
-                        skillRef.Hometown = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(maid.Hometown)).SkillId;
+                        skillRef.Hometown = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(maid.Hometown) && si.SkillName.Equals("Hometown")).SkillId;
                     }
                     if (maid.Address != null)
                     {
-                        skillRef.Hometown = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(maid.Address)).SkillId;
+                        skillRef.Hometown = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(maid.Address) && si.SkillName.Equals("Address")).SkillId;
                     }
                     if (!stay.Equals("null"))
                     {
-                        skillRef.Stay = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Stay") && si.SkillString.Equals(stay)).SkillId;
+                        skillRef.Stay = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(stay) && si.SkillName.Equals("Stay")).SkillId;
                     }
                     if (!salary.Equals("null"))
                     {
-                        skillRef.Salary = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(salary)).SkillId;
+                        skillRef.Salary = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(salary) && si.SkillName.Equals("Salary")).SkillId;
                     }
                     if (!work.Equals("null"))
                     {
-                        skillRef.Work = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(work)).SkillId;
+                        skillRef.Work = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(work) && si.SkillName.Equals("Work")).SkillId;
                     }
                     if (SickCare != null)
                     {
@@ -312,14 +311,16 @@ namespace MS_Website.Controllers
                     jobRequest.Status = "Waiting";
                     jobRequest.PostTime = DateTime.Now;
                     jobRequest.ExpiredTime = DateTime.Now.AddDays(7*int.Parse(time));
-                    jobRequest.MaidId = maidIdInt;
+                    jobRequest.MaidId = maidId;
                     jobRequest.Title = "Tuân ngu";
                     jobRequest.IsActive = false;
                     skillRef.Type = 0;
                     db.JobRequests.Add(jobRequest);
                     db.SaveChanges();
                     LoadItems();
-                }
+                    var newJobId = db.JobRequests.SingleOrDefault(j => j.SkillRefId == skillRef.SkillRefId).JobRequestId;
+                    return RedirectToAction("GetJobRequest", "Post", new { jobId = newJobId });
+                }                      
             }
             return View("PostRequest");
         }
