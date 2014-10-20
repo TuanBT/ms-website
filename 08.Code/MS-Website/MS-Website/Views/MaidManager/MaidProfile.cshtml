@@ -2,6 +2,7 @@
     ViewBag.Title = "Thông tin người giúp việc";
     Layout = "~/Views/Shared/_Layout.cshtml";
     MS_Website.Models.Maid maid = Model;
+    var MaidManager = (MS_Website.Models.MaidManager)ViewBag.MaidManager;
 }
 
 
@@ -343,7 +344,6 @@
                             <li>
                                 <div class="row">
                                     <div class="col-md-3">
-                                        @{MS_Website.Models.MaidManager MaidManager = (MS_Website.Models.MaidManager)ViewBag.MaidManager;}
                                         <div class="jrImage">
                                             <img src="@MaidManager.Avatar" alt="Maid sercive" width="100%">
                                         </div>
