@@ -344,7 +344,7 @@
                                 <img src="@ViewBag.MaidManager.Avatar" alt="Maid sercive" height="100%">
                             </div>
                             <div class="rimacoFullname">
-                                <a href="#">@ViewBag.MaidManager.Fullname</a>
+                                <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = ViewBag.MaidManager.AccId, role = ViewBag.MaidManager.Role})">@ViewBag.MaidManager.Fullname</a>
                             </div>
                         </div>
                     </div>
