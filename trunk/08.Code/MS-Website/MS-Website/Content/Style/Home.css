@@ -531,6 +531,9 @@ border-radius: 8px;
     text-align: center;
 }
 
+.scContent>img {
+    border-radius: 5px;
+}
 
 .starRating1 {
     display: block;
