@@ -20,8 +20,8 @@ namespace MS_Website.Controllers
             {
                 if (Session["AccId"] != null)
                 {
-                    var accId = (int) Session["AccId"];
-                    var role = ((string) Session["Role"]).Trim();
+                    var accId = (int)Session["AccId"];
+                    var role = ((string)Session["Role"]).Trim();
                     var account = db.Accounts.SingleOrDefault(a => a.AccountId == accId);
                     int numWating = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Waiting"));
                     int numApplied = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Applied"));
@@ -39,6 +39,31 @@ namespace MS_Website.Controllers
                     }
                 }
                 return RedirectToAction("Login", "Home");
+            }
+        }
+
+        public ActionResult GetMaidManager(int accId, string role)
+        {
+            using (var db = new MSEntities())
+            {
+                int numWating = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Waiting"));
+                int numApplied = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Applied"));
+                int numApproved = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Approved"));
+                int numExpired = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Expired"));
+                ViewBag.MaidMediatorStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied };
+                if (role.Equals("MaidMediator"))
+                {
+                    var maidMediator = db.Accounts.SingleOrDefault(mm => mm.AccountId == accId);
+                    ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
+                    return View("MaidMediator", maidMediator);
+                }
+                if (role.Equals("Staff"))
+                {
+                    var staff = db.Accounts.SingleOrDefault(s => s.AccountId == accId);
+                    ViewBag.MaidList = db.Maids.Where(m => m.Staff.Account.AccountId == accId).ToList();
+                    return View("Staff", staff);
+                }
+                return View("MaidMediator");
             }
         }
 
@@ -85,6 +110,7 @@ namespace MS_Website.Controllers
                     }
                     if (maid.MaidMediatorId != null)
                     {
+                        var accId = maid.MaidMediatorId;
                         var mUsername = maid.MaidMediator.Account.Username;
                         var isActive = maid.MaidMediator.Account.IsActive;
                         var joinDate = maid.MaidMediator.Account.JoinDate;
@@ -93,12 +119,13 @@ namespace MS_Website.Controllers
                         var email = maid.MaidMediator.Account.Email;
                         var phone = maid.MaidMediator.Account.Phone;
                         var fullname = maid.MaidMediator.Account.FullName;
-                        var mm = new MaidManager(mUsername, isActive, joinDate, role, avatar, email, phone,
+                        var mm = new MaidManager(accId, mUsername, isActive, joinDate, role, avatar, email, phone,
                                                          fullname);
                         ViewBag.MaidManager = mm;
                     }
                     else
                     {
+                        var accId = maid.StaffId;
                         var mUsername = maid.Staff.Account.Username;
                         var isActive = maid.Staff.Account.IsActive;
                         var joinDate = maid.Staff.Account.JoinDate;
@@ -107,7 +134,7 @@ namespace MS_Website.Controllers
                         var email = maid.Staff.Account.Email;
                         var phone = maid.Staff.Account.Phone;
                         var fullname = maid.Staff.Account.FullName;
-                        var mm = new MaidManager(mUsername, isActive, joinDate, role, avatar, email, phone,
+                        var mm = new MaidManager(accId, mUsername, isActive, joinDate, role, avatar, email, phone,
                                                          fullname);
                         ViewBag.MaidManager = mm;
                     }
@@ -140,7 +167,7 @@ namespace MS_Website.Controllers
                 {
                     return RedirectToAction("Login", "Home");
                 }
-                var maidManagerId = (int) Session["AccId"];
+                var maidManagerId = (int)Session["AccId"];
                 var role = Session["Role"];
                 Session["StayList"] = db.SkillInstances.Where(si => si.SkillName.Equals("Stay")).ToList();
                 Session["SalaryList"] = db.SkillInstances.Where(si => si.SkillName.Equals("Salary")).ToList();
@@ -153,7 +180,7 @@ namespace MS_Website.Controllers
                 {
                     var maidList = db.Maids.Where(m => m.MaidMediatorId == maidManagerId).ToList();
                     Session["MaidList"] = maidList;
-                } 
+                }
                 else if (role.Equals("Staff"))
                 {
                     var maidList = db.Maids.Where(m => m.StaffId == maidManagerId).ToList();
@@ -302,15 +329,15 @@ namespace MS_Website.Controllers
                     jobRequest.SkillRefId = skillRef.SkillRefId;
                     if (Session["Role"].Equals("MaidMediator"))
                     {
-                        jobRequest.MaidMediatorId = (int) Session["AccId"];
+                        jobRequest.MaidMediatorId = (int)Session["AccId"];
                     }
                     else if (Session["Role"].Equals("Staff"))
                     {
-                        jobRequest.StaffId = (int) Session["AccId"];
+                        jobRequest.StaffId = (int)Session["AccId"];
                     }
                     jobRequest.Status = "Waiting";
                     jobRequest.PostTime = DateTime.Now;
-                    jobRequest.ExpiredTime = DateTime.Now.AddDays(7*int.Parse(time));
+                    jobRequest.ExpiredTime = DateTime.Now.AddDays(7 * int.Parse(time));
                     jobRequest.MaidId = maidId;
                     jobRequest.Title = title;
                     jobRequest.IsActive = false;
@@ -320,7 +347,7 @@ namespace MS_Website.Controllers
                     LoadItems();
                     var newJobId = db.JobRequests.SingleOrDefault(j => j.SkillRefId == skillRef.SkillRefId).JobRequestId;
                     return RedirectToAction("GetJobRequest", "Post", new { jobId = newJobId });
-                }                      
+                }
             }
             return View("PostRequest");
         }
