@@ -351,7 +351,7 @@
                                     <div class="col-md-9">
                                         <div class="jrDetail">
                                             <div class="jrMaidFullname">
-                                                <a href="#">@MaidManager.Fullname</a>
+                                                <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = MaidManager.AccId, role = MaidManager.Role })">@MaidManager.Fullname</a>
                                             </div>
                                             <div class="blTime">
                                                 <span class="blTimeText">
