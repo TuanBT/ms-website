@@ -118,7 +118,7 @@
                                     </div>
                                     @if (ViewBag.Remove == "true")
                                     {
-                                        using (Html.BeginForm("RemoveJob", "MaidMediator"))
+                                        using (Html.BeginForm("RemoveJob", "MaidManager"))
                                         {
                                         <input id="hidden" type="hidden" value="" name="jobId" />
                                         <div id="NotAppliedList" style="display: none;" class="blfbutton">
@@ -283,7 +283,7 @@
                                     </div>
                                     @if (ViewBag.Remove == "true")
                                     {
-                                        using (Html.BeginForm("RemoveJob", "MaidMediator", FormMethod.Get, new { name = "RemoveJobForm" }))
+                                        using (Html.BeginForm("RemoveJob", "MaidManager", FormMethod.Get, new { name = "RemoveJobForm" }))
                                         {
                                         <input id="jobId" type="hidden" value="" name="jobId" />
                                         <div id="ExpiredButton" style="display: none;" class="blfbutton">
