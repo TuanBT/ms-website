@@ -157,7 +157,7 @@
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Đóng</span></button>
                                         </div>
-                                        @using (Html.BeginForm("AddMaid", "MaidMediator", FormMethod.Get, new { name = "addMaidModal" }))
+                                        @using (Html.BeginForm("AddMaid", "MaidManager", FormMethod.Get, new { name = "addMaidModal" }))
                                         {
                                             <div class="modal-body">
                                                 <table border="0">
@@ -215,7 +215,7 @@
                                         </div>
                                         <div class="liMaidContent">
                                             <div class="licoFullName">
-                                                <a href="@Url.Action("ManageMaidProfile", "MaidMediator", new { maidId = maid.MaidId })" class="myToolTip">
+                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" class="myToolTip">
                                                     @maid.MaidName
                                                     @*<span>
                                                         <img class="callout" src="../Content/Image/callout_black.gif" /><img class="maidAva2" src="@maid.PersonalImage" /><strong>Tên đầy đủ: </strong>@maid.MaidName<br />
