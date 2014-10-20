@@ -52,6 +52,7 @@ namespace MS_Website.Controllers
                     ///new RecruitmentTemp();
                     var recruitmentTemp = new RecruitmentTemp
                                                           {
+                                                              Account = null,
                                                               Customer = customer,
                                                               Recruitment = recruitment,
                                                               JobRequest = null,

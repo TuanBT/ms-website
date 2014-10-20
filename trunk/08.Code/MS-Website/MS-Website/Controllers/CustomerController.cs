@@ -32,11 +32,10 @@ namespace MS_Website.Controllers
                         var notApplJobList = db.Recruitments.Where(r => r.Customer.AccountId == accId && r.Status.Equals("Waiting")).ToList();
                         var applJobList = db.Recruitments.Where(r => r.Customer.AccountId == accId && r.Status.Equals("Applied")).ToList();
                         var expiredJobList = db.Recruitments.Where(r => r.Customer.AccountId == accId && r.Status.Equals("Expired")).ToList();
-                        ViewBag.NotApplList = notApplJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, null, null)).ToList();
-                        ViewBag.ApplList = (from recruitment in applJobList let apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitment.RecruitmentId) let jobRequest = db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId) select new RecruitmentTemp(recruitment, customer, jobRequest, null)).ToList();
-                        ViewBag.ExpiredList = expiredJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, null, null)).ToList();
+                        ViewBag.NotApplList = notApplJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                        ViewBag.ApplList = (from recruitment in applJobList let apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitment.RecruitmentId) let jobRequest = db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId) select new RecruitmentTemp(recruitment, customer, account, jobRequest, null)).ToList();
+                        ViewBag.ExpiredList = expiredJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
                         ViewBag.JoinDate = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId).JoinDate;
-                        ViewBag.CustImg = customer.Account.Avatar;
                         return View("CustomerProfile", account);
                     }
                 }
@@ -211,7 +210,6 @@ namespace MS_Website.Controllers
                 var newRecruitId = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId).RecruitmentId;
                 return RedirectToAction("GetRecruitment", "Post", new {recruitmentId = newRecruitId});
             }
-            return View("PostRecruitment");
         }
 
         public void LoadItems()
