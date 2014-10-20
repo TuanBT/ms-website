@@ -62,7 +62,7 @@
                                                                         <input type="radio" name="recruitId" id="optionsRadios2" value="@recruit.RecruitmentId">
                                                                         <div>
                                                                             <div class="liImage">
-                                                                                <img src="~/Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                                                <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
                                                                             </div>
                                                                             <div class="liMaidContent">
                                                                                 <div class="licoFullName">
@@ -206,7 +206,7 @@
                                 Đăng lúc
                             </div>
                             <div class="rideroContent">
-                                <strong>30/08/2012
+                                <strong>@Model.Job.PostTime
                                 </strong>
                             </div>
                         </li>
@@ -220,7 +220,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="jrImage">
-                                            <img src="@ViewBag.MaidImg" alt="Maid sercive" width="100%">
+                                            <img src="@Model.Maid.PersonalImage" alt="Maid sercive" width="100%">
                                         </div>
                                     </div>
                                     <div class="col-md-9">
