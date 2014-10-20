@@ -87,7 +87,7 @@ namespace MS_Website.Controllers
             return View("PostRecruitment");
         }
 
-        public ActionResult AddRecruitment(string gender, string age, string LanguageEnglish,
+        public ActionResult AddRecruitment(string title, string gender, string age, string LanguageEnglish,
             string LanguageChinese, string LanguageJapanese, string LanguageKorean, string exp,
             string hometown, string addr, string married, string stay, string salary, string work,
             string SickCare, string OldCare, string BabySister, string DisabilityCare, string BonsaiCare,
@@ -203,7 +203,7 @@ namespace MS_Website.Controllers
                 recruitment.Status = "Waiting";
                 recruitment.PostTime = DateTime.Now;
                 recruitment.ExpiredTime = DateTime.Now.AddDays(7 * int.Parse(time));
-                recruitment.Title = "Tuân ngu";
+                recruitment.Title = title;
                 skillRef.Type = 1;
                 db.Recruitments.Add(recruitment);
                 db.SaveChanges();
