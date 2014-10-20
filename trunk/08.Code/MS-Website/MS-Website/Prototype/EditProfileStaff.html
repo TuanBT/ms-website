@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Edit profile staff</title>
+    <link rel="icon" href="../Content/Image/favicon.ico"/>
+    <script src="../Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <link href="../Content/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link href="../Content/Style/Home.css" rel="stylesheet">
+    <link href="../Content/style/profilePage.css" rel="stylesheet">
+
+    <link href="../Content/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
+    <script src="../Content/bootstrap-fileinput/js/fileinput.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div class="headerPage">
+    <div class="rows">
+        <div class="hFunction">
+            <div class="hLogo">
+                <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100%">
+            </div>
+            <div class="hMainFunction">
+                <div class="hUserName">
+                    Bùi Tiến Tuân
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="Menu">
+    <div class="rows">
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    <li>
+                        <a href="#" class="hefaContent iscurent">Find Work</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent"> Find Work</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li class="iscurent">
+                <a href="#" class="hChContent"> Job Applications</a>
+            </li>
+            <li class>
+                <a href="#" class="hChContent"> Job Applications</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="body">
+<div class="rows">
+<div class="row">
+<div class="titlePage">Sửa thông tin nhân viên</div>
+<div class="postJRRow">
+    <div class="row">
+        <div class="col-md-4 poJRTtitle">
+            Họ và tên
+        </div>
+        <div class="col-md-8">
+            <input type="text" class="form-control" placeholder="Nguyễn Văn A">
+        </div>
+    </div>
+</div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Số điện thoại
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="0123456789">
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Email
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="Email">
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+              Mật khẩu
+            </div>
+            <div class="col-md-8">
+                <input type="password" class="form-control" placeholder="password">
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+               Ảnh đại diện
+                <img src="../Content/Image/default-avatar.png" width="80%">
+            </div>
+            <div class="col-md-8">
+                <input id="input-21" type="file" accept="image/*" >
+                <script>
+                    $("#input-21").fileinput({
+                        previewFileType: "image",
+                        browseClass: "btn btn-success",
+                        browseLabel: " Chọn hình",
+                        browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                        removeClass: "btn btn-danger",
+                        removeLabel: " Xóa",
+                        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                        uploadClass: "btn btn-info",
+                        uploadLabel: " Tải lên",
+                        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>'
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+<div class="buttonFooterPage">
+    <button type="button" class="btn btn-success btn-lg">Cập nhập thông tin</button>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
