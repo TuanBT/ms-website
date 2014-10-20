@@ -21,7 +21,6 @@ namespace MS_Website.Controllers
                 if (job != null)
                 {
                     var maid = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId);
-                    ViewBag.MaidImg = maid.PersonalImage;
                     var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == job.SkillRefId);
                     var skillList = new List<string>();
                     if (skillRef != null)
