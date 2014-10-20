@@ -7,8 +7,9 @@ namespace MS_Website.Models
 {
     public class MaidManager
     {
-        public MaidManager(string username, bool isActive, DateTime joinDate, string role, string avatar, string email, string phone, string fullname)
+        public MaidManager(System.Nullable<int> accId, string username, bool isActive, DateTime joinDate, string role, string avatar, string email, string phone, string fullname)
         {
+            this.AccId = accId;
             this.Username = username;
             this.IsActive = isActive;
             this.JoinDate = joinDate;
@@ -18,7 +19,7 @@ namespace MS_Website.Models
             this.Phone = phone;
             this.Fullname = fullname;
         }
-        public MaidManager(){}
+        public System.Nullable<int> AccId { get; set; }
         public string Username { get; set; }
         public bool IsActive { get; set; }
         public DateTime JoinDate { get; set; }
