@@ -278,14 +278,14 @@ ul {
 
     .background .w1 {
         float: left;
-margin-top: -225px;
+margin-top: -320px;
 margin-left: 5px;
 height: 320px;
     }
 
     .background .w2 {
         float: right;
-margin-top: -200px;
+margin-top: -300px;
 margin-right: 5px;
 height: 300px;
     }
@@ -512,8 +512,6 @@ border-radius: 8px;
 }
 
     .scContentBox button {
-        width: 50%;
-        margin-left: 25%;
         margin-top: 10px;
     }
 
@@ -530,6 +528,7 @@ border-radius: 8px;
 
 .scContent {
     padding: 10px;
+    text-align: center;
 }
 
 

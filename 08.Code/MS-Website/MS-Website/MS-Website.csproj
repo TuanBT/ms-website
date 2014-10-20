@@ -142,7 +142,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EvaluateController.cs" />
     <Compile Include="Controllers\Kmean.cs" />
-    <Compile Include="Controllers\MaidMediatorController.cs" />
+    <Compile Include="Controllers\MaidManagerController.cs" />
     <Compile Include="Controllers\PayPalController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -150,6 +150,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -545,8 +546,13 @@
     <Content Include="Content\Image\default-avatar.png" />
     <Content Include="Content\Image\favicon.ico" />
     <Content Include="Content\Image\Home\background_blur.jpg" />
-    <Content Include="Content\Image\Home\women1.png" />
-    <Content Include="Content\Image\Home\women2.png" />
+    <Content Include="Content\Image\Home\men.png" />
+    <Content Include="Content\Image\Home\women.png" />
+    <Content Include="Content\Image\Home\work1.png" />
+    <Content Include="Content\Image\Home\work2.png" />
+    <Content Include="Content\Image\Home\work3.png" />
+    <Content Include="Content\Image\Home\work4.png" />
+    <Content Include="Content\Image\jr.png" />
     <Content Include="Content\Image\Maid\001.jpg" />
     <Content Include="Content\Image\Maid\002.jpg" />
     <Content Include="Content\Image\Maid\003.jpg" />
@@ -609,6 +615,7 @@
     <Content Include="Content\Image\Profile\tuanlq.jpg" />
     <Content Include="Content\Image\Profile\tuantq.JPG" />
     <Content Include="Content\Image\Profile\vutt.jpg" />
+    <Content Include="Content\Image\rc.png" />
     <Content Include="Content\Image\Staff\1234590861_anh_the.jpg" />
     <Content Include="Content\Image\Staff\anh-the.jpg" />
     <Content Include="Content\Image\Staff\anh_the9112.jpg" />
@@ -2024,6 +2031,13 @@
     <Content Include="Views\Evaluate\_Index.cshtml" />
     <Content Include="Views\Evaluate\_Post.cshtml" />
     <Content Include="Views\Evaluate\_Rate.cshtml" />
+    <Content Include="Views\CustomerRecruiment\Create.cshtml" />
+    <Content Include="Views\CustomerRecruiment\_ChooseMaid.cshtml" />
+    <Content Include="Views\CustomerRecruiment\_ChooseSkill.cshtml" />
+    <Content Include="Views\CustomerRecruiment\_Details.cshtml" />
+    <Content Include="Views\CustomerRecruiment\Details2.cshtml" />
+    <Content Include="Views\CustomerRecruiment\Index.cshtml" />
+    <Content Include="Views\CustomerRecruiment\Post.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
