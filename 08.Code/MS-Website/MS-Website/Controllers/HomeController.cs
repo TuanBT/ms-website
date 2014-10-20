@@ -194,7 +194,7 @@ namespace MS_Website.Controllers
             {
                 if (Session["Role"].Equals("MaidMediator"))
                 {
-                    return RedirectToAction("Index", "MaidMediator");
+                    return RedirectToAction("Index", "MaidManager");
                 }
                 if (Session["Role"].Equals("Staff"))
                 {
@@ -207,6 +207,30 @@ namespace MS_Website.Controllers
                 if (Session["Role"].Equals("Admin"))
                 {
 
+                }
+            }
+            return View("Login");
+        }
+
+        public ActionResult PostJobRedirect()
+        {
+            if (Session["AccId"] != null)
+            {
+                if (Session["Role"].Equals("MaidMediator") || Session["Role"].Equals("Staff"))
+                {
+                    return Redirect("/MaidManager/PostRequest");
+                }
+            }
+            return View("Login");
+        }
+
+        public ActionResult PostRecruitRedirect()
+        {
+            if (Session["AccId"] != null)
+            {
+                if (Session["Role"].Equals("Customer"))
+                {
+                    return Redirect("/Customer/PostRecruitment");
                 }
             }
             return View("Login");

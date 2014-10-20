@@ -9,7 +9,7 @@ using MS_Website.Models;
 
 namespace MS_Website.Controllers
 {
-    public class MaidMediatorController : Controller
+    public class MaidManagerController : Controller
     {
         //
         // GET: /MaidMediator/
