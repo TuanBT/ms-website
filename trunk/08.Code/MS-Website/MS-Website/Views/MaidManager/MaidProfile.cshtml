@@ -148,7 +148,7 @@
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="#">@job.Job.Title</a>
+                                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Đăng: </span><span
@@ -162,7 +162,7 @@
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="#">@job.Recruitment.Title</a>
+                                                        <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = job.Recruitment.RecruitmentId })">@job.Recruitment.Title</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Nhận: </span><span
@@ -206,7 +206,7 @@
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="#">@job.Job.Title</a>
+                                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Đăng: </span><span
@@ -220,7 +220,7 @@
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="#">@job.Recruitment.Title</a>
+                                                        <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = job.Recruitment.RecruitmentId })">@job.Recruitment.Title</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Nhận: </span><span
