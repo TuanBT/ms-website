@@ -2041,6 +2041,7 @@
     <Content Include="Views\MaidManager\MaidMediator.cshtml" />
     <Content Include="Views\MaidManager\MaidProfile.cshtml" />
     <Content Include="Views\MaidManager\PostRequest.cshtml" />
+    <Content Include="Views\MaidManager\AddMaid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

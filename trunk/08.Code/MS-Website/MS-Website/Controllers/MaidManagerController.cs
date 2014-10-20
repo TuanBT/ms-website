@@ -137,18 +137,18 @@ namespace MS_Website.Controllers
                         maid.Married = married;
                         maid.Description = desc;
                         maid.RateAvg = 0;
-                        maid.PersonalImage = "../Content/Image/Maid/default-avatar.png";
+                        maid.PersonalImage = "../Content/Image/default-avatar.png";
                         db.Maids.Add(maid);
                         db.SaveChanges();
                         if (Session["Role"].Equals("MaidMediator"))
                         {
-                            maid = db.Maids.OrderByDescending(m => m.MaidMediatorId == managerId).Last();
+                            maid = db.Maids.OrderByDescending(m => m.MaidId).FirstOrDefault(m => m.MaidMediatorId == managerId);
                         }
                         else
                         {
-                            maid = db.Maids.OrderByDescending(m => m.StaffId == managerId).Last();
+                            maid = db.Maids.OrderByDescending(m => m.MaidId).FirstOrDefault(m => m.StaffId == managerId);
                         }
-                        return RedirectToAction("ManageMaidProfile", new { maidId = maid.MaidId});
+                        if (maid != null) return RedirectToAction("ManageMaidProfile", new { maidId = maid.MaidId});
                     }
                 }
             }
