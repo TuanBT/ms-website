@@ -164,7 +164,7 @@ namespace MS_Website.Controllers
             return View("PostRequest");
         }
 
-        public ActionResult AddRequest(string stay, string salary, string work, string SickCare,
+        public ActionResult AddRequest(string title, string stay, string salary, string work, string SickCare,
             string OldCare, string BabySister, string DisabilityCare, string BonsaiCare, string Cooking,
             string Washing, string CleanHouse, int maidId, string time)
         {
@@ -312,7 +312,7 @@ namespace MS_Website.Controllers
                     jobRequest.PostTime = DateTime.Now;
                     jobRequest.ExpiredTime = DateTime.Now.AddDays(7*int.Parse(time));
                     jobRequest.MaidId = maidId;
-                    jobRequest.Title = "Tuân ngu";
+                    jobRequest.Title = title;
                     jobRequest.IsActive = false;
                     skillRef.Type = 0;
                     db.JobRequests.Add(jobRequest);
