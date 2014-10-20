@@ -18,6 +18,7 @@ namespace MS_Website.Models
             this.Phone = phone;
             this.Fullname = fullname;
         }
+        public MaidManager(){}
         public string Username { get; set; }
         public bool IsActive { get; set; }
         public DateTime JoinDate { get; set; }
