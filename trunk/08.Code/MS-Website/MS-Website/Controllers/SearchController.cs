@@ -120,7 +120,7 @@ namespace MS_Website.Controllers
                         if (jobRequest != null)
                         {
                             var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                            var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, skillList);
+                            var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null, skillList);
                             jobRequestList.Add(jobRequestTmp);
                         }
                         else
@@ -680,7 +680,7 @@ namespace MS_Website.Controllers
                         if (jobRequest != null)
                         {
                             var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                            var jobRequestTemp = new JobRequestTemp(jobRequest, maid, null, skillList);
+                            var jobRequestTemp = new JobRequestTemp(jobRequest, maid, null, null, skillList);
                             jobRequestList.Add(jobRequestTemp);
                         }
                         else

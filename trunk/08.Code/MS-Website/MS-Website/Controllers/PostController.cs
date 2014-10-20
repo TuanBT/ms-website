@@ -64,12 +64,12 @@ namespace MS_Website.Controllers
                         var recruitment = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId);
                         ViewBag.Customer =
                             db.Accounts.SingleOrDefault(a => a.AccountId == recruitment.CustomerId);
-                        var jobRequestTmp = new JobRequestTemp(job, maid, recruitment, skillList);
+                        var jobRequestTmp = new JobRequestTemp(job, maid, null, recruitment, skillList);
                         return View("JobRequest", jobRequestTmp);
                     }
                     else
                     {
-                        var jobRequestTmp = new JobRequestTemp(job, maid, null, skillList);
+                        var jobRequestTmp = new JobRequestTemp(job, maid, null, null, skillList);
                         return View("JobRequest", jobRequestTmp);
                     }
                 }
@@ -87,7 +87,6 @@ namespace MS_Website.Controllers
                 {
                     var customer = db.Customers.SingleOrDefault(m => m.AccountId == recruitment.CustomerId);
                     var account = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId);
-                    ViewBag.CustImg = customer.Account.Avatar;
                     var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId);
                     var skillList = new List<string>();
                     var recSkillRefList = new List<SkillReference>();
@@ -114,7 +113,7 @@ namespace MS_Website.Controllers
                             if (jobRequest != null)
                             {
                                 var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                                var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null);
+                                var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null, null);
                                 recJobReqList.Add(jobRequestTmp);
                             }
                         }
