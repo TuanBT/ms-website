@@ -5,7 +5,7 @@
 }
 
 <style>
-	a.myToolTip
+    a.myToolTip
     {
         outline: none;
     }
@@ -52,7 +52,7 @@
     a.myToolTip .maidAva2
     {
         float: right;
-	    margin-right: -8px;
+        margin-right: -8px;
         width: 60px;
         height: 60px;
     }
@@ -73,7 +73,7 @@
                         <a class="hefaContent iscurent">Thông tin</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("PostRequest","MaidManager")" class="hefaContent">Đăng yêu cầu công việc</a>
+                        <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent">Đăng yêu cầu công việc</a>
                     </li>
                     <li>
                         <a href="#" class="hefaContent">Thông báo</a>
@@ -123,10 +123,10 @@
                         <div class="ovContent">
                             @{
                                 //watting,expired,approved,applied
-                               int[] numStatus = ViewBag.MaidMediatorStatusStatistic;
-                               var numberStatistic = new int[4] { numStatus[0], numStatus[1], numStatus[2], numStatus[3] };
-                              }
-                            @Html.Partial("_PartialStatisticPie",numberStatistic)
+                                int[] numStatus = ViewBag.MaidMediatorStatusStatistic;
+                                var numberStatistic = new int[4] { numStatus[0], numStatus[1], numStatus[2], numStatus[3] };
+                            }
+                            @Html.Partial("_PartialStatisticPie", numberStatistic)
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,9 @@
                     <div class="riManager">
                         <div class="rimaTitle">
                             Đại diện cho:
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Thêm người đại diện</button>
+                            <a href="@Url.Action("LoadAddMaid", "MaidManager")">
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Thêm người đại diện</button>
+                            </a>
                             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -221,10 +223,10 @@
                                                     </span>*@
                                                 </a>
                                                 <div class="licoRate">
-                                                    @Html.Partial("_PartialStar",(float) maid.RateAvg)
+                                                    @Html.Partial("_PartialStar", (float)maid.RateAvg)
                                                 </div>
                                                 <div class="blTime">
-                                                    <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender==true?"Nam":"Nữ")</span>
+                                                    <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender == true ? "Nam" : "Nữ")</span>
                                                 </div>
                                                 @*<div class="ricoPost">
                                                     Đăng/nhận <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
