@@ -339,14 +339,44 @@
                         <div class="rimaTitle">
                             Quản lý bởi
                         </div>
-                        <div class="rimaContent">
-                            <div class="rimacoImage">
-                                <img src="@ViewBag.MaidManager.Avatar" alt="Maid sercive" height="100%">
-                            </div>
-                            <div class="rimacoFullname">
-                                <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = ViewBag.MaidManager.AccId, role = ViewBag.MaidManager.Role})">@ViewBag.MaidManager.Fullname</a>
-                            </div>
-                        </div>
+                        <ul class="rimaListSameJobRequest">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        @{MS_Website.Models.MaidManager MaidManager = (MS_Website.Models.MaidManager)ViewBag.MaidManager;}
+                                        <div class="jrImage">
+                                            <img src="@MaidManager.Avatar" alt="Maid sercive" width="100%">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="jrDetail">
+                                            <div class="jrMaidFullname">
+                                                <a href="#">@MaidManager.Fullname</a>
+                                            </div>
+                                            <div class="blTime">
+                                                <span class="blTimeText">
+                                                    @{
+                                                        string role = "";
+                                                        if (MaidManager.Role == "MaidMediator")
+                                                        {
+                                                            role = "Đại diện người giúp việc";
+                                                        }
+                                                        else if (MaidManager.Role == "Staff")
+                                                        {
+                                                            role = "Nhân viên";
+                                                        }
+                                                    }
+                                                    @role
+                                                </span>
+                                            </div>
+                                            <div class="blTime">
+                                                    <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">(Chưa biết)</span>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
