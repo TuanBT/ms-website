@@ -67,16 +67,92 @@ namespace MS_Website.Controllers
             }
         }
 
-        public ActionResult AddMaid(string fullname, string desc, string address, string phone)
+        public ActionResult LoadAddMaid()
         {
             using (var db = new MSEntities())
             {
-                var accId = (int)Session["AccId"];
-                var maid = new Maid { MaidName = fullname, MaidMediatorId = accId };
-                db.Maids.Add(maid);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (Session["Exp"] == null)
+                {
+                    Session["Exp"] = db.SkillInstances.Where(si => si.SkillName.Equals("Experience")).ToList();
+                }
+                if (Session["Hometown"] == null)
+                {
+                    Session["Hometown"] = db.SkillInstances.Where(si => si.SkillName.Equals("Hometown")).ToList();
+                }
+                if (Session["Address"] == null)
+                {
+                    Session["Address"] = db.SkillInstances.Where(si => si.SkillName.Equals("Address")).ToList();
+                }
+                ViewBag.Exp = Session["Exp"];
+                ViewBag.Hometown = Session["Hometown"];
+                ViewBag.Address = Session["Address"];
+                ViewBag.Salary = Session["Salary"];
+                return View("AddMaid");
             }
+        }
+
+        public ActionResult AddMaid(string fullname, double exp, string phone, string birthdate, bool gender,
+            string english, string jap, string chinese, string korean, string hometown, string addr, bool married, 
+            string desc, string avatar)
+        {
+            if (Session["AccId"] != null)
+            {
+                if (Session["Role"].Equals("MaidMediator") || Session["Role"].Equals("Staff"))
+                {
+                    using (var db = new MSEntities())
+                    {
+                        var maid = new Maid();
+                        var managerId = (int) Session["AccId"];
+                        if (Session["Role"].Equals("MaidMediator"))
+                        {
+                            maid.MaidMediatorId = managerId;
+                        }
+                        else
+                        {
+                            maid.StaffId = managerId;
+                        }
+                        maid.MaidName = fullname;
+                        maid.Experience = exp;
+                        maid.Phone = phone;
+                        maid.BirthDate = DateTime.Parse("1991-08-20");
+                        maid.Gender = gender;
+                        if (english != null)
+                        {
+                            maid.English = true;
+                        }
+                        if (jap != null)
+                        {
+                            maid.Japanese = true;
+                        }
+                        if (chinese != null)
+                        {
+                            maid.Chinese = true;
+                        }
+                        if (korean != null)
+                        {
+                            maid.Korean = true;
+                        }
+                        maid.Hometown = hometown;
+                        maid.Address = addr;
+                        maid.Married = married;
+                        maid.Description = desc;
+                        maid.RateAvg = 0;
+                        maid.PersonalImage = "../Content/Image/Maid/default-avatar.png";
+                        db.Maids.Add(maid);
+                        db.SaveChanges();
+                        if (Session["Role"].Equals("MaidMediator"))
+                        {
+                            maid = db.Maids.OrderByDescending(m => m.MaidMediatorId == managerId).Last();
+                        }
+                        else
+                        {
+                            maid = db.Maids.OrderByDescending(m => m.StaffId == managerId).Last();
+                        }
+                        return RedirectToAction("ManageMaidProfile", new { maidId = maid.MaidId});
+                    }
+                }
+            }
+            return View();
         }
 
         public ActionResult ManageMaidProfile(int maidId)
