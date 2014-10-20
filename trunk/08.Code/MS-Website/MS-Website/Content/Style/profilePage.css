@@ -1056,11 +1056,12 @@ font-weight: 700;
 
 .poJRTtitle {
     display: block;
-    padding-bottom: 5px;
+    margin-top: 11px;
     line-height: 1.5;
     font-weight: 700;
     width: 200px;
     float: left;
+
 }
 
 .titlePage {
