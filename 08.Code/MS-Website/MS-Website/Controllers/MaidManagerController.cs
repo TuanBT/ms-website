@@ -21,7 +21,7 @@ namespace MS_Website.Controllers
                 if (Session["AccId"] != null)
                 {
                     var accId = (int)Session["AccId"];
-                    var role = ((string)Session["Role"]).Trim();
+                    var role = Session["Role"];
                     var account = db.Accounts.SingleOrDefault(a => a.AccountId == accId);
                     int numWating = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Waiting"));
                     int numApplied = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Applied"));
@@ -94,18 +94,21 @@ namespace MS_Website.Controllers
                     ViewBag.ApplList = (from jobRequest in applJobList let apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId) let recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId) select new JobRequestTemp(jobRequest, maid, recruit, null)).ToList();
                     ViewBag.ApprList = (from jobRequest in apprJobList let apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId) let recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId) select new JobRequestTemp(jobRequest, maid, recruit, null)).ToList();
                     ViewBag.ExpiredList = expiredJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null)).ToList();
-                    if (maid.MaidMediatorId != null)
+                    if (Session["AccId"] != null)
                     {
-                        if (maid.MaidMediatorId == (int)Session["AccId"])
+                        if (maid.MaidMediatorId != null)
                         {
-                            ViewBag.Remove = "true";
+                            if (maid.MaidMediatorId == (int) Session["AccId"])
+                            {
+                                ViewBag.Remove = "true";
+                            }
                         }
-                    }
-                    else
-                    {
-                        if (maid.StaffId == (int)Session["AccId"])
+                        else
                         {
-                            ViewBag.Remove = "true";
+                            if (maid.StaffId == (int) Session["AccId"])
+                            {
+                                ViewBag.Remove = "true";
+                            }
                         }
                     }
                     if (maid.MaidMediatorId != null)

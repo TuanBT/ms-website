@@ -116,42 +116,33 @@ namespace MS_Website.Controllers
                     {
                         var skillList = new List<string>();
                         PostController.LoadSkillList(skillRef, skillList, db);
-                        var jobRequest = db.JobRequests.SingleOrDefault(jr => jr.SkillRefId == skillRef.SkillRefId);
+                        var jobRequest = db.JobRequests.SingleOrDefault(jr => jr.SkillRefId == skillRef.SkillRefId && jr.Status.Equals("Waiting"));
                         if (jobRequest != null)
                         {
                             var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                            if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
-                            {
-                                var apply =
-                                    db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId);
-                                var recruitment =
-                                    db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId);
-                                var jobRequestTmp = new JobRequestTemp(jobRequest, maid, recruitment, skillList);
-                                jobRequestList.Add(jobRequestTmp);
-                            }
-                            else
-                            {
-                                var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null);
-                                jobRequestList.Add(jobRequestTmp);
-                            }
+                            var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, skillList);
+                            jobRequestList.Add(jobRequestTmp);
                         }
                         else
                         {
-                            var recruitment = db.Recruitments.SingleOrDefault(a => a.SkillRefId == skillRef.SkillRefId);
-                            var customer = db.Customers.SingleOrDefault(c => c.AccountId == recruitment.CustomerId);
-                            if (recruitment.Status.Equals("Applied") || recruitment.Status.Equals("Approved"))
+                            var recruitment = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId && r.Status.Equals("Waiting"));
+                            if (recruitment != null)
                             {
-                                var apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitment.RecruitmentId);
-                                jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == apply.JobRequestId);
-                                var recruitmentTemp = new RecruitmentTemp(recruitment, customer, jobRequest, skillList);
-                                recruitmentList.Add(recruitmentTemp);
-                            }      
-                            else
-                            {
-                                var recruitmentTemp = new RecruitmentTemp(recruitment, customer, null, skillList);
+                                var customer = db.Customers.SingleOrDefault(c => c.AccountId == recruitment.CustomerId);
+                                var account = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId);
+                                var recruitmentTemp = new RecruitmentTemp(recruitment, customer, account, null, skillList);
                                 recruitmentList.Add(recruitmentTemp);
                             }
                         }
+                    }
+                    if (recruitmentList.Any())
+                    {
+                        var custImgList = new List<string>();
+                        foreach (var recruit in recruitmentList)
+                        {
+                            custImgList.Add(recruit.Customer.Account.Avatar);
+                        }
+                        ViewBag.CustImgList = custImgList;
                     }
                 }
                 ViewBag.Recruitment = recruitmentList;
@@ -685,27 +676,22 @@ namespace MS_Website.Controllers
                     {
                         var skillList = new List<string>();
                         PostController.LoadSkillList(skillRef, skillList, db);
-                        var jobRequest = db.JobRequests.SingleOrDefault(jr => jr.SkillRefId == skillRef.SkillRefId);
+                        var jobRequest = db.JobRequests.SingleOrDefault(jr => jr.SkillRefId == skillRef.SkillRefId && jr.Status.Equals("Waiting"));
                         if (jobRequest != null)
                         {
                             var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                            if (jobRequest.Status.Equals("Waiting"))
-                            {
-                                var jobRequestTemp = new JobRequestTemp(jobRequest, maid, null, null);
-                                jobRequestList.Add(jobRequestTemp);
-                            }
+                            var jobRequestTemp = new JobRequestTemp(jobRequest, maid, null, skillList);
+                            jobRequestList.Add(jobRequestTemp);
                         }
                         else
                         {
-                            var recruitment = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId);
+                            var recruitment = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId && r.Status.Equals("Waiting"));
                             if (recruitment != null)
                             {
                                 var customer = db.Customers.SingleOrDefault(c => c.AccountId == recruitment.CustomerId);
-                                if (recruitment.Status.Equals("Waiting"))
-                                {
-                                    var recruitmentTemp = new RecruitmentTemp(recruitment, customer, null, skillList);
-                                    recruitmentList.Add(recruitmentTemp);
-                                }
+                                var account = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId);
+                                var recruitmentTemp = new RecruitmentTemp(recruitment, customer, account, null, skillList);
+                                recruitmentList.Add(recruitmentTemp);
                             }
                         }
                     }

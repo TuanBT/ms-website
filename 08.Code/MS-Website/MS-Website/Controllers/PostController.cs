@@ -86,6 +86,7 @@ namespace MS_Website.Controllers
                 if (recruitment != null)
                 {
                     var customer = db.Customers.SingleOrDefault(m => m.AccountId == recruitment.CustomerId);
+                    var account = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId);
                     ViewBag.CustImg = customer.Account.Avatar;
                     var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId);
                     var skillList = new List<string>();
@@ -128,12 +129,12 @@ namespace MS_Website.Controllers
                         var jobRequest = db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId);
                         ViewBag.Maid =
                             db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                        var recruitmentTmp = new RecruitmentTemp(recruitment, customer, jobRequest, skillList);
+                        var recruitmentTmp = new RecruitmentTemp(recruitment, customer, account, jobRequest, skillList);
                         return View("Recruitment", recruitmentTmp);
                     }
                     else
                     {
-                        var recruitmentTmp = new RecruitmentTemp(recruitment, customer, null, skillList);
+                        var recruitmentTmp = new RecruitmentTemp(recruitment, customer, account, null, skillList);
                         return View("Recruitment", recruitmentTmp);
                     }
                 }
