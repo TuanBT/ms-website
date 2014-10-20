@@ -21,6 +21,11 @@ namespace MS_Website.Controllers
             this.numClusters = K;
         }
 
+        public Kmean(string path)
+        {
+            this.meansPathFile = path;
+        }
+
         public Kmean(int K, string path)
         {
             this.meansPathFile = path;
@@ -52,7 +57,7 @@ namespace MS_Website.Controllers
         } 
 
         //Return group of row
-        public int GetGroupRowData(double[] rowData)
+        public  int GetGroupRowData(double[] rowData)
         {
             var means = new double[1][];
             string[] lineMeans = GetFileFromServer();
