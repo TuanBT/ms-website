@@ -1,0 +1,286 @@
+﻿@{
+    ViewBag.Title = "Người đại diện";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    MS_Website.Models.Account account = Model;
+}
+
+<style>
+	a.myToolTip
+    {
+        outline: none;
+    }
+
+        a.myToolTip strong
+        {
+            line-height: 30px;
+        }
+
+        a.myToolTip:hover
+        {
+            text-decoration: none;
+        }
+
+        a.myToolTip span
+        {
+            z-index: 10;
+            display: none;
+            padding: 14px 20px;
+            margin-top: 60px;
+            margin-left: -160px;
+            width: 300px;
+            line-height: 16px;
+        }
+
+        a.myToolTip:hover span
+        {
+            display: inline;
+            position: absolute;
+            border: 2px solid #FFF;
+            color: #EEE;
+            background: #333 url(cssttp/css-tooltip-gradient-bg.png) repeat-x 0 0;
+        }
+
+    .callout
+    {
+        z-index: 20;
+        position: absolute;
+        border: 0;
+        top: -14px;
+        left: 120px;
+    }
+
+    a.myToolTip .maidAva2
+    {
+        float: right;
+	    margin-right: -8px;
+        width: 60px;
+        height: 60px;
+    }
+    /*CSS3 extras*/
+    a.myToolTip span
+    {
+        border-radius: 2px;
+        box-shadow: 0px 0px 8px 4px #666;
+        /*opacity: 0.8;*/
+    }
+</style>
+<div class="Menu">
+    <div class="rows">
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    <li>
+                        <a class="hefaContent iscurent">Thông tin</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Quản lý</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("PostRequest","MaidMediator")" class="hefaContent">Yêu cầu công việc</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thông báo</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thống kê</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li class="iscurent">
+                <a class="hChContent">Cá nhân</a>
+            </li>
+            <li class>
+                <a href="#" class="hChContent">Sửa thông tin</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="leftInfo">
+                    <div class="mainInfo">
+                        <div class="miPic">
+                            <img src="@account.Avatar" alt="Maid sercive">
+                        </div>
+                        <div class="mmiDetail">
+                            <div class="miFullName">
+                                @account.FullName
+                            </div>
+                            <div class="miAccount">
+                                Đại diện người giúp việc
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overView">
+                        <div class="ovTitle">
+                            Thống kê các yêu cầu
+                        </div>
+                        <div class="ovContent">
+                            @{
+                                //watting,expired,approved,applied
+                               int[] numStatus = ViewBag.MaidMediatorStatusStatistic;
+                               var numberStatistic = new int[4] { numStatus[0], numStatus[1], numStatus[2], numStatus[3] };
+                              }
+                            @Html.Partial("_PartialStatisticPie",numberStatistic)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rightInfo">
+                    <ul class="riDetail">
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Tham gia
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@account.JoinDate
+                                </strong>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="riManager">
+                        <div class="rimaTitle">
+                            Đại diện cho:
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Thêm người đại diện</button>
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Đóng</span></button>
+                                        </div>
+                                        @using (Html.BeginForm("AddMaid", "MaidManager", FormMethod.Get, new { name = "addMaidModal" }))
+                                        {
+                                            <div class="modal-body">
+                                                <table border="0">
+                                                    <tr>
+                                                        <td>Ảnh đại diên:</td>
+                                                        <td>
+                                                            <img id="maidAvatar" src="../Content/Image/maid_avatar.jpg" /><input id="maidAva" type="file" onchange="uploadMaidAva()">
+                                                        <td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tên đầy đủ:</td>
+                                                        <td>
+                                                            <input id="fullname" type="text" class="form-control" name="fullname">
+                                                        <td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Thông tin:</td>
+                                                        <td>
+                                                            <input id="desc" type="text" class="form-control" name="desc">
+                                                        <td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Địa chỉ:</td>
+                                                        <td>
+                                                            <input id="address" type="text" class="form-control" name="address">
+                                                        <td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Số điện thoại:</td>
+                                                        <td>
+                                                            <input id="phone" type="text" class="form-control" name="phone">
+                                                        <td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                                <button type="submit" class="btn btn-primary" onclick="addMaid()" data-dismiss="modal">Lưu</button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rimaContent">
+                            <ul class="rimaMaidList">
+                                @{
+                                    List<MS_Website.Models.Maid> Maid = ViewBag.MaidList;
+                                }
+                                @foreach (var maid in Maid)
+                                {                      
+                                    <li>
+                                        <div class="liImage">
+                                            <img src="@maid.PersonalImage">
+                                        </div>
+                                        <div class="liMaidContent">
+                                            <div class="licoFullName">
+                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" class="myToolTip">
+                                                    @maid.MaidName
+                                                    @*<span>
+                                                        <img class="callout" src="../Content/Image/callout_black.gif" /><img class="maidAva2" src="@maid.PersonalImage" /><strong>Tên đầy đủ: </strong>@maid.MaidName<br />
+                                                        <strong>Số điện thoại: </strong>
+                                                        <br/>
+                                                    </span>*@
+                                                </a>
+                                                <div class="licoRate">
+                                                    @Html.Partial("_PartialStar",(float) maid.RateAvg)
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender==true?"Nam":"Nữ")</span>
+                                                </div>
+                                                @*<div class="ricoPost">
+                                                    Đăng/nhận <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                                </div>*@
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="rimaMore">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function addMaid() {
+        document.forms["addMaidModal"].submit();
+    }
+
+    function uploadAva() { //calls the function named uploadAva()
+        var preview = document.querySelector('img[class=avatar]'); //selects the query named img
+        var file = document.querySelector('input[type=file]').files[0]; //sames as here
+        var reader = new window.FileReader();
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            var ava = document.getElementById("ava").src;
+            document.getElementById("avaIcon").setAttribute("src", ava);
+        };
+        if (file) {
+            reader.readAsDataURL(file); //reads the data as a URL
+        } else {
+            preview.src = "";
+        }
+    }
+
+    function uploadMaidAva() { //calls the function named uploadAva()
+        var preview = document.querySelector('img[id=maidAvatar]'); //selects the query named img
+        var file = document.querySelector('input[id=maidAva]').files[0]; //sames as here
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            var ava = document.getElementById("ava").src;
+            document.getElementById("avaIcon").setAttribute("src", ava);
+        };
+        if (file) {
+            reader.readAsDataURL(file); //reads the data as a URL
+        } else {
+            preview.src = "";
+        }
+    }
+</script>
