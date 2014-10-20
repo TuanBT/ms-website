@@ -21,12 +21,7 @@
             <div class="oSignup">
 
                 <div class="oTitleWrapper">
-                    <h1 class="txtCenter">Tạo tài khoản đại diện</h1>
-                    <div class="oMobileHidden">
-                        <div class="oSignupEscapeLinkWrapper ">
-                            Tìm kiếm người giúp việc?        <a class="oSignupEscapeLink \" href="#" data-event-name="freelancer_escape">Đăng kí là khách hàng            </a>
-                        </div>
-                    </div>
+                    <h1 class="txtCenter">Tạo tài khoản</h1>
                     <div id="Div1" class="oHidden">
                         <h1 class="oHidden">Tài khoản tồn tại</h1>
                         <p>
@@ -50,10 +45,6 @@
                             <div id="emailError"></div>
                         </div>
                         <div class="oFormField">
-                            <span class="textAvar">Ảnh đại diện:</span>
-                            <img id="maidAvatar" src="~" /><input id="maidAva" type="file" onchange="uploadMaidAva()" name="Avatar">
-                        </div>
-                        <div class="oFormField">
                             @Html.TextBoxFor(m => m.Phone, new { @class = "oInputText oFormMed", @placeholder = "Điện thoại" })
                         </div>
                         <div class="oFormField">
@@ -74,10 +65,7 @@
                         </div>
 
                         <div class="oFormField oSupportInfo txtCenter oFieldValue-terms">
-                            Với việc tạo tài khoản
-   
-                        <a target="_blank" href="#" class="nowrap">Bạn đồng ý với các quy định</a>
-                            và <a target="_blank" href="#" class="nowrap">bảo mật của Maid Service</a>.       
+                            Với việc tạo tài khoản Bạn đồng ý với các quy định và bảo mật của Maid Service.       
                         </div>
                         <div class="oFormField">
                             <div id="submit-element">

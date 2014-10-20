@@ -1193,3 +1193,7 @@ text-decoration: none;
 .labelStatus {
     font-size: 15px;
 }
+
+.jrImage>img{
+    border-radius: 5px;
+}
