@@ -28,31 +28,35 @@ namespace MS_Website.Controllers
                     {
                         LoadSkillList(skillRef, skillList, db);
                     }
-                    ViewBag.MaidRating = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId).RateAvg;
-                    if (job.Maid.MaidMediatorId != null)
+                    ViewBag.MaidRating = maid.RateAvg;
+                    if (Session["AccId"] != null)
                     {
-                        if (job.Maid.MaidMediatorId == (int)Session["AccId"])
+                        if (job.Maid.MaidMediatorId != null)
                         {
-                            if (job.Status.Equals("Waiting") || job.Status.Equals("Expired"))
+                            if (job.Maid.MaidMediatorId == (int) Session["AccId"])
                             {
-                                ViewBag.Remove = "true";
+                                if (job.Status.Equals("Waiting") || job.Status.Equals("Expired"))
+                                {
+                                    ViewBag.Remove = "true";
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        if (job.Maid.StaffId == (int)Session["AccId"])
+                        else
                         {
-                            if (job.Status.Equals("Waiting") || job.Status.Equals("Expired"))
+                            if (job.Maid.StaffId == (int) Session["AccId"])
                             {
-                                ViewBag.Remove = "true";
+                                if (job.Status.Equals("Waiting") || job.Status.Equals("Expired"))
+                                {
+                                    ViewBag.Remove = "true";
+                                }
                             }
                         }
-                    }
-                    if (Session["Role"].Equals("Customer"))
-                    {
-                        var custId = (int)Session["AccId"];
-                        ViewBag.RecruitmentList = db.Recruitments.Where(r => r.CustomerId == custId && r.Status.Equals("Waiting")).ToList();
+                        if (Session["Role"].Equals("Customer"))
+                        {
+                            var custId = (int) Session["AccId"];
+                            ViewBag.RecruitmentList =
+                                db.Recruitments.Where(r => r.CustomerId == custId && r.Status.Equals("Waiting")).ToList();
+                        }
                     }
                     if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
                     {
@@ -87,11 +91,14 @@ namespace MS_Website.Controllers
                     var skillList = new List<string>();
                     var recSkillRefList = new List<SkillReference>();
                     var recJobReqList = new List<JobRequestTemp>();
-                    if (recruitment.CustomerId == (int)Session["AccId"])
+                    if (Session["AccId"] != null)
                     {
-                        if (recruitment.Status.Equals("Waiting") || recruitment.Status.Equals("Expired"))
+                        if (recruitment.CustomerId == (int) Session["AccId"])
                         {
-                            ViewBag.Remove = "true";
+                            if (recruitment.Status.Equals("Waiting") || recruitment.Status.Equals("Expired"))
+                            {
+                                ViewBag.Remove = "true";
+                            }
                         }
                     }
                     if (skillRef != null)
