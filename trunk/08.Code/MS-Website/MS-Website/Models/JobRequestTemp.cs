@@ -7,10 +7,11 @@ namespace MS_Website.Models
 {
     public class JobRequestTemp
     {
-        public JobRequestTemp(JobRequest job, Maid maid, Recruitment recruitment, List<string> skillList)
+        public JobRequestTemp(JobRequest job, Maid maid, Account account, Recruitment recruitment, List<string> skillList)
         {
             this.Job = job;
             this.Maid = maid;
+            this.Account = account;
             this.Recruitment = recruitment;
             this.SkillList = skillList;
         }
@@ -20,6 +21,7 @@ namespace MS_Website.Models
             
         }
 
+        public Account Account { get; set; }
         public JobRequest Job { get; set; }
         public Maid Maid { get; set; }
         public Recruitment Recruitment { get; set; }

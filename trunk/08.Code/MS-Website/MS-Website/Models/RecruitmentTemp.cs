@@ -7,14 +7,16 @@ namespace MS_Website.Models
 {
     public class RecruitmentTemp
     {
-        public RecruitmentTemp(Recruitment recruitment, Customer customer, JobRequest jobRequest, List<string> skillList)
+        public RecruitmentTemp(Recruitment recruitment, Customer customer, Account account, JobRequest jobRequest, List<string> skillList)
         {
             this.Recruitment = recruitment;
             this.Customer = customer;
+            this.Account = account;
             this.JobRequest = jobRequest;
             this.SkillList = skillList;
         }
 
+        public Account Account { get; set; }
         public Recruitment Recruitment { get; set; }
         public Customer Customer { get; set; }
         public JobRequest JobRequest { get; set; }
