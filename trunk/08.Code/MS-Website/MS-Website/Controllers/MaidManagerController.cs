@@ -14,34 +14,6 @@ namespace MS_Website.Controllers
         //
         // GET: /MaidMediator/
 
-        public ActionResult Index()
-        {
-            using (var db = new MSEntities())
-            {
-                if (Session["AccId"] != null)
-                {
-                    var accId = (int)Session["AccId"];
-                    var role = Session["Role"];
-                    var account = db.Accounts.SingleOrDefault(a => a.AccountId == accId);
-                    int numWating = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Waiting"));
-                    int numApplied = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Applied"));
-                    int numApproved = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Approved"));
-                    int numExpired = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Expired"));
-                    ViewBag.MaidMediatorStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied };
-                    if (role.Equals("MaidMediator"))
-                    {
-                        ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
-                        return View("MaidMediator", account);
-                    }
-                    if (role.Equals("Staff"))
-                    {
-                        ViewBag.MaidList = db.Maids.Where(m => m.Staff.Account.AccountId == accId).ToList();
-                    }
-                }
-                return RedirectToAction("Login", "Home");
-            }
-        }
-
         public ActionResult GetMaidManager(int accId, string role)
         {
             using (var db = new MSEntities())
@@ -65,7 +37,7 @@ namespace MS_Website.Controllers
                     Session["MaidManager"] = staff;
                     return View("Staff", staff);
                 }
-                return View("MaidMediator");
+                return RedirectToAction("Login","Home");
             }
         }
 
@@ -73,7 +45,7 @@ namespace MS_Website.Controllers
         {
             if (Session["AccId"] != null)
             {
-                var maidManagerId = (int) Session["AccId"];
+                var maidManagerId = (int)Session["AccId"];
                 using (var db = new MSEntities())
                 {
                     if (Session["Role"].Equals("MaidMediator"))
@@ -91,23 +63,65 @@ namespace MS_Website.Controllers
             return RedirectToAction("Login", "Home");
         }
 
+        public ActionResult EditMaidMedProfile(int maidMedId, string fullname, string phone, string email, string avatar)
+        {
+            if (Session["AccId"] != null)
+            {
+                var loggedId = (int)Session["AccId"];
+                using (var db = new MSEntities())
+                {
+                    if (loggedId == maidMedId)
+                    {
+                        var maidMedAcc = db.Accounts.SingleOrDefault(a => a.AccountId == loggedId);
+                        maidMedAcc.FullName = fullname;
+                        maidMedAcc.Phone = phone;
+                        maidMedAcc.Email = email;
+                        db.SaveChanges();
+                        if (maidMedAcc.Role.Equals("MaidMediator"))
+                        {
+                            return RedirectToAction("GetMaidManager", new { accId = loggedId, role = "MaidMediator" });
+                        }
+                        if (maidMedAcc.Role.Equals("Staff"))
+                        {
+                            return RedirectToAction("GetMaidManager", new { accId = loggedId, role = "Staff" });
+                        }
+                    }
+                }
+            }
+            return RedirectToAction("Login", "Home");
+        }
+
         public ActionResult MaidEdit(int maidId)
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidId);
-                return View("MaidEdit", maid);
+                var loggedId = (int)Session["AccId"];
+                using (var db = new MSEntities())
+                {
+                    var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidId);
+                    if (maid.MaidMediatorId == loggedId || maid.StaffId == loggedId)
+                    {
+                        if (Session["Hometown"] == null)
+                        {
+                            Session["Hometown"] = db.SkillInstances.Where(si => si.SkillName.Equals("Hometown")).ToList();
+                        }
+                        if (Session["Address"] == null)
+                        {
+                            Session["Address"] = db.SkillInstances.Where(si => si.SkillName.Equals("Address")).ToList();
+                        }
+                        ViewBag.Hometown = Session["Hometown"];
+                        ViewBag.Address = Session["Address"];
+                        return View("MaidEdit", maid);
+                    }
+                }
             }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult LoadAddMaid()
         {
             using (var db = new MSEntities())
             {
-                if (Session["Exp"] == null)
-                {
-                    Session["Exp"] = db.SkillInstances.Where(si => si.SkillName.Equals("Experience")).ToList();
-                }
                 if (Session["Hometown"] == null)
                 {
                     Session["Hometown"] = db.SkillInstances.Where(si => si.SkillName.Equals("Hometown")).ToList();
@@ -116,16 +130,14 @@ namespace MS_Website.Controllers
                 {
                     Session["Address"] = db.SkillInstances.Where(si => si.SkillName.Equals("Address")).ToList();
                 }
-                ViewBag.Exp = Session["Exp"];
                 ViewBag.Hometown = Session["Hometown"];
                 ViewBag.Address = Session["Address"];
-                ViewBag.Salary = Session["Salary"];
                 return View("AddMaid");
             }
         }
 
         public ActionResult AddMaid(string fullname, double exp, string phone, string birthdate, bool gender,
-            string english, string jap, string chinese, string korean, string hometown, string addr, bool married, 
+            string english, string jap, string chinese, string korean, string hometown, string addr, bool married,
             string desc, string avatar)
         {
             if (Session["AccId"] != null)
@@ -135,7 +147,7 @@ namespace MS_Website.Controllers
                     using (var db = new MSEntities())
                     {
                         var maid = new Maid();
-                        var managerId = (int) Session["AccId"];
+                        var managerId = (int)Session["AccId"];
                         if (Session["Role"].Equals("MaidMediator"))
                         {
                             maid.MaidMediatorId = managerId;
@@ -147,7 +159,7 @@ namespace MS_Website.Controllers
                         maid.MaidName = fullname;
                         maid.Experience = exp;
                         maid.Phone = phone;
-                        maid.BirthDate = DateTime.Parse("1991-08-20");
+                        maid.BirthDate = DateTime.Parse(birthdate);
                         maid.Gender = gender;
                         maid.English = english != null;
                         maid.Japanese = jap != null;
@@ -162,11 +174,49 @@ namespace MS_Website.Controllers
                         db.Maids.Add(maid);
                         db.SaveChanges();
                         maid = Session["Role"].Equals("MaidMediator") ? db.Maids.OrderByDescending(m => m.MaidId).FirstOrDefault(m => m.MaidMediatorId == managerId) : db.Maids.OrderByDescending(m => m.MaidId).FirstOrDefault(m => m.StaffId == managerId);
-                        if (maid != null) return RedirectToAction("ManageMaidProfile", new { maidId = maid.MaidId});
+                        if (maid != null)
+                        {
+                            return RedirectToAction("ManageMaidProfile", new { maidId = maid.MaidId });
+                        }
                     }
                 }
             }
-            return RedirectToAction("Login","Home");
+            return RedirectToAction("Login", "Home");
+        }
+
+        public ActionResult EditMaidProfile(int maidId, string fullname, double exp, string phone, string birthdate, bool gender,
+            string english, string jap, string chinese, string korean, string hometown, string addr, bool married,
+            string desc, string avatar)
+        {
+            if (Session["AccId"] != null)
+            {
+                var loggedId = (int)Session["AccId"];
+                using (var db = new MSEntities())
+                {
+                    var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidId);
+                    if (maid.MaidMediatorId == loggedId || maid.StaffId == loggedId)
+                    {
+                        maid.MaidName = fullname;
+                        maid.Experience = exp;
+                        maid.Phone = phone;
+                        maid.BirthDate = DateTime.Parse(birthdate);
+                        maid.Gender = gender;
+                        maid.English = english != null;
+                        maid.Japanese = jap != null;
+                        maid.Chinese = chinese != null;
+                        maid.Korean = korean != null;
+                        maid.Hometown = hometown;
+                        maid.Address = addr;
+                        maid.Married = married;
+                        maid.Description = desc;
+                        maid.RateAvg = 0;
+                        maid.PersonalImage = "../Content/Image/default-avatar.png";
+                        db.SaveChanges();
+                        return RedirectToAction("ManageMaidProfile", new { maidId = maid.MaidId });
+                    }
+                }
+            }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult ManageMaidProfile(int maidId)
@@ -557,26 +607,26 @@ namespace MS_Website.Controllers
                 if (sr.Cooking != null)
                 {
                     cooking = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.Cooking).SkillNormallized;
-                    
+
                 }
                 if (sr.Washing != null)
                 {
                     washing = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.Washing).SkillNormallized;
-                    
+
                 }
                 if (sr.CleanHouse != null)
                 {
                     clean = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.CleanHouse).SkillNormallized;
                 }
-               double[] kmeanPara = { gender, age, english, chinese, japanese, korean, exp, hometown, addr, married, work, stay, salary, sickCare, oldCare, babysister, disCare, bonsaiCare, cooking, washing, clean };
-               string strPathServer = AppDomain.CurrentDomain.BaseDirectory;
-               string strMeansDataFile = strPathServer + "App_Data\\" + "meansData.txt";
-               Kmean kmean = new Kmean(strMeansDataFile);
+                double[] kmeanPara = { gender, age, english, chinese, japanese, korean, exp, hometown, addr, married, work, stay, salary, sickCare, oldCare, babysister, disCare, bonsaiCare, cooking, washing, clean };
+                string strPathServer = AppDomain.CurrentDomain.BaseDirectory;
+                string strMeansDataFile = strPathServer + "App_Data\\" + "meansData.txt";
+                Kmean kmean = new Kmean(strMeansDataFile);
                 return kmean.GetGroupRowData(kmeanPara);
             }
         }
-		
-		public ActionResult ManageJobRequest()
+
+        public ActionResult ManageJobRequest()
         {
             List<JobRequestTemp> jobRequestTemps = new List<JobRequestTemp>();
             using (var db = new MSEntities())

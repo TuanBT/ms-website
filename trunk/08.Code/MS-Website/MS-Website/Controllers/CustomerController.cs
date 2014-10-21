@@ -17,42 +17,56 @@ namespace MS_Website.Controllers
         //
         // GET: /CustomerRecruiment/
 
-        public ActionResult Index()
+        public ActionResult GetCustomer(int custId)
         {
             using (var db = new MSEntities())
             {
-                if (Session["AccId"] != null)
-                {
-                    var accId = (int)Session["AccId"];
-                    var role = ((string)Session["Role"]).Trim();
-                    var account = db.Accounts.SingleOrDefault(a => a.AccountId == accId);
-                    if (role.Equals("Customer"))
-                    {
-                        var customer = db.Customers.SingleOrDefault(c => c.AccountId == accId);
-                        var notApplJobList = db.Recruitments.Where(r => r.Customer.AccountId == accId && r.Status.Equals("Waiting")).ToList();
-                        var applJobList = db.Recruitments.Where(r => r.Customer.AccountId == accId && r.Status.Equals("Applied")).ToList();
-                        var expiredJobList = db.Recruitments.Where(r => r.Customer.AccountId == accId && r.Status.Equals("Expired")).ToList();
-                        ViewBag.NotApplList = notApplJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                        ViewBag.ApplList = (from recruitment in applJobList let apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitment.RecruitmentId) let jobRequest = db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId) select new RecruitmentTemp(recruitment, customer, account, jobRequest, null)).ToList();
-                        ViewBag.ExpiredList = expiredJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                        ViewBag.JoinDate = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId).JoinDate;
-                        return View("CustomerProfile", account);
-                    }
-                }
-                return RedirectToAction("Login", "Home");
+                var account = db.Accounts.SingleOrDefault(a => a.AccountId == custId);
+                var customer = db.Customers.SingleOrDefault(c => c.AccountId == custId);
+                var notApplJobList = db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Waiting")).ToList();
+                var applJobList = db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Applied")).ToList();
+                var expiredJobList = db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Expired")).ToList();
+                ViewBag.NotApplList = notApplJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                ViewBag.ApplList = (from recruitment in applJobList let apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitment.RecruitmentId) let jobRequest = db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId) select new RecruitmentTemp(recruitment, customer, account, jobRequest, null)).ToList();
+                ViewBag.ExpiredList = expiredJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                ViewBag.JoinDate = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId).JoinDate;
+                return View("CustomerProfile", account);
             }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult CustomerEdit()
         {
             if (Session["AccId"] != null)
             {
-                var custId = (int)Session["AccId"]; 
+                var custId = (int)Session["AccId"];
                 using (var db = new MSEntities())
                 {
                     var customerAcc = db.Accounts.SingleOrDefault(a => a.AccountId == custId);
                     ViewBag.CustAddr = customerAcc.Customer.Address;
                     return View("CustomerEdit", customerAcc);
+                }
+            }
+            return RedirectToAction("Login", "Home");
+        }
+
+        public ActionResult EditCustProfile(int custId, string fullname, string phone, string email, string addr, string avatar)
+        {
+            if (Session["AccId"] != null)
+            {
+                var loggedId = (int)Session["AccId"];
+                using (var db = new MSEntities())
+                {
+                    var cust = db.Accounts.SingleOrDefault(a => a.AccountId == custId);
+                    if (cust.AccountId == loggedId)
+                    {
+                        cust.FullName = fullname;
+                        cust.Phone = phone;
+                        cust.Email = email;
+                        cust.Customer.Address = addr;
+                        db.SaveChanges();
+                        return RedirectToAction("GetCustomer", "Customer", new { custId = cust.AccountId});
+                    }
                 }
             }
             return RedirectToAction("Login", "Home");
@@ -107,7 +121,7 @@ namespace MS_Website.Controllers
             string SickCare, string OldCare, string BabySister, string DisabilityCare, string BonsaiCare,
             string Cooking, string Washing, string CleanHouse, string time)
         {
-            var custId = (int) Session["AccId"];
+            var custId = (int)Session["AccId"];
             using (var db = new MSEntities())
             {
                 var skillRef = new SkillReference();
@@ -223,7 +237,7 @@ namespace MS_Website.Controllers
                 db.SaveChanges();
                 LoadItems();
                 var newRecruitId = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId).RecruitmentId;
-                return RedirectToAction("GetRecruitment", "Post", new {recruitmentId = newRecruitId});
+                return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = newRecruitId });
             }
         }
 
