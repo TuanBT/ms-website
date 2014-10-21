@@ -200,23 +200,15 @@ namespace MS_Website.Controllers
 
         public ActionResult Redirect()
         {
-            if (Session["Role"] != null)
+            if (Session["AccId"] != null)
             {
-                if (Session["Role"].Equals("MaidMediator"))
-                {
-                    return RedirectToAction("Index", "MaidManager");
-                }
-                if (Session["Role"].Equals("Staff"))
-                {
-
-                }
                 if (Session["Role"].Equals("Customer"))
                 {
-                    return RedirectToAction("Index", "Customer");
+                    return RedirectToAction("GetCustomer", "Customer", new { custId = (int) Session["AccId"]});
                 }
-                if (Session["Role"].Equals("Admin"))
+                if (Session["Role"].Equals("MaidMediator") || Session["Role"].Equals("Staff"))
                 {
-
+                    return RedirectToAction("GetMaidManager", "MaidManager", new { accId = (int)Session["AccId"], role = Session["Role"] });
                 }
             }
             return View("Login");
