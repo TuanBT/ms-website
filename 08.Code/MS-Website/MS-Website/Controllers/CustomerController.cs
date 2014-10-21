@@ -43,6 +43,14 @@ namespace MS_Website.Controllers
             }
         }
 
+        public ActionResult CustomerEdit()
+        {
+            using (var db = new MSEntities())
+            {
+                return View("CustomerEdit");
+            }
+        }
+
         public ActionResult RemoveRecruitment(int recruitmentId)
         {
             using (var db = new MSEntities())
