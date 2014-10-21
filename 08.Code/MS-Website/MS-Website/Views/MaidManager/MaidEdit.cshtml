@@ -1,0 +1,228 @@
+﻿@{
+    ViewBag.Title = "Sửa thông tin người giúp việc";
+}
+
+<div class="Menu">
+    <div class="rows">
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    <li>
+                        <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = Session["AccId"], role = Session["Role"]})" class="hefaContent iscurent">Thông tin</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thống kê</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li>
+                <a href="@Url.Action("ManageMaidProfile","MaidManager", new { maidId = Model.MaidId})" class="hChContent">Cá nhân</a>
+            </li>
+            <li class="iscurent">
+                <a class="hChContent iscurent">Sửa thông tin</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="body">
+<div class="rows">
+<div class="row">
+<div class="titlePage">Sửa thông tin người giúp việc</div>
+<div class="postJRRow">
+    <div class="row">
+        <div class="col-md-4 poJRTtitle">
+            Họ và tên
+        </div>
+        <div class="col-md-8">
+            <input type="text" class="form-control" placeholder="Nguyễn Văn A">
+        </div>
+    </div>
+</div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Kinh nghiệm (năm)
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="1.5">
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Số điện thoại
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="0123456789">
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Ngày sinh
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker5'>
+                        <input type='text' class="form-control" data-date-format="YYYY/MM/DD"/>
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker5').datetimepicker({
+                            pickTime: false
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Giới tính
+            </div>
+            <div class="col-md-8">
+                <select class="form-control">
+                    <option>Nam</option>
+                    <option>Nữ</option>
+                    <option>Khác</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Biết tiếng
+            </div>
+            <div class="col-md-8">
+                <div class="checkbox">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" value="">
+                        Tiếng Anh
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" value="">
+                        Tiếng Hàn
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" value="">
+                        Tiếng Nhật
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" value="">
+                        Tiếng Trung
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Nguyên quán
+            </div>
+            <div class="col-md-8">
+                <select class="form-control">
+                    <option>Miền bắc</option>
+                    <option>Miền Trung</option>
+                    <option>Miền Nam</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Đang sống tại
+            </div>
+            <div class="col-md-8">
+                <select class="form-control">
+                    <option>Quận 1</option>
+                    <option>Quận 2</option>
+                    <option>Quận 3</option>
+                    <option>Quận 4</option>
+                    <option>Quận 5</option>
+                    <option>Quận 6</option>
+                    <option>Quận 7</option>
+                    <option>Quận 8</option>
+                    <option>Quận 9</option>
+                    <option>Quận 10</option>
+                    <option>Quận 11</option>
+                    <option>Quận 12</option>
+                    <option>Quận Bình Tân</option>
+                    <option>Quận Bình Thạnh</option>
+                    <option>Quận Gò Vấp</option>
+                    <option>Quận Phú Nhuận</option>
+                    <option>Quận Tân Bình</option>
+                    <option>Quận Tân Phú</option>
+                    <option>Quận Thủ Đức</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Kết hôn
+            </div>
+            <div class="col-md-8">
+                <select class="form-control">
+                    <option>Đã kết hôn</option>
+                    <option>Chưa kết hôn</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+               Giới thiệu bản thân
+            </div>
+            <div class="col-md-8">
+                <textarea class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Ảnh người giúp việc
+                <img src="../Content/Image/default-avatar.png" width="80%">
+            </div>
+            <div class="col-md-8">
+                <input id="input-21" type="file" accept="image/*" >
+                <script>
+                    $("#input-21").fileinput({
+                        previewFileType: "image",
+                        browseClass: "btn btn-success",
+                        browseLabel: " Chọn hình",
+                        browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                        removeClass: "btn btn-danger",
+                        removeLabel: " Xóa",
+                        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                        uploadClass: "btn btn-info",
+                        uploadLabel: " Tải lên",
+                        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>'
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+<div class="buttonFooterPage">
+    <button type="button" class="btn btn-success btn-lg">Cập nhập thông tin</button>
+</div>
+</div>
+</div>
+</div>

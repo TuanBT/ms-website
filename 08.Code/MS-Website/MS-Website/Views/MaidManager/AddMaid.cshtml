@@ -1,7 +1,33 @@
 ﻿@{
-    ViewBag.Title = "AddMaid";
+    ViewBag.Title = "Thêm người giúp việc";
 }
 
+<div class="Menu">
+    <div class="rows">
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    <li>
+                        <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = Session["AccId"], role = Session["Role"]})" class="hefaContent">Thông tin</a>
+                    </li>
+                    <li>
+                        <a class="hefaContent iscurent">Thêm người giúp viêc</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent">Đăng yêu cầu công việc</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thông báo</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thống kê</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
 <div class="body">
     <div class="rows">
         <div class="row">
