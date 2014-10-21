@@ -14,6 +14,7 @@ namespace MS_Website.Models
             this.Account = account;
             this.Recruitment = recruitment;
             this.SkillList = skillList;
+
         }
 
         public JobRequestTemp()
