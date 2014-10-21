@@ -2042,6 +2042,10 @@
     <Content Include="Views\MaidManager\MaidProfile.cshtml" />
     <Content Include="Views\MaidManager\PostRequest.cshtml" />
     <Content Include="Views\MaidManager\AddMaid.cshtml" />
+    <Content Include="Views\MaidManager\ManageJobRequest.cshtml" />
+    <Content Include="Views\MaidManager\ManageRecruitment.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
