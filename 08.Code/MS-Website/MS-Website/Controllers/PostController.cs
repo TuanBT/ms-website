@@ -438,5 +438,65 @@ namespace MS_Website.Controllers
             }
             return skillList;
         }
+
+        [HttpPost]
+        public ActionResult RatingJobRequest(string rate, string jrId)
+        {
+            var jobId = Convert.ToInt32(jrId);
+            var numrate = Convert.ToDouble(rate)*2;
+            bool statusNew = false;
+            using (var db = new MSEntities())
+            {
+                var CustomerId = (int)Session["AccId"];
+                var dbRate = db.Ratings.FirstOrDefault(r => r.CustomerId == CustomerId && r.JobRequestId == jobId);
+
+                if (dbRate == null)
+                {
+                    Rating rating = new Rating
+                                        {
+                                            CustomerId = CustomerId,
+                                            JobRequestId = jobId,
+                                            Rate = numrate
+                                        };
+                    db.Ratings.Add(rating);
+                    db.SaveChanges();
+                    statusNew = true;
+                }
+                else
+                {
+                    if (dbRate.Rate != numrate)
+                    {
+                        dbRate.Rate = numrate;
+                        db.SaveChanges();
+                        statusNew = true;
+                    }
+                }
+                if (statusNew)
+                {
+                    var maidId = db.JobRequests.FirstOrDefault(j => j.JobRequestId == jobId).MaidId;
+                    var Ratings = db.Ratings.Select(r => r).ToList();
+                    var jobRequests =
+                        db.JobRequests.Where(
+                            j => (j.Status == "Applied" || j.Status == "Approved") && j.MaidId == maidId).ToList();
+                    int count = 0;
+                    double total = 0;
+                    foreach (var Rating in Ratings)
+                    {
+                        foreach (var jobRequest in jobRequests)
+                        {
+                            if (Rating.JobRequestId == jobRequest.JobRequestId)
+                            {
+                                count++;
+                                total += Rating.Rate;
+                            }
+                        }
+                    }
+                    var Maid = db.Maids.FirstOrDefault(m => m.MaidId == maidId);
+                    Maid.RateAvg = (int)total / count;
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("GetJobRequest", new { jobId = jobId });
+        }
     }
 }
