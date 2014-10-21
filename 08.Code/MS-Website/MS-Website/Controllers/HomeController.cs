@@ -155,37 +155,46 @@ namespace MS_Website.Controllers
         {
             using (var _db = new MSEntities())
             {
-                var newUser = _db.Accounts.Create();
-                newUser.Username = acc.Username;
-                newUser.Password = acc.Password;
-                newUser.Avatar = acc.Avatar;
-                newUser.Role = acc.Role;
-                newUser.Email = acc.Email;
-                newUser.Phone = acc.Phone;
-                newUser.FullName = acc.FullName;
-                newUser.JoinDate = DateTime.Now;
-                newUser.IsActive = true;
-                newUser.IsWebmaster = false;
-                _db.Accounts.Add(newUser);
-                _db.SaveChanges();
-                if (acc.Role.Equals("Customer"))
+                try
                 {
-                    var addedAcc = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
-                    var newCustomer = new Customer();
-                    newCustomer.AccountId = addedAcc.AccountId;
-                    newCustomer.Payment = 0;
-                    _db.Customers.Add(newCustomer);
+                    var newUser = _db.Accounts.Create();
+                    newUser.Username = acc.Username;
+                    newUser.Password = acc.Password;
+                    newUser.Avatar = acc.Avatar;
+                    newUser.Role = acc.Role;
+                    newUser.Email = acc.Email;
+                    newUser.Phone = acc.Phone;
+                    newUser.FullName = acc.FullName;
+                    newUser.JoinDate = DateTime.Now;
+                    newUser.IsActive = true;
+                    newUser.IsWebmaster = false;
+                    _db.Accounts.Add(newUser);
                     _db.SaveChanges();
+                    if (acc.Role.Equals("Customer"))
+                    {
+                        var addedAcc = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                        var newCustomer = new Customer();
+                        newCustomer.AccountId = addedAcc.AccountId;
+                        newCustomer.Payment = 0;
+                        _db.Customers.Add(newCustomer);
+                        _db.SaveChanges();
+                    }
+                    else
+                    {
+                        var addedAcc = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                        var newMaid = new MaidMediator();
+                        newMaid.AccountId = addedAcc.AccountId;
+                        _db.MaidMediators.Add(newMaid);
+                        _db.SaveChanges();
+                    }
+                    return RedirectToAction("Login", "Home", acc);
                 }
-                else
+                catch (Exception)
                 {
-                    var addedAcc = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
-                    var newMaid = new MaidMediator();
-                    newMaid.AccountId = addedAcc.AccountId;
-                    _db.MaidMediators.Add(newMaid);
-                    _db.SaveChanges();
+
+                    return View("Register");
                 }
-                return RedirectToAction("Login", "Home", acc);
+                
             }
         }
 
