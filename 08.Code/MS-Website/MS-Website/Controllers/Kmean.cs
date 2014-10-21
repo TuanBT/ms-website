@@ -24,6 +24,7 @@ namespace MS_Website.Controllers
         public Kmean(string path)
         {
             this.meansPathFile = path;
+            this.numClusters = GetFileFromServer().Length;
         }
 
         public Kmean(int K, string path)
