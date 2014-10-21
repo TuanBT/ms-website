@@ -10,7 +10,7 @@
             <div class="hFatherMenu">
                 <ul class="hmeTabList">
                     <li>
-                        <a href="@Url.Action("Index", "Customer")" class="hefaContent iscurent">Thông tin</a>
+                        <a href="@Url.Action("GetCustomer", "Customer", new { custId = account.AccountId })" class="hefaContent iscurent">Thông tin</a>
                     </li>
                     <li>
                         <a href="@Url.Action("PostRecruitment", "Customer")" class="hefaContent">Đăng yêu cầu tuyển việc</a>
@@ -37,78 +37,81 @@
     </div>
 </div>
 <div class="body">
-<div class="rows">
-<div class="row">
-<div class="titlePage">Sửa thông tin khách hàng</div>
-<div class="postJRRow">
-    <div class="row">
-        <div class="col-md-4 poJRTtitle">
-            Họ và tên
-        </div>
-        <div class="col-md-8">
-            <input type="text" class="form-control" placeholder="@account.FullName" value="@account.FullName">
-        </div>
-    </div>
-</div>
-    <div class="postJRRow">
+    <div class="rows">
         <div class="row">
-            <div class="col-md-4 poJRTtitle">
-                Số điện thoại
-            </div>
-            <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="@account.Phone" value="@account.Phone">
-            </div>
+            <div class="titlePage">Sửa thông tin khách hàng</div>
+            @using (Html.BeginForm("EditCustProfile", "Customer", new { custId = account.AccountId }))
+            {
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Họ và tên
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" value="@account.FullName" name="fullname">
+                        </div>
+                    </div>
+                </div>
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Số điện thoại
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" value="@account.Phone" name="phone">
+                        </div>
+                    </div>
+                </div>
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Email
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" value="@account.Email" name="email">
+                        </div>
+                    </div>
+                </div>
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Địa chỉ
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" value="@ViewBag.CustAddr" name="addr">
+                        </div>
+                    </div>
+                </div>
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Ảnh đại diện
+                    <img src="@account.Avatar" width="80%">
+                        </div>
+                        <div class="col-md-8">
+                            <input id="input-21" type="file" accept="image/*">
+                            <script>
+                                $("#input-21").fileinput({
+                                    previewFileType: "image",
+                                    browseClass: "btn btn-success",
+                                    browseLabel: " Chọn hình",
+                                    browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                                    removeClass: "btn btn-danger",
+                                    removeLabel: " Xóa",
+                                    removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                                    uploadClass: "btn btn-info",
+                                    uploadLabel: " Tải lên",
+                                    uploadIcon: '<i class="glyphicon glyphicon-upload"></i>'
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttonFooterPage">
+                    <button class="btn btn-success btn-lg">Cập nhập thông tin</button>
+                </div>
+            }
         </div>
     </div>
-    <div class="postJRRow">
-        <div class="row">
-            <div class="col-md-4 poJRTtitle">
-                Email
-            </div>
-            <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="@account.Email" value="@account.Email">
-            </div>
-        </div>
-    </div>
-    <div class="postJRRow">
-        <div class="row">
-            <div class="col-md-4 poJRTtitle">
-                Địa chỉ
-            </div>
-            <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="@ViewBag.CustAddr" value="@ViewBag.CustAddr">
-            </div>
-        </div>
-    </div>
-    <div class="postJRRow">
-        <div class="row">
-            <div class="col-md-4 poJRTtitle">
-               Ảnh đại diện
-                <img src="../Content/Image/default-avatar.png" width="80%">
-            </div>
-            <div class="col-md-8">
-                <input id="input-21" type="file" accept="image/*" >
-                <script>
-                    $("#input-21").fileinput({
-                        previewFileType: "image",
-                        browseClass: "btn btn-success",
-                        browseLabel: " Chọn hình",
-                        browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
-                        removeClass: "btn btn-danger",
-                        removeLabel: " Xóa",
-                        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
-                        uploadClass: "btn btn-info",
-                        uploadLabel: " Tải lên",
-                        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>'
-                    });
-                </script>
-            </div>
-        </div>
-    </div>
-<div class="buttonFooterPage">
-    <button type="button" class="btn btn-success btn-lg">Cập nhập thông tin</button>
-</div>
-</div>
-</div>
 </div>
 
