@@ -174,14 +174,17 @@
                             </div>
                         </div>
                     </div>
-                    @if (JobRequestTemp.Job.Status == "Approved")
+                    @if (JobRequestTemp.Job.Status == "Applied" || JobRequestTemp.Job.Status == "Approved")
                     {
                         <div class="overView">
                             <div class="ovTitle">
                                 Bạn có thể chấm điểm cho công việc này
                             </div>
                             <div class="ovContent">
-                                @{ Html.RenderAction("Rate", "Evaluate", new {id = JobRequestTemp.Job.JobRequestId}); }
+                                @* @{ Html.RenderAction("Rate", "Evaluate", new {id = JobRequestTemp.Job.JobRequestId}); }*@
+                                @*ViewBag.MaidRating*@
+                                @{ ViewBag.jrid = JobRequestTemp.Job.JobRequestId; }
+                                @Html.Partial("_PartialRating")
                             </div>
                         </div>
                         <div class="overView">
