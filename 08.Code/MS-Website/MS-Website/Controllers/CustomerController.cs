@@ -45,10 +45,17 @@ namespace MS_Website.Controllers
 
         public ActionResult CustomerEdit()
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                return View("CustomerEdit");
+                var custId = (int)Session["AccId"]; 
+                using (var db = new MSEntities())
+                {
+                    var customerAcc = db.Accounts.SingleOrDefault(a => a.AccountId == custId);
+                    ViewBag.CustAddr = customerAcc.Customer.Address;
+                    return View("CustomerEdit", customerAcc);
+                }
             }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult RemoveRecruitment(int recruitmentId)
