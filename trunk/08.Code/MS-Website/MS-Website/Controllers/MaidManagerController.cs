@@ -69,12 +69,26 @@ namespace MS_Website.Controllers
             }
         }
 
-        public ActionResult MaidMediatorEdit()
+        public ActionResult MaidManagerEdit()
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                return View("MaidMediatorEdit");
+                var maidManagerId = (int) Session["AccId"];
+                using (var db = new MSEntities())
+                {
+                    if (Session["Role"].Equals("MaidMediator"))
+                    {
+                        var maidMediatorAcc = db.Accounts.SingleOrDefault(a => a.AccountId == maidManagerId);
+                        return View("MaidManagerEdit", maidMediatorAcc);
+                    }
+                    if (Session["Role"].Equals("Staff"))
+                    {
+                        var staffAcc = db.Accounts.SingleOrDefault(a => a.AccountId == maidManagerId);
+                        return View("MaidManagerEdit", staffAcc);
+                    }
+                }
             }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult MaidEdit(int maidId)
@@ -152,7 +166,7 @@ namespace MS_Website.Controllers
                     }
                 }
             }
-            return View();
+            return RedirectToAction("Login","Home");
         }
 
         public ActionResult ManageMaidProfile(int maidId)
@@ -609,8 +623,6 @@ namespace MS_Website.Controllers
                 //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
                 return RedirectToAction("ManageJobRequest", "MaidManager");
             }
-
-
         }
 
         public ActionResult ManageRecruitment()
