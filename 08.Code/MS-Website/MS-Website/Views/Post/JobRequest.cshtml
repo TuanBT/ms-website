@@ -174,14 +174,14 @@
                             </div>
                         </div>
                     </div>
-                    @if (JobRequestTemp.Job.Status == "Applied" || JobRequestTemp.Job.Status == "Approved")
+                    @if (JobRequestTemp.Job.Status == "Approved")
                     {
                         <div class="overView">
                             <div class="ovTitle">
                                 Bạn có thể chấm điểm cho công việc này
                             </div>
                             <div class="ovContent">
-                                @{ Html.RenderAction("Rate", "Evaluate", new {jobReqId = JobRequestTemp.Job.JobRequestId}); }
+                                @{ Html.RenderAction("Rate", "Evaluate", new {id = JobRequestTemp.Job.JobRequestId}); }
                             </div>
                         </div>
                         <div class="overView">
@@ -189,7 +189,7 @@
                                 Nhận xét của người đã thuê
                             </div>
                             <div class="ovContent">
-                                @{ Html.RenderAction("Post", "Evaluate"); }
+                                @{ Html.RenderAction("Post", "Evaluate", new { id = JobRequestTemp.Job.JobRequestId}); }
                             </div>
                         </div>
                     }

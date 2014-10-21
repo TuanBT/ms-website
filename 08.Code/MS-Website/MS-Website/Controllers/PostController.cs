@@ -17,7 +17,27 @@ namespace MS_Website.Controllers
         {
             using (var db = new MSEntities())
             {
-                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);                
+                bool flag = false;
+                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                if (job.Status.Equals("Approved"))
+                {
+                    var recruits = db.Recruitments.Where(r => r.CustomerId == (int)Session["AccId"]);
+                    var apply = db.Applies.FirstOrDefault(a => a.JobRequestId == jobId);
+                    //if (recruits != null)
+                    //{
+                    //    foreach (var item in recruits)
+                    //    {
+                    //        if (item.RecruitmentId == apply.RecruitmentId)
+                    //        {
+                    //            flag = true;
+                    //        }
+                    //    }
+                    //}
+                }
+                ViewBag.JobReqId = jobId;
+                Session["flag"] = flag;
+                Session["jobId"] = jobId;
+
                 if (job != null)
                 {
                     var maid = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId);
@@ -32,7 +52,7 @@ namespace MS_Website.Controllers
                     {
                         if (job.Maid.MaidMediatorId != null)
                         {
-                            if (job.Maid.MaidMediatorId == (int) Session["AccId"])
+                            if (job.Maid.MaidMediatorId == (int)Session["AccId"])
                             {
                                 if (job.Status.Equals("Waiting") || job.Status.Equals("Expired"))
                                 {
@@ -42,7 +62,7 @@ namespace MS_Website.Controllers
                         }
                         else
                         {
-                            if (job.Maid.StaffId == (int) Session["AccId"])
+                            if (job.Maid.StaffId == (int)Session["AccId"])
                             {
                                 if (job.Status.Equals("Waiting") || job.Status.Equals("Expired"))
                                 {
@@ -52,7 +72,7 @@ namespace MS_Website.Controllers
                         }
                         if (Session["Role"].Equals("Customer"))
                         {
-                            var custId = (int) Session["AccId"];
+                            var custId = (int)Session["AccId"];
                             ViewBag.RecruitmentList =
                                 db.Recruitments.Where(r => r.CustomerId == custId && r.Status.Equals("Waiting")).ToList();
                         }
@@ -73,7 +93,7 @@ namespace MS_Website.Controllers
                     }
                 }
             }
-            ViewBag.JobReqId = jobId;
+
             return View("JobRequest");
         }
 
@@ -92,7 +112,7 @@ namespace MS_Website.Controllers
                     var recJobReqList = new List<JobRequestTemp>();
                     if (Session["AccId"] != null)
                     {
-                        if (recruitment.CustomerId == (int) Session["AccId"])
+                        if (recruitment.CustomerId == (int)Session["AccId"])
                         {
                             if (recruitment.Status.Equals("Waiting") || recruitment.Status.Equals("Expired"))
                             {

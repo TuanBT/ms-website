@@ -5,10 +5,18 @@
 
 @using (Html.BeginForm())
 {
-    <input id="input-3" class="rating" data-size="sm" value="@ViewBag.AverageRate" />
+    //if ((bool)Session["flag"])
+    //{
+    <input id="input-3" class="rating" data-size="sm" value="@ViewBag.AverageRate" />@*
+    }
+    else
+    {
+    <input id="input-3" class="rating" data-size="sm" value="@ViewBag.AverageRate" data-readonly="true" />
+    }*@
     <input name="Rate" id="Rate" value="" type="hidden" />
-    <input name="JobRequestId" value="1" type="hidden" />
-    <input name="CustomerId" value="11" type="hidden" />
+    <input name="JobRequestId" value="@ViewBag.JobReqId" type="hidden" />
+    
+    @*<input name="AccountId" value='@(int)Session["AccId"]' type="hidden" />*@
     
     <button type="submit" class="btn btn-primary">Chấm điểm</button>
 }

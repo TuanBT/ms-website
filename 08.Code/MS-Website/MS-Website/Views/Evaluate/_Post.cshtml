@@ -1,118 +1,102 @@
 ﻿@model MS_Website.Models.Comment
 
 <style>
-    .detailBox
-    {
+    .detailBox {
         /* width:320px;
     border:1px solid #bbb;
     margin:50px;*/
     }
 
-    .titleBox
-    {
+    .titleBox {
         background-color: #fdfdfd;
         padding: 10px;
     }
 
-        .titleBox label
-        {
+        .titleBox label {
             color: #444;
             margin: 0;
             display: inline-block;
         }
 
-    .commentBox
-    {
+    .commentBox {
         padding: 10px;
         border-top: 1px dotted #bbb;
     }
 
-        .commentBox .form-group:first-child, .actionBox .form-group:first-child
-        {
+        .commentBox .form-group:first-child, .actionBox .form-group:first-child {
             width: 80%;
         }
 
-        .commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2)
-        {
+        .commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
             width: 18%;
         }
 
-    .actionBox .form-group *
-    {
+    .actionBox .form-group * {
         width: 100%;
     }
 
-    .taskDescription
-    {
+    .taskDescription {
         margin-top: 10px 0;
     }
 
-    .commentList
-    {
+    .commentList {
         padding: 0;
         list-style: none;
         max-height: 200px;
         overflow: auto;
     }
 
-        .commentList li
-        {
+        .commentList li {
             margin: 0;
             margin-top: 10px;
         }
 
-            .commentList li > div
-            {
+            .commentList li > div {
                 display: table-cell;
             }
 
-    .commenterImage
-    {
+    .commenterImage {
         width: 30px;
         margin-right: 5px;
         height: 100%;
         float: left;
     }
 
-        .commenterImage img
-        {
+        .commenterImage img {
             width: 100%;
             border-radius: 50%;
         }
 
-    .commentText p
-    {
+    .commentText p {
         margin: 0;
     }
 
-    .sub-text
-    {
+    .sub-text {
         color: #aaa;
         font-family: verdana;
         font-size: 11px;
     }
 
-    .actionBox
-    {
+    .actionBox {
         /*  border-top:1px dotted #bbb;
     padding:10px;*/
     }
 
-    .form-inline
-    {
+    .form-inline {
         margin-top: 10px;
     }
 </style>
 
 <div class="detailBox">
-    @{Html.RenderAction("Index", "Evaluate", new { id = 1 });}
+    @{Html.RenderAction("Index", "Evaluate", new { id = ViewBag.JobReqId });}
+
+
 
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
-
-        @Html.Hidden("CustomerId", "11")
-        @Html.Hidden("JobRequestId", "1")
+        <input type="hidden" value="@ViewBag.JobReqId" name="JobRequestId" />
+        
         <div class="form-inline">
             <div class="form-group">
                 <input class="form-control" type="text" placeholder="Nhận xét của bạn" name="CommentContent">
@@ -122,5 +106,9 @@
             </div>
         </div>
     }
+
 </div>
 
+<script type="text/javascript">
+    document.forms["wdw"].s
+</script>
