@@ -55,15 +55,34 @@ namespace MS_Website.Controllers
                 {
                     var maidMediator = db.Accounts.SingleOrDefault(mm => mm.AccountId == accId);
                     ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
+                    Session["MaidManager"] = maidMediator;
                     return View("MaidMediator", maidMediator);
                 }
                 if (role.Equals("Staff"))
                 {
                     var staff = db.Accounts.SingleOrDefault(s => s.AccountId == accId);
                     ViewBag.MaidList = db.Maids.Where(m => m.Staff.Account.AccountId == accId).ToList();
+                    Session["MaidManager"] = staff;
                     return View("Staff", staff);
                 }
                 return View("MaidMediator");
+            }
+        }
+
+        public ActionResult MaidMediatorEdit()
+        {
+            using (var db = new MSEntities())
+            {
+                return View("MaidMediatorEdit");
+            }
+        }
+
+        public ActionResult MaidEdit(int maidId)
+        {
+            using (var db = new MSEntities())
+            {
+                var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidId);
+                return View("MaidEdit", maid);
             }
         }
 
@@ -116,22 +135,10 @@ namespace MS_Website.Controllers
                         maid.Phone = phone;
                         maid.BirthDate = DateTime.Parse("1991-08-20");
                         maid.Gender = gender;
-                        if (english != null)
-                        {
-                            maid.English = true;
-                        }
-                        if (jap != null)
-                        {
-                            maid.Japanese = true;
-                        }
-                        if (chinese != null)
-                        {
-                            maid.Chinese = true;
-                        }
-                        if (korean != null)
-                        {
-                            maid.Korean = true;
-                        }
+                        maid.English = english != null;
+                        maid.Japanese = jap != null;
+                        maid.Chinese = chinese != null;
+                        maid.Korean = korean != null;
                         maid.Hometown = hometown;
                         maid.Address = addr;
                         maid.Married = married;
@@ -140,14 +147,7 @@ namespace MS_Website.Controllers
                         maid.PersonalImage = "../Content/Image/default-avatar.png";
                         db.Maids.Add(maid);
                         db.SaveChanges();
-                        if (Session["Role"].Equals("MaidMediator"))
-                        {
-                            maid = db.Maids.OrderByDescending(m => m.MaidId).FirstOrDefault(m => m.MaidMediatorId == managerId);
-                        }
-                        else
-                        {
-                            maid = db.Maids.OrderByDescending(m => m.MaidId).FirstOrDefault(m => m.StaffId == managerId);
-                        }
+                        maid = Session["Role"].Equals("MaidMediator") ? db.Maids.OrderByDescending(m => m.MaidId).FirstOrDefault(m => m.MaidMediatorId == managerId) : db.Maids.OrderByDescending(m => m.MaidId).FirstOrDefault(m => m.StaffId == managerId);
                         if (maid != null) return RedirectToAction("ManageMaidProfile", new { maidId = maid.MaidId});
                     }
                 }
@@ -561,8 +561,8 @@ namespace MS_Website.Controllers
                 return kmean.GetGroupRowData(kmeanPara);
             }
         }
-
-        public ActionResult ManageJobRequest()
+		
+		public ActionResult ManageJobRequest()
         {
             List<JobRequestTemp> jobRequestTemps = new List<JobRequestTemp>();
             using (var db = new MSEntities())
@@ -656,8 +656,6 @@ namespace MS_Website.Controllers
                 //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
                 return RedirectToAction("ManageRecruitment", "MaidManager");
             }
-
-
         }
     }
 }
