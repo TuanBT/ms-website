@@ -561,5 +561,103 @@ namespace MS_Website.Controllers
                 return kmean.GetGroupRowData(kmeanPara);
             }
         }
+
+        public ActionResult ManageJobRequest()
+        {
+            List<JobRequestTemp> jobRequestTemps = new List<JobRequestTemp>();
+            using (var db = new MSEntities())
+            {
+                var jobRequests = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                foreach (var jobRequest in jobRequests)
+                {
+
+                    var jobRequestTemp = new JobRequestTemp
+                    {
+                        Job = jobRequest,
+                        SkillList = null,
+                        Account = db.Accounts.FirstOrDefault(j => j.AccountId == jobRequest.MaidMediatorId),
+
+                        Maid = null,
+                        Recruitment = null,
+                    };
+                    if (jobRequestTemp.Job.MaidMediatorId != null)
+                    {
+                        jobRequestTemps.Add(jobRequestTemp);
+                    }
+
+                }
+
+
+                //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                return View(jobRequestTemps);
+
+            }
+        }
+
+        [HttpGet]
+        public ActionResult MarkActive(int jobRequestId)
+        {
+            var db = new MSEntities();
+
+            using (db)
+            {
+
+                var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
+                jobRequest.Status = "Waiting";
+                db.SaveChanges();
+                //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                return RedirectToAction("ManageJobRequest", "MaidManager");
+            }
+
+
+        }
+
+        public ActionResult ManageRecruitment()
+        {
+            List<RecruitmentTemp> recruitmentTemps = new List<RecruitmentTemp>();
+            using (var db = new MSEntities())
+            {
+                var recruiments = db.Recruitments.Where(j => j.Status == "NotActive").ToList();
+                foreach (var recruitment in recruiments)
+                {
+
+                    var recruitmentTemp = new RecruitmentTemp
+                    {
+                        Recruitment = recruitment,
+                        SkillList = null,
+                        Account = db.Accounts.FirstOrDefault(j => j.AccountId == recruitment.CustomerId),
+                        JobRequest = null,
+                    };
+                    recruitmentTemps.Add(recruitmentTemp);
+
+
+                }
+
+
+                //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                return View(recruitmentTemps);
+
+            }
+        }
+
+        [HttpGet]
+        public ActionResult MarkActiveRecruitment(int recruitmentId)
+        {
+            var db = new MSEntities();
+
+            using (db)
+            {
+
+                var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
+                recruitment.Status = "Waiting";
+                db.SaveChanges();
+                //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                return RedirectToAction("ManageRecruitment", "MaidManager");
+            }
+
+
+        }
     }
 }
