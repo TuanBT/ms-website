@@ -73,10 +73,10 @@
                         <a class="hefaContent iscurent">Thông tin</a>
                     </li>
                     <li>
-                        <a href="#" class="hefaContent">Quản lý</a>
+                        <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent">Thêm người giúp viêc</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("PostRequest","MaidMediator")" class="hefaContent">Yêu cầu công việc</a>
+                        <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent">Đăng yêu cầu công việc</a>
                     </li>
                     <li>
                         <a href="#" class="hefaContent">Thông báo</a>
@@ -94,13 +94,11 @@
                 <a class="hChContent">Cá nhân</a>
             </li>
             <li class>
-                <a href="#" class="hChContent">Sửa thông tin</a>
+                <a href="@Url.Action("MaidManagerEdit","MaidManager")" class="hChContent">Sửa thông tin</a>
             </li>
         </ul>
     </div>
 </div>
-
-
 <div class="body">
     <div class="rows">
         <div class="row">
