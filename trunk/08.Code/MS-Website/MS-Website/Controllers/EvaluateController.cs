@@ -23,8 +23,9 @@ namespace MS_Website.Controllers
         //
         // GET: /Evaluate/Post/
 
-        public ActionResult Post()
+        public ActionResult Post(int id)
         {
+            ViewBag.JobReqId = id;
             return PartialView("_Post");
         }
 
@@ -37,13 +38,17 @@ namespace MS_Website.Controllers
             try
             {
                 comment.PostTime = DateTime.UtcNow;
+                comment.CustomerId = (int)Session["AccId"];
                 db.Comments.Add(comment);
                 db.SaveChanges();
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+            }
+            finally
+            {
+                ViewBag.JobReqId = comment.JobRequestId;
             }
             return PartialView("_Post");
         }
@@ -51,9 +56,9 @@ namespace MS_Website.Controllers
         //
         // GET: /Evaluate/Rate
 
-        public ActionResult Rate(int jobReqId)
+        public ActionResult Rate(int id)
         {
-            var rating = db.Ratings.FirstOrDefault(r => r.JobRequestId == 1);
+            var rating = db.Ratings.FirstOrDefault(r => r.JobRequestId == id);
 
             if (rating != null)
             {
@@ -61,9 +66,10 @@ namespace MS_Website.Controllers
             }
             else
             {
-                @ViewBag.AverageRate = "";
+                @ViewBag.AverageRate = 0;
             }
-            
+
+            ViewBag.JobReqId = id;
             return PartialView("_Rate");
         }
 
@@ -73,11 +79,12 @@ namespace MS_Website.Controllers
         [HttpPost]
         public ActionResult Rate(Rating rating)
         {
+            rating.CustomerId = (int)Session["AccId"];
             if (rating.Rate > 5)
             {
                 rating.Rate = rating.Rate / 10;
             }
-           
+
             Rating custRating = db.Ratings.FirstOrDefault(r => (r.JobRequestId == 1) && (r.CustomerId == 11));
             if (custRating != null)
             {
@@ -114,8 +121,6 @@ namespace MS_Website.Controllers
                 db.SaveChanges();
 
             }
-            //rate = Math.Round(rate, MidpointRounding.AwayFromZero);
-            //rate = Math.Round(rate * 2, MidpointRounding.AwayFromZero) / 2;
 
             return PartialView("_Rate");
         }

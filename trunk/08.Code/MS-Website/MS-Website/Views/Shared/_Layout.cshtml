@@ -14,30 +14,30 @@
     @Styles.Render("~/Content/Style/Home.css")
     @Styles.Render("~/Content/Style/profilePage.css")
 </head>
-    <body>
-        <div class="headerPage">
-            <div class="rows">
-                <div class="hFunction">
-                    <div class="hLogo">
-                        <a href="@Url.Action("Index","Home")">
-                            <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100%">
-                        </a>
-                    </div>
-                    <div class="searchOnPage">
-                        @Html.Partial("_PartialSearch")
-                    </div>
-                    <div>
-                        @Html.Partial("_PartialAccount")
-                    </div>
+<body>
+    <div class="headerPage">
+        <div class="rows">
+            <div class="hFunction">
+                <div class="hLogo">
+                    <a href="@Url.Action("Index", "Home")">
+                        <img src="../Content/Image/MS-Logo-white.png" alt="Maid sercive" height="100%">
+                    </a>
                 </div>
-
+                <div class="searchOnPage">
+                    @Html.Partial("_PartialSearch")
+                </div>
+                <div>
+                    @Html.Partial("_PartialAccount")
+                </div>
             </div>
+
         </div>
-        @RenderBody()
+    </div>
+    @RenderBody()
 
-     @Html.Partial("_PartialFooter")
+    @Html.Partial("_PartialFooter")
 
-        @* @Scripts.Render("~/bundles/jquery")
+    @* @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)*@
-    </body>
+</body>
 </html>
