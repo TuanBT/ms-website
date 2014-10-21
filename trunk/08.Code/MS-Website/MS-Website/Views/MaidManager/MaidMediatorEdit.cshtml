@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Sửa thông tin đại diện người giúp việc";
+}
+
+<div class="Menu">
+    <div class="rows">
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    <li>
+                        <a class="hefaContent iscurent">Thông tin</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent">Thêm người giúp viêc</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent">Đăng yêu cầu công việc</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thông báo</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thống kê</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li>
+                <a href="@Url.Action("GetMaidManager","MaidManager", new { accId = Session["AccId"], role = Session["Role"]})" class="hChContent">Cá nhân</a>
+            </li>
+            <li class="iscurent">
+                <a class="hChContent">Sửa thông tin</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="body">
+<div class="rows">
+<div class="row">
+<div class="titlePage">Sửa thông tin người giúp việc</div>
+<div class="postJRRow">
+    <div class="row">
+        <div class="col-md-4 poJRTtitle">
+            Họ và tên
+        </div>
+        <div class="col-md-8">
+            <input type="text" class="form-control" placeholder="Nguyễn Văn A">
+        </div>
+    </div>
+</div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Số điện thoại
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="0123456789">
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+                Email
+            </div>
+            <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="Email">
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+              Mật khẩu
+            </div>
+            <div class="col-md-8">
+                <input type="password" class="form-control" placeholder="password">
+            </div>
+        </div>
+    </div>
+    <div class="postJRRow">
+        <div class="row">
+            <div class="col-md-4 poJRTtitle">
+               Ảnh đại diện
+                <img src="../Content/Image/default-avatar.png" width="80%">
+            </div>
+            <div class="col-md-8">
+                <input id="input-21" type="file" accept="image/*" >
+                <script>
+                    $("#input-21").fileinput({
+                        previewFileType: "image",
+                        browseClass: "btn btn-success",
+                        browseLabel: " Chọn hình",
+                        browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                        removeClass: "btn btn-danger",
+                        removeLabel: " Xóa",
+                        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                        uploadClass: "btn btn-info",
+                        uploadLabel: " Tải lên",
+                        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>'
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+<div class="buttonFooterPage">
+    <button type="button" class="btn btn-success btn-lg">Cập nhập thông tin</button>
+</div>
+</div>
+</div>
+</div>

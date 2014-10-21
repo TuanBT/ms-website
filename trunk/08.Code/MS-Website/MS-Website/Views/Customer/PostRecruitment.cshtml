@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Post recruitment";
+    ViewBag.Title = "Đăng yêu cầu tuyển viêc";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,31 +9,28 @@
             <div class="hFatherMenu">
                 <ul class="hmeTabList">
                     <li>
-                        <a href="#" class="hefaContent iscurent">Find Work</a>
+                        <a href="@Url.Action("Index", "Customer")" class="hefaContent">Thông tin</a>
                     </li>
                     <li>
-                        <a href="#" class="hefaContent">Find Work</a>
+                        <a class="hefaContent iscurent">Đăng yêu cầu tuyển việc</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thông báo</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thống kê</a>
                     </li>
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="hChildMenu">
-        <ul class="hChildMenuList">
-            <li class="iscurent">
-                <a href="#" class="hChContent">Job Applications</a>
-            </li>
-            <li class>
-                <a href="#" class="hChContent">Job Applications</a>
-            </li>
-        </ul>
+
     </div>
 </div>
 
 <div class="body">
     <div class="rows">
         <div class="row">
-            <div class="titlePage">Đăng yêu cầu người giúp việc</div>
+            <div class="titlePage">Đăng yêu cầu tuyển việc</div>
             @*<div class="postJRRow">
                 <div class="row">
                     <div class="col-md-4 poJRTtitle">

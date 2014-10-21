@@ -5,24 +5,13 @@
     var MaidManager = (MS_Website.Models.MaidManager)ViewBag.MaidManager;
 }
 
-
-
 <div class="Menu">
     <div class="rows">
         <div class="hMenu">
             <div class="hFatherMenu">
                 <ul class="hmeTabList">
                     <li>
-                        <a class="hefaContent iscurent">Thông tin</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hefaContent">Quản lý</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hefaContent">Yêu cầu công việc</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hefaContent">Thông báo</a>
+                        <a href="@Url.Action("MaidEdit","MaidManager", new { maidId = Model.MaidId})" class="hefaContent iscurent">Thông tin</a>
                     </li>
                     <li>
                         <a href="#" class="hefaContent">Thống kê</a>
@@ -30,14 +19,15 @@
                 </ul>
             </div>
         </div>
+
     </div>
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li class="iscurent">
-                <a class="hChContent">Cá nhân</a>
+                <a class="hChContent iscurent">Cá nhân</a>
             </li>
-            <li class>
-                <a href="#" class="hChContent">Sửa thông tin</a>
+            <li>
+                <a href="@Url.Action("MaidEdit","MaidManager", new { maidId = Model.MaidId})" class="hChContent">Sửa thông tin</a>
             </li>
         </ul>
     </div>

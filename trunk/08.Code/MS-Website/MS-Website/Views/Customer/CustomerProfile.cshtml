@@ -11,10 +11,16 @@
             <div class="hFatherMenu">
                 <ul class="hmeTabList">
                     <li>
-                        <a href="#" class="hefaContent iscurent">Find Work</a>
+                        <a class="hefaContent iscurent">Thông tin</a>
                     </li>
                     <li>
-                        <a href="/Customer/PostRecruitment" class="hefaContent">Đăng yêu cầu tuyển việc</a>
+                        <a href="@Url.Action("PostRecruitment", "Customer")" class="hefaContent">Đăng yêu cầu tuyển việc</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thông báo</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thống kê</a>
                     </li>
                 </ul>
             </div>
@@ -23,10 +29,10 @@
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li class="iscurent">
-                <a href="#" class="hChContent">Job Applications</a>
+                <a class="hChContent">Cá nhân</a>
             </li>
-            <li class>
-                <a href="#" class="hChContent">Job Applications</a>
+            <li>
+                <a href="@Url.Action("CustomerEdit","Customer")" class="hChContent">Sửa thông tin</a>
             </li>
         </ul>
     </div>
@@ -38,14 +44,14 @@
                 <div class="leftInfo">
                     <div class="mainInfo">
                         <div class="miPic">
-                            <img src="@ViewBag.CustImg" alt="Maid service" height="100%">
+                            <img src="@Model.Avatar" alt="Maid service" height="100%">
                         </div>
                         <div class="mmiDetail">
                             <div class="miFullName">
                                 @Model.FullName
                             </div>
                             <div class="miAccount">
-                                Người thuê việc
+                                Người tuyển việc
                             </div>
                         </div>
                     </div>
@@ -62,7 +68,7 @@
                                     {
                                         <li id="@recruit.Recruitment.RecruitmentId" onclick="chooseRecruit(@recruit.Recruitment.RecruitmentId, 2)">
                                             <div class="blImage">
-                                                <img src="../Content/Image/MS-Logo.png" alt="Maid service" height="100%">
+                                                <img src="../Content/Image/rc.png" alt="Maid service" height="100%">
                                             </div>
                                             <div class="blDetail">
                                                 <div class="blName">
@@ -109,7 +115,7 @@
                                         <li>
                                             <div class="bAWork">
                                                 <div class="blImage">
-                                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                    <img src="../Content/Image/rc.png" alt="Maid sercive" height="100%">
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
@@ -127,7 +133,7 @@
                                             </div>
                                             <div class="bACus">
                                                 <div class="blImage">
-                                                    <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                    <img src="../Content/Image/jr.png" alt="Maid sercive" height="100%">
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
@@ -166,7 +172,7 @@
                                     {
                                         <li id="@recruit.Recruitment.RecruitmentId" onclick="chooseRecruit(@recruit.Recruitment.RecruitmentId, 2)">
                                             <div class="blImage">
-                                                <img src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                                <img src="../Content/Image/rc.png" alt="Maid sercive" height="100%">
                                             </div>
                                             <div class="blDetail">
                                                 <div class="blName">
