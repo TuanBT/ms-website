@@ -67,19 +67,30 @@ namespace MS_Website.Controllers
             return RedirectToAction("Login", "Home");
         }
 
-        public ActionResult EditMaidMedProfile(int maidMedId, string fullname, string phone, string email, string avatar)
+        public ActionResult EditMaidMedProfile(string maidMedId, string fullname, string phone, string email)
         {
+            int maidMedIds = Convert.ToInt32(maidMedId);
             if (Session["AccId"] != null)
             {
                 var loggedId = (int)Session["AccId"];
                 using (var db = new MSEntities())
                 {
-                    if (loggedId == maidMedId)
+                    if (loggedId == maidMedIds)
                     {
                         var maidMedAcc = db.Accounts.SingleOrDefault(a => a.AccountId == loggedId);
+                        HttpPostedFileBase avatar = Request.Files["avatar"];
+                        string picExt = ".png";
+                        if (avatar != null)
+                        {
+                            picExt = System.IO.Path.GetExtension(avatar.FileName);
+                            string path = System.IO.Path.Combine(Server.MapPath("~/Content/Image/MaidMediator"), maidMedAcc.AccountId + picExt);
+                            avatar.SaveAs(path);
+                        }
+
                         maidMedAcc.FullName = fullname;
                         maidMedAcc.Phone = phone;
                         maidMedAcc.Email = email;
+                        maidMedAcc.Avatar = "../Content/Image/MaidMediator/" + maidMedAcc.AccountId.ToString() + picExt;
                         db.SaveChanges();
                         if (maidMedAcc.Role.Equals("MaidMediator"))
                         {
@@ -188,16 +199,25 @@ namespace MS_Website.Controllers
             return RedirectToAction("Login", "Home");
         }
 
-        public ActionResult EditMaidProfile(int maidId, string fullname, double exp, string phone, string birthdate, bool gender,
+        public ActionResult EditMaidProfile(string maidId, string fullname, double exp, string phone, string birthdate, bool gender,
             string english, string jap, string chinese, string korean, string hometown, string addr, bool married,
-            string desc, string avatar)
+            string desc)
         {
+            int maidIds = Convert.ToInt32(maidId);
             if (Session["AccId"] != null)
             {
                 var loggedId = (int)Session["AccId"];
                 using (var db = new MSEntities())
                 {
-                    var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidId);
+                    var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidIds);
+                    HttpPostedFileBase avatar = Request.Files["avatar"];
+                    string picExt = ".png";
+                    if (avatar != null)
+                    {
+                        picExt = System.IO.Path.GetExtension(avatar.FileName);
+                        string path = System.IO.Path.Combine(Server.MapPath("~/Content/Image/Maid"), maid.MaidId.ToString() + picExt);
+                        avatar.SaveAs(path);
+                    }
                     if (maid.MaidMediatorId == loggedId || maid.StaffId == loggedId)
                     {
                         maid.MaidName = fullname;
@@ -214,7 +234,7 @@ namespace MS_Website.Controllers
                         maid.Married = married;
                         maid.Description = desc;
                         maid.RateAvg = 0;
-                        maid.PersonalImage = "../Content/Image/default-avatar.png";
+                        maid.PersonalImage = "../Content/Image/Maid/" + maid.MaidId.ToString() + picExt;
                         db.SaveChanges();
                         return RedirectToAction("ManageMaidProfile", new { maidId = maid.MaidId });
                     }
