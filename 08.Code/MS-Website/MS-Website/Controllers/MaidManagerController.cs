@@ -465,7 +465,7 @@ namespace MS_Website.Controllers
                         skillRef.CleanHouse =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(CleanHouse)).SkillId;
                     }
-                    skillRef.Group = GetGroup(skillRef);
+                    skillRef.Group = PostController.GetGroup(skillRef);
                     db.SkillReferences.Add(skillRef);
                     db.SaveChanges();
                     skillRef = db.SkillReferences.SingleOrDefault(sr => sr.Type == 2);
@@ -503,127 +503,6 @@ namespace MS_Website.Controllers
             ViewBag.WorkList = Session["WorkList"];
             ViewBag.SkillList = Session["SkillList"];
             ViewBag.MaidList = Session["MaidList"];
-        }
-
-        public int GetGroup(SkillReference sr)
-        {
-            using (var db = new MSEntities())
-            {
-                var gender = 0;
-                var age = 0;
-                var english = 0;
-                var chinese = 0;
-                var japanese = 0;
-                var korean = 0;
-                var exp = 0;
-                var hometown = 0;
-                var addr = 0;
-                var married = 0;
-                var work = 0;
-                var stay = 0;
-                var salary = 0;
-                var sickCare = 0;
-                var oldCare = 0;
-                var babysister = 0;
-                var disCare = 0;
-                var bonsaiCare = 0;
-                var cooking = 0;
-                var washing = 0;
-                var clean = 0;
-                if (sr.Gender != null)
-                {
-                    gender =
-                           db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Gender") && si.SkillId == sr.Gender)
-                               .SkillNormallized;
-                }
-                if (sr.Age != null)
-                {
-                    age = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Age") && si.SkillId == sr.Age).SkillNormallized;
-                }
-                if (sr.LanguageEnglish != null)
-                {
-                    english = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.LanguageEnglish).SkillNormallized;
-                }
-                if (sr.LanguageChinese != null)
-                {
-                    chinese = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.LanguageChinese).SkillNormallized;
-                }
-                if (sr.LanguageJapanese != null)
-                {
-                    japanese = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.LanguageJapanese).SkillNormallized;
-                }
-                if (sr.LanguageKorean != null)
-                {
-                    korean = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.LanguageKorean).SkillNormallized;
-                }
-                if (sr.Experience != null)
-                {
-                    exp = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Experience") && si.SkillId == sr.Experience).SkillNormallized;
-                }
-                if (sr.Hometown != null)
-                {
-                    hometown = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Hometown") && si.SkillId == sr.Hometown).SkillNormallized;
-                }
-                if (sr.Address != null)
-                {
-                    addr = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Address") && si.SkillId == sr.Address).SkillNormallized;
-                }
-                if (sr.Married != null)
-                {
-                    married = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Married") && si.SkillId == sr.Married).SkillNormallized;
-                }
-                if (sr.Work != null)
-                {
-                    work = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Work") && si.SkillId == sr.Work).SkillNormallized;
-                }
-                if (sr.Stay != null)
-                {
-                    stay = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Stay") && si.SkillId == sr.Stay).SkillNormallized;
-                }
-                if (sr.Salary != null)
-                {
-                    salary = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Salary") && si.SkillId == sr.Salary).SkillNormallized;
-                }
-                if (sr.SickCare != null)
-                {
-                    sickCare = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.SickCare).SkillNormallized;
-                }
-                if (sr.OldCare != null)
-                {
-                    oldCare = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.OldCare).SkillNormallized;
-                }
-                if (sr.BabySister != null)
-                {
-                    babysister = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.BabySister).SkillNormallized;
-                }
-                if (sr.DisabilityCare != null)
-                {
-                    disCare = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.DisabilityCare).SkillNormallized;
-                }
-                if (sr.BonsaiCare != null)
-                {
-                    bonsaiCare = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.BonsaiCare).SkillNormallized;
-                }
-                if (sr.Cooking != null)
-                {
-                    cooking = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.Cooking).SkillNormallized;
-
-                }
-                if (sr.Washing != null)
-                {
-                    washing = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.Washing).SkillNormallized;
-
-                }
-                if (sr.CleanHouse != null)
-                {
-                    clean = db.SkillInstances.SingleOrDefault(si => si.SkillId == sr.CleanHouse).SkillNormallized;
-                }
-                double[] kmeanPara = { gender, age, english, chinese, japanese, korean, exp, hometown, addr, married, work, stay, salary, sickCare, oldCare, babysister, disCare, bonsaiCare, cooking, washing, clean };
-                string strPathServer = AppDomain.CurrentDomain.BaseDirectory;
-                string strMeansDataFile = strPathServer + "App_Data\\" + "meansData.txt";
-                Kmean kmean = new Kmean(strMeansDataFile);
-                return kmean.GetGroupRowData(kmeanPara);
-            }
         }
 
         public ActionResult ManageJobRequest()
