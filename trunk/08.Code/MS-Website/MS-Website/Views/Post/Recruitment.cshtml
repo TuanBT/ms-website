@@ -79,7 +79,7 @@
                                         <div class="iStatusName">
                                             <a href="@Url.Action("GetJobRequest", "Post", new { jobId = Model.JobRequest.JobRequestId })">
                                                 @ViewBag.Maid.MaidName</a>
-                                            </div>
+                                        </div>
                                     </div>
                                 }
                             </div>
@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="suNumber">
-                                            <span id="currPage">1</span>/5
+                                            <span id="currPage">1</span>/@(Math.Round((double)ViewBag.RecommendNum / 2))
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@
                                     <div class="col-md-9">
                                         <div class="jrDetail">
                                             <div class="jrMaidFullname">
-                                                <a href="@Url.Action("Index", "Customer", new { customerId = RecruitmentTemp.Customer.AccountId })">@RecruitmentTemp.Customer.Account.FullName</a>
+                                                <a href="@Url.Action("GetCustomer", "Customer", new { custId = RecruitmentTemp.Customer.AccountId })">@RecruitmentTemp.Customer.Account.FullName</a>
                                             </div>
                                             <div class="blTime">
                                                 <span class="blTimeText">Khách hàng</span>
