@@ -1189,3 +1189,7 @@ a {
 .buttonFooterPage {
     text-align: right;
 }
+
+.kv-fileinput-upload {
+    display: none;
+}
