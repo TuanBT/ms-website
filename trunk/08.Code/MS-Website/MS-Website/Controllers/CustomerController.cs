@@ -26,13 +26,13 @@ namespace MS_Website.Controllers
                 var notApplJobList = db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Waiting")).ToList();
                 var applJobList = db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Applied")).ToList();
                 var expiredJobList = db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Expired")).ToList();
+                var unpublicList = db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Hide")).ToList();
                 ViewBag.NotApplList = notApplJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
                 ViewBag.ApplList = (from recruitment in applJobList let apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitment.RecruitmentId) let jobRequest = db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId) select new RecruitmentTemp(recruitment, customer, account, jobRequest, null)).ToList();
                 ViewBag.ExpiredList = expiredJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                ViewBag.JoinDate = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId).JoinDate;
+                ViewBag.UnpublicList = unpublicList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
                 return View("CustomerProfile", account);
             }
-            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult CustomerEdit()
@@ -72,7 +72,7 @@ namespace MS_Website.Controllers
             return RedirectToAction("Login", "Home");
         }
 
-        public ActionResult RemoveRecruitment(int recruitmentId)
+        public ActionResult PublicRecruitment(int recruitmentId)
         {
             using (var db = new MSEntities())
             {
@@ -85,7 +85,7 @@ namespace MS_Website.Controllers
                     db.SaveChanges();
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("","");
         }
 
         public ActionResult PostRecruitment()
@@ -222,6 +222,7 @@ namespace MS_Website.Controllers
                     skillRef.CleanHouse =
                         db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(CleanHouse)).SkillId;
                 }
+                skillRef.Group = PostController.GetGroup(skillRef);
                 db.SkillReferences.Add(skillRef);
                 db.SaveChanges();
                 skillRef = db.SkillReferences.SingleOrDefault(sr => sr.Type == 2);
