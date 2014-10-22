@@ -4,7 +4,7 @@
     MS_Website.Models.Account account = Model;
 }
 
-<style>
+    <style>
 	a.myToolTip
     {
         outline: none;
@@ -73,17 +73,21 @@
                         <a class="hefaContent iscurent">Thông tin</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent">Thêm người giúp viêc</a>
+                        <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent">Thêm người giúp việc</a>
                     </li>
                     <li>
                         <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent">Đăng yêu cầu công việc</a>
                     </li>
                     <li>
-                        <a href="#" class="hefaContent">Thông báo</a>
+                        <a href="@Url.Action("ManageJobRequest","MaidManager")" class="hefaContent">Quản lý</a>
                     </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thông báo</a>
+                    </li>           
                     <li>
                         <a href="#" class="hefaContent">Thống kê</a>
                     </li>
+                    
                 </ul>
             </div>
         </div>
@@ -148,7 +152,7 @@
                     <div class="riManager">
                         <div class="rimaTitle">
                             Đại diện cho:
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Thêm người đại diện</button>
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Thêm người giúp việc</button>
                             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
