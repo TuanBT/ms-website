@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "CustomerProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    MS_Website.Models.Account account = Model;
 }
 
 @*@{MS_Website.Models.JobRequestTemp NotApplList = ViewBag.NotApplList};
@@ -44,11 +45,11 @@
                 <div class="leftInfo">
                     <div class="mainInfo">
                         <div class="miPic">
-                            <img src="@Model.Avatar" alt="Maid service" height="100%">
+                            <img src="@account.Avatar" alt="Maid service" height="100%">
                         </div>
                         <div class="mmiDetail">
                             <div class="miFullName">
-                                @Model.FullName
+                                @account.FullName
                             </div>
                             <div class="miAccount">
                                 Người tuyển việc
@@ -180,6 +181,52 @@
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
+                                                                                               class="blTimeText">@recruit.Recruitment.PostTime</span>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Tới: </span><span
+                                                                                              class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="blFooter">
+                                    <div class="blfNumber">
+                                        <ul class="pagination pagination-sm">
+                                            <li><a href="#">&laquo;</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                    @using (Html.BeginForm("RemoveRecruitment", "Customer", FormMethod.Get, new { name = "RemoveRecruitForm" }))
+                                    {
+                                        <input id="recruitId" type="hidden" value="" name="recruitmentId" />
+                                        <div id="ExpiredButton" style="display: none;" class="blfbutton">
+                                            <button type="submit" class="btn btn-danger" onclick="removeRecruit()">Tạm ẩn</button>
+                                            <button type="button" class="btn btn-info">Gia hạn</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="tab-pane fade bExprred" id="unpublic">
+                                <ul class="bexpiredListWork">
+                                    @foreach (var recruit in ViewBag.UnpublicList)
+                                    {
+                                        <li id="@recruit.Recruitment.RecruitmentId" onclick="chooseRecruit(@recruit.Recruitment.RecruitmentId, 2)">
+                                            <div class="blImage">
+                                                <img src="../Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                            </div>
+                                            <div class="blDetail">
+                                                <div class="blName">
+                                                    <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = recruit.Recruitment.RecruitmentId })">@recruit.Recruitment.Title</a>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Đăng: </span><span
                                                         class="blTimeText">@recruit.Recruitment.PostTime</span>
                                                 </div>
                                                 <div class="blTime">
@@ -202,11 +249,10 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
-                                    @using (Html.BeginForm("RemoveRecruitment", "Customer", FormMethod.Get, new { name = "RemoveRecruitForm" }))
+                                    @using (Html.BeginForm("RemoveRecruitment", "Customer", new { name = "RemoveRecruitForm" }))
                                     {
-                                        <input id="recruitId" type="hidden" value="" name="recruitmentId" />
                                         <div id="ExpiredButton" style="display: none;" class="blfbutton">
-                                            <button type="submit" class="btn btn-danger" onclick="removeRecruit()">Hủy</button>
+                                            <button type="submit" class="btn btn-danger" onclick="removeRecruit()">Tạm ẩn</button>
                                             <button type="button" class="btn btn-info">Gia hạn</button>
                                         </div>
                                     }
@@ -231,7 +277,7 @@
                                 Tham gia
                             </div>
                             <div class="rideroContent">
-                                <strong>@ViewBag.JoinDate
+                                <strong>@account.JoinDate
                                 </strong>
                             </div>
                         </li>
@@ -284,10 +330,6 @@
             document.getElementById("ExpiredButton").setAttribute("style", "display: none;");
             document.getElementById("NotAppliedList").setAttribute("style", "display: none;");
         }
-    }
-    
-    function removeRecruit() {
-        document.forms["RemoveRecruitForm"].submit();
     }
 </script>
 
