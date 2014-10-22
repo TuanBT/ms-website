@@ -9,7 +9,7 @@
             <div class="hFatherMenu">
                 <ul class="hmeTabList">
                     <li>
-                        <a href="@Url.Action("Index", "Customer")" class="hefaContent">Thông tin</a>
+                        <a href="@Url.Action("GetCustomer", "Customer", new { custId = (int) Session["AccId"]})" class="hefaContent">Thông tin</a>
                     </li>
                     <li>
                         <a class="hefaContent iscurent">Đăng yêu cầu tuyển việc</a>
