@@ -23,20 +23,25 @@ namespace MS_Website.Controllers
                 int numApproved = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Approved"));
                 int numExpired = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Expired"));
                 ViewBag.MaidMediatorStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied };
-                if (role.Equals("MaidMediator"))
+                if (Session["Role"] != null)
                 {
-                    var maidMediator = db.Accounts.SingleOrDefault(mm => mm.AccountId == accId);
-                    ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
-                    Session["MaidManager"] = maidMediator;
-                    return View("MaidMediator", maidMediator);
+                    if (role.Equals("MaidMediator"))
+                    {
+                        var maidMediator = db.Accounts.SingleOrDefault(mm => mm.AccountId == accId);
+                        ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
+                        Session["MaidManager"] = maidMediator;
+                        return View("MaidMediator", maidMediator);
+                    }
+
+                    if (role.Equals("Staff"))
+                    {
+                        var staff = db.Accounts.SingleOrDefault(s => s.AccountId == accId);
+                        ViewBag.MaidList = db.Maids.Where(m => m.Staff.Account.AccountId == accId).ToList();
+                        Session["MaidManager"] = staff;
+                        return View("Staff", staff);
+                    }
                 }
-                if (role.Equals("Staff"))
-                {
-                    var staff = db.Accounts.SingleOrDefault(s => s.AccountId == accId);
-                    ViewBag.MaidList = db.Maids.Where(m => m.Staff.Account.AccountId == accId).ToList();
-                    Session["MaidManager"] = staff;
-                    return View("Staff", staff);
-                }
+               
                 return RedirectToAction("Login","Home");
             }
         }
@@ -545,7 +550,6 @@ namespace MS_Website.Controllers
 
             using (db)
             {
-
                 var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
                 jobRequest.Status = "Waiting";
                 db.SaveChanges();
