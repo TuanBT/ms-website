@@ -11,7 +11,7 @@
             <div class="hFatherMenu">
                 <ul class="hmeTabList">
                     <li>
-                        <a href="@Url.Action("MaidEdit","MaidManager", new { maidId = Model.MaidId})" class="hefaContent iscurent">Thông tin</a>
+                        <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = Model.MaidId })" class="hefaContent iscurent">Thông tin</a>
                     </li>
                     <li>
                         <a href="#" class="hefaContent">Thống kê</a>
@@ -26,13 +26,13 @@
             <li class="iscurent">
                 <a class="hChContent iscurent">Cá nhân</a>
             </li>
-            @if(Session["AccId"] != null)
+            @if (Session["AccId"] != null)
             {
                 if (maid.MaidMediatorId == (int)Session["AccId"] || maid.StaffId == (int)Session["AccId"])
                 {
-                    <li>
-                        <a href="@Url.Action("MaidEdit", "MaidManager", new {maidId = Model.MaidId})" class="hChContent">Sửa thông tin</a>
-                    </li>
+                <li>
+                    <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = Model.MaidId })" class="hChContent">Sửa thông tin</a>
+                </li>
                 }
             }
         </ul>
@@ -74,6 +74,7 @@
                             <li class><a href="#applied" role="tab" data-toggle="tab">Đã được nhận</a></li>
                             <li class><a href="#approved" role="tab" data-toggle="tab">Đã hoàn tất</a></li>
                             <li class><a href="#expired" role="tab" data-toggle="tab">Hết hạn</a></li>
+                            <li class><a href="#hide" role="tab" data-toggle="tab">Không công khai</a></li>
                         </ul>
 
                         <div class="tab-content">
@@ -81,7 +82,7 @@
                                 <ul class="bFreeListWork">
                                     @foreach (var job in ViewBag.NotApplList)
                                     {
-                                        <li id="@job.Job.JobRequestId" onclick="chooseJob(@job.Job.JobRequestId, 2)">
+                                        <li id="@job.Job.JobRequestId" onclick="chooseJob(@job.Job.JobRequestId, 1)">
                                             <div class="blImage">
                                                 <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                             </div>
@@ -113,14 +114,17 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
-                                    @if (ViewBag.Remove == "true")
+                                    @if (ViewBag.Manage == "true")
                                     {
-                                        using (Html.BeginForm("RemoveJob", "MaidManager"))
+                                        using (Html.BeginForm("HideJobRequest", "MaidManager"))
                                         {
-                                        <input id="hidden" type="hidden" value="" name="jobId" />
-                                        <div id="NotAppliedList" style="display: none;" class="blfbutton">
-                                            <button type="submit" class="btn btn-danger">Hủy</button>
-                                            <button type="button" class="btn btn-info">Gia hạn</button>
+                                        <input id="hideId" type="hidden" name="jobId" />
+                                        <div id="button_1" style="display: none;" class="blfbutton">
+                                            <button type="submit" class="btn btn-danger">Tạm ẩn</button>
+                                            @if (Session["Role"].Equals("Staff"))
+                                            {
+                                                <button type="button" class="btn btn-info" onclick="return false">Gia hạn</button>
+                                            }
                                         </div>
                                         }
                                     }
@@ -246,7 +250,7 @@
                                 <ul class="bexpiredListWork">
                                     @foreach (var job in ViewBag.ExpiredList)
                                     {
-                                        <li id="@job.Job.JobRequestId" onclick="chooseJob(@job.Job.JobRequestId, 3)">
+                                        <li id="@job.Job.JobRequestId" onclick="chooseJob(@job.Job.JobRequestId, 4)">
                                             <div class="blImage">
                                                 <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                             </div>
@@ -278,14 +282,64 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
-                                    @if (ViewBag.Remove == "true")
+                                    @if (ViewBag.Manage == "true")
                                     {
-                                        using (Html.BeginForm("RemoveJob", "MaidManager", FormMethod.Get, new { name = "RemoveJobForm" }))
+                                        <div id="button_4" style="display: none;" class="blfbutton">
+                                            @if (Session["Role"].Equals("Staff"))
+                                            {
+                                                <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="tab-pane fade bExprred" id="hide">
+                                <ul class="bexpiredListWork">
+                                    @foreach (var job in ViewBag.HideList)
+                                    {
+                                        <li id="@job.Job.JobRequestId" onclick="chooseJob(@job.Job.JobRequestId, 5)">
+                                            <div class="blImage">
+                                                <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
+                                            </div>
+                                            <div class="blDetail">
+                                                <div class="blName">
+                                                    <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Đăng: </span><span
+                                                        class="blTimeText">@job.Job.PostTime</span>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Tới: </span><span
+                                                        class="blTimeText">@job.Job.ExpiredTime</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="blFooter">
+                                    <div class="blfNumber">
+                                        <ul class="pagination pagination-sm">
+                                            <li><a href="#">&laquo;</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                    @if (ViewBag.Manage == "true")
+                                    {
+                                        using (Html.BeginForm("PublicJobRequest", "MaidManager"))
                                         {
-                                        <input id="jobId" type="hidden" value="" name="jobId" />
-                                        <div id="ExpiredButton" style="display: none;" class="blfbutton">
-                                            <button type="button" class="btn btn-danger" onclick="removeJob()">Xóa</button>
-                                            <button type="button" class="btn btn-info">Gia hạn</button>
+                                        <input id="publicId" type="hidden" name="jobId" />
+                                        <div id="button_5" style="display: none;" class="blfbutton">
+                                            <button type="submit" class="btn btn-danger">Công khai</button>
+                                            @if (Session["Role"].Equals("Staff"))
+                                            {
+                                                <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                            }
                                         </div>
                                         }
                                     }
@@ -376,6 +430,36 @@
         </div>
     </div>
 </div>
+<div class="modal fade extendModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header chooseMaidModalTitle">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">Gia hạn đơn tuyển việc</h4>
+            </div>
+            @using (Html.BeginForm("ExtendJobRequest", "MaidManager", FormMethod.Get, new { name = "ExtendForm" }))
+            {
+                <input id="extendId" type="hidden" name="jobId" />
+                <div class="modal-body chooseMaidModalMaid">
+                    <span>Thời gian gia hạn</span>
+                    <select class="form-control" name="extend">
+                        <option value="1">1 tuần</option>
+                        <option value="2">2 tuần</option>
+                        <option value="3">3 tuần</option>
+                        <option value="4">4 tuần</option>
+                        <option value="5">5 tuần</option>
+                    </select>
+                    <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal" onclick="extendRecruit()" style="margin-left: 75px; margin-top: 5px; margin-bottom: 10px;">Đồng ý</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 <script>
     var chosenId = 0;
     function chooseJob(jobId, type) {
@@ -385,26 +469,40 @@
         if (jobId != chosenId) {
             document.getElementById(jobId).setAttribute("class", "isCurent");
             chosenId = jobId;
-            document.getElementById("jobId").setAttribute("value", jobId);
         } else {
             document.getElementById(jobId).setAttribute("class", "");
             chosenId = 0;
             type = 0;
         }
-        if (type == 2) {
-            document.getElementById("ExpiredButton").setAttribute("style", "display: none;");
-            document.getElementById("NotAppliedList").setAttribute("style", "");
-        } else if (type == 3) {
-            document.getElementById("ExpiredButton").setAttribute("style", "");
-            document.getElementById("NotAppliedList").setAttribute("style", "display: none;");
-        } else if (type == 0) {
-            document.getElementById("ExpiredButton").setAttribute("style", "display: none;");
-            document.getElementById("NotAppliedList").setAttribute("style", "display: none;");
+        if (type == 1) {
+            document.getElementById("hideId").setAttribute("value", jobId);
+            document.getElementById("button_1").setAttribute("style", "");
+            document.getElementById("button_4").setAttribute("style", "display: none;");
+            document.getElementById("button_5").setAttribute("style", "display: none;");
+        } else if (type == 4) {
+            document.getElementById("extendId").setAttribute("value", jobId);
+            document.getElementById("button_1").setAttribute("style", "display: none;");
+            document.getElementById("button_4").setAttribute("style", "");
+            document.getElementById("button_5").setAttribute("style", "display: none;");
+        } else if (type == 5) {
+            document.getElementById("publicId").setAttribute("value", jobId);
+            document.getElementById("button_1").setAttribute("style", "display: none;");
+            document.getElementById("button_4").setAttribute("style", "display: none;");
+            document.getElementById("button_5").setAttribute("style", "");
+        }
+        else if (type == 0) {
+            document.getElementById("button_1").setAttribute("style", "display: none;");
+            document.getElementById("button_4").setAttribute("style", "display: none;");
+            document.getElementById("button_5").setAttribute("style", "display: none;");
         }
     }
 
     function removeJob() {
         document.forms["RemoveJobForm"].submit();
+    }
+
+    function extendRecruit() {
+        document.forms["ExtendForm"].submit();
     }
 </script>
 
