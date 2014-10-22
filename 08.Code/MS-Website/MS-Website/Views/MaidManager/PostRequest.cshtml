@@ -12,15 +12,21 @@
                     <li>
                         <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = Session["AccId"], role = Session["Role"]})" class="hefaContent">Thông tin</a>
                     </li>
-                    <li>
-                        <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent">Thêm người giúp viêc</a>
-                    </li>
-                    <li>
-                        <a class="hefaContent iscurent">Đăng yêu cầu công việc</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hefaContent">Thông báo</a>
-                    </li>
+                    @if(Session["AccId"] != null)
+                    {
+                        if(Session["Role"].Equals("MaidMediator") || Session["Role"].Equals("Staff"))
+                        {
+                            <li>
+                                <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent">Thêm người giúp viêc</a>
+                            </li>
+                            <li>
+                                <a class="hefaContent iscurent">Đăng yêu cầu công việc</a>
+                            </li>
+                            <li>
+                                <a href="#" class="hefaContent">Thông báo</a>
+                            </li>
+                        }
+                    }
                     <li>
                         <a href="#" class="hefaContent">Thống kê</a>
                     </li>
