@@ -26,9 +26,15 @@
             <li class="iscurent">
                 <a class="hChContent iscurent">Cá nhân</a>
             </li>
-            <li>
-                <a href="@Url.Action("MaidEdit","MaidManager", new { maidId = Model.MaidId})" class="hChContent">Sửa thông tin</a>
-            </li>
+            @if(Session["AccId"] != null)
+            {
+                if (maid.MaidMediatorId == (int)Session["AccId"] || maid.StaffId == (int)Session["AccId"])
+                {
+                    <li>
+                        <a href="@Url.Action("MaidEdit", "MaidManager", new {maidId = Model.MaidId})" class="hChContent">Sửa thông tin</a>
+                    </li>
+                }
+            }
         </ul>
     </div>
 </div>
