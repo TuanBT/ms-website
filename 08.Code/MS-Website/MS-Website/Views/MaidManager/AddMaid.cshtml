@@ -17,10 +17,13 @@
                         <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = Session["AccId"], role = Session["Role"] })" class="hefaContent">Thông tin</a>
                     </li>
                     <li>
-                        <a class="hefaContent iscurent">Thêm người giúp viêc</a>
+                        <a class="hefaContent iscurent" href="@Url.Action("LoadAddMaid", "MaidManager")">Thêm người giúp viêc</a>
                     </li>
                     <li>
                         <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent">Đăng yêu cầu công việc</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ManageJobRequest","MaidManager")" class="hefaContent">Quản lý</a>
                     </li>
                     <li>
                         <a href="#" class="hefaContent">Thông báo</a>
@@ -28,6 +31,7 @@
                     <li>
                         <a href="#" class="hefaContent">Thống kê</a>
                     </li>
+                    
                 </ul>
             </div>
         </div>
