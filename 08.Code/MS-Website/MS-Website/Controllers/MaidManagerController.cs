@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using MS_Website.Models;
 
 namespace MS_Website.Controllers
@@ -16,6 +13,8 @@ namespace MS_Website.Controllers
 
         public ActionResult GetMaidManager(int accId, string role)
         {
+            if (Session["Role"] != null)
+            {
             using (var db = new MSEntities())
             {
                 int numWating = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Waiting"));
@@ -23,8 +22,7 @@ namespace MS_Website.Controllers
                 int numApproved = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Approved"));
                 int numExpired = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Expired"));
                 ViewBag.MaidMediatorStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied };
-                if (Session["Role"] != null)
-                {
+               
                     if (role.Equals("MaidMediator"))
                     {
                         var maidMediator = db.Accounts.SingleOrDefault(mm => mm.AccountId == accId);
@@ -40,10 +38,9 @@ namespace MS_Website.Controllers
                         Session["MaidManager"] = staff;
                         return View("Staff", staff);
                     }
-                }
-               
-                return RedirectToAction("Login","Home");
+                }     
             }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult MaidManagerEdit()
@@ -125,6 +122,10 @@ namespace MS_Website.Controllers
 
         public ActionResult LoadAddMaid()
         {
+            if (Session["AccId"] != null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             using (var db = new MSEntities())
             {
                 if (Session["Hometown"] == null)
@@ -226,6 +227,10 @@ namespace MS_Website.Controllers
 
         public ActionResult ManageMaidProfile(int maidId)
         {
+            if (Session["AccId"]!=null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             using (var db = new MSEntities())
             {
                 var maid = db.Maids.FirstOrDefault(m => m.MaidId == maidId);
@@ -343,6 +348,10 @@ namespace MS_Website.Controllers
             string OldCare, string BabySister, string DisabilityCare, string BonsaiCare, string Cooking,
             string Washing, string CleanHouse, int maidId, string time)
         {
+            if (Session["AccId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (maidId != null)
             {
                 using (var db = new MSEntities())
@@ -499,6 +508,7 @@ namespace MS_Website.Controllers
                 }
             }
             return View("PostRequest");
+            
         }
 
         public void LoadItems()
@@ -512,95 +522,104 @@ namespace MS_Website.Controllers
 
         public ActionResult ManageJobRequest()
         {
-            List<JobRequestTemp> jobRequestTemps = new List<JobRequestTemp>();
-            using (var db = new MSEntities())
+            if (Session["AccId"]!=null)
             {
-                var jobRequests = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                foreach (var jobRequest in jobRequests)
+                List<JobRequestTemp> jobRequestTemps = new List<JobRequestTemp>();
+                using (var db = new MSEntities())
                 {
-
-                    var jobRequestTemp = new JobRequestTemp
+                    var jobRequests = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    foreach (var jobRequest in jobRequests)
                     {
-                        Job = jobRequest,
-                        SkillList = null,
-                        Account = db.Accounts.FirstOrDefault(j => j.AccountId == jobRequest.MaidMediatorId),
 
-                        Maid = null,
-                        Recruitment = null,
-                    };
-                    if (jobRequestTemp.Job.MaidMediatorId != null)
-                    {
-                        jobRequestTemps.Add(jobRequestTemp);
+                        var jobRequestTemp = new JobRequestTemp
+                        {
+                            Job = jobRequest,
+                            SkillList = null,
+                            Account = db.Accounts.FirstOrDefault(j => j.AccountId == jobRequest.MaidMediatorId),
+
+                            Maid = null,
+                            Recruitment = null,
+                        };
+                        if (jobRequestTemp.Job.MaidMediatorId != null)
+                        {
+                            jobRequestTemps.Add(jobRequestTemp);
+                        }
+
                     }
 
-                }
-
-
-                //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                return View(jobRequestTemps);
-
+                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    return View(jobRequestTemps);
+            }     
             }
+            return RedirectToAction("Login", "Home");
         }
 
         [HttpGet]
         public ActionResult MarkActive(int jobRequestId)
         {
-            var db = new MSEntities();
-
-            using (db)
+            if (Session["AccId"]!=null)
             {
-                var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
-                jobRequest.Status = "Waiting";
-                db.SaveChanges();
-                //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                return RedirectToAction("ManageJobRequest", "MaidManager");
+                var db = new MSEntities();
+
+                using (db)
+                {
+                    var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
+                    jobRequest.Status = "Waiting";
+                    db.SaveChanges();
+                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    return RedirectToAction("ManageJobRequest", "MaidManager");
+                }
             }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult ManageRecruitment()
         {
-            List<RecruitmentTemp> recruitmentTemps = new List<RecruitmentTemp>();
-            using (var db = new MSEntities())
+            if (Session["AccId"]!=null)
             {
-                var recruiments = db.Recruitments.Where(j => j.Status == "NotActive").ToList();
-                foreach (var recruitment in recruiments)
+                List<RecruitmentTemp> recruitmentTemps = new List<RecruitmentTemp>();
+                using (var db = new MSEntities())
                 {
-
-                    var recruitmentTemp = new RecruitmentTemp
+                    var recruiments = db.Recruitments.Where(j => j.Status == "NotActive").ToList();
+                    foreach (var recruitment in recruiments)
                     {
-                        Recruitment = recruitment,
-                        SkillList = null,
-                        Account = db.Accounts.FirstOrDefault(j => j.AccountId == recruitment.CustomerId),
-                        JobRequest = null,
-                    };
-                    recruitmentTemps.Add(recruitmentTemp);
 
-
-                }
-
-
-                //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                return View(recruitmentTemps);
-
+                        var recruitmentTemp = new RecruitmentTemp
+                        {
+                            Recruitment = recruitment,
+                            SkillList = null,
+                            Account = db.Accounts.FirstOrDefault(j => j.AccountId == recruitment.CustomerId),
+                            JobRequest = null,
+                        };
+                        recruitmentTemps.Add(recruitmentTemp);
+                    }
+                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    return View(recruitmentTemps);
+            }  
             }
+            return RedirectToAction("Login", "Home");
         }
 
         [HttpGet]
         public ActionResult MarkActiveRecruitment(int recruitmentId)
         {
-            var db = new MSEntities();
-
-            using (db)
+            if(Session["AccId"]!=null)
             {
+                var db = new MSEntities();
 
-                var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
-                recruitment.Status = "Waiting";
-                db.SaveChanges();
-                //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                return RedirectToAction("ManageRecruitment", "MaidManager");
+                using (db)
+                {
+
+                    var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
+                    recruitment.Status = "Waiting";
+                    db.SaveChanges();
+                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    return RedirectToAction("ManageRecruitment", "MaidManager");
+                }
             }
+            return RedirectToAction("Login", "Home");
         }
     }
 }
