@@ -11,7 +11,6 @@ namespace MS_Website.Controllers
 {
     public class CustomerController : Controller
     {
-        private MSEntities db = new MSEntities();
         private SkillBusiness buss = new SkillBusiness();
 
         //
@@ -19,20 +18,44 @@ namespace MS_Website.Controllers
 
         public ActionResult GetCustomer(int custId)
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                var account = db.Accounts.SingleOrDefault(a => a.AccountId == custId);
-                var customer = db.Customers.SingleOrDefault(c => c.AccountId == custId);
-                var notApplJobList = db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Waiting")).ToList();
-                var applJobList = db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Applied")).ToList();
-                var expiredJobList = db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Expired")).ToList();
-                var unpublicList = db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Hide")).ToList();
-                ViewBag.NotApplList = notApplJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                ViewBag.ApplList = (from recruitment in applJobList let apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitment.RecruitmentId) let jobRequest = db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId) select new RecruitmentTemp(recruitment, customer, account, jobRequest, null)).ToList();
-                ViewBag.ExpiredList = expiredJobList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                ViewBag.UnpublicList = unpublicList.Select(recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                return View("CustomerProfile", account);
+                using (var db = new MSEntities())
+                {
+                    var account = db.Accounts.SingleOrDefault(a => a.AccountId == custId);
+                    var customer = db.Customers.SingleOrDefault(c => c.AccountId == custId);
+                    var notApplJobList =
+                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Waiting")).ToList();
+                    var applJobList =
+                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Applied")).ToList();
+                    var expiredJobList =
+                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Expired")).ToList();
+                    var unpublicList =
+                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Hide")).ToList();
+                    ViewBag.NotApplList =
+                        notApplJobList.Select(
+                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                    ViewBag.ApplList = (from recruitment in applJobList
+                                        let apply =
+                                            db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitment.RecruitmentId)
+                                        let jobRequest =
+                                            db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId)
+                                        select new RecruitmentTemp(recruitment, customer, account, jobRequest, null)).
+                        ToList();
+                    ViewBag.ExpiredList =
+                        expiredJobList.Select(
+                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                    ViewBag.UnpublicList =
+                        unpublicList.Select(
+                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                    if ((int) Session["AccId"] == custId)
+                    {
+                        ViewBag.Manage = "true";
+                    }
+                    return View("CustomerProfile", account);
+                }
             }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult CustomerEdit()
@@ -65,27 +88,39 @@ namespace MS_Website.Controllers
                         cust.Email = email;
                         cust.Customer.Address = addr;
                         db.SaveChanges();
-                        return RedirectToAction("GetCustomer", "Customer", new { custId = cust.AccountId});
+                        return RedirectToAction("GetCustomer", "Customer", new { custId = cust.AccountId });
                     }
                 }
             }
             return RedirectToAction("Login", "Home");
         }
 
-        public ActionResult PublicRecruitment(int recruitmentId)
+        public ActionResult HideRecruitment(int recruitId)
         {
             using (var db = new MSEntities())
             {
-                var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
+                var recruitment = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
                 if (recruitment != null)
                 {
-                    db.Recruitments.Remove(recruitment);
-                    var skillRefTmp = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId);
-                    db.SkillReferences.Remove(skillRefTmp);
+                    recruitment.Status = "Hide";
                     db.SaveChanges();
                 }
             }
-            return RedirectToAction("","");
+            return RedirectToAction("GetCustomer", new { custId = Session["AccId"] });
+        }
+
+        public ActionResult PublicRecruitment(int recruitId)
+        {
+            using (var db = new MSEntities())
+            {
+                var recruitment = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
+                if (recruitment != null)
+                {
+                    recruitment.Status = "Waiting";
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("GetCustomer", new { custId = Session["AccId"] });
         }
 
         public ActionResult PostRecruitment()
@@ -242,6 +277,19 @@ namespace MS_Website.Controllers
             }
         }
 
+        public ActionResult ExtendRecruitment(int recruitId, int extend)
+        {
+            using (var db = new MSEntities())
+            {
+                var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
+                var expiredTime = recruit.ExpiredTime.AddDays(7 * extend);
+                recruit.ExpiredTime = expiredTime;
+                recruit.Status = "Waiting";
+                db.SaveChanges();
+                return RedirectToAction("GetCustomer", "Customer", new { custId = recruit.CustomerId });
+            }
+        }
+
         public void LoadItems()
         {
             ViewBag.Gender = Session["Gender"];
@@ -259,16 +307,19 @@ namespace MS_Website.Controllers
 
         public ActionResult ApplyJobRequest(int jobRequestId, int recruitId)
         {
-            var apply = new Apply();
-            apply.JobRequestId = jobRequestId;
-            apply.RecruitmentId = recruitId;
-            db.Applies.Add(apply);
-            var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
-            var recruit = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
-            jobRequest.Status = "Applied";
-            recruit.Status = "Applied";
-            db.SaveChanges();
-            return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
+            using (var db = new MSEntities())
+            {
+                var apply = new Apply();
+                apply.JobRequestId = jobRequestId;
+                apply.RecruitmentId = recruitId;
+                db.Applies.Add(apply);
+                var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
+                var recruit = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
+                jobRequest.Status = "Applied";
+                recruit.Status = "Applied";
+                db.SaveChanges();
+                return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
+            }
         }
     }
 }
