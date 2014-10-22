@@ -2,8 +2,8 @@
 <script src="~/Content/bootstrap-star-rating-master/js/star-rating.min.js" type="text/javascript"></script>
 
 @{
-    float rate = (float) ViewBag.MaidRating;
-    float numrate = rate * 5 / 10;
+    var rate = (int)ViewBag.jrRate;
+    float numrate = (float) rate/2;
 }
 
     @using (Html.BeginForm("RatingJobRequest", "Post", FormMethod.Post))
