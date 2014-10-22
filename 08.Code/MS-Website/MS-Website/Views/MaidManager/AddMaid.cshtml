@@ -4,7 +4,10 @@
 
 <link href="../Content/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
 <script src="../Content/bootstrap-fileinput/js/fileinput.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="../Content/AdminLTE-master/js/jquery-ui.min.js"></script>
+<script src="../Content/bootstrap-datetimepicker/js/moment.js" type="text/javascript"></script>
+<link href="../Content/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="../Content/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+
 <div class="Menu">
     <div class="rows">
         <div class="hMenu">
@@ -74,8 +77,8 @@
                         </div>
                         <div class="col-md-8">
                             <div class="form-group">
-                                <div class="input-group">
-                                    <input type="text" id="datepicker" class="form-control" name="birthdate" />
+                                <div class="input-group datepicker">
+                                    <input type="text"  class="form-control datepicker" name="birthdate" data-date-format="DD/MM/YYYY"/>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -83,7 +86,7 @@
                             </div>
                             <script>
                                 $(function () {
-                                    $("#datepicker").datepicker();
+                                    $(".datepicker").datetimepicker();
                                 });
                             </script>
                         </div>
