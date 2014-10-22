@@ -2046,6 +2046,10 @@
     <Content Include="Views\MaidManager\ManageRecruitment.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\MaidManager\Staff.cshtml" />
+    <Content Include="Views\MaidManager\MaidManagerEdit.cshtml" />
+    <Content Include="Views\MaidManager\MaidEdit.cshtml" />
+    <Content Include="Views\Customer\CustomerEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
