@@ -21,9 +21,15 @@
             <li class="iscurent">
                 <a href="#" class="hChContent">Chi tiết tuyển người giúp việc</a>
             </li>
-            <li class>
-                <a href="#" class="hChContent">Sửa thông tin tìm người giúp việc</a>
-            </li>
+            @if(Session["AccId"] != null)
+            {
+                if(RecruitmentTemp.Recruitment.CustomerId == (int)Session["AccId"])
+                {
+                    <li>
+                        <a href="#" class="hChContent">Sửa thông tin tìm người giúp việc</a>
+                    </li>
+                }
+            }
         </ul>
     </div>
 </div>
