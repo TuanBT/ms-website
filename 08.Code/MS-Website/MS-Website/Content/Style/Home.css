@@ -528,7 +528,7 @@ border-radius: 8px;
 
 .scContent {
     padding: 10px;
-    text-align: center;
+    text-align: left;
 }
 
 .scContent>img {
