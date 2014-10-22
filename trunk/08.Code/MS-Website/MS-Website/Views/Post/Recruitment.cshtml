@@ -2,6 +2,7 @@
     ViewBag.Title = "Tin tìm người";
     Layout = "~/Views/Shared/_Layout.cshtml";
     MS_Website.Models.RecruitmentTemp RecruitmentTemp = Model;
+    var Recommend = (List<MS_Website.Models.JobRequestTemp>)ViewBag.Recommend;
 }
 
 <div class="Menu">
@@ -21,13 +22,13 @@
             <li class="iscurent">
                 <a href="#" class="hChContent">Chi tiết tuyển người giúp việc</a>
             </li>
-            @if(Session["AccId"] != null)
+            @if (Session["AccId"] != null)
             {
-                if(RecruitmentTemp.Recruitment.CustomerId == (int)Session["AccId"])
+                if (RecruitmentTemp.Recruitment.CustomerId == (int)Session["AccId"])
                 {
-                    <li>
-                        <a href="#" class="hChContent">Sửa thông tin tìm người giúp việc</a>
-                    </li>
+                <li>
+                    <a href="#" class="hChContent">Sửa thông tin tìm người giúp việc</a>
+                </li>
                 }
             }
         </ul>
@@ -41,13 +42,13 @@
                     <div class="mainInfo">
                         <div class="miPic">
                             <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
+                            @if (ViewBag.Remove == "true")
+                            {
+                                <div class="miButton">
+                                    <button type="button" class="btn btn-danger">Tạm ẩn</button>
+                                </div>
+                            }
                         </div>
-                        @if (ViewBag.Remove == "true")
-                        {
-                            <div class="miButton">
-                                <button type="button" class="btn btn-danger">Hủy</button>
-                            </div>
-                        }
                         <div class="mmiDetail">
                             <div class="iStatus">
                                 <div class="iTitle">
@@ -136,7 +137,7 @@
                                 @{
                         var counter = 0;
                                 }
-                                @foreach (var job in ViewBag.Recommend)
+                                @foreach (var job in Recommend)
                                 {
                                     <li id="@counter" style="display: @(counter > 1 ? "none" : "");">
                                         <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">
@@ -144,7 +145,7 @@
                                                 <img src="@job.Maid.PersonalImage" alt="Maid sercive" height="100%">
                                             </span>
                                             <span class="listSuCuDetail">
-                                                <span class="liCuName">@job.Maid.MaidName
+                                                <span class="liCuName">@job.Job.Title
                                                 </span>
                                                 <span class="liCuPostTime">Đăng: @job.Job.PostTime
                                                 </span>
