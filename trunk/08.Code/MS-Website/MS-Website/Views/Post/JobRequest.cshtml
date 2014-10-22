@@ -21,9 +21,15 @@
             <li class="iscurent">
                 <a href="#" class="hChContent">Chi tiết yêu cầu công việc</a>
             </li>
-            <li class>
-                <a href="#" class="hChContent">Sửa thông tin yêu cầu công việc</a>
-            </li>
+            @if(Session["AccId"] != null)
+            {
+                if(JobRequestTemp.Maid.MaidMediatorId == (int)Session["AccId"] || JobRequestTemp.Maid.StaffId == (int)Session["AccId"])
+                {
+                    <li>
+                        <a href="#" class="hChContent">Sửa thông tin yêu cầu công việc</a>
+                    </li>
+                }
+            }
         </ul>
     </div>
 </div>
