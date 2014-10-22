@@ -40,6 +40,14 @@ namespace MS_Website.Controllers
 
                 if (job != null)
                 {
+
+                    var ratingRow = db.Ratings.FirstOrDefault(r => r.JobRequestId == job.JobRequestId);
+                    ViewBag.jrRate = 0;
+                    if (ratingRow != null)
+                    {
+                        ViewBag.jrRate = ratingRow.Rate;
+                    }
+
                     var maid = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId);
                     var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == job.SkillRefId);
                     var skillList = new List<string>();
