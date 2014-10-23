@@ -42,14 +42,33 @@
                     <div class="mainInfo">
                         <div class="miPic">
                             <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
-                            @if (ViewBag.Remove == "true")
+                            @if (ViewBag.Manage == "true")
                             {
                                 <div class="miButton">
-                                    <button type="button" class="btn btn-danger">Tạm ẩn</button>
+                                    @if(RecruitmentTemp.Recruitment.Status.Equals("Waiting"))
+                                    {
+                                         using (Html.BeginForm("HideRecruitment", "Customer", new {recruitId = RecruitmentTemp.Recruitment.RecruitmentId}))
+                                         {
+                                             <button type="button" class="btn btn-danger">Tạm ẩn</button>
+                                         }
+                                    } 
+                                    else
+                                    {
+                                        using (Html.BeginForm("PublicRecruitment", "Customer", new {recruitId = RecruitmentTemp.Recruitment.RecruitmentId}))
+                                         {
+                                             <button type="button" class="btn btn-danger">Công khai</button>
+                                         }
+                                    }
                                 </div>
                             }
                         </div>
                         <div class="mmiDetail">
+                            <div class="iStatus">
+                                <div class="iTitle">
+                                    Tiều đề:
+                                </div>
+                                <span>@RecruitmentTemp.Recruitment.Title</span>
+                            </div>
                             <div class="iStatus">
                                 <div class="iTitle">
                                     Tình Trạng:
