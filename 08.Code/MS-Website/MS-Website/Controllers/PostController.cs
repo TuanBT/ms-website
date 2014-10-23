@@ -40,13 +40,14 @@ namespace MS_Website.Controllers
 
                 if (job != null)
                 {
-
                     var ratingRow = db.Ratings.FirstOrDefault(r => r.JobRequestId == job.JobRequestId);
                     ViewBag.jrRate = 0;
                     if (ratingRow != null)
                     {
                         ViewBag.jrRate = ratingRow.Rate;
                     }
+                    var commentTable = db.Comments.Where(c => c.JobRequestId == job.JobRequestId).OrderByDescending(c => c.CommentId).ToList();
+                    ViewBag.Comment = commentTable;
 
                     var maid = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId);
                     var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == job.SkillRefId);
@@ -627,6 +628,26 @@ namespace MS_Website.Controllers
                     Maid.RateAvg = (int)total / count;
                     db.SaveChanges();
                 }
+            }
+            return RedirectToAction("GetJobRequest", new { jobId = jobId });
+        }
+
+        [HttpPost]
+        public ActionResult CommentJobRequest(string content, string cusId, string jrId)
+        {
+            var jobId = Convert.ToInt32(jrId);
+            var customerId = Convert.ToInt32(cusId);
+            using (var db = new MSEntities())
+            {
+                Comment comment = new Comment
+                {
+                    CustomerId = customerId,
+                    JobRequestId = jobId,
+                    CommentContent = content,
+                    PostTime = DateTime.Now
+                };
+                db.Comments.Add(comment);
+                db.SaveChanges();
             }
             return RedirectToAction("GetJobRequest", new { jobId = jobId });
         }
