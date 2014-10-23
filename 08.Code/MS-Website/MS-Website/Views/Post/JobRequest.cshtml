@@ -41,7 +41,6 @@
                     <div class="mainInfo">
                         <div class="miPic">
                             <img src="../Content/Image/jr.png" alt="Maid sercive" width="100%">
-                            <div>
                                 @if (ViewBag.Manage == "true")
                                 {
                                     <div class="miButton">
@@ -61,29 +60,7 @@
                                         }
                                     </div>
                                 }
-                            </div>
-                            @if (JobRequestTemp.Job.Status == "Applied" || JobRequestTemp.Job.Status == "Approved")
-                            {
-                                <div class="overView">
-                                    <div class="ovTitle">
-                                        Bạn có thể chấm điểm cho công việc này
-                                    </div>
-                                    <div class="ovContent">
-                                        @* @{ Html.RenderAction("Rate", "Evaluate", new {id = JobRequestTemp.Job.JobRequestId}); }*@
-                                        @*ViewBag.MaidRating*@
-                                        @{ ViewBag.jrid = JobRequestTemp.Job.JobRequestId; }
-                                        @Html.Partial("_PartialRating")
-                                    </div>
-                                </div>
-                                <div class="overView">
-                                    <div class="ovTitle">
-                                        Nhận xét của người đã thuê
-                                    </div>
-                                    <div class="ovContent">
-                                        @{ Html.RenderAction("Post", "Evaluate", new { id = JobRequestTemp.Job.JobRequestId }); }
-                                    </div>
-                                </div>
-                            }
+                           
                             <div class="miButton">
                                 @{
                                     if (ViewBag.RecruitmentList != null)
@@ -136,11 +113,11 @@
                         </div>
 
                         <div class="mmiDetail">
-                            <div class="iStatus">
+                            <div class="iRows">
                                 <div class="iTitle">
                                     Tiều đề:
                                 </div>
-                                <span>@JobRequestTemp.Job.Title</span>
+                                <span class="iTitleContent">@JobRequestTemp.Job.Title</span>
                             </div>
                             <div class="iStatus">
                                 <div class="iTitle">
@@ -218,26 +195,33 @@
                     </div>
                     @if (JobRequestTemp.Job.Status == "Applied" || JobRequestTemp.Job.Status == "Approved")
                     {
-                        <div class="overView">
-                            <div class="ovTitle">
-                                Bạn có thể chấm điểm cho công việc này
-                            </div>
-                            <div class="ovContent">
-                                @* @{ Html.RenderAction("Rate", "Evaluate", new {id = JobRequestTemp.Job.JobRequestId}); }*@
-                                @*ViewBag.MaidRating*@
-                                @{ ViewBag.jrid = JobRequestTemp.Job.JobRequestId; }
-                                @Html.Partial("_PartialRating")
-                            </div>
-                        </div>
+                        ViewBag.CusId = (int)JobRequestTemp.Recruitment.CustomerId;
+                        if (ViewBag.CusId != null)
+                        {
+                            if (Session["AccId"] != null)
+                            {
+                                if ((int)Session["AccId"] == (int)ViewBag.CusId)
+                                {
+                                     <div class="overView">
+                                         <div class="ovTitle">
+                                             Bạn có thể chấm điểm cho công việc này
+                                         </div>
+                                         <div class="ovContent">
+                                             @* @{ Html.RenderAction("Rate", "Evaluate", new {id = JobRequestTemp.Job.JobRequestId}); }*@
+                                             @*ViewBag.MaidRating*@
+                                             @{ ViewBag.jrid = JobRequestTemp.Job.JobRequestId; }
+                                             @Html.Partial("_PartialRating")
+                                         </div>
+                                     </div>
+                                }
+                            }
+                        }
                         <div class="overView">
                             <div class="ovTitle">
                                 Nhận xét của người đã thuê
                             </div>
                             <div class="ovContent">
                                 @*@{ Html.RenderAction("Post", "Evaluate", new { id = JobRequestTemp.Job.JobRequestId}); }*@
-                                @{
-                                   ViewBag.CusId = (int)JobRequestTemp.Recruitment.CustomerId;
-                                }
                                 @Html.Partial("_PartialComment", (List<MS_Website.Models.Comment>)ViewBag.Comment)
                             </div>
                         </div>
