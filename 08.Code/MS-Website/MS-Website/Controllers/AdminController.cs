@@ -145,50 +145,59 @@ namespace MS_Website.Controllers
         }
         public ActionResult AddStaff(Account acc)
         {
-            using (var db=new MSEntities())
+            if (Session["AccId"]!=null && Session["IsAdmin"].Equals(true))
             {
-                try
+                using (var db = new MSEntities())
                 {
-                    var newStaff = db.Accounts.Create();
-                    newStaff.Username = acc.Username;
-                    newStaff.Password = acc.Password;
-                    newStaff.IsActive = true;
-                    newStaff.JoinDate = DateTime.Now;
-                    newStaff.Role = "Staff";
-                    newStaff.IsWebmaster = false;
-                    newStaff.Email = null;
-                    newStaff.Phone = null;
-                    newStaff.FullName = null;
-                    newStaff.Avatar = null;
-                    db.Accounts.Add(newStaff);
-                    db.SaveChanges();
+                    try
+                    {
+                        var newStaff = db.Accounts.Create();
+                        newStaff.Username = acc.Username;
+                        newStaff.Password = acc.Password;
+                        newStaff.IsActive = true;
+                        newStaff.JoinDate = DateTime.Now;
+                        newStaff.Role = "Staff";
+                        newStaff.IsWebmaster = false;
+                        newStaff.Email = null;
+                        newStaff.Phone = null;
+                        newStaff.FullName = null;
+                        newStaff.Avatar = null;
+                        db.Accounts.Add(newStaff);
+                        db.SaveChanges();
 
-                    var addedAcc = db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
-                    var newStaffs = new Staff();
-                    newStaffs.AccountId = addedAcc.AccountId;
-                    db.Staffs.Add(newStaffs);
-                    db.SaveChanges();
-                    return RedirectToAction("Login", "Home", acc);
-                   
-                }
-                catch (Exception)
-                {
-                   return View("AddStaff");
+                        var addedAcc = db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                        var newStaffs = new Staff {AccountId = addedAcc.AccountId};
+                        db.Staffs.Add(newStaffs);
+                        db.SaveChanges();
+                        return RedirectToAction("Login", "Home", acc);
+
+                    }
+                    catch (Exception)
+                    {
+                        return View("AddStaff");
+                    }
                 }
             }
+            return RedirectToAction("Login", "Home");
         }
         public ActionResult BanAccount(string searchString)
         {
             var db = new MSEntities();
-            var search = db.Accounts.Where(s => s.Username.Contains(searchString) && s.IsActive).ToList();
+            
+            if (Session["AccId"]!=null && Session["IsAdmin"].Equals(true))
+            {
+                var search = db.Accounts.Where(s => s.Username.Contains(searchString) && s.IsActive).ToList();
 
 
-            return View("BanAccount",search);
+                return View("BanAccount", search);
+            }
+            return RedirectToAction("Login", "Home");
+
         }
         [HttpGet]
         public ActionResult MarkActive(int accountId)
         {
-            if (Session["AccId"] != null)
+            if (Session["AccId"] != null && Session["IsAdmin"].Equals(true))
             {
                 var db = new MSEntities();
 

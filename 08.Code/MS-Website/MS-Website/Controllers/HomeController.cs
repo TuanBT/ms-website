@@ -137,6 +137,7 @@ namespace MS_Website.Controllers
                         Session["AccId"] = b.AccountId;
                         Session["Fullname"] = b.FullName;
                         Session["Role"] = b.Role;
+                        Session["IsAdmin"] = b.IsWebmaster;
                         return RedirectToAction("Index", "Home");
                     }
                 }
