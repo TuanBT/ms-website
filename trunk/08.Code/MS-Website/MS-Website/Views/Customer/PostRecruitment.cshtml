@@ -179,7 +179,7 @@
                                 <div class="modal-body chooseMaidModalSkill">
                                     <div class="moskCategory">
                                         <div class="moskCategoryName">
-                                            Cá nhân
+                                           Yêu cầu về thông tin cá nhân
                                         </div>
                                         <div class="moskCategoryContent">
                                             <div class="moskSkill">
@@ -198,12 +198,40 @@
                                             </div>
                                             <div class="moskSkill">
                                                 <div class="moskSkillName">
-                                                    Tuổi
+                                                    Nhóm tuổi
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="age" name="age">
                                                         <option value="null">Không khai</option>
                                                         @foreach (var item in ViewBag.Age)
+                                                        {
+                                                            <option value="@item.SkillString">@item.SkillString</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                             <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Kinh nghiệm
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <select class="form-control" id="exp" name="exp">
+                                                        <option value="null">Không khai</option>
+                                                        @foreach (var item in ViewBag.Experience)
+                                                        {
+                                                            <option value="@item.SkillString">@item.SkillString</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    Nguyên quán
+                                                </div>
+                                                <div class="moskSkillContent">
+                                                    <select class="form-control" id="hometown" name="hometown">
+                                                        <option value="null">Không khai</option>
+                                                        @foreach (var item in ViewBag.Hometown)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
                                                         }
@@ -225,35 +253,7 @@
                                             }
                                             <div class="moskSkill">
                                                 <div class="moskSkillName">
-                                                    Kinh nghiệm
-                                                </div>
-                                                <div class="moskSkillContent">
-                                                    <select class="form-control" id="exp" name="exp">
-                                                        <option value="null">Không khai</option>
-                                                        @foreach (var item in ViewBag.Experience)
-                                                        {
-                                                            <option value="@item.SkillString">@item.SkillString</option>
-                                                        }
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="moskSkill">
-                                                <div class="moskSkillName">
-                                                    Quê quán
-                                                </div>
-                                                <div class="moskSkillContent">
-                                                    <select class="form-control" id="hometown" name="hometown">
-                                                        <option value="null">Không khai</option>
-                                                        @foreach (var item in ViewBag.Hometown)
-                                                        {
-                                                            <option value="@item.SkillString">@item.SkillString</option>
-                                                        }
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="moskSkill">
-                                                <div class="moskSkillName">
-                                                    Địa chỉ
+                                                    Đang ở tại
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="addr" name="addr">
@@ -283,12 +283,12 @@
                                     </div>
                                     <div class="moskCategory">
                                         <div class="moskCategoryName">
-                                            Yêu cầu
+                                            Yêu cầu về công việc
                                         </div>
                                         <div class="moskCategoryContent">
                                             <div class="moskSkill">
                                                 <div class="moskSkillName">
-                                                    Ở lại
+                                                    Lưu trú
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="stay" name="stay">
@@ -316,7 +316,7 @@
                                             </div>
                                             <div class="moskSkill">
                                                 <div class="moskSkillName">
-                                                    Thời gian 
+                                                    Kiểu công việc
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="work" name="work">
@@ -332,7 +332,7 @@
                                     </div>
                                     <div class="moskCategory">
                                         <div class="moskCategoryName">
-                                            Kĩ năng
+                                            Yêu cầu các kỹ năng cần có
                                         </div>
                                         <div class="moskCategoryContent">
                                             @foreach (var item in ViewBag.SkillList)

@@ -1,5 +1,5 @@
-﻿@{
-    ViewBag.Title = "Tin tìm người";
+﻿ @{
+    ViewBag.Title = "Tin tìm người giúp việc";
     Layout = "~/Views/Shared/_Layout.cshtml";
     MS_Website.Models.RecruitmentTemp RecruitmentTemp = Model;
     var Recommend = (List<MS_Website.Models.JobRequestTemp>)ViewBag.Recommend;
@@ -42,7 +42,6 @@
                     <div class="mainInfo">
                         <div class="miPic">
                             <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
-                            <div>
                                 @if (ViewBag.Manage == "true")
                                 {
                                     <div class="miButton">
@@ -62,15 +61,14 @@
                                         }
                                     </div>
                                 }
-                            </div>
                         </div>
 
                         <div class="mmiDetail">
-                            <div class="iStatus">
+                            <div class="iRows">
                                 <div class="iTitle">
                                     Tiều đề:
                                 </div>
-                                <span>@RecruitmentTemp.Recruitment.Title</span>
+                                <span class="iTitleContent">@RecruitmentTemp.Recruitment.Title</span>
                             </div>
                             <div class="iStatus">
                                 <div class="iTitle">
