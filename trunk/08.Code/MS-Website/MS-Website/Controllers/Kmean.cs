@@ -82,7 +82,7 @@ namespace MS_Website.Controllers
             for (int k = 0; k < numClusters; k++)
             {
                 double distance = Distance(rowData, means[k]);
-                if (distance < min)
+                if (distance <= min)
                 {
                     min = distance;
                     groupMin = k;
