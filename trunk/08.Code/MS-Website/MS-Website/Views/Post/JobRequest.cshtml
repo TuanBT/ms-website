@@ -21,13 +21,13 @@
             <li class="iscurent">
                 <a href="#" class="hChContent">Chi tiết yêu cầu công việc</a>
             </li>
-            @if(Session["AccId"] != null)
+            @if (Session["AccId"] != null)
             {
-                if(JobRequestTemp.Maid.MaidMediatorId == (int)Session["AccId"] || JobRequestTemp.Maid.StaffId == (int)Session["AccId"])
+                if (JobRequestTemp.Maid.MaidMediatorId == (int)Session["AccId"] || JobRequestTemp.Maid.StaffId == (int)Session["AccId"])
                 {
-                    <li>
-                        <a href="#" class="hChContent">Sửa thông tin yêu cầu công việc</a>
-                    </li>
+                <li>
+                    <a href="#" class="hChContent">Sửa thông tin yêu cầu công việc</a>
+                </li>
                 }
             }
         </ul>
@@ -45,52 +45,52 @@
                                 @{
                                     if (ViewBag.RecruitmentList != null)
                                     {
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target=".chooseMaidModel">Thuê</button>
-                                        <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                                             aria-hidden="true">
-                                            <div class="modal-dialog modal-sm">
-                                                <div class="modal-content">
-                                                    <div class="modal-header chooseMaidModalTitle">
-                                                        <button type="button" class="close" data-dismiss="modal">
-                                                            <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                                        <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những đơn tuyển việc mà bạn muốn bỏ</h4>
-                                                    </div>
-                                                    @using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new { name = "ApplyForm" }))
-                                                    {
-                                                        <div class="modal-body chooseMaidModalMaid">
-                                                            @foreach (var recruit in ViewBag.RecruitmentList)
-                                                            {
-                                                                <div class="radio">
-                                                                    <label>
-                                                                        <input type="radio" name="recruitId" id="optionsRadios2" value="@recruit.RecruitmentId">
-                                                                        <div>
-                                                                            <div class="liImage">
-                                                                                <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target=".chooseMaidModel">Thuê</button>
+                                    <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header chooseMaidModalTitle">
+                                                    <button type="button" class="close" data-dismiss="modal">
+                                                        <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những đơn tuyển việc mà bạn muốn bỏ</h4>
+                                                </div>
+                                                @using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new { name = "ApplyForm" }))
+                                                {
+                                                    <div class="modal-body chooseMaidModalMaid">
+                                                        @foreach (var recruit in ViewBag.RecruitmentList)
+                                                        {
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input type="radio" name="recruitId" id="optionsRadios2" value="@recruit.RecruitmentId">
+                                                                    <div>
+                                                                        <div class="liImage">
+                                                                            <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                                                        </div>
+                                                                        <div class="liMaidContent">
+                                                                            <div class="licoFullName">
+                                                                                <a href="#" id="@recruit.RecruitmentId name">@recruit.Title</a>
                                                                             </div>
-                                                                            <div class="liMaidContent">
-                                                                                <div class="licoFullName">
-                                                                                    <a href="#" id="@recruit.RecruitmentId name">@recruit.Title</a>
-                                                                                </div>
-                                                                                <div class="ricoPost">
-                                                                                </div>
+                                                                            <div class="ricoPost">
                                                                             </div>
                                                                         </div>
-                                                                    </label>
-                                                                </div>
-                                                            }
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <input type="hidden" name="jobRequestId" value="@Model.Job.JobRequestId"/>
-                                                            <button class="btn btn-primary" data-dismiss="modal" onclick="chooseRecruit()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
-                                                        </div>
-                                                    }
-                                                </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <input type="hidden" name="jobRequestId" value="@Model.Job.JobRequestId"/>
+                                                        <button class="btn btn-primary" data-dismiss="modal" onclick="chooseRecruit()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
+                                    </div>
                                     }
                                     if (ViewBag.Remove == "true")
                                     {
-                                        <button type="button" class="btn btn-danger">Hủy</button>
+                                    <button type="button" class="btn btn-danger">Hủy</button>
                                     }
                                 }
                             </div>
@@ -106,7 +106,7 @@
                                 <span class="label label-warning">Đã hoàn tất</span>
                                 <span class="label label-danger">Hết hạn</span>*@
                                 @{string color = "default";
-                                    string status = "";
+                                  string status = "";
                                 }
                                 @if (Model.Job.Status == "Waiting")
                                 {
@@ -189,7 +189,11 @@
                                 Nhận xét của người đã thuê
                             </div>
                             <div class="ovContent">
-                                @{ Html.RenderAction("Post", "Evaluate", new { id = JobRequestTemp.Job.JobRequestId}); }
+                                @*@{ Html.RenderAction("Post", "Evaluate", new { id = JobRequestTemp.Job.JobRequestId}); }*@
+                                @{
+                                   ViewBag.CusId = (int)JobRequestTemp.Recruitment.CustomerId;
+                                }
+                                @Html.Partial("_PartialComment", (List<MS_Website.Models.Comment>)ViewBag.Comment)
                             </div>
                         </div>
                     }
@@ -226,7 +230,7 @@
                                                 <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = JobRequestTemp.Maid.MaidId })">@JobRequestTemp.Maid.MaidName</a>
                                             </div>
                                             <div class="blTime">
-                                               <span class="blTimeText">Người giúp việc</span>
+                                                <span class="blTimeText">Người giúp việc</span>
                                             </div>
                                             <div class="jrMaidRate">
                                                 <div class="rate">
@@ -234,7 +238,7 @@
                                                 </div>
                                             </div>
                                             <div class="blTime">
-                                                <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(JobRequestTemp.Maid.Gender==true?"Nam":"Nữ")</span>
+                                                <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(JobRequestTemp.Maid.Gender == true ? "Nam" : "Nữ")</span>
                                             </div>
                                         </div>
                                     </div>
