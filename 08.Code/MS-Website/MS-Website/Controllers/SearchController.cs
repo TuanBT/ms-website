@@ -13,6 +13,7 @@ namespace MS_Website.Controllers
         //
         public ActionResult Index(string searchString)
         {
+            //Index search
             using (var db = new MSEntities())
             {
                 var skillInstanceList = db.SkillInstances.Where(si => si.SkillString.Contains(searchString) || si.SkillNameVietnam.Contains(searchString)).ToList();
