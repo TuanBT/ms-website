@@ -1,0 +1,16 @@
+﻿@model MS_Website.Models.Account
+@{
+    ViewBag.Title = "Thêm nhân viên";
+}
+
+
+@using (Html.BeginForm("AddStaff", "Admin", FormMethod.Post))
+                {
+                    
+                            
+                            @Html.TextBoxFor(m => m.Username, new { @class = "oInputText oFormMed", @placeholder = "Tên đăng nhập", @id = "txtUsername" })<br />
+                            @Html.PasswordFor(m => m.Password, new { @class = "oInputText oFormMed", @placeholder = "Mật khẩu", @id = "txtPassword" })<br/>
+                           
+                                <input type="submit" name="submit" id="btnSubmit" value="Đăng kí">
+                           
+                }
