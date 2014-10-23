@@ -667,5 +667,63 @@ namespace MS_Website.Controllers
             }
             return RedirectToAction("Login", "Home");
         }
+
+        public ActionResult ManageAppliedJobRequest()
+        {
+            if (Session["AccId"] != null)
+            {
+                List<JobRequestTemp> jobRequestTemps = new List<JobRequestTemp>();
+                using (var db = new MSEntities())
+                {
+                    var jobRequests = db.JobRequests.Where(j => j.Status.Equals("Applied")).ToList();
+                    foreach (var jobRequest in jobRequests)
+                    {
+
+                        var jobRequestTemp = new JobRequestTemp
+                        {
+                            Job = jobRequest,
+                            SkillList = null,
+                            Account = db.Accounts.FirstOrDefault(j => j.AccountId == jobRequest.MaidMediatorId),
+
+                            Maid = null,
+                            Recruitment = null,
+                        };
+                        if (jobRequestTemp.Job.MaidMediatorId != null)
+                        {
+                            jobRequestTemps.Add(jobRequestTemp);
+                        }
+
+                    }
+
+
+                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    return View(jobRequestTemps);
+                }
+
+
+            }
+            return RedirectToAction("Login", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult MarkApproved(int jobRequestId)
+        {
+            if (Session["AccId"] != null)
+            {
+                var db = new MSEntities();
+
+                using (db)
+                {
+
+                    var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
+                    jobRequest.Status = "Approved";
+                    db.SaveChanges();
+                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    return RedirectToAction("ManageAppliedJobRequest", "MaidManager");
+                }
+            }
+            return RedirectToAction("Login", "Home");
+        }
     }
 }
