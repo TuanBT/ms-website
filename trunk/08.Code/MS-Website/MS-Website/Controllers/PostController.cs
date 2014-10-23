@@ -633,13 +633,19 @@ namespace MS_Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult CommentJobRequest(string content, string cusId, string jrId)
+        public JsonResult CommentJobRequest(string content, string cusId, string jrId)
         {
+            if(content=="")
+            {
+                 return Json("", JsonRequestBehavior.AllowGet);
+            }
             var jobId = Convert.ToInt32(jrId);
             var customerId = Convert.ToInt32(cusId);
+            string result = "";
+            var comment = new Comment();
             using (var db = new MSEntities())
             {
-                Comment comment = new Comment
+                 comment = new Comment
                 {
                     CustomerId = customerId,
                     JobRequestId = jobId,
@@ -649,7 +655,9 @@ namespace MS_Website.Controllers
                 db.Comments.Add(comment);
                 db.SaveChanges();
             }
-            return RedirectToAction("GetJobRequest", new { jobId = jobId });
+            comment.CommentContent += "&&&"+comment.PostTime.ToString("dd/M/yyyy");
+            return Json(Json(comment), JsonRequestBehavior.AllowGet);
+            //return RedirectToAction("GetJobRequest", new { jobId = jobId });
         }
     }
 }
