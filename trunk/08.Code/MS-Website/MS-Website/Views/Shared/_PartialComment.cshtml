@@ -91,20 +91,21 @@
 
 <div class="detailBox">
     <div class="actionBox">
-        <ul class="commentList">
+        <input type="hidden" value="@ViewBag.Customer.Avatar" id="CommentAvatar"/>
+        <ul class="commentList" id="commentList">
             @if (comments != null)
             {
                 foreach (var comment in comments)
                 {
-                <li>
-                    <div class="commenterImage">
-                        <img src="@ViewBag.Customer.Avatar">
-                    </div>
-                    <div class="commentText">
-                        <p class="">@comment.CommentContent</p>
-                        <span class="date sub-text">Đăng: @String.Format("{0:d/M/yyyy}", comment.PostTime)</span>
-                    </div>
-                </li>
+                    <li>
+                        <div class="commenterImage">
+                            <img src="@ViewBag.Customer.Avatar">
+                        </div>
+                        <div class="commentText">
+                            <p class="">@comment.CommentContent</p>
+                            <span class="date sub-text">Đăng: @String.Format("{0:d/M/yyyy}", comment.PostTime)</span>
+                        </div>
+                    </li>
                 }
             }
         </ul>
@@ -116,14 +117,14 @@
                 {
                     using (Html.BeginForm("CommentJobRequest", "Post", FormMethod.Post, new {@class = "form-inline"}))
                     {
-                        <input name="cusId" type="hidden" value="@ViewBag.CusId"/>
-                        <input name="jrId" type="hidden" value="@ViewBag.jrid"/>
+                        <input name="cusId" id="CustomerIdComment" type="hidden" value="@ViewBag.CusId"/>
+                        <input name="jrId" id="jobRequestIdComment" type="hidden" value="@ViewBag.jrid"/>
 
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="Nhận xét của bạn" name="content">
+                            <input class="form-control" type="text" placeholder="Nhận xét của bạn" name="content" id="contentComent">
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-success" type="submit">Đăng</button>
+                            <button class="btn btn-success" type="button" onclick="PostComment()">Đăng</button>
                         </div>
                     }
                 }
@@ -131,7 +132,19 @@
         }
     </div>
 </div>
-
-
+<script type="text/jscript">
+    function PostComment(){
+        var url = "/Post/CommentJobRequest";
+        var content = $('#contentComent').val();
+        var cusId = $('#CustomerIdComment').val();
+        var jrId = $('#jobRequestIdComment').val();
+        var avatar = $('#CommentAvatar').val();
+        $.post(url, { content: content, cusId: cusId, jrId: jrId }, function (data) {
+            var commentLi = "<li><div class='commenterImage'><img src='" + avatar + "'></div><div class='commentText'><p class=''>" + data.Data.CommentContent.split("&&&")[0] + "</p><span class='date sub-text'>Đăng: " + data.Data.CommentContent.split("&&&")[1] + "</span></div></li>";
+            $("#commentList").html(commentLi + $("#commentList").html());
+            $('#contentComent').val("");
+        });
+    }
+</script>
 
 
