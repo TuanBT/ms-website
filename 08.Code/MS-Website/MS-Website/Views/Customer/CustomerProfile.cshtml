@@ -61,7 +61,10 @@
                             <li class="active"><a href="#free" role="tab" data-toggle="tab">Chưa tuyển được người</a></li>
                             <li class><a href="#applied" role="tab" data-toggle="tab">Đã tuyển</a></li>
                             <li class><a href="#expired" role="tab" data-toggle="tab">Hết hạn</a></li>
-                            <li class><a href="#hide" role="tab" data-toggle="tab">Không công khai</a></li>
+                            @if (ViewBag.Manage == "true")
+                            {
+                                <li class><a href="#hide" role="tab" data-toggle="tab">Không công khai</a></li>
+                            }
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade in active  bFree" id="free">
