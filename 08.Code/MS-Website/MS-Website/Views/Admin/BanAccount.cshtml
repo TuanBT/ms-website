@@ -38,7 +38,7 @@
                                 
                                 
                 <td>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@account.AccountId)">Xác nhận</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@account.AccountId)">Khóa</button>
                 </td>
             </tr>
         }
@@ -50,10 +50,10 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myLargeModalLabel">Xác nhận kích hoạt</h4>
+                                <h4 class="modal-title" id="myLargeModalLabel">Xác nhận</h4>
                             </div>
                             <div class="modal-body">
-                               Bạn thực sự đã nhận tiền từ người đại diện cho người giúp việc?
+                               Bạn thực sự muốn khóa tên đăng nhập này?
                             </div>
                             <div class="modal-footer">
                                 @using (Html.BeginForm("MarkActive","Admin",FormMethod.Get))
