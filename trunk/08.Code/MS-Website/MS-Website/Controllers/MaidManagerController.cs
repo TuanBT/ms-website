@@ -563,7 +563,7 @@ namespace MS_Website.Controllers
                 List<JobRequestTemp> jobRequestTemps = new List<JobRequestTemp>();
                 using (var db = new MSEntities())
                 {
-                    var jobRequests = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    var jobRequests = db.JobRequests.Where(j => j.IsActive == false).ToList();
                     foreach (var jobRequest in jobRequests)
                     {
 
@@ -605,7 +605,7 @@ namespace MS_Website.Controllers
                 {
 
                     var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
-                    jobRequest.Status = "Waiting";
+                    jobRequest.IsActive = true;
                     db.SaveChanges();
                     //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
                     return RedirectToAction("ManageJobRequest", "MaidManager");
