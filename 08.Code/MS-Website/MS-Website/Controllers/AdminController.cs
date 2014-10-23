@@ -143,6 +143,66 @@ namespace MS_Website.Controllers
             }
             return View("Admin");
         }
+        public ActionResult AddStaff(Account acc)
+        {
+            using (var db=new MSEntities())
+            {
+                try
+                {
+                    var newStaff = db.Accounts.Create();
+                    newStaff.Username = acc.Username;
+                    newStaff.Password = acc.Password;
+                    newStaff.IsActive = true;
+                    newStaff.JoinDate = DateTime.Now;
+                    newStaff.Role = "Staff";
+                    newStaff.IsWebmaster = false;
+                    newStaff.Email = null;
+                    newStaff.Phone = null;
+                    newStaff.FullName = null;
+                    newStaff.Avatar = null;
+                    db.Accounts.Add(newStaff);
+                    db.SaveChanges();
 
+                    var addedAcc = db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                    var newStaffs = new Staff();
+                    newStaffs.AccountId = addedAcc.AccountId;
+                    db.Staffs.Add(newStaffs);
+                    db.SaveChanges();
+                    return RedirectToAction("Login", "Home", acc);
+                   
+                }
+                catch (Exception)
+                {
+                   return View("AddStaff");
+                }
+            }
+        }
+        public ActionResult BanAccount(string searchString)
+        {
+            var db = new MSEntities();
+            var search = db.Accounts.Where(s => s.Username.Contains(searchString) && s.IsActive).ToList();
+
+
+            return View("BanAccount",search);
+        }
+        [HttpGet]
+        public ActionResult MarkActive(int accountId)
+        {
+            if (Session["AccId"] != null)
+            {
+                var db = new MSEntities();
+
+                using (db)
+                {
+
+                    var acc = db.Accounts.SingleOrDefault(j => j.AccountId == accountId);
+                    acc.IsActive = false;
+                    db.SaveChanges();
+                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    return RedirectToAction("BanAccount", "Admin");
+                }
+            }
+            return RedirectToAction("Login", "Home");
+        }
     }
 }
