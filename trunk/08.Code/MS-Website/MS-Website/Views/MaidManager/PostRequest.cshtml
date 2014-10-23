@@ -176,16 +176,16 @@
                                 <div class="modal-body chooseMaidModalSkill">
                                     <div class="moskCategory">
                                         <div class="moskCategoryName">
-                                            Yêu cầu
+                                            Yêu cầu về công việc
                                         </div>
                                         <div class="moskCategoryContent">
                                             <div class="moskSkill">
                                                 <div class="moskSkillName">
-                                                    Ở lại
+                                                    Lưu trú
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="stay" name="stay">
-                                                        <option value="null">Không khai</option>
+                                                        <option value="null">--</option>
                                                         @foreach (var item in ViewBag.StayList)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -199,7 +199,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="salary" name="salary">
-                                                        <option value="null">Không khai</option>
+                                                        <option value="null">--</option>
                                                         @foreach (var item in ViewBag.SalaryList)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -209,11 +209,11 @@
                                             </div>
                                             <div class="moskSkill">
                                                 <div class="moskSkillName">
-                                                    Thời gian 
+                                                    Kiểu công việc
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="work" name="work">
-                                                        <option value="null">Không khai</option>
+                                                        <option value="null">--</option>
                                                         @foreach (var item in ViewBag.WorkList)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -225,7 +225,7 @@
                                     </div>
                                     <div class="moskCategory">
                                         <div class="moskCategoryName">
-                                            Kĩ năng
+                                            Chọn các công việc muốn làm
                                         </div>
                                         <div class="moskCategoryContent">
                                             @foreach (var item in ViewBag.SkillList)
