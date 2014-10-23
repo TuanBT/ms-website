@@ -36,13 +36,13 @@
     </div>
     <div class="hChildMenu">
         <ul class="hChildMenuList">
-            <li class="iscurent">
+            <li class="">
                 <a href="@Url.Action("ManageJobRequest","MaidManager")" class="hChContent">Yêu cầu tìm việc</a>
             </li>
             <li class="">
                 <a href="@Url.Action("ManageRecruitment","MaidManager")" class="hChContent">Yêu cầu tìm người giúp việc</a>
             </li>
-            <li class="">
+            <li class="iscurent">
                 <a href="@Url.Action("ManageAppliedJobRequest","MaidManager")" class="hChContent">Xác nhận yêu cầu tìm việc</a>
             </li>
         </ul>
@@ -104,7 +104,7 @@
                                 </td>
                                 <td>@jobRequest.Job.PostTime</td>
                                 <td>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@jobRequest.Job.JobRequestId)">Kích hoạt</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@jobRequest.Job.JobRequestId)">Xác nhận</button>
                                 </td>
                             </tr>
                         }
@@ -116,13 +116,13 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myLargeModalLabel">Xác nhận kích hoạt</h4>
+                                <h4 class="modal-title" id="myLargeModalLabel">Xác nhận chuyển trạng thái</h4>
                             </div>
                             <div class="modal-body">
-                               Bạn thực sự đã nhận tiền từ người đại diện cho người giúp việc?
+                               Bạn đã nhận được tiền và chấp nhận chuyển trạng thái? 
                             </div>
                             <div class="modal-footer">
-                                @using (Html.BeginForm("MarkActive","MaidManager",FormMethod.Get))
+                                @using (Html.BeginForm("MarkApproved","MaidManager",FormMethod.Get))
                                 {
                                     <input type="hidden" name="jobRequestId" id="jrId2" />
                                     <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
