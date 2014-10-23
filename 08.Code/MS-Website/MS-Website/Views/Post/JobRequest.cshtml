@@ -41,6 +41,49 @@
                     <div class="mainInfo">
                         <div class="miPic">
                             <img src="../Content/Image/jr.png" alt="Maid sercive" width="100%">
+                            <div>
+                                @if (ViewBag.Manage == "true")
+                                {
+                                    <div class="miButton">
+                                        @if (JobRequestTemp.Job.Status.Equals("Waiting"))
+                                        {
+                                            using (Html.BeginForm("HideJobRequest", "MaidManager", new { recruitId = JobRequestTemp.Job.JobRequestId }))
+                                            {
+                                            <button type="button" class="btn btn-danger">Tạm ẩn</button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            using (Html.BeginForm("PublicJobRequest", "MaidManager", new { recruitId = JobRequestTemp.Job.JobRequestId }))
+                                            {
+                                            <button type="button" class="btn btn-danger">Công khai</button>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            </div>
+                            @if (JobRequestTemp.Job.Status == "Applied" || JobRequestTemp.Job.Status == "Approved")
+                            {
+                                <div class="overView">
+                                    <div class="ovTitle">
+                                        Bạn có thể chấm điểm cho công việc này
+                                    </div>
+                                    <div class="ovContent">
+                                        @* @{ Html.RenderAction("Rate", "Evaluate", new {id = JobRequestTemp.Job.JobRequestId}); }*@
+                                        @*ViewBag.MaidRating*@
+                                        @{ ViewBag.jrid = JobRequestTemp.Job.JobRequestId; }
+                                        @Html.Partial("_PartialRating")
+                                    </div>
+                                </div>
+                                <div class="overView">
+                                    <div class="ovTitle">
+                                        Nhận xét của người đã thuê
+                                    </div>
+                                    <div class="ovContent">
+                                        @{ Html.RenderAction("Post", "Evaluate", new { id = JobRequestTemp.Job.JobRequestId }); }
+                                    </div>
+                                </div>
+                            }
                             <div class="miButton">
                                 @{
                                     if (ViewBag.RecruitmentList != null)
@@ -88,15 +131,17 @@
                                         </div>
                                     </div>
                                     }
-                                    if (ViewBag.Remove == "true")
-                                    {
-                                    <button type="button" class="btn btn-danger">Hủy</button>
-                                    }
                                 }
                             </div>
                         </div>
 
                         <div class="mmiDetail">
+                            <div class="iStatus">
+                                <div class="iTitle">
+                                    Tiều đề:
+                                </div>
+                                <span>@JobRequestTemp.Job.Title</span>
+                            </div>
                             <div class="iStatus">
                                 <div class="iTitle">
                                     Tình Trạng:

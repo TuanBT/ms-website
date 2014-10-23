@@ -42,26 +42,29 @@
                     <div class="mainInfo">
                         <div class="miPic">
                             <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
-                            @if (ViewBag.Manage == "true")
-                            {
-                                <div class="miButton">
-                                    @if(RecruitmentTemp.Recruitment.Status.Equals("Waiting"))
-                                    {
-                                         using (Html.BeginForm("HideRecruitment", "Customer", new {recruitId = RecruitmentTemp.Recruitment.RecruitmentId}))
-                                         {
-                                             <button type="button" class="btn btn-danger">Tạm ẩn</button>
-                                         }
-                                    } 
-                                    else
-                                    {
-                                        using (Html.BeginForm("PublicRecruitment", "Customer", new {recruitId = RecruitmentTemp.Recruitment.RecruitmentId}))
-                                         {
-                                             <button type="button" class="btn btn-danger">Công khai</button>
-                                         }
-                                    }
-                                </div>
-                            }
+                            <div>
+                                @if (ViewBag.Manage == "true")
+                                {
+                                    <div class="miButton">
+                                        @if (RecruitmentTemp.Recruitment.Status.Equals("Waiting"))
+                                        {
+                                            using (Html.BeginForm("HideRecruitment", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
+                                            {
+                                            <button class="btn btn-danger">Tạm ẩn</button>
+                                            }
+                                        }
+                                        else if (RecruitmentTemp.Recruitment.Status.Equals("Hide"))
+                                        {
+                                            using (Html.BeginForm("PublicRecruitment", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
+                                            {
+                                            <button class="btn btn-danger">Công khai</button>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            </div>
                         </div>
+
                         <div class="mmiDetail">
                             <div class="iStatus">
                                 <div class="iTitle">
