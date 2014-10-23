@@ -1,0 +1,164 @@
+﻿@{
+    List<MS_Website.Models.JobRequestTemp> jobRequests = Model;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="../Content/TableJquery/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="../Content/TableJquery/js/jquery.dataTables.min.js"></script>
+<div class="Menu">
+    <div class="rows">
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    <li>
+                        <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = Session["AccId"], role = Session["Role"] })" class="hefaContent">Thông tin</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent">Thêm người giúp việc</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent">Đăng yêu cầu công việc</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ManageJobRequest","MaidManager")" class="hefaContent iscurent" >Quản lý</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hefaContent">Thông báo</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="hefaContent">Thống kê</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li class="iscurent">
+                <a href="@Url.Action("ManageJobRequest","MaidManager")" class="hChContent">Yêu cầu tìm việc</a>
+            </li>
+            <li class="">
+                <a href="@Url.Action("ManageRecruitment","MaidManager")" class="hChContent">Yêu cầu tìm người giúp việc</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="col-md-8">
+                <script type="text/javascript" language="javascript" class="init">
+                    $(document).ready(function() {
+                        $('#JRTable').DataTable();
+                    } );
+                </script>
+                <table id="JRTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tiêu đề yêu cầu</th>
+                    <th>Người đại diện</th>
+                    <th>Thời gian đăng</th>
+                    <th>Xử lý</th>
+                </tr>
+                </thead>
+
+                    <tbody>
+                        @{var count=0;}
+                        @foreach(var jobRequest in jobRequests)
+                        {
+                            
+                            count++;
+                            <tr>
+                                <td>
+                                    @count
+                                    <input type="hidden" value="@(jobRequest.Job.JobRequestId)" id="" />
+                                </td>
+                                
+                                <td>
+                                    <a href="@Url.Action("GetJobRequest", "Post", new { jobId = jobRequest.Job.JobRequestId })">@jobRequest.Job.Title</a>
+                                </td>
+                                <td>
+                                    @{
+                                        int? managerId=0;
+                                        string roles = "";
+                                        if(jobRequest.Job.MaidMediatorId!=null)
+                                        {
+                                            managerId = jobRequest.Job.MaidMediatorId;
+                                            roles = "MaidMediator";
+                                        }
+                                        else if (jobRequest.Job.StaffId!=null)
+                                        {
+                                            managerId = jobRequest.Job.StaffId;
+                                            roles = "Staff";
+                                        }
+                                    }
+                                    <a href="@Url.Action("GetMaidManager","MaidManager", new {accId=managerId,role=roles})">@jobRequest.Account.FullName</a>
+                                </td>
+                                <td>@jobRequest.Job.PostTime</td>
+                                <td>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@jobRequest.Job.JobRequestId)">Kích hoạt</button>
+                                </td>
+                            </tr>
+                        }
+                        
+                    </tbody>
+                </table>
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="myLargeModalLabel">Xác nhận kích hoạt</h4>
+                            </div>
+                            <div class="modal-body">
+                               Bạn thực sự đã nhận tiền từ người đại diện cho người giúp việc?
+                            </div>
+                            <div class="modal-footer">
+                                @using (Html.BeginForm("MarkActive","MaidManager",FormMethod.Get))
+                                {
+                                    <input type="hidden" name="jobRequestId" id="jrId2" />
+                                    <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
+                                }
+                                
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rightInfo">
+                    <ul class="riDetail">
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Tham gia
+                            </div>
+                            <div class="rideroContent">
+                                <strong>
+                                    30/08/2014
+                                </strong>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" language="javascript">
+          /*  $("#btnActive").click(function (jobRequestId)
+            {
+               document.getElementById('jrId2').setAttribute("value",jobRequestId);
+            })*/
+
+            function btnActive(jobRequestId) {
+                document.getElementById('jrId2').setAttribute("value", jobRequestId);
+            }
+        </script>
+
+    </div>
+</div>
+
+
