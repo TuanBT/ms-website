@@ -125,7 +125,7 @@ namespace MS_Website.Controllers
                         {
                             if (recruitment.Status.Equals("Waiting") || recruitment.Status.Equals("Expired"))
                             {
-                                ViewBag.Remove = "true";
+                                ViewBag.Manage = "true";
                             }
                         }
                     }
