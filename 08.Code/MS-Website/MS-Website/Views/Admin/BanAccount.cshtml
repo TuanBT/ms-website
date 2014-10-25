@@ -2,16 +2,21 @@
     List<MS_Website.Models.Account> accounts = Model;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <link rel="stylesheet" type="text/css" href="../Content/TableJquery/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="../Content/TableJquery/js/jquery.dataTables.min.js"></script>
-<h2>BanAccount</h2>
-@using (Html.BeginForm())
-{   
-    <p>
-        Title: @Html.TextBox("SearchString")
-        <input type="submit" value="Filter" />
-    </p>
-}
+
+
+
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="col-md-8">
+                <script type="text/javascript" language="javascript" class="init">
+                    $(document).ready(function () {
+                        $('#JRTable').DataTable();
+                    });
+                </script>
 <table id="JRTable" class="display" cellspacing="0" width="100%">
     <thead>
         <tr>
@@ -45,7 +50,7 @@
                         
     </tbody>
 </table>
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -66,13 +71,21 @@
                         </div><!-- /.modal-content -->
                     </div>
                 </div>
- <script type="text/javascript" language="javascript">
+            </div>
+        </div>
+        <script type="text/javascript" language="javascript">
             /*  $("#btnActive").click(function (jobRequestId)
               {
                  document.getElementById('jrId2').setAttribute("value",jobRequestId);
               })*/
 
-     function btnActive(accountId) {
+            function btnActive(accountId) {
                 document.getElementById('jrId2').setAttribute("value", accountId);
             }
         </script>
+
+    </div>
+</div>
+
+
+ 
