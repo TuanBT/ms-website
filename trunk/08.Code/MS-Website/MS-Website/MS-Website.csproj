@@ -163,6 +163,7 @@
     <Compile Include="Models\Comment.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommentTemp.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
@@ -2053,6 +2054,7 @@
     <Content Include="Views\MaidManager\ManageAppliedJobRequest.cshtml" />
     <Content Include="Views\Admin\AddStaff.cshtml" />
     <Content Include="Views\Admin\BanAccount.cshtml" />
+    <Content Include="Views\Admin\ManageComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
