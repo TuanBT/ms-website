@@ -143,6 +143,7 @@ namespace MS_Website.Controllers
             }
             return View("Admin");
         }
+
         public ActionResult AddStaff(Account acc)
         {
             if (Session["AccId"]!=null && Session["IsAdmin"].Equals(true))
@@ -180,16 +181,19 @@ namespace MS_Website.Controllers
             }
             return RedirectToAction("Login", "Home");
         }
-        public ActionResult BanAccount(string searchString)
+
+        public ActionResult BanAccount()
         {
-            var db = new MSEntities();
             
             if (Session["AccId"]!=null && Session["IsAdmin"].Equals(true))
             {
-                var search = db.Accounts.Where(s => s.Username.Contains(searchString) && s.IsActive).ToList();
+
+                var db = new MSEntities();
+                var acc = db.Accounts.Where(a => a.IsActive.Equals(true)  && a.IsWebmaster.Equals(false)).ToList();
+                
 
 
-                return View("BanAccount", search);
+                return View("BanAccount", acc);
             }
             return RedirectToAction("Login", "Home");
 
