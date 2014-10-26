@@ -10,25 +10,11 @@
 <script src="../Content/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 
 <div class="Menu">
-    <div class="rows">
-        <div class="hMenu">
-            <div class="hFatherMenu">
-                <ul class="hmeTabList">
-                    <li>
-                        <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = Session["AccId"], role = Session["Role"] })" class="hefaContent iscurent">Thông tin</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hefaContent">Thống kê</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
+    @Html.Partial("_PartialMenu")
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li>
-                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = Model.MaidId })" class="hChContent">Cá nhân</a>
+                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" class="hChContent">Cá nhân</a>
             </li>
             <li class="iscurent">
                 <a class="hChContent iscurent">Sửa thông tin</a>
@@ -40,7 +26,7 @@
     <div class="rows">
         <div class="row">
             <div class="titlePage">Sửa thông tin người giúp việc</div>
-            @using (Html.BeginForm("EditMaidProfile", "MaidManager", FormMethod.Post, new {enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("EditMaidProfile", "MaidManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <input type="hidden" value="@maid.MaidId" name="maidId"/>
                 <div class="postJRRow">
@@ -102,8 +88,8 @@
                         </div>
                         <div class="col-md-8">
                             <select class="form-control" name="gender">
-                                <option value="true" selected="@((bool)maid.Gender ? "selected":"")">Nam</option>
-                                <option value="false" selected="@(!(bool)maid.Gender ? "selected":"")">Nữ</option>
+                                <option value="true" selected="@((bool)maid.Gender ? "selected" : "")">Nam</option>
+                                <option value="false" selected="@(!(bool)maid.Gender ? "selected" : "")">Nữ</option>
                             </select>
                         </div>
                     </div>
@@ -144,7 +130,7 @@
                             <select class="form-control">
                                 @foreach (var item in ViewBag.Hometown)
                                 {
-                                    <option value="@item.SkillString" @(maid.Hometown.Equals(item.SkillString) ? "selected":"")>@item.SkillString</option>
+                                    <option value="@item.SkillString" @(maid.Hometown.Equals(item.SkillString) ? "selected" : "")>@item.SkillString</option>
                                 }
                             </select>
                         </div>
@@ -159,7 +145,7 @@
                             <select class="form-control">
                                 @foreach (var item in ViewBag.Address)
                                 {
-                                    <option value="@item.SkillString" @(maid.Address.Equals(item.SkillString) ? "selected":"")>@item.SkillString</option>
+                                    <option value="@item.SkillString" @(maid.Address.Equals(item.SkillString) ? "selected" : "")>@item.SkillString</option>
                                 }
                             </select>
                         </div>
@@ -172,8 +158,8 @@
                         </div>
                         <div class="col-md-8">
                             <select class="form-control" name="married">
-                                <option value="true" selected="@((bool)maid.Married ? "selected":"")">Đã kết hôn</option>
-                                <option value="false" selected="@(!(bool)maid.Married ? "selected":"")">Chưa kết hôn</option>
+                                <option value="true" selected="@((bool)maid.Married ? "selected" : "")">Đã kết hôn</option>
+                                <option value="false" selected="@(!(bool)maid.Married ? "selected" : "")">Chưa kết hôn</option>
                             </select>
                         </div>
                     </div>

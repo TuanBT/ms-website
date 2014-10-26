@@ -2,43 +2,11 @@
 @{
     ViewBag.Title = "Đăng yêu cầu kiếm việc";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.AddJob = true;
 }
 
 <div class="Menu">
-    <div class="rows">
-        <div class="hMenu">
-            <div class="hFatherMenu">
-                <ul class="hmeTabList">
-                    <li>
-                        <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = Session["AccId"], role = Session["Role"]})" class="hefaContent">Thông tin</a>
-                    </li>
-                    @if(Session["AccId"] != null)
-                    {
-                        if(Session["Role"].Equals("MaidMediator") || Session["Role"].Equals("Staff"))
-                        {
-                            <li>
-                                <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent">Thêm người giúp viêc</a>
-                            </li>
-                            <li>
-                                <a class="hefaContent iscurent">Đăng yêu cầu công việc</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("ManageJobRequest", "MaidManager")" class="hefaContent">Quản lý</a>
-                            </li>    
-                            <li>
-                                <a href="#" class="hefaContent">Thông báo</a>
-                            </li>
-                        }
-                    }
-                    <li>
-                        <a href="#" class="hefaContent">Thống kê</a>
-                    </li>
-                   
-                </ul>
-            </div>
-        </div>
-
-    </div>
+    @Html.Partial("_PartialMenu")
 </div>
 
 

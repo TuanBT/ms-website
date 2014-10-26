@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Thêm người giúp việc";
+    ViewBag.AddMaid = true;
 }
 
 <link href="../Content/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
@@ -9,43 +10,7 @@
 <script src="../Content/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 
 <div class="Menu">
-    @if(Session["AccId"] != null)
-    {
-        <div class="rows">
-            <div class="hMenu">
-                <div class="hFatherMenu">
-                    <ul class="hmeTabList">
-                        <li>
-                            <a href="@Url.Action("GetMaidManager", "MaidManager", new {accId = Session["AccId"], role = Session["Role"]})" class="hefaContent">Thông tin</a>
-                        </li>
-                        @if(Session["Role"].Equals("MaidMediator"))
-                        {
-                            <li>
-                                <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent iscurent">Thêm người giúp việc</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent">Đăng yêu cầu công việc</a>
-                            </li>
-                        }
-                        @if(Session["Role"].Equals("Staff"))
-                        {
-                            <li>
-                                <a href="@Url.Action("ManageJobRequest", "MaidManager")" class="hefaContent">Quản lý</a>
-                            </li>
-                        }
-                        <li>
-                            <a href="#" class="hefaContent">Thông báo</a>
-                        </li>
-                        <li>
-                            <a href="#" class="hefaContent">Thống kê</a>
-                        </li>
-                    
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    }
+    @Html.Partial("_PartialMenu")
 </div>
 <div class="body">
     <div class="rows">
