@@ -5,30 +5,11 @@
 <link href="../Content/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
 <script src="../Content/bootstrap-fileinput/js/fileinput.min.js" type="text/javascript"></script>
 <div class="Menu">
-    <div class="rows">
-        <div class="hMenu">
-            <div class="hFatherMenu">
-                <ul class="hmeTabList">
-                    <li>
-                        <a href="@Url.Action("GetCustomer", "Customer", new { custId = account.AccountId })" class="hefaContent iscurent">Thông tin</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("PostRecruitment", "Customer")" class="hefaContent">Đăng yêu cầu tuyển việc</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hefaContent">Thông báo</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hefaContent">Thống kê</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_PartialMenu")
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li>
-                <a href="@Url.Action("Index", "Customer")" class="hChContent">Cá nhân</a>
+                <a href="@Url.Action("GetCustomer", "Customer", new { custId = account.AccountId})" class="hChContent">Cá nhân</a>
             </li>
             <li class="iscurent">
                 <a class="hChContent">Sửa thông tin</a>

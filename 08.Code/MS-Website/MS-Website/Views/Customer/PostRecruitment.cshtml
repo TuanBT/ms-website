@@ -1,35 +1,57 @@
 ﻿@{
     ViewBag.Title = "Đăng yêu cầu tuyển viêc";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.AddRecruit = true;
 }
 
 <div class="Menu">
-    <div class="rows">
-        <div class="hMenu">
-            <div class="hFatherMenu">
-                <ul class="hmeTabList">
-                    <li>
-                        <a href="@Url.Action("GetCustomer", "Customer", new { custId = (int) Session["AccId"]})" class="hefaContent">Thông tin</a>
-                    </li>
-                    @if(Session["AccId"] != null)
-                    {
-                        if(Session["Role"].Equals("Customer"))
+    @if (Session["AccId"] != null)
+    {
+        <div class="rows">
+            <div class="hMenu">
+                <div class="hFatherMenu">
+                    <ul class="hmeTabList">
+                        <li>
+                            <a class="hefaContent">Thông tin</a>
+                        </li>
+                        @if (Session["Role"].Equals("MaidMediator") || Session["Role"].Equals("Staff"))
                         {
                             <li>
-                                <a class="hefaContent iscurent">Đăng yêu cầu tuyển việc</a>
+                                <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent">Thêm người giúp viêc</a>
                             </li>
                             <li>
-                                <a href="#" class="hefaContent">Thông báo</a>
+                                <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent iscurent">Đăng yêu cầu công việc</a>
                             </li>
                         }
-                    }
-                    <li>
-                        <a href="#" class="hefaContent">Thống kê</a>
-                    </li>
-                </ul>
+                        @if (Session["Role"].Equals("Customer"))
+                        {
+                            <li>
+                                <a href="@Url.Action("PostRecruitment", "Customer")" class="hefaContent">Đăng yêu cầu tuyển việc</a>
+                            </li>
+                        }
+                        @if (Session["Role"].Equals("Staff"))
+                        {
+                            <li>
+                                <a href="@Url.Action("ManageJobRequest", "MaidManager")" class="hefaContent">Quản lý</a>
+                            </li>
+                        }
+                        <li>
+                            <a href="#" class="hefaContent">Thông báo</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hefaContent">Thống kê</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-
+    }
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li class="iscurent">
+                <a class="hChContent">Đăng mới</a>
+            </li>
+        </ul>
     </div>
 </div>
 
