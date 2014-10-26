@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Sửa thông tin người giúp việc";
     MS_Website.Models.Maid maid = Model;
+    ViewBag.Info = true;
 }
 
 <link href="../Content/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
@@ -88,8 +89,8 @@
                         </div>
                         <div class="col-md-8">
                             <select class="form-control" name="gender">
-                                <option value="true" selected="@((bool)maid.Gender ? "selected" : "")">Nam</option>
-                                <option value="false" selected="@(!(bool)maid.Gender ? "selected" : "")">Nữ</option>
+                                <option value="true" selected="@(maid.Gender != null && (bool)maid.Gender ? "selected" : "")">Nam</option>
+                                <option value="false" selected="@(maid.Gender != null && !(bool)maid.Gender ? "selected" : "")">Nữ</option>
                             </select>
                         </div>
                     </div>
@@ -102,19 +103,19 @@
                         <div class="col-md-8">
                             <div class="checkbox">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" value="english" @((bool)maid.English ? "checked" : "")>
+                                    <input type="checkbox" value="english" @(maid.English != null && (bool)maid.English ? "checked" : "")>
                                     Tiếng Anh
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" value="korean" @((bool)maid.Korean ? "checked" : "")>
+                                    <input type="checkbox" value="korean" @(maid.Korean != null && (bool)maid.Korean ? "checked" : "")>
                                     Tiếng Hàn
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" value="jap" @((bool)maid.Japanese ? "checked" : "")>
+                                    <input type="checkbox" value="jap" @(maid.Japanese != null && (bool)maid.Japanese ? "checked" : "")>
                                     Tiếng Nhật
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" value="chinese" @((bool)maid.Chinese ? "checked" : "")>
+                                    <input type="checkbox" value="chinese" @(maid.Chinese != null && (bool)maid.Chinese ? "checked" : "")>
                                     Tiếng Trung
                                 </label>
                             </div>
@@ -130,7 +131,7 @@
                             <select class="form-control">
                                 @foreach (var item in ViewBag.Hometown)
                                 {
-                                    <option value="@item.SkillString" @(maid.Hometown.Equals(item.SkillString) ? "selected" : "")>@item.SkillString</option>
+                                    <option value="@item.SkillString" @(maid.Hometown != null && maid.Hometown.Equals(item.SkillString) ? "selected" : "")>@item.SkillString</option>
                                 }
                             </select>
                         </div>
@@ -145,7 +146,7 @@
                             <select class="form-control">
                                 @foreach (var item in ViewBag.Address)
                                 {
-                                    <option value="@item.SkillString" @(maid.Address.Equals(item.SkillString) ? "selected" : "")>@item.SkillString</option>
+                                    <option value="@item.SkillString" @(maid.Address != null && maid.Address.Equals(item.SkillString) ? "selected" : "")>@item.SkillString</option>
                                 }
                             </select>
                         </div>
@@ -158,8 +159,8 @@
                         </div>
                         <div class="col-md-8">
                             <select class="form-control" name="married">
-                                <option value="true" selected="@((bool)maid.Married ? "selected" : "")">Đã kết hôn</option>
-                                <option value="false" selected="@(!(bool)maid.Married ? "selected" : "")">Chưa kết hôn</option>
+                                <option value="true" selected="@(maid.Married != null && (bool)maid.Married ? "selected" : "")">Đã kết hôn</option>
+                                <option value="false" selected="@(maid.Married != null && !(bool)maid.Married ? "selected" : "")">Chưa kết hôn</option>
                             </select>
                         </div>
                     </div>
