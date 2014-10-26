@@ -6,35 +6,15 @@
 }
 
 <div class="Menu">
-    <div class="rows">
-        <div class="hMenu">
-            <div class="hFatherMenu">
-                <ul class="hmeTabList">
-                    <li>
-                        <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = Model.MaidId })" class="hefaContent iscurent">Thông tin</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hefaContent">Thống kê</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
+    @Html.Partial("_PartialMenu")
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li class="iscurent">
-                <a class="hChContent iscurent">Cá nhân</a>
+                <a class="hChContent">Cá nhân</a>
             </li>
-            @if (Session["AccId"] != null)
-            {
-                if (maid.MaidMediatorId == (int)Session["AccId"] || maid.StaffId == (int)Session["AccId"])
-                {
-                <li>
-                    <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = Model.MaidId })" class="hChContent">Sửa thông tin</a>
-                </li>
-                }
-            }
+            <li class>
+                <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = maid.MaidId})" class="hChContent">Sửa thông tin</a>
+            </li>
         </ul>
     </div>
 </div>
@@ -479,6 +459,7 @@
         }
         if (type == 1) {
             document.getElementById("hideId").setAttribute("value", jobId);
+            document.getElementById("extendId").setAttribute("value", jobId);
             document.getElementById("button_1").setAttribute("style", "");
             document.getElementById("button_4").setAttribute("style", "display: none;");
             document.getElementById("button_5").setAttribute("style", "display: none;");
@@ -489,11 +470,11 @@
             document.getElementById("button_5").setAttribute("style", "display: none;");
         } else if (type == 5) {
             document.getElementById("publicId").setAttribute("value", jobId);
+            document.getElementById("extendId").setAttribute("value", jobId);
             document.getElementById("button_1").setAttribute("style", "display: none;");
             document.getElementById("button_4").setAttribute("style", "display: none;");
             document.getElementById("button_5").setAttribute("style", "");
-        }
-        else if (type == 0) {
+        } else if (type == 0) {
             document.getElementById("button_1").setAttribute("style", "display: none;");
             document.getElementById("button_4").setAttribute("style", "display: none;");
             document.getElementById("button_5").setAttribute("style", "display: none;");

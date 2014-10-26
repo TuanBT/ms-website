@@ -5,51 +5,8 @@
 <link rel="stylesheet" type="text/css" href="../Content/TableJquery/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="../Content/TableJquery/js/jquery.dataTables.min.js"></script>
 <div class="Menu">
-    <div class="rows">
-        <div class="hMenu">
-            <div class="hFatherMenu">
-                <ul class="hmeTabList">
-                    <li>
-                        <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = Session["AccId"], role = Session["Role"] })" class="hefaContent">Thông tin</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent">Thêm người giúp việc</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent">Đăng yêu cầu công việc</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("ManageJobRequest","MaidManager")" class="hefaContent iscurent" >Quản lý</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hefaContent">Thông báo</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="hefaContent">Thống kê</a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
-
-    </div>
-    <div class="hChildMenu">
-        <ul class="hChildMenuList">
-            <li class="iscurent">
-                <a href="@Url.Action("ManageJobRequest","MaidManager")" class="hChContent">Yêu cầu tìm việc</a>
-            </li>
-            <li class="">
-                <a href="@Url.Action("ManageRecruitment","MaidManager")" class="hChContent">Yêu cầu tìm người giúp việc</a>
-            </li>
-            <li class="">
-                <a href="@Url.Action("ManageAppliedJobRequest","MaidManager")" class="hChContent">Xác nhận yêu cầu tìm việc</a>
-            </li>
-        </ul>
-    </div>
+    @Html.Partial("_PartialMenu")
 </div>
-
-
 <div class="body">
     <div class="rows">
         <div class="row">
