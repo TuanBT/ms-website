@@ -140,7 +140,7 @@ namespace MS_Website.Controllers
                             {
                                 var jobRequest =
                                     db.JobRequests.SingleOrDefault(
-                                        j => j.SkillRefId == skillReference.SkillRefId && j.Status.Equals("Waiting"));
+                                        j => j.SkillRefId == skillReference.SkillRefId && j.Status.Equals("Waiting") && j.IsActive == true);
                                 if (jobRequest != null)
                                 {
                                     var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
