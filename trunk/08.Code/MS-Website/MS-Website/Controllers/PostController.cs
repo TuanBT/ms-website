@@ -63,9 +63,9 @@ namespace MS_Website.Controllers
                         {
                             if (job.Maid.MaidMediatorId == (int)Session["AccId"])
                             {
-                                if (job.Status.Equals("Waiting") || job.Status.Equals("Expired"))
+                                if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
                                 {
-                                    ViewBag.Remove = "true";
+                                    ViewBag.Manage = "true";
                                 }
                             }
                         }
@@ -73,9 +73,9 @@ namespace MS_Website.Controllers
                         {
                             if (job.Maid.StaffId == (int)Session["AccId"])
                             {
-                                if (job.Status.Equals("Waiting") || job.Status.Equals("Expired"))
+                                if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
                                 {
-                                    ViewBag.Remove = "true";
+                                    ViewBag.Manage = "true";
                                 }
                             }
                         }
@@ -123,7 +123,7 @@ namespace MS_Website.Controllers
                     {
                         if (recruitment.CustomerId == (int)Session["AccId"])
                         {
-                            if (recruitment.Status.Equals("Waiting") || recruitment.Status.Equals("Expired"))
+                            if (!recruitment.Status.Equals("Applied"))
                             {
                                 ViewBag.Manage = "true";
                             }
