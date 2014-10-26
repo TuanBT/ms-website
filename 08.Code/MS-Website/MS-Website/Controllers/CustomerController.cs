@@ -316,6 +316,7 @@ namespace MS_Website.Controllers
                 var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
                 var recruit = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
                 jobRequest.Status = "Applied";
+                jobRequest.ApplyTimes = DateTime.Now;
                 recruit.Status = "Applied";
                 db.SaveChanges();
                 return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
