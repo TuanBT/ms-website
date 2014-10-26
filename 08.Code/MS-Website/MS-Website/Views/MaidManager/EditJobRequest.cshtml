@@ -1,20 +1,29 @@
 ﻿@using MS_Website.Models
 @{
-    ViewBag.Title = "Đăng yêu cầu kiếm việc";
+    ViewBag.Title = "Sửa yêu cầu kiếm việc";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.AddJob = true;
+    JobRequest jobRequest = Model;
 }
 
 <div class="Menu">
     @Html.Partial("_PartialMenu")
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li>
+                <a href="@Url.Action("GetJobRequest", "Post", new { jobId = jobRequest.JobRequestId })" class="hChContent">Chi tiết yêu cầu công việc</a>
+            </li>
+            <li class="iscurent">
+                <a class="hChContent">Sửa thông tin yêu cầu công việc</a>
+            </li>
+        </ul>
+    </div>
 </div>
-
 
 <div class="body">
     <div class="rows">
         <div class="row">
-            <div class="titlePage">Đăng yêu cầu công việc</div>
-            @using (Html.BeginForm("AddRequest", "MaidManager", FormMethod.Post))
+            <div class="titlePage">Sửa yêu cầu công việc</div>
+            @using (Html.BeginForm("EditJobRequest", "MaidManager", new { jobId = jobRequest.JobRequestId }))
             {
                 <div class="postJRRow">
                     <div class="row">
@@ -30,11 +39,11 @@
                                 </div>
                                 <div>
                                     <div class="liImage">
-                                        <img id="maidImg" src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
+                                        <img id="maidImg" src="@jobRequest.Maid.PersonalImage" alt="Maid sercive" height="100%">
                                     </div>
                                     <div class="liMaidContent">
                                         <div class="licoFullName">
-                                            <a href="#" id="maidName">Tên người giúp việc</a>
+                                            <a href="#" id="maidName">@jobRequest.Maid.MaidName</a>
                                         </div>
                                         <div class="licoRate">
                                             <span class="glyphicon glyphicon-star"></span>
@@ -108,7 +117,7 @@
                             Tiêu đề 
                         </div>
                         <div class="col-md-8">
-                            <input class="form-control input-lg text" maxlength="1000" name="title" type="text" value="">
+                            <input class="form-control input-lg text" maxlength="1000" name="title" type="text" value="@jobRequest.Title">
                         </div>
                     </div>
                 </div>
@@ -126,6 +135,17 @@
                                         </button>
                                     </div>
                                     <ul id="chosenSkills">
+                                        @{
+                                    var counter = 0;
+                                        }
+                                        @foreach (var skillStr in ViewBag.SkillStrList)
+                                        {
+                                            <li id="@counter" class="childSkill">
+                                                <span class="skillText">@skillStr<span class="glyphicon glyphicon-remove" onclick="removeSkill(@counter)"></span>
+                                                </span>
+                                            </li>
+                                            counter++;
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -156,7 +176,7 @@
                                                         <option value="null">--</option>
                                                         @foreach (var item in ViewBag.StayList)
                                                         {
-                                                            <option value="@item.SkillString">@item.SkillString</option>
+                                                            <option value="@item.SkillString" @(ViewBag.StayValue != null && ViewBag.StayValue == item.SkillString ? "selected" : "")>@item.SkillString</option>
                                                         }
                                                     </select>
                                                 </div>
@@ -170,7 +190,7 @@
                                                         <option value="null">--</option>
                                                         @foreach (var item in ViewBag.SalaryList)
                                                         {
-                                                            <option value="@item.SkillString">@item.SkillString</option>
+                                                            <option value="@item.SkillString" @(ViewBag.SalaryValue != null && ViewBag.SalaryValue == item.SkillString ? "selected" : "")>@item.SkillString</option>
                                                         }
                                                     </select>
                                                 </div>
@@ -184,7 +204,7 @@
                                                         <option value="null">--</option>
                                                         @foreach (var item in ViewBag.WorkList)
                                                         {
-                                                            <option value="@item.SkillString">@item.SkillString</option>
+                                                            <option value="@item.SkillString" @(ViewBag.WorkValue != null && ViewBag.WorkValue == item.SkillString ? "selected" : "")>@item.SkillString</option>
                                                         }
                                                     </select>
                                                 </div>
@@ -196,19 +216,76 @@
                                             Chọn các công việc muốn làm
                                         </div>
                                         <div class="moskCategoryContent">
-                                            @foreach (var item in ViewBag.SkillList)
-                                            {
-                                                <div class="moskSkill">
-                                                    <div class="moskSkillName">
-                                                        <div class="checkbox">
-                                                            <label>
-                                                                <input class="skill" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName"/>
-                                                                @item.SkillNameVietnam
-                                                            </label>
-                                                        </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input class="skill" type="checkbox" value="Chăm sóc người bệnh" name="SickCare" @(ViewBag.SickCareValue != null ? "checked" : "")/>
+                                                            Chăm sóc người bệnh
+                                                        </label>
                                                     </div>
                                                 </div>
-                                            }
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input class="skill" type="checkbox" value="Chăm sóc người già" name="OldCare" @(ViewBag.OldCareValue != null ? "checked" : "")/>
+                                                            Chăm sóc người già
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input class="skill" type="checkbox" value="Chăm sóc người khuyết tật" name="DisabilityCare" @(ViewBag.DisabilityCareValue != null ? "checked" : "")/>
+                                                            Chăm sóc người khuyết tật
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input class="skill" type="checkbox" value="Chăm sóc cây cảnh" name="BonsaiCare" @(ViewBag.BonsaiCareValue != null ? "checked" : "")/>
+                                                            Chăm sóc cây cảnh
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input class="skill" type="checkbox" value="Biết nấu ăn" name="Cooking" @(ViewBag.CookingValue != null ? "checked" : "")/>
+                                                            Biết nấu ăn
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input class="skill" type="checkbox" value="Biết giặt giũ" name="Washing" @(ViewBag.WashingValue != null ? "checked" : "")/>
+                                                            Biết giặt giũ
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input class="skill" type="checkbox" value="Biết dọn nhà" name="CleanHouse" @(ViewBag.CleanHouseValue != null ? "checked" : "")/>
+                                                            Biết dọn nhà
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -219,30 +296,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="postJRRow">
-                    <div class="row">
-                        <div class="col-md-4 poJRTtitle">
-                            Thời hạn đăng
-                        </div>
-                        <div class="col-md-8">
-                            <select id="time" class="form-control" name="time">
-                                <option value="1">1 tuần</option>
-                                <option value="2">2 tuần</option>
-                                <option value="3">3 tuần</option>
-                                <option value="4">4 tuần</option>
-                                <option value="5">5 tuần</option>
-                            </select>
-                            <span class="postJRTimeTotal">Tổng <span>1</span> * <span
-                                class="postJRTimePrice">25.000</span> = <span class="postJRTimePriceTotal">25.000</span> đồng</span>
-                            <span class="postJRTimeDetail">Đơn giá hiện tại <span
-                                class="postJRTimePrice">25.000</span> đồng/Tuần</span>
-                        </div>
-                    </div>
-                </div>                
+                </div>             
                 <div>
-                    <input id="chosenMaid" type="hidden" name="maidId" />
-                    <button class="btn btn-success btn-lg">Đăng yêu cầu</button>
+                    <input id="chosenMaid" type="hidden" name="maidId" value="@jobRequest.MaidId" />
+                    <button class="btn btn-success btn-lg">Sửa yêu cầu</button>
                 </div>
             }
         </div>
@@ -285,7 +342,7 @@
             }
         }
         for (var i = 0; i < chosenList.length; i++) {
-            chosenSkills += "<li class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
+            chosenSkills += "<li id='" + i + "' class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
         }
         document.getElementById("chosenSkills").innerHTML = chosenSkills;
     }

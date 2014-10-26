@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     MS_Website.Models.Maid maid = Model;
     var MaidManager = (MS_Website.Models.MaidManager)ViewBag.MaidManager;
+    ViewBag.Info = true;
 }
 
 <div class="Menu">
@@ -479,10 +480,6 @@
             document.getElementById("button_4").setAttribute("style", "display: none;");
             document.getElementById("button_5").setAttribute("style", "display: none;");
         }
-    }
-
-    function removeJob() {
-        document.forms["RemoveJobForm"].submit();
     }
 
     function extendRecruit() {
