@@ -16,9 +16,12 @@
             {
                 if (RecruitmentTemp.Recruitment.CustomerId == (int)Session["AccId"])
                 {
-                <li>
-                    <a href="#" class="hChContent">Sửa thông tin tìm người giúp việc</a>
-                </li>
+                    if (ViewBag.Manage == "true")
+                    {
+                        <li>
+                            <a href="@Url.Action("RecruitmentEdit","Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId})" class="hChContent">Sửa thông tin tuyển người giúp việc</a>
+                        </li>
+                    }
                 }
             }
         </ul>
@@ -32,25 +35,26 @@
                     <div class="mainInfo">
                         <div class="miPic">
                             <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
-                                @if (ViewBag.Manage == "true")
-                                {
-                                    <div class="miButton">
-                                        @if (RecruitmentTemp.Recruitment.Status.Equals("Waiting"))
+                            @if (ViewBag.Manage == "true")
+                            {
+                                <div class="miButton">
+                                    @if (RecruitmentTemp.Recruitment.Status.Equals("Waiting"))
+                                    {
+                                        using (Html.BeginForm("HideRecruitment", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
                                         {
-                                            using (Html.BeginForm("HideRecruitment", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
-                                            {
                                             <button class="btn btn-danger">Tạm ẩn</button>
-                                            }
                                         }
-                                        else if (RecruitmentTemp.Recruitment.Status.Equals("Hide"))
+                                    }
+                                    else if (RecruitmentTemp.Recruitment.Status.Equals("Hide"))
+                                    {
+                                        using (Html.BeginForm("PublicRecruitment", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
                                         {
-                                            using (Html.BeginForm("PublicRecruitment", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
-                                            {
                                             <button class="btn btn-danger">Công khai</button>
-                                            }
                                         }
-                                    </div>
-                                }
+                                    }
+                                    <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                </div>
+                            }
                         </div>
 
                         <div class="mmiDetail">
@@ -68,7 +72,7 @@
                                 <span class="label label-success">Đã tuyển</span>
                                 <span class="label label-danger">Hết hạn</span>*@
                                 @{string color = "default";
-                                  string status = "";
+                                    string status = "";
                                 }
                                 @if (Model.Recruitment.Status == "Waiting")
                                 {
@@ -145,7 +149,7 @@
                             <input id="currPos" type="hidden" value="1" />
                             <ul class="listSuggestCus">
                                 @{
-                        var counter = 0;
+                                    var counter = 0;
                                 }
                                 @foreach (var job in Recommend)
                                 {
@@ -215,6 +219,39 @@
         </div>
     </div>
 </div>
+<div class="modal fade extendModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header chooseMaidModalTitle">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">Gia hạn đơn tuyển việc</h4>
+            </div>
+            @using (Html.BeginForm("ExtendRecruitment", "Customer", FormMethod.Get, new { name = "ExtendForm" }))
+            {
+                <input id="extendId" type="hidden" name="recruitId" value="@RecruitmentTemp.Recruitment.RecruitmentId" />
+                <div class="modal-body chooseMaidModalMaid">
+                    <span>Thời gian gia hạn</span>
+                    <select class="form-control" name="extend">
+                        <option value="1">1 tuần</option>
+                        <option value="2">2 tuần</option>
+                        <option value="3">3 tuần</option>
+                        <option value="4">4 tuần</option>
+                        <option value="5">5 tuần</option>
+                    </select>
+                    <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" onclick="paypal()">Nạp thêm tiền qua Paypal</button>
+                    <div id="extend" style="display: none;">
+                        <button class="btn btn-primary" data-dismiss="modal" onclick="extendRecruit()" style="margin-left: 75px; margin-top: 5px; margin-bottom: 10px;">Đồng ý</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 <script>
     function loadNext() {
         var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
@@ -257,5 +294,14 @@
             }
             document.getElementById("currPos").setAttribute("value", currPos - 2);
         }
+    }
+    
+    function extendRecruit() {
+        document.forms["ExtendForm"].submit();
+    }
+    
+    function paypal() {
+        document.getElementById("extend").setAttribute("style", "");
+        document.getElementById("result").setAttribute("style", "");
     }
 </script>

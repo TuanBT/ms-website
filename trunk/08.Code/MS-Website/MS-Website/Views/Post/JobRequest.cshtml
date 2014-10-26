@@ -16,7 +16,7 @@
                 if (JobRequestTemp.Maid.MaidMediatorId == (int)Session["AccId"] || JobRequestTemp.Maid.StaffId == (int)Session["AccId"])
                 {
                 <li>
-                    <a href="#" class="hChContent">Sửa thông tin yêu cầu công việc</a>
+                    <a href="@Url.Action("JobRequestEdit","MaidManager", new {jobId = JobRequestTemp.Job.JobRequestId})" class="hChContent">Sửa thông tin yêu cầu công việc</a>
                 </li>
                 }
             }
@@ -31,26 +31,30 @@
                     <div class="mainInfo">
                         <div class="miPic">
                             <img src="../Content/Image/jr.png" alt="Maid sercive" width="100%">
-                                @if (ViewBag.Manage == "true")
-                                {
-                                    <div class="miButton">
-                                        @if (JobRequestTemp.Job.Status.Equals("Waiting"))
+                            @if (ViewBag.Manage == "true")
+                            {
+                                <div class="miButton">
+                                    @if (JobRequestTemp.Job.Status.Equals("Waiting"))
+                                    {
+                                        using (Html.BeginForm("HideJobRequest", "MaidManager", new { jobId = JobRequestTemp.Job.JobRequestId }))
                                         {
-                                            using (Html.BeginForm("HideJobRequest", "MaidManager", new { recruitId = JobRequestTemp.Job.JobRequestId }))
-                                            {
-                                            <button type="button" class="btn btn-danger">Tạm ẩn</button>
-                                            }
+                                        <button class="btn btn-danger">Tạm ẩn</button>
                                         }
-                                        else
+                                    }
+                                    else if (JobRequestTemp.Job.Status.Equals("Hide"))
+                                    {
+                                        using (Html.BeginForm("PublicJobRequest", "MaidManager", new { jobId = JobRequestTemp.Job.JobRequestId }))
                                         {
-                                            using (Html.BeginForm("PublicJobRequest", "MaidManager", new { recruitId = JobRequestTemp.Job.JobRequestId }))
-                                            {
-                                            <button type="button" class="btn btn-danger">Công khai</button>
-                                            }
+                                        <button class="btn btn-danger">Công khai</button>
                                         }
-                                    </div>
-                                }
-                           
+                                    }
+                                    @if (Session["Role"].Equals("Staff"))
+                                    {
+                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                    }
+                                </div>
+                            }
+
                             <div class="miButton">
                                 @{
                                     if (ViewBag.RecruitmentList != null)
@@ -91,7 +95,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <input type="hidden" name="jobRequestId" value="@Model.Job.JobRequestId"/>
-                                                        <button class="btn btn-primary" data-dismiss="modal" onclick="chooseRecruit()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                                        <button class="btn btn-primary" data-dismiss="modal" onclick="apply()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
                                                     </div>
                                                 }
                                             </div>
@@ -192,17 +196,17 @@
                             {
                                 if ((int)Session["AccId"] == (int)ViewBag.CusId)
                                 {
-                                     <div class="overView">
-                                         <div class="ovTitle">
-                                             Bạn có thể chấm điểm cho công việc này
-                                         </div>
-                                         <div class="ovContent">
-                                             @* @{ Html.RenderAction("Rate", "Evaluate", new {id = JobRequestTemp.Job.JobRequestId}); }*@
-                                             @*ViewBag.MaidRating*@
-                                             @{ ViewBag.jrid = JobRequestTemp.Job.JobRequestId; }
-                                             @Html.Partial("_PartialRating")
-                                         </div>
-                                     </div>
+                        <div class="overView">
+                            <div class="ovTitle">
+                                Bạn có thể chấm điểm cho công việc này
+                            </div>
+                            <div class="ovContent">
+                                @* @{ Html.RenderAction("Rate", "Evaluate", new {id = JobRequestTemp.Job.JobRequestId}); }*@
+                                @*ViewBag.MaidRating*@
+                                @{ ViewBag.jrid = JobRequestTemp.Job.JobRequestId; }
+                                @Html.Partial("_PartialRating")
+                            </div>
+                        </div>
                                 }
                             }
                         }
@@ -270,9 +274,43 @@
         </div>
     </div>
 </div>
+<div class="modal fade extendModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header chooseMaidModalTitle">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="mySmallModalLabel">Gia hạn đơn tuyển việc</h4>
+            </div>
+            @using (Html.BeginForm("ExtendJobRequest", "MaidManager", FormMethod.Get, new { name = "ExtendForm" }))
+            {
+                <input id="extendId" type="hidden" name="jobId" value="@JobRequestTemp.Job.JobRequestId" />
+                <div class="modal-body chooseMaidModalMaid">
+                    <span>Thời gian gia hạn</span>
+                    <select class="form-control" name="extend">
+                        <option value="1">1 tuần</option>
+                        <option value="2">2 tuần</option>
+                        <option value="3">3 tuần</option>
+                        <option value="4">4 tuần</option>
+                        <option value="5">5 tuần</option>
+                    </select>
+                    <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal" onclick="extendRecruit()" style="margin-left: 75px; margin-top: 5px; margin-bottom: 10px;">Đồng ý</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 <script>
-    function chooseRecruit() {
+    function apply() {
         document.forms["ApplyForm"].submit();
+    }
+
+    function extendRecruit() {
+        document.forms["ExtendForm"].submit();
     }
 </script>
 
