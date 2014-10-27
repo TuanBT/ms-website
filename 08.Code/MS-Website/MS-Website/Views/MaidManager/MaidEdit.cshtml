@@ -89,6 +89,7 @@
                         </div>
                         <div class="col-md-8">
                             <select class="form-control" name="gender">
+                                <option selected="@(maid.Gender == null ? "selected" : "")">--</option>
                                 <option value="true" selected="@(maid.Gender != null && (bool)maid.Gender ? "selected" : "")">Nam</option>
                                 <option value="false" selected="@(maid.Gender != null && !(bool)maid.Gender ? "selected" : "")">Nữ</option>
                             </select>
@@ -129,6 +130,7 @@
                         </div>
                         <div class="col-md-8">
                             <select class="form-control">
+                                <option selected="@(maid.Hometown == null ? "selected" : "")">--</option>
                                 @foreach (var item in ViewBag.Hometown)
                                 {
                                     <option value="@item.SkillString" @(maid.Hometown != null && maid.Hometown.Equals(item.SkillString) ? "selected" : "")>@item.SkillString</option>
@@ -144,6 +146,7 @@
                         </div>
                         <div class="col-md-8">
                             <select class="form-control">
+                                <option selected="@(maid.Address == null ? "selected" : "")">--</option>
                                 @foreach (var item in ViewBag.Address)
                                 {
                                     <option value="@item.SkillString" @(maid.Address != null && maid.Address.Equals(item.SkillString) ? "selected" : "")>@item.SkillString</option>
@@ -159,6 +162,7 @@
                         </div>
                         <div class="col-md-8">
                             <select class="form-control" name="married">
+                                <option selected="@(maid.Married == null ? "selected" : "")">--</option>
                                 <option value="true" selected="@(maid.Married != null && (bool)maid.Married ? "selected" : "")">Đã kết hôn</option>
                                 <option value="false" selected="@(maid.Married != null && !(bool)maid.Married ? "selected" : "")">Chưa kết hôn</option>
                             </select>
