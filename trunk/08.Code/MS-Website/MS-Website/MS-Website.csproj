@@ -2055,6 +2055,7 @@
     <Content Include="Views\Admin\AddStaff.cshtml" />
     <Content Include="Views\Admin\BanAccount.cshtml" />
     <Content Include="Views\Admin\ManageComment.cshtml" />
+    <Content Include="Views\Shared\_PartialMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

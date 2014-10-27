@@ -7,6 +7,19 @@
     <script type="text/javascript" src="../Content/TableJquery/js/jquery.dataTables.min.js"></script>
 <div class="Menu">
     @Html.Partial("_PartialMenu")
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li class="">
+                <a href="@Url.Action("ManageJobRequest","MaidManager")" class="hChContent">Yêu cầu tìm việc</a>
+            </li>
+            <li class="iscurent">
+                <a href="@Url.Action("ManageRecruitment","MaidManager")" class="hChContent">Yêu cầu tìm người giúp việc</a>
+            </li>
+            <li class="">
+                <a href="@Url.Action("ManageAppliedJobRequest","MaidManager")" class="hChContent">Xác nhận yêu cầu tìm việc</a>
+            </li>
+        </ul>
+    </div>
 </div>
 <div class="body">
     <div class="rows">
@@ -21,6 +34,7 @@
                 <thead>
                 <tr>
                     <th>STT</th>
+                    <th>Mã</th>
                     <th>Tiêu đề yêu cầu</th>
                     <th>Người đại diện</th>
                     <th>Thời gian đăng</th>
@@ -39,7 +53,7 @@
                                     @count
                                     <input type="hidden" value="@(jobRequest.Recruitment.RecruitmentId)" id="" />
                                 </td>
-                                
+                                <td>@jobRequest.Recruitment.RecruitmentId</td>
                                 <td>
                                     <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = jobRequest.Recruitment.RecruitmentId })">@jobRequest.Recruitment.Title</a>
                                 </td>
