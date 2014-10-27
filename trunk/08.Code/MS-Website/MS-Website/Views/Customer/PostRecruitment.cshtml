@@ -5,7 +5,7 @@
 }
 
 <div class="Menu">
-    @Html.Partial("_PartialMenu")
+    @* @Html.Partial("_PartialMenu")*@
 </div>
 
 <div class="body">
@@ -111,6 +111,11 @@
             </div>*@
             @using (Html.BeginForm("AddRecruitment", "Customer", FormMethod.Post))
             {
+                <div class="postRCAlertMoney">
+                                <div class="alert alert-info" role="alert">
+                                    <strong>Thông báo!</strong> Bạn cần phải thanh toán qua Paypal, trước khi tin tuyển việc này được công khai.<br />
+                                         </div>
+                            </div>
                 <div class="postJRRow">
                     <div class="row">
                         <div class="col-md-4 poJRTtitle">
@@ -154,7 +159,7 @@
                                 <div class="modal-body chooseMaidModalSkill">
                                     <div class="moskCategory">
                                         <div class="moskCategoryName">
-                                           Yêu cầu về thông tin cá nhân
+                                            Yêu cầu về thông tin cá nhân
                                         </div>
                                         <div class="moskCategoryContent">
                                             <div class="moskSkill">
@@ -185,7 +190,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                             <div class="moskSkill">
+                                            <div class="moskSkill">
                                                 <div class="moskSkillName">
                                                     Kinh nghiệm
                                                 </div>
@@ -350,13 +355,7 @@
                                 class="postJRTimePrice">25.000</span> = <span class="postJRTimePriceTotal">25.000</span> đồng</span>
                             <span class="postJRTimeDetail">Đơn giá hiện tại <span
                                 class="postJRTimePrice">25.000</span> đồng/Tuần</span>
-                            <div class="postRCAlertMoney">
-                                <div class="alert alert-danger" role="alert">
-                                    <strong>Xin lỗi!</strong> Tiền trong tài khoản không đủ thanh toán.<br />
-                                    Bạn chỉ còn <strong>10.000 đồng</strong> trong tài khoản
-                                    <button type="button" class="btn btn-info">Nạp thêm tiền qua Paypal</button>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -368,6 +367,7 @@
         </div>
     </div>
 </div>
+
 <script>
     var chosenList = new Array();
     var chosenSkills = "";
