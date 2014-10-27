@@ -642,6 +642,14 @@ namespace MS_Website.Controllers
                                     i--;
                                 }
                             }
+							else
+							{
+								if (db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRefList[i].SkillRefId).PostTime > searchDate)
+                                {
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
+							}
                         }
                     }
                     else
