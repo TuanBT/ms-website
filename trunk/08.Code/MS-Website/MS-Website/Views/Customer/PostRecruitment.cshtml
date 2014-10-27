@@ -168,7 +168,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="gender" name="gender">
-                                                        <option value="null">--</option>
+                                                        <option id="gender_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Gender)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -182,7 +182,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="age" name="age">
-                                                        <option value="null">--</option>
+                                                        <option id="age_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Age)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -196,7 +196,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="exp" name="exp">
-                                                        <option value="null">--</option>
+                                                        <option id="exp_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Experience)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -210,7 +210,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="hometown" name="hometown">
-                                                        <option value="null">--</option>
+                                                        <option id="hometown_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Hometown)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -224,7 +224,7 @@
                                                     <div class="moskSkillName">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input class="language" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName">
+                                                                <input id="@item.SkillNameVietnam" class="language" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName">
                                                                 @item.SkillNameVietnam
                                                             </label>
                                                         </div>
@@ -237,7 +237,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="addr" name="addr">
-                                                        <option value="null">--</option>
+                                                        <option id="address_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Address)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -251,7 +251,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="married" name="married">
-                                                        <option value="null">--</option>
+                                                        <option id="married_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Married)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -272,7 +272,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="stay" name="stay">
-                                                        <option value="null">--</option>
+                                                        <option id="stay_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.StayList)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -286,7 +286,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="salary" name="salary">
-                                                        <option value="null">--</option>
+                                                        <option id="salary_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.SalaryList)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -300,7 +300,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="work" name="work">
-                                                        <option value="null">--</option>
+                                                        <option id="work_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.WorkList)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -321,7 +321,7 @@
                                                     <div class="moskSkillName">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input class="skill" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName"/>
+                                                                <input id="@item.SkillNameVietnam" class="skill" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName"/>
                                                                 @item.SkillNameVietnam
                                                             </label>
                                                         </div>
@@ -453,6 +453,27 @@
     }
 
     function removeSkill(skillNo) {
+        if (chosenList[skillNo].search("Giới tính") != -1) {
+            document.getElementById("gender_null").setAttribute("selected", "");
+        } else if (chosenList[skillNo].search("Tuổi") != -1) {
+            document.getElementById("age_null").setAttribute("selected", "");
+        } else if (chosenList[skillNo].search("Kinh nghiệm") != -1) {
+            document.getElementById("exp_null").setAttribute("selected", "");
+        } else if (chosenList[skillNo].search("Quê quán") != -1) {
+            document.getElementById("hometown_null").setAttribute("selected", "");
+        } else if (chosenList[skillNo].search("Địa chỉ") != -1) {
+            document.getElementById("address_null").setAttribute("selected", "");
+        } else if (chosenList[skillNo].search("Kết hôn") != -1) {
+            document.getElementById("married_null").setAttribute("selected", "");
+        } else if (chosenList[skillNo].search("Ngủ lại") != -1) {
+            document.getElementById("stay_null").setAttribute("selected", "");
+        } else if (chosenList[skillNo].search("Mức lương") != -1) {
+            document.getElementById("salary_null").setAttribute("selected", "");
+        } else if (chosenList[skillNo].search("Công việc") != -1) {
+            document.getElementById("work_null").setAttribute("selected", "");
+        } else {
+            document.getElementById(chosenList[skillNo]).checked = false;;
+        }
         if (chosenList.length > 0) {
             chosenList.splice(skillNo, 1);
             chosenSkills = "";
