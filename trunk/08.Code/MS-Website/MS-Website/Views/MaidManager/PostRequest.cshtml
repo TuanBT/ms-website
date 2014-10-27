@@ -93,7 +93,6 @@
                                             </label>
                                         </div>
                                     }
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="chooseMaid()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
@@ -153,7 +152,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="stay" name="stay">
-                                                        <option value="null">--</option>
+                                                        <option id="stay_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.StayList)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -167,7 +166,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="salary" name="salary">
-                                                        <option value="null">--</option>
+                                                        <option id="salary_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.SalaryList)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -181,7 +180,7 @@
                                                 </div>
                                                 <div class="moskSkillContent">
                                                     <select class="form-control" id="work" name="work">
-                                                        <option value="null">--</option>
+                                                        <option id="work_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.WorkList)
                                                         {
                                                             <option value="@item.SkillString">@item.SkillString</option>
@@ -202,7 +201,7 @@
                                                     <div class="moskSkillName">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input class="skill" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName"/>
+                                                                <input id="@item.SkillNameVietnam" class="skill" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName"/>
                                                                 @item.SkillNameVietnam
                                                             </label>
                                                         </div>
@@ -291,6 +290,15 @@
     }
 
     function removeSkill(skillNo) {
+        if (chosenList[skillNo].search("Ngủ lại") != -1) {
+            document.getElementById("stay_null").setAttribute("selected", "");
+        } else if (chosenList[skillNo].search("Mức lương") != -1) {
+            document.getElementById("salary_null").setAttribute("selected", "");
+        } else if (chosenList[skillNo].search("Công việc") != -1) {
+            document.getElementById("work_null").setAttribute("selected", "");
+        } else {
+            document.getElementById(chosenList[skillNo]).checked = false;;
+        }
         if (chosenList.length > 0) {
             chosenList.splice(skillNo, 1);
             chosenSkills = "";
