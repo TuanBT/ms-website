@@ -578,6 +578,7 @@ namespace MS_Website.Controllers
             var jobId = Convert.ToInt32(jrId);
             var numrate = Convert.ToDouble(rate) * 2;
             bool statusNew = false;
+            float MaidRateAvg = 0;
             using (var db = new MSEntities())
             {
                 var CustomerId = (int)Session["AccId"];
@@ -626,9 +627,11 @@ namespace MS_Website.Controllers
                     }
                     var Maid = db.Maids.FirstOrDefault(m => m.MaidId == maidId);
                     Maid.RateAvg = (int)total / count;
+                    MaidRateAvg = (int)total / count;
                     db.SaveChanges();
                 }
             }
+            //return Json("{MaidRateAvg:" + MaidRateAvg + ",numrate:" + numrate + "}", JsonRequestBehavior.AllowGet);
             return RedirectToAction("GetJobRequest", new { jobId = jobId });
         }
 
@@ -658,6 +661,21 @@ namespace MS_Website.Controllers
             comment.CommentContent += "&&&"+comment.PostTime.ToString("dd/M/yyyy");
             return Json(Json(comment), JsonRequestBehavior.AllowGet);
             //return RedirectToAction("GetJobRequest", new { jobId = jobId });
+        }
+
+        public ActionResult ReturnPaypal(int recruitmentId)
+        {
+           //Status Payment
+               using (var db = new MSEntities())
+               {
+                   var recruitment = db.Recruitments.FirstOrDefault(r=>r.RecruitmentId==recruitmentId);
+                   if (recruitment != null)
+                   {
+                       recruitment.Status = "Waiting";
+                       db.SaveChanges();
+                   }
+                   return RedirectToAction("GetRecruitment", "Post", new {recruitmentId = recruitmentId});
+               }
         }
     }
 }
