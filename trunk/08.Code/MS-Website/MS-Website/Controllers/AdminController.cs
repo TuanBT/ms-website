@@ -165,7 +165,7 @@ namespace MS_Website.Controllers
             return View("Admin");
         }
 
-        public ActionResult AddStaff(Account acc)
+        public ActionResult AddStaff(Account acc, string account)
         {
             if (Session["AccId"] != null && Session["IsAdmin"].Equals(true))
             {
@@ -191,7 +191,7 @@ namespace MS_Website.Controllers
                         var newStaffs = new Staff {AccountId = addedAcc.AccountId};
                         db.Staffs.Add(newStaffs);
                         db.SaveChanges();
-                        return RedirectToAction("Login", "Home", acc);
+                        return RedirectToAction("BanAccount", "Admin", acc);
 
                     }
                     catch (Exception)
