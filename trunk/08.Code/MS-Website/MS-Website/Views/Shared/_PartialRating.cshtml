@@ -5,21 +5,22 @@
     var rate = (int)ViewBag.jrRate;
     float numrate = (float) rate/2;
 }
-<input type="hidden" value="" id="MaidRate"/>
     @using (Html.BeginForm("RatingJobRequest", "Post", FormMethod.Post))
     {
         <input id="input-23" value="@numrate" name="rate" class="rating" id="jobrequestRate"/>
     <input value="@((int)ViewBag.jrid)" name="jrId" type="hidden" id="jrIdRate"/>
-    <button type="submit" class="btn btn-primary">Chấm điểm</button>
+    <button type="submit" class="btn btn-primary" onclick="">Chấm điểm</button>
     }
-
 <script type="text/jscript">
-    function PostComment(){
+    function Rating() {
         var url = "/Post/RatingJobRequest";
         var rate = $('#jobrequestRate').val();
         var jrId = $('#jrIdRate').val();
         $.post(url, { jrId: jrId, rate: rate }, function (data) {
-
+            var obj = eval('(' + data + ')');
+            obj.MaidRateAvg;
+            var numrate = (obj.numrate*10)+"%";
+            //$(".rating-stars").css({width: numrate });
         });
     }
 </script>
