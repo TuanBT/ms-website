@@ -672,6 +672,7 @@ namespace MS_Website.Controllers
                    if (recruitment != null)
                    {
                        recruitment.Status = "Waiting";
+                       recruitment.IsActive = true;
                        db.SaveChanges();
                    }
                    return RedirectToAction("GetRecruitment", "Post", new {recruitmentId});
