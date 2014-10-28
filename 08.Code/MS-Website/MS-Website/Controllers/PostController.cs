@@ -674,7 +674,7 @@ namespace MS_Website.Controllers
                        recruitment.Status = "Waiting";
                        db.SaveChanges();
                    }
-                   return RedirectToAction("GetRecruitment", "Post", new {recruitmentId = recruitmentId});
+                   return RedirectToAction("GetRecruitment", "Post", new {recruitmentId});
                }
         }
     }
