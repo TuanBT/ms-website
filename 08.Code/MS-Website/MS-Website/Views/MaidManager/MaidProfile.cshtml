@@ -58,6 +58,7 @@
                             @if (ViewBag.Manage == "true")
                             {
                                 <li class><a href="#hide" role="tab" data-toggle="tab">Không công khai</a></li>
+                                <li class><a href="#notActive" role="tab" data-toggle="tab">Chưa kích hoạt</a></li>
                             }
                         </ul>
 
@@ -291,6 +292,58 @@
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
+                                                                                               class="blTimeText">@job.Job.PostTime</span>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Tới: </span><span
+                                                                                              class="blTimeText">@job.Job.ExpiredTime</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="blFooter">
+                                    <div class="blfNumber">
+                                        <ul class="pagination pagination-sm">
+                                            <li><a href="#">&laquo;</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                    @if (ViewBag.Manage == "true")
+                                    {
+                                        using (Html.BeginForm("PublicJobRequest", "MaidManager"))
+                                        {
+                                            <input id="publicId" type="hidden" name="jobId" />
+                                            <div id="button_5" style="display: none;" class="blfbutton">
+                                                <button type="submit" class="btn btn-danger">Công khai</button>
+                                                @if (Session["Role"].Equals("Staff"))
+                                                {
+                                                    <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                                }
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="tab-pane fade bExprred" id="notActive">
+                                <ul class="bexpiredListWork">
+                                    @foreach (var job in ViewBag.NotActiveList)
+                                    {
+                                        <li id="@job.Job.JobRequestId" onclick="chooseJob(@job.Job.JobRequestId, 0)">
+                                            <div class="blImage">
+                                                <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
+                                            </div>
+                                            <div class="blDetail">
+                                                <div class="blName">
+                                                    <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Đăng: </span><span
                                                         class="blTimeText">@job.Job.PostTime</span>
                                                 </div>
                                                 <div class="blTime">
@@ -313,20 +366,6 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
-                                    @if (ViewBag.Manage == "true")
-                                    {
-                                        using (Html.BeginForm("PublicJobRequest", "MaidManager"))
-                                        {
-                                        <input id="publicId" type="hidden" name="jobId" />
-                                        <div id="button_5" style="display: none;" class="blfbutton">
-                                            <button type="submit" class="btn btn-danger">Công khai</button>
-                                            @if (Session["Role"].Equals("Staff"))
-                                            {
-                                                <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                            }
-                                        </div>
-                                        }
-                                    }
                                 </div>
                             </div>
                         </div>
