@@ -211,6 +211,10 @@ namespace MS_Website.Controllers
                 {
                     return RedirectToAction("GetMaidManager", "MaidManager", new { accId = (int)Session["AccId"], role = Session["Role"] });
                 }
+                if (Session["Role"].Equals("Admin"))
+                {
+                    return RedirectToAction("BanAccount", "Admin", new { accId = (int)Session["AccId"], role = Session["Role"] });
+                }
             }
             return View("Login");
         }
