@@ -12,6 +12,8 @@
     <link href="~/Content/Style/Signup/create-account.css" rel="stylesheet" type="text/css">
     <link href="~/Content/Style/Signup/globals.css" rel="stylesheet" type="text/css">
     <link href="~/Content/Style/Signup/signup.css" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.js"></script>
 </head>
 <body>
     <div id="main" role="main" class="oPageCentered oContentContainer">
@@ -32,16 +34,16 @@
                         </div>
                     </div>
                 </div>
-                @using (Html.BeginForm("AddAccount", "Home", FormMethod.Post, new { @class = "oSignupForm", @name = "registerForm" }))
+                @using (Html.BeginForm("AddAccount", "Home", FormMethod.Post, new { @class = "oSignupForm", @name = "registerForm", @id="registerForm" ,@action="", @novalidate="novalidate"}))
                 {
                     <div class="oSignupHelp "></div>
                     <div class="oSignupFields">
                         <article class="oSignupHelp oSignupHelpContractor "></article>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m => m.FullName, new { @class = "oInputText oFormMed", @id = "txtFullName", @placeholder = "Họ và tên" })
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "oInputText oFormMed", @id = "txtFullName", @placeholder = "Họ và tên"})
                         </div>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "oInputText oFormMed", @placeholder = "Email", @id = "txtEmail" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "oInputText oFormMed", @placeholder = "Email", @id = "txtEmail",@name="email" })
                             <div id="emailError"></div>
                         </div>
                         <div class="oFormField">
@@ -54,12 +56,12 @@
                             </select>
                         </div>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m => m.Username, new { @class = "oInputText oFormMed", @placeholder = "Tên đăng nhập", @id = "txtUsername" })
+                            @Html.TextBoxFor(m => m.Username, new { @class = "oInputText oFormMed", @placeholder = "Tên đăng nhập", @id = "txtUsername",@name="username" })
                             <div id="usernameBlank"></div>
                         </div>
 
                         <div class="oFormField">
-                            @Html.PasswordFor(m => m.Password, new { @class = "oInputText oFormMed", @placeholder = "Mật khẩu", @id = "txtPassword" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "oInputText oFormMed", @placeholder = "Mật khẩu", @id = "txtPassword",@name="password" })
                             <div id="passwordBlank"></div>
 
                         </div>
@@ -79,25 +81,51 @@
     </div>
     <script type="text/javascript" language="javascript">
 
-        $("#btnSubmit").click(function validateEmail() {
-
-            var re = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            var errText = "";
-            if ($("#txtUsername").val() == "") {
-                errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
-                document.getElementById("usernameBlank").innerHTML = errText;
-                return false;
-            }
-            if ($("#txtPassword").val() == "") {
-                errText = "<font color='red'>Vui lòng nhập mật khẩu</font>";
-                document.getElementById("passwordBlank").innerHTML = errText;
-                return false;
-            }
+       $("#btnSubmit").click(function validateEmail() {
+             var errText = "";
+             if ($("#txtUsername").val() == "") {
+                 errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
+                 document.getElementById("usernameBlank").innerHTML = errText;
+                 return false;
+             }
+             if ($("#txtPassword").val() == "") {
+                 errText = "<font color='red'>Vui lòng nhập mật khẩu</font>";
+                 document.getElementById("passwordBlank").innerHTML = errText;
+                 return false;
+             }
+             return true;
+                 });
+            /*$.validator.setDefaults({
+                submitHandler: function () {
+                    alert("submitted!");
+                }
+            });
+            $().ready(function() {
+                $("#registerForm").validate({
+                    rules: {
+                        username: {required:true},
+                        password: {required:true},
+                        email: {
+                            required: true,
+                            email:true
+                        }
+                    },
+                    messages:{
+                        username: {
+                            required: "Please enter a username",
+                        },
+                        password: {
+                            required: "Please provide a password",
+                        },
+                        email: "Please enter a valid email address"
+                    }
+                });
+            });*/
             /* if (!re.test(email)) {
                 document.getElementById("emailError").innerHTML = "Email không hợp lệ";
                 return false;
             }*/
-        });
+    
     </script>
     <script>
         function uploadAva() { //calls the function named uploadAva()
