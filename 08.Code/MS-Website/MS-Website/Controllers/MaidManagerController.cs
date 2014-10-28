@@ -531,6 +531,7 @@ namespace MS_Website.Controllers
                 skillRef.LanguageKorean = null;
                 skillRef.Experience = null;
                 skillRef.Hometown = null;
+                skillRef.Address = null;
                 skillRef.Married = null;
                 List<string> skillList = new List<string>();
                 PostController.LoadSkillList(skillRef, skillList, db);
