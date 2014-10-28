@@ -58,7 +58,7 @@ namespace MS_Website.Controllers
                     ViewBag.NotActiveList =
                        notActiveList.Select(
                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                    if ((int) Session["AccId"] == custId)
+                    if ((int)Session["AccId"] == custId)
                     {
                         ViewBag.Manage = "true";
                     }
@@ -565,6 +565,12 @@ namespace MS_Website.Controllers
                 jobRequest.ApplyTimes = DateTime.Now;
                 recruit.Status = "Applied";
                 db.SaveChanges();
+                var function = new Function();
+                function.SentMessage(
+                    jobRequest.Maid.Phone ?? "",
+                    jobRequest.Staff != null ? jobRequest.Staff.Account.Phone : "",
+                    jobRequest.MaidMediator != null ? jobRequest.MaidMediator.Account.Phone : "",
+                    recruit.Customer.Account.Phone ?? "");
                 return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
             }
         }
