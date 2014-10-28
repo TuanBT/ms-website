@@ -765,7 +765,7 @@ namespace MS_Website.Controllers
                 List<RecruitmentTemp> recruitmentTemps = new List<RecruitmentTemp>();
                 using (var db = new MSEntities())
                 {
-                    var recruiments = db.Recruitments.Where(j => j.Status == "NotActive").ToList();
+                    var recruiments = db.Recruitments.Where(j => j.IsActive==false).ToList();
                     foreach (var recruitment in recruiments)
                     {
 
@@ -803,7 +803,7 @@ namespace MS_Website.Controllers
                 {
 
                     var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
-                    recruitment.Status = "Waiting";
+                    recruitment.IsActive=true;
                     db.SaveChanges();
                     //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
                     return RedirectToAction("ManageRecruitment", "MaidManager");
