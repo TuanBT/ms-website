@@ -255,11 +255,11 @@
         chosenList = new Array();
         chosenSkills = "";
         var stayDr = document.getElementById("stay");
-        var stay = "Ngủ lại - " + stayDr.options[stayDr.selectedIndex].value;
+        var stay = "Lưu trú - " + stayDr.options[stayDr.selectedIndex].value;
         var salaryDr = document.getElementById("salary");
         var salary = "Mức lương - " + salaryDr.options[salaryDr.selectedIndex].value;
         var workDr = document.getElementById("work");
-        var work = "Công việc - " + workDr.options[workDr.selectedIndex].value;
+        var work = "Kiểu công việc - " + workDr.options[workDr.selectedIndex].value;
         var skillList = new Array();
         var skillCount = 0;
         var skillElements = document.getElementsByClassName("skill");
@@ -269,13 +269,13 @@
             }
         }
         var chosenCount = 0;
-        if (stay != "Ngủ lại - null") {
+        if (stay != "Lưu trú - null") {
             chosenList[chosenCount++] = stay;
         }
         if (salary != "Mức lương - null") {
             chosenList[chosenCount++] = salary;
         }
-        if (work != "Công việc - null") {
+        if (work != "Kiểu công việc - null") {
             chosenList[chosenCount++] = work;
         }
         if (skillList.length > 0) {
@@ -290,16 +290,16 @@
     }
 
     function removeSkill(skillNo) {
-        if (chosenList[skillNo].search("Ngủ lại") != -1) {
-            document.getElementById("stay_null").setAttribute("selected", "");
-        } else if (chosenList[skillNo].search("Mức lương") != -1) {
-            document.getElementById("salary_null").setAttribute("selected", "");
-        } else if (chosenList[skillNo].search("Công việc") != -1) {
-            document.getElementById("work_null").setAttribute("selected", "");
-        } else {
-            document.getElementById(chosenList[skillNo]).checked = false;;
-        }
         if (chosenList.length > 0) {
+            if (chosenList[skillNo].search("Ngủ lại") != -1) {
+                document.getElementById("stay_null").setAttribute("selected", "");
+            } else if (chosenList[skillNo].search("Mức lương") != -1) {
+                document.getElementById("salary_null").setAttribute("selected", "");
+            } else if (chosenList[skillNo].search("Kiểu công việc") != -1) {
+                document.getElementById("work_null").setAttribute("selected", "");
+            } else {
+                document.getElementById(chosenList[skillNo]).checked = false;;
+            }
             chosenList.splice(skillNo, 1);
             chosenSkills = "";
             for (var i = 0; i < chosenList.length; i++) {
