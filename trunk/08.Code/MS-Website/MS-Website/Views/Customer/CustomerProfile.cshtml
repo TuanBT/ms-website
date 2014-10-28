@@ -46,6 +46,8 @@
                             @if (ViewBag.Manage == "true")
                             {
                                 <li class><a href="#hide" role="tab" data-toggle="tab">Không công khai</a></li>
+                                <li class><a href="#paid" role="tab" data-toggle="tab">Đã thanh toán</a></li>
+                                <li class><a href="#notActive" role="tab" data-toggle="tab">Chưa kích hoạt</a></li>
                             }
                         </ul>
                         <div class="tab-content">
@@ -223,6 +225,93 @@
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
+                                                                                               class="blTimeText">@recruit.Recruitment.PostTime</span>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Tới: </span><span
+                                                                                              class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="blFooter">
+                                    <div class="blfNumber">
+                                        <ul class="pagination pagination-sm">
+                                            <li><a href="#">&laquo;</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                    @if (ViewBag.Manage == "true")
+                                    {
+                                        using (Html.BeginForm("PublicRecruitment", "Customer"))
+                                        {
+                                            <input id="publicId" type="hidden" name="recruitId" />
+                                            <div id="button_4" style="display: none;" class="blfbutton">
+                                                <button type="submit" class="btn btn-danger">Công khai</button>
+                                                <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="tab-pane fade bExprred" id="paid">
+                                <ul class="bexpiredListWork">
+                                    @foreach (var recruit in ViewBag.PaidList)
+                                    {
+                                        <li id="@recruit.Recruitment.RecruitmentId" onclick="chooseRecruit(@recruit.Recruitment.RecruitmentId, 0)">
+                                            <div class="blImage">
+                                                <img src="../Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                            </div>
+                                            <div class="blDetail">
+                                                <div class="blName">
+                                                    <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = recruit.Recruitment.RecruitmentId })">@recruit.Recruitment.Title</a>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Đăng: </span><span
+                                                                                               class="blTimeText">@recruit.Recruitment.PostTime</span>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Tới: </span><span
+                                                                                              class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                                <div class="blFooter">
+                                    <div class="blfNumber">
+                                        <ul class="pagination pagination-sm">
+                                            <li><a href="#">&laquo;</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+                                            <li><a href="#">&raquo;</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade bExprred" id="notActive">
+                                <ul class="bexpiredListWork">
+                                    @foreach (var recruit in ViewBag.NotActiveList)
+                                    {
+                                        <li id="@recruit.Recruitment.RecruitmentId" onclick="chooseRecruit(@recruit.Recruitment.RecruitmentId, 0)">
+                                            <div class="blImage">
+                                                <img src="../Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                            </div>
+                                            <div class="blDetail">
+                                                <div class="blName">
+                                                    <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = recruit.Recruitment.RecruitmentId })">@recruit.Recruitment.Title</a>
+                                                </div>
+                                                <div class="blTime">
+                                                    <span class="blTimeTitle">Đăng: </span><span
                                                         class="blTimeText">@recruit.Recruitment.PostTime</span>
                                                 </div>
                                                 <div class="blTime">
@@ -245,17 +334,6 @@
                                             <li><a href="#">&raquo;</a></li>
                                         </ul>
                                     </div>
-                                    @if (ViewBag.Manage == "true")
-                                    {
-                                        using (Html.BeginForm("PublicRecruitment", "Customer"))
-                                        {
-                                        <input id="publicId" type="hidden" name="recruitId" />
-                                        <div id="button_4" style="display: none;" class="blfbutton">
-                                            <button type="submit" class="btn btn-danger">Công khai</button>
-                                            <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                        </div>
-                                        }
-                                    }
                                 </div>
                             </div>
                         </div>
