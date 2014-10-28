@@ -22,7 +22,6 @@ namespace MS_Website.Models
         }
     
         public int AccountId { get; set; }
-        public double Payment { get; set; }
         public string Address { get; set; }
     
         public virtual Account Account { get; set; }

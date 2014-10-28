@@ -216,7 +216,6 @@
             <PropertyRef Name="AccountId" />
           </Key>
           <Property Name="AccountId" Type="int" Nullable="false" />
-          <Property Name="Payment" Type="float" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="JobRequest">
@@ -263,7 +262,6 @@
             <PropertyRef Name="AccountId" />
           </Key>
           <Property Name="AccountId" Type="int" Nullable="false" />
-          <Property Name="Payment" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Rating">
           <Key>
@@ -285,6 +283,7 @@
           <Property Name="PostTime" Type="datetime" Nullable="false" />
           <Property Name="ExpiredTime" Type="datetime" Nullable="false" />
           <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SkillCategory">
           <Key>
@@ -1031,7 +1030,6 @@
             <PropertyRef Name="AccountId" />
           </Key>
           <Property Name="AccountId" Type="Int32" Nullable="false" />
-          <Property Name="Payment" Type="Double" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Account" Relationship="MSModel.FK_Customer_Account" FromRole="Customer" ToRole="Account" />
           <NavigationProperty Name="Comments" Relationship="MSModel.FK_Comment_Customer" FromRole="Customer" ToRole="Comment" />
@@ -1092,7 +1090,6 @@
             <PropertyRef Name="AccountId" />
           </Key>
           <Property Name="AccountId" Type="Int32" Nullable="false" />
-          <Property Name="Payment" Type="Double" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="MSModel.FK_MaidRepresentation_Account" FromRole="MaidMediator" ToRole="Account" />
           <NavigationProperty Name="JobRequests" Relationship="MSModel.FK_JobRequest_MaidMediator1" FromRole="MaidMediator" ToRole="JobRequest" />
           <NavigationProperty Name="Maids" Relationship="MSModel.FK_Maid_MaidMediator1" FromRole="MaidMediator" ToRole="Maid" />
@@ -1119,6 +1116,7 @@
           <Property Name="PostTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ExpiredTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Applies" Relationship="MSModel.FK_Apply_Recruitment" FromRole="Recruitment" ToRole="Apply" />
           <NavigationProperty Name="Customer" Relationship="MSModel.FK_Recruitment_Customer" FromRole="Recruitment" ToRole="Customer" />
           <NavigationProperty Name="SkillReference" Relationship="MSModel.FK_Recruitment_SkillReference1" FromRole="Recruitment" ToRole="SkillReference" />
@@ -1741,7 +1739,6 @@
             <EntityTypeMapping TypeName="MSModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1791,7 +1788,6 @@
             <EntityTypeMapping TypeName="MSModel.MaidMediator">
               <MappingFragment StoreEntitySet="MaidMediator">
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1815,6 +1811,7 @@
                 <ScalarProperty Name="PostTime" ColumnName="PostTime" />
                 <ScalarProperty Name="ExpiredTime" ColumnName="ExpiredTime" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1890,7 +1887,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

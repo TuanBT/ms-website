@@ -21,7 +21,6 @@ namespace MS_Website.Models
         }
     
         public int AccountId { get; set; }
-        public double Payment { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual ICollection<JobRequest> JobRequests { get; set; }
