@@ -24,18 +24,22 @@ namespace MS_Website.Controllers
                 {
                     var account = db.Accounts.SingleOrDefault(a => a.AccountId == custId);
                     var customer = db.Customers.SingleOrDefault(c => c.AccountId == custId);
-                    var notApplJobList =
+                    var notApplRecList =
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Waiting")).ToList();
-                    var applJobList =
+                    var applRecList =
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Applied")).ToList();
-                    var expiredJobList =
+                    var expiredRecList =
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Expired")).ToList();
                     var unpublicList =
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Hide")).ToList();
+                    var paidList =
+                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Payment")).ToList();
+                    var notActiveList =
+                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.IsActive == false).ToList();
                     ViewBag.NotApplList =
-                        notApplJobList.Select(
+                        notApplRecList.Select(
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                    ViewBag.ApplList = (from recruitment in applJobList
+                    ViewBag.ApplList = (from recruitment in applRecList
                                         let apply =
                                             db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitment.RecruitmentId)
                                         let jobRequest =
@@ -43,11 +47,17 @@ namespace MS_Website.Controllers
                                         select new RecruitmentTemp(recruitment, customer, account, jobRequest, null)).
                         ToList();
                     ViewBag.ExpiredList =
-                        expiredJobList.Select(
+                        expiredRecList.Select(
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
                     ViewBag.UnpublicList =
                         unpublicList.Select(
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                    ViewBag.PaidList =
+                       paidList.Select(
+                           recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                    ViewBag.NotActiveList =
+                       notActiveList.Select(
+                           recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
                     if ((int) Session["AccId"] == custId)
                     {
                         ViewBag.Manage = "true";
@@ -250,7 +260,7 @@ namespace MS_Website.Controllers
                 var recruitment = new Recruitment();
                 recruitment.SkillRefId = skillRef.SkillRefId;
                 recruitment.CustomerId = custId;
-                recruitment.Status = "Waiting";
+                recruitment.Status = "Payment";
                 recruitment.PostTime = DateTime.Now;
                 recruitment.ExpiredTime = DateTime.Now.AddDays(7 * int.Parse(time));
                 recruitment.Title = title;

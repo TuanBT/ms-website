@@ -255,11 +255,13 @@ namespace MS_Website.Controllers
                     var apprJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.Status.Equals("Approved") && job.IsActive == true).ToList();
                     var expiredJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.Status.Equals("Expired") && job.IsActive == true).ToList();
                     var hideJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.Status.Equals("Hide") && job.IsActive == true).ToList();
+                    var notActiveJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.IsActive == false).ToList();
                     ViewBag.NotApplList = notApplJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).ToList();
                     ViewBag.ApplList = (from jobRequest in applJobList let apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId) let recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId) select new JobRequestTemp(jobRequest, maid, null, recruit, null)).ToList();
                     ViewBag.ApprList = (from jobRequest in apprJobList let apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId) let recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId) select new JobRequestTemp(jobRequest, maid, null, recruit, null)).ToList();
                     ViewBag.ExpiredList = expiredJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).ToList();
                     ViewBag.HideList = hideJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).ToList();
+                    ViewBag.NotActiveList = notActiveJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).ToList();
                     if (Session["AccId"] != null)
                     {
                         if (maid.MaidMediatorId != null)

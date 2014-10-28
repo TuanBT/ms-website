@@ -176,7 +176,6 @@ namespace MS_Website.Controllers
                         var addedAcc = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
                         var newCustomer = new Customer();
                         newCustomer.AccountId = addedAcc.AccountId;
-                        newCustomer.Payment = 0;
                         _db.Customers.Add(newCustomer);
                         _db.SaveChanges();
                     }
