@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1874d68a75184f9d9cda8a416c3e102d" Name="Diagram1" ZoomLevel="60">
-        <EntityTypeShape EntityType="MSModel.Account" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MSModel.Apply" Width="1.5" PointX="12.75" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MSModel.Comment" Width="1.5" PointX="12.75" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MSModel.Customer" Width="1.5" PointX="10.5" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MSModel.JobRequest" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MSModel.Maid" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MSModel.MaidMediator" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="MSModel.Rating" Width="1.5" PointX="12.75" PointY="9.125" IsExpanded="true" />
+      <Diagram DiagramId="8158c4f3d63542cbb5c87c107d08de54" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="MSModel.Account" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Apply" Width="1.5" PointX="12.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Comment" Width="1.5" PointX="12.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Customer" Width="1.5" PointX="10.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.JobRequest" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Maid" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.MaidMediator" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Rating" Width="1.5" PointX="12.75" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MSModel.Recruitment" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MSModel.SkillCategory" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MSModel.SkillInstance" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="MSModel.SkillReference" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MSModel.Staff" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.SkillCategory" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.SkillInstance" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.SkillReference" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MSModel.Staff" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
         <AssociationConnector Association="MSModel.FK_Customer_Account" ManuallyRouted="false" />
         <AssociationConnector Association="MSModel.FK_MaidRepresentation_Account" ManuallyRouted="false" />
         <AssociationConnector Association="MSModel.FK_Staff_Account" ManuallyRouted="false" />
