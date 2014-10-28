@@ -514,11 +514,26 @@ namespace MS_Website.Controllers
             using (var db = new MSEntities())
             {
                 var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
-                var expiredTime = recruit.ExpiredTime.AddDays(7 * extend);
-                recruit.ExpiredTime = expiredTime;
-                recruit.Status = "Waiting";
-                db.SaveChanges();
-                return RedirectToAction("GetCustomer", "Customer", new { custId = recruit.CustomerId });
+                if (recruit.Status.Equals("Applied"))
+                {
+                    TempData["Alert"] = "Công việc đã thuê được người";
+                }
+                else if (recruit.Status.Equals("Payment"))
+                {
+                    TempData["Alert"] = "Công việc chưa được thanh toán";
+                }
+                else if (!recruit.IsActive)
+                {
+                    TempData["Alert"] = "Công việc không tồn tại";
+                }
+                else
+                {
+                    var expiredTime = recruit.ExpiredTime.AddDays(7*extend);
+                    recruit.ExpiredTime = expiredTime;
+                    recruit.Status = "Waiting";
+                    db.SaveChanges();
+                }
+                return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
             }
         }
 
@@ -555,22 +570,37 @@ namespace MS_Website.Controllers
         {
             using (var db = new MSEntities())
             {
-                var apply = new Apply();
-                apply.JobRequestId = jobRequestId;
-                apply.RecruitmentId = recruitId;
-                db.Applies.Add(apply);
                 var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
-                var recruit = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
-                jobRequest.Status = "Applied";
-                jobRequest.ApplyTimes = DateTime.Now;
-                recruit.Status = "Applied";
-                db.SaveChanges();
-                var function = new Function();
-                function.SentMessage(
-                    jobRequest.Maid.Phone ?? "",
-                    jobRequest.Staff != null ? jobRequest.Staff.Account.Phone : "",
-                    jobRequest.MaidMediator != null ? jobRequest.MaidMediator.Account.Phone : "",
-                    recruit.Customer.Account.Phone ?? "");
+                if (jobRequest.Status.Equals("Waiting"))
+                {
+                    var apply = new Apply();
+                    apply.JobRequestId = jobRequestId;
+                    apply.RecruitmentId = recruitId;
+                    db.Applies.Add(apply);
+                    var recruit = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
+                    jobRequest.Status = "Applied";
+                    jobRequest.ApplyTimes = DateTime.Now;
+                    recruit.Status = "Applied";
+                    db.SaveChanges();
+                    var function = new Function();
+                    function.SentMessage(
+                        jobRequest.Maid.Phone ?? "",
+                        jobRequest.Staff != null ? jobRequest.Staff.Account.Phone : "",
+                        jobRequest.MaidMediator != null ? jobRequest.MaidMediator.Account.Phone : "",
+                        recruit.Customer.Account.Phone ?? "");
+                }
+                else if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
+                {
+                    TempData["Alert"] = "Công việc đã được thuê bởi khách hàng khác";
+                }
+                else if (jobRequest.Status.Equals("Expired"))
+                {
+                    TempData["Alert"] = "Công việc đã hết hạn";
+                }
+                else if (jobRequest.Status.Equals("Hide") || !jobRequest.IsActive)
+                {
+                    TempData["Alert"] = "Công việc không tồn tại";
+                }
                 return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
             }
         }
