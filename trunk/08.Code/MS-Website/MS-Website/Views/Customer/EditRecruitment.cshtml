@@ -468,15 +468,15 @@
         var hometownDr = document.getElementById("hometown");
         var hometown = "Quê quán - " + hometownDr.options[hometownDr.selectedIndex].value;
         var addrDr = document.getElementById("addr");
-        var addr = "Địa chỉ - " + addrDr.options[addrDr.selectedIndex].value;
+        var addr = "Ở tại - " + addrDr.options[addrDr.selectedIndex].value;
         var marriedDr = document.getElementById("married");
         var married = "Kết hôn - " + marriedDr.options[marriedDr.selectedIndex].value;
         var stayDr = document.getElementById("stay");
-        var stay = "Ngủ lại - " + stayDr.options[stayDr.selectedIndex].value;
+        var stay = "Lưu trú - " + stayDr.options[stayDr.selectedIndex].value;
         var salaryDr = document.getElementById("salary");
         var salary = "Mức lương - " + salaryDr.options[salaryDr.selectedIndex].value;
         var workDr = document.getElementById("work");
-        var work = "Công việc - " + workDr.options[workDr.selectedIndex].value;
+        var work = "Kiểu công việc - " + workDr.options[workDr.selectedIndex].value;
         var skillList = new Array();
         var skillCount = 0;
         var skillElements = document.getElementsByClassName("skill");
@@ -503,19 +503,19 @@
         if (hometown != "Quê quán - null") {
             chosenList[chosenCount++] = hometown;
         }
-        if (addr != "Địa chỉ - null") {
+        if (addr != "Ở tại - null") {
             chosenList[chosenCount++] = addr;
         }
         if (married != "Kết hôn - null") {
             chosenList[chosenCount++] = married;
         }
-        if (stay != "Ngủ lại - null") {
+        if (stay != "Lưu trú - null") {
             chosenList[chosenCount++] = stay;
         }
         if (salary != "Mức lương - null") {
             chosenList[chosenCount++] = salary;
         }
-        if (work != "Công việc - null") {
+        if (work != "Kiểu công việc - null") {
             chosenList[chosenCount++] = work;
         }
         if (skillList.length > 0) {
@@ -530,28 +530,31 @@
     }
 
     function removeSkill(skillNo) {
-        if (chosenList[skillNo].search("Giới tính") != -1) {
-            document.getElementById("gender_null").setAttribute("selected", "");
-        } else if (chosenList[skillNo].search("Tuổi") != -1) {
-            document.getElementById("age_null").setAttribute("selected", "");
-        } else if (chosenList[skillNo].search("Kinh nghiệm") != -1) {
-            document.getElementById("exp_null").setAttribute("selected", "");
-        } else if (chosenList[skillNo].search("Quê quán") != -1) {
-            document.getElementById("hometown_null").setAttribute("selected", "");
-        } else if (chosenList[skillNo].search("Địa chỉ") != -1) {
-            document.getElementById("address_null").setAttribute("selected", "");
-        } else if (chosenList[skillNo].search("Kết hôn") != -1) {
-            document.getElementById("married_null").setAttribute("selected", "");
-        } else if (chosenList[skillNo].search("Ngủ lại") != -1) {
-            document.getElementById("stay_null").setAttribute("selected", "");
-        } else if (chosenList[skillNo].search("Mức lương") != -1) {
-            document.getElementById("salary_null").setAttribute("selected", "");
-        } else if (chosenList[skillNo].search("Công việc") != -1) {
-            document.getElementById("work_null").setAttribute("selected", "");
-        } else {
-            document.getElementById(chosenList[skillNo]).checked = false;;
+        if (chosenList.length == 0) {
+            addSkill();
         }
         if (chosenList.length > 0) {
+            if (chosenList[skillNo].search("Giới tính") != -1) {
+                document.getElementById("gender_null").setAttribute("selected", "");
+            } else if (chosenList[skillNo].search("Tuổi") != -1) {
+                document.getElementById("age_null").setAttribute("selected", "");
+            } else if (chosenList[skillNo].search("Kinh nghiệm") != -1) {
+                document.getElementById("exp_null").setAttribute("selected", "");
+            } else if (chosenList[skillNo].search("Quê quán") != -1) {
+                document.getElementById("hometown_null").setAttribute("selected", "");
+            } else if (chosenList[skillNo].search("Địa chỉ") != -1) {
+                document.getElementById("address_null").setAttribute("selected", "");
+            } else if (chosenList[skillNo].search("Kết hôn") != -1) {
+                document.getElementById("married_null").setAttribute("selected", "");
+            } else if (chosenList[skillNo].search("Ngủ lại") != -1) {
+                document.getElementById("stay_null").setAttribute("selected", "");
+            } else if (chosenList[skillNo].search("Mức lương") != -1) {
+                document.getElementById("salary_null").setAttribute("selected", "");
+            } else if (chosenList[skillNo].search("Kiểu công việc") != -1) {
+                document.getElementById("work_null").setAttribute("selected", "");
+            } else {
+                document.getElementById(chosenList[skillNo]).checked = false;;
+            }
             chosenList.splice(skillNo, 1);
             chosenSkills = "";
             for (var i = 0; i < chosenList.length; i++) {
