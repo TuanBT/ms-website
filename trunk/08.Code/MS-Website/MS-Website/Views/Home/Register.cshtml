@@ -81,7 +81,7 @@
     </div>
     <script type="text/javascript" language="javascript">
 
-       $("#btnSubmit").click(function validateEmail() {
+       /*$("#btnSubmit").click(function validateEmail() {
              var errText = "";
              if ($("#txtUsername").val() == "") {
                  errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
@@ -94,33 +94,33 @@
                  return false;
              }
              return true;
-                 });
-            /*$.validator.setDefaults({
+                 });*/
+            $.validator.setDefaults({
                 submitHandler: function () {
                     alert("submitted!");
                 }
             });
-            $().ready(function() {
+            $("#btnSubmit").ready(function() {
                 $("#registerForm").validate({
                     rules: {
-                        username: {required:true},
-                        password: {required:true},
+                        username: { required: true },
+                        password: { required: true },
                         email: {
                             required: true,
-                            email:true
+                            email: true
                         }
                     },
-                    messages:{
+                    messages: {
                         username: {
                             required: "Please enter a username",
                         },
                         password: {
                             required: "Please provide a password",
                         },
-                        email: "Please enter a valid email address"
+                        email: "Please enter a valid email address",
                     }
                 });
-            });*/
+});
             /* if (!re.test(email)) {
                 document.getElementById("emailError").innerHTML = "Email không hợp lệ";
                 return false;
