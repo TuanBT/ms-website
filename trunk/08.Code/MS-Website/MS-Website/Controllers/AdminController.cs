@@ -12,11 +12,6 @@ namespace MS_Website.Controllers
         //
         // GET: /Admin/
 
-        public ActionResult Admin()
-        {
-            return View();
-        }
-
         public ActionResult RunKmean()
         {
             using (var db = new MSEntities())
@@ -147,22 +142,26 @@ namespace MS_Website.Controllers
                                     , oldCareVl, babySisterVl, disabilityCareVl,
                                     bonsaiCareVl, cookingVl, washingVl, cleanHouseVl
                                 },
-                            group = -1
+                            group = -1,
+                            distance = -1
                         };
                     kmeanDatas.Add(kmeanData);
                 }
                 //Run alg and write group
                 kmeanDatas = kmean.GetKmeanData(kmeanDatas);
 
+                var means = kmean.GetMeansFile();
+
                 int i = 0;
                 foreach (SkillReference skillReference in skillRefTable)
                 {
                     skillReference.Group = kmeanDatas[i].group;
+                    skillReference.Distance = kmean.GetDistanceRowData(kmeanDatas[i].dataRow, kmeanDatas[i].group, means);
                     i++;
                 }
                 db.SaveChanges();
             }
-            return View("Admin");
+            return View("AdminConfig");
         }
 
         public ActionResult AdminConfig()
