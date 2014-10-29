@@ -11,21 +11,22 @@ namespace MS_Website.Controllers
     {
         //
         // GET: /Admin/
-
-        public ActionResult RunKmean()
+        [HttpPost]
+        public ActionResult RunKmean(string numCluterKStr)
         {
             using (var db = new MSEntities())
             {
-                var skillRefJrTable = db.SkillReferences.Where(s => s.Type == 0).ToList();
+                //var skillRefJrTable = db.SkillReferences.Where(s => s.Type == 0).ToList();
                 var skillRefTable = db.SkillReferences.Select(s => s);
 
                 string strPathServer = AppDomain.CurrentDomain.BaseDirectory;
                 string strMeansDataFile = strPathServer + "App_Data\\" + "meansData.txt";
                 //Choose max count/10
-                int numCluterK = (skillRefTable.Count() - skillRefJrTable.Count()) > skillRefJrTable.Count()
+                /*int numCluterK = (skillRefTable.Count() - skillRefJrTable.Count()) > skillRefJrTable.Count()
                                      ? (skillRefTable.Count() - skillRefJrTable.Count())/10
                                      : skillRefJrTable.Count()/10;
-                if (numCluterK == 0) numCluterK = 1;
+                if (numCluterK == 0) numCluterK = 1;*/
+                var numCluterK = numCluterKStr != "" ? Convert.ToInt32(numCluterKStr) : 1;
                 var kmean = new Kmean(numCluterK, strMeansDataFile);
                 var kmeanDatas = new List<KmeanData>();
                 foreach (var skillRef in skillRefTable)
@@ -166,6 +167,16 @@ namespace MS_Website.Controllers
 
         public ActionResult AdminConfig()
         {
+            using (var db = new MSEntities())
+            {
+                var skillRefJrTable = db.SkillReferences.Where(s => s.Type == 0).ToList();
+                var skillRefTable = db.SkillReferences.Select(s => s);
+                //Choose max count/10
+                int numCluterK = (skillRefTable.Count() - skillRefJrTable.Count()) > skillRefJrTable.Count()
+                                     ? (skillRefTable.Count() - skillRefJrTable.Count())/10
+                                     : skillRefJrTable.Count()/10;
+                ViewBag.numCluterK = numCluterK;
+            }
             return View();
         }
 
