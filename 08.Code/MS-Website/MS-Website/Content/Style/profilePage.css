@@ -50,66 +50,66 @@
     margin: 0 auto;
 }
 
-.hChildMenuList > li {
-    display: inline-block;
-    line-height: 1em;
-    padding: 18px 0 18px 30px;
-    position: relative;
-}
+    .hChildMenuList > li {
+        display: inline-block;
+        line-height: 1em;
+        padding: 18px 0 18px 30px;
+        position: relative;
+    }
 
-.hChildMenuList > li a {
-    text-decoration: none;
-    color: #949492;
-}
+        .hChildMenuList > li a {
+            text-decoration: none;
+            color: #949492;
+        }
 
-.hChildMenuList > li a:hover {
-    color: #252523;
-}
+            .hChildMenuList > li a:hover {
+                color: #252523;
+            }
 
-.hChildMenuList > .iscurent:before {
-    content: "";
-    display: inline-block;
-    background: #fff;
-    bottom: 0;
-    height: 10px;
-    left: 50%;
-    margin-left: 8px;
-    position: absolute;
-    width: 20px;
-    z-index: 1;
-}
+    .hChildMenuList > .iscurent:before {
+        content: "";
+        display: inline-block;
+        background: #fff;
+        bottom: 0;
+        height: 10px;
+        left: 50%;
+        margin-left: 8px;
+        position: absolute;
+        width: 20px;
+        z-index: 1;
+    }
 
-.hChildMenuList > .iscurent:after {
-    content: "";
-    display: inline-block;
-    background: #fff;
-    bottom: -5px;
-    left: 50%;
-    height: 10px;
-    width: 9px;
-    margin-left: 14px;
-    position: absolute;
-    -webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .28);
-    -moz-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .28);
-    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .28);
-    -webkit-transform: rotate(56deg) skew(0deg, -20deg);
-    -moz-transform: rotate(56deg) skew(0deg, -20deg);
-    -ms-transform: rotate(56deg) skew(0deg, -20deg);
-    -o-transform: rotate(56deg) skew(0deg, -20deg);
-    transform: rotate(56deg) skew(0deg, -20deg);
-}
+    .hChildMenuList > .iscurent:after {
+        content: "";
+        display: inline-block;
+        background: #fff;
+        bottom: -5px;
+        left: 50%;
+        height: 10px;
+        width: 9px;
+        margin-left: 14px;
+        position: absolute;
+        -webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .28);
+        -moz-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .28);
+        box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .28);
+        -webkit-transform: rotate(56deg) skew(0deg, -20deg);
+        -moz-transform: rotate(56deg) skew(0deg, -20deg);
+        -ms-transform: rotate(56deg) skew(0deg, -20deg);
+        -o-transform: rotate(56deg) skew(0deg, -20deg);
+        transform: rotate(56deg) skew(0deg, -20deg);
+    }
 
-.hChildMenuList > .iscurent a {
-    color: #252523;
-}
+    .hChildMenuList > .iscurent a {
+        color: #252523;
+    }
 
-.hChildMenuList > .iscurent a:hover {
-    color: #252523;
-}
+        .hChildMenuList > .iscurent a:hover {
+            color: #252523;
+        }
 
-.hChildMenuList:hover {
-    color: #616160;
-}
+    .hChildMenuList:hover {
+        color: #616160;
+    }
 
 .hChContent {
 }
@@ -118,15 +118,15 @@
     display: inline-block;
 }
 
-.hmeTabList > li {
-    display: inline-block;
-    vertical-align: bottom;
-    position: relative;
-    background: 0;
-    color: #7bd454;
-    padding: 0;
-    margin: 0;
-}
+    .hmeTabList > li {
+        display: inline-block;
+        vertical-align: bottom;
+        position: relative;
+        background: 0;
+        color: #7bd454;
+        padding: 0;
+        margin: 0;
+    }
 
 .hefaContent {
     padding: 16px 20px 12px;
@@ -141,21 +141,21 @@
     text-decoration: none;
 }
 
-.hefaContent.iscurent {
-    background: #fff;
-    color: #7bd454;
-}
+    .hefaContent.iscurent {
+        background: #fff;
+        color: #7bd454;
+    }
 
-.hefaContent.iscurent:hover {
-    background: #fff;
-    color: #7bd454;
-}
+        .hefaContent.iscurent:hover {
+            background: #fff;
+            color: #7bd454;
+        }
 
-.hefaContent:hover {
-    background: rgba(255, 255, 255, 0.2);
-    text-decoration: none;
-    color: #fff;
-}
+    .hefaContent:hover {
+        background: rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+        color: #fff;
+    }
 
 .hUserName {
     padding: 5px;
@@ -164,48 +164,48 @@
     margin-right: 20px;
 }
 
-.hUserName:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
+    .hUserName:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
 
-.hUserName a {
-    text-decoration: none;
-    color: white;
-    font-weight: 700;
-}
+    .hUserName a {
+        text-decoration: none;
+        color: white;
+        font-weight: 700;
+    }
 
 .hUserFuncList {
     display: inline-block;
 }
 
-.hUserFuncList > li {
-    padding: 15px 10px 0 10px;
-    border-radius: 10px 10px 0 0;
-    text-align: center;
-    font-size: 20px;
-    display: inline-block;
-}
+    .hUserFuncList > li {
+        padding: 15px 10px 0 10px;
+        border-radius: 10px 10px 0 0;
+        text-align: center;
+        font-size: 20px;
+        display: inline-block;
+    }
 
-.hUserFuncList > li:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
+        .hUserFuncList > li:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
 
-.hUserFuncList > li > a {
-    text-decoration: none;
-    color: white;
-}
+        .hUserFuncList > li > a {
+            text-decoration: none;
+            color: white;
+        }
 
-.hUserFuncList button {
-    text-decoration: none;
-    color: white;
-    font-weight: 700;
-}
+    .hUserFuncList button {
+        text-decoration: none;
+        color: white;
+        font-weight: 700;
+    }
 
-.hUserFuncList button:hover {
-    text-decoration: none;
-    color: white;
-    font-weight: 700;
-}
+        .hUserFuncList button:hover {
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+        }
 
 /*End header*/
 
@@ -238,10 +238,10 @@
     text-align: center;
 }
 
-.miPic > img {
-    border-radius: 5px;
-    width: 100%;
-}
+    .miPic > img {
+        border-radius: 5px;
+        width: 100%;
+    }
 
 .mmiDetail {
     display: inline-block;
@@ -394,44 +394,44 @@ a {
     margin-left: 60px;
 }
 
-.listSuggestCus > li {
-    height: 100%;
-    padding: 0;
-    top: 5px;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-    background: transparent;
-    overflow: hidden;
-    border-color: #d2d6de;
-    border-style: solid;
-    border-width: 1px;
-    position: relative;
-    display: inline-block;
-    background-color: #fff;
-    width: 228px;
-    border-radius: 7px;
-    vertical-align: top;
-    margin-right: 12px;
-    margin-bottom: 18px;
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-}
+    .listSuggestCus > li {
+        height: 100%;
+        padding: 0;
+        top: 5px;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+        background: transparent;
+        overflow: hidden;
+        border-color: #d2d6de;
+        border-style: solid;
+        border-width: 1px;
+        position: relative;
+        display: inline-block;
+        background-color: #fff;
+        width: 228px;
+        border-radius: 7px;
+        vertical-align: top;
+        margin-right: 12px;
+        margin-bottom: 18px;
+        -webkit-transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
 
-.listSuggestCus > li:hover {
-    -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, .3);
-    -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, .3);
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, .3);
-}
+        .listSuggestCus > li:hover {
+            -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, .3);
+            -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, .3);
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, .3);
+        }
 
-.listSuggestCus > li > a {
-    text-decoration: none;
-}
+        .listSuggestCus > li > a {
+            text-decoration: none;
+        }
 
-.listSuggestCus > li > a:hover {
-}
+            .listSuggestCus > li > a:hover {
+            }
 
 .listSuCuImage {
     display: block;
@@ -448,8 +448,8 @@ a {
     color: #0093f0;
 }
 
-.listSuCuDetail:hover {
-}
+    .listSuCuDetail:hover {
+    }
 
 .liCuName {
     font: 600 21px Adelle_Regular, Georgia, sans-serif;
@@ -473,9 +473,9 @@ a {
     color: #DDD;
 }
 
-.lisuPre:hover {
-    color: black;
-}
+    .lisuPre:hover {
+        color: black;
+    }
 
 .lisuNex {
     float: right;
@@ -484,9 +484,9 @@ a {
     color: #DDD;
 }
 
-.lisuNex:hover {
-    color: black;
-}
+    .lisuNex:hover {
+        color: black;
+    }
 
 .liMaidRate {
     margin: 10px 0 10px 0;
@@ -535,26 +535,26 @@ a {
     border: 1px solid #DDD;
     border-radius: 5px;
     text-align: center;
-. iSkill
+    . iSkill;
 }
 
-.blImage img {
-    border-radius: 5px;
-}
+    .blImage img {
+        border-radius: 5px;
+    }
 
 .blName {
     font-weight: bold;
     font-size: 14px;
 }
 
-.blName > a {
-    text-decoration: none;
-    color: black;
-}
+    .blName > a {
+        text-decoration: none;
+        color: black;
+    }
 
-.blName > :hover {
-    color: #2980b9;
-}
+    .blName > :hover {
+        color: #2980b9;
+    }
 
 .blStar {
 }
@@ -594,9 +594,9 @@ a {
     border-radius: 5px;
 }
 
-.bFreeListWork > li:hover {
-    background: #f5f5f2;
-}
+    .bFreeListWork > li:hover {
+        background: #f5f5f2;
+    }
 
 .blTime {
     color: #7f8c8d;
@@ -612,13 +612,13 @@ a {
     margin-top: 20px;
 }
 
-.bFreeListWork > .isCurent {
-    background: rgba(20, 182, 231, 0.35);
-}
+    .bFreeListWork > .isCurent {
+        background: rgba(20, 182, 231, 0.35);
+    }
 
-.bFreeListWork > .isCurent:hover {
-    background: rgba(20, 182, 231, 0.35);
-}
+        .bFreeListWork > .isCurent:hover {
+            background: rgba(20, 182, 231, 0.35);
+        }
 
 .btApply {
     display: inline-block;
@@ -653,48 +653,48 @@ a {
     width: 505px;
 }
 
-.bApplyListWork > li:hover {
-    background: #e6e6e6;
-}
+    .bApplyListWork > li:hover {
+        background: #e6e6e6;
+    }
 
 .bexpiredListWork {
     margin-left: 20px;
     margin-top: 20px;
 }
 
-.bexpiredListWork > .isCurent {
-    background: rgba(255, 0, 0, 0.15);
-}
+    .bexpiredListWork > .isCurent {
+        background: rgba(255, 0, 0, 0.15);
+    }
 
-.bexpiredListWork > .isCurent:hover {
-    background: rgba(255, 0, 0, 0.15);
-}
+        .bexpiredListWork > .isCurent:hover {
+            background: rgba(255, 0, 0, 0.15);
+        }
 
-.bexpiredListWork > li {
-    display: inline-block;
-    padding: 5px;
-    background: #ffffff;
-    border-radius: 5px;
-}
+    .bexpiredListWork > li {
+        display: inline-block;
+        padding: 5px;
+        background: #ffffff;
+        border-radius: 5px;
+    }
 
-.bexpiredListWork > li:hover {
-    background: #f5f5f2;
-}
+        .bexpiredListWork > li:hover {
+            background: #f5f5f2;
+        }
 
 .bFreeCusListWork {
     margin-left: 20px;
     margin-top: 10px;
 }
 
-.bFreeCusListWork > li {
-    display: inline-block;
-    padding: 5px;
-    margin: 0 30px 0 30px;
-    background: #ffffff;
-    border-radius: 5px 5px 0 0;
-    border-bottom: 1px solid #DDD;
-    width: 505px;
-}
+    .bFreeCusListWork > li {
+        display: inline-block;
+        padding: 5px;
+        margin: 0 30px 0 30px;
+        background: #ffffff;
+        border-radius: 5px 5px 0 0;
+        border-bottom: 1px solid #DDD;
+        width: 505px;
+    }
 
 .bfcWork {
     float: left;
@@ -706,15 +706,15 @@ a {
     text-align: center;
 }
 
-.bfMaid > li {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-}
+    .bfMaid > li {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+    }
 
-.bfMaid > li > .blImage {
-    float: none;
-}
+        .bfMaid > li > .blImage {
+            float: none;
+        }
 
 .MaidListTitle {
     margin-right: 77px;
@@ -743,9 +743,9 @@ a {
     margin-top: 20px;
 }
 
-.miButton > button {
-    margin: 10px 0 10px 0;
-}
+    .miButton > button {
+        margin: 10px 0 10px 0;
+    }
 
 .iStatus {
 }
@@ -785,8 +785,8 @@ a {
     text-decoration: none;
 }
 
-.jrMaidFullname > a:hover {
-}
+    .jrMaidFullname > a:hover {
+    }
 
 .rimaMaidList > li {
     height: 60px;
@@ -803,17 +803,17 @@ a {
     text-align: center;
 }
 
-.rimaMore:hover {
-    color: black;
-    text-align: center;
-}
+    .rimaMore:hover {
+        color: black;
+        text-align: center;
+    }
 
 .rimaMaidList {
 }
 
-.rimaMaidList > li {
-    height: 60px;
-}
+    .rimaMaidList > li {
+        height: 60px;
+    }
 
 .liImage {
     width: 50px;
@@ -824,10 +824,10 @@ a {
     text-align: center;
 }
 
-.liImage img {
-    border-radius: 5px;
-    height: 100%;
-}
+    .liImage img {
+        border-radius: 5px;
+        height: 100%;
+    }
 
 .licoFullName {
 }
@@ -859,17 +859,17 @@ a {
     text-align: center;
 }
 
-.rimaMore:hover {
-    color: black;
-    text-align: center;
-}
+    .rimaMore:hover {
+        color: black;
+        text-align: center;
+    }
 
 .rimaMaidList {
 }
 
-.rimaMaidList > li {
-    height: 60px;
-}
+    .rimaMaidList > li {
+        height: 60px;
+    }
 
 .liImage {
     width: 50px;
@@ -934,11 +934,11 @@ a {
     margin-top: 10px;
 }
 
-.iRating > .miRate {
-    display: inline-block;
-    margin-top: 0px;
-    font-size: 14px;
-}
+    .iRating > .miRate {
+        display: inline-block;
+        margin-top: 0px;
+        font-size: 14px;
+    }
 
 .iSkill {
 }
@@ -963,8 +963,8 @@ a {
     text-decoration: none;
 }
 
-.jrMaidFullname > a:hover {
-}
+    .jrMaidFullname > a:hover {
+    }
 
 .jrDetail {
     display: inline-block;
@@ -977,17 +977,17 @@ a {
     border-radius: 5px;
 }
 
-.maliApply > li:hover {
-    background: #ecf0f1;
-}
+    .maliApply > li:hover {
+        background: #ecf0f1;
+    }
 
 .maliApply > .isActive {
     background: rgba(0, 255, 173, 0.26);
 }
 
-.maliApply > .isActive:hover {
-    background: rgba(0, 255, 173, 0.26);
-}
+    .maliApply > .isActive:hover {
+        background: rgba(0, 255, 173, 0.26);
+    }
 
 .maliPreNex {
     float: right;
@@ -996,9 +996,9 @@ a {
     color: #DDD;
 }
 
-.maliPreNex:hover {
-    color: black;
-}
+    .maliPreNex:hover {
+        color: black;
+    }
 
 .maidlistApply {
     margin-top: 40px;
@@ -1049,7 +1049,6 @@ a {
     font-weight: 700;
     width: 200px;
     float: left;
-
 }
 
 .titlePage {
@@ -1121,27 +1120,27 @@ a {
     font-weight: 700;
 }
 
-.moskSkillName label {
-    font-weight: 700;
-    font-size: 14px;
-}
+    .moskSkillName label {
+        font-weight: 700;
+        font-size: 14px;
+    }
 
 .moskSkillContent {
     /*margin-left: 10px;*/
 }
 
-.moskSkillContent > .radio {
-    margin: 0;
-}
+    .moskSkillContent > .radio {
+        margin: 0;
+    }
 
 .postRCAlertMoney {
     margin-top: 10px;
 }
 
-.postRCAlertMoney button {
-    float: right;
-    margin-top: -17px;
-}
+    .postRCAlertMoney button {
+        float: right;
+        margin-top: -17px;
+    }
 
 .footerRow {
     margin-left: 0px;
@@ -1160,25 +1159,25 @@ a {
     padding: 0px;
 }
 
-.buttonSearch:hover {
-    background: #599B28;
-    border: 1px solid #599B28;
-}
+    .buttonSearch:hover {
+        background: #599B28;
+        border: 1px solid #599B28;
+    }
 
 .buttonSearchLink {
     color: white;
     text-decoration: none;
 }
 
-.buttonSearchLink:hover {
-    color: white;
-    text-decoration: none;
-}
+    .buttonSearchLink:hover {
+        color: white;
+        text-decoration: none;
+    }
 
-.buttonSearchLink:focus {
-    color: white;
-    text-decoration: none;
-}
+    .buttonSearchLink:focus {
+        color: white;
+        text-decoration: none;
+    }
 
 .labelStatus {
     font-size: 15px;
@@ -1202,4 +1201,11 @@ a {
 
 .iTitleContent {
     font-size: 16px;
+}
+
+.MSNotifier {
+    position: fixed;
+    bottom: 5px;
+    z-index: 1000;
+    right: 5px;
 }
