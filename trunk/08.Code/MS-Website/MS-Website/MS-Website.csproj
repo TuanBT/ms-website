@@ -2043,6 +2043,7 @@
     <Content Include="Views\Customer\EditRecruitment.cshtml" />
     <Content Include="Views\Admin\AdminConfig.cshtml" />
     <Content Include="Views\Shared\_PartialPaypal.cshtml" />
+    <Content Include="Views\Shared\_PartialNotifier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
