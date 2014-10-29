@@ -151,7 +151,7 @@ namespace MS_Website.Controllers
             }
         }
 
-        public ActionResult AddMaid(string fullname, double exp, string phone, string birthdate, bool gender,
+        public ActionResult AddMaid(string fullname, Nullable<double> exp, string phone, string birthdate, bool gender,
             string english, string jap, string chinese, string korean, string hometown, string addr, bool married,
             string desc, string avatar)
         {

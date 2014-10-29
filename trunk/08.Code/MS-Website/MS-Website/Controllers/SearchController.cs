@@ -184,15 +184,15 @@ namespace MS_Website.Controllers
                 var jobRequestList = new List<JobRequestTemp>();
                 var recruitmentList = new List<RecruitmentTemp>();
                 var checkedSkills = new List<string>();
-                if (gender != null)
+                if (gender != null && !gender.Equals("all"))
                 {
                     searchInsList.Add(db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Gender") && si.SkillString.Equals(gender)));
                 }
-                if (age != null)
+                if (age != null && !age.Equals("all"))
                 {
                     searchInsList.Add(db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Age") && si.SkillString.Equals(age)));
                 }
-                if (salary != null)
+                if (salary != null && !salary.Equals("all"))
                 {
                     if (salary.Equals("low"))
                     {
@@ -626,7 +626,7 @@ namespace MS_Website.Controllers
                         }
                     }
                 }
-                if (time != null)
+                if (time != null && !time.Equals("all"))
                 {
                     var now = DateTime.Now;
                     var searchDate = now.AddDays(-int.Parse(time));
