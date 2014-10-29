@@ -321,13 +321,23 @@ namespace MS_Website.Controllers
                 var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
                 if (job != null)
                 {
-                    if (job.Status.Equals("Applied"))
+                    if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
                     {
                         TempData["Alert"] = "Công việc đã được thuê";
-                        return RedirectToAction("GetJobRequest", "Post", new { jobId });
                     }
-                    job.Status = "Hide";
-                    db.SaveChanges();
+                    else if (job.Status.Equals("Expired"))
+                    {
+                        TempData["Alert"] = "Công việc đã hết hạn";
+                    }
+                    else if (!job.IsActive)
+                    {
+                        TempData["Alert"] = "Công việc không tồn tại";
+                    }
+                    else
+                    {
+                        job.Status = "Hide";
+                        db.SaveChanges();
+                    }
                 }
                 return RedirectToAction("GetJobRequest", "Post", new { jobId });
             }
@@ -340,8 +350,19 @@ namespace MS_Website.Controllers
                 var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
                 if (job != null)
                 {
-                    job.Status = "Waiting";
-                    db.SaveChanges();
+                    if (job.Status.Equals("Expired"))
+                    {
+                        TempData["Alert"] = "Công việc đã hết hạn";
+                    }
+                    else if (!job.IsActive)
+                    {
+                        TempData["Alert"] = "Công việc không tồn tại";
+                    }
+                    else
+                    {
+                        job.Status = "Waiting";
+                        db.SaveChanges();
+                    }
                 }
                 return RedirectToAction("ManageMaidProfile", new { maidId = job.MaidId });
             }
@@ -490,6 +511,7 @@ namespace MS_Website.Controllers
                         db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(CleanHouse)).SkillId;
                 }
                 skillRef.Group = PostController.GetGroup(skillRef);
+                skillRef.Distance = PostController.GetDistance(skillRef);
                 db.SkillReferences.Add(skillRef);
                 db.SaveChanges();
                 skillRef = db.SkillReferences.SingleOrDefault(sr => sr.Type == 2);
@@ -527,9 +549,19 @@ namespace MS_Website.Controllers
             {
                 LoadItems(db);
                 var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                if (jobRequest.PostTime.AddDays(3) < DateTime.Now)
+                {
+                    TempData["Alert"] = "Công việc đã hết hạn cho sửa";
+                    return RedirectToAction("GetJobRequest", "Post", new { jobId });
+                }
                 if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
                 {
                     TempData["Alert"] = "Công việc đã được thuê";
+                    return RedirectToAction("GetJobRequest", "Post", new { jobId });
+                }
+                if (!jobRequest.IsActive)
+                {
+                    TempData["Alert"] = "Công việc không tồn tại";
                     return RedirectToAction("GetJobRequest", "Post", new { jobId });
                 }
                 var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == jobRequest.SkillRefId);
@@ -608,9 +640,17 @@ namespace MS_Website.Controllers
             using (var db = new MSEntities())
             {
                 var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
-                if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
+                if (jobRequest.PostTime.AddDays(3) < DateTime.Now)
+                {
+                    TempData["Alert"] = "Công việc đã hết hạn cho sửa";
+                }
+                else if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
                 {
                     TempData["Alert"] = "Công việc đã được thuê";
+                }
+                else if (!jobRequest.IsActive)
+                {
+                    TempData["Alert"] = "Công việc không tồn tại";
                 }
                 else
                 {
@@ -687,16 +727,20 @@ namespace MS_Website.Controllers
             using (var db = new MSEntities())
             {
                 var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
-                if (job.Status.Equals("Waiting") || job.Status.Equals("Expired"))
+                if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
+                {
+                    TempData["Alert"] = "Công việc đã được thuê";
+                }
+                else if (!job.IsActive)
+                {
+                    TempData["Alert"] = "Công việc không tồn tại";
+                }
+                else
                 {
                     var expiredTime = job.ExpiredTime.AddDays(7 * extend);
                     job.ExpiredTime = expiredTime;
                     job.Status = "Waiting";
                     db.SaveChanges();
-                }
-                else if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
-                {
-                    TempData["Alert"] = "Công việc đã được thuê";
                 }
                 return RedirectToAction("GetJobRequest", "Post", new { jobId });
             }
