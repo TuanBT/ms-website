@@ -1994,7 +1994,6 @@
     <Content Include="Views\Post\JobRequest.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\MaidMediator\PostRequest.cshtml" />
-    <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Shared\_CustomerLayout.cshtml">
@@ -2057,6 +2056,9 @@
     <Content Include="Views\Admin\BanAccount.cshtml" />
     <Content Include="Views\Admin\ManageComment.cshtml" />
     <Content Include="Views\Shared\_PartialMenu.cshtml" />
+    <Content Include="Views\MaidManager\EditJobRequest.cshtml" />
+    <Content Include="Views\Customer\EditRecruitment.cshtml" />
+    <Content Include="Views\Admin\AdminConfig.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
