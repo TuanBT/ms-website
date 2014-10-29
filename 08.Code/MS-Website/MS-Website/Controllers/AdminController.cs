@@ -17,7 +17,18 @@ namespace MS_Website.Controllers
             using (var db = new MSEntities())
             {
                 //var skillRefJrTable = db.SkillReferences.Where(s => s.Type == 0).ToList();
-                var skillRefTable = db.SkillReferences.Select(s => s);
+                //var skillRefTable = new d
+                List<int> skillRefIds = new List<int>();
+                var jobRequests = db.JobRequests.Where(j => j.Status == "Waiting").ToList();
+                foreach (var jobRequest in jobRequests)
+                {
+                   skillRefIds.Add(db.SkillReferences.SingleOrDefault(s => s.SkillRefId == jobRequest.SkillRefId).SkillRefId);
+                }
+                var recruitments = db.Recruitments.Where(r => r.Status == "Waiting").ToList();
+                foreach (var recruitment in recruitments)
+                {
+                    skillRefIds.Add(db.SkillReferences.SingleOrDefault(s => s.SkillRefId == recruitment.SkillRefId).SkillRefId);
+                }
 
                 string strPathServer = AppDomain.CurrentDomain.BaseDirectory;
                 string strMeansDataFile = strPathServer + "App_Data\\" + "meansData.txt";
@@ -29,8 +40,10 @@ namespace MS_Website.Controllers
                 var numCluterK = numCluterKStr != "" ? Convert.ToInt32(numCluterKStr) : 1;
                 var kmean = new Kmean(numCluterK, strMeansDataFile);
                 var kmeanDatas = new List<KmeanData>();
-                foreach (var skillRef in skillRefTable)
+                for (int j = 0; j < skillRefIds.Count;j++ )
                 {
+                    int id = skillRefIds[j];
+                    var skillRef = db.SkillReferences.FirstOrDefault(s => s.SkillRefId == id);
                     int gender = skillRef.Gender != null ? skillRef.Gender.Value : -1;
                     double genderVl = gender != -1
                                           ? db.SkillInstances.FirstOrDefault(s => s.SkillId == gender).SkillNormallized
@@ -153,16 +166,16 @@ namespace MS_Website.Controllers
 
                 var means = kmean.GetMeansFile();
 
-                int i = 0;
-                foreach (SkillReference skillReference in skillRefTable)
+                for (var j = 0; j < skillRefIds.Count;j++ )
                 {
-                    skillReference.Group = kmeanDatas[i].group;
-                    skillReference.Distance = kmean.GetDistanceRowData(kmeanDatas[i].dataRow, kmeanDatas[i].group, means);
-                    i++;
+                    int id = skillRefIds[j];
+                    var skillRef = db.SkillReferences.FirstOrDefault(s => s.SkillRefId == id);
+                    skillRef.Group = kmeanDatas[j].group;
+                    skillRef.Distance = kmean.GetDistanceRowData(kmeanDatas[j].dataRow, kmeanDatas[j].group, means);
                 }
-                db.SaveChanges();
+                    db.SaveChanges();
             }
-            return View("AdminConfig");
+            return RedirectToAction("AdminConfig", "Admin");
         }
 
         public ActionResult AdminConfig()
