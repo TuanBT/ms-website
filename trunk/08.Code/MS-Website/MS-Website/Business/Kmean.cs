@@ -94,22 +94,7 @@ namespace MS_Website.Controllers
         //return distance with one rowdata
         public double GetDistanceRowData(double[] rowData, int group)
         {
-            var means = new double[1][];
-            string[] lineMeans = GetFileFromServer();
-            if (lineMeans.Length > 0)
-            {
-                means = new double[lineMeans.Length][];
-                for (int i = 0; i < lineMeans.Length; i++)
-                {
-                    string[] numStrs = lineMeans[i].Split(';');
-                    double[] dataTemp = new double[numStrs.Length];
-                    for (int j = 0; j < numStrs.Length; j++)
-                    {
-                        dataTemp[j] = Convert.ToDouble(numStrs[j]);
-                    }
-                    means[i] = dataTemp;
-                }
-            }
+            var means = GetMeansFile();
             return Distance(rowData, means[group]);
         }
 
