@@ -40,7 +40,7 @@
                     <div class="oSignupFields">
                         <article class="oSignupHelp oSignupHelpContractor "></article>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m => m.FullName, new { @class = "oInputText oFormMed", @id = "txtFullName", @placeholder = "Họ và tên"})
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "oInputText oFormMed", @id = "txtFullName", @placeholder = "Họ và tên",@maxlength="50"})
                         </div>
                         <div class="oFormField">
                             @Html.TextBoxFor(m => m.Email, new { @class = "oInputText oFormMed", @placeholder = "Email", @id = "txtEmail",@name="email" })
