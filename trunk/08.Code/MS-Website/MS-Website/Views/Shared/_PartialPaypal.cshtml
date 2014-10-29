@@ -1,0 +1,27 @@
+﻿@{ MS_Website.Models.RecruitmentTemp RecruitmentTemp = Model;}
+@{
+    int week = (int)(RecruitmentTemp.Recruitment.ExpiredTime - RecruitmentTemp.Recruitment.PostTime).TotalDays / 7;
+    int amount = week * 1;
+}
+@if (Session["AccId"] != null)
+{
+    if (RecruitmentTemp.Recruitment.Status == "Payment" && RecruitmentTemp.Recruitment.CustomerId == (int)Session["AccId"])
+    {
+    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" style="display: inline-block">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="ms_website@gmail.com">
+        <input type="hidden" name="item_name" value="Recruitment">
+        <input type="hidden" name="item_number" value="@RecruitmentTemp.Recruitment.RecruitmentId">
+        <input type="hidden" name="amount" value="@amount">
+        <input type="hidden" name="no_shipping" value="0">
+        <input type="hidden" name="no_note" value="1">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="hidden" name="lc" value="USD">
+        <input name="return" value="http://localhost:7197/Post/ReturnPaypal?recruitmentId=@(RecruitmentTemp.Recruitment.RecruitmentId)" type="hidden">
+        <input name="cancel_return" value="http://localhost:7197" type="hidden">
+        <input name="cbt" value="Return to MS Website" type="hidden">
+        <input type="hidden" name="bn" value="PP-BuyNowBF">
+        <input type="image" class="btn" src="http://www.cheshirecanine.com/PayPal-BuyNow-11-x-click-but6.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+    </form>
+    }
+}
