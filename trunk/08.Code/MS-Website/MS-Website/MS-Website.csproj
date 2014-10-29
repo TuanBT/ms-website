@@ -141,10 +141,8 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
-    <Compile Include="Controllers\EvaluateController.cs" />
-    <Compile Include="Controllers\Kmean.cs" />
+    <Compile Include="Business\Kmean.cs" />
     <Compile Include="Controllers\MaidManagerController.cs" />
-    <Compile Include="Controllers\PayPalController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -194,7 +192,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MSModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\PayPalModel.cs" />
     <Compile Include="Models\Rating.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
@@ -1996,10 +1993,6 @@
     <Content Include="Views\MaidMediator\PostRequest.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Views\Shared\_CustomerLayout.cshtml">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Views\Shared\_CustomerLayout2.cshtml" />
     <Content Include="Views\Shared\_PartialAccount.cshtml" />
     <Content Include="Views\Shared\_PartialComment.cshtml" />
     <Content Include="Views\Shared\_PartialRating.cshtml" />
@@ -2016,7 +2009,6 @@
     <Content Include="Views\Shared\_PartialStar.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\Shared\_CustomerLayout.cshtml" />
     <Content Include="Views\Shared\_PartialSearch.cshtml" />
     <Content Include="Views\CustomerRecruiment\Details.cshtml">
       <SubType>Code</SubType>
@@ -2024,14 +2016,6 @@
     <Content Include="Views\CustomerRecruiment\Pay.cshtml" />
     <Content Include="Views\Customer\CustomerProfile.cshtml" />
     <Content Include="Views\Customer\PostRecruitment.cshtml" />
-    <Content Include="Views\PayPal\Index.cshtml" />
-    <Content Include="Views\PayPal\ValidateCommand.cshtml" />
-    <Content Include="Views\PayPal\RedirectFromPaypal.cshtml" />
-    <Content Include="Views\PayPal\CancelFromPaypal.cshtml" />
-    <Content Include="Views\PayPal\NotifyFromPaypal.cshtml" />
-    <Content Include="Views\Evaluate\_Index.cshtml" />
-    <Content Include="Views\Evaluate\_Post.cshtml" />
-    <Content Include="Views\Evaluate\_Rate.cshtml" />
     <Content Include="Views\CustomerRecruiment\Create.cshtml" />
     <Content Include="Views\CustomerRecruiment\_ChooseMaid.cshtml" />
     <Content Include="Views\CustomerRecruiment\_ChooseSkill.cshtml" />
@@ -2062,7 +2046,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
