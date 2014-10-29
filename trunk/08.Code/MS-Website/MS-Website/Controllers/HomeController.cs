@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Providers.Entities;
 using MS_Website.Models;
 using Twilio;
 using Account = MS_Website.Models.Account;
@@ -132,6 +133,11 @@ namespace MS_Website.Controllers
                     var b =
                         ms.Accounts.FirstOrDefault(
                             a => a.Username.Equals(acc.Username) && a.Password.Equals(acc.Password));
+                    var d = ms.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                    if (d==null)
+                    {
+                        ViewBag.Error = "Tên đăng nhập hoặc mật khẩu không đúng";
+                    }
                     if (b != null)
                     {
                         Session["AccId"] = b.AccountId;
@@ -154,49 +160,59 @@ namespace MS_Website.Controllers
 
         public ActionResult AddAccount(Account acc)
         {
-            using (var _db = new MSEntities())
+            var db = new MSEntities();
+            try
             {
-                try
+                using (db)
                 {
                     var newUser = _db.Accounts.Create();
-                    newUser.Username = acc.Username;
-                    newUser.Password = acc.Password;
-                    newUser.Avatar = acc.Avatar;
-                    newUser.Role = acc.Role;
-                    newUser.Email = acc.Email;
-                    newUser.Phone = acc.Phone;
-                    newUser.FullName = acc.FullName;
-                    newUser.JoinDate = DateTime.Now;
-                    newUser.IsActive = true;
-                    newUser.IsWebmaster = false;
-                    _db.Accounts.Add(newUser);
-                    _db.SaveChanges();
-                    if (acc.Role.Equals("Customer"))
+                    var error = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                    if (error != null)
                     {
-                        var addedAcc = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
-                        var newCustomer = new Customer();
-                        newCustomer.AccountId = addedAcc.AccountId;
-                        _db.Customers.Add(newCustomer);
-                        _db.SaveChanges();
+                        ViewBag.Err = "Tên đăng nhập đã tồn tại";
+                        return View("Register");
                     }
                     else
                     {
-                        var addedAcc = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
-                        var newMaid = new MaidMediator();
-                        newMaid.AccountId = addedAcc.AccountId;
-                        _db.MaidMediators.Add(newMaid);
+                        newUser.Username = acc.Username;
+                        newUser.Password = acc.Password;
+                        newUser.Avatar = acc.Avatar;
+                        newUser.Role = acc.Role;
+                        newUser.Email = acc.Email;
+                        newUser.Phone = acc.Phone;
+                        newUser.FullName = acc.FullName;
+                        newUser.JoinDate = DateTime.Now;
+                        newUser.IsActive = true;
+                        newUser.IsWebmaster = false;
+                        _db.Accounts.Add(newUser);
                         _db.SaveChanges();
+                        if (acc.Role.Equals("Customer"))
+                        {
+                            var addedAcc = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                            var newCustomer = new Customer();
+                            newCustomer.AccountId = addedAcc.AccountId;
+                            _db.Customers.Add(newCustomer);
+                            _db.SaveChanges();
+                        }
+                        else
+                        {
+                            var addedAcc = _db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                            var newMaid = new MaidMediator();
+                            newMaid.AccountId = addedAcc.AccountId;
+                            _db.MaidMediators.Add(newMaid);
+                            _db.SaveChanges();
+                        }
                     }
+                    
                     return RedirectToAction("Login", "Home", acc);
                 }
-                catch (Exception)
-                {
-
-                    return View("Register");
-                }
-                
             }
-        }
+            catch(Exception)
+            {
+                return View("Register");
+            }
+
+            }
 
         public ActionResult Redirect()
         {
