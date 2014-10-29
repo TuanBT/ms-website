@@ -165,6 +165,11 @@ namespace MS_Website.Controllers
             return View("Admin");
         }
 
+        public ActionResult AdminConfig()
+        {
+            return View();
+        }
+
         public ActionResult AddStaff(Account acc, string account)
         {
             if (Session["AccId"] != null && Session["IsAdmin"].Equals(true))
