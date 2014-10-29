@@ -32,8 +32,26 @@
 <div class="body">
     <div class="rows">
         <div class="row">
-            <div class="titlePage">Đăng yêu cầu công việc</div>
-            <a href="/Admin/RunKmean">Run kmean</a>
+            <div class="titlePage">XỬ LÝ THUẬT TOÁN KMEAN</div>
+            @using (Html.BeginForm("RunKmean", "Admin", FormMethod.Post))
+            {
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Chạy thuật toán Kmean
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-2" style="margin-top: 11px;"><span>Gợi ý số K</span></div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="numCluterKStr" value="@ViewBag.numCluterK"></div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-success">Kmean</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
