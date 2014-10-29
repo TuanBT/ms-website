@@ -24,7 +24,8 @@
                             Họ và tên
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" name="fullname">
+                            <input type="text" class="form-control" name="fullname" id="txtMaidName">
+                            <div id="AddErr"></div>
                         </div>
                     </div>
                 </div>
@@ -164,11 +165,22 @@
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-success btn-lg">Hoàn tất thêm người giúp việc</button>
+                    <button class="btn btn-success btn-lg" id="btnAddMaid">Hoàn tất thêm người giúp việc</button>
                 </div>
             }
         </div>
     </div>
 </div>
+<script type="text/javascript" language="javascript">
+    $("#btnAddMaid").click(function () {
+        console.debug("sdf");
+        var errText = "";
+        if ($("#txtMaidName").val() == "") {
+            errText = "<font color='red'>Vui lòng nhập tên người giúp việc</font>";
+            document.getElementById("AddErr").innerHTML = errText;
+            return false;
+        } 
+    });
+    </script>
 
 
