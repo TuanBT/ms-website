@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Quản lý cấu hình";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="Menu">
+    <div class="rows">
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    <li>
+                        <a href="@Url.Action("BanAccount", "Admin")" class="hefaContent">Khóa tài khoản</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("AddStaff", "Admin")" class="hefaContent">Thêm nhân viên</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ManageComment", "Admin")" class="hefaContent">Xóa bình luận</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("AdminConfig", "Admin")" class="hefaContent iscurent">Kmean</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="titlePage">Đăng yêu cầu công việc</div>
+            <a href="/Admin/RunKmean">Run kmean</a>
+        </div>
+    </div>
+</div>
