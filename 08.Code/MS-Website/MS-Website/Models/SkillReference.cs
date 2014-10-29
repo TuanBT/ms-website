@@ -43,6 +43,7 @@ namespace MS_Website.Models
         public Nullable<int> Washing { get; set; }
         public Nullable<int> CleanHouse { get; set; }
         public int Type { get; set; }
+        public Nullable<double> Distance { get; set; }
         public Nullable<int> Group { get; set; }
     
         public virtual ICollection<JobRequest> JobRequests { get; set; }

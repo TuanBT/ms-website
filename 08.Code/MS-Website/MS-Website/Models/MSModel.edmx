@@ -331,6 +331,7 @@
           <Property Name="Washing" Type="int" />
           <Property Name="CleanHouse" Type="int" />
           <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Distance" Type="float" />
           <Property Name="Group" Type="int" />
         </EntityType>
         <EntityType Name="Staff">
@@ -1190,6 +1191,7 @@
           <Property Name="Washing" Type="Int32" />
           <Property Name="CleanHouse" Type="Int32" />
           <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Distance" Type="Double" />
           <Property Name="Group" Type="Int32" />
           <NavigationProperty Name="JobRequests" Relationship="MSModel.FK_JobRequest_SkillReference" FromRole="SkillReference" ToRole="JobRequest" />
           <NavigationProperty Name="Recruitments" Relationship="MSModel.FK_Recruitment_SkillReference1" FromRole="SkillReference" ToRole="Recruitment" />
@@ -1862,6 +1864,7 @@
                 <ScalarProperty Name="Washing" ColumnName="Washing" />
                 <ScalarProperty Name="CleanHouse" ColumnName="CleanHouse" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
                 <ScalarProperty Name="Group" ColumnName="Group" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1887,7 +1890,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

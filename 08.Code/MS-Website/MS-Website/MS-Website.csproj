@@ -139,7 +139,6 @@
     <Compile Include="Business\Function.cs" />
     <Compile Include="Business\SkillBusiness.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Business\Kmean.cs" />
     <Compile Include="Controllers\MaidManagerController.cs" />
