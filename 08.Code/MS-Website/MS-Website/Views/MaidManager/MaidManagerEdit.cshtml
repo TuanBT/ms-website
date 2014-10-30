@@ -32,7 +32,8 @@
                             Họ và tên
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@account.FullName" name="fullname">
+                            <input type="text" class="form-control" value="@account.FullName" name="fullname" maxlength="50" id="txtFullName">
+                            <div id="textBlank"></div>
                         </div>
                     </div>
                 </div>
@@ -42,7 +43,8 @@
                             Số điện thoại
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@account.Phone" name="phone">
+                            <input type="text" class="form-control" value="@account.Phone" name="phone" maxlength="15">
+                            <div id="PhoneErr"></div>
                         </div>
                     </div>
                 </div>
@@ -52,7 +54,8 @@
                             Email
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@account.Email" name="email">
+                            <input type="text" class="form-control" value="@account.Email" name="email" id="txtMail" maxlength="50">
+                            <div id="ExpErr"></div>
                         </div>
                     </div>
                 </div>
@@ -82,9 +85,42 @@
                     </div>
                 </div>
                 <div class="buttonFooterPage">
-                    <button class="btn btn-success btn-lg">Cập nhập thông tin</button>
+                    <button class="btn btn-success btn-lg" id="btnEdit">Cập nhập thông tin</button>
                 </div>
             }
         </div>
     </div>
 </div>
+<script type="text/javascript" language="javascript">
+    $("#btnEdit").click(function () {
+        console.debug("sdf");
+        var errText = "";
+        var phone = new RegExp('^[0-9]+$');
+        var reg = new RegExp('[0-9]*[.][0-9]+$');
+        if ($("#txtFullName").val() == "") {
+            errText = "<font color='red'>Vui lòng nhập họ tên</font>";
+            document.getElementById("textBlank").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("textBlank").innerHTML = errText;
+        }
+        if (phone.test($("#txtPhone").val()) == false) {
+            errText = "<font color='red'>Vui lòng nhập số</font>";
+            document.getElementById("PhoneErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("PhoneErr").innerHTML = errText;
+        }
+        if (email.test($("#txtEmail").val()) == false) {
+            errText = "<font color='red'>Vui lòng nhập đúng định dạng abc@abc.abc</font>";
+            document.getElementById("ExpErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("ExpErr").innerHTML = errText;
+        }
+    });
+    </script>
+

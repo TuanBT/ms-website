@@ -36,7 +36,7 @@
                             Họ và tên
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@maid.MaidName" name="fullname" id="txtMaidName">
+                            <input type="text" class="form-control" value="@maid.MaidName" name="fullname" id="txtMaidName" maxlength="50">
                             <div id="AddErr"></div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                             Kinh nghiệm (năm)
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@maid.Experience" name="exp" id="txtExp">
+                            <input type="text" class="form-control" value="@maid.Experience" name="exp" id="txtExp" maxlength="5">
                             <div id="ExpErr"></div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                             Số điện thoại
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@maid.Phone" name="phone" id="txtPhone">
+                            <input type="text" class="form-control" value="@maid.Phone" name="phone" id="txtPhone" maxlength="15">
                             <div id="PhoneErr"></div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                             Giới thiệu bản thân
                         </div>
                         <div class="col-md-8">
-                            <textarea class="form-control" rows="3" name="desc" value="@maid.Description"></textarea>
+                            <textarea class="form-control" rows="3" name="desc" value="@maid.Description" maxlength="100"></textarea>
                         </div>
                     </div>
                 </div>
