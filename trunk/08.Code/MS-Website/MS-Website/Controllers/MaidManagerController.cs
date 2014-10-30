@@ -171,6 +171,7 @@ namespace MS_Website.Controllers
                         {
                             maid.StaffId = managerId;
                         }
+                      
                         maid.MaidName = fullname;
                         maid.Experience = exp;
                         maid.Phone = phone;
