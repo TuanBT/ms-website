@@ -32,7 +32,7 @@
 
 @if (TempData["Alert"] != null)
 {
-    <div class="modal fade in" id="alertModal">
+    @*<div class="modal fade in" id="alertModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -43,7 +43,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
+    @Html.Partial("_PartialNotifier", "4;Chú ý!;" + TempData["Alert"])
 }
 <div class="body">
     <div class="rows">
