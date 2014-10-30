@@ -28,8 +28,8 @@
                                         Chọn người
                                     </button>
                                 </div>
-                                <div>
-                                    <div class="liImage">
+                                <div id="maidBoxChoosed">
+                                    @*<div class="liImage">
                                         <img id="maidImg" src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
                                     </div>
                                     <div class="liMaidContent">
@@ -47,7 +47,7 @@
                                             Đăng/nhận
                                             <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
                                         </div>
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
                         </div>
@@ -64,12 +64,14 @@
                                         lý</h4>
                                 </div>
                                 <div class="modal-body chooseMaidModalMaid">
-                                    @foreach (var maid in ViewBag.MaidList)
+                                    @{int i = -1;}
+                                    @foreach (var maid in (List<Maid>)ViewBag.MaidList)
                                     {
+                                        i++;
                                         <div class="radio">
                                             <label>
                                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId">
-                                                <div>
+                                                <div class="chooseMaid@(i)">
                                                     <div class="liImage">
                                                         <img id="@maid.MaidId img" src="@maid.PersonalImage" alt="Maid sercive" height="100%">
                                                     </div>
@@ -78,15 +80,10 @@
                                                             <a href="#" id="@maid.MaidId name">@maid.MaidName</a>
                                                         </div>
                                                         <div class="licoRate">
-                                                            <span class="glyphicon glyphicon-star"></span>
-                                                            <span class="glyphicon glyphicon-star"></span>
-                                                            <span class="glyphicon glyphicon-star"></span>
-                                                            <span class="glyphicon glyphicon-star"></span>
-                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            @Html.Partial("_PartialStar", (float)maid.RateAvg)
                                                         </div>
-                                                        <div class="ricoPost">
-                                                            Đăng/nhận
-                                                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                                        <div class="blTime">
+                                                            <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender == true ? "Nam" : "Nữ")</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -225,17 +222,17 @@
                             Thời hạn đăng
                         </div>
                         <div class="col-md-8">
-                            <select id="time" class="form-control" name="time">
+                            <select id="time" class="form-control" name="time" onchange="chooseTime(25)">
                                 <option value="1">1 tuần</option>
                                 <option value="2">2 tuần</option>
                                 <option value="3">3 tuần</option>
                                 <option value="4">4 tuần</option>
                                 <option value="5">5 tuần</option>
                             </select>
-                            <span class="postJRTimeTotal">Tổng <span>1</span> * <span
-                                class="postJRTimePrice">25.000</span> = <span class="postJRTimePriceTotal">25.000</span> đồng</span>
+                            <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> * <span
+                                class="postJRTimePrice"><span class="prices">25</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">25</span>.000</span> đồng</span>
                             <span class="postJRTimeDetail">Đơn giá hiện tại <span
-                                class="postJRTimePrice">25.000</span> đồng/Tuần</span>
+                                class="postJRTimePrice"><span class="prices">25</span>.000</span> đồng/Tuần</span>
                         </div>
                     </div>
                 </div>                
@@ -250,6 +247,7 @@
 <script>
     var chosenList = new Array();
     var chosenSkills = "";
+
 
     function addSkill() {
         chosenList = new Array();
@@ -311,18 +309,31 @@
 
     function chooseMaid() {
         var maidId;
+        var numChoose;
         var radio = document.getElementsByName("optionsRadios");
         for (var i = 0; i < radio.length; i++) {
             if (radio[i].checked) {
                 maidId = radio[i].value;
+                numChoose = i;
                 break;
             }
         }
-        var maidImg = document.getElementById(maidId + " img").getAttribute("src");
-        var maidName = document.getElementById(maidId + " name").innerHTML;
-        document.getElementById("maidImg").setAttribute("src", maidImg);
-        document.getElementById("maidName").innerHTML = maidName;
-        document.getElementById("chosenMaid").setAttribute("value", maidId);
+        var div = new $(".chooseMaid" + numChoose).clone();
+        $("#maidBoxChoosed").html(div);
+        /*var maidImg = document.getElementById(maidId + " img").getAttribute("src");
+         var maidName = document.getElementById(maidId + " name").innerHTML;
+         document.getElementById("maidImg").setAttribute("src", maidImg);
+         document.getElementById("maidName").innerHTML = maidName;
+         document.getElementById("chosenMaid").setAttribute("value", maidId);*/
+    }
+
+    function chooseTime(prices) {
+        var price = parseInt(prices);
+        var week = parseInt($("#time").val());
+        var total = price * week;
+        $("#WeekChoose").html(week);
+        $(".prices").html(price);
+        $("#pricesTotal").html(total);
     }
 
     function cancel() {

@@ -345,18 +345,17 @@
                             Thời hạn đăng
                         </div>
                         <div class="col-md-8">
-                            <select class="form-control" id="time" name="time">
+                            <select class="form-control" id="time" name="time" onchange="chooseTime(25)">
                                 <option value="1">1 tuần</option>
                                 <option value="2">2 tuần</option>
                                 <option value="3">3 tuần</option>
                                 <option value="4">4 tuần</option>
                                 <option value="5">5 tuần</option>
                             </select>
-                            <span class="postJRTimeTotal">Tổng <span>1</span> * <span
-                                class="postJRTimePrice">25.000</span> = <span class="postJRTimePriceTotal">25.000</span> đồng</span>
+                           <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> * <span
+                                class="postJRTimePrice"><span class="prices">25</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">25</span>.000</span> đồng</span>
                             <span class="postJRTimeDetail">Đơn giá hiện tại <span
-                                class="postJRTimePrice">25.000</span> đồng/Tuần</span>
-                            
+                                class="postJRTimePrice"><span class="prices">25</span>.000</span> đồng/Tuần</span>
                         </div>
                     </div>
                 </div>
@@ -484,7 +483,16 @@
             document.getElementById("chosenSkills").innerHTML = chosenSkills;
         }
     }
-
+    
+    function chooseTime(prices) {
+        var price = parseInt(prices);
+        var week = parseInt($("#time").val());
+        var total = price * week;
+        $("#WeekChoose").html(week);
+        $(".prices").html(price);
+        $("#pricesTotal").html(total);
+    }
+    
     function cancel() {
         return false;
     }
