@@ -1,0 +1,20 @@
+﻿
+@if (Session["AccId"] != null)
+{
+    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" style="display: inline-block">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="ms_website@gmail.com">
+        <input type="hidden" name="item_name" value="Recruitment">
+        <input id="recruitId" type="hidden" name="item_number">
+        <input id="amount" type="hidden" name="amount">
+        <input type="hidden" name="no_shipping" value="0">
+        <input type="hidden" name="no_note" value="1">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="hidden" name="lc" value="USD">
+        <input id="return" name="return" type="hidden">
+        <input name="cancel_return" value="http://localhost:7197" type="hidden">
+        <input name="cbt" value="Return to MS Website" type="hidden">
+        <input type="hidden" name="bn" value="PP-BuyNowBF">
+        <input type="image" class="btn" src="../Content/Image/Another/PayPal-BuyNow.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+    </form>
+}
