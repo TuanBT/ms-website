@@ -15,7 +15,7 @@
                 <a class="hChContent">Cá nhân</a>
             </li>
             <li>
-                <a href="@Url.Action("CustomerEdit", "Customer", new { custId = account.AccountId})" class="hChContent">Sửa thông tin</a>
+                <a href="@Url.Action("CustomerEdit", "Customer", new { custId = account.AccountId })" class="hChContent">Sửa thông tin</a>
             </li>
         </ul>
     </div>
@@ -225,11 +225,11 @@
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
-                                                                                               class="blTimeText">@recruit.Recruitment.PostTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.PostTime</span>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Tới: </span><span
-                                                                                              class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -251,11 +251,11 @@
                                     {
                                         using (Html.BeginForm("PublicRecruitment", "Customer"))
                                         {
-                                            <input id="publicId" type="hidden" name="recruitId" />
-                                            <div id="button_4" style="display: none;" class="blfbutton">
-                                                <button type="submit" class="btn btn-danger">Công khai</button>
-                                                <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                            </div>
+                                        <input id="publicId" type="hidden" name="recruitId" />
+                                        <div id="button_4" style="display: none;" class="blfbutton">
+                                            <button type="submit" class="btn btn-danger">Công khai</button>
+                                            <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                        </div>
                                         }
                                     }
                                 </div>
@@ -274,11 +274,11 @@
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
-                                                                                               class="blTimeText">@recruit.Recruitment.PostTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.PostTime</span>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Tới: </span><span
-                                                                                              class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -391,12 +391,12 @@
                     <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="mySmallModalLabel">Gia hạn đơn tuyển việc</h4>
             </div>
-            @using (Html.BeginForm("ExtendRecruitment", "Customer", FormMethod.Get, new { name = "ExtendForm" }))
-            {
+            @*@using (Html.BeginForm("ExtendRecruitment", "Customer", FormMethod.Get, new { name = "ExtendForm" }))
+            {*@
                 <input id="extendId" type="hidden" name="recruitId" />
                 <div class="modal-body chooseMaidModalMaid">
                     <span>Thời gian gia hạn</span>
-                    <select class="form-control" name="extend">
+                    <select id="week" class="form-control" name="extend" onchange="chooseWeek()">
                         <option value="1">1 tuần</option>
                         <option value="2">2 tuần</option>
                         <option value="3">3 tuần</option>
@@ -405,13 +405,13 @@
                     </select>
                     <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" onclick="paypal()">Nạp thêm tiền qua Paypal</button>
-                    <div id="extend" style="display: none;">
+            <div class="modal-footer">
+                @Html.Partial("_PartialExtend")
+                @*<div id="extend" style="display: none;">
                         <button class="btn btn-primary" data-dismiss="modal" onclick="extendRecruit()" style="margin-left: 75px; margin-top: 5px; margin-bottom: 10px;">Đồng ý</button>
-                    </div>
-                </div>
-            }
+                    </div>*@
+            </div>
+            @*}*@
         </div>
     </div>
 </div>
@@ -457,9 +457,13 @@
         document.forms["ExtendForm"].submit();
     }
 
-    function paypal() {
-        document.getElementById("extend").setAttribute("style", "");
-        document.getElementById("result").setAttribute("style", "");
+    function chooseWeek() {
+        var recruitId = document.getElementById("extendId").getAttribute("value");
+        var weekDr = document.getElementById("week");
+        var week = weekDr.options[weekDr.selectedIndex].value;
+        document.getElementById("recruitId").setAttribute("value", recruitId);
+        document.getElementById("amount").setAttribute("value", week * 1);
+        document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=" + week);
     }
 </script>
 
