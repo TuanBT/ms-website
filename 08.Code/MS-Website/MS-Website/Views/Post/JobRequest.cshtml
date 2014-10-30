@@ -19,7 +19,7 @@
             </li>
             @if (Session["AccId"] != null)
             {
-                if (JobRequestTemp.Maid.MaidMediatorId == (int)Session["AccId"] || JobRequestTemp.Maid.StaffId == (int)Session["AccId"])
+                if (ViewBag.Manage == true)
                 {
                     <li>
                         <a href="@Url.Action("JobRequestEdit", "MaidManager", new { jobId = JobRequestTemp.Job.JobRequestId })" class="hChContent">Sửa thông tin yêu cầu công việc</a>
@@ -91,7 +91,7 @@
                                                     <div class="modal-header chooseMaidModalTitle">
                                                         <button type="button" class="close" data-dismiss="modal">
                                                             <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                                        <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những đơn tuyển việc mà bạn muốn bỏ</h4>
+                                                        <h4 class="modal-title" id="mySmallModalLabel">Xin hãy chọn một đơn tuyển việc</h4>
                                                     </div>
                                                     @using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new { name = "ApplyForm" }))
                                                     {
@@ -107,7 +107,7 @@
                                                                             </div>
                                                                             <div class="liMaidContent">
                                                                                 <div class="licoFullName">
-                                                                                    <a href="#" id="@recruit.RecruitmentId name">@recruit.Title</a>
+                                                                                    <a href="@Url.Action("GetRecruitment","Post", new { recruitmentId = recruit.RecruitmentId})" id="@recruit.RecruitmentId name">@recruit.Title</a>
                                                                                 </div>
                                                                                 <div class="ricoPost">
                                                                                 </div>

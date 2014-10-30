@@ -14,14 +14,11 @@
             </li>
             @if (Session["AccId"] != null)
             {
-                if (RecruitmentTemp.Recruitment.CustomerId == (int)Session["AccId"])
+                if (ViewBag.Manage == "true")
                 {
-                    if (ViewBag.Manage == "true")
-                    {
                 <li>
                     <a href="@Url.Action("RecruitmentEdit", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId })" class="hChContent">Sửa thông tin tuyển người giúp việc</a>
                 </li>
-                    }
                 }
             }
         </ul>
@@ -80,12 +77,12 @@
                                 @if (Model.Recruitment.Status == "Payment")
                                 {
                                     color = "warning";
-                                    status = "Chưa thanh toán";   
+                                    status = "Chưa thanh toán";
                                 }
-                                 @if (Model.Recruitment.Status == "Hide")
+                                @if (Model.Recruitment.Status == "Hide")
                                 {
                                     color = "default";
-                                    status = "Tạm ẩn";   
+                                    status = "Tạm ẩn";
                                 }
                                 @if (Model.Recruitment.Status == "Waiting")
                                 {
@@ -116,7 +113,7 @@
                                         </div>
                                     </div>
                                 }
-                                @Html.Partial("_PartialPaypal",RecruitmentTemp)
+                                @Html.Partial("_PartialPaypal", RecruitmentTemp)
                             </div>
                             <div class="iSkill">
                                 <div class="iTitle">
@@ -149,7 +146,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="suNumber">
-                                            <span id="currPage">1</span>/@(Math.Round((double)ViewBag.RecommendNum / 2))
+                                            <span id="currPage">1</span>/@(Math.Ceiling((double)ViewBag.RecommendNum / 2))
                                         </div>
                                     </div>
                                 </div>
@@ -242,27 +239,21 @@
                     <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="mySmallModalLabel">Gia hạn đơn tuyển việc</h4>
             </div>
-            @using (Html.BeginForm("ExtendRecruitment", "Customer", FormMethod.Get, new { name = "ExtendForm" }))
-            {
-                <input id="extendId" type="hidden" name="recruitId" value="@RecruitmentTemp.Recruitment.RecruitmentId" />
-                <div class="modal-body chooseMaidModalMaid">
-                    <span>Thời gian gia hạn</span>
-                    <select class="form-control" name="extend">
-                        <option value="1">1 tuần</option>
-                        <option value="2">2 tuần</option>
-                        <option value="3">3 tuần</option>
-                        <option value="4">4 tuần</option>
-                        <option value="5">5 tuần</option>
-                    </select>
-                    <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" onclick="paypal()">Nạp thêm tiền qua Paypal</button>
-                    <div id="extend" style="display: none;">
-                        <button class="btn btn-primary" data-dismiss="modal" onclick="extendRecruit()" style="margin-left: 75px; margin-top: 5px; margin-bottom: 10px;">Đồng ý</button>
-                    </div>
-                </div>
-            }
+            <input id="extendId" type="hidden" name="recruitId" />
+            <div class="modal-body chooseMaidModalMaid">
+                <span>Thời gian gia hạn</span>
+                <select id="week" class="form-control" name="extend" onchange="chooseWeek()">
+                    <option value="1">1 tuần</option>
+                    <option value="2">2 tuần</option>
+                    <option value="3">3 tuần</option>
+                    <option value="4">4 tuần</option>
+                    <option value="5">5 tuần</option>
+                </select>
+                <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
+            </div>
+            <div class="modal-footer">
+                @Html.Partial("_PartialExtend")
+            </div>
         </div>
     </div>
 </div>
@@ -317,5 +308,14 @@
     function paypal() {
         document.getElementById("extend").setAttribute("style", "");
         document.getElementById("result").setAttribute("style", "");
+    }
+    
+    function chooseWeek() {
+        var recruitId = document.getElementById("extendId").getAttribute("value");
+        var weekDr = document.getElementById("week");
+        var week = weekDr.options[weekDr.selectedIndex].value;
+        document.getElementById("recruitId").setAttribute("value", recruitId);
+        document.getElementById("amount").setAttribute("value", week * 1);
+        document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=" + week);
     }
 </script>
