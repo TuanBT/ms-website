@@ -30,7 +30,7 @@
                             Họ và tên
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@account.FullName" name="fullname" id="txtMaidName">
+                            <input type="text" class="form-control" value="@account.FullName" name="fullname" id="txtMaidName" maxlength="50">
                             <div id="AddErr"></div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                             Số điện thoại
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@account.Phone" name="phone" id="txtPhone">
+                            <input type="text" class="form-control" value="@account.Phone" name="phone" id="txtPhone" maxlength="15">
                             <div id="PhoneErr"></div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                             Email
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@account.Email" name="email" id="txtEmail">
+                            <input type="text" class="form-control" value="@account.Email" name="email" id="txtEmail" maxlength="25">
                             <div id="ExpErr"></div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             Địa chỉ
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@ViewBag.CustAddr" name="addr">
+                            <input type="text" class="form-control" value="@ViewBag.CustAddr" name="addr" maxlength="50">
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
         console.debug("sdf");
         var errText = "";
         var phone = new RegExp('^[0-9]+$');
-        
+        var email = new RegExp('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$');
         if ($("#txtMaidName").val() == "") {
             errText = "<font color='red'>Vui lòng nhập tên người giúp việc</font>";
             document.getElementById("AddErr").innerHTML = errText;
