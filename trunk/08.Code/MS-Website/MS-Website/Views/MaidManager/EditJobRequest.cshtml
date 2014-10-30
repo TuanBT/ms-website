@@ -117,7 +117,8 @@
                             Tiêu đề 
                         </div>
                         <div class="col-md-8">
-                            <input class="form-control input-lg text" maxlength="1000" name="title" type="text" value="@jobRequest.Title">
+                            <input class="form-control input-lg text" maxlength="50" name="title" type="text" value="@jobRequest.Title" id="txtTitle">
+                            <div id="textBlank"></div>
                         </div>
                     </div>
                 </div>
@@ -299,7 +300,7 @@
                 </div>             
                 <div>
                     <input id="chosenMaid" type="hidden" name="maidId" value="@jobRequest.MaidId" />
-                    <button class="btn btn-success btn-lg">Sửa yêu cầu</button>
+                    <button class="btn btn-success btn-lg" id="btnEdit">Sửa yêu cầu</button>
                 </div>
             }
         </div>
@@ -390,4 +391,17 @@
         return false;
     }
 </script>
-
+<script type="text/javascript" language="javascript">
+    $("#btnEdit").click(function () {
+        console.debug("sdf");
+        var errText = "";
+        if ($("#txtTitle").val() == "") {
+            errText = "<font color='red'>Vui lòng nhập tiêu đề</font>";
+            document.getElementById("textBlank").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("textBlank").innerHTML = errText;
+        }
+    });
+    </script>
