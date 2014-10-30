@@ -47,7 +47,8 @@
                             Số điện thoại
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" name="phone">
+                            <input type="text" class="form-control" name="phone" id="txtPhone" maxlength="15">
+                            <div id="PhoneErr"></div>
                         </div>
                     </div>
                 </div>
@@ -162,7 +163,7 @@
                             Giới thiệu bản thân
                         </div>
                         <div class="col-md-8">
-                            <textarea class="form-control" rows="3" name="desc"></textarea>
+                            <textarea class="form-control" rows="3" name="desc" maxlength="100"></textarea>
                         </div>
                     </div>
                 </div>
@@ -177,7 +178,7 @@
     $("#btnAddMaid").click(function () {
         console.debug("sdf");
         var errText = "";
-        var phone = new RegExp('\d+$');
+        var phone = new RegExp('^[0-9]+$');
         var reg = new RegExp('[0-9]*[.][0-9]+$');
         if ($("#txtMaidName").val() == "") {
             errText = "<font color='red'>Vui lòng nhập tên người giúp việc</font>";
@@ -188,12 +189,20 @@
             document.getElementById("AddErr").innerHTML = errText;
         }
         if (reg.test($("#txtExp").val())==false) {
-            errText = "<font color='red'>Vui lòng nhập số</font>";
+            errText = "<font color='red'>Vui lòng nhập số thập phân không bao gồm chữ</font>";
             document.getElementById("ExpErr").innerHTML = errText;
             return false;
         } else {
             errText = "";
             document.getElementById("ExpErr").innerHTML = errText;
+        }
+        if (phone.test($("#txtPhone").val()) == false) {
+            errText = "<font color='red'>Vui lòng nhập số</font>";
+            document.getElementById("PhoneErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("PhoneErr").innerHTML = errText;
         }
     });
     </script>
