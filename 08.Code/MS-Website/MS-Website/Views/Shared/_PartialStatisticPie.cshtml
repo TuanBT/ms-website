@@ -8,6 +8,7 @@ var numberStatistic = new int[4] {1, 2, 3, 4};*@
 <input value=@Model[2] type="number" id="approvedInput" hidden/>
 <input value=@Model[3] type="number" id="appliedInput" hidden/>
 
+@*
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
     google.load("visualization", "1", {packages:["corechart"]});
@@ -33,3 +34,75 @@ var numberStatistic = new int[4] {1, 2, 3, 4};*@
 </script>
 
 <div id="piechart" style="width: 900px;height: 500px;margin-left: -126px;margin-top: -14px;position: relative;"></div>
+*@
+
+
+<script src="~/Content/Chart.js/src/Chart.min.js"></script>
+
+<div class="row">
+    <div class="col-md-9">
+        <div id="canvas-holder">
+			<canvas id="chart-area"  height="400" width="400"/>
+		</div>
+
+    </div>
+    <div class="col-md-3">
+        <ul class="legend">
+            @{
+                if (Model[0] != 0)
+                {
+                    <li><span style="background-color: #F7464A"></span>Đang chờ</li>
+                }
+                if (Model[1] != 0)
+                {
+                     <li><span style="background-color:#46BFBD"></span>Hết hạn</li>
+                }
+                if (Model[2] != 0)
+                {
+                    <li><span style="background-color:#FDB45C"></span>Đã phản hồi</li>
+                }
+                if (Model[3] != 0)
+                {
+                      <li><span style="background-color:#949FB1"></span>Đã nhận</li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+
+
+<script>
+    var pieData = [
+            {
+                value: parseInt($('#wattingInput').val()),
+                color: "#F7464A",
+                highlight: "#FF5A5E",
+                label: "Đang chờ"
+            },
+            {
+                value: parseInt($('#expiredInput').val()),
+                color: "#46BFBD",
+                highlight: "#5AD3D1",
+                label: "Hết hạn"
+            },
+            {
+                value: parseInt($('#approvedInput').val()),
+                color: "#FDB45C",
+                highlight: "#FFC870",
+                label: "Đã phản hồi"
+            },
+            {
+                value: parseInt($('#appliedInput').val()),
+                color: "#949FB1",
+                highlight: "#A8B3C5",
+                label: "Đã nhận"
+            }
+
+    ];
+
+    window.onload = function () {
+        var ctx = document.getElementById("chart-area").getContext("2d");
+        window.myPie = new Chart(ctx).Pie(pieData);
+    };
+</script>
+
