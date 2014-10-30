@@ -32,8 +32,6 @@ namespace MS_Website.Models
         [Display(Name = "Email")]
         [EmailAddress(ErrorMessage = "Định dạng email không đúng")]
         public string Email { get; set; }
-        [Display(Name = "Phone")]
-        [Phone(ErrorMessage="Vui lòng nhập số")]
         public string Phone { get; set; }
         public string FullName { get; set; }
     
