@@ -53,7 +53,7 @@ namespace MS_Website.Controllers
                     ///new RecruitmentTemp();
                     var recruitmentTemp = new RecruitmentTemp
                                                           {
-                                                              Account = null,
+                                                              Account = _db.Accounts.SingleOrDefault(a => a.AccountId == recruitment.CustomerId),
                                                               Customer = customer,
                                                               Recruitment = recruitment,
                                                               JobRequest = null,

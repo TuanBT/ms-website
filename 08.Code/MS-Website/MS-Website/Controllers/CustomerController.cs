@@ -312,17 +312,17 @@ namespace MS_Website.Controllers
                 if (recruitment.PostTime.AddDays(3) < DateTime.Now)
                 {
                     TempData["Alert"] = "Công việc đã hết hạn cho sửa";
-                    return RedirectToAction("GetJobRequest", "Post", new { recruitmentId = recruitId });
+                    return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
                 }
                 if (recruitment.Status.Equals("Applied"))
                 {
                     TempData["Alert"] = "Công việc đã được thuê";
-                    return RedirectToAction("GetJobRequest", "Post", new { recruitmentId = recruitId });
+                    return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
                 }
                 if (!recruitment.IsActive)
                 {
                     TempData["Alert"] = "Công việc không tồn tại";
-                    return RedirectToAction("GetJobRequest", "Post", new { recruitmentId = recruitId });
+                    return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
                 }
                 var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId);
                 skillRef.Gender = null;
