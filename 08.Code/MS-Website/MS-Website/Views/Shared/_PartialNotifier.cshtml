@@ -1,0 +1,38 @@
+﻿@* @Html.Partial("_PartialNotifier", "1;Thông báo;Nội dung thông báo!")*@
+
+@{
+    string str = Model;
+    string type = str.Split(';')[0];
+    string title = str.Split(';')[1];
+    string content = str.Split(';')[2];
+    string typeStr = "success";
+}
+@{
+    if (type == "1")
+    {
+        typeStr = "success";
+    }
+    if (type == "2")
+    {
+        typeStr = "info";
+    }
+    if (type == "3")
+    {
+        typeStr = "warning";
+    }
+    if (type == "4")
+    {
+        typeStr = "danger";
+    }
+}
+<script>
+    $(".MSNotifier").fadeIn();
+    setTimeout(function () {
+        $(".MSNotifier").fadeOut("slow");
+    }, 3000);
+</script>
+<div class="MSNotifier">
+    <div class="alert alert-@typeStr" role="alert">
+        <strong>@title</strong> @content
+    </div>
+</div>
