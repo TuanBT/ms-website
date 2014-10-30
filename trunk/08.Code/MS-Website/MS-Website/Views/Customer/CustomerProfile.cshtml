@@ -65,11 +65,11 @@
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
-                                                        class="blTimeText">@recruit.Recruitment.PostTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.PostTime.ToShortDateString()</span>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Tới: </span><span
-                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime.ToShortDateString()</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -123,11 +123,11 @@
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Đăng: </span><span
-                                                            class="blTimeText">@recruit.Recruitment.PostTime</span>
+                                                            class="blTimeText">@recruit.Recruitment.PostTime.ToShortDateString()</span>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Tới: </span><span
-                                                            class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
+                                                            class="blTimeText">@recruit.Recruitment.ExpiredTime.ToShortDateString()</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,11 +141,11 @@
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Đăng: </span><span
-                                                            class="blTimeText">@recruit.JobRequest.PostTime</span>
+                                                            class="blTimeText">@recruit.JobRequest.PostTime.ToShortDateString()</span>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Tới: </span><span
-                                                            class="blTimeText">@recruit.JobRequest.ExpiredTime</span>
+                                                            class="blTimeText">@recruit.JobRequest.ExpiredTime.ToShortDateString()</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,11 +180,11 @@
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
-                                                        class="blTimeText">@recruit.Recruitment.PostTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.PostTime.ToShortDateString()</span>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Tới: </span><span
-                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime.ToShortDateString()</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -225,11 +225,11 @@
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
-                                                        class="blTimeText">@recruit.Recruitment.PostTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.PostTime.ToShortDateString()</span>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Tới: </span><span
-                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime.ToShortDateString()</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -274,11 +274,11 @@
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
-                                                        class="blTimeText">@recruit.Recruitment.PostTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.PostTime.ToShortDateString()</span>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Tới: </span><span
-                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime.ToShortDateString()</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -312,11 +312,11 @@
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
-                                                        class="blTimeText">@recruit.Recruitment.PostTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.PostTime.ToShortDateString()</span>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Tới: </span><span
-                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime</span>
+                                                        class="blTimeText">@recruit.Recruitment.ExpiredTime.ToShortDateString()</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -354,7 +354,7 @@
                                 Tham gia
                             </div>
                             <div class="rideroContent">
-                                <strong>@account.JoinDate
+                                <strong>@account.JoinDate.ToShortDateString()
                                 </strong>
                             </div>
                         </li>
@@ -391,27 +391,21 @@
                     <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="mySmallModalLabel">Gia hạn đơn tuyển việc</h4>
             </div>
-            @*@using (Html.BeginForm("ExtendRecruitment", "Customer", FormMethod.Get, new { name = "ExtendForm" }))
-            {*@
-                <input id="extendId" type="hidden" name="recruitId" />
-                <div class="modal-body chooseMaidModalMaid">
-                    <span>Thời gian gia hạn</span>
-                    <select id="week" class="form-control" name="extend" onchange="chooseWeek()">
-                        <option value="1">1 tuần</option>
-                        <option value="2">2 tuần</option>
-                        <option value="3">3 tuần</option>
-                        <option value="4">4 tuần</option>
-                        <option value="5">5 tuần</option>
-                    </select>
-                    <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
-                </div>
+            <input id="extendId" type="hidden" name="recruitId" />
+            <div class="modal-body chooseMaidModalMaid">
+                <span>Thời gian gia hạn</span>
+                <select id="week" class="form-control" name="extend" onchange="chooseWeek()">
+                    <option value="1">1 tuần</option>
+                    <option value="2">2 tuần</option>
+                    <option value="3">3 tuần</option>
+                    <option value="4">4 tuần</option>
+                    <option value="5">5 tuần</option>
+                </select>
+                <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
+            </div>
             <div class="modal-footer">
                @Html.Partial("_PartialExtend")
-                @*<div id="extend" style="display: none;">
-                        <button class="btn btn-primary" data-dismiss="modal" onclick="extendRecruit()" style="margin-left: 75px; margin-top: 5px; margin-bottom: 10px;">Đồng ý</button>
-                    </div>*@
             </div>
-            @*}*@
         </div>
     </div>
 </div>
