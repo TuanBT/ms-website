@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Index";
+    ViewBag.Manage = true;
+    ViewBag.Statistic = true;
+}
+
+<script src="~/Content/Chart.js/src/Chart.min.js"></script>
+
+<div class="Menu">
+    @Html.Partial("_PartialMenu")
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li class="iscurent">
+                <a href="@Url.Action("StatisticRequest", "Statistic")" class="hChContent">Các yêu cầu</a>
+            </li>
+            <li class="">
+                <a href="#" class="hChContent">Doanh thu</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="titlePage">THỐNG KÊ CÁC YÊU CẦU TRONG NĂM 2014</div>
+            <div class="col-md-8">
+                <div class="leftInfo">
+                    <div>
+                        <canvas id="canvas"></canvas>
+                    </div>
+                    <input id="valueX" value="T1;T2;T3;T4;T5;T6;T7;T8;T9;T10;T11;T12" type="hidden" />
+                    <input id="valueY1" value="@ViewBag.StaTisticJR" type="hidden"/>
+                    <input id="valueY2" value="@ViewBag.StatisticRc" type="hidden"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rightInfo">
+                    <ul class="legend">
+                        <li><span style="background-color:rgba(211,84,0,1)"></span>Các yêu cầu tìm việc</li>
+                        <li><span style="background-color:rgba(39,174,96,1)"></span>Các yêu cầu tìm người</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var data = {
+        labels: $("#valueX").val().split(';'),
+        datasets: [
+            {
+                label: "Yêu cầu công việc",
+                fillColor: "rgba(211,84,0,0.05)",
+                strokeColor: "rgba(211,84,0,1)",
+                pointColor: "rgba(211,84,0,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(211,84,0,1)",
+                data: $("#valueY1").val().split(';')
+            },
+	         {
+	             label: "Tìm người giúp việc",
+	             fillColor: "rgba(39,174,96,0.05)",
+	             strokeColor: "rgba(39,174,96,1)",
+	             pointColor: "rgba(39,174,96,1)",
+	             pointStrokeColor: "#fff",
+	             pointHighlightFill: "#fff",
+	             pointHighlightStroke: "rgba(39,174,96,1)",
+	             data: $("#valueY2").val().split(';')
+	         }/*,
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(41,128,185,0.05)",
+                strokeColor: "rgba(41,128,185,1)",
+                pointColor: "rgba(41,128,185,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(41,128,185,1)",
+                data: $("#valueY3").val().split(';')
+            }*/
+        ]
+    };
+
+
+    window.onload = function () {
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myLine = new Chart(ctx).Line(data, {
+            responsive: true
+        });
+    };
+
+	</script>
