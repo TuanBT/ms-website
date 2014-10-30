@@ -2044,6 +2044,7 @@
     <Content Include="Views\Admin\AdminConfig.cshtml" />
     <Content Include="Views\Shared\_PartialPaypal.cshtml" />
     <Content Include="Views\Shared\_PartialNotifier.cshtml" />
+    <Content Include="Views\Shared\_PartialExtend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
