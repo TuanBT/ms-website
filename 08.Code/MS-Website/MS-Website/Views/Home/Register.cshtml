@@ -47,8 +47,8 @@
                             @Html.ValidationMessageFor(m=>m.Email)
                         </div>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m => m.Phone, new { @class = "oInputText oFormMed", @placeholder = "Điện thoại" })
-                            @Html.ValidationMessageFor(m=>m.Phone)
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "oInputText oFormMed", @placeholder = "Điện thoại" , @id="txtPhone"})
+                            <div id="PhoneErr"></div>
                             
                         </div>
                         <div class="oFormField">
@@ -85,5 +85,28 @@
         </div>
     </div>
 </body>
-
+<script type="text/javascript" language="javascript">
+    $("#validate").click(function () {
+        console.debug("sdf");
+        var errText = "";
+        var phone = new RegExp('^[0-9]+$');
+        var email = new RegExp('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$');
+        if (phone.test($("#txtPhone").val()) == false) {
+            errText = "<font color='red'>Vui lòng nhập số</font>";
+            document.getElementById("PhoneErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("PhoneErr").innerHTML = errText;
+        }
+        if (email.test($("#txtEmail").val()) == false) {
+            errText = "<font color='red'>Vui lòng nhập đúng định dạng abc@abc.abc</font>";
+            document.getElementById("ExpErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("ExpErr").innerHTML = errText;
+        }
+    });
+    </script>
 </html>
