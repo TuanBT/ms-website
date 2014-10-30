@@ -1205,7 +1205,7 @@ a {
 
 .MSNotifier {
     position: fixed;
-    bottom: 5px;
+    top: 130px;
     z-index: 1000;
-    right: 5px;
+    right: 25px;
 }
