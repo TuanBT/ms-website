@@ -36,7 +36,8 @@
                             Họ và tên
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@maid.MaidName" name="fullname">
+                            <input type="text" class="form-control" value="@maid.MaidName" name="fullname" id="txtMaidName">
+                            <div id="AddErr"></div>
                         </div>
                     </div>
                 </div>
@@ -46,7 +47,8 @@
                             Kinh nghiệm (năm)
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@maid.Experience" name="exp">
+                            <input type="text" class="form-control" value="@maid.Experience" name="exp" id="txtExp">
+                            <div id="ExpErr"></div>
                         </div>
                     </div>
                 </div>
@@ -56,7 +58,8 @@
                             Số điện thoại
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@maid.Phone" name="phone">
+                            <input type="text" class="form-control" value="@maid.Phone" name="phone" id="txtPhone">
+                            <div id="PhoneErr"></div>
                         </div>
                     </div>
                 </div>
@@ -205,9 +208,41 @@
                     </div>
                 </div>
                 <div class="buttonFooterPage">
-                    <button class="btn btn-success btn-lg">Cập nhập thông tin</button>
+                    <button class="btn btn-success btn-lg" id="btnEdit">Cập nhập thông tin</button>
                 </div>
             }
         </div>
     </div>
 </div>
+<script type="text/javascript" language="javascript">
+    $("#btnEdit").click(function () {
+        console.debug("sdf");
+        var errText = "";
+        var phone = new RegExp('^[0-9]+$');
+        var reg = new RegExp('[0-9]*[.][0-9]+$');
+        if ($("#txtMaidName").val() == "") {
+            errText = "<font color='red'>Vui lòng nhập tên người giúp việc</font>";
+            document.getElementById("AddErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("AddErr").innerHTML = errText;
+        }
+        if (reg.test($("#txtExp").val()) == false) {
+            errText = "<font color='red'>Vui lòng nhập số thập phân không bao gồm chữ</font>";
+            document.getElementById("ExpErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("ExpErr").innerHTML = errText;
+        }
+        if (phone.test($("#txtPhone").val()) == false) {
+            errText = "<font color='red'>Vui lòng nhập số</font>";
+            document.getElementById("PhoneErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("PhoneErr").innerHTML = errText;
+        }
+    });
+    </script>
