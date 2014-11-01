@@ -149,6 +149,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -538,6 +539,13 @@
     <Content Include="Content\bootstrap-star-rating-master\img\loading.gif" />
     <Content Include="Content\bootstrap-star-rating-master\js\star-rating.js" />
     <Content Include="Content\bootstrap-star-rating-master\js\star-rating.min.js" />
+    <Content Include="Content\Chart.js\src\Chart.Bar.js" />
+    <Content Include="Content\Chart.js\src\Chart.Core.js" />
+    <Content Include="Content\Chart.js\src\Chart.Doughnut.js" />
+    <Content Include="Content\Chart.js\src\Chart.Line.js" />
+    <Content Include="Content\Chart.js\src\Chart.min.js" />
+    <Content Include="Content\Chart.js\src\Chart.PolarArea.js" />
+    <Content Include="Content\Chart.js\src\Chart.Radar.js" />
     <Content Include="Content\font-awesome-4.2.0\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.2.0\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome-4.2.0\fonts\fontawesome-webfont.svg" />
@@ -2045,6 +2053,7 @@
     <Content Include="Views\Shared\_PartialPaypal.cshtml" />
     <Content Include="Views\Shared\_PartialNotifier.cshtml" />
     <Content Include="Views\Shared\_PartialExtend.cshtml" />
+    <Content Include="Views\Statistic\StatisticRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
