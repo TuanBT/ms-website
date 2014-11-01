@@ -482,8 +482,8 @@ background-color: #5cb85c;
 }
 
     .skillText:hover {
-        color: #fff;
-        background: #00aeec;
+        color: #ecf0f1;
+        background: #3498db;
     }
 
     .skillText span {
