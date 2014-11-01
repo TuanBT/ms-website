@@ -19,7 +19,7 @@
             </li>
             @if (Session["AccId"] != null)
             {
-                if (ViewBag.Manage == true)
+                if (ViewBag.Manage == "true")
                 {
                     <li>
                         <a href="@Url.Action("JobRequestEdit", "MaidManager", new { jobId = JobRequestTemp.Job.JobRequestId })" class="hChContent">Sửa thông tin yêu cầu công việc</a>

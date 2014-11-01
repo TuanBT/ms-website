@@ -1201,11 +1201,13 @@ a {
 
 .iTitleContent {
     font-size: 16px;
+    color: #8e44ad;
+font-weight: 700;
 }
 
 .MSNotifier {
     position: fixed;
-    top: 130px;
+    top: 25px;
     z-index: 1000;
     right: 25px;
 }
@@ -1239,4 +1241,9 @@ a {
             width: 20px;
             height: 20px;
             border-radius: 5px;
+        }
+
+
+        .AddErr {
+            font-style: italic;
         }

@@ -17,6 +17,11 @@ namespace MS_Website.Business
             string AccountSid = "AC439137c82934e09c6e8120d9ee085b2b";
             string AuthToken = "b145152a0db201fe0e624f0205f66734";
 
+            phoneMaid = RegionPhone(phoneMaid);
+            phoneStaff = RegionPhone(phoneStaff);
+            phoneMaidMediator = RegionPhone(phoneMaidMediator);
+            phoneCustomer = RegionPhone(phoneCustomer);
+
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
             var message = new Message();
             if(phoneMaid!="")
@@ -42,6 +47,20 @@ namespace MS_Website.Business
                 var error = message.RestException.Message;
                 // handle the error ...
             }
+        }
+
+        public string RegionPhone(string phone)
+        {
+            string phoneTemp = "+84";
+            if (phone[0] == '0')
+            {
+                for (int i = 1; i < phone.Length; i++)
+                {
+                    phoneTemp += phone[i];
+                }
+                return phoneTemp;
+            }
+            return phone;
         }
     }
 }
