@@ -4,6 +4,12 @@
     MS_Website.Models.Maid maid = Model;
     var MaidManager = (MS_Website.Models.MaidManager)ViewBag.MaidManager;
     ViewBag.Info = true;
+    List<MS_Website.Models.JobRequestTemp> notApplList = ViewBag.NotApplList;
+    List<MS_Website.Models.JobRequestTemp> applList = ViewBag.ApplList;
+    List<MS_Website.Models.JobRequestTemp> apprList = ViewBag.ApprList;
+    List<MS_Website.Models.JobRequestTemp> expiredList = ViewBag.ExpiredList;
+    List<MS_Website.Models.JobRequestTemp> hideList = ViewBag.HideList;
+    List<MS_Website.Models.JobRequestTemp> notActiveList = ViewBag.NotActiveList;
 }
 
 <div class="Menu">
@@ -14,7 +20,7 @@
                 <a class="hChContent">Cá nhân</a>
             </li>
             <li class>
-                <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = maid.MaidId})" class="hChContent">Sửa thông tin</a>
+                <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = maid.MaidId })" class="hChContent">Sửa thông tin</a>
             </li>
         </ul>
     </div>
@@ -61,13 +67,18 @@
                                 <li class><a href="#notActive" role="tab" data-toggle="tab">Chưa kích hoạt</a></li>
                             }
                         </ul>
-
+                        @{
+                            var counter = 1;
+                            var total = 0;
+                        }
                         <div class="tab-content">
                             <div class="tab-pane fade in active bFree" id="free">
                                 <ul class="bFreeListWork">
-                                    @foreach (var job in ViewBag.NotApplList)
+                                    <input id="currPos1" type="hidden" value="4" />
+                                    @foreach (var job in notApplList)
                                     {
-                                        <li id="@job.Job.JobRequestId" onclick="chooseJob(@job.Job.JobRequestId, 1)">
+                                        var id = job.Job.JobRequestId;
+                                        <li id="@counter" onclick="chooseJob(@counter, @id, 1)" style="display: @(counter > 4 ? "none" : "")">
                                             <div class="blImage">
                                                 <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                             </div>
@@ -85,18 +96,24 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        if (counter < notApplList.Count)
+                                        {
+                                            counter++;
+                                        }
                                     }
+                                    @{
+                                        total += notApplList.Count;
+                                    }
+                                    <input id="lastPos1" type="hidden" value="@counter" />
                                 </ul>
                                 <div class="blFooter">
                                     <div class="blfNumber">
                                         <ul class="pagination pagination-sm">
-                                            <li><a href="#">&laquo;</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">&raquo;</a></li>
+                                            <div class="suNumber">
+                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(1, 4)"></span>
+                                                <span id="currPage1">1</span>/@(Math.Ceiling((double)notApplList.Count / 4))
+                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(1, 4)"></span>
+                                            </div>
                                         </ul>
                                     </div>
                                     @if (ViewBag.Manage == "true")
@@ -125,9 +142,10 @@
                                     </div>
                                 </div>
                                 <ul class="bApplyListWork">
-                                    @foreach (var job in ViewBag.ApplList)
+                                    <input id="currPos2" type="hidden" value="@(counter + 2)" />
+                                    @foreach (var job in applList)
                                     {
-                                        <li>
+                                        <li id="@(counter + 1)" style="display: @(counter - total > 1 ? "none" : "")">
                                             <div class="bAWork">
                                                 <div class="blImage">
                                                     <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
@@ -152,23 +170,29 @@
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Nhận: </span><span
-                                                            class="blTimeText">@job.Job.ApplyTimes.ToShortDateString()</span>
+                                                            class="blTimeText">@job.Job.ApplyTimes.Value.ToShortDateString()</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
+                                        if (counter - total < applList.Count)
+                                        {
+                                            counter++;
+                                        }
                                     }
+                                    @{
+                                        total += applList.Count;
+                                    }
+                                    <input id="lastPos2" type="hidden" value="@counter" />
                                 </ul>
                                 <div class="blFooter">
                                     <div class="blfNumber">
                                         <ul class="pagination pagination-sm">
-                                            <li><a href="#">&laquo;</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">&raquo;</a></li>
+                                            <div class="suNumber">
+                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(2, 2)"></span>
+                                                <span id="currPage2">1</span>/@(Math.Ceiling((double)applList.Count / 2))
+                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(2, 2)"></span>
+                                            </div>
                                         </ul>
                                     </div>
                                 </div>
@@ -183,9 +207,10 @@
                                     </div>
                                 </div>
                                 <ul class="bApplyListWork">
-                                    @foreach (var job in ViewBag.ApprList)
+                                    <input id="currPos3" type="hidden" value="@(counter + 2)" />
+                                    @foreach (var job in apprList)
                                     {
-                                        <li>
+                                        <li id="@(counter + 1)" style="display: @(counter - total > 1 ? "none" : "")">
                                             <div class="bAWork">
                                                 <div class="blImage">
                                                     <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
@@ -210,32 +235,39 @@
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Nhận: </span><span
-                                                            class="blTimeText">@job.Job.ApplyTimes.ToShortDateString()</span>
+                                                            class="blTimeText">@job.Job.ApplyTimes.Value.ToShortDateString()</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
+                                        if (counter - total < apprList.Count)
+                                        {
+                                            counter++;
+                                        }
                                     }
+                                    @{
+                                        total += apprList.Count;
+                                    }
+                                    <input id="lastPos3" type="hidden" value="@counter" />
                                 </ul>
                                 <div class="blFooter">
                                     <div class="blfNumber">
                                         <ul class="pagination pagination-sm">
-                                            <li><a href="#">&laquo;</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">&raquo;</a></li>
+                                            <div class="suNumber">
+                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(3, 2)"></span>
+                                                <span id="currPage3">1</span>/@(Math.Ceiling((double)apprList.Count / 2))
+                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(3, 2)"></span>
+                                            </div>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade bExprred" id="expired">
                                 <ul class="bexpiredListWork">
-                                    @foreach (var job in ViewBag.ExpiredList)
+                                    <input id="currPos4" type="hidden" value="@(counter + 4)" />
+                                    @foreach (var job in expiredList)
                                     {
-                                        <li id="@job.Job.JobRequestId" onclick="chooseJob(@job.Job.JobRequestId, 4)">
+                                        <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
                                             <div class="blImage">
                                                 <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                             </div>
@@ -253,18 +285,24 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        if (counter - total < expiredList.Count)
+                                        {
+                                            counter++;
+                                        }
                                     }
+                                    @{
+                                        total += expiredList.Count;
+                                    }
+                                    <input id="lastPos4" type="hidden" value="@counter" />
                                 </ul>
                                 <div class="blFooter">
                                     <div class="blfNumber">
                                         <ul class="pagination pagination-sm">
-                                            <li><a href="#">&laquo;</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">&raquo;</a></li>
+                                            <div class="suNumber">
+                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(4, 4)"></span>
+                                                <span id="currPage4">1</span>/@(Math.Ceiling((double)expiredList.Count / 4))
+                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(4, 4)"></span>
+                                            </div>
                                         </ul>
                                     </div>
                                     @if (ViewBag.Manage == "true")
@@ -280,9 +318,10 @@
                             </div>
                             <div class="tab-pane fade bExprred" id="hide">
                                 <ul class="bexpiredListWork">
-                                    @foreach (var job in ViewBag.HideList)
+                                    <input id="currPos5" type="hidden" value="@(counter + 4)" />
+                                    @foreach (var job in hideList)
                                     {
-                                        <li id="@job.Job.JobRequestId" onclick="chooseJob(@job.Job.JobRequestId, 5)">
+                                        <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
                                             <div class="blImage">
                                                 <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                             </div>
@@ -300,41 +339,48 @@
                                                 </div>
                                             </div>
                                         </li>
+                                        if (counter - total < hideList.Count)
+                                        {
+                                            counter++;
+                                        }
                                     }
+                                    @{
+                                        total += hideList.Count;
+                                    }
+                                    <input id="lastPos5" type="hidden" value="@counter" />
                                 </ul>
                                 <div class="blFooter">
                                     <div class="blfNumber">
                                         <ul class="pagination pagination-sm">
-                                            <li><a href="#">&laquo;</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">&raquo;</a></li>
+                                            <div class="suNumber">
+                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(5, 4)"></span>
+                                                <span id="currPage5">1</span>/@(Math.Ceiling((double)hideList.Count / 4))
+                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(5, 4)"></span>
+                                            </div>
                                         </ul>
                                     </div>
                                     @if (ViewBag.Manage == "true")
                                     {
                                         using (Html.BeginForm("PublicJobRequest", "MaidManager"))
                                         {
-                                            <input id="publicId" type="hidden" name="jobId" />
-                                            <div id="button_5" style="display: none;" class="blfbutton">
-                                                <button type="submit" class="btn btn-danger">Công khai</button>
-                                                @if (Session["Role"].Equals("Staff"))
-                                                {
-                                                    <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                                }
-                                            </div>
+                                        <input id="publicId" type="hidden" name="jobId" />
+                                        <div id="button_5" style="display: none;" class="blfbutton">
+                                            <button type="submit" class="btn btn-danger">Công khai</button>
+                                            @if (Session["Role"].Equals("Staff"))
+                                            {
+                                                <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                            }
+                                        </div>
                                         }
                                     }
                                 </div>
                             </div>
                             <div class="tab-pane fade bExprred" id="notActive">
                                 <ul class="bexpiredListWork">
-                                    @foreach (var job in ViewBag.NotActiveList)
+                                    <input id="currPos6" type="hidden" value="@(counter + 4)" />
+                                    @foreach (var job in notActiveList)
                                     {
-                                        <li id="@job.Job.JobRequestId">
+                                        <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
                                             <div class="blImage">
                                                 <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                             </div>
@@ -344,26 +390,32 @@
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Đăng: </span><span
-                                                        class="blTimeText">@job.Job.PostTime.ToShortDateString()</span>
+                                                                                               class="blTimeText">@job.Job.PostTime.ToShortDateString()</span>
                                                 </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Tới: </span><span
-                                                        class="blTimeText">@job.Job.ExpiredTime.ToShortDateString()</span>
+                                                                                              class="blTimeText">@job.Job.ExpiredTime.ToShortDateString()</span>
                                                 </div>
                                             </div>
                                         </li>
+                                        if (counter - total < notActiveList.Count)
+                                        {
+                                            counter++;
+                                        }
                                     }
+                                    @{
+                                        total += notActiveList.Count;
+                                    }
+                                    <input id="lastPos6" type="hidden" value="@counter" />
                                 </ul>
                                 <div class="blFooter">
                                     <div class="blfNumber">
                                         <ul class="pagination pagination-sm">
-                                            <li><a href="#">&laquo;</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">&raquo;</a></li>
+                                            <div class="suNumber">
+                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(6, 4)"></span>
+                                                <span id="currPage6">1</span>/@(Math.Ceiling((double)notActiveList.Count / 4))
+                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(6, 4)"></span>
+                                            </div>
                                         </ul>
                                     </div>
                                 </div>
@@ -484,17 +536,17 @@
     </div>
 </div>
 <script>
-    var chosenId = 0;
-    function chooseJob(jobId, type) {
-        if (chosenId != 0) {
-            document.getElementById(chosenId).setAttribute("class", "");
+    var chosenCount = 0;
+    function chooseJob(counter, jobId, type) {
+        if (chosenCount != 0) {
+            document.getElementById(chosenCount).setAttribute("class", "");
         }
-        if (jobId != chosenId) {
-            document.getElementById(jobId).setAttribute("class", "isCurent");
-            chosenId = jobId;
+        if (counter != chosenCount) {
+            document.getElementById(counter).setAttribute("class", "isCurent");
+            chosenCount = jobId;
         } else {
-            document.getElementById(jobId).setAttribute("class", "");
-            chosenId = 0;
+            document.getElementById(counter).setAttribute("class", "");
+            chosenCount = 0;
             type = 0;
         }
         if (type == 1) {
@@ -523,6 +575,49 @@
 
     function extendRecruit() {
         document.forms["ExtendForm"].submit();
+    }
+
+    function loadNext(type, amount) {
+        var currPos = parseInt(document.getElementById("currPos" + type).getAttribute("value"));
+        var lastPos = parseInt(document.getElementById("lastPos" + type).getAttribute("value"));
+        if (currPos < lastPos) {
+            var currPage = parseInt(document.getElementById("currPage" + type).innerHTML) + 1;
+            document.getElementById("currPage" + type).innerHTML = currPage;
+            for (var i = currPos - amount + 1; i <= currPos; i++) {
+                if (document.getElementById(i) != null) {
+                    document.getElementById(i).setAttribute("style", "display: none");
+                }
+            }
+            for (var j = currPos + 1; j <= currPos + amount; j++) {
+                if (document.getElementById(j) != null) {
+                    document.getElementById(j).setAttribute("style", "");
+                }
+            }
+            document.getElementById("currPos" + type).setAttribute("value", currPos + amount);
+        }
+    }
+
+    function loadBack(type, amount) {
+        var currPos = parseInt(document.getElementById("currPos" + type).getAttribute("value"));
+        var lastPos = 0;
+        if (parseInt(type) - 1 > 0) {
+            lastPos = parseInt(document.getElementById("lastPos" + (parseInt(type) - 1)).getAttribute("value"));
+        }
+        if (currPos - amount > lastPos) {
+            var currPage = parseInt(document.getElementById("currPage" + type).innerHTML) - 1;
+            document.getElementById("currPage" + type).innerHTML = currPage;
+            for (var i = currPos; i > currPos - amount; i--) {
+                if (document.getElementById(i) != null) {
+                    document.getElementById(i).setAttribute("style", "display: none");
+                }
+            }
+            for (var j = currPos - amount; j > currPos - 2 * amount; j--) {
+                if (document.getElementById(j) != null) {
+                    document.getElementById(j).setAttribute("style", "");
+                }
+            }
+            document.getElementById("currPos" + type).setAttribute("value", currPos - amount);
+        }
     }
 </script>
 
