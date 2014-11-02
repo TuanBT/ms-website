@@ -12,24 +12,29 @@ namespace MS_Website.Controllers
         //
         // GET: /Statistic/
 
-        public ActionResult StatisticRequest()
+        public ActionResult StatisticRequest(int year)
         {
+            if(year==0)
+            {
+                year = DateTime.Now.Year;
+            }
             if (Session["AccId"] != null)
             {
                 using (var db = new MSEntities())
                 {
-                    var t1 = new DateTime(2014, 1, 1);
-                    var t2 = new DateTime(2014, 2, 1);
-                    var t3 = new DateTime(2014, 3, 1);
-                    var t4 = new DateTime(2014, 4, 1);
-                    var t5 = new DateTime(2014, 5, 1);
-                    var t6 = new DateTime(2014, 6, 1);
-                    var t7 = new DateTime(2014, 7, 1);
-                    var t8 = new DateTime(2014, 8, 1);
-                    var t9 = new DateTime(2014, 9, 1);
-                    var t10 = new DateTime(2014, 10, 1);
-                    var t11 = new DateTime(2014, 11, 1);
-                    var t12 = new DateTime(2014, 12, 1);
+                    var t1 = new DateTime(year, 1, 1);
+                    var t2 = new DateTime(year, 2, 1);
+                    var t3 = new DateTime(year, 3, 1);
+                    var t4 = new DateTime(year, 4, 1);
+                    var t5 = new DateTime(year, 5, 1);
+                    var t6 = new DateTime(year, 6, 1);
+                    var t7 = new DateTime(year, 7, 1);
+                    var t8 = new DateTime(year, 8, 1);
+                    var t9 = new DateTime(year, 9, 1);
+                    var t10 = new DateTime(year, 10, 1);
+                    var t11 = new DateTime(year, 11, 1);
+                    var t12 = new DateTime(year, 12, 1);
+                    var t13 = new DateTime(year+1, 1, 1);
 
                     var jr = db.JobRequests;
                     string statisticJr = "" +
@@ -44,7 +49,7 @@ namespace MS_Website.Controllers
                                jr.Count(j => j.PostTime >= t9 && j.PostTime < t10) + ";" +
                                jr.Count(j => j.PostTime >= t10 && j.PostTime < t11) + ";" +
                                jr.Count(j => j.PostTime >= t11 && j.PostTime < t12) + ";" +
-                               jr.Count(j => j.PostTime >= t12) + "";
+                               jr.Count(j => j.PostTime >= t12 && j.PostTime < t13) + "";
 
                     var rc = db.Recruitments;
                     string statisticRc = "" +
@@ -59,10 +64,11 @@ namespace MS_Website.Controllers
                               rc.Count(j => j.PostTime >= t9 && j.PostTime < t10) + ";" +
                               rc.Count(j => j.PostTime >= t10 && j.PostTime < t11) + ";" +
                               rc.Count(j => j.PostTime >= t11 && j.PostTime < t12) + ";" +
-                              rc.Count(j => j.PostTime >= t12) + "";
+                              rc.Count(j => j.PostTime >= t12 && j.PostTime < t13) + "";
 
                     ViewBag.StaTisticJR = statisticJr;
                     ViewBag.StatisticRc = statisticRc;
+                    ViewBag.Year = year;
                     return View();
                 }
             }

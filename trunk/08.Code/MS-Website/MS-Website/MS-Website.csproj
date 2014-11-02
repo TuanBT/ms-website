@@ -215,7 +215,9 @@
     <Compile Include="Models\Staff.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs" />
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>MSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
