@@ -39,6 +39,5 @@ namespace MS_Website.Models
         public DbSet<SkillInstance> SkillInstances { get; set; }
         public DbSet<SkillReference> SkillReferences { get; set; }
         public DbSet<Staff> Staffs { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }
