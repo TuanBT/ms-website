@@ -9,7 +9,13 @@
             <a href="#"><span class="glyphicon glyphicon-cog"></span></a>
         </li>
         <li>
-            <a href="#"><span class="glyphicon glyphicon-question-sign"></span></a>
+            <a href="@Url.Action("Notifier","Notifier")"><span class="glyphicon glyphicon-exclamation-sign"></span>
+                @if(Session["NumberNotifier"]!=null)
+                {
+                    <span id="numberNotifier" class="numberNotifier">@((int) Session["NumberNotifier"])</span>
+                }
+
+            </a>
         </li>
         <li>
             @using (Html.BeginForm("LogOut", "Home"))

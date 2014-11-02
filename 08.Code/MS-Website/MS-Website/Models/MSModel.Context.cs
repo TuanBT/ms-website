@@ -32,11 +32,13 @@ namespace MS_Website.Models
         public DbSet<JobRequest> JobRequests { get; set; }
         public DbSet<Maid> Maids { get; set; }
         public DbSet<MaidMediator> MaidMediators { get; set; }
+        public DbSet<Notifier> Notifiers { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Recruitment> Recruitments { get; set; }
         public DbSet<SkillCategory> SkillCategories { get; set; }
         public DbSet<SkillInstance> SkillInstances { get; set; }
         public DbSet<SkillReference> SkillReferences { get; set; }
         public DbSet<Staff> Staffs { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

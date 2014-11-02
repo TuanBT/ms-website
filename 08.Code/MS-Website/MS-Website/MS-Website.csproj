@@ -142,6 +142,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Business\Kmean.cs" />
     <Compile Include="Controllers\MaidManagerController.cs" />
+    <Compile Include="Controllers\NotifierController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -192,6 +193,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MSModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Notifier.cs">
+      <DependentUpon>MSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Rating.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
@@ -209,6 +213,9 @@
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Staff.cs">
+      <DependentUpon>MSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2054,6 +2061,7 @@
     <Content Include="Views\Shared\_PartialNotifier.cshtml" />
     <Content Include="Views\Shared\_PartialExtend.cshtml" />
     <Content Include="Views\Statistic\StatisticRequest.cshtml" />
+    <Content Include="Views\Notifier\Notifier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

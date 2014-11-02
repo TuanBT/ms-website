@@ -212,6 +212,7 @@
 /*body*/
 .body {
     padding-bottom: 30px;
+    min-height: 500px;
 }
 
 .rows {
@@ -1202,7 +1203,7 @@ a {
 .iTitleContent {
     font-size: 16px;
     color: #8e44ad;
-font-weight: 700;
+    font-weight: 700;
 }
 
 .MSNotifier {
@@ -1244,6 +1245,47 @@ font-weight: 700;
         }
 
 
-        .AddErr {
-            font-style: italic;
+.AddErr {
+    font-style: italic;
+}
+
+
+.notiRow {
+}
+
+    .notiRow > li {
+        border-bottom: 1px solid #DDD;
+        margin-bottom: 10px;
+    }
+
+.notiHide {
+    text-align: center;
+    color: grey;
+    cursor: pointer;
+}
+
+    .notiHide:hover {
+        color: tomato;
+    }
+
+
+.notiContent {
+}
+
+    .notiContent a {
+        text-decoration: none;
+        color: #666;
+    }
+
+        .notiContent a:hover {
         }
+
+        .notiContent a:focus {
+        }
+
+
+.notiDate {
+    color: #999;
+    font-weight: 700;
+    font-size: 15px;
+}
