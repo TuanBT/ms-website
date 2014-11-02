@@ -499,6 +499,7 @@ a {
 /*box list work*/
 .boxListWork {
     margin-top: 20px;
+    display: inline-block;
 }
 
 .bFree {
@@ -637,21 +638,21 @@ a {
 }
 
 .bAWork {
-    float: left;
+    /*float: left;*/
 }
 
 .bACus {
-    float: right;
+    /*float: right;*/
 }
 
 .bApplyListWork > li {
-    display: inline-block;
+    /*display: inline-block;*/
     padding: 5px;
-    margin: 0 30px 0 30px;
+    /*margin: 0 30px 0 30px;*/
     background: #ffffff;
     border-radius: 5px 5px 0 0;
     border-bottom: 1px solid #DDD;
-    width: 505px;
+    /*width: 505px;*/
 }
 
     .bApplyListWork > li:hover {
@@ -1288,4 +1289,20 @@ a {
     color: #999;
     font-weight: 700;
     font-size: 15px;
+}
+
+.descriptionChart {
+    margin-top: 10px;
+font-size: 18px;
+}
+
+.listYear {
+    text-align: center;
+}
+
+.listYear>li {
+    display: inline-block;
+padding: 0 10px;
+background: #EEE;
+border-radius: 5px;
 }

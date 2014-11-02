@@ -55,7 +55,82 @@
                             @maid.Description
                         </div>
                     </div>
-                    <div class="boxListWork">
+                    
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="rightInfo">
+                    <ul class="riDetail">
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Điện thoại
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@Model.Phone
+                                </strong>
+                            </div>
+                        </li>
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Kinh nghiệm
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@Model.Experience năm
+                                </strong>
+                            </div>
+                        </li>
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Đánh giá
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@Model.RateAvg điểm
+                                </strong>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="riManager">
+                        <div class="rimaTitle">
+                            Quản lý bởi
+                        </div>
+                        <ul class="rimaListSameJobRequest">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="jrImage">
+                                            <img src="@MaidManager.Avatar" alt="Maid sercive" width="100%">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="jrDetail">
+                                            <div class="jrMaidFullname">
+                                                <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = MaidManager.AccId, role = MaidManager.Role })">@MaidManager.Fullname</a>
+                                            </div>
+                                            <div class="blTime">
+                                                <span class="blTimeText">
+                                                    @{
+                                                        string role = "";
+                                                        if (MaidManager.Role == "MaidMediator")
+                                                        {
+                                                            role = "Đại diện người giúp việc";
+                                                        }
+                                                        else if (MaidManager.Role == "Staff")
+                                                        {
+                                                            role = "Nhân viên";
+                                                        }
+                                                    }
+                                                    @role
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="boxListWork">
                         <ul class="nav nav-tabs" role="tablist" id="myTab">
                             <li class="active"><a href="#free" role="tab" data-toggle="tab">Chưa được nhận</a></li>
                             <li class><a href="#applied" role="tab" data-toggle="tab">Đã được nhận</a></li>
@@ -133,46 +208,52 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade bApplied" id="applied">
-                                <div class="bTitle">
+                                @*<div class="bTitle">
                                     <div class="btWork">
                                         Công việc
                                     </div>
                                     <div class="btApply">
                                         Người nhận
                                     </div>
-                                </div>
+                                </div>*@
                                 <ul class="bApplyListWork">
                                     <input id="currPos2" type="hidden" value="@(counter + 2)" />
                                     @foreach (var job in applList)
                                     {
                                         <li id="@(counter + 1)" style="display: @(counter - total > 1 ? "none" : "")">
-                                            <div class="bAWork">
-                                                <div class="blImage">
-                                                    <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
-                                                </div>
-                                                <div class="blDetail">
-                                                    <div class="blName">
-                                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
-                                                    </div>
-                                                    <div class="blTime">
-                                                        <span class="blTimeTitle">Đăng: </span><span
-                                                            class="blTimeText">@job.Job.PostTime.ToShortDateString()</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="bACus">
-                                                <div class="blImage">
-                                                    <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
-                                                </div>
-                                                <div class="blDetail">
-                                                    <div class="blName">
-                                                        <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = job.Recruitment.RecruitmentId })">@job.Recruitment.Title</a>
-                                                    </div>
-                                                    <div class="blTime">
-                                                        <span class="blTimeTitle">Nhận: </span><span
-                                                            class="blTimeText">@job.Job.ApplyTimes.Value.ToShortDateString()</span>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="bAWork">
+                                                        <div class="blImage">
+                                                            <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
+                                                        </div>
+                                                        <div class="blDetail">
+                                                            <div class="blName">
+                                                                <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
+                                                            </div>
+                                                            <div class="blTime">
+                                                                <span class="blTimeTitle">Đăng: </span><span
+                                                                                                           class="blTimeText">@job.Job.PostTime.ToShortDateString()</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="bACus">
+                                                        <div class="blImage">
+                                                            <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                                        </div>
+                                                        <div class="blDetail">
+                                                            <div class="blName">
+                                                                <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = job.Recruitment.RecruitmentId })">@job.Recruitment.Title</a>
+                                                            </div>
+                                                            <div class="blTime">
+                                                                <span class="blTimeTitle">Nhận: </span><span
+                                                                                                           class="blTimeText">@job.Job.ApplyTimes.Value.ToShortDateString()</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
                                             </div>
                                         </li>
                                         if (counter - total < applList.Count)
@@ -198,46 +279,52 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade bApplied" id="approved">
-                                <div class="bTitle">
+                               @* <div class="bTitle">
                                     <div class="btWork">
                                         Công việc
                                     </div>
                                     <div class="btApply">
                                         Người nhận
                                     </div>
-                                </div>
+                                </div>*@
                                 <ul class="bApplyListWork">
                                     <input id="currPos3" type="hidden" value="@(counter + 2)" />
                                     @foreach (var job in apprList)
                                     {
                                         <li id="@(counter + 1)" style="display: @(counter - total > 1 ? "none" : "")">
-                                            <div class="bAWork">
-                                                <div class="blImage">
-                                                    <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
-                                                </div>
-                                                <div class="blDetail">
-                                                    <div class="blName">
-                                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
-                                                    </div>
-                                                    <div class="blTime">
-                                                        <span class="blTimeTitle">Đăng: </span><span
-                                                            class="blTimeText">@job.Job.PostTime.ToShortDateString()</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="bACus">
-                                                <div class="blImage">
-                                                    <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
-                                                </div>
-                                                <div class="blDetail">
-                                                    <div class="blName">
-                                                        <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = job.Recruitment.RecruitmentId })">@job.Recruitment.Title</a>
-                                                    </div>
-                                                    <div class="blTime">
-                                                        <span class="blTimeTitle">Nhận: </span><span
-                                                            class="blTimeText">@job.Job.ApplyTimes.Value.ToShortDateString()</span>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="bAWork">
+                                                        <div class="blImage">
+                                                            <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
+                                                        </div>
+                                                        <div class="blDetail">
+                                                            <div class="blName">
+                                                                <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
+                                                            </div>
+                                                            <div class="blTime">
+                                                                <span class="blTimeTitle">Đăng: </span><span
+                                                                                                           class="blTimeText">@job.Job.PostTime.ToShortDateString()</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="bACus">
+                                                        <div class="blImage">
+                                                            <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                                        </div>
+                                                        <div class="blDetail">
+                                                            <div class="blName">
+                                                                <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = job.Recruitment.RecruitmentId })">@job.Recruitment.Title</a>
+                                                            </div>
+                                                            <div class="blTime">
+                                                                <span class="blTimeTitle">Nhận: </span><span
+                                                                                                           class="blTimeText">@job.Job.ApplyTimes.Value.ToShortDateString()</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
                                             </div>
                                         </li>
                                         if (counter - total < apprList.Count)
@@ -428,80 +515,6 @@
                             })
                         </script>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="rightInfo">
-                    <ul class="riDetail">
-                        <li class="rideRow">
-                            <div class="rideroTitle">
-                                Điện thoại
-                            </div>
-                            <div class="rideroContent">
-                                <strong>@Model.Phone
-                                </strong>
-                            </div>
-                        </li>
-                        <li class="rideRow">
-                            <div class="rideroTitle">
-                                Kinh nghiệm
-                            </div>
-                            <div class="rideroContent">
-                                <strong>@Model.Experience năm
-                                </strong>
-                            </div>
-                        </li>
-                        <li class="rideRow">
-                            <div class="rideroTitle">
-                                Đánh giá
-                            </div>
-                            <div class="rideroContent">
-                                <strong>@Model.RateAvg điểm
-                                </strong>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="riManager">
-                        <div class="rimaTitle">
-                            Quản lý bởi
-                        </div>
-                        <ul class="rimaListSameJobRequest">
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="jrImage">
-                                            <img src="@MaidManager.Avatar" alt="Maid sercive" width="100%">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="jrDetail">
-                                            <div class="jrMaidFullname">
-                                                <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = MaidManager.AccId, role = MaidManager.Role })">@MaidManager.Fullname</a>
-                                            </div>
-                                            <div class="blTime">
-                                                <span class="blTimeText">
-                                                    @{
-                                                        string role = "";
-                                                        if (MaidManager.Role == "MaidMediator")
-                                                        {
-                                                            role = "Đại diện người giúp việc";
-                                                        }
-                                                        else if (MaidManager.Role == "Staff")
-                                                        {
-                                                            role = "Nhân viên";
-                                                        }
-                                                    }
-                                                    @role
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

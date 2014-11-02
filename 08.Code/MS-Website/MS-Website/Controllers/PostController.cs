@@ -834,5 +834,7 @@ namespace MS_Website.Controllers
                 return RedirectToAction("GetRecruitment", "Post", new { recruitmentId });
             }
         }
+
+
     }
 }

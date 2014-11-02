@@ -1,47 +1,47 @@
 ﻿@if (Session["AccId"] != null)
-    {
-        <div class="rows">
-            <div class="hMenu">
-                <div class="hFatherMenu">
-                    <ul class="hmeTabList">
-                        @if(Session["Role"].Equals("Customer"))
-                        {
-                            <li>
-                                <a href="@Url.Action("GetCustomer", "Customer", new { custId = (int)Session["AccId"]})" class="hefaContent @(ViewBag.Info != null ? "iscurent":"")">Thông tin</a>
-                            </li>
-                        }
-                        else if (Session["Role"].Equals("MaidMediator") || Session["Role"].Equals("Staff"))
-                        {
-                            <li>
-                                <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = (int)Session["AccId"], role = Session["Role"]})" class="hefaContent @(ViewBag.Info != null ? "iscurent":"")">Thông tin</a>
-                            </li>
-                        }
-                        @if (Session["Role"].Equals("MaidMediator") || Session["Role"].Equals("Staff"))
-                        {
-                            <li>
-                                <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent @(ViewBag.AddMaid != null ? "iscurent":"")">Thêm người giúp việc</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent @(ViewBag.AddJob != null ? "iscurent":"")">Đăng yêu cầu công việc</a>
-                            </li>
-                        }
-                        @if (Session["Role"].Equals("Customer"))
-                        {
-                            <li>
-                                <a href="@Url.Action("PostRecruitment", "Customer")" class="hefaContent @(ViewBag.AddRecruit != null ? "iscurent":"")">Đăng yêu cầu tuyển việc</a>
-                            </li>
-                        }
-                        @if (Session["Role"].Equals("Staff"))
-                        {
-                            <li>
-                                <a href="@Url.Action("ManageJobRequest", "MaidManager")" class="hefaContent @(ViewBag.StaffManage != null ? "iscurent":"")">Quản lý</a>
-                            </li>
-                        }
+{
+    <div class="rows">
+        <div class="hMenu">
+            <div class="hFatherMenu">
+                <ul class="hmeTabList">
+                    @if (Session["Role"].Equals("Customer"))
+                    {
                         <li>
-                            <a href="@Url.Action("StatisticRequest", "Statistic")" class="hefaContent @(ViewBag.Statistic != null ? "iscurent":"")">Thống kê</a>
+                            <a href="@Url.Action("GetCustomer", "Customer", new { custId = (int)Session["AccId"] })" class="hefaContent @(ViewBag.Info != null ? "iscurent" : "")">Thông tin</a>
                         </li>
-                    </ul>
-                </div>
+                    }
+                    else if (Session["Role"].Equals("MaidMediator") || Session["Role"].Equals("Staff"))
+                    {
+                        <li>
+                            <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = (int)Session["AccId"], role = Session["Role"] })" class="hefaContent @(ViewBag.Info != null ? "iscurent" : "")">Thông tin</a>
+                        </li>
+                    }
+                    @if (Session["Role"].Equals("MaidMediator") || Session["Role"].Equals("Staff"))
+                    {
+                        <li>
+                            <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent @(ViewBag.AddMaid != null ? "iscurent" : "")">Thêm người giúp việc</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent @(ViewBag.AddJob != null ? "iscurent" : "")">Đăng yêu cầu công việc</a>
+                        </li>
+                    }
+                    @if (Session["Role"].Equals("Customer"))
+                    {
+                        <li>
+                            <a href="@Url.Action("PostRecruitment", "Customer")" class="hefaContent @(ViewBag.AddRecruit != null ? "iscurent" : "")">Đăng yêu cầu tuyển việc</a>
+                        </li>
+                    }
+                    @if (Session["Role"].Equals("Staff"))
+                    {
+                        <li>
+                            <a href="@Url.Action("ManageJobRequest", "MaidManager")" class="hefaContent @(ViewBag.StaffManage != null ? "iscurent" : "")">Quản lý</a>
+                        </li>
+                    }
+                    <li>
+                        <a href="@Url.Action("StatisticRequest", "Statistic", new { year = 0 })" class="hefaContent @(ViewBag.Statistic != null ? "iscurent" : "")">Thống kê</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    }
+    </div>
+}
