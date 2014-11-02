@@ -131,7 +131,7 @@ namespace MS_Website.Controllers
                     }
                 }
             }
-            return RedirectToAction("GetCustomer", new { custId = Session["AccId"] });
+            return RedirectToAction("GetRecruitment","Post", new { recruitmentId = recruitId });
         }
 
         public ActionResult PublicRecruitment(int recruitId)
@@ -156,7 +156,7 @@ namespace MS_Website.Controllers
                     }
                 }
             }
-            return RedirectToAction("GetCustomer", new { custId = Session["AccId"] });
+            return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
         }
 
         public ActionResult PostRecruitment()

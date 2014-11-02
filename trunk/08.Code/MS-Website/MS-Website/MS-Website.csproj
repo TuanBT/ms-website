@@ -215,6 +215,7 @@
     <Compile Include="Models\Staff.cs">
       <DependentUpon>MSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -538,6 +539,13 @@
     <Content Include="Content\bootstrap-3.2.0\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\bootstrap-3.2.0\js\bootstrap.js" />
     <Content Include="Content\bootstrap-3.2.0\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap-datetimepicker\css\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\bootstrap-datetimepicker\js\moment.js" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
+    <Content Include="Content\bootstrap-fileinput\img\loading.gif" />
+    <Content Include="Content\bootstrap-fileinput\js\fileinput.min.js" />
     <Content Include="Content\bootstrap-star-rating-master\css\star-rating.css" />
     <Content Include="Content\bootstrap-star-rating-master\css\star-rating.min.css" />
     <Content Include="Content\bootstrap-star-rating-master\img\loading.gif" />
