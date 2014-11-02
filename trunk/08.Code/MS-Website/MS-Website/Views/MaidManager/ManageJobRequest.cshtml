@@ -24,7 +24,7 @@
 <div class="body">
     <div class="rows">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <script type="text/javascript" language="javascript" class="init">
                     $(document).ready(function() {
                         $('#JRTable').DataTable();
@@ -73,7 +73,7 @@
                                     }
                                     <a href="@Url.Action("GetMaidManager","MaidManager", new {accId=managerId,role=roles})">@jobRequest.Account.FullName</a>
                                 </td>
-                                <td>@jobRequest.Job.PostTime</td>
+                                <td>@jobRequest.Job.PostTime.ToString("dd/MM/yyyy")</td>
                                 <td>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@jobRequest.Job.JobRequestId)">Kích hoạt</button>
                                 </td>
@@ -83,7 +83,7 @@
                     </tbody>
                 </table>
                 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog modal-sm">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>

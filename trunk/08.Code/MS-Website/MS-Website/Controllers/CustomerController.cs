@@ -606,7 +606,7 @@ namespace MS_Website.Controllers
                 }
                 else
                 {
-                    var expiredTime = recruit.ExpiredTime.AddDays(7*extend);
+                    var expiredTime = recruit.ExpiredTime.AddDays(7 * extend);
                     recruit.ExpiredTime = expiredTime;
                     recruit.Status = "Waiting";
                     db.SaveChanges();
@@ -666,6 +666,18 @@ namespace MS_Website.Controllers
                         jobRequest.Staff != null ? jobRequest.Staff.Account.Phone : "",
                         jobRequest.MaidMediator != null ? jobRequest.MaidMediator.Account.Phone : "",
                         recruit.Customer.Account.Phone ?? "");
+                    string link = "/Post/GetJobRequest?jobId=" + jobRequestId;
+                    //People post jobrequest
+                    var notifier = new MS_Website.Models.Notifier
+                                       {
+                                           AccId = jobRequest.MaidMediatorId != null ? (int)jobRequest.MaidMediatorId : (int)jobRequest.StaffId,
+                                           Date = DateTime.Now,
+                                           Content = "Yêu cầu của bạn đã được thuê",
+                                           Link = link,
+                                           View = false
+                                       };
+                    db.Notifiers.Add(notifier);
+                    db.SaveChanges();
                 }
                 else if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
                 {
