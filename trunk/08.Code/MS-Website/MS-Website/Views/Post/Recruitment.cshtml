@@ -40,17 +40,20 @@
                                     {
                                         using (Html.BeginForm("HideRecruitment", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
                                         {
-                                        <button class="btn btn-danger">Tạm ẩn</button>
+                                            <button class="btn btn-danger">Tạm ẩn</button>
                                         }
                                     }
                                     else if (RecruitmentTemp.Recruitment.Status.Equals("Hide"))
                                     {
                                         using (Html.BeginForm("PublicRecruitment", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
                                         {
-                                        <button class="btn btn-danger">Công khai</button>
+                                            <button class="btn btn-danger">Công khai</button>
                                         }
                                     }
-                                    <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                    @if (RecruitmentTemp.Recruitment.Status == "Expired" || RecruitmentTemp.Recruitment.Status == "Waiting")
+                                    {
+                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                    }
                                 </div>
                             }
                         </div>
@@ -74,34 +77,34 @@
                                 @{
                                     string color = "default";
                                     string status = "Tạm ẩn";                                }
-                                @if (Model.Recruitment.Status == "Payment")
+                                @if (RecruitmentTemp.Recruitment.Status == "Payment")
                                 {
                                     color = "warning";
                                     status = "Chưa thanh toán";
                                 }
-                                @if (Model.Recruitment.Status == "Hide")
+                                @if (RecruitmentTemp.Recruitment.Status == "Hide")
                                 {
                                     color = "default";
                                     status = "Tạm ẩn";
                                 }
-                                @if (Model.Recruitment.Status == "Waiting")
+                                @if (RecruitmentTemp.Recruitment.Status == "Waiting")
                                 {
                                     color = "primary";
                                     status = "Đang chờ người làm";
                                 }
-                                @if (Model.Recruitment.Status == "Applied")
+                                @if (RecruitmentTemp.Recruitment.Status == "Applied")
                                 {
                                     color = "success";
                                     status = "Đã thuê";
                                 }
-                                else if (Model.Recruitment.Status == "Expired")
+                                else if (RecruitmentTemp.Recruitment.Status == "Expired")
                                 {
                                     color = "danger";
                                     status = "Hết hạn";
                                 }
 
                                 <span class="labelStatus label label-@color">@status</span>
-                                @if (Model.JobRequest != null)
+                                @if (RecruitmentTemp.JobRequest != null)
                                 {
                                     <div class="istatusHire">
                                         <div class="iStatusPic">
@@ -134,6 +137,17 @@
                             </div>
                         </div>
                     </div>
+                    @if (RecruitmentTemp.Recruitment.Status == "Payment")
+                    {
+                        <div class="overView">
+                            <div class="ovTitle">
+                                Nếu bạn đã thanh toán?
+                            </div>
+                            <div class="ovContent">
+                                Có thể quá trình thanh toán bị lỗi? Bạn có thể <a href="#"> Ấn vào đây để </a> nhân viên của chúng tôi kiểm tra lại đơn hàng và kích hoạt yêu cầu này.
+                            </div>
+                        </div>
+                    }
                     @if (ViewBag.Recommend != null)
                     {
                         <div class="suggestCus">
@@ -309,7 +323,7 @@
         document.getElementById("extend").setAttribute("style", "");
         document.getElementById("result").setAttribute("style", "");
     }
-    
+
     function chooseWeek() {
         var recruitId = document.getElementById("extendId").getAttribute("value");
         var weekDr = document.getElementById("week");

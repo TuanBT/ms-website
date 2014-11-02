@@ -144,6 +144,8 @@ namespace MS_Website.Controllers
                         Session["Fullname"] = b.FullName;
                         Session["Role"] = b.Role;
                         Session["IsAdmin"] = b.IsWebmaster;
+                        var notifier = ms.Notifiers.Where(n => n.View == false && n.AccId == b.AccountId).ToList();
+                        Session["NumberNotifier"] = notifier.Count;
                         return RedirectToAction("Index", "Home");
                     }
                 }
