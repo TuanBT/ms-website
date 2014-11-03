@@ -3,10 +3,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     MS_Website.Models.Account account = Model;
     ViewBag.Info = true;
+    List<MS_Website.Models.Maid> Maid = ViewBag.MaidList;
 }
 
-    <style>
-	a.myToolTip
+<style>
+    a.myToolTip
     {
         outline: none;
     }
@@ -53,7 +54,7 @@
     a.myToolTip .maidAva2
     {
         float: right;
-	    margin-right: -8px;
+        margin-right: -8px;
         width: 60px;
         height: 60px;
     }
@@ -105,7 +106,7 @@
                                 //watting,expired,approved,applied
                                 int[] numStatus = ViewBag.MaidMediatorStatusStatistic;
                                 var numberStatistic = new int[4] { numStatus[0], numStatus[1], numStatus[2], numStatus[3] };
-                              }
+                            }
                             @Html.Partial("_PartialStatisticPie", numberStatistic)
                         </div>
                     </div>
@@ -127,66 +128,22 @@
                     <div class="riManager">
                         <div class="rimaTitle">
                             Đại diện cho:
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Thêm người giúp việc</button>
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Đóng</span></button>
-                                        </div>
-                                        @using (Html.BeginForm("AddMaid", "MaidManager", FormMethod.Get, new { name = "addMaidModal" }))
-                                        {
-                                            <div class="modal-body">
-                                                <table border="0">
-                                                    <tr>
-                                                        <td>Ảnh đại diên:</td>
-                                                        <td>
-                                                            <img id="maidAvatar" src="../Content/Image/maid_avatar.jpg" /><input id="maidAva" type="file" onchange="uploadMaidAva()">
-                                                        <td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Tên đầy đủ:</td>
-                                                        <td>
-                                                            <input id="fullname" type="text" class="form-control" name="fullname">
-                                                        <td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Thông tin:</td>
-                                                        <td>
-                                                            <input id="desc" type="text" class="form-control" name="desc">
-                                                        <td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Địa chỉ:</td>
-                                                        <td>
-                                                            <input id="address" type="text" class="form-control" name="address">
-                                                        <td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Số điện thoại:</td>
-                                                        <td>
-                                                            <input id="phone" type="text" class="form-control" name="phone">
-                                                        <td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                                                <button type="submit" class="btn btn-primary" onclick="addMaid()" data-dismiss="modal">Lưu</button>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
+                            <a href="@Url.Action("LoadAddMaid", "MaidManager")">
+                                <button type="button" class="btn btn-info">Thêm người giúp việc</button>
+                            </a>
+                        </div>
+                        <div id="back" class="rimaMore" style="display: none;">
+                            <span class="glyphicon glyphicon-chevron-up" onclick="preMaids()"></span>
                         </div>
                         <div class="rimaContent">
+                            <input id="currPos" type="hidden" value="4" />
                             <ul class="rimaMaidList">
                                 @{
-                                    List<MS_Website.Models.Maid> Maid = ViewBag.MaidList;
+                                    var counter = 0;
                                 }
                                 @foreach (var maid in Maid)
                                 {                      
-                                    <li>
+                                    <li id="@counter" style="display: @(counter > 4 ? "none" : "");">
                                         <div class="liImage">
                                             <img src="@maid.PersonalImage">
                                         </div>
@@ -212,12 +169,17 @@
                                             </div>
                                         </div>
                                     </li>
+                                    counter++;
                                 }
                             </ul>
+                            <input id="lastPos" type="hidden" value="@(counter - 1)"/>
                         </div>
-                        <div class="rimaMore">
-                            <span class="glyphicon glyphicon-chevron-down"></span>
-                        </div>
+                        @if (counter > 5)
+                        {
+                            <div id="next" class="rimaMore">
+                                <span class="glyphicon glyphicon-chevron-down" onclick="nextMaids()"></span>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -259,5 +221,52 @@
         } else {
             preview.src = "";
         }
+    }
+
+    function nextMaids() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        var lastPos = parseInt(document.getElementById("lastPos").getAttribute("value"));
+        var temp = 0;
+        if (currPos < lastPos) {
+            for (var i = 0; i <= currPos; i++) {
+                if (document.getElementById(i) != null) {
+                    document.getElementById(i).setAttribute("style", "display: none");
+                }
+            }
+            for (var j = currPos + 1; j <= currPos + 5; j++) {
+                if (document.getElementById(j) != null) {
+                    document.getElementById(j).setAttribute("style", "");
+                    temp = j;
+                }
+            }
+        }
+        currPos = temp;
+        if (currPos >= lastPos) {
+            document.getElementById("next").setAttribute("style", "display: none");
+        }
+        document.getElementById("currPos").setAttribute("value", currPos);
+        document.getElementById("back").setAttribute("style", "");
+    }
+
+    function preMaids() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        var temp = 0;
+        if (currPos - 9 >= 0) {
+            for (var i = currPos; i > currPos - 5; i--) {
+                if (document.getElementById(i).getAttribute("style") == "") {
+                    document.getElementById(i).setAttribute("style", "display: none");
+                    temp = i;
+                }
+            }
+            for (var j = temp - 1; j > temp - 6; j--) {
+                document.getElementById(j).setAttribute("style", "");
+            }
+        }
+        currPos = temp - 1;
+        if (currPos <= 4) {
+            document.getElementById("back").setAttribute("style", "display: none");
+        }
+        document.getElementById("currPos").setAttribute("value", currPos);
+        document.getElementById("next").setAttribute("style", "");
     }
 </script>
