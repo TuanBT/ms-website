@@ -151,9 +151,8 @@
                                 <ul class="bFreeListWork">
                                     <input id="currPos1" type="hidden" value="4" />
                                     @foreach (var job in notApplList)
-                                    {
-                                        var id = job.Job.JobRequestId;
-                                        <li id="@counter" onclick="chooseJob(@counter, @id, 1)" style="display: @(counter > 4 ? "none" : "")">
+                                    {           
+                                        <li id="@counter" onclick="chooseJob(@counter, @job.Job.JobRequestId, 1)" style="display: @(counter > 4 ? "none" : "")">
                                             <div class="blImage">
                                                 <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                             </div>
@@ -354,7 +353,7 @@
                                     <input id="currPos4" type="hidden" value="@(counter + 4)" />
                                     @foreach (var job in expiredList)
                                     {
-                                        <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
+                                        <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 4)" style="display: @(counter - total > 3 ? "none" : "")">
                                             <div class="blImage">
                                                 <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                             </div>
@@ -408,7 +407,7 @@
                                     <input id="currPos5" type="hidden" value="@(counter + 4)" />
                                     @foreach (var job in hideList)
                                     {
-                                        <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
+                                        <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 5)" style="display: @(counter - total > 3 ? "none" : "")">
                                             <div class="blImage">
                                                 <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                             </div>
@@ -556,7 +555,7 @@
         }
         if (counter != chosenCount) {
             document.getElementById(counter).setAttribute("class", "isCurent");
-            chosenCount = jobId;
+            chosenCount = counter;
         } else {
             document.getElementById(counter).setAttribute("class", "");
             chosenCount = 0;
