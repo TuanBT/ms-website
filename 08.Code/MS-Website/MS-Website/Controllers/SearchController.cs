@@ -13,6 +13,7 @@ namespace MS_Website.Controllers
         //
         public ActionResult Index(string searchString)
         {
+            ViewBag.SearchString = searchString;
             //Index search
             using (var db = new MSEntities())
             {
