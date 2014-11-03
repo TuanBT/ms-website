@@ -30,7 +30,7 @@ namespace MS_Website.Controllers
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Applied")).ToList();
                     var expiredRecList =
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Expired")).ToList();
-                    var unpublicList =
+                    var hideList =
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Hide")).ToList();
                     var paidList =
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Payment")).ToList();
@@ -49,8 +49,8 @@ namespace MS_Website.Controllers
                     ViewBag.ExpiredList =
                         expiredRecList.Select(
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                    ViewBag.UnpublicList =
-                        unpublicList.Select(
+                    ViewBag.HideList =
+                        hideList.Select(
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
                     ViewBag.PaidList =
                        paidList.Select(
