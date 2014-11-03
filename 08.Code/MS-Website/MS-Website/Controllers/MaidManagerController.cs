@@ -20,13 +20,14 @@ namespace MS_Website.Controllers
             {
                 using (var db = new MSEntities())
                 {
-                    int numWating = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Waiting"));
-                    int numApplied = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Applied"));
-                    int numApproved = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Approved"));
-                    int numExpired = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Expired"));
-                    ViewBag.MaidMediatorStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied };
                     if (role.Equals("MaidMediator"))
                     {
+                        int numWating = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Waiting"));
+                        int numApplied = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Applied"));
+                        int numApproved = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Approved"));
+                        int numExpired = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Expired"));
+                        int numHide = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Hide"));
+                        ViewBag.MaidMediatorStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied, numHide };
                         var maidMediator = db.Accounts.SingleOrDefault(mm => mm.AccountId == accId);
                         ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
                         Session["MaidManager"] = maidMediator;
@@ -34,6 +35,12 @@ namespace MS_Website.Controllers
                     }
                     if (role.Equals("Staff"))
                     {
+                        int numWating = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Waiting"));
+                        int numApplied = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Applied"));
+                        int numApproved = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Approved"));
+                        int numExpired = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Expired"));
+                        int numHide = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Hide"));
+                        ViewBag.StaffStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied, numHide };
                         var staff = db.Accounts.SingleOrDefault(s => s.AccountId == accId);
                         ViewBag.MaidList = db.Maids.Where(m => m.Staff.Account.AccountId == accId).ToList();
                         Session["MaidManager"] = staff;

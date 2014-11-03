@@ -104,8 +104,8 @@
                         <div class="ovContent">
                             @{
                                 //watting,expired,approved,applied
-                                int[] numStatus = ViewBag.MaidMediatorStatusStatistic;
-                                var numberStatistic = new int[4] { numStatus[0], numStatus[1], numStatus[2], numStatus[3] };
+                                int[] numStatus = ViewBag.StaffStatusStatistic;
+                                var numberStatistic = new int[5] { numStatus[0], numStatus[1], numStatus[2], numStatus[3], numStatus[4] };
                             }
                             @Html.Partial("_PartialStatisticPie", numberStatistic)
                         </div>
@@ -120,7 +120,7 @@
                                 Tham gia
                             </div>
                             <div class="rideroContent">
-                                <strong>@account.JoinDate
+                                <strong>@account.JoinDate.ToString("dd/MM/yyyyy")
                                 </strong>
                             </div>
                         </li>
@@ -128,12 +128,9 @@
                     <div class="riManager">
                         <div class="rimaTitle">
                             Đại diện cho:
-                            <a href="@Url.Action("LoadAddMaid", "MaidManager")">
-                                <button type="button" class="btn btn-info">Thêm người giúp việc</button>
-                            </a>
                         </div>
-                        <div id="back" class="rimaMore" style="display: none;">
-                            <span class="glyphicon glyphicon-chevron-up" onclick="preMaids()"></span>
+                        <div id="back" class="rimaMore" style="display: none;" onclick="preMaids()">
+                            <span class="glyphicon glyphicon-chevron-up"></span>
                         </div>
                         <div class="rimaContent">
                             <input id="currPos" type="hidden" value="4" />
@@ -176,10 +173,13 @@
                         </div>
                         @if (counter > 5)
                         {
-                            <div id="next" class="rimaMore">
-                                <span class="glyphicon glyphicon-chevron-down" onclick="nextMaids()"></span>
+                            <div id="next" class="rimaMore" onclick="nextMaids()">
+                                <span class="glyphicon glyphicon-chevron-down"></span>
                             </div>
                         }
+                        <a href="@Url.Action("LoadAddMaid", "MaidManager")">
+                                <button type="button" class="btn btn-info">Thêm người giúp việc</button>
+                            </a>
                     </div>
                 </div>
             </div>
