@@ -372,7 +372,7 @@ namespace MS_Website.Controllers
                         db.SaveChanges();
                     }
                 }
-                return RedirectToAction("ManageMaidProfile", new { maidId = job.MaidId });
+                return RedirectToAction("GetJobRequest", "Post", new { jobId });
             }
         }
 
