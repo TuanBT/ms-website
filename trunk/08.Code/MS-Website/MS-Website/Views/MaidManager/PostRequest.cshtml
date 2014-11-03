@@ -64,14 +64,18 @@
                                         lý</h4>
                                 </div>
                                 <div class="modal-body chooseMaidModalMaid">
-                                    @{int i = -1;}
+                                    <div id="back" class="rimaMore" style="display: none;" onclick="preMaids()">
+                                        <span class="glyphicon glyphicon-chevron-up"></span>
+                                    </div>
+                                    <input id="currPos" type="hidden" value="4" />
+                                    @{int counter = -1;}
                                     @foreach (var maid in (List<Maid>)ViewBag.MaidList)
                                     {
-                                        i++;
-                                        <div class="radio">
+                                        counter++;
+                                        <div id="@counter" class="radio" style="display: @(counter > 4 ? "none" : "");">
                                             <label>
                                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId">
-                                                <div class="chooseMaid@(i)">
+                                                <div class="chooseMaid@(counter)">
                                                     <div class="liImage">
                                                         <img id="@maid.MaidId img" src="@maid.PersonalImage" alt="Maid sercive" height="100%">
                                                     </div>
@@ -88,6 +92,13 @@
                                                     </div>
                                                 </div>
                                             </label>
+                                        </div>
+                                    }
+                                    <input id="lastPos" type="hidden" value="@(counter - 1)"/>
+                                    @if (counter > 5)
+                                    {
+                                        <div id="next" class="rimaMore" onclick="nextMaids()">
+                                            <span class="glyphicon glyphicon-chevron-down"></span>
                                         </div>
                                     }
                                 </div>
@@ -323,8 +334,8 @@
         /*var maidImg = document.getElementById(maidId + " img").getAttribute("src");
          var maidName = document.getElementById(maidId + " name").innerHTML;
          document.getElementById("maidImg").setAttribute("src", maidImg);
-         document.getElementById("maidName").innerHTML = maidName;
-         document.getElementById("chosenMaid").setAttribute("value", maidId);*/
+         document.getElementById("maidName").innerHTML = maidName;*/
+        document.getElementById("chosenMaid").setAttribute("value", maidId);
     }
 
     function chooseTime(prices) {
@@ -338,6 +349,53 @@
 
     function cancel() {
         return false;
+    }
+
+    function nextMaids() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        var lastPos = parseInt(document.getElementById("lastPos").getAttribute("value"));
+        var temp = 0;
+        if (currPos < lastPos) {
+            for (var i = 0; i <= currPos; i++) {
+                if (document.getElementById(i) != null) {
+                    document.getElementById(i).setAttribute("style", "display: none");
+                }
+            }
+            for (var j = currPos + 1; j <= currPos + 5; j++) {
+                if (document.getElementById(j) != null) {
+                    document.getElementById(j).setAttribute("style", "");
+                    temp = j;
+                }
+            }
+        }
+        currPos = temp;
+        if (currPos >= lastPos) {
+            document.getElementById("next").setAttribute("style", "display: none");
+        }
+        document.getElementById("currPos").setAttribute("value", currPos);
+        document.getElementById("back").setAttribute("style", "");
+    }
+
+    function preMaids() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        var temp = 0;
+        if (currPos - 9 >= 0) {
+            for (var i = currPos; i > currPos - 5; i--) {
+                if (document.getElementById(i).getAttribute("style") == "") {
+                    document.getElementById(i).setAttribute("style", "display: none");
+                    temp = i;
+                }
+            }
+            for (var j = temp - 1; j > temp - 6; j--) {
+                document.getElementById(j).setAttribute("style", "");
+            }
+        }
+        currPos = temp - 1;
+        if (currPos <= 4) {
+            document.getElementById("back").setAttribute("style", "display: none");
+        }
+        document.getElementById("currPos").setAttribute("value", currPos);
+        document.getElementById("next").setAttribute("style", "");
     }
 </script>
 
