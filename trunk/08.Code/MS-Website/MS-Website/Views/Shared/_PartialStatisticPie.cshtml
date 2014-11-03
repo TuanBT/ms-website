@@ -1,12 +1,13 @@
 ﻿@model int[]
 
 @*//watting,expired,approved,applied
-var numberStatistic = new int[4] {1, 2, 3, 4};*@
+var numberStatistic = new int[5] {1, 2, 3, 4, 5};*@
 
 <input value=@Model[0] type="number" id="wattingInput" hidden/>
 <input value=@Model[1] type="number" id="expiredInput" hidden/>
 <input value=@Model[2] type="number" id="approvedInput" hidden/>
 <input value=@Model[3] type="number" id="appliedInput" hidden/>
+<input value=@Model[4] type="number" id="hideInput" hidden/>
 
 @*
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -51,19 +52,23 @@ var numberStatistic = new int[4] {1, 2, 3, 4};*@
             @{
                 if (Model[0] != 0)
                 {
-                    <li><span style="background-color: #F7464A"></span>Đang chờ</li>
+                    <li><span style="background-color: #428bca"></span>Chờ nhận</li>
                 }
                 if (Model[1] != 0)
                 {
-                     <li><span style="background-color:#46BFBD"></span>Hết hạn</li>
+                     <li><span style="background-color:#d9534f"></span>Hết hạn</li>
                 }
                 if (Model[2] != 0)
                 {
-                    <li><span style="background-color:#FDB45C"></span>Đã phản hồi</li>
+                    <li><span style="background-color:#f0ad4e"></span>Hoàn tất</li>
                 }
                 if (Model[3] != 0)
                 {
-                      <li><span style="background-color:#949FB1"></span>Đã nhận</li>
+                      <li><span style="background-color:#5cb85c"></span>Được nhận</li>
+                }
+                if (Model[4] != 0)
+                {
+                      <li><span style="background-color:#777"></span>Tạm ẩn</li>
                 }
             }
         </ul>
@@ -75,27 +80,33 @@ var numberStatistic = new int[4] {1, 2, 3, 4};*@
     var pieData = [
             {
                 value: parseInt($('#wattingInput').val()),
-                color: "#F7464A",
-                highlight: "#FF5A5E",
-                label: "Đang chờ"
+                color: "#428bca",
+                highlight: "#428bca",
+                label: "Chờ nhận"
             },
             {
                 value: parseInt($('#expiredInput').val()),
-                color: "#46BFBD",
-                highlight: "#5AD3D1",
+                color: "#d9534f",
+                highlight: "#d9534f",
                 label: "Hết hạn"
             },
             {
                 value: parseInt($('#approvedInput').val()),
-                color: "#FDB45C",
-                highlight: "#FFC870",
-                label: "Đã phản hồi"
+                color: "#f0ad4e",
+                highlight: "#f0ad4e",
+                label: "Hoàn tất"
             },
             {
                 value: parseInt($('#appliedInput').val()),
-                color: "#949FB1",
-                highlight: "#A8B3C5",
-                label: "Đã nhận"
+                color: "#5cb85c",
+                highlight: "#5cb85c",
+                label: "Được nhận"
+            },
+            {
+                value: parseInt($('#hideInput').val()),
+                color: "#777",
+                highlight: "#777",
+                label: "Tạm ẩn"
             }
 
     ];
