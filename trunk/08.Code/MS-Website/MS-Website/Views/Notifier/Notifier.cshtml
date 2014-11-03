@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Thông báo";
+    List<MS_Website.Models.Notifier> notifiers = Model;
+}
+
+<div class="Menu">
+    @Html.Partial("_PartialMenu")
+</div>
+
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="titlePage">THÔNG BÁO</div>
+            <ul class="notiRow">
+                @if (notifiers.Count>0)
+                {
+                    foreach (var notifier in notifiers)
+                    {
+                        <li id="@notifier.Id">
+                            <div class="row" >
+                                <div class="col-md-1 notiHide">
+                                    <span onclick="hideNotifier(@(notifier.Id))" class="glyphicon glyphicon-remove"></span>
+                                </div>
+                                <div class="col-md-9 notiContent">
+                                    <a href="@notifier.Link" onclick="hideNotifier(@(notifier.Id))">@notifier.Content</a>
+                                </div>
+                                <div class="col-md-2 notiDate">
+                                    @notifier.Date.ToString("dd/MM/yyyy")
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }else
+                {
+                    <h5>Không có thông báo mới</h5>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    function hideNotifier(id){
+        var url = "/Notifier/HideNotifier";
+        $.post(url, { notiId: id }, function (data) {
+            $("#" + id).remove();
+            var num = $("#numberNotifier").html();
+            $("#numberNotifier").html(parseInt(num)-1);
+        });
+    }
+</script>
