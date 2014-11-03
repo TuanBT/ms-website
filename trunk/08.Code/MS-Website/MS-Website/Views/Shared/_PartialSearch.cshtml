@@ -1,7 +1,7 @@
 ﻿<div class="input-group">
     @using (Html.BeginForm("Index", "Search"))
     {
-        <input type="text" class="searchInput form-control" placeholder="Tìm kiếm công việc" name="searchString" />
+        <input type="text" class="searchInput form-control" placeholder="Tìm kiếm công việc" value="@(ViewBag.SearchString ?? "")" name="searchString" />
         <span class="input-group-addon buttonSearch">
             @*<span class="glyphicon glyphicon-search"></span>*@
               <button class="btn btn-link buttonSearchLink" title="Tìm Kiếm" type="submit">Tìm Kiếm</button>
