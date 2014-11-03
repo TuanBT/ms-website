@@ -335,7 +335,7 @@
 .rimaContent {
     /*height: 50px;*/
     margin-left: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .rimacoImage {
@@ -808,6 +808,8 @@ a {
     .rimaMore:hover {
         color: black;
         text-align: center;
+        background: #EEE;
+        border-radius: 50px;
     }
 
 .rimaMaidList {
@@ -1293,16 +1295,16 @@ a {
 
 .descriptionChart {
     margin-top: 10px;
-font-size: 18px;
+    font-size: 18px;
 }
 
 .listYear {
     text-align: center;
 }
 
-.listYear>li {
-    display: inline-block;
-padding: 0 10px;
-background: #EEE;
-border-radius: 5px;
-}
+    .listYear > li {
+        display: inline-block;
+        padding: 0 10px;
+        background: #EEE;
+        border-radius: 5px;
+    }
