@@ -169,9 +169,9 @@ margin-top: 54px;
 
         @using (Html.BeginForm("AddStaff", "Admin", FormMethod.Post, new { name = "loginForm" }))
 {
-            @Html.TextBoxFor(a => a.Username, new { @id = "txtUsername", @class = "form-control input-lg text", @placeholder = "Tên đăng nhập", maxlength = 1000 })
+            @Html.TextBoxFor(a => a.Username, new { @id = "txtUsername", @class = "form-control input-lg text", @placeholder = "Tên đăng nhập", maxlength = "50" })
             <div id="textBlank"></div>
-            @Html.PasswordFor(a => a.Password, new { @id = "txtPassword", @class = "form-control input-lg text", @placeholder = "Mật khẩu", maxlength = 1000 })
+            @Html.PasswordFor(a => a.Password, new { @id = "txtPassword", @class = "form-control input-lg text", @placeholder = "Mật khẩu", maxlength = "50" })
             <div id="passwordBlank"></div><font color="red">@ViewBag.Error</font><br/>
                     
             <label class="RememberMe" id="btnBack">
