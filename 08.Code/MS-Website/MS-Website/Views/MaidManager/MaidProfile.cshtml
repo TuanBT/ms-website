@@ -61,12 +61,33 @@
             <div class="col-md-4">
                 <div class="rightInfo">
                     <ul class="riDetail">
+                        @if(Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
+                        {
+                            <li class="rideRow">
+                                <div class="rideroTitle">
+                                    Điện thoại
+                                </div>
+                                <div class="rideroContent">
+                                    <strong>@Model.Phone
+                                    </strong>
+                                </div>
+                            </li>
+                        }
                         <li class="rideRow">
                             <div class="rideroTitle">
-                                Điện thoại
+                                Giới tính
                             </div>
                             <div class="rideroContent">
-                                <strong>@Model.Phone
+                                <strong>@(Model.Gender ? "Nam":"Nữ")
+                                </strong>
+                            </div>
+                        </li>
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Ngày sinh
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@Model.BirthDate.ToString("dd/MM/yyyy")
                                 </strong>
                             </div>
                         </li>
@@ -81,10 +102,19 @@
                         </li>
                         <li class="rideRow">
                             <div class="rideroTitle">
-                                Đánh giá
+                                Quê quán
                             </div>
                             <div class="rideroContent">
-                                <strong>@Model.RateAvg điểm
+                                <strong>@Model.Hometown
+                                </strong>
+                            </div>
+                        </li>
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Địa chỉ
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@Model.Address
                                 </strong>
                             </div>
                         </li>
