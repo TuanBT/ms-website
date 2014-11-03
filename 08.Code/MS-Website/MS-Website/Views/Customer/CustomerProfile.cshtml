@@ -379,7 +379,7 @@
                     <div class="tab-pane fade bExprred" id="notActive">
                         <ul class="bexpiredListWork">
                             <input id="currPos6" type="hidden" value="@(counter + 4)" />
-                            @foreach (var recruitment in hideList)
+                            @foreach (var recruitment in notActiveList)
                             {
                                 <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
