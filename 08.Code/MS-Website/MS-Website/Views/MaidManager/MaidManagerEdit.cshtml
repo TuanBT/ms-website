@@ -43,7 +43,7 @@
                             Số điện thoại
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@account.Phone" name="phone" maxlength="15">
+                            <input type="text" class="form-control" value="@account.Phone" name="phone" maxlength="15" id="txtPhone">
                             <div id="PhoneErr"></div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             Email
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" value="@account.Email" name="email" id="txtMail" maxlength="50">
+                            <input type="text" class="form-control" value="@account.Email" name="email" id="txtEmail" maxlength="25">
                             <div id="ExpErr"></div>
                         </div>
                     </div>
@@ -96,9 +96,9 @@
         console.debug("sdf");
         var errText = "";
         var phone = new RegExp('^[0-9]+$');
-        var reg = new RegExp('[0-9]*[.][0-9]+$');
+        var email = new RegExp('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$');
         if ($("#txtFullName").val() == "") {
-            errText = "<font color='red'>Vui lòng nhập họ tên</font>";
+            errText = "<font color='red'>Vui lòng nhập tên người quản lý</font>";
             document.getElementById("textBlank").innerHTML = errText;
             return false;
         } else {
