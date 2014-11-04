@@ -1,32 +1,13 @@
 ﻿@{
     List<MS_Website.Models.CommentTemp> comments = Model;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.ManageComment = true;
 }
 <link rel="stylesheet" type="text/css" href="../Content/TableJquery/css/jquery.dataTables.min.css">
-    <script type="text/javascript" src="../Content/TableJquery/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../Content/TableJquery/js/jquery.dataTables.min.js"></script>
 <div class="Menu">
-    <div class="rows">
-        <div class="hMenu">
-            <div class="hFatherMenu">
-                <ul class="hmeTabList">
-                    <li>
-                        <a href="@Url.Action("BanAccount", "Admin")" class="hefaContent">Khóa tài khoản</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("AddStaff", "Admin")" class="hefaContent">Thêm nhân viên</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("ManageComment", "Admin")" class="hefaContent iscurent">Xóa bình luận</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("AdminConfig", "Admin")" class="hefaContent">Kmean</a>
-                    </li>                   
-                </ul>
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_PartialMenu")
 </div>
-
 
 <div class="body">
     <div class="rows">
@@ -38,33 +19,33 @@
                     });
                 </script>
                 <table id="JRTable" class="display" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Người bình luận</th>
-                    <th>Tiêu đề</th>
-                    <th>Nội dung</th>
-                    <th>Thời gian đăng</th>
-                    <th>Xử lý</th>
-                </tr>
-                </thead>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Người bình luận</th>
+                            <th>Tiêu đề</th>
+                            <th>Nội dung</th>
+                            <th>Thời gian đăng</th>
+                            <th>Xử lý</th>
+                        </tr>
+                    </thead>
 
                     <tbody>
-                        @{var count=0;}
+                        @{var count = 0;}
                         @foreach (var comment in comments)
                         {
-                            
+
                             count++;
                             <tr>
                                 <td>
                                     @count
                                     <input type="hidden" value="@(comment.Comment.CommentId)" id="" />
                                 </td>
-                                
+
                                 <td>
                                     @comment.Account.FullName
                                 </td>
-                                
+
                                 <td>
                                     @comment.Job.Title
                                 </td>
@@ -77,7 +58,7 @@
                                 </td>
                             </tr>
                         }
-                        
+
                     </tbody>
                 </table>
                 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -88,17 +69,18 @@
                                 <h4 class="modal-title" id="myLargeModalLabel">Xác nhận xóa lời bình</h4>
                             </div>
                             <div class="modal-body">
-                               Bạn thực sự muốn xóa lời bình này?
+                                Bạn thực sự muốn xóa lời bình này?
                             </div>
                             <div class="modal-footer">
-                                @using (Html.BeginForm("DeleteComment","Admin",FormMethod.Get))
+                                @using (Html.BeginForm("DeleteComment", "Admin", FormMethod.Get))
                                 {
                                     <input type="hidden" name="commentId" id="jrId2" />
                                     <button type="submit" class="btn btn-success" id="btnAccept">Xóa</button>
                                 }
-                                
+
                             </div>
-                        </div><!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-content -->
                     </div>
                 </div>
             </div>
@@ -110,8 +92,7 @@
                                 Tham gia
                             </div>
                             <div class="rideroContent">
-                                <strong>
-                                    30/08/2014
+                                <strong>30/08/2014
                                 </strong>
                             </div>
                         </li>
