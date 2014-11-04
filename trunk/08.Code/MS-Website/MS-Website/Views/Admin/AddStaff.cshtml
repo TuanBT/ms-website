@@ -173,7 +173,13 @@ margin-top: 54px;
             <div id="textBlank"></div>
             @Html.PasswordFor(a => a.Password, new { @id = "txtPassword", @class = "form-control input-lg text", @placeholder = "Mật khẩu", maxlength = "50" })
             <div id="passwordBlank"></div><font color="red">@ViewBag.Error</font><br/>
-                    
+            <div>
+                @if(ViewBag.Err!=null)
+                        {
+                            <font color="red">@ViewBag.Err</font>
+                        }
+            </div>
+            
             <label class="RememberMe" id="btnBack">
               <a href="ManageComment">Quản lý bình luận</a>
             </label>
