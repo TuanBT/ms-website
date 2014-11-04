@@ -50,7 +50,7 @@
             <div class="col-md-4">
                 <div class="rightInfo">
                     <ul class="riDetail">
-                        @if(Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
+                        @if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
                         {
                             <li class="rideRow">
                                 <div class="rideroTitle">
@@ -116,7 +116,7 @@
                             {
                                 <li id="@counter" onclick="chooseRecruit(@counter, @recruitment.Recruitment.RecruitmentId, 1)" style="display: @(counter > 4 ? "none" : "")">
                                     <div class="blImage">
-                                        <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
+                                        <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
                                     <div class="blDetail">
                                         <div class="blName">
@@ -147,7 +147,14 @@
                                 <ul class="pagination pagination-sm">
                                     <div class="suNumber">
                                         <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(1, 4)"></span>
-                                        <span id="currPage1">1</span>/@(Math.Ceiling((double)notApplList.Count / 4))
+                                        @if (notApplList.Any())
+                                        {
+                                            <span id="currPage1">1/</span>@(Math.Ceiling((double)notApplList.Count / 4))
+                                        }
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
                                         <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(1, 4)"></span>
                                     </div>
                                 </ul>
@@ -183,7 +190,7 @@
                                         <div class="col-md-6">
                                             <div class="bAWork">
                                                 <div class="blImage">
-                                                    <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
+                                                    <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
@@ -199,7 +206,7 @@
                                         <div class="col-md-6">
                                             <div class="bACus">
                                                 <div class="blImage">
-                                                    <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                                    <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
@@ -229,7 +236,14 @@
                                 <ul class="pagination pagination-sm">
                                     <div class="suNumber">
                                         <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(2, 2)"></span>
-                                        <span id="currPage2">1</span>/@(Math.Ceiling((double)applList.Count / 2))
+                                        @if (applList.Any())
+                                        {
+                                            <span id="currPage2">1/</span>@(Math.Ceiling((double)applList.Count / 2))
+                                        }
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
                                         <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(2, 2)"></span>
                                     </div>
                                 </ul>
@@ -243,7 +257,7 @@
                             {
                                 <li id="@(counter + 1)" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 3)" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
-                                        <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
+                                        <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
                                     <div class="blDetail">
                                         <div class="blName">
@@ -274,7 +288,14 @@
                                 <ul class="pagination pagination-sm">
                                     <div class="suNumber">
                                         <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(3, 4)"></span>
-                                        <span id="currPage3">1</span>/@(Math.Ceiling((double)expiredList.Count / 4))
+                                        @if (expiredList.Any())
+                                        {
+                                            <span id="currPage3">1/</span>@(Math.Ceiling((double)expiredList.Count / 4))
+                                        }
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
                                         <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(3, 4)"></span>
                                     </div>
                                 </ul>
@@ -294,7 +315,7 @@
                             {
                                 <li id="@(counter + 1)" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 4)" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
-                                        <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
+                                        <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
                                     <div class="blDetail">
                                         <div class="blName">
@@ -325,7 +346,14 @@
                                 <ul class="pagination pagination-sm">
                                     <div class="suNumber">
                                         <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(4, 4)"></span>
-                                        <span id="currPage4">1</span>/@(Math.Ceiling((double)hideList.Count / 4))
+                                        @if (hideList.Any())
+                                        {
+                                            <span id="currPage4">1/</span>@(Math.Ceiling((double)hideList.Count / 4))
+                                        }
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
                                         <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(4, 4)"></span>
                                     </div>
                                 </ul>
@@ -346,11 +374,11 @@
                     <div class="tab-pane fade bExprred" id="paid">
                         <ul class="bexpiredListWork">
                             <input id="currPos5" type="hidden" value="@(counter + 4)" />
-                            @foreach (var recruitment in hideList)
+                            @foreach (var recruitment in paidList)
                             {
                                 <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
-                                        <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
+                                        <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
                                     <div class="blDetail">
                                         <div class="blName">
@@ -366,7 +394,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                if (counter - total < hideList.Count)
+                                if (counter - total < paidList.Count)
                                 {
                                     counter++;
                                 }
@@ -381,7 +409,14 @@
                                 <ul class="pagination pagination-sm">
                                     <div class="suNumber">
                                         <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(5, 4)"></span>
-                                        <span id="currPage5">1</span>/@(Math.Ceiling((double)hideList.Count / 4))
+                                        @if (paidList.Any())
+                                        {
+                                            <span id="currPage5">1/</span>@(Math.Ceiling((double)paidList.Count / 4))
+                                        }
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
                                         <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(5, 4)"></span>
                                     </div>
                                 </ul>
@@ -395,7 +430,7 @@
                             {
                                 <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
-                                        <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
+                                        <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
                                     <div class="blDetail">
                                         <div class="blName">
@@ -411,13 +446,13 @@
                                         </div>
                                     </div>
                                 </li>
-                                if (counter - total < hideList.Count)
+                                if (counter - total < notActiveList.Count)
                                 {
                                     counter++;
                                 }
                             }
                             @{
-                                total += paidList.Count;
+                                total += notActiveList.Count;
                             }
                             <input id="lastPos6" type="hidden" value="@counter" />
                         </ul>
@@ -426,7 +461,14 @@
                                 <ul class="pagination pagination-sm">
                                     <div class="suNumber">
                                         <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(6, 4)"></span>
-                                        <span id="currPage6">1</span>/@(Math.Ceiling((double)hideList.Count / 4))
+                                        @if (notActiveList.Any())
+                                        {
+                                            <span id="currPage6">1/</span>@(Math.Ceiling((double)notActiveList.Count / 4))
+                                        }
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
                                         <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(6, 4)"></span>
                                     </div>
                                 </ul>
@@ -527,7 +569,7 @@
         var lastPos = parseInt(document.getElementById("lastPos" + type).getAttribute("value"));
         if (currPos < lastPos) {
             var currPage = parseInt(document.getElementById("currPage" + type).innerHTML) + 1;
-            document.getElementById("currPage" + type).innerHTML = currPage;
+            document.getElementById("currPage" + type).innerHTML = currPage + "/";
             for (var i = currPos - amount + 1; i <= currPos; i++) {
                 if (document.getElementById(i) != null) {
                     document.getElementById(i).setAttribute("style", "display: none");
@@ -550,7 +592,7 @@
         }
         if (currPos - amount > lastPos) {
             var currPage = parseInt(document.getElementById("currPage" + type).innerHTML) - 1;
-            document.getElementById("currPage" + type).innerHTML = currPage;
+            document.getElementById("currPage" + type).innerHTML = currPage + "/";
             for (var i = currPos; i > currPos - amount; i--) {
                 if (document.getElementById(i) != null) {
                     document.getElementById(i).setAttribute("style", "display: none");
