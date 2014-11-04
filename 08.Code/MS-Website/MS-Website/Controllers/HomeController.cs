@@ -37,6 +37,13 @@ namespace MS_Website.Controllers
             JreRcr jreRcr;
             using (_db)
             {
+                var limitDate = DateTime.Now.AddDays(-3);
+                var invalidJobList = _db.JobRequests.Where(jr => !jr.IsActive && jr.PostTime < limitDate).ToList();
+                foreach (var jobRequest in invalidJobList)
+                {
+                    _db.JobRequests.Remove(jobRequest);
+                }
+                _db.SaveChanges();
                 int NumPageRec = (int)Math.Ceiling((_db.Recruitments.Count(r => r.Status == "Waiting") / (double)numResultOnPage));
                 int NumPageJob = (int)Math.Ceiling((_db.JobRequests.Count(r => r.Status == "Waiting") / (double)numResultOnPage));
                 ViewBag.NumPageRec = NumPageRec > 5 ? 5 : NumPageRec;

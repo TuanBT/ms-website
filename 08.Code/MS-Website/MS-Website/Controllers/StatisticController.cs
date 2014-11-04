@@ -76,5 +76,57 @@ namespace MS_Website.Controllers
             
         }
 
+        public ActionResult StatisticIncome(int year)
+        {
+            if (year == 0)
+            {
+                year = DateTime.Now.Year;
+            }
+            using (var db = new MSEntities())
+            {
+                var jobIncome_1 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 1 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_1 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 1 && r.PostTime.Year == year) * 25;
+                var totalIncome_1 = jobIncome_1 + recruitIncome_1;
+                var jobIncome_2 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 2 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_2 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 2 && r.PostTime.Year == year) * 25;
+                var totalIncome_2 = jobIncome_2 + recruitIncome_2;
+                var jobIncome_3 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 3 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_3 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 3 && r.PostTime.Year == year) * 25;
+                var totalIncome_3 = jobIncome_3 + recruitIncome_3;
+                var jobIncome_4 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 4 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_4 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 4 && r.PostTime.Year == year) * 25;
+                var totalIncome_4 = jobIncome_4 + recruitIncome_4;
+                var jobIncome_5 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 5 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_5 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 5 && r.PostTime.Year == year) * 25;
+                var totalIncome_5 = jobIncome_5 + recruitIncome_5;
+                var jobIncome_6 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 6 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_6 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 6 && r.PostTime.Year == year) * 25;
+                var totalIncome_6 = jobIncome_6 + recruitIncome_6;
+                var jobIncome_7 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 7 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_7 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 7 && r.PostTime.Year == year) * 25;
+                var totalIncome_7 = jobIncome_7 + recruitIncome_7;
+                var jobIncome_8 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 8 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_8 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 8 && r.PostTime.Year == year) * 25;
+                var totalIncome_8 = jobIncome_8 + recruitIncome_8;
+                var jobIncome_9 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 9 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_9 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 9 && r.PostTime.Year == year) * 25;
+                var totalIncome_9 = jobIncome_9 + recruitIncome_9;
+                var jobIncome_10 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 10 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_10 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 10 && r.PostTime.Year == year) * 25;
+                var totalIncome_10 = jobIncome_10 + recruitIncome_10;
+                var jobIncome_11 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 11 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_11 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 11 && r.PostTime.Year == year) * 25;
+                var totalIncome_11 = jobIncome_11 + recruitIncome_11;
+                var jobIncome_12 = db.JobRequests.Count(jr => jr.IsActive && jr.PostTime.Month == 12 && jr.PostTime.Year == year) * 25;
+                var recruitIncome_12 = db.Recruitments.Count(r => r.IsActive && r.PostTime.Month == 12 && r.PostTime.Year == year) * 25;
+                var totalIncome_12 = jobIncome_12 + recruitIncome_12;
+                var totalString = totalIncome_1 + ";" + totalIncome_2 + ";" + totalIncome_3 + ";" + totalIncome_4 + ";"
+                    + totalIncome_5 + ";" + totalIncome_6 + ";" + totalIncome_7 + ";" + totalIncome_8 + ";"
+                    + totalIncome_9 + ";" + totalIncome_10 + ";" + totalIncome_11 + ";" + totalIncome_12;
+                ViewBag.Year = year;
+                ViewBag.Total = totalString;
+                return View("StatisticIncome");
+            }
+        }
     }
 }
