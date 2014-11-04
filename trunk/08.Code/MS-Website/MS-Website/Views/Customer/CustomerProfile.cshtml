@@ -94,12 +94,12 @@
             </div>
             <div class="boxListWork">
                 <ul class="nav nav-tabs" role="tablist" id="myTab">
-                    <li class="active"><a href="#free" role="tab" data-toggle="tab">Chưa tuyển được người</a></li>
-                    <li class><a href="#applied" role="tab" data-toggle="tab">Đã tuyển</a></li>
+                    <li class="active"><a href="#free" role="tab" data-toggle="tab">Chờ thuê</a></li>
+                    <li class><a href="#applied" role="tab" data-toggle="tab">Đã nhận</a></li>
                     <li class><a href="#expired" role="tab" data-toggle="tab">Hết hạn</a></li>
                     @if (ViewBag.Manage == "true")
                     {
-                        <li class><a href="#hide" role="tab" data-toggle="tab">Không công khai</a></li>
+                        <li class><a href="#hide" role="tab" data-toggle="tab">Tạm ẩn</a></li>
                         <li class><a href="#paid" role="tab" data-toggle="tab">Đã thanh toán</a></li>
                         <li class><a href="#notActive" role="tab" data-toggle="tab">Chưa kích hoạt</a></li>
                     }
@@ -124,11 +124,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToShortDateString()</span>
+                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
-                                            <span class="blTimeTitle">Tới: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToShortDateString()</span>
+                                            <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -191,7 +191,7 @@
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Đăng: </span><span
-                                                            class="blTimeText">@recruitment.Recruitment.PostTime.ToShortDateString()</span>
+                                                            class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -203,11 +203,11 @@
                                                 </div>
                                                 <div class="blDetail">
                                                     <div class="blName">
-                                                        <a href="@Url.Action("GetJobRequest", "Post", new { recruitId = recruitment.JobRequest.JobRequestId })">@recruitment.JobRequest.Title</a>
+                                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = recruitment.JobRequest.JobRequestId })">@recruitment.JobRequest.Title</a>
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Nhận: </span><span
-                                                            class="blTimeText">@recruitment.JobRequest.ApplyTimes.Value.ToShortDateString()</span>
+                                                            class="blTimeText">@recruitment.JobRequest.ApplyTimes.Value.ToString("dd/MM/yyyy")</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -251,11 +251,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToShortDateString()</span>
+                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
-                                            <span class="blTimeTitle">Tới: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToShortDateString()</span>
+                                            <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -302,11 +302,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToShortDateString()</span>
+                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
-                                            <span class="blTimeTitle">Tới: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToShortDateString()</span>
+                                            <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -358,11 +358,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToShortDateString()</span>
+                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
-                                            <span class="blTimeTitle">Tới: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToShortDateString()</span>
+                                            <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -403,11 +403,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToShortDateString()</span>
+                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
-                                            <span class="blTimeTitle">Tới: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToShortDateString()</span>
+                                            <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>

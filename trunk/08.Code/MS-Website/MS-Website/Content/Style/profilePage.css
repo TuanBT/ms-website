@@ -500,6 +500,7 @@ a {
 .boxListWork {
     margin-top: 20px;
     display: inline-block;
+    width: 100%;
 }
 
 .bFree {
@@ -546,7 +547,8 @@ a {
 
 .blName {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 13px;
+    max-width: 179px;
 }
 
     .blName > a {
@@ -594,10 +596,11 @@ a {
     padding: 5px;
     background: #ffffff;
     border-radius: 5px;
+    min-height: 84px;
 }
 
     .bFreeListWork > li:hover {
-        background: #f5f5f2;
+        background: #ecf0f1;
     }
 
 .blTime {
@@ -677,6 +680,7 @@ a {
         padding: 5px;
         background: #ffffff;
         border-radius: 5px;
+        min-height: 84px;
     }
 
         .bexpiredListWork > li:hover {
