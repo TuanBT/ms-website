@@ -5,35 +5,7 @@
 <link rel="stylesheet" type="text/css" href="../Content/TableJquery/css/jquery.dataTables.min.css">
     <script type="text/javascript" src="../Content/TableJquery/js/jquery.dataTables.min.js"></script>
 <div class="Menu">
-    <div class="rows">
-        <div class="hMenu">
-            <div class="hFatherMenu">
-                <ul class="hmeTabList">
-                    <li>
-                        <a href="@Url.Action("GetMaidManager", "MaidManager", new { accId = Session["AccId"], role = Session["Role"] })" class="hefaContent">Thông tin</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("LoadAddMaid", "MaidManager")" class="hefaContent">Thêm người giúp việc</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("PostRequest", "MaidManager")" class="hefaContent">Đăng yêu cầu công việc</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("ManageJobRequest","MaidManager")" class="hefaContent iscurent" >Quản lý</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hefaContent">Thông báo</a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="hefaContent">Thống kê</a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
-
-    </div>
+    @Html.Partial("_PartialMenu")
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li class="">
