@@ -1,7 +1,6 @@
 ﻿@{
     ViewBag.Title = "Sửa thông tin người giúp việc";
     MS_Website.Models.Maid maid = Model;
-    ViewBag.Info = true;
 }
 
 <link href="../Content/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
@@ -15,10 +14,10 @@
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li>
-                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" class="hChContent">Cá nhân</a>
+                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" class="hChContent">Thông tin người giúp việc</a>
             </li>
             <li class="iscurent">
-                <a class="hChContent iscurent">Sửa thông tin</a>
+                <a class="hChContent iscurent">Sửa thông tin người giúp việc</a>
             </li>
         </ul>
     </div>

@@ -3,7 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     MS_Website.Models.Maid maid = Model;
     var MaidManager = (MS_Website.Models.MaidManager)ViewBag.MaidManager;
-    ViewBag.Info = true;
     List<MS_Website.Models.JobRequestTemp> notApplList = ViewBag.NotApplList;
     List<MS_Website.Models.JobRequestTemp> applList = ViewBag.ApplList;
     List<MS_Website.Models.JobRequestTemp> apprList = ViewBag.ApprList;
@@ -17,10 +16,10 @@
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li class="iscurent">
-                <a class="hChContent">Cá nhân</a>
+                <a class="hChContent">Thông tin người giúp việc</a>
             </li>
             <li class>
-                <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = maid.MaidId })" class="hChContent">Sửa thông tin</a>
+                <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = maid.MaidId })" class="hChContent">Sửa thông tin người giúp việc</a>
             </li>
         </ul>
     </div>
