@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Thống kê yêu cầu";
     ViewBag.Manage = true;
     ViewBag.Statistic = true;
     int year = DateTime.Now.Year;
@@ -12,10 +12,10 @@
     <div class="hChildMenu">
         <ul class="hChildMenuList">
             <li class="iscurent">
-                <a href="@Url.Action("StatisticRequest", "Statistic")" class="hChContent">Các yêu cầu</a>
+                <a href="#">Các yêu cầu</a>
             </li>
             <li class="">
-                <a href="#" class="hChContent">Doanh thu</a>
+                <a href="@Url.Action("StatisticIncome","Statistic", new {year})" class="hChContent">Doanh thu</a>
             </li>
         </ul>
     </div>
