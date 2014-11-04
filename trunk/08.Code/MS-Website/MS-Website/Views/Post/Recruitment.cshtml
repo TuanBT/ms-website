@@ -270,6 +270,7 @@
             </div>
             <div class="modal-footer">
                 @Html.Partial("_PartialExtend")
+                <input type="hidden" id="PriceRC" value="@((int)Session["PriceJR"]/20)"/>
             </div>
         </div>
     </div>
@@ -332,7 +333,7 @@
         var weekDr = document.getElementById("week");
         var week = weekDr.options[weekDr.selectedIndex].value;
         document.getElementById("recruitId").setAttribute("value", recruitId);
-        document.getElementById("amount").setAttribute("value", week * 1);
+        document.getElementById("amount").setAttribute("value", parseInt(week) * parseInt($("#PriceRC").val()));
         document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=" + week);
     }
     
