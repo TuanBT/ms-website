@@ -2072,6 +2072,7 @@
     <Content Include="Views\Shared\_PartialExtend.cshtml" />
     <Content Include="Views\Statistic\StatisticRequest.cshtml" />
     <Content Include="Views\Notifier\Notifier.cshtml" />
+    <Content Include="Views\Statistic\StatisticIncome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
