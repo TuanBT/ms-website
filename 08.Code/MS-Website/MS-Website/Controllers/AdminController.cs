@@ -201,6 +201,12 @@ namespace MS_Website.Controllers
                 {
                     try
                     {
+                        var error = db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                        if (error != null)
+                        {
+                            ViewBag.Err = "Tên đăng nhập đã tồn tại";
+                            return View("AddStaff");
+                        }
                         var newStaff = db.Accounts.Create();
                         newStaff.Username = acc.Username;
                         newStaff.Password = acc.Password;
