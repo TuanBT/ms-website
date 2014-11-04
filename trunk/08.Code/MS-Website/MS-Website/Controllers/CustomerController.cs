@@ -32,8 +32,6 @@ namespace MS_Website.Controllers
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Expired")).ToList();
                     var hideList =
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Hide")).ToList();
-                    var paidList =
-                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Payment")).ToList();
                     var notActiveList =
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && r.IsActive == false).ToList();
                     ViewBag.NotApplList =
@@ -52,9 +50,6 @@ namespace MS_Website.Controllers
                     ViewBag.HideList =
                         hideList.Select(
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                    ViewBag.PaidList =
-                       paidList.Select(
-                           recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
                     ViewBag.NotActiveList =
                        notActiveList.Select(
                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();

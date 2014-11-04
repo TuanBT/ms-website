@@ -39,9 +39,14 @@ namespace MS_Website.Controllers
             {
                 var limitDate = DateTime.Now.AddDays(-3);
                 var invalidJobList = _db.JobRequests.Where(jr => !jr.IsActive && jr.PostTime < limitDate).ToList();
+                var invalidRecruitList = _db.Recruitments.Where(r => !r.IsActive && r.PostTime < limitDate).ToList();
                 foreach (var jobRequest in invalidJobList)
                 {
                     _db.JobRequests.Remove(jobRequest);
+                }
+                foreach (var recruitment in invalidRecruitList)
+                {
+                    _db.Recruitments.Remove(recruitment);
                 }
                 _db.SaveChanges();
                 int NumPageRec = (int)Math.Ceiling((_db.Recruitments.Count(r => r.Status == "Waiting") / (double)numResultOnPage));
