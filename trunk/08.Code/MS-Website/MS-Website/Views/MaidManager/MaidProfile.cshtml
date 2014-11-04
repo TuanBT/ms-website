@@ -18,9 +18,15 @@
             <li class="iscurent">
                 <a class="hChContent">Thông tin người giúp việc</a>
             </li>
-            <li class>
-                <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = maid.MaidId })" class="hChContent">Sửa thông tin người giúp việc</a>
-            </li>
+            @if (Session["AccId"]!=null)
+            {
+                if ((int)Session["AccId"] == MaidManager.AccId)
+                {
+                    <li class>
+                        <a href="@Url.Action("MaidEdit", "MaidManager", new {maidId = maid.MaidId})" class="hChContent">Sửa thông tin người giúp việc</a>
+                    </li>
+                }
+            }
         </ul>
     </div>
 </div>
@@ -60,17 +66,20 @@
             <div class="col-md-4">
                 <div class="rightInfo">
                     <ul class="riDetail">
-                        @if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
+                        @if (Session["Role"]!=null)
                         {
-                            <li class="rideRow">
-                                <div class="rideroTitle">
-                                    Điện thoại
-                                </div>
-                                <div class="rideroContent">
-                                    <strong>@Model.Phone
-                                    </strong>
-                                </div>
-                            </li>
+                            if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
+                            {
+                                <li class="rideRow">
+                                    <div class="rideroTitle">
+                                        Điện thoại
+                                    </div>
+                                    <div class="rideroContent">
+                                        <strong>@Model.Phone
+                                        </strong>
+                                    </div>
+                                </li>
+                            }
                         }
                         <li class="rideRow">
                             <div class="rideroTitle">

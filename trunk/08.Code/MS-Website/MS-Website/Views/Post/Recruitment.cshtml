@@ -139,17 +139,20 @@
                     </div>
                     @if (RecruitmentTemp.Recruitment.Status == "Payment")
                     {
-                        if (Session["Role"].Equals("Customer"))
-                        {
-                            <div class="overView">
-                                <div class="ovTitle">
-                                    Nếu bạn đã thanh toán?
-                                </div>
-                                <div class="ovContent">
-                                    Có thể quá trình thanh toán bị lỗi? Bạn có thể <a onclick="NotiPaypal('Kiểm tra lại thanh toán', '/Post/GetRecruitment?recruitmentId=@(RecruitmentTemp.Recruitment.RecruitmentId)')"> Ấn vào đây để </a> nhân viên của chúng tôi kiểm tra lại đơn hàng và kích hoạt yêu cầu này.
-                                </div>
-                            </div>
-                        }
+                         if (Session["Role"]!=null)
+                         {
+                             if (Session["Role"].Equals("Customer"))
+                             {
+                                 <div class="overView">
+                                     <div class="ovTitle">
+                                         Nếu bạn đã thanh toán?
+                                     </div>
+                                     <div class="ovContent">
+                                         Có thể quá trình thanh toán bị lỗi? Bạn có thể <a onclick="NotiPaypal('Kiểm tra lại thanh toán', '/Post/GetRecruitment?recruitmentId=@(RecruitmentTemp.Recruitment.RecruitmentId)')"> Ấn vào đây để </a> nhân viên của chúng tôi kiểm tra lại đơn hàng và kích hoạt yêu cầu này.
+                                     </div>
+                                 </div>
+                             }
+                         }
                     }
                     @if (ViewBag.Recommend != null)
                     {
@@ -207,7 +210,7 @@
                     <ul class="riDetail">
                         <li class="rideRow">
                             <div class="rideroTitle">
-                                Đăng lúc
+                                Đăng ngày
                             </div>
                             <div class="rideroContent">
                                 <strong>@Model.Recruitment.PostTime.ToString("dd/MM/yyyy")
