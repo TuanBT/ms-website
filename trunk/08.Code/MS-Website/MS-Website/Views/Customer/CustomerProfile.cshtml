@@ -5,7 +5,6 @@
     ViewBag.Info = true;
     List<MS_Website.Models.RecruitmentTemp> notApplList = ViewBag.NotApplList;
     List<MS_Website.Models.RecruitmentTemp> applList = ViewBag.ApplList;
-    List<MS_Website.Models.RecruitmentTemp> paidList = ViewBag.PaidList;
     List<MS_Website.Models.RecruitmentTemp> expiredList = ViewBag.ExpiredList;
     List<MS_Website.Models.RecruitmentTemp> hideList = ViewBag.HideList;
     List<MS_Website.Models.RecruitmentTemp> notActiveList = ViewBag.NotActiveList;
@@ -100,7 +99,6 @@
                     @if (ViewBag.Manage == "true")
                     {
                         <li class><a href="#hide" role="tab" data-toggle="tab">Tạm ẩn</a></li>
-                        <li class><a href="#paid" role="tab" data-toggle="tab">Đã thanh toán</a></li>
                         <li class><a href="#notActive" role="tab" data-toggle="tab">Chưa kích hoạt</a></li>
                     }
                 </ul>
@@ -371,61 +369,9 @@
                             }
                         </div>
                     </div>
-                    <div class="tab-pane fade bExprred" id="paid">
-                        <ul class="bexpiredListWork">
-                            <input id="currPos5" type="hidden" value="@(counter + 4)" />
-                            @foreach (var recruitment in paidList)
-                            {
-                                <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
-                                    <div class="blImage">
-                                        <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
-                                    </div>
-                                    <div class="blDetail">
-                                        <div class="blName">
-                                            <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = recruitment.Recruitment.RecruitmentId })">@recruitment.Recruitment.Title</a>
-                                        </div>
-                                        <div class="blTime">
-                                            <span class="blTimeTitle">Đăng: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
-                                        </div>
-                                        <div class="blTime">
-                                            <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                if (counter - total < paidList.Count)
-                                {
-                                    counter++;
-                                }
-                            }
-                            @{
-                                total += paidList.Count;
-                            }
-                            <input id="lastPos5" type="hidden" value="@counter" />
-                        </ul>
-                        <div class="blFooter">
-                            <div class="blfNumber">
-                                <ul class="pagination pagination-sm">
-                                    <div class="suNumber">
-                                        <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(5, 4)"></span>
-                                        @if (paidList.Any())
-                                        {
-                                            <span id="currPage5">1/</span>@(Math.Ceiling((double)paidList.Count / 4))
-                                        }
-                                        else
-                                        {
-                                            <span>Không có kết quả</span>
-                                        }
-                                        <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(5, 4)"></span>
-                                    </div>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                     <div class="tab-pane fade bExprred" id="notActive">
                         <ul class="bexpiredListWork">
-                            <input id="currPos6" type="hidden" value="@(counter + 4)" />
+                            <input id="currPos5" type="hidden" value="@(counter + 4)" />
                             @foreach (var recruitment in notActiveList)
                             {
                                 <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
@@ -454,22 +400,22 @@
                             @{
                                 total += notActiveList.Count;
                             }
-                            <input id="lastPos6" type="hidden" value="@counter" />
+                            <input id="lastPos5" type="hidden" value="@counter" />
                         </ul>
                         <div class="blFooter">
                             <div class="blfNumber">
                                 <ul class="pagination pagination-sm">
                                     <div class="suNumber">
-                                        <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(6, 4)"></span>
+                                        <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(5, 4)"></span>
                                         @if (notActiveList.Any())
                                         {
-                                            <span id="currPage6">1/</span>@(Math.Ceiling((double)notActiveList.Count / 4))
+                                            <span id="currPage5">1/</span>@(Math.Ceiling((double)notActiveList.Count / 4))
                                         }
                                         else
                                         {
                                             <span>Không có kết quả</span>
                                         }
-                                        <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(6, 4)"></span>
+                                        <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(5, 4)"></span>
                                     </div>
                                 </ul>
                             </div>
