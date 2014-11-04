@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Thống kê doanh thu";
+    ViewBag.Manage = true;
+    ViewBag.Statistic = true;
+    int year = DateTime.Now.Year;
+}
+
+<script src="~/Content/Chart.js/src/Chart.min.js"></script>
+
+<div class="Menu">
+    @Html.Partial("_PartialMenu")
+    <div class="hChildMenu">
+        <ul class="hChildMenuList">
+            <li class="">
+                <a href="@Url.Action("StatisticRequest", "Statistic", new {year})" class="hChContent">Các yêu cầu</a>
+            </li>
+            <li class="iscurent">
+                <a href="#" class="hChContent">Doanh thu</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="titlePage">THỐNG KÊ DOANH THU TRONG NĂM @ViewBag.Year</div>
+            <div class="col-md-8">
+                <div class="leftInfo">
+                    <div>
+                        <canvas id="canvas"></canvas>
+                    </div>
+                    <input id="valueX" value="T1;T2;T3;T4;T5;T6;T7;T8;T9;T10;T11;T12" type="hidden" />
+                    <input id="valueY" value="@ViewBag.Total" type="hidden"/>
+                    <div class="descriptionChart">
+                        <ul class="listYear">
+                            <li>
+                                <a href="@Url.Action("StatisticIncome", "Statistic", new { year = year - 2 })">@(year - 2)</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("StatisticIncome", "Statistic", new { year = year - 1 })">@(year - 1)</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("StatisticIncome", "Statistic", new { year })">@(year)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    var barChartData = {
+        labels: $("#valueX").val().split(';'),
+        datasets: [
+            {
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: $("#valueY").val().split(';')
+            }
+        ]
+    };
+    window.onload = function() {
+        var ctx = document.getElementById("canvas").getContext("2d");
+        window.myBar = new Chart(ctx).Bar(barChartData, {
+            responsive: true
+        });
+    };
+
+	</script>
