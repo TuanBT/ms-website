@@ -23,6 +23,9 @@ namespace MS_Website.Controllers
 
         public ActionResult Index()
         {
+            Session["PriceJR"] = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceJR"]);
+            Session["PriceRC"] = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceRC"]);
+
             int pageRec = Convert.ToInt32(Request["pageRec"]) == 0 ? 1 : Convert.ToInt32(Request["pageRec"]);
             int pageJob = Convert.ToInt32(Request["pageJob"]) == 0 ? 1 : Convert.ToInt32(Request["pageJob"]);
             bool flagRec = Convert.ToBoolean(Request["rec"]);
