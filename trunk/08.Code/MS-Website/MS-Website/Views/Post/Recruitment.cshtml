@@ -144,7 +144,7 @@
                                 Nếu bạn đã thanh toán?
                             </div>
                             <div class="ovContent">
-                                Có thể quá trình thanh toán bị lỗi? Bạn có thể <a href="#"> Ấn vào đây để </a> nhân viên của chúng tôi kiểm tra lại đơn hàng và kích hoạt yêu cầu này.
+                            Có thể quá trình thanh toán bị lỗi? Bạn có thể <a onclick="NotiPaypal('Kiểm tra lại thanh toán','/Post/GetRecruitment?recruitmentId=@(RecruitmentTemp.Recruitment.RecruitmentId)')"> Ấn vào đây để </a> nhân viên của chúng tôi kiểm tra lại đơn hàng và kích hoạt yêu cầu này.
                             </div>
                         </div>
                     }
@@ -331,5 +331,12 @@
         document.getElementById("recruitId").setAttribute("value", recruitId);
         document.getElementById("amount").setAttribute("value", week * 1);
         document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=" + week);
+    }
+    
+    function NotiPaypal(content, link) {
+        var url = "/Post/NotiPaypal";
+        $.post(url, {content: content, link: link }, function (data) {
+            $(".ovContent").html(data);
+        });
     }
 </script>
