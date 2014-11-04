@@ -886,6 +886,7 @@ namespace MS_Website.Controllers
 
                     var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
                     recruitment.IsActive = true;
+                    recruitment.Status = "Waiting";
                     db.SaveChanges();
                     //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
                     return RedirectToAction("ManageRecruitment", "MaidManager");
