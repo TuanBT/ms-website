@@ -19,7 +19,7 @@ namespace MS_Website.Controllers
             {
                 bool flag = false;
                 var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
-                if (job.Status.Equals("Approved"))
+                /*if (job.Status.Equals("Approved"))
                 {
                     var recruits = db.Recruitments.Where(r => r.CustomerId == (int)Session["AccId"]);
                     var apply = db.Applies.FirstOrDefault(a => a.JobRequestId == jobId);
@@ -33,7 +33,7 @@ namespace MS_Website.Controllers
                     //        }
                     //    }
                     //}
-                }
+                }*/
                 ViewBag.JobReqId = jobId;
                 Session["flag"] = flag;
                 Session["jobId"] = jobId;
