@@ -1,4 +1,5 @@
 ﻿@{
+    
     ViewBag.Title = "Tìm kiếm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -174,7 +175,7 @@
                                                             @Html.Partial("_PartialStar",(float)job.Maid.RateAvg)
                                                         </div>
                                                         <div class="detailInfo">
-                                                            <strong>Đăng lúc: </strong><span>@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                            <strong>Đăng ngày: </strong><span>@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
                                                         </div>
 
                                                         <div class="description">
@@ -240,7 +241,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="detailInfo">
-                                                            <strong>Đăng lúc: </strong><span>@recruit.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
+                                                            <strong>Đăng ngày: </strong><span>@recruit.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                                         </div>
                                                         <div class="description">
                                                         </div>

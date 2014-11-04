@@ -2,176 +2,36 @@
 @{
     ViewBag.Title = "Tạo tài khoản nhân viện";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<link rel="stylesheet" type="text/css" href="../Content/TableJquery/css/jquery.dataTables.min.css">
-<script type="text/javascript" src="../Content/TableJquery/js/jquery.dataTables.min.js"></script>
-    <style>
-        .header {
-            background: #7bd454;
-            line-height: 80px;
-            height: 80px;
-        }
-
-        .rows {
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 0;
-            margin-bottom: 0;
-            width: 960px;
-        }
-
-        .header .logo {
-            float: left;
-            height: 100%;
-            margin-left: 10px;
-        }
-
-        .oContentContainer {
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px / 5px;
-            border-radius: 5px / 5px;
-            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
-            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
-            background-color: #fff;
-            padding: 54px;
-        }
-
-        .oPageCentered {
-            margin: 0 auto;
-            position: relative;
-            width: 960px;
-            min-height: 300px;
-        }
-
-        .oFormContainer {
-            width: 307px;
-        }
-
-        h1 {
-            font-size: 26px;
-            font-weight: 400;
-            margin-bottom: 30px;
-            font-family: Adelle_Regular, Georgia, serif;
-        }
-
-        form {
-            line-height: inherit;
-            margin: 0 0 1.5em;
-        }
-
-        .oInputText {
-            margin-bottom: 19px;
-        }
-
-        .oFormJumbo {
-            height: 48px;
-            font-size: 16px;
-            border-radius: 7px;
-            width: 100%;
-        }
-
-        body {
-            background-color: #ebebeb;
-            position: relative;
-            min-width: 960px;
-            min-height: 100%;
-            padding-bottom: 150px;
-            padding: 0;
-            margin: 0;
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 13px;
-            line-height: 1.4;
-            color: #252523;
-            word-wrap: break-word;
-        }
-
-        element.style {
-        }
-
-        body:before {
-            background: #7bd454;
-            content: "";
-            height: 200px;
-            width: 100%;
-            min-width: 960px;
-            position: absolute;
-            top: 0;
-            z-index: -1;
-            padding: 0;
-        }
-
-        .footerRow{
-    background: #bdc3c7;
-    /*padding-top: 1.0625rem;
-    padding-bottom: 2.8125rem;*/
-    color: white;
-    text-align: center;
-    margin-top: 20px;
+    ViewBag.AddStaff = "Add staff";
 }
 
-.imgWorkFooter{
-   height: 30px;
-margin-top: 54px;
-}
-
-        .linksContainer {
-            display: inline-block;
-            color: #fff;
-            text-align: right;
-            vertical-align: middle;
-            float: right;
-        }
-
-        a {
-            text-decoration: none;
-            color: blue;
-        }
-
-            a:hover, a:focus {
-                color: blue;
-                text-decoration: underline;
-            }
-
-        .FormFooter {
-        }
-
-        #submitBtn {
-        }
-
-        .RememberMe {
-            float: left;
-            margin-top: 5px;
-        }
-
-        #remember_me {
-        }
-
-        .ForgotLinks {
-            margin-top: 10px;
-        }
-
-            .ForgotLinks a {
-                color: #28b7ed;
-            }
-
-        .text {
-            margin: 20px 0 20px 0;
-        }
-        
-    </style>
-
-    <div id="main" role="main" class="oPageCentered oContentContainer">
-
-    <div class="oPageCentered oFormContainer">
-        
-        <h1>Tạo tài khoản nhân viên</h1>
-
-        @using (Html.BeginForm("AddStaff", "Admin", FormMethod.Post, new { name = "loginForm" }))
-{
-            @Html.TextBoxFor(a => a.Username, new { @id = "txtUsername", @class = "form-control input-lg text", @placeholder = "Tên đăng nhập", maxlength = "50" })
-            <div id="textBlank"></div>
-            @Html.PasswordFor(a => a.Password, new { @id = "txtPassword", @class = "form-control input-lg text", @placeholder = "Mật khẩu", maxlength = "50" })
+<div class="Menu">
+    @Html.Partial("_PartialMenu")
+</div>
+<div class="body">
+    <div class="rows">
+        <div class="row">
+            <div class="titlePage">THÊM NGƯỜI GIÚP VIỆC</div>
+            @using (Html.BeginForm("AddStaff", "Admin", FormMethod.Post, new { name = "loginForm" }))
+            {
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Tên đăng ký
+                        </div>
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(a => a.Username, new { @id = "txtUsername", @class = "form-control input-lg text", @placeholder = "Tên đăng nhập", maxlength = "50" })
+                            <div id="textBlank"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Mật khẩu
+                        </div>
+                        <div class="col-md-8">
+                           @Html.PasswordFor(a => a.Password, new { @id = "txtPassword", @class = "form-control input-lg text", @placeholder = "Mật khẩu", maxlength = "50" })
             <div id="passwordBlank"></div><font color="red">@ViewBag.Error</font><br/>
             <div>
                 @if(ViewBag.Err!=null)
@@ -179,19 +39,16 @@ margin-top: 54px;
                             <font color="red">@ViewBag.Err</font>
                         }
             </div>
-            
-            <label class="RememberMe" id="btnBack">
-              <a href="ManageComment">Quản lý bình luận</a>
-            </label>
-            <button id="btnLogin" type="submit" class="btn btn-success" name="Login" style="float:right">Đăng kí</button>
-                
-    <input type="hidden" name="ioBB" id="ioBB">
-    @*<div class="ForgotLinks">
-                    <a href="#">Quên mật khẩu?</a>
-                </div>*@
-    }
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button id="btnLogin" type="submit" class="btn btn-success" name="Login" style="float:right">Thêm người giúp việc</button>
+                </div>
+            }
+        </div>
     </div>
-    </div>
+</div>
    <script type="text/javascript" language="javascript">
        $("#btnLogin").click(function () {
            console.debug("sdf");

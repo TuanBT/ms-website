@@ -1,4 +1,5 @@
 ﻿@{
+    ViewBag.Title = "Khóa tài khoản";
     List<MS_Website.Models.Account> accounts = Model;
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.BanAcc = true;
@@ -13,7 +14,6 @@
 <div class="body">
     <div class="rows">
         <div class="row">
-            <div class="col-md-8">
                 <script type="text/javascript" language="javascript" class="init">
                     $(document).ready(function () {
                         $('#JRTable').DataTable();
@@ -73,7 +73,6 @@
                         </div><!-- /.modal-content -->
                     </div>
                 </div>
-            </div>
         </div>
         <script type="text/javascript" language="javascript">
             /*  $("#btnActive").click(function (jobRequestId)
