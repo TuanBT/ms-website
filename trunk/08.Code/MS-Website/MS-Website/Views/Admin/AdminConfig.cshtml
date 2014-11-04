@@ -1,33 +1,12 @@
 ﻿@{
     ViewBag.Title = "Quản lý cấu hình";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Kmean = true;
 }
 
 <div class="Menu">
-    <div class="rows">
-        <div class="hMenu">
-            <div class="hFatherMenu">
-                <ul class="hmeTabList">
-                    <li>
-                        <a href="@Url.Action("BanAccount", "Admin")" class="hefaContent">Khóa tài khoản</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("AddStaff", "Admin")" class="hefaContent">Thêm nhân viên</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("ManageComment", "Admin")" class="hefaContent">Xóa bình luận</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("AdminConfig", "Admin")" class="hefaContent iscurent">Kmean</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_PartialMenu")
 </div>
-
-
-
 
 <div class="body">
     <div class="rows">
