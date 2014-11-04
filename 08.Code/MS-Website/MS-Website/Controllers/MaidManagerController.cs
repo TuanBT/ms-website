@@ -178,7 +178,7 @@ namespace MS_Website.Controllers
                         {
                             maid.StaffId = managerId;
                         }
-                      
+
                         maid.MaidName = fullname;
                         maid.Experience = exp;
                         maid.Phone = phone;
@@ -789,27 +789,21 @@ namespace MS_Website.Controllers
                 List<JobRequestTemp> jobRequestTemps = new List<JobRequestTemp>();
                 using (var db = new MSEntities())
                 {
-                    var jobRequests = db.JobRequests.Where(j => j.IsActive == false).ToList();
+                    var jobRequests = db.JobRequests.Where(j => !j.IsActive).ToList();
                     foreach (var jobRequest in jobRequests)
                     {
-
                         var jobRequestTemp = new JobRequestTemp
                         {
                             Job = jobRequest,
                             SkillList = null,
-                            Account = db.Accounts.FirstOrDefault(j => j.AccountId == jobRequest.MaidMediatorId),
+                            Account = db.Accounts.FirstOrDefault(a => a.AccountId == jobRequest.MaidMediatorId || a.AccountId == jobRequest.StaffId),
 
                             Maid = null,
                             Recruitment = null,
                         };
-                        if (jobRequestTemp.Job.MaidMediatorId != null)
-                        {
-                            jobRequestTemps.Add(jobRequestTemp);
-                        }
+                        jobRequestTemps.Add(jobRequestTemp);
 
                     }
-
-
                     //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
                     //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
                     return View(jobRequestTemps);
