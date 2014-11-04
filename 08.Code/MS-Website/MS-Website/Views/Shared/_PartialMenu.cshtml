@@ -4,6 +4,21 @@
         <div class="hMenu">
             <div class="hFatherMenu">
                 <ul class="hmeTabList">
+                    @if (Session["Role"].Equals("Admin"))
+                    {
+                        <li>
+                            <a href="@Url.Action("BanAccount", "Admin")" class="hefaContent @(ViewBag.BanAcc != null ? "iscurent" : "")">Khóa tài khoản</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("AddStaff", "Admin")" class="hefaContent @(ViewBag.AddStaff != null ? "iscurent" : "")">Thêm nhân viên</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("ManageComment", "Admin")" class="hefaContent @(ViewBag.ManageComment != null ? "iscurent" : "")">Xóa bình luận</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("AdminConfig", "Admin")" class="hefaContent @(ViewBag.Kmean != null ? "iscurent" : "")">Kmean</a>
+                        </li>
+                    }
                     @if (Session["Role"].Equals("Customer"))
                     {
                         <li>
@@ -37,9 +52,12 @@
                             <a href="@Url.Action("ManageJobRequest", "MaidManager")" class="hefaContent @(ViewBag.StaffManage != null ? "iscurent" : "")">Quản lý</a>
                         </li>
                     }
-                    <li>
-                        <a href="@Url.Action("StatisticRequest", "Statistic", new { year = 0 })" class="hefaContent @(ViewBag.Statistic != null ? "iscurent" : "")">Thống kê</a>
-                    </li>
+                    @if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin"))
+                    {
+                        <li>
+                            <a href="@Url.Action("StatisticRequest", "Statistic", new { year = DateTime.Now.Year })" class="hefaContent @(ViewBag.Statistic != null ? "iscurent" : "")">Thống kê</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
