@@ -346,7 +346,7 @@
                             Thời hạn đăng
                         </div>
                         <div class="col-md-8">
-                            <select class="form-control" id="time" name="time" onchange="chooseTime(25)">
+                            <select class="form-control" id="time" name="time" onchange="chooseTime(@Session["PriceRC"])">
                                 <option value="1">1 tuần</option>
                                 <option value="2">2 tuần</option>
                                 <option value="3">3 tuần</option>
@@ -354,9 +354,9 @@
                                 <option value="5">5 tuần</option>
                             </select>
                            <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> * <span
-                                class="postJRTimePrice"><span class="prices">25</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">25</span>.000</span> đồng</span>
+                                class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">@Session["PriceRC"]</span>.000</span> đồng</span>
                             <span class="postJRTimeDetail">Đơn giá hiện tại <span
-                                class="postJRTimePrice"><span class="prices">25</span>.000</span> đồng/Tuần</span>
+                                class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> đồng/Tuần</span>
                         </div>
                     </div>
                 </div>

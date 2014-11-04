@@ -433,7 +433,7 @@
     </div>
 </div>
 <div class="modal fade extendModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
+     aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header chooseMaidModalTitle">
@@ -455,10 +455,12 @@
             </div>
             <div class="modal-footer">
                 @Html.Partial("_PartialExtend")
+                <input type="hidden" id="PriceRC" value="@((int)Session["PriceRC"]/20)"/>
             </div>
         </div>
     </div>
 </div>
+
 <script>
     var chosenCount = 0;
     function chooseRecruit(counter, recruitId, type) {
@@ -506,7 +508,7 @@
         var weekDr = document.getElementById("week");
         var week = weekDr.options[weekDr.selectedIndex].value;
         document.getElementById("recruitId").setAttribute("value", recruitId);
-        document.getElementById("amount").setAttribute("value", week * 1);
+        document.getElementById("amount").setAttribute("value", parseInt(week) * parseInt($("#PriceRC").val()));
         document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=" + week);
     }
 
