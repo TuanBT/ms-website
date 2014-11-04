@@ -55,13 +55,13 @@
                             @maid.Description
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="rightInfo">
                     <ul class="riDetail">
-                        @if(Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
+                        @if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
                         {
                             <li class="rideRow">
                                 <div class="rideroTitle">
@@ -78,7 +78,7 @@
                                 Giới tính
                             </div>
                             <div class="rideroContent">
-                                <strong>@(Model.Gender ? "Nam":"Nữ")
+                                <strong>@(Model.Gender ? "Nam" : "Nữ")
                                 </strong>
                             </div>
                         </li>
@@ -161,389 +161,431 @@
                 </div>
             </div>
             <div class="boxListWork">
-                        <ul class="nav nav-tabs" role="tablist" id="myTab">
-                            <li class="active"><a href="#free" role="tab" data-toggle="tab">Chờ nhận</a></li>
-                            <li class><a href="#applied" role="tab" data-toggle="tab">Được nhận</a></li>
-                            <li class><a href="#approved" role="tab" data-toggle="tab">hoàn tất</a></li>
-                            <li class><a href="#expired" role="tab" data-toggle="tab">Hết hạn</a></li>
+                <ul class="nav nav-tabs" role="tablist" id="myTab">
+                    <li class="active"><a href="#free" role="tab" data-toggle="tab">Chờ nhận</a></li>
+                    <li class><a href="#applied" role="tab" data-toggle="tab">Được nhận</a></li>
+                    <li class><a href="#approved" role="tab" data-toggle="tab">Hoàn tất</a></li>
+                    <li class><a href="#expired" role="tab" data-toggle="tab">Hết hạn</a></li>
+                    @if (ViewBag.Manage == "true")
+                    {
+                        <li class><a href="#hide" role="tab" data-toggle="tab">Tạm ẩn</a></li>
+                        <li class><a href="#notActive" role="tab" data-toggle="tab">Chưa kích hoạt</a></li>
+                    }
+                </ul>
+                @{
+                    var counter = 1;
+                    var total = 0;
+                }
+                <div class="tab-content">
+                    <div class="tab-pane fade in active bFree" id="free">
+                        <ul class="bFreeListWork">
+                            <input id="currPos1" type="hidden" value="4" />
+                            @foreach (var job in notApplList)
+                            {           
+                                <li id="@counter" onclick="chooseJob(@counter, @job.Job.JobRequestId, 1)" style="display: @(counter > 4 ? "none" : "")">
+                                    <div class="blImage">
+                                        <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
+                                    </div>
+                                    <div class="blDetail">
+                                        <div class="blName">
+                                            <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
+                                        </div>
+                                        <div class="blTime">
+                                            <span class="blTimeTitle">Đăng: </span><span
+                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                        <div class="blTime">
+                                            <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                if (counter < notApplList.Count)
+                                {
+                                    counter++;
+                                }
+                            }
+                            @{
+                                total += notApplList.Count;
+                            }
+                            <input id="lastPos1" type="hidden" value="@counter" />
+                        </ul>
+                        <div class="blFooter">
+                            <div class="blfNumber">
+                                <ul class="pagination pagination-sm">
+                                    <div class="suNumber">
+                                        <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(1, 4)"></span>
+                                        @if (notApplList.Any())
+                                        {
+                                            <span id="currPage1">1/</span>@(Math.Ceiling((double)notApplList.Count / 4))
+                                        }
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
+                                        <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(1, 4)"></span>
+                                    </div>
+                                </ul>
+                            </div>
                             @if (ViewBag.Manage == "true")
                             {
-                                <li class><a href="#hide" role="tab" data-toggle="tab">Tạm ẩn</a></li>
-                                <li class><a href="#notActive" role="tab" data-toggle="tab">Chưa kích hoạt</a></li>
+                                using (Html.BeginForm("HideJobRequest", "MaidManager"))
+                                {
+                                <input id="hideId" type="hidden" name="jobId" />
+                                <div id="button_1" style="display: none;" class="blfbutton">
+                                    <button type="submit" class="btn btn-danger">Tạm ẩn</button>
+                                    @if (Session["Role"].Equals("Staff"))
+                                    {
+                                        <button type="button" class="btn btn-info" onclick="return false">Gia hạn</button>
+                                    }
+                                </div>
+                                }
                             }
+                        </div>
+                    </div>
+                    <div class="tab-pane fade bApplied" id="applied">
+                        @*<div class="bTitle">
+                                    <div class="btWork">
+                                        Công việc
+                                    </div>
+                                    <div class="btApply">
+                                        Người nhận
+                                    </div>
+                                </div>*@
+                        <ul class="bApplyListWork">
+                            <input id="currPos2" type="hidden" value="@(counter + 2)" />
+                            @foreach (var job in applList)
+                            {
+                                <li id="@(counter + 1)" style="display: @(counter - total > 1 ? "none" : "")">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="bAWork">
+                                                <div class="blImage">
+                                                    <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
+                                                </div>
+                                                <div class="blDetail">
+                                                    <div class="blName">
+                                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
+                                                    </div>
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Đăng: </span><span
+                                                            class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="bACus">
+                                                <div class="blImage">
+                                                    <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                                </div>
+                                                <div class="blDetail">
+                                                    <div class="blName">
+                                                        <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = job.Recruitment.RecruitmentId })">@job.Recruitment.Title</a>
+                                                    </div>
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Nhận: </span><span
+                                                            class="blTimeText">@job.Job.ApplyTimes.Value.ToString("dd/MM/yyyy")</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                if (counter - total < applList.Count)
+                                {
+                                    counter++;
+                                }
+                            }
+                            @{
+                                total += applList.Count;
+                            }
+                            <input id="lastPos2" type="hidden" value="@counter" />
                         </ul>
-                        @{
-                            var counter = 1;
-                            var total = 0;
-                        }
-                        <div class="tab-content">
-                            <div class="tab-pane fade in active bFree" id="free">
-                                <ul class="bFreeListWork">
-                                    <input id="currPos1" type="hidden" value="4" />
-                                    @foreach (var job in notApplList)
-                                    {           
-                                        <li id="@counter" onclick="chooseJob(@counter, @job.Job.JobRequestId, 1)" style="display: @(counter > 4 ? "none" : "")">
-                                            <div class="blImage">
-                                                <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
-                                            </div>
-                                            <div class="blDetail">
-                                                <div class="blName">
-                                                    <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
-                                                </div>
-                                                <div class="blTime">
-                                                    <span class="blTimeTitle">Đăng: </span><span
-                                                        class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
-                                                </div>
-                                                <div class="blTime">
-                                                    <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                        class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        if (counter < notApplList.Count)
+                        <div class="blFooter">
+                            <div class="blfNumber">
+                                <ul class="pagination pagination-sm">
+                                    <div class="suNumber">
+                                        <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(2, 2)"></span>
+                                        @if (applList.Any())
                                         {
-                                            counter++;
+                                            <span id="currPage2">1/</span>@(Math.Ceiling((double)applList.Count / 2))
                                         }
-                                    }
-                                    @{
-                                        total += notApplList.Count;
-                                    }
-                                    <input id="lastPos1" type="hidden" value="@counter" />
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
+                                        <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(2, 2)"></span>
+                                    </div>
                                 </ul>
-                                <div class="blFooter">
-                                    <div class="blfNumber">
-                                        <ul class="pagination pagination-sm">
-                                            <div class="suNumber">
-                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(1, 4)"></span>
-                                                <span id="currPage1">1</span>/@(Math.Ceiling((double)notApplList.Count / 4))
-                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(1, 4)"></span>
-                                            </div>
-                                        </ul>
-                                    </div>
-                                    @if (ViewBag.Manage == "true")
-                                    {
-                                        using (Html.BeginForm("HideJobRequest", "MaidManager"))
-                                        {
-                                        <input id="hideId" type="hidden" name="jobId" />
-                                        <div id="button_1" style="display: none;" class="blfbutton">
-                                            <button type="submit" class="btn btn-danger">Tạm ẩn</button>
-                                            @if (Session["Role"].Equals("Staff"))
-                                            {
-                                                <button type="button" class="btn btn-info" onclick="return false">Gia hạn</button>
-                                            }
-                                        </div>
-                                        }
-                                    }
-                                </div>
-                            </div>
-                            <div class="tab-pane fade bApplied" id="applied">
-                                @*<div class="bTitle">
-                                    <div class="btWork">
-                                        Công việc
-                                    </div>
-                                    <div class="btApply">
-                                        Người nhận
-                                    </div>
-                                </div>*@
-                                <ul class="bApplyListWork">
-                                    <input id="currPos2" type="hidden" value="@(counter + 2)" />
-                                    @foreach (var job in applList)
-                                    {
-                                        <li id="@(counter + 1)" style="display: @(counter - total > 1 ? "none" : "")">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="bAWork">
-                                                        <div class="blImage">
-                                                            <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
-                                                        </div>
-                                                        <div class="blDetail">
-                                                            <div class="blName">
-                                                                <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
-                                                            </div>
-                                                            <div class="blTime">
-                                                                <span class="blTimeTitle">Đăng: </span><span
-                                                                                                           class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="bACus">
-                                                        <div class="blImage">
-                                                            <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
-                                                        </div>
-                                                        <div class="blDetail">
-                                                            <div class="blName">
-                                                                <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = job.Recruitment.RecruitmentId })">@job.Recruitment.Title</a>
-                                                            </div>
-                                                            <div class="blTime">
-                                                                <span class="blTimeTitle">Nhận: </span><span
-                                                                                                           class="blTimeText">@job.Job.ApplyTimes.Value.ToString("dd/MM/yyyy")</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                            </div>
-                                        </li>
-                                        if (counter - total < applList.Count)
-                                        {
-                                            counter++;
-                                        }
-                                    }
-                                    @{
-                                        total += applList.Count;
-                                    }
-                                    <input id="lastPos2" type="hidden" value="@counter" />
-                                </ul>
-                                <div class="blFooter">
-                                    <div class="blfNumber">
-                                        <ul class="pagination pagination-sm">
-                                            <div class="suNumber">
-                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(2, 2)"></span>
-                                                <span id="currPage2">1</span>/@(Math.Ceiling((double)applList.Count / 2))
-                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(2, 2)"></span>
-                                            </div>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade bApplied" id="approved">
-                               @* <div class="bTitle">
-                                    <div class="btWork">
-                                        Công việc
-                                    </div>
-                                    <div class="btApply">
-                                        Người nhận
-                                    </div>
-                                </div>*@
-                                <ul class="bApplyListWork">
-                                    <input id="currPos3" type="hidden" value="@(counter + 2)" />
-                                    @foreach (var job in apprList)
-                                    {
-                                        <li id="@(counter + 1)" style="display: @(counter - total > 1 ? "none" : "")">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="bAWork">
-                                                        <div class="blImage">
-                                                            <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
-                                                        </div>
-                                                        <div class="blDetail">
-                                                            <div class="blName">
-                                                                <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
-                                                            </div>
-                                                            <div class="blTime">
-                                                                <span class="blTimeTitle">Đăng: </span><span
-                                                                                                           class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="bACus">
-                                                        <div class="blImage">
-                                                            <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
-                                                        </div>
-                                                        <div class="blDetail">
-                                                            <div class="blName">
-                                                                <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = job.Recruitment.RecruitmentId })">@job.Recruitment.Title</a>
-                                                            </div>
-                                                            <div class="blTime">
-                                                                <span class="blTimeTitle">Nhận: </span><span
-                                                                                                           class="blTimeText">@job.Job.ApplyTimes.Value.ToString("dd/MM/yyyy")</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                            </div>
-                                        </li>
-                                        if (counter - total < apprList.Count)
-                                        {
-                                            counter++;
-                                        }
-                                    }
-                                    @{
-                                        total += apprList.Count;
-                                    }
-                                    <input id="lastPos3" type="hidden" value="@counter" />
-                                </ul>
-                                <div class="blFooter">
-                                    <div class="blfNumber">
-                                        <ul class="pagination pagination-sm">
-                                            <div class="suNumber">
-                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(3, 2)"></span>
-                                                <span id="currPage3">1</span>/@(Math.Ceiling((double)apprList.Count / 2))
-                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(3, 2)"></span>
-                                            </div>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade bExprred" id="expired">
-                                <ul class="bexpiredListWork">
-                                    <input id="currPos4" type="hidden" value="@(counter + 4)" />
-                                    @foreach (var job in expiredList)
-                                    {
-                                        <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 4)" style="display: @(counter - total > 3 ? "none" : "")">
-                                            <div class="blImage">
-                                                <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
-                                            </div>
-                                            <div class="blDetail">
-                                                <div class="blName">
-                                                    <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
-                                                </div>
-                                                <div class="blTime">
-                                                    <span class="blTimeTitle">Đăng: </span><span
-                                                        class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
-                                                </div>
-                                                <div class="blTime">
-                                                    <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                        class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        if (counter - total < expiredList.Count)
-                                        {
-                                            counter++;
-                                        }
-                                    }
-                                    @{
-                                        total += expiredList.Count;
-                                    }
-                                    <input id="lastPos4" type="hidden" value="@counter" />
-                                </ul>
-                                <div class="blFooter">
-                                    <div class="blfNumber">
-                                        <ul class="pagination pagination-sm">
-                                            <div class="suNumber">
-                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(4, 4)"></span>
-                                                <span id="currPage4">1</span>/@(Math.Ceiling((double)expiredList.Count / 4))
-                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(4, 4)"></span>
-                                            </div>
-                                        </ul>
-                                    </div>
-                                    @if (ViewBag.Manage == "true")
-                                    {
-                                        <div id="button_4" style="display: none;" class="blfbutton">
-                                            @if (Session["Role"].Equals("Staff"))
-                                            {
-                                                <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                            }
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                            <div class="tab-pane fade bExprred" id="hide">
-                                <ul class="bexpiredListWork">
-                                    <input id="currPos5" type="hidden" value="@(counter + 4)" />
-                                    @foreach (var job in hideList)
-                                    {
-                                        <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 5)" style="display: @(counter - total > 3 ? "none" : "")">
-                                            <div class="blImage">
-                                                <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
-                                            </div>
-                                            <div class="blDetail">
-                                                <div class="blName">
-                                                    <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
-                                                </div>
-                                                <div class="blTime">
-                                                    <span class="blTimeTitle">Đăng: </span><span
-                                                                                               class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
-                                                </div>
-                                                <div class="blTime">
-                                                    <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                              class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        if (counter - total < hideList.Count)
-                                        {
-                                            counter++;
-                                        }
-                                    }
-                                    @{
-                                        total += hideList.Count;
-                                    }
-                                    <input id="lastPos5" type="hidden" value="@counter" />
-                                </ul>
-                                <div class="blFooter">
-                                    <div class="blfNumber">
-                                        <ul class="pagination pagination-sm">
-                                            <div class="suNumber">
-                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(5, 4)"></span>
-                                                <span id="currPage5">1</span>/@(Math.Ceiling((double)hideList.Count / 4))
-                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(5, 4)"></span>
-                                            </div>
-                                        </ul>
-                                    </div>
-                                    @if (ViewBag.Manage == "true")
-                                    {
-                                        using (Html.BeginForm("PublicJobRequest", "MaidManager"))
-                                        {
-                                        <input id="publicId" type="hidden" name="jobId" />
-                                        <div id="button_5" style="display: none;" class="blfbutton">
-                                            <button type="submit" class="btn btn-danger">Công khai</button>
-                                            @if (Session["Role"].Equals("Staff"))
-                                            {
-                                                <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                            }
-                                        </div>
-                                        }
-                                    }
-                                </div>
-                            </div>
-                            <div class="tab-pane fade bExprred" id="notActive">
-                                <ul class="bexpiredListWork">
-                                    <input id="currPos6" type="hidden" value="@(counter + 4)" />
-                                    @foreach (var job in notActiveList)
-                                    {
-                                        <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
-                                            <div class="blImage">
-                                                <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
-                                            </div>
-                                            <div class="blDetail">
-                                                <div class="blName">
-                                                    <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
-                                                </div>
-                                                <div class="blTime">
-                                                    <span class="blTimeTitle">Đăng: </span><span
-                                                                                               class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
-                                                </div>
-                                                <div class="blTime">
-                                                    <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                              class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        if (counter - total < notActiveList.Count)
-                                        {
-                                            counter++;
-                                        }
-                                    }
-                                    @{
-                                        total += notActiveList.Count;
-                                    }
-                                    <input id="lastPos6" type="hidden" value="@counter" />
-                                </ul>
-                                <div class="blFooter">
-                                    <div class="blfNumber">
-                                        <ul class="pagination pagination-sm">
-                                            <div class="suNumber">
-                                                <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(6, 4)"></span>
-                                                <span id="currPage6">1</span>/@(Math.Ceiling((double)notActiveList.Count / 4))
-                                                <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(6, 4)"></span>
-                                            </div>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-
-                        <script>
-                            $(function () {
-                                $('#myTab a:selected').tab('show');
-                            })
-                        </script>
                     </div>
+                    <div class="tab-pane fade bApplied" id="approved">
+                        @* <div class="bTitle">
+                                    <div class="btWork">
+                                        Công việc
+                                    </div>
+                                    <div class="btApply">
+                                        Người nhận
+                                    </div>
+                                </div>*@
+                        <ul class="bApplyListWork">
+                            <input id="currPos3" type="hidden" value="@(counter + 2)" />
+                            @foreach (var job in apprList)
+                            {
+                                <li id="@(counter + 1)" style="display: @(counter - total > 1 ? "none" : "")">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="bAWork">
+                                                <div class="blImage">
+                                                    <img src="~/Content/Image/jr.png" alt="Maid sercive" height="100%">
+                                                </div>
+                                                <div class="blDetail">
+                                                    <div class="blName">
+                                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
+                                                    </div>
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Đăng: </span><span
+                                                            class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="bACus">
+                                                <div class="blImage">
+                                                    <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                                </div>
+                                                <div class="blDetail">
+                                                    <div class="blName">
+                                                        <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = job.Recruitment.RecruitmentId })">@job.Recruitment.Title</a>
+                                                    </div>
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Nhận: </span><span
+                                                            class="blTimeText">@job.Job.ApplyTimes.Value.ToString("dd/MM/yyyy")</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                if (counter - total < apprList.Count)
+                                {
+                                    counter++;
+                                }
+                            }
+                            @{
+                                total += apprList.Count;
+                            }
+                            <input id="lastPos3" type="hidden" value="@counter" />
+                        </ul>
+                        <div class="blFooter">
+                            <div class="blfNumber">
+                                <ul class="pagination pagination-sm">
+                                    <div class="suNumber">
+                                        <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(3, 2)"></span>
+                                        @if (apprList.Any())
+                                        {
+                                            <span id="currPage3">1/</span>@(Math.Ceiling((double)apprList.Count / 2))
+                                        }
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
+                                        <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(3, 2)"></span>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade bExprred" id="expired">
+                        <ul class="bexpiredListWork">
+                            <input id="currPos4" type="hidden" value="@(counter + 4)" />
+                            @foreach (var job in expiredList)
+                            {
+                                <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 4)" style="display: @(counter - total > 3 ? "none" : "")">
+                                    <div class="blImage">
+                                        <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
+                                    </div>
+                                    <div class="blDetail">
+                                        <div class="blName">
+                                            <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
+                                        </div>
+                                        <div class="blTime">
+                                            <span class="blTimeTitle">Đăng: </span><span
+                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                        <div class="blTime">
+                                            <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                if (counter - total < expiredList.Count)
+                                {
+                                    counter++;
+                                }
+                            }
+                            @{
+                                total += expiredList.Count;
+                            }
+                            <input id="lastPos4" type="hidden" value="@counter" />
+                        </ul>
+                        <div class="blFooter">
+                            <div class="blfNumber">
+                                <ul class="pagination pagination-sm">
+                                    <div class="suNumber">
+                                        <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(4, 4)"></span>
+                                        @if (expiredList.Any())
+                                        {
+                                            <span id="currPage4">1/</span>@(Math.Ceiling((double)expiredList.Count / 4))
+                                        }
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
+                                        <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(4, 4)"></span>
+                                    </div>
+                                </ul>
+                            </div>
+                            @if (ViewBag.Manage == "true")
+                            {
+                                <div id="button_4" style="display: none;" class="blfbutton">
+                                    @if (Session["Role"].Equals("Staff"))
+                                    {
+                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="tab-pane fade bExprred" id="hide">
+                        <ul class="bexpiredListWork">
+                            <input id="currPos5" type="hidden" value="@(counter + 4)" />
+                            @foreach (var job in hideList)
+                            {
+                                <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 5)" style="display: @(counter - total > 3 ? "none" : "")">
+                                    <div class="blImage">
+                                        <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
+                                    </div>
+                                    <div class="blDetail">
+                                        <div class="blName">
+                                            <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
+                                        </div>
+                                        <div class="blTime">
+                                            <span class="blTimeTitle">Đăng: </span><span
+                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                        <div class="blTime">
+                                            <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                if (counter - total < hideList.Count)
+                                {
+                                    counter++;
+                                }
+                            }
+                            @{
+                                total += hideList.Count;
+                            }
+                            <input id="lastPos5" type="hidden" value="@counter" />
+                        </ul>
+                        <div class="blFooter">
+                            <div class="blfNumber">
+                                <ul class="pagination pagination-sm">
+                                    <div class="suNumber">
+                                        <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(5, 4)"></span>
+                                        @if (hideList.Any())
+                                        {
+                                            <span id="currPage5">1/</span>@(Math.Ceiling((double)hideList.Count / 4))
+                                        }
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
+                                        <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(5, 4)"></span>
+                                    </div>
+                                </ul>
+                            </div>
+                            @if (ViewBag.Manage == "true")
+                            {
+                                using (Html.BeginForm("PublicJobRequest", "MaidManager"))
+                                {
+                                <input id="publicId" type="hidden" name="jobId" />
+                                <div id="button_5" style="display: none;" class="blfbutton">
+                                    <button type="submit" class="btn btn-danger">Công khai</button>
+                                    @if (Session["Role"].Equals("Staff"))
+                                    {
+                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                    }
+                                </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="tab-pane fade bExprred" id="notActive">
+                        <ul class="bexpiredListWork">
+                            <input id="currPos6" type="hidden" value="@(counter + 4)" />
+                            @foreach (var job in notActiveList)
+                            {
+                                <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
+                                    <div class="blImage">
+                                        <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
+                                    </div>
+                                    <div class="blDetail">
+                                        <div class="blName">
+                                            <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
+                                        </div>
+                                        <div class="blTime">
+                                            <span class="blTimeTitle">Đăng: </span><span
+                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                        <div class="blTime">
+                                            <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                if (counter - total < notActiveList.Count)
+                                {
+                                    counter++;
+                                }
+                            }
+                            @{
+                                total += notActiveList.Count;
+                            }
+                            <input id="lastPos6" type="hidden" value="@counter" />
+                        </ul>
+                        <div class="blFooter">
+                            <div class="blfNumber">
+                                <ul class="pagination pagination-sm">
+                                    <div class="suNumber">
+                                        <span class="glyphicon glyphicon-chevron-left" onclick="loadBack(6, 4)"></span>
+                                        @if (notActiveList.Any())
+                                        {
+                                            <span id="currPage6">1/</span>@(Math.Ceiling((double)notActiveList.Count / 4))
+                                        }
+                                        else
+                                        {
+                                            <span>Không có kết quả</span>
+                                        }
+                                        <span class="glyphicon glyphicon-chevron-right" onclick="loadNext(6, 4)"></span>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    $(function () {
+                        $('#myTab a:selected').tab('show');
+                    })
+                </script>
+            </div>
         </div>
     </div>
 </div>
@@ -624,7 +666,7 @@
         var lastPos = parseInt(document.getElementById("lastPos" + type).getAttribute("value"));
         if (currPos < lastPos) {
             var currPage = parseInt(document.getElementById("currPage" + type).innerHTML) + 1;
-            document.getElementById("currPage" + type).innerHTML = currPage;
+            document.getElementById("currPage" + type).innerHTML = currPage + "/";
             for (var i = currPos - amount + 1; i <= currPos; i++) {
                 if (document.getElementById(i) != null) {
                     document.getElementById(i).setAttribute("style", "display: none");
@@ -647,7 +689,7 @@
         }
         if (currPos - amount > lastPos) {
             var currPage = parseInt(document.getElementById("currPage" + type).innerHTML) - 1;
-            document.getElementById("currPage" + type).innerHTML = currPage;
+            document.getElementById("currPage" + type).innerHTML = currPage + "/";
             for (var i = currPos; i > currPos - amount; i--) {
                 if (document.getElementById(i) != null) {
                     document.getElementById(i).setAttribute("style", "display: none");
