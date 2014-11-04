@@ -835,6 +835,28 @@ namespace MS_Website.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult NotiPaypal(string content, string link)
+        {
+            using (var db = new MSEntities())
+            {
+                var staffs = db.Staffs.Select(s => s).ToList();
+                foreach (var staff in staffs)
+                {
+                    var notifier = new Notifier()
+                                      {
+                                          AccId = staff.AccountId,
+                                          Content = content,
+                                          Link = link,
+                                          View = false,
+                                          Date = DateTime.Now
+                                      };
+                    db.Notifiers.Add(notifier);
+                    db.SaveChanges();
+                }
+                return Json("Bạn đã gửi yêu cầu kiểm tra thành công. Chúng tôi sẽ sớm xử lý trường hợp này!", JsonRequestBehavior.AllowGet);
+            }
+        }
 
     }
 }
