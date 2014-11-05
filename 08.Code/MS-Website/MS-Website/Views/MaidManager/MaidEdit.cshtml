@@ -219,7 +219,7 @@
         var errText = "";
         var phone = new RegExp('^[0-9]+$');
         var reg = new RegExp('[0-9]*[.][0-9]+$');
-        if ($("#txtMaidName").val() == "") {
+        if ($("#txtMaidName").val().trim() == "") {
             errText = "<font color='red'>Vui lòng nhập tên người giúp việc</font>";
             document.getElementById("AddErr").innerHTML = errText;
             return false;

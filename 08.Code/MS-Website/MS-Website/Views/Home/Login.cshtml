@@ -216,7 +216,7 @@ margin-top: 54px;
         $("#btnLogin").click(function () {
             console.debug("sdf");
             var errText = "";
-            if ($("#txtUsername").val() == "") {
+            if ($("#txtUsername").val().trim() == "") {
                 errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
                 document.getElementById("textBlank").innerHTML = errText;
                 return false;
@@ -224,7 +224,7 @@ margin-top: 54px;
                 errText = "";
                 document.getElementById("textBlank").innerHTML = errText;
             } 
-            if ($("#txtPassword").val()=="") {
+            if ($("#txtPassword").val().trim()=="") {
                 errText = "<font color='red'>Vui lòng nhập mật khẩu</font>";
                 document.getElementById("passwordBlank").innerHTML = errText;
                 return false;

@@ -124,6 +124,7 @@
                         <div class="col-md-8">
                             <input class="form-control input-lg text" maxlength="50" name="title" type="text" value="" placeholder="Tối đa 50 kí tự" id="txtTitle">
                             <div id="textBlank"></div>
+                            <font color="red">@ViewBag.Err</font>
                             
                         </div>
                     </div>
@@ -503,7 +504,7 @@
     $("#btnEdit").click(function () {
         console.debug("sdf");
         var errText = "";
-        if ($("#txtTitle").val() == "") {
+        if ($("#txtTitle").val().trim() == "") {
             errText = "<font color='red'>Vui lòng nhập tiêu đề</font>";
             document.getElementById("textBlank").innerHTML = errText;
             return false;
