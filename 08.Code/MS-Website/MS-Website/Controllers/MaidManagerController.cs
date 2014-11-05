@@ -747,7 +747,10 @@ namespace MS_Website.Controllers
                 {
                     var expiredTime = job.ExpiredTime.AddDays(7 * extend);
                     job.ExpiredTime = expiredTime;
-                    job.Status = "Waiting";
+                    if (job.Status.Equals("Expired"))
+                    {
+                        job.Status = "Waiting";
+                    }
                     db.SaveChanges();
                 }
                 return RedirectToAction("GetJobRequest", "Post", new { jobId });
