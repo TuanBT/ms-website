@@ -11,6 +11,77 @@ namespace MS_Website.Controllers
     {
         //
         // GET: /Statistic/
+        public ActionResult Statistic()
+        {
+            if (Session["AccId"] != null)
+            {
+                if (Session["Role"].Equals("Customer"))
+                {
+                    return RedirectToAction("StatisticRequestCustomer", "Statistic");
+                }
+                if (Session["Role"].Equals("Staff") || Session["Role"].Equals("MaidMediator"))
+                {
+                    return RedirectToAction("StatisticRequestMaid", "Statistic");
+                }
+                if (Session["Role"].Equals("Admin"))
+                {
+                    return RedirectToAction("StatisticRequest", "Statistic", new { year = DateTime.Now.Year });
+                }
+            }
+            return RedirectToAction("Login", "Home");
+        }
+
+        public ActionResult StatisticRequestCustomer()
+        {
+            using (var db = new MSEntities())
+            {
+                var accId = (int) Session["AccId"];
+                if (db.Customers.Count(c => c.AccountId == accId) > 0)
+                {
+                    int numWating = db.Recruitments.Count(r => (r.CustomerId == accId && r.Status == "Waiting"));
+                    int numApplied = db.Recruitments.Count(r => (r.CustomerId == accId && r.Status == "Applied"));
+                    int isActive = db.Recruitments.Count(r => (r.CustomerId == accId && r.IsActive == false));
+                    int numExpired = db.Recruitments.Count(r => (r.CustomerId == accId && r.Status == "Expired"));
+                    int numHide = db.JobRequests.Count(r => (r.MaidMediatorId == accId && r.Status == "Hide"));
+                    ViewBag.CusStatusStatistic = new int[] {numWating, numExpired, isActive, numApplied, numHide};
+                }
+                else
+                {
+                    ViewBag.CusStatusStatistic = new int[] { 0, 0, 0, 0, 0 };
+                }
+            }
+            return View();
+        }
+
+        public ActionResult StatisticRequestMaid()
+        {
+            using (var db = new MSEntities())
+            {
+                var accId = (int)Session["AccId"];
+                if (db.MaidMediators.Count(m => m.AccountId == accId) > 0)
+                {
+                    int numWating = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Waiting"));
+                    int numApplied = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Applied"));
+                    int numApproved = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Approved"));
+                    int numExpired = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Expired"));
+                    int numHide = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Hide"));
+                    ViewBag.MaidStatusStatistic = new int[] {numWating, numExpired, numApproved, numApplied, numHide};
+                }
+                else if (db.Staffs.Count(s => s.AccountId == accId) > 0)
+                {
+                    int numWating = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Waiting"));
+                    int numApplied = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Applied"));
+                    int numApproved = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Approved"));
+                    int numExpired = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Expired"));
+                    int numHide = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Hide"));
+                    ViewBag.MaidStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied, numHide };
+                }else
+                {
+                    ViewBag.MaidStatusStatistic = new int[] { 0, 0, 0, 0, 0 };
+                }
+            }
+            return View();
+        }
 
         public ActionResult StatisticRequest(int year)
         {
@@ -78,7 +149,7 @@ namespace MS_Website.Controllers
                     }
                 }
             }
-            return RedirectToAction("Login", "Home");  
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult StatisticIncome(int year)
@@ -89,8 +160,8 @@ namespace MS_Website.Controllers
                 {
                     var jobList = new List<JobRequest>();
                     var recruitList = new List<Recruitment>();
-                    var rcPrice = (int) Session["PriceRC"];
-                    var jrPrice = (int) Session["PriceJR"];
+                    var rcPrice = (int)Session["PriceRC"];
+                    var jrPrice = (int)Session["PriceJR"];
                     if (year == 0)
                     {
                         year = DateTime.Now.Year;
@@ -119,11 +190,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome1 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome1 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome1 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome1 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         jobList =
                             db.JobRequests.Where(jr => jr.IsActive && jr.PostTime.Month == 2 && jr.PostTime.Year == year)
@@ -135,11 +206,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome2 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome2 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome2 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome2 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         jobList =
                             db.JobRequests.Where(jr => jr.IsActive && jr.PostTime.Month == 3 && jr.PostTime.Year == year)
@@ -151,11 +222,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome3 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome3 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome3 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome3 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         jobList =
                             db.JobRequests.Where(jr => jr.IsActive && jr.PostTime.Month == 4 && jr.PostTime.Year == year)
@@ -167,11 +238,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome4 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome4 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome4 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome4 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         jobList =
                             db.JobRequests.Where(jr => jr.IsActive && jr.PostTime.Month == 5 && jr.PostTime.Year == year)
@@ -183,11 +254,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome5 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome5 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome5 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome5 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         jobList =
                             db.JobRequests.Where(jr => jr.IsActive && jr.PostTime.Month == 6 && jr.PostTime.Year == year)
@@ -199,11 +270,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome6 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome6 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome6 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome6 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         jobList =
                             db.JobRequests.Where(jr => jr.IsActive && jr.PostTime.Month == 7 && jr.PostTime.Year == year)
@@ -215,11 +286,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome7 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome7 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome7 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome7 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         jobList =
                             db.JobRequests.Where(jr => jr.IsActive && jr.PostTime.Month == 8 && jr.PostTime.Year == year)
@@ -231,11 +302,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome8 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome8 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome8 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome8 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         jobList =
                             db.JobRequests.Where(jr => jr.IsActive && jr.PostTime.Month == 9 && jr.PostTime.Year == year)
@@ -247,11 +318,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome9 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome9 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome9 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome9 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         jobList =
                             db.JobRequests.Where(
@@ -263,11 +334,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome10 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome10 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome10 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome10 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         jobList =
                             db.JobRequests.Where(
@@ -279,11 +350,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome11 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome11 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome11 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome11 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         jobList =
                             db.JobRequests.Where(
@@ -295,11 +366,11 @@ namespace MS_Website.Controllers
                                 ToList();
                         foreach (var jobRequest in jobList)
                         {
-                            totalIncome12 += jrPrice*(int) (jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays/7;
+                            totalIncome12 += jrPrice * (int)(jobRequest.ExpiredTime - jobRequest.PostTime).TotalDays / 7;
                         }
                         foreach (var recruitment in recruitList)
                         {
-                            totalIncome12 += rcPrice*(int) (recruitment.ExpiredTime - recruitment.PostTime).TotalDays/7;
+                            totalIncome12 += rcPrice * (int)(recruitment.ExpiredTime - recruitment.PostTime).TotalDays / 7;
                         }
                         var totalString = totalIncome1 + ";" + totalIncome2 + ";" + totalIncome3 + ";" + totalIncome4 +
                                           ";"

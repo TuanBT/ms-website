@@ -2073,6 +2073,8 @@
     <Content Include="Views\Statistic\StatisticRequest.cshtml" />
     <Content Include="Views\Notifier\Notifier.cshtml" />
     <Content Include="Views\Statistic\StatisticIncome.cshtml" />
+    <Content Include="Views\Statistic\StatisticRequestCustomer.cshtml" />
+    <Content Include="Views\Statistic\StatisticRequestMaid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
