@@ -115,7 +115,7 @@
                             <input id="currPos1" type="hidden" value="4" />
                             @foreach (var recruitment in notApplList)
                             {
-                                <li id="@(counter + 1)" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 1)" style="display: @(counter > 4 ? "none" : "")">
+                                <li id="@(counter + 1)1" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 1)" style="display: @(counter > 3 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
@@ -186,7 +186,7 @@
                             <input id="currPos2" type="hidden" value="@(counter + 2)" />
                             @foreach (var recruitment in applList)
                             {
-                                <li id="@(counter + 1)" style="display: @(counter - total > 1 ? "none" : "")">
+                                <li id="@(counter + 1)2" style="display: @(counter - total > 1 ? "none" : "")">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="bAWork">
@@ -256,7 +256,7 @@
                             <input id="currPos3" type="hidden" value="@(counter + 4)" />
                             @foreach (var recruitment in expiredList)
                             {
-                                <li id="@(counter + 1)" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 3)" style="display: @(counter - total > 3 ? "none" : "")">
+                                <li id="@(counter + 1)3" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 3)" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
@@ -314,7 +314,7 @@
                             <input id="currPos4" type="hidden" value="@(counter + 4)" />
                             @foreach (var recruitment in hideList)
                             {
-                                <li id="@(counter + 1)" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 4)" style="display: @(counter - total > 3 ? "none" : "")">
+                                <li id="@(counter + 1)4" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 4)" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
@@ -377,7 +377,7 @@
                             <input id="currPos5" type="hidden" value="@(counter + 4)" />
                             @foreach (var recruitment in notActiveList)
                             {
-                                <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
+                                <li id="@(counter + 1)5" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
@@ -468,13 +468,13 @@
     var chosenCount = 0;
     function chooseRecruit(counter, recruitId, type) {
         if (chosenCount != 0) {
-            document.getElementById(chosenCount).setAttribute("class", "");
+            document.getElementById(chosenCount + "" + type).setAttribute("class", "");
         }
         if (counter != chosenCount) {
-            document.getElementById(counter).setAttribute("class", "isCurent");
+            document.getElementById(counter + "" + type).setAttribute("class", "isCurent");
             chosenCount = counter;
         } else {
-            document.getElementById(counter).setAttribute("class", "");
+            document.getElementById(counter + "" + type).setAttribute("class", "");
             chosenCount = 0;
             type = 0;
         }
@@ -525,13 +525,13 @@
             var currPage = parseInt(document.getElementById("currPage" + type).innerHTML) + 1;
             document.getElementById("currPage" + type).innerHTML = currPage + "/";
             for (var i = currPos - amount + 1; i <= currPos; i++) {
-                if (document.getElementById(i) != null) {
-                    document.getElementById(i).setAttribute("style", "display: none");
+                if (document.getElementById(i + "" + type) != null) {
+                    document.getElementById(i + "" + type).setAttribute("style", "display: none");
                 }
             }
             for (var j = currPos + 1; j <= currPos + amount; j++) {
-                if (document.getElementById(j) != null) {
-                    document.getElementById(j).setAttribute("style", "");
+                if (document.getElementById(j + "" + type) != null) {
+                    document.getElementById(j + "" + type).setAttribute("style", "");
                 }
             }
             document.getElementById("currPos" + type).setAttribute("value", currPos + amount);
@@ -548,13 +548,13 @@
             var currPage = parseInt(document.getElementById("currPage" + type).innerHTML) - 1;
             document.getElementById("currPage" + type).innerHTML = currPage + "/";
             for (var i = currPos; i > currPos - amount; i--) {
-                if (document.getElementById(i) != null) {
-                    document.getElementById(i).setAttribute("style", "display: none");
+                if (document.getElementById(i + "" + type) != null) {
+                    document.getElementById(i + "" + type).setAttribute("style", "display: none");
                 }
             }
             for (var j = currPos - amount; j > currPos - 2 * amount; j--) {
-                if (document.getElementById(j) != null) {
-                    document.getElementById(j).setAttribute("style", "");
+                if (document.getElementById(j + "" + type) != null) {
+                    document.getElementById(j + "" + type).setAttribute("style", "");
                 }
             }
             document.getElementById("currPos" + type).setAttribute("value", currPos - amount);
