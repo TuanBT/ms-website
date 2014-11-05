@@ -24,6 +24,22 @@
         </ul>
     </div>
 </div>
+@if (TempData["Alert"] != null)
+{
+    @*<div class="modal fade in" id="alertModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>@TempData["Alert"]</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeAlert()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    @Html.Partial("_PartialNotifier", "4;Chú ý!;" + TempData["Alert"])
+}
 <div class="body">
     <div class="rows">
         <div class="row">
