@@ -66,7 +66,7 @@
             <div class="col-md-4">
                 <div class="rightInfo">
                     <ul class="riDetail">
-                        @if (Session["Role"]!=null)
+                        @if (Session["Acc"]!=null)
                         {
                             if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
                             {
@@ -181,7 +181,7 @@
                     }
                 </ul>
                 @{
-                    var counter = 1;
+                    var counter = 0;
                     var total = 0;
                 }
                 <div class="tab-content">
@@ -190,7 +190,7 @@
                             <input id="currPos1" type="hidden" value="4" />
                             @foreach (var job in notApplList)
                             {           
-                                <li id="@counter" onclick="chooseJob(@counter, @job.Job.JobRequestId, 1)" style="display: @(counter > 4 ? "none" : "")">
+                                <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 1)" style="display: @(counter > 4 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                     </div>
@@ -244,7 +244,7 @@
                                     <button type="submit" class="btn btn-danger">Tạm ẩn</button>
                                     @if (Session["Role"].Equals("Staff"))
                                     {
-                                        <button type="button" class="btn btn-info" onclick="return false">Gia hạn</button>
+                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
                                     }
                                 </div>
                                 }
