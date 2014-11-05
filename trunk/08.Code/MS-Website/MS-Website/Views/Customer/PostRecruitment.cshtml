@@ -142,10 +142,10 @@
                                             Thêm kỹ năng
                                         </button>
                                     </div>
-                                    <ul id="chosenSkills">
-                                    </ul>
+                                    <ul id="chosenSkills"></ul>
                                 </div>
                             </div>
+                            <div id="SkillErr"></div>
                         </div>
                     </div>
                     <div class="modal fade chooseSkillModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -511,6 +511,15 @@
         } else {
             errText = "";
             document.getElementById("textBlank").innerHTML = errText;
+        }
+        if ($("#chosenSkills").html()=="" ) {
+            errText = "<font color='red'>Vui lòng chọn kĩ năng</font>";
+            document.getElementById("SkillErr").innerHTML = errText;
+            return false;
+        }
+        else {
+            errText = "";
+            document.getElementById("SkillErr").innerHTML = errText;
         }
     });
     </script>
