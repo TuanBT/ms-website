@@ -330,8 +330,10 @@
                 break;
             }
         }
-        var div = new $(".chooseMaid" + numChoose).clone();
-        $("#maidBoxChoosed").html(div);
+        div = new $(".chooseMaid" + numChoose).clone();
+        if(div.size()==1) {
+            $("#maidBoxChoosed").html(div);
+        }
         /*var maidImg = document.getElementById(maidId + " img").getAttribute("src");
          var maidName = document.getElementById(maidId + " name").innerHTML;
          document.getElementById("maidImg").setAttribute("src", maidImg);
