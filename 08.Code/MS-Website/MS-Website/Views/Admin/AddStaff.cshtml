@@ -32,7 +32,9 @@
                         </div>
                         <div class="col-md-8">
                            @Html.PasswordFor(a => a.Password, new { @id = "txtPassword", @class = "form-control input-lg text", @placeholder = "Mật khẩu", maxlength = "50" })
-            <div id="passwordBlank"></div><font color="red">@ViewBag.Error</font><br/>
+            <div id="passwordBlank"></div>
+             @Html.PasswordFor(a => a.Password, new { @id = "txtConfirmPassword", @class = "form-control input-lg text", @placeholder = "Nhập lại mật khẩu", maxlength = "50" })
+            <div id="CPErr"></div>
             <div>
                 @if(ViewBag.Err!=null)
                         {
@@ -65,6 +67,17 @@
                errText = "<font color='red'>Vui lòng nhập mật khẩu</font>";
                document.getElementById("passwordBlank").innerHTML = errText;
                return false;
+           }else {
+               errText = "";
+               document.getElementById("passwordBlank").innerHTML = errText;
+           }
+           if ($("#txtConfirmPassword").val()!=$("#txtPassword").val()) {
+               errText = "<font color='red'>Mật khẩu không trùng khớp</font>";
+               document.getElementById("CPErr").innerHTML = errText;
+               return false;
+           } else {
+               errText = "";
+               document.getElementById("CPErr").innerHTML = errText;
            }
        });
   
