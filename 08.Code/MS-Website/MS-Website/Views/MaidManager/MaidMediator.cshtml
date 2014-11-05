@@ -103,12 +103,12 @@
                             Thống kê các yêu cầu
                         </div>
                         <div class="ovContent">
-                            @{
+                           @* @{
                                 //watting,expired,approved,applied
                                 int[] numStatus = ViewBag.MaidMediatorStatusStatistic;
                                 var numberStatistic = new int[5] { numStatus[0], numStatus[1], numStatus[2], numStatus[3], numStatus[4] };
                             }
-                            @Html.Partial("_PartialStatisticPie", numberStatistic)
+                            @Html.Partial("_PartialStatisticPie", numberStatistic)*@
                         </div>
                     </div>
                 </div>
