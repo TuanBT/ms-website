@@ -44,7 +44,7 @@
                         </div>
                         <div class="oFormField">
                             @Html.TextBoxFor(m => m.Email, new { @class = "oInputText oFormMed", @placeholder = "Email", @id = "txtEmail",@name="email" })
-                            @Html.ValidationMessageFor(m=>m.Email)
+                            <div id="ExpErr"></div>
                         </div>
                         <div class="oFormField">
                             @Html.TextBoxFor(m => m.Phone, new { @class = "oInputText oFormMed", @placeholder = "Điện thoại" , @id="txtPhone"})
@@ -59,15 +59,18 @@
                         </div>
                         <div class="oFormField">
                             @Html.TextBoxFor(m => m.Username, new { @class = "oInputText oFormMed", @placeholder = "Tên đăng nhập", @id = "txtUsername",@name="username" })
-                            @Html.ValidationMessageFor(m=>m.Username)
+                            <div id="textBlank"></div>
                         </div>
 
                         <div class="oFormField">
                             @Html.PasswordFor(m => m.Password, new { @class = "oInputText oFormMed", @placeholder = "Mật khẩu", @id = "txtPassword",@name="password" })
-                            @Html.ValidationMessageFor(m=>m.Password)
-
+                            <div id="passwordBlank"></div>
                         </div>
-                        @if(ViewBag.Err!=null)
+                        <div class="oFormField">
+                            @Html.PasswordFor(m => m.Password, new { @class = "oInputText oFormMed", @placeholder = "Nhập lại mật khẩu", @id = "txtConfirmPassword" })
+                           <div id="CPErr"></div>
+                        </div>
+                        @if (ViewBag.Err != null)
                         {
                             <font color="red">@ViewBag.Err</font>
                         }
@@ -106,6 +109,30 @@
         } else {
             errText = "";
             document.getElementById("ExpErr").innerHTML = errText;
+        }
+        if ($("#txtUsername").val() == "") {
+            errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
+            document.getElementById("textBlank").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("textBlank").innerHTML = errText;
+        }
+        if ($("#txtPassword").val() == "") {
+            errText = "<font color='red'>Vui lòng nhập mật khẩu</font>";
+            document.getElementById("passwordBlank").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("passwordBlank").innerHTML = errText;
+        }
+        if ($("#txtConfirmPassword").val() != $("#txtPassword").val()) {
+            errText = "<font color='red'>Mật khẩu không trùng khớp</font>";
+            document.getElementById("CPErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("CPErr").innerHTML = errText;
         }
     });
     </script>
