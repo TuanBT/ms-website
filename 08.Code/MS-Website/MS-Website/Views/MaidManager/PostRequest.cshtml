@@ -29,6 +29,7 @@
                                     </button>
                                 </div>
                                 <div id="maidBoxChoosed">
+                                   
                                     @*<div class="liImage">
                                         <img id="maidImg" src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
                                     </div>
@@ -48,8 +49,9 @@
                                             <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
                                         </div>
                                     </div>*@
-                                </div>
+                                </div> 
                             </div>
+                            <div id="MaidErr"></div>
                         </div>
                     </div>
                     <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -133,8 +135,8 @@
                                             Thêm kỹ năng
                                         </button>
                                     </div>
-                                    <ul id="chosenSkills">
-                                    </ul>
+                                    <ul id="chosenSkills"></ul>
+                                    <div id="SkillErr"></div>
                                 </div>
                             </div>
                         </div>
@@ -412,6 +414,24 @@
         } else {
             errText = "";
             document.getElementById("textBlank").innerHTML = errText;
+        }
+        if ($("#maidBoxChoosed").val() == "") {
+            errText = "<font color='red'>Vui lòng chọn người giúp việc</font>";
+            document.getElementById("MaidErr").innerHTML = errText;
+            return false;
+        }
+        else {
+            errText = "";
+            document.getElementById("MaidErr").innerHTML = errText;
+        }
+        if ($("#chosenSkills").html() == "") {
+            errText = "<font color='red'>Vui lòng chọn kĩ năng</font>";
+            document.getElementById("SkillErr").innerHTML = errText;
+            return false;
+        }
+        else {
+            errText = "";
+            document.getElementById("SkillErr").innerHTML = errText;
         }
     });
     </script>
