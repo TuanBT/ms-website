@@ -315,11 +315,6 @@ namespace MS_Website.Controllers
                     TempData["Alert"] = "Công việc đã được thuê";
                     return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
                 }
-                if (!recruitment.IsActive)
-                {
-                    TempData["Alert"] = "Công việc không tồn tại";
-                    return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
-                }
                 var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId);
                 skillRef.Gender = null;
                 skillRef.Age = null;
@@ -450,10 +445,6 @@ namespace MS_Website.Controllers
                 else if (recruitment.Status.Equals("Applied"))
                 {
                     TempData["Alert"] = "Công việc đã được thuê";
-                }
-                else if (!recruitment.IsActive)
-                {
-                    TempData["Alert"] = "Công việc không tồn tại";
                 }
                 else
                 {
