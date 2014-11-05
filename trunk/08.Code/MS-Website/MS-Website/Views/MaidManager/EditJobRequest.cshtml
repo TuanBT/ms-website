@@ -137,7 +137,7 @@
                                     </div>
                                     <ul id="chosenSkills">
                                         @{
-                                    var counter = 0;
+                                            var counter = 0;
                                         }
                                         @foreach (var skillStr in ViewBag.SkillStrList)
                                         {
@@ -148,6 +148,7 @@
                                             counter++;
                                         }
                                     </ul>
+                                    <div id="SkillErr"></div>
                                 </div>
                             </div>
                         </div>
@@ -402,6 +403,15 @@
         } else {
             errText = "";
             document.getElementById("textBlank").innerHTML = errText;
+        }
+        if ($("#chosenSkills").html() == "") {
+            errText = "<font color='red'>Vui lòng chọn kĩ năng</font>";
+            document.getElementById("SkillErr").innerHTML = errText;
+            return false;
+        }
+        else {
+            errText = "";
+            document.getElementById("SkillErr").innerHTML = errText;
         }
     });
     </script>
