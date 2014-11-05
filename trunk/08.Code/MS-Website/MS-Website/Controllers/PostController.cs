@@ -15,179 +15,184 @@ namespace MS_Website.Controllers
 
         public ActionResult GetJobRequest(int jobId)
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                bool flag = false;
-                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
-                /*if (job.Status.Equals("Approved"))
+                using (var db = new MSEntities())
                 {
-                    var recruits = db.Recruitments.Where(r => r.CustomerId == (int)Session["AccId"]);
-                    var apply = db.Applies.FirstOrDefault(a => a.JobRequestId == jobId);
-                    //if (recruits != null)
-                    //{
-                    //    foreach (var item in recruits)
-                    //    {
-                    //        if (item.RecruitmentId == apply.RecruitmentId)
-                    //        {
-                    //            flag = true;
-                    //        }
-                    //    }
-                    //}
-                }*/
-                ViewBag.JobReqId = jobId;
-                Session["flag"] = flag;
-                Session["jobId"] = jobId;
+                    bool flag = false;
+                    var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                    /*if (job.Status.Equals("Approved"))
+                    {
+                        var recruits = db.Recruitments.Where(r => r.CustomerId == (int)Session["AccId"]);
+                        var apply = db.Applies.FirstOrDefault(a => a.JobRequestId == jobId);
+                        //if (recruits != null)
+                        //{
+                        //    foreach (var item in recruits)
+                        //    {
+                        //        if (item.RecruitmentId == apply.RecruitmentId)
+                        //        {
+                        //            flag = true;
+                        //        }
+                        //    }
+                        //}
+                    }*/
+                    ViewBag.JobReqId = jobId;
+                    Session["flag"] = flag;
+                    Session["jobId"] = jobId;
 
-                if (job != null)
-                {
-                    if (job.ExpiredTime < DateTime.Now)
+                    if (job != null)
                     {
-                        if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved") && !job.Status.Equals("Expired"))
+                        if (job.ExpiredTime < DateTime.Now)
                         {
-                            job.Status = "Expired";
-                            db.SaveChanges();
-                        }
-                    }
-                    var ratingRow = db.Ratings.FirstOrDefault(r => r.JobRequestId == job.JobRequestId);
-                    ViewBag.jrRate = 0;
-                    if (ratingRow != null)
-                    {
-                        ViewBag.jrRate = ratingRow.Rate;
-                    }
-                    var commentTable = db.Comments.Where(c => c.JobRequestId == job.JobRequestId).OrderByDescending(c => c.CommentId).ToList();
-                    ViewBag.Comment = commentTable;
-
-                    var maid = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId);
-                    var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == job.SkillRefId);
-                    var skillList = new List<string>();
-                    if (skillRef != null)
-                    {
-                        LoadSkillList(skillRef, skillList, db);
-                    }
-                    ViewBag.MaidRating = maid.RateAvg;
-                    if (Session["AccId"] != null)
-                    {
-                        if (job.Maid.MaidMediatorId != null)
-                        {
-                            if (job.Maid.MaidMediatorId == (int)Session["AccId"])
+                            if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved") && !job.Status.Equals("Expired"))
                             {
-                                if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
+                                job.Status = "Expired";
+                                db.SaveChanges();
+                            }
+                        }
+                        var ratingRow = db.Ratings.FirstOrDefault(r => r.JobRequestId == job.JobRequestId);
+                        ViewBag.jrRate = 0;
+                        if (ratingRow != null)
+                        {
+                            ViewBag.jrRate = ratingRow.Rate;
+                        }
+                        var commentTable = db.Comments.Where(c => c.JobRequestId == job.JobRequestId).OrderByDescending(c => c.CommentId).ToList();
+                        ViewBag.Comment = commentTable;
+
+                        var maid = db.Maids.SingleOrDefault(m => m.MaidId == job.MaidId);
+                        var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == job.SkillRefId);
+                        var skillList = new List<string>();
+                        if (skillRef != null)
+                        {
+                            LoadSkillList(skillRef, skillList, db);
+                        }
+                        ViewBag.MaidRating = maid.RateAvg;
+                        if (Session["AccId"] != null)
+                        {
+                            if (job.Maid.MaidMediatorId != null)
+                            {
+                                if (job.Maid.MaidMediatorId == (int)Session["AccId"])
                                 {
-                                    ViewBag.Manage = "true";
+                                    if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
+                                    {
+                                        ViewBag.Manage = "true";
+                                    }
                                 }
                             }
+                            else
+                            {
+                                if (job.Maid.StaffId == (int)Session["AccId"])
+                                {
+                                    if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
+                                    {
+                                        ViewBag.Manage = "true";
+                                    }
+                                }
+                            }
+                            if (Session["Role"].Equals("Customer"))
+                            {
+                                var custId = (int)Session["AccId"];
+                                ViewBag.RecruitmentList =
+                                    db.Recruitments.Where(r => r.CustomerId == custId && r.Status.Equals("Waiting")).ToList();
+                            }
+                        }
+                        if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
+                        {
+                            var apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobId);
+                            var recruitment = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId);
+                            ViewBag.Customer =
+                                db.Accounts.SingleOrDefault(a => a.AccountId == recruitment.CustomerId);
+                            var jobRequestTmp = new JobRequestTemp(job, maid, null, recruitment, skillList);
+                            return View("JobRequest", jobRequestTmp);
                         }
                         else
                         {
-                            if (job.Maid.StaffId == (int)Session["AccId"])
-                            {
-                                if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
-                                {
-                                    ViewBag.Manage = "true";
-                                }
-                            }
+                            var jobRequestTmp = new JobRequestTemp(job, maid, null, null, skillList);
+                            return View("JobRequest", jobRequestTmp);
                         }
-                        if (Session["Role"].Equals("Customer"))
-                        {
-                            var custId = (int)Session["AccId"];
-                            ViewBag.RecruitmentList =
-                                db.Recruitments.Where(r => r.CustomerId == custId && r.Status.Equals("Waiting")).ToList();
-                        }
-                    }
-                    if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
-                    {
-                        var apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobId);
-                        var recruitment = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId);
-                        ViewBag.Customer =
-                            db.Accounts.SingleOrDefault(a => a.AccountId == recruitment.CustomerId);
-                        var jobRequestTmp = new JobRequestTemp(job, maid, null, recruitment, skillList);
-                        return View("JobRequest", jobRequestTmp);
-                    }
-                    else
-                    {
-                        var jobRequestTmp = new JobRequestTemp(job, maid, null, null, skillList);
-                        return View("JobRequest", jobRequestTmp);
                     }
                 }
             }
-
-            return View("JobRequest");
+            return RedirectToAction("Index","Login");
         }
 
         public ActionResult GetRecruitment(int recruitmentId)
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
-                if (recruitment != null)
+                using (var db = new MSEntities())
                 {
-                    if (recruitment.ExpiredTime < DateTime.Now)
+                    var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
+                    if (recruitment != null)
                     {
-                        if (!recruitment.Status.Equals("Applied") && !recruitment.Status.Equals("Approved") && !recruitment.Status.Equals("Expired"))
+                        if (recruitment.ExpiredTime < DateTime.Now)
                         {
-                            recruitment.Status = "Expired";
-                            db.SaveChanges();
-                        }
-                    }
-                    var customer = db.Customers.SingleOrDefault(m => m.AccountId == recruitment.CustomerId);
-                    var account = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId);
-                    var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId);
-                    var skillList = new List<string>();
-                    var recSkillRefList = new List<SkillReference>();
-                    var recJobReqList = new List<JobRequestTemp>();
-                    if (Session["AccId"] != null)
-                    {
-                        if (recruitment.CustomerId == (int)Session["AccId"])
-                        {
-                            if (!recruitment.Status.Equals("Applied"))
+                            if (!recruitment.Status.Equals("Applied") && !recruitment.Status.Equals("Approved") && !recruitment.Status.Equals("Expired"))
                             {
-                                ViewBag.Manage = "true";
+                                recruitment.Status = "Expired";
+                                db.SaveChanges();
                             }
                         }
-                    }
-                    if (skillRef != null)
-                    {
-                        LoadSkillList(skillRef, skillList, db);
-                        recSkillRefList =
-                            db.SkillReferences.Where(sr => sr.Type == 0 && sr.Group == skillRef.Group).OrderBy(sr => sr.Distance).ToList();
-                        if (recruitment.Status.Equals("Waiting"))
+                        var customer = db.Customers.SingleOrDefault(m => m.AccountId == recruitment.CustomerId);
+                        var account = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId);
+                        var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId);
+                        var skillList = new List<string>();
+                        var recSkillRefList = new List<SkillReference>();
+                        var recJobReqList = new List<JobRequestTemp>();
+                        if (Session["AccId"] != null)
                         {
-                            foreach (var skillReference in recSkillRefList)
+                            if (recruitment.CustomerId == (int)Session["AccId"])
                             {
-                                var jobRequest =
-                                    db.JobRequests.SingleOrDefault(
-                                        j => j.SkillRefId == skillReference.SkillRefId && j.Status.Equals("Waiting") && j.IsActive);
-                                if (jobRequest != null)
+                                if (!recruitment.Status.Equals("Applied"))
                                 {
-                                    var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                                    var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null, null);
-                                    recJobReqList.Add(jobRequestTmp);
+                                    ViewBag.Manage = "true";
                                 }
                             }
-                            if (recJobReqList.Any())
+                        }
+                        if (skillRef != null)
+                        {
+                            LoadSkillList(skillRef, skillList, db);
+                            recSkillRefList =
+                                db.SkillReferences.Where(sr => sr.Type == 0 && sr.Group == skillRef.Group).OrderBy(sr => sr.Distance).ToList();
+                            if (recruitment.Status.Equals("Waiting"))
                             {
-                                ViewBag.Recommend = recJobReqList;
-                                ViewBag.RecommendNum = recJobReqList.Count;
+                                foreach (var skillReference in recSkillRefList)
+                                {
+                                    var jobRequest =
+                                        db.JobRequests.SingleOrDefault(
+                                            j => j.SkillRefId == skillReference.SkillRefId && j.Status.Equals("Waiting") && j.IsActive);
+                                    if (jobRequest != null)
+                                    {
+                                        var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
+                                        var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null, null);
+                                        recJobReqList.Add(jobRequestTmp);
+                                    }
+                                }
+                                if (recJobReqList.Any())
+                                {
+                                    ViewBag.Recommend = recJobReqList;
+                                    ViewBag.RecommendNum = recJobReqList.Count;
+                                }
                             }
                         }
-                    }
-                    if (recruitment.Status.Equals("Applied") || recruitment.Status.Equals("Approved"))
-                    {
-                        var apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitmentId);
-                        var jobRequest = db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId);
-                        ViewBag.Maid =
-                            db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                        var recruitmentTmp = new RecruitmentTemp(recruitment, customer, account, jobRequest, skillList);
-                        return View("Recruitment", recruitmentTmp);
-                    }
-                    else
-                    {
-                        var recruitmentTmp = new RecruitmentTemp(recruitment, customer, account, null, skillList);
-                        return View("Recruitment", recruitmentTmp);
+                        if (recruitment.Status.Equals("Applied") || recruitment.Status.Equals("Approved"))
+                        {
+                            var apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitmentId);
+                            var jobRequest = db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId);
+                            ViewBag.Maid =
+                                db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
+                            var recruitmentTmp = new RecruitmentTemp(recruitment, customer, account, jobRequest, skillList);
+                            return View("Recruitment", recruitmentTmp);
+                        }
+                        else
+                        {
+                            var recruitmentTmp = new RecruitmentTemp(recruitment, customer, account, null, skillList);
+                            return View("Recruitment", recruitmentTmp);
+                        }
                     }
                 }
             }
-            return View("JobRequest");
+            return RedirectToAction("Index","Login");
         }
 
         public static List<string> LoadSkillList(SkillReference skillRef, List<string> skillList, MSEntities db)
