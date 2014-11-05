@@ -603,7 +603,10 @@ namespace MS_Website.Controllers
                 {
                     var expiredTime = recruit.ExpiredTime.AddDays(7 * extend);
                     recruit.ExpiredTime = expiredTime;
-                    recruit.Status = "Waiting";
+                    if (recruit.Status.Equals("Expired"))
+                    {
+                        recruit.Status = "Waiting";
+                    }
                     db.SaveChanges();
                 }
                 return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
