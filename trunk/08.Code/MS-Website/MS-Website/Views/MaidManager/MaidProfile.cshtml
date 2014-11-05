@@ -190,7 +190,7 @@
                             <input id="currPos1" type="hidden" value="4" />
                             @foreach (var job in notApplList)
                             {           
-                                <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 1)" style="display: @(counter > 4 ? "none" : "")">
+                                <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 1)" style="display: @(counter > 3 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                     </div>
@@ -631,13 +631,13 @@
     var chosenCount = 0;
     function chooseJob(counter, jobId, type) {
         if (chosenCount != 0) {
-            document.getElementById(chosenCount).setAttribute("class", "");
+            document.getElementById(chosenCount + "" + type).setAttribute("class", "");
         }
         if (counter != chosenCount) {
-            document.getElementById(counter).setAttribute("class", "isCurent");
+            document.getElementById(counter + "" + type).setAttribute("class", "isCurent");
             chosenCount = counter;
         } else {
-            document.getElementById(counter).setAttribute("class", "");
+            document.getElementById(counter + "" + type).setAttribute("class", "");
             chosenCount = 0;
             type = 0;
         }
@@ -676,13 +676,13 @@
             var currPage = parseInt(document.getElementById("currPage" + type).innerHTML) + 1;
             document.getElementById("currPage" + type).innerHTML = currPage + "/";
             for (var i = currPos - amount + 1; i <= currPos; i++) {
-                if (document.getElementById(i) != null) {
-                    document.getElementById(i).setAttribute("style", "display: none");
+                if (document.getElementById(i + "" + type) != null) {
+                    document.getElementById(i + "" + type).setAttribute("style", "display: none");
                 }
             }
             for (var j = currPos + 1; j <= currPos + amount; j++) {
-                if (document.getElementById(j) != null) {
-                    document.getElementById(j).setAttribute("style", "");
+                if (document.getElementById(j + "" + type) != null) {
+                    document.getElementById(j + "" + type).setAttribute("style", "");
                 }
             }
             document.getElementById("currPos" + type).setAttribute("value", currPos + amount);
@@ -699,13 +699,13 @@
             var currPage = parseInt(document.getElementById("currPage" + type).innerHTML) - 1;
             document.getElementById("currPage" + type).innerHTML = currPage + "/";
             for (var i = currPos; i > currPos - amount; i--) {
-                if (document.getElementById(i) != null) {
-                    document.getElementById(i).setAttribute("style", "display: none");
+                if (document.getElementById(i + "" + type) != null) {
+                    document.getElementById(i + "" + type).setAttribute("style", "display: none");
                 }
             }
             for (var j = currPos - amount; j > currPos - 2 * amount; j--) {
-                if (document.getElementById(j) != null) {
-                    document.getElementById(j).setAttribute("style", "");
+                if (document.getElementById(j + "" + type) != null) {
+                    document.getElementById(j + "" + type).setAttribute("style", "");
                 }
             }
             document.getElementById("currPos" + type).setAttribute("value", currPos - amount);
