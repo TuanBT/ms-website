@@ -49,35 +49,38 @@
             <div class="col-md-4">
                 <div class="rightInfo">
                     <ul class="riDetail">
-                        @if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
+                        @if (Session["Acc"]!=null)
                         {
-                            <li class="rideRow">
-                                <div class="rideroTitle">
-                                    Điện thoại
-                                </div>
-                                <div class="rideroContent">
-                                    <strong>@account.Phone
-                                    </strong>
-                                </div>
-                            </li>
-                            <li class="rideRow">
-                                <div class="rideroTitle">
-                                    Email
-                                </div>
-                                <div class="rideroContent">
-                                    <strong>@account.Email
-                                    </strong>
-                                </div>
-                            </li>
-                            <li class="rideRow">
-                                <div class="rideroTitle">
-                                    Địa chỉ
-                                </div>
-                                <div class="rideroContent">
-                                    <strong>@account.Customer.Address
-                                    </strong>
-                                </div>
-                            </li>
+                            if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
+                             {
+                                 <li class="rideRow">
+                                     <div class="rideroTitle">
+                                         Điện thoại
+                                     </div>
+                                     <div class="rideroContent">
+                                         <strong>@account.Phone
+                                         </strong>
+                                     </div>
+                                 </li>
+                                 <li class="rideRow">
+                                     <div class="rideroTitle">
+                                         Email
+                                     </div>
+                                     <div class="rideroContent">
+                                         <strong>@account.Email
+                                         </strong>
+                                     </div>
+                                 </li>
+                                 <li class="rideRow">
+                                     <div class="rideroTitle">
+                                         Địa chỉ
+                                     </div>
+                                     <div class="rideroContent">
+                                         <strong>@account.Customer.Address
+                                         </strong>
+                                     </div>
+                                 </li>
+                             }
                         }
                         <li class="rideRow">
                             <div class="rideroTitle">
@@ -103,7 +106,7 @@
                     }
                 </ul>
                 @{
-                    var counter = 1;
+                    var counter = 0;
                     var total = 0;
                 }
                 <div class="tab-content">
@@ -112,7 +115,7 @@
                             <input id="currPos1" type="hidden" value="4" />
                             @foreach (var recruitment in notApplList)
                             {
-                                <li id="@counter" onclick="chooseRecruit(@counter, @recruitment.Recruitment.RecruitmentId, 1)" style="display: @(counter > 4 ? "none" : "")">
+                                <li id="@(counter + 1)" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 1)" style="display: @(counter > 4 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
@@ -164,7 +167,7 @@
                                 <input id="hideId" type="hidden" name="recruitId" />
                                 <div id="button_1" style="display: none;" class="blfbutton">
                                     <button type="submit" class="btn btn-danger">Tạm ẩn</button>
-                                    <button type="button" class="btn btn-info" onclick="return false">Gia hạn</button>
+                                    <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
                                 </div>
                                 }
                             }
@@ -500,6 +503,7 @@
             document.getElementById("button_3").setAttribute("style", "display: none;");
             document.getElementById("button_4").setAttribute("style", "display: none;");
         }
+        document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=1");
     }
 
     function extendRecruit() {
@@ -507,6 +511,7 @@
     }
 
     function chooseWeek() {
+        var recruitId = document.getElementById("extendId").getAttribute("value");
         var weekDr = document.getElementById("week");
         var week = weekDr.options[weekDr.selectedIndex].value;
         document.getElementById("amount").setAttribute("value", parseInt(week) * parseInt($("#PriceRC").val()));
