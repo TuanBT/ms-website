@@ -52,7 +52,7 @@
                                     }
                                     @if (RecruitmentTemp.Recruitment.Status == "Expired" || RecruitmentTemp.Recruitment.Status == "Waiting")
                                     {
-                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="chooseExtend()">Gia hạn</button>
                                     }
                                 </div>
                             }
@@ -77,11 +77,6 @@
                                 @{
                                     string color = "default";
                                     string status = "Tạm ẩn";                                }
-                                @if (RecruitmentTemp.Recruitment.Status == "Payment")
-                                {
-                                    color = "warning";
-                                    status = "Chưa thanh toán";
-                                }
                                 @if (RecruitmentTemp.Recruitment.Status == "Hide")
                                 {
                                     color = "default";
@@ -137,7 +132,7 @@
                             </div>
                         </div>
                     </div>
-                    @if (RecruitmentTemp.Recruitment.Status == "Payment")
+                    @if (!RecruitmentTemp.Recruitment.IsActive)
                     {
                          if (Session["Role"]!=null)
                          {
@@ -259,7 +254,7 @@
                     <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="mySmallModalLabel">Gia hạn đơn tuyển việc</h4>
             </div>
-            <input id="extendId" type="hidden" name="recruitId" />
+            <input id="extendId" type="hidden" name="recruitId" value="@RecruitmentTemp.Recruitment.RecruitmentId"/>
             <div class="modal-body chooseMaidModalMaid">
                 <span>Thời gian gia hạn</span>
                 <select id="week" class="form-control" name="extend" onchange="chooseWeek()">
@@ -322,6 +317,13 @@
         }
     }
 
+    function chooseExtend() {
+        var recruitId = document.getElementById("extendId").getAttribute("value");
+        document.getElementById("recruitId").setAttribute("value", recruitId);
+        document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=1");
+        return false;
+    }
+
     function extendRecruit() {
         document.forms["ExtendForm"].submit();
     }
@@ -335,7 +337,6 @@
         var recruitId = document.getElementById("extendId").getAttribute("value");
         var weekDr = document.getElementById("week");
         var week = weekDr.options[weekDr.selectedIndex].value;
-        document.getElementById("recruitId").setAttribute("value", recruitId);
         document.getElementById("amount").setAttribute("value", parseInt(week) * parseInt($("#PriceRC").val()));
         document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=" + week);
     }
