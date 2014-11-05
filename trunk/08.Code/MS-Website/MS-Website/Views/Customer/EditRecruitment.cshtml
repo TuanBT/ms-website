@@ -573,7 +573,7 @@
     $("#btnEdit").click(function () {
         console.debug("sdf");
         var errText = "";
-        if ($("#txtTitle").val() == "") {
+        if ($("#txtTitle").val().trim() == "") {
             errText = "<font color='red'>Vui lòng nhập tiêu đề</font>";
             document.getElementById("textBlank").innerHTML = errText;
             return false;

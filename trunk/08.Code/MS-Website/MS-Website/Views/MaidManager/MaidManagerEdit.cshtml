@@ -97,7 +97,7 @@
         var errText = "";
         var phone = new RegExp('^[0-9]+$');
         var email = new RegExp('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$');
-        if ($("#txtFullName").val() == "") {
+        if ($("#txtFullName").val().trim() == "") {
             errText = "<font color='red'>Vui lòng nhập tên người quản lý</font>";
             document.getElementById("textBlank").innerHTML = errText;
             return false;
