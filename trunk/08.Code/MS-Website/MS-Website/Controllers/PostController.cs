@@ -113,7 +113,7 @@ namespace MS_Website.Controllers
                     }
                 }
             }
-            return RedirectToAction("Index","Login");
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult GetRecruitment(int recruitmentId)
@@ -192,7 +192,7 @@ namespace MS_Website.Controllers
                     }
                 }
             }
-            return RedirectToAction("Index","Login");
+            return RedirectToAction("Login", "Home");
         }
 
         public static List<string> LoadSkillList(SkillReference skillRef, List<string> skillList, MSEntities db)
