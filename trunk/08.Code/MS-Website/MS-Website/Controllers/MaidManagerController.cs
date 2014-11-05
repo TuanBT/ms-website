@@ -22,12 +22,7 @@ namespace MS_Website.Controllers
                 {
                     if (role.Equals("MaidMediator"))
                     {
-                        int numWating = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Waiting"));
-                        int numApplied = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Applied"));
-                        int numApproved = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Approved"));
-                        int numExpired = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Expired"));
-                        int numHide = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Hide"));
-                        ViewBag.MaidMediatorStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied, numHide };
+                       
                         var maidMediator = db.Accounts.SingleOrDefault(mm => mm.AccountId == accId);
                         ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
                         Session["MaidManager"] = maidMediator;
