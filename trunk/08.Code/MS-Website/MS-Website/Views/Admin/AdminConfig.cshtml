@@ -31,10 +31,11 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-2 poJRTtitleSmall"><span>Gợi ý số K</span></div>
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control" name="numCluterKStr" value="@ViewBag.numCluterK">
+                                    <input type="text" id="txtNumCluterK" class="form-control" name="numCluterKStr" value="@ViewBag.numCluterK">
+                                    <div id="errKmean" style="color: red"></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="submit" class="btn btn-success">Chạy Kmean</button>
+                                    <button type="submit" id="btnRunKmean" class="btn btn-success">Chạy Kmean</button>
                                 </div>
                             </div>
                         </div>
@@ -99,6 +100,16 @@
 
 
 <script type="text/jscript">
+    
+    $("#btnRunKmean").click(function () {
+        $("#errKmean").html("");
+        var reg = new RegExp('^\s*-?[0-9]{1,10}\s*$');
+        if (!reg.test($("#txtNumCluterK").val())) {
+            $("#errKmean").html("Phải nhập số nguyên!");
+            return false;
+        }
+    })
+    
     function ChangePriceJR() {
         $("#NotiSuss").fadeOut();
         $("#errJR").html("");
@@ -134,4 +145,5 @@
             $("#errRC").html("Phải nhập số nguyên!");
         }
     }
+
 </script>
