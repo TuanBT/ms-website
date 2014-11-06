@@ -190,7 +190,7 @@
                             <input id="currPos1" type="hidden" value="4" />
                             @foreach (var job in notApplList)
                             {           
-                                <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 1)" style="display: @(counter > 3 ? "none" : "")">
+                                <li id="@(counter + 1)1" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 1)" style="display: @(counter > 3 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                     </div>
@@ -264,7 +264,7 @@
                             <input id="currPos2" type="hidden" value="@(counter + 2)" />
                             @foreach (var job in applList)
                             {
-                                <li id="@(counter + 1)" style="display: @(counter - total > 1 ? "none" : "")">
+                                <li id="@(counter + 1)2" style="display: @(counter - total > 1 ? "none" : "")">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="bAWork">
@@ -342,7 +342,7 @@
                             <input id="currPos3" type="hidden" value="@(counter + 2)" />
                             @foreach (var job in apprList)
                             {
-                                <li id="@(counter + 1)" style="display: @(counter - total > 1 ? "none" : "")">
+                                <li id="@(counter + 1)3" style="display: @(counter - total > 1 ? "none" : "")">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="bAWork">
@@ -412,7 +412,7 @@
                             <input id="currPos4" type="hidden" value="@(counter + 4)" />
                             @foreach (var job in expiredList)
                             {
-                                <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 4)" style="display: @(counter - total > 3 ? "none" : "")">
+                                <li id="@(counter + 1)4" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 4)" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                     </div>
@@ -473,7 +473,7 @@
                             <input id="currPos5" type="hidden" value="@(counter + 4)" />
                             @foreach (var job in hideList)
                             {
-                                <li id="@(counter + 1)" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 5)" style="display: @(counter - total > 3 ? "none" : "")">
+                                <li id="@(counter + 1)5" onclick="chooseJob(@(counter + 1), @job.Job.JobRequestId, 5)" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                     </div>
@@ -539,7 +539,7 @@
                             <input id="currPos6" type="hidden" value="@(counter + 4)" />
                             @foreach (var job in notActiveList)
                             {
-                                <li id="@(counter + 1)" style="display: @(counter - total > 3 ? "none" : "")">
+                                <li id="@(counter + 1)6" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/jr.png" alt="Maid service" height="100%">
                                     </div>
