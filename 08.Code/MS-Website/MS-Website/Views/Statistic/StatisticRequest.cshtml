@@ -11,14 +11,17 @@
     @Html.Partial("_PartialMenu")
     <div class="hChildMenu">
         <ul class="hChildMenuList">
-            <li class="">
+            @if (!Session["Role"].Equals("Admin"))
+            {
+                <li class="">
                     <a href="#" class="hChContent">Yêu cầu cá nhân</a>
                 </li>
+            }
             <li class="iscurent">
                 <a href="#">Các yêu cầu</a>
             </li>
             <li class="">
-                <a href="@Url.Action("StatisticIncome","Statistic", new {year})" class="hChContent">Doanh thu</a>
+                <a href="@Url.Action("StatisticIncome", "Statistic", new { year })" class="hChContent">Doanh thu</a>
             </li>
         </ul>
     </div>

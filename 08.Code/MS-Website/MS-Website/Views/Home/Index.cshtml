@@ -138,7 +138,7 @@
                             }
                             <ul class="pagination pagination-sm pagingIndex" id="pagingTabMaid" style="display: @pagingMaid">
                                 @{
-                                    for (int i = 1; i <= (int) ViewBag.NumPageRec; i++)
+                                    for (int i = 1; i <= (int)ViewBag.NumPageJob; i++)
                                     {
                                         <li class="@(pageJob == i ? "active" : "")"><a href="@Url.Action("Index", "Home", new { pageJob = i, job = true, rec = false })">@i</a></li>
                                     }
@@ -146,7 +146,7 @@
                             </ul>
                             <ul class="pagination pagination-sm pagingIndex" id="pagingtabCustomer" style="display: @pagingCus">
                                 @{
-                                    for (int i = 1; i <= (int)ViewBag.NumPageJob; i++)
+                                    for (int i = 1; i <= (int)ViewBag.NumPageRec; i++)
                                     {
                                      <li class="@(pageRec == i ? "active" : "")"><a href="@Url.Action("Index", "Home", new { pageRec = i, job = false, rec = true })">@i</a></li>
                                     }

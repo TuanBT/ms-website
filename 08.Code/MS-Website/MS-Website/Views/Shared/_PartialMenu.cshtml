@@ -24,7 +24,7 @@
                             <a href="@Url.Action("ManageComment", "Admin")" class="hefaContent @(ViewBag.ManageComment != null ? "iscurent" : "")">Xóa bình luận</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("AdminConfig", "Admin")" class="hefaContent @(ViewBag.Kmean != null ? "iscurent" : "")">Kmean</a>
+                            <a href="@Url.Action("AdminConfig", "Admin")" class="hefaContent @(ViewBag.Config != null ? "iscurent" : "")">Quản lý cấu hình</a>
                         </li>
                     }
                     @if (roleSession.Equals(Customer))
