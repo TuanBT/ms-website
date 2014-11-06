@@ -456,21 +456,37 @@ namespace MS_Website.Controllers
                             db.SkillInstances.SingleOrDefault(
                                 si => si.SkillString.Equals(gender) && si.SkillName.Equals("Gender")).SkillId;
                     }
+                    else
+                    {
+                        skillRef.Gender = null;
+                    }
                     if (!age.Equals("null"))
                     {
                         skillRef.Age =
                             db.SkillInstances.SingleOrDefault(
                                 si => si.SkillString.Equals(age) && si.SkillName.Equals("Age")).SkillId;
                     }
+                    else
+                    {
+                        skillRef.Age = null;
+                    }
                     if (LanguageEnglish != null)
                     {
                         skillRef.LanguageEnglish =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(LanguageEnglish)).SkillId;
                     }
+                    else
+                    {
+                        skillRef.LanguageEnglish = null;
+                    }
                     if (LanguageChinese != null)
                     {
                         skillRef.LanguageChinese =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(LanguageChinese)).SkillId;
+                    }
+                    else
+                    {
+                        skillRef.LanguageChinese = null;
                     }
                     if (LanguageJapanese != null)
                     {
@@ -478,10 +494,18 @@ namespace MS_Website.Controllers
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(LanguageJapanese)).
                                 SkillId;
                     }
+                    else
+                    {
+                        skillRef.LanguageJapanese = null;
+                    }
                     if (LanguageKorean != null)
                     {
                         skillRef.LanguageKorean =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(LanguageKorean)).SkillId;
+                    }
+                    else
+                    {
+                        skillRef.LanguageKorean = null;
                     }
                     if (!exp.Equals("null"))
                     {
@@ -489,11 +513,19 @@ namespace MS_Website.Controllers
                             db.SkillInstances.SingleOrDefault(
                                 si => si.SkillString.Equals(exp) && si.SkillName.Equals("Experience")).SkillId;
                     }
+                    else
+                    {
+                        skillRef.Experience = null;
+                    }
                     if (!hometown.Equals("null"))
                     {
                         skillRef.Hometown =
                             db.SkillInstances.SingleOrDefault(
                                 si => si.SkillString.Equals(hometown) && si.SkillName.Equals("Hometown")).SkillId;
+                    }
+                    else
+                    {
+                        skillRef.Hometown = null;
                     }
                     if (!addr.Equals("null"))
                     {
@@ -501,11 +533,19 @@ namespace MS_Website.Controllers
                             db.SkillInstances.SingleOrDefault(
                                 si => si.SkillString.Equals(addr) && si.SkillName.Equals("Address")).SkillId;
                     }
+                    else
+                    {
+                        skillRef.Address = null;
+                    }
                     if (!married.Equals("null"))
                     {
                         skillRef.Married =
                             db.SkillInstances.SingleOrDefault(
                                 si => si.SkillString.Equals(married) && si.SkillName.Equals("Married")).SkillId;
+                    }
+                    else
+                    {
+                        skillRef.Married = null;
                     }
                     if (!stay.Equals("null"))
                     {
@@ -515,11 +555,19 @@ namespace MS_Website.Controllers
                                 si.SkillName.Equals("Stay") && si.SkillString.Equals(stay) &&
                                 si.SkillName.Equals("Stay")).SkillId;
                     }
+                    else
+                    {
+                        skillRef.Stay = null;
+                    }
                     if (!salary.Equals("null"))
                     {
                         skillRef.Salary =
                             db.SkillInstances.SingleOrDefault(
                                 si => si.SkillString.Equals(salary) && si.SkillName.Equals("Salary")).SkillId;
+                    }
+                    else
+                    {
+                        skillRef.Salary = null;
                     }
                     if (!work.Equals("null"))
                     {
@@ -527,45 +575,81 @@ namespace MS_Website.Controllers
                             db.SkillInstances.SingleOrDefault(
                                 si => si.SkillString.Equals(work) && si.SkillName.Equals("Work")).SkillId;
                     }
+                    else
+                    {
+                        skillRef.Work = null;
+                    }
                     if (SickCare != null)
                     {
                         skillRef.SickCare =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(SickCare)).SkillId;
+                    }
+                    else
+                    {
+                        skillRef.SickCare = null;
                     }
                     if (OldCare != null)
                     {
                         skillRef.OldCare =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(OldCare)).SkillId;
                     }
+                    else
+                    {
+                        skillRef.OldCare = null;
+                    }
                     if (BabySister != null)
                     {
                         skillRef.BabySister =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(BabySister)).SkillId;
+                    }
+                    else
+                    {
+                        skillRef.BabySister = null;
                     }
                     if (DisabilityCare != null)
                     {
                         skillRef.DisabilityCare =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(DisabilityCare)).SkillId;
                     }
+                    else
+                    {
+                        skillRef.DisabilityCare = null;
+                    }
                     if (BonsaiCare != null)
                     {
                         skillRef.BonsaiCare =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(BonsaiCare)).SkillId;
+                    }
+                    else
+                    {
+                        skillRef.BonsaiCare = null;
                     }
                     if (Cooking != null)
                     {
                         skillRef.Cooking =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(Cooking)).SkillId;
                     }
+                    else
+                    {
+                        skillRef.Cooking = null;
+                    }
                     if (Washing != null)
                     {
                         skillRef.Washing =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(Washing)).SkillId;
                     }
+                    else
+                    {
+                        skillRef.Washing = null;
+                    }
                     if (CleanHouse != null)
                     {
                         skillRef.CleanHouse =
                             db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(CleanHouse)).SkillId;
+                    }
+                    else
+                    {
+                        skillRef.CleanHouse = null;
                     }
                     skillRef.Group = PostController.GetGroup(skillRef);
                     db.SaveChanges();
