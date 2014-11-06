@@ -188,7 +188,7 @@
                                                         <option id="gender_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Gender)
                                                         {
-                                                            <option value="@item.SkillString">@item.SkillString</option>
+                                                            <option value="@item.SkillString" @(ViewBag.StayValue != null && ViewBag.GenderValue == item.SkillString ? "selected" : "")>@item.SkillString</option>
                                                         }
                                                     </select>
                                                 </div>
@@ -202,7 +202,7 @@
                                                         <option id="age_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Age)
                                                         {
-                                                            <option value="@item.SkillString">@item.SkillString</option>
+                                                            <option value="@item.SkillString" @(ViewBag.StayValue != null && ViewBag.AgeValue == item.SkillString ? "selected" : "")>@item.SkillString</option>
                                                         }
                                                     </select>
                                                 </div>
@@ -216,7 +216,7 @@
                                                         <option id="exp_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Experience)
                                                         {
-                                                            <option value="@item.SkillString">@item.SkillString</option>
+                                                            <option value="@item.SkillString" @(ViewBag.ExperienceValue != null && ViewBag.GenderValue == item.SkillString ? "selected" : "")>@item.SkillString</option>
                                                         }
                                                     </select>
                                                 </div>
@@ -230,7 +230,7 @@
                                                         <option id="hometown_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Hometown)
                                                         {
-                                                            <option value="@item.SkillString">@item.SkillString</option>
+                                                            <option value="@item.SkillString" @(ViewBag.ExperienceValue != null && ViewBag.HometownValue == item.SkillString ? "selected" : "")>@item.SkillString</option>
                                                         }
                                                     </select>
                                                 </div>
@@ -383,6 +383,16 @@
                                                 <div class="moskSkillName">
                                                     <div class="checkbox">
                                                         <label>
+                                                            <input id="Chăm sóc trẻ em" class="skill" type="checkbox" value="Chăm sóc trẻ em" name="BabySister" @(ViewBag.BabySisterValue != null ? "checked" : "")/>
+                                                            Chăm sóc trẻ em
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    <div class="checkbox">
+                                                        <label>
                                                             <input id="Chăm sóc người khuyết tật" class="skill" type="checkbox" value="Chăm sóc người khuyết tật" name="DisabilityCare" @(ViewBag.DisabilityCareValue != null ? "checked" : "")/>
                                                             Chăm sóc người khuyết tật
                                                         </label>
@@ -452,6 +462,7 @@
     var chosenSkills = "";
 
     function addSkill() {
+        chosenList = new Array();
         chosenSkills = "";
         var genderDr = document.getElementById("gender");
         var gender = "Giới tính - " + genderDr.options[genderDr.selectedIndex].value;
@@ -548,7 +559,7 @@
                 document.getElementById("address_null").setAttribute("selected", "");
             } else if (chosenList[skillNo].search("Kết hôn") != -1) {
                 document.getElementById("married_null").setAttribute("selected", "");
-            } else if (chosenList[skillNo].search("Ngủ lại") != -1) {
+            } else if (chosenList[skillNo].search("Lưu trú") != -1) {
                 document.getElementById("stay_null").setAttribute("selected", "");
             } else if (chosenList[skillNo].search("Mức lương") != -1) {
                 document.getElementById("salary_null").setAttribute("selected", "");

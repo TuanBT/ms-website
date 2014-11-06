@@ -5,7 +5,7 @@
 }
 @if (Session["AccId"] != null)
 {
-    if (RecruitmentTemp.Recruitment.Status == "Payment" && RecruitmentTemp.Recruitment.CustomerId == (int)Session["AccId"])
+    if (!RecruitmentTemp.Recruitment.IsActive && RecruitmentTemp.Recruitment.CustomerId == (int)Session["AccId"])
     {
     <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" style="display: inline-block">
         <input type="hidden" name="cmd" value="_xclick">
