@@ -1313,3 +1313,11 @@ a {
         background: #EEE;
         border-radius: 5px;
     }
+
+.poJRTtitleSmall {
+    display: block;
+    margin-top: 11px;
+    line-height: 1.5;
+    font-weight: 700;
+    float: left;
+}

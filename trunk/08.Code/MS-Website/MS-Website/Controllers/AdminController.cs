@@ -22,7 +22,7 @@ namespace MS_Website.Controllers
                 var jobRequests = db.JobRequests.Where(j => j.Status == "Waiting").ToList();
                 foreach (var jobRequest in jobRequests)
                 {
-                   skillRefIds.Add(db.SkillReferences.SingleOrDefault(s => s.SkillRefId == jobRequest.SkillRefId).SkillRefId);
+                    skillRefIds.Add(db.SkillReferences.SingleOrDefault(s => s.SkillRefId == jobRequest.SkillRefId).SkillRefId);
                 }
                 var recruitments = db.Recruitments.Where(r => r.Status == "Waiting").ToList();
                 foreach (var recruitment in recruitments)
@@ -40,7 +40,7 @@ namespace MS_Website.Controllers
                 var numCluterK = numCluterKStr != "" ? Convert.ToInt32(numCluterKStr) : 1;
                 var kmean = new Kmean(numCluterK, strMeansDataFile);
                 var kmeanDatas = new List<KmeanData>();
-                for (int j = 0; j < skillRefIds.Count;j++ )
+                for (int j = 0; j < skillRefIds.Count; j++)
                 {
                     int id = skillRefIds[j];
                     var skillRef = db.SkillReferences.FirstOrDefault(s => s.SkillRefId == id);
@@ -166,31 +166,52 @@ namespace MS_Website.Controllers
 
                 var means = kmean.GetMeansFile();
 
-                for (var j = 0; j < skillRefIds.Count;j++ )
+                for (var j = 0; j < skillRefIds.Count; j++)
                 {
                     int id = skillRefIds[j];
                     var skillRef = db.SkillReferences.FirstOrDefault(s => s.SkillRefId == id);
                     skillRef.Group = kmeanDatas[j].group;
                     skillRef.Distance = kmean.GetDistanceRowData(kmeanDatas[j].dataRow, kmeanDatas[j].group, means);
                 }
-                    db.SaveChanges();
+                db.SaveChanges();
             }
             return RedirectToAction("AdminConfig", "Admin");
         }
 
         public ActionResult AdminConfig()
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                var skillRefJrTable = db.SkillReferences.Where(s => s.Type == 0).ToList();
-                var skillRefTable = db.SkillReferences.Select(s => s);
-                //Choose max count/10
-                int numCluterK = (skillRefTable.Count() - skillRefJrTable.Count()) > skillRefJrTable.Count()
-                                     ? (skillRefTable.Count() - skillRefJrTable.Count())/10
-                                     : skillRefJrTable.Count()/10;
-                ViewBag.numCluterK = numCluterK;
+                if (Session["Role"].Equals("Admin"))
+                {
+                    string strPathServer = AppDomain.CurrentDomain.BaseDirectory;
+                    string strMeansDataFile = strPathServer + "App_Data\\" + "meansData.txt";
+                    string[] lineMeans = null;
+                    try
+                    {
+                        lineMeans = System.IO.File.ReadAllLines(strMeansDataFile);
+                        ViewBag.numCluterKCurrent = lineMeans.Length;
+                    }
+                    catch (Exception)
+                    {
+                        ViewBag.numCluterKCurrent = 1;
+                    }
+                    using (var db = new MSEntities())
+                    {
+
+
+                        var skillRefJrTable = db.SkillReferences.Where(s => s.Type == 0).ToList();
+                        var skillRefTable = db.SkillReferences.Select(s => s);
+                        //Choose max count/10
+                        int numCluterK = (skillRefTable.Count() - skillRefJrTable.Count()) > skillRefJrTable.Count()
+                                             ? (skillRefTable.Count() - skillRefJrTable.Count()) / 10
+                                             : skillRefJrTable.Count() / 10;
+                        ViewBag.numCluterK = numCluterK;
+                    }
+                    return View();
+                }
             }
-            return View();
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult AddStaff(Account acc, string account)
@@ -222,7 +243,7 @@ namespace MS_Website.Controllers
                         db.SaveChanges();
 
                         var addedAcc = db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
-                        var newStaffs = new Staff {AccountId = addedAcc.AccountId};
+                        var newStaffs = new Staff { AccountId = addedAcc.AccountId };
                         db.Staffs.Add(newStaffs);
                         db.SaveChanges();
                         return RedirectToAction("BanAccount", "Admin", acc);
@@ -276,13 +297,13 @@ namespace MS_Website.Controllers
 
         public ActionResult ManageComment()
         {
-            
+
             if (Session["AccId"] != null && Session["IsAdmin"].Equals(true))
             {
                 List<CommentTemp> commentTemps = new List<CommentTemp>();
                 using (var db = new MSEntities())
                 {
-                    var comments = db.Comments.Where(c=>c.CommentId!=null).ToList();
+                    var comments = db.Comments.Where(c => c.CommentId != null).ToList();
                     foreach (var comment in comments)
                     {
 
@@ -320,6 +341,47 @@ namespace MS_Website.Controllers
                 }
             }
             return RedirectToAction("Login", "Home");
+        }
+
+        [HttpPost]
+        public JsonResult ManageFeeJR(string SpriceJR)
+        {
+            System.Configuration.Configuration config = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+
+            System.Configuration.KeyValueConfigurationElement settingPriceJR = config.AppSettings.Settings["PriceJR"];
+
+            if (null != settingPriceJR)
+            {
+                config.AppSettings.Settings["PriceJR"].Value = SpriceJR;
+            }
+            else
+            {
+                config.AppSettings.Settings.Add("PriceJR", SpriceJR);
+            }
+            config.Save();
+            return Json("", JsonRequestBehavior.AllowGet);
+            //return RedirectToAction("AdminConfig");
+        }
+
+        [HttpPost]
+        public JsonResult ManageFeeRC(string SpriceRC)
+        {
+            System.Configuration.Configuration config = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+
+            System.Configuration.KeyValueConfigurationElement settingPriceRC = config.AppSettings.Settings["PriceRC"];
+
+            if (null != settingPriceRC)
+            {
+                config.AppSettings.Settings["PriceRC"].Value = SpriceRC;
+            }
+            else
+            {
+                config.AppSettings.Settings.Add("PriceRC", SpriceRC);
+            }
+
+            config.Save();
+            return Json("", JsonRequestBehavior.AllowGet);
+            //return RedirectToAction("AdminConfig");
         }
     }
 }

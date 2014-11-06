@@ -20,8 +20,14 @@
                             Tên đăng ký
                         </div>
                         <div class="col-md-8">
-                            @Html.TextBoxFor(a => a.Username, new { @id = "txtUsername", @class = "form-control input-lg text", @placeholder = "Tên đăng nhập", maxlength = "50" })
+                            @Html.TextBoxFor(a => a.Username, new { @id = "txtUsername", @class = "form-control input-lg text", @placeholder = "", maxlength = "50" })
                             <div id="textBlank"></div>
+                            <div>
+                                @if (ViewBag.Err != null)
+                                {
+                                    <font color="red">@ViewBag.Err</font>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -31,54 +37,57 @@
                             Mật khẩu
                         </div>
                         <div class="col-md-8">
-                           @Html.PasswordFor(a => a.Password, new { @id = "txtPassword", @class = "form-control input-lg text", @placeholder = "Mật khẩu", maxlength = "50" })
-            <div id="passwordBlank"></div>
-             @Html.PasswordFor(a => a.Password, new { @id = "txtConfirmPassword", @class = "form-control input-lg text", @placeholder = "Nhập lại mật khẩu", maxlength = "50" })
-            <div id="CPErr"></div>
-            <div>
-                @if(ViewBag.Err!=null)
-                        {
-                            <font color="red">@ViewBag.Err</font>
-                        }
-            </div>
+                            @Html.PasswordFor(a => a.Password, new { @id = "txtPassword", @class = "form-control input-lg text", @placeholder = "", maxlength = "50" })
+                            <div id="passwordBlank"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Nhập lại mật khẩu
+                        </div>
+                        <div class="col-md-8">
+                            @Html.PasswordFor(a => a.Password, new { @id = "txtConfirmPassword", @class = "form-control input-lg text", @placeholder = "", maxlength = "50" })
+                            <div id="CPErr"></div>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <button id="btnLogin" type="submit" class="btn btn-success" name="Login" style="float:right">Thêm người giúp việc</button>
+                    <button id="btnLogin" type="submit" class="btn btn-success" name="Login" style="float: right">Thêm người giúp việc</button>
                 </div>
             }
         </div>
     </div>
 </div>
-   <script type="text/javascript" language="javascript">
-       $("#btnLogin").click(function () {
-           console.debug("sdf");
-           var errText = "";
-           if ($("#txtUsername").val().trim() == "") {
-               errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
-               document.getElementById("textBlank").innerHTML = errText;
-               return false;
-           } else {
-               errText = "";
-               document.getElementById("textBlank").innerHTML = errText;
-           }
-           if ($("#txtPassword").val().trim() == "") {
-               errText = "<font color='red'>Vui lòng nhập mật khẩu</font>";
-               document.getElementById("passwordBlank").innerHTML = errText;
-               return false;
-           }else {
-               errText = "";
-               document.getElementById("passwordBlank").innerHTML = errText;
-           }
-           if ($("#txtConfirmPassword").val().trim()!=$("#txtPassword").val().trim()) {
-               errText = "<font color='red'>Mật khẩu không trùng khớp</font>";
-               document.getElementById("CPErr").innerHTML = errText;
-               return false;
-           } else {
-               errText = "";
-               document.getElementById("CPErr").innerHTML = errText;
-           }
-       });
-  
-    </script>
+<script type="text/javascript" language="javascript">
+    $("#btnLogin").click(function () {
+        console.debug("sdf");
+        var errText = "";
+        if ($("#txtUsername").val().trim() == "") {
+            errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
+            document.getElementById("textBlank").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("textBlank").innerHTML = errText;
+        }
+        if ($("#txtPassword").val().trim() == "") {
+            errText = "<font color='red'>Vui lòng nhập mật khẩu</font>";
+            document.getElementById("passwordBlank").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("passwordBlank").innerHTML = errText;
+        }
+        if ($("#txtConfirmPassword").val().trim() != $("#txtPassword").val().trim()) {
+            errText = "<font color='red'>Mật khẩu không trùng khớp</font>";
+            document.getElementById("CPErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("CPErr").innerHTML = errText;
+        }
+    });
+
+</script>

@@ -51,8 +51,10 @@ namespace MS_Website.Controllers
                     _db.Recruitments.Remove(recruitment);
                 }
                 _db.SaveChanges();
-                int NumPageRec = (int)Math.Ceiling((_db.Recruitments.Count(r => r.Status == "Waiting") / (double)numResultOnPage));
-                int NumPageJob = (int)Math.Ceiling((_db.JobRequests.Count(r => r.Status == "Waiting") / (double)numResultOnPage));
+                var abc = (double) _db.JobRequests.Count(r => r.Status == "Waiting")/numResultOnPage;
+                int bcd =(int) Math.Ceiling(abc);
+                int NumPageRec = (int)Math.Ceiling((double)_db.Recruitments.Count(r => r.Status == "Waiting") / numResultOnPage);
+                int NumPageJob = (int)Math.Ceiling((double)_db.JobRequests.Count(r => r.Status == "Waiting") / numResultOnPage);
                 ViewBag.NumPageRec = NumPageRec > 5 ? 5 : NumPageRec;
                 ViewBag.NumPageJob = NumPageJob > 5 ? 5 : NumPageJob;
 

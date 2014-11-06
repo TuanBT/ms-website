@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Quản lý cấu hình";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Kmean = true;
+    ViewBag.Config = true;
 }
 
 <div class="Menu">
@@ -11,7 +11,13 @@
 <div class="body">
     <div class="rows">
         <div class="row">
-            <div class="titlePage">XỬ LÝ THUẬT TOÁN KMEAN</div>
+            <div class="titlePage">QUẢN LÝ CẤU HÌNH</div>
+            <div class="alert alert-success" role="alert" id="NotiSuss">
+                <strong>Thông báo! </strong><span id="contentNotiSuss">Nên cân nhắc kỹ trước khi thay đổi, vì những giá trị dưới đây có thể ảnh hưởng tới hệ thống.</span><br>
+            </div>
+            <div class="alert alert-danger" role="alert" id="NotiFail" style="display: none">
+                <strong>Thông báo! </strong><span id="contentNotiFail"></span><br>
+            </div>
             @using (Html.BeginForm("RunKmean", "Admin", FormMethod.Post))
             {
                 <div class="postJRRow">
@@ -21,11 +27,67 @@
                         </div>
                         <div class="col-md-8">
                             <div class="row">
-                                <div class="col-md-2" style="margin-top: 11px;"><span>Gợi ý số K</span></div>
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" name="numCluterKStr" value="@ViewBag.numCluterK"></div>
+                                <div class="col-md-4" style="margin-top: 11px;">Số K hiện tại: @ViewBag.numCluterKCurrent</div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2 poJRTtitleSmall"><span>Gợi ý số K</span></div>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" name="numCluterKStr" value="@ViewBag.numCluterK">
+                                </div>
                                 <div class="col-md-2">
-                                    <button type="submit" class="btn btn-success">Kmean</button></div>
+                                    <button type="submit" class="btn btn-success">Chạy Kmean</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @using (Html.BeginForm("ManageFeeJR", "Admin", FormMethod.Post))
+            {
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Đơn giá<br />
+                            (yêu cầu công việc/tuần)<br />
+                            ngàn đồng
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4" style="margin-top: 11px;">Giá hiện tại: <span id="priceJR">@(Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceJR"]))</span> ngàn đồng</div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2 poJRTtitleSmall"><span>Giá mới</span></div>
+                                <div class="col-md-3">
+                                    <input type="text" id="txtPriceJR" class="form-control" name="SpriceJR" value="@(Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceJR"]))">
+                                    <div id="errJR" style="color: red"></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" onclick="ChangePriceJR()" class="btn btn-success">Sửa giá</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @using (Html.BeginForm("ManageFeeRC", "Admin", FormMethod.Post))
+            {
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Đơn giá<br />
+                            (yêu cầu tìm người/tuần)<br />
+                            ngàn đồng
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4" style="margin-top: 11px;">Giá hiện tại: <span id="priceRC">@(Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceRC"]))</span>  ngàn đồng</div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2 poJRTtitleSmall"><span>Giá mới</span></div>
+                                <div class="col-md-3">
+                                    <input type="text" id="txtPriceRC" class="form-control" name="SpriceRC" value="@(Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceRC"]))">
+                                <div id="errRC" style="color: red"></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" onclick="ChangePriceRC()" class="btn btn-success">Sửa giá</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -34,3 +96,42 @@
         </div>
     </div>
 </div>
+
+
+<script type="text/jscript">
+    function ChangePriceJR() {
+        $("#NotiSuss").fadeOut();
+        $("#errJR").html("");
+        var url = "/Admin/ManageFeeJR";
+        var price = $('#txtPriceJR').val();
+        var reg = new RegExp('^\s*-?[0-9]{1,10}\s*$');
+        if (reg.test(price)) {
+            $.post(url, { SpriceJR: price }, function (data) {
+                $("#NotiSuss").fadeIn();
+                $("#NotiFail").fadeOut();
+                $("#contentNotiSuss").html("Cập nhập đơn giá cho yêu cầu công việc thành công.");
+                $("#priceJR").html($('#txtPriceJR').val());
+            });
+        } else {
+            $("#errJR").html("Phải nhập số nguyên!");
+        }
+    }
+    
+    function ChangePriceRC() {
+        $("#NotiSuss").fadeOut();
+        $("#errRC").html("");
+        var url = "/Admin/ManageFeeRC";
+        var price = $('#txtPriceRC').val();
+        var reg = new RegExp('^\s*-?[0-9]{1,10}\s*$');
+        if (reg.test(price)) {
+            $.post(url, { SpriceRC: price }, function (data) {
+                $("#NotiSuss").fadeIn();
+                $("#NotiFail").fadeOut();
+                $("#contentNotiSuss").html("Cập nhập đơn giá cho yêu cầu tìm người thành công.");
+                $("#priceRC").html($('#txtPriceRC').val());
+            });
+        } else {
+            $("#errRC").html("Phải nhập số nguyên!");
+        }
+    }
+</script>
