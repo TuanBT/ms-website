@@ -25,15 +25,15 @@ namespace MS_Website.Controllers
                     var account = db.Accounts.SingleOrDefault(a => a.AccountId == custId);
                     var customer = db.Customers.SingleOrDefault(c => c.AccountId == custId);
                     var notApplRecList =
-                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Waiting")).ToList();
+                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Waiting") && r.IsActive).ToList();
                     var applRecList =
-                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Applied")).ToList();
+                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Applied") && r.IsActive).ToList();
                     var expiredRecList =
-                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Expired")).ToList();
+                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Expired") && r.IsActive).ToList();
                     var hideList =
-                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Hide")).ToList();
+                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Hide") && r.IsActive).ToList();
                     var notActiveList =
-                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.IsActive == false).ToList();
+                        db.Recruitments.Where(r => r.Customer.AccountId == custId && !r.IsActive).ToList();
                     ViewBag.NotApplList =
                         notApplRecList.Select(
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
@@ -283,7 +283,7 @@ namespace MS_Website.Controllers
                     var recruitment = new Recruitment();
                     recruitment.SkillRefId = skillRef.SkillRefId;
                     recruitment.CustomerId = custId;
-                    recruitment.Status = "Payment";
+                    recruitment.Status = "Waiting";
                     recruitment.PostTime = DateTime.Now;
                     recruitment.ExpiredTime = DateTime.Now.AddDays(7 * int.Parse(time));
                     recruitment.Title = title;
@@ -316,15 +316,6 @@ namespace MS_Website.Controllers
                     return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
                 }
                 var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId);
-                skillRef.Gender = null;
-                skillRef.Age = null;
-                skillRef.LanguageChinese = null;
-                skillRef.LanguageEnglish = null;
-                skillRef.LanguageJapanese = null;
-                skillRef.LanguageKorean = null;
-                skillRef.Experience = null;
-                skillRef.Hometown = null;
-                skillRef.Married = null;
                 List<string> skillList = new List<string>();
                 PostController.LoadSkillList(skillRef, skillList, db);
                 ViewBag.SkillStrList = skillList;
