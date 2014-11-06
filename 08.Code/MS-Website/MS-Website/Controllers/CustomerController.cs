@@ -78,20 +78,33 @@ namespace MS_Website.Controllers
             return RedirectToAction("Login", "Home");
         }
 
-        public ActionResult EditCustProfile(int custId, string fullname, string phone, string email, string addr, string avatar)
+        public ActionResult EditCustProfile(string custId, string fullname, string phone, string email, string addr)
         {
             if (Session["AccId"] != null)
             {
                 var loggedId = (int)Session["AccId"];
                 using (var db = new MSEntities())
                 {
-                    var cust = db.Accounts.SingleOrDefault(a => a.AccountId == custId);
+                    int custIdNum = Convert.ToInt32(custId);
+                    var cust = db.Accounts.SingleOrDefault(a => a.AccountId == custIdNum);
+                    HttpPostedFileBase avatar = Request.Files["avatar"];
+                    string picExt = ".png";
+                    if (avatar != null)
+                    {
+                        picExt = System.IO.Path.GetExtension(avatar.FileName);
+                        string path = System.IO.Path.Combine(Server.MapPath("~/Content/Image/Profile"), cust.AccountId + picExt);
+                        avatar.SaveAs(path);
+                    }
                     if (cust.AccountId == loggedId)
                     {
                         cust.FullName = fullname;
                         cust.Phone = phone;
                         cust.Email = email;
                         cust.Customer.Address = addr;
+                        if (avatar != null && avatar.FileName != "")
+                        {
+                            cust.Avatar = "../Content/Image/Profile/" + cust.AccountId + picExt;
+                        }
                         db.SaveChanges();
                         return RedirectToAction("GetCustomer", "Customer", new { custId = cust.AccountId });
                     }

@@ -42,8 +42,8 @@
 <script>
     function hideNotifier(id){
         var url = "/Notifier/HideNotifier";
+        $("#" + id).remove();
         $.post(url, { notiId: id }, function (data) {
-            $("#" + id).remove();
             var num = $("#numberNotifier").html();
             $("#numberNotifier").html(parseInt(num)-1);
         });

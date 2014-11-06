@@ -22,8 +22,9 @@
     <div class="rows">
         <div class="row">
             <div class="titlePage">SỬA THÔNG TIN KHÁCH HÀNG</div>
-            @using (Html.BeginForm("EditCustProfile", "Customer", new { custId = account.AccountId }))
+            @using (Html.BeginForm("EditCustProfile", "Customer", FormMethod.Post, new {enctype = "multipart/form-data"}))
             {
+                <input type="hidden" name="custId" value="@account.AccountId"/>
                 <div class="postJRRow">
                     <div class="row">
                         <div class="col-md-4 poJRTtitle">
@@ -74,7 +75,7 @@
                     <img src="@account.Avatar" width="80%">
                         </div>
                         <div class="col-md-8">
-                            <input id="input-21" type="file" accept="image/*">
+                            <input id="input-21" type="file" accept="image/*"  name="avatar">
                             <script>
                                 $("#input-21").fileinput({
                                     previewFileType: "image",
