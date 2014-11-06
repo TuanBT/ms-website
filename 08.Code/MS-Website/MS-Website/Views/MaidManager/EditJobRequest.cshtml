@@ -73,36 +73,43 @@
                                         lý</h4>
                                 </div>
                                 <div class="modal-body chooseMaidModalMaid">
-                                    @foreach (var maid in ViewBag.MaidList)
+                                    <div id="back" class="rimaMore" style="display: none;" onclick="preMaids()">
+                                        <span class="glyphicon glyphicon-chevron-up"></span>
+                                    </div>
+                                    <input id="currPos" type="hidden" value="4" />
+                                    @{int counter = -1;}
+                                    @foreach (var maid in (List<Maid>)ViewBag.MaidList)
                                     {
-                                        <div class="radio">
+                                        counter++;
+                                        <div id="@counter" class="radio" style="display: @(counter > 4 ? "none" : "");">
                                             <label>
                                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId">
-                                                <div>
+                                                <div class="chooseMaid@(counter)">
                                                     <div class="liImage">
                                                         <img id="@maid.MaidId img" src="@maid.PersonalImage" alt="Maid sercive" height="100%">
                                                     </div>
                                                     <div class="liMaidContent">
                                                         <div class="licoFullName">
-                                                            <a href="#" id="@maid.MaidId name">@maid.MaidName</a>
+                                                            <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" target="_blank" id="@maid.MaidId name">@maid.MaidName</a>
                                                         </div>
                                                         <div class="licoRate">
-                                                            <span class="glyphicon glyphicon-star"></span>
-                                                            <span class="glyphicon glyphicon-star"></span>
-                                                            <span class="glyphicon glyphicon-star"></span>
-                                                            <span class="glyphicon glyphicon-star"></span>
-                                                            <span class="glyphicon glyphicon-star"></span>
+                                                            @Html.Partial("_PartialStar", (float)maid.RateAvg)
                                                         </div>
-                                                        <div class="ricoPost">
-                                                            Đăng/nhận
-                                                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
+                                                        <div class="blTime">
+                                                            <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender == true ? "Nam" : "Nữ")</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </label>
                                         </div>
                                     }
-
+                                    <input id="lastPos" type="hidden" value="@(counter - 1)"/>
+                                    @if (counter > 5)
+                                    {
+                                        <div id="next" class="rimaMore" onclick="nextMaids()">
+                                            <span class="glyphicon glyphicon-chevron-down"></span>
+                                        </div>
+                                    }
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="chooseMaid()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
@@ -137,15 +144,15 @@
                                     </div>
                                     <ul id="chosenSkills">
                                         @{
-                                            var counter = 0;
+                                            var counterSkill = 0;
                                         }
                                         @foreach (var skillStr in ViewBag.SkillStrList)
                                         {
-                                            <li id="@counter" class="childSkill">
-                                                <span class="skillText">@skillStr<span class="glyphicon glyphicon-remove" onclick="removeSkill(@counter)"></span>
+                                            <li id="@counterSkill" class="childSkill">
+                                                <span class="skillText">@skillStr<span class="glyphicon glyphicon-remove" onclick="removeSkill(@counterSkill)"></span>
                                                 </span>
                                             </li>
-                                            counter++;
+                                            counterSkill++;
                                         }
                                     </ul>
                                     <div id="SkillErr"></div>
@@ -234,6 +241,16 @@
                                                         <label>
                                                             <input id="Chăm sóc người già" class="skill" type="checkbox" value="Chăm sóc người già" name="OldCare" @(ViewBag.OldCareValue != null ? "checked" : "")/>
                                                             Chăm sóc người già
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="moskSkill">
+                                                <div class="moskSkillName">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input id="Chăm sóc trẻ em" class="skill" type="checkbox" value="Chăm sóc trẻ em" name="BabySister" @(ViewBag.BabySisterValue != null ? "checked" : "")/>
+                                                            Chăm sóc trẻ em
                                                         </label>
                                                     </div>
                                                 </div>
@@ -354,14 +371,14 @@
             addSkill();
         }
         if (chosenList.length > 0) {
-            if (chosenList[skillNo].search("Ngủ lại") != -1) {
+            if (chosenList[skillNo].search("Lưu trú") != -1) {
                 document.getElementById("stay_null").setAttribute("selected", "");
             } else if (chosenList[skillNo].search("Mức lương") != -1) {
                 document.getElementById("salary_null").setAttribute("selected", "");
             } else if (chosenList[skillNo].search("Kiểu công việc") != -1) {
                 document.getElementById("work_null").setAttribute("selected", "");
             } else {
-                document.getElementById(chosenList[skillNo]).checked = false;;
+                document.getElementById(chosenList[skillNo]).checked = false;
             }
             chosenList.splice(skillNo, 1);
             chosenSkills = "";
@@ -386,6 +403,53 @@
         document.getElementById("maidImg").setAttribute("src", maidImg);
         document.getElementById("maidName").innerHTML = maidName;
         document.getElementById("chosenMaid").setAttribute("value", maidId);
+    }
+    
+    function nextMaids() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        var lastPos = parseInt(document.getElementById("lastPos").getAttribute("value"));
+        var temp = 0;
+        if (currPos < lastPos) {
+            for (var i = 0; i <= currPos; i++) {
+                if (document.getElementById(i) != null) {
+                    document.getElementById(i).setAttribute("style", "display: none");
+                }
+            }
+            for (var j = currPos + 1; j <= currPos + 5; j++) {
+                if (document.getElementById(j) != null) {
+                    document.getElementById(j).setAttribute("style", "");
+                    temp = j;
+                }
+            }
+        }
+        currPos = temp;
+        if (currPos >= lastPos) {
+            document.getElementById("next").setAttribute("style", "display: none");
+        }
+        document.getElementById("currPos").setAttribute("value", currPos);
+        document.getElementById("back").setAttribute("style", "");
+    }
+
+    function preMaids() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        var temp = 0;
+        if (currPos - 9 >= 0) {
+            for (var i = currPos; i > currPos - 5; i--) {
+                if (document.getElementById(i).getAttribute("style") == "") {
+                    document.getElementById(i).setAttribute("style", "display: none");
+                    temp = i;
+                }
+            }
+            for (var j = temp - 1; j > temp - 6; j--) {
+                document.getElementById(j).setAttribute("style", "");
+            }
+        }
+        currPos = temp - 1;
+        if (currPos <= 4) {
+            document.getElementById("back").setAttribute("style", "display: none");
+        }
+        document.getElementById("currPos").setAttribute("value", currPos);
+        document.getElementById("next").setAttribute("style", "");
     }
 
     function cancel() {
