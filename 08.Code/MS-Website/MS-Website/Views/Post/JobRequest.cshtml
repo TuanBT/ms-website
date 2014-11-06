@@ -5,10 +5,10 @@
 }
 
 <style>
-	.modal.in
-	{
-		display: block;
-	}
+    .modal.in
+    {
+        display: block;
+    }
 </style>
 <div class="Menu">
     @Html.Partial("_PartialMenu")
@@ -21,9 +21,9 @@
             {
                 if (ViewBag.Manage == "true")
                 {
-                    <li>
-                        <a href="@Url.Action("JobRequestEdit", "MaidManager", new { jobId = JobRequestTemp.Job.JobRequestId })" class="hChContent">Sửa thông tin yêu cầu công việc</a>
-                    </li>
+                <li>
+                    <a href="@Url.Action("JobRequestEdit", "MaidManager", new { jobId = JobRequestTemp.Job.JobRequestId })" class="hChContent">Sửa thông tin yêu cầu công việc</a>
+                </li>
                 }
             }
         </ul>
@@ -32,7 +32,7 @@
 
 @if (TempData["Alert"] != null)
 {
-    @*<div class="modal fade in" id="alertModal">
+@*<div class="modal fade in" id="alertModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -107,9 +107,17 @@
                                                                             </div>
                                                                             <div class="liMaidContent">
                                                                                 <div class="licoFullName">
-                                                                                    <a href="@Url.Action("GetRecruitment","Post", new { recruitmentId = recruit.RecruitmentId})" id="@recruit.RecruitmentId name">@recruit.Title</a>
+                                                                                    <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = recruit.RecruitmentId })" id="@recruit.RecruitmentId name">@recruit.Title</a>
                                                                                 </div>
                                                                                 <div class="ricoPost">
+                                                                                    <div class="blTime">
+                                                                                        <span class="blTimeTitle">Đăng: </span><span
+                                                                                            class="blTimeText">@recruit.PostTime.ToString("dd/MM/yyyy")</span>
+                                                                                    </div>
+                                                                                    <div class="blTime">
+                                                                                        <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                                                            class="blTimeText">@recruit.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -349,7 +357,7 @@
     function extendRecruit() {
         document.forms["ExtendForm"].submit();
     }
-    
+
     function closeAlert() {
         document.getElementById("alertModal").setAttribute("class", "modal fade hide");
     }
