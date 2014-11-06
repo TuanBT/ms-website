@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -177,7 +178,7 @@ namespace MS_Website.Controllers
                         maid.MaidName = fullname;
                         maid.Experience = exp;
                         maid.Phone = phone;
-                        maid.BirthDate = DateTime.Parse(birthdate);
+                        maid.BirthDate = DateTime.Parse(birthdate.ToString(CultureInfo.InvariantCulture));
                         maid.Gender = gender;
                         maid.English = english != null;
                         maid.Japanese = jap != null;
@@ -226,7 +227,7 @@ namespace MS_Website.Controllers
                         maid.MaidName = fullname;
                         maid.Experience = exp;
                         maid.Phone = phone;
-                        maid.BirthDate = DateTime.Parse(birthdate);
+                        maid.BirthDate = DateTime.Parse(birthdate.ToString(CultureInfo.InvariantCulture));
                         maid.Gender = gender;
                         maid.English = english != null;
                         maid.Japanese = jap != null;
