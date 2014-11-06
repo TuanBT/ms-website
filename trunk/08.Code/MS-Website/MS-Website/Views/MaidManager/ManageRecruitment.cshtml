@@ -1,5 +1,5 @@
 ﻿@{
-    List<MS_Website.Models.RecruitmentTemp> jobRequests = Model;
+    List<MS_Website.Models.RecruitmentTemp> Recruitments = Model;
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.StaffManage = true;
 }
@@ -44,26 +44,26 @@
 
                     <tbody>
                         @{var count=0;}
-                        @foreach(var jobRequest in jobRequests)
+                        @foreach (var Recruitment in Recruitments)
                         {
                             
                             count++;
                             <tr>
                                 <td>
                                     @count
-                                    <input type="hidden" value="@(jobRequest.Recruitment.RecruitmentId)" id="" />
+                                    <input type="hidden" value="@(Recruitment.Recruitment.RecruitmentId)" id="" />
                                 </td>
-                                <td>@jobRequest.Recruitment.RecruitmentId</td>
+                                <td>@Recruitment.Recruitment.RecruitmentId</td>
                                 <td>
-                                    <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = jobRequest.Recruitment.RecruitmentId })">@jobRequest.Recruitment.Title</a>
+                                    <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = Recruitment.Recruitment.RecruitmentId })">@Recruitment.Recruitment.Title</a>
                                 </td>
                                 
                                 <td>
-                                    <a href="@Url.Action("GetCustomer", "Customer", new { custId = jobRequest.Recruitment.CustomerId })">@jobRequest.Account.FullName</a>
+                                    <a href="@Url.Action("GetCustomer", "Customer", new { custId = Recruitment.Recruitment.CustomerId })">@Recruitment.Account.FullName</a>
                                 </td>
-                                <td>@jobRequest.Recruitment.PostTime.ToString("dd/MM/yyyy")</td>
+                                <td>@Recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@jobRequest.Recruitment.RecruitmentId)">Kích hoạt</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@Recruitment.Recruitment.RecruitmentId)">Kích hoạt</button>
                                 </td>
                             </tr>
                         }

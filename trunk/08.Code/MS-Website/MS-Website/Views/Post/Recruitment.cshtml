@@ -26,7 +26,7 @@
 </div>
 @if (TempData["Alert"] != null)
 {
-    @*<div class="modal fade in" id="alertModal">
+@*<div class="modal fade in" id="alertModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -48,32 +48,62 @@
                     <div class="mainInfo">
                         <div class="miPic">
                             <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
-                            @if (ViewBag.Manage == "true")
-                            {
-                                <div class="miButton">
-
-                                    @if (RecruitmentTemp.Recruitment.Status.Equals("Waiting"))
+                            <div class="miButton">
+                                @if (ViewBag.Manage == "true")
+                                {
+                                    if (RecruitmentTemp.Recruitment.Status.Equals("Waiting"))
                                     {
                                         using (Html.BeginForm("HideRecruitment", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
                                         {
-                                            <button class="btn btn-danger">Tạm ẩn</button>
+                                    <button class="btn btn-danger">Tạm ẩn</button>
                                         }
                                     }
                                     else if (RecruitmentTemp.Recruitment.Status.Equals("Hide"))
                                     {
                                         using (Html.BeginForm("PublicRecruitment", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
                                         {
-                                            <button class="btn btn-danger">Công khai</button>
+                                    <button class="btn btn-danger">Công khai</button>
                                         }
                                     }
-                                    @if (RecruitmentTemp.Recruitment.Status == "Expired" || RecruitmentTemp.Recruitment.Status == "Waiting")
+                                    if (RecruitmentTemp.Recruitment.Status == "Expired" || RecruitmentTemp.Recruitment.Status == "Waiting")
                                     {
-                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="chooseExtend()">Gia hạn</button>
+                                    <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="chooseExtend()">Gia hạn</button>
                                     }
-                                </div>
-                            }
+                                }
+                                @if (Session["AccId"] != null)
+                                {
+                                    if (Session["Role"].Equals("Staff"))
+                                    {
+                                        if (!RecruitmentTemp.Recruitment.IsActive)
+                                        {
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@RecruitmentTemp.Recruitment.RecruitmentId)">Kích hoạt</button>
+                                        }
+                                    }
+                                }
+                            </div>
                         </div>
+                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                <h4 class="modal-title" id="myLargeModalLabel">Xác nhận kích hoạt</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                Bạn thực sự đã nhận tiền từ khách hàng này?
+                                            </div>
+                                            <div class="modal-footer">
+                                                @using (Html.BeginForm("MarkActiveRecruitmentOnRCPage", "MaidManager", FormMethod.Get))
+                                                {
+                                                    <input type="hidden" name="recruitmentId" id="jrId2" />
+                                                    <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
+                                                }
 
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                </div>
                         <div class="mmiDetail">
                             <div class="iRows">
                                 <div class="iTitle">
@@ -150,20 +180,20 @@
                     </div>
                     @if (!RecruitmentTemp.Recruitment.IsActive)
                     {
-                         if (Session["Role"]!=null)
-                         {
-                             if (Session["Role"].Equals("Customer"))
-                             {
-                                 <div class="overView">
-                                     <div class="ovTitle">
-                                         Nếu bạn đã thanh toán?
-                                     </div>
-                                     <div class="ovContent">
-                                         Có thể quá trình thanh toán bị lỗi? Bạn có thể <a onclick="NotiPaypal('Kiểm tra lại thanh toán', '/Post/GetRecruitment?recruitmentId=@(RecruitmentTemp.Recruitment.RecruitmentId)')"> Ấn vào đây để </a> nhân viên của chúng tôi kiểm tra lại đơn hàng và kích hoạt yêu cầu này.
-                                     </div>
-                                 </div>
-                             }
-                         }
+                        if (Session["Role"] != null)
+                        {
+                            if (Session["Role"].Equals("Customer"))
+                            {
+                        <div class="overView">
+                            <div class="ovTitle">
+                                Nếu bạn đã thanh toán?
+                            </div>
+                            <div class="ovContent">
+                                Có thể quá trình thanh toán bị lỗi? Bạn có thể <a onclick="NotiPaypal('Kiểm tra lại thanh toán', '/Post/GetRecruitment?recruitmentId=@(RecruitmentTemp.Recruitment.RecruitmentId)')">Ấn vào đây để </a>nhân viên của chúng tôi kiểm tra lại đơn hàng và kích hoạt yêu cầu này.
+                            </div>
+                        </div>
+                            }
+                        }
                     }
                     @if (ViewBag.Recommend != null)
                     {
@@ -295,7 +325,7 @@
             </div>
             <div class="modal-footer">
                 @Html.Partial("_PartialExtend")
-                <input type="hidden" id="PriceRC" value="@((int)Session["PriceRC"]/20)"/>
+                <input type="hidden" id="PriceRC" value="@((int)Session["PriceRC"] / 20)"/>
             </div>
         </div>
     </div>
@@ -367,11 +397,15 @@
         document.getElementById("amount").setAttribute("value", parseInt(week) * parseInt($("#PriceRC").val()));
         document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=" + week);
     }
-    
+
     function NotiPaypal(content, link) {
         var url = "/Post/NotiPaypal";
-        $.post(url, {content: content, link: link }, function (data) {
+        $.post(url, { content: content, link: link }, function (data) {
             $(".ovContent").html(data);
         });
+    }
+
+    function btnActive(recruitmentId) {
+        document.getElementById('jrId2').setAttribute("value", recruitmentId);
     }
 </script>

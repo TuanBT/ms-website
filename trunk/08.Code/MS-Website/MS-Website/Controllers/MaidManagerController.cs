@@ -23,7 +23,7 @@ namespace MS_Website.Controllers
                 {
                     if (role.Equals("MaidMediator"))
                     {
-                       
+
                         var maidMediator = db.Accounts.SingleOrDefault(mm => mm.AccountId == accId);
                         ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
                         Session["MaidManager"] = maidMediator;
@@ -83,7 +83,7 @@ namespace MS_Website.Controllers
                         var maidMedAcc = db.Accounts.SingleOrDefault(a => a.AccountId == loggedId);
                         HttpPostedFileBase avatar = Request.Files["avatar"];
                         string picExt = ".png";
-                        if (avatar != null)
+                        if (avatar != null && avatar.FileName!="")
                         {
                             picExt = System.IO.Path.GetExtension(avatar.FileName);
                             string path = System.IO.Path.Combine(Server.MapPath("~/Content/Image/MaidMediator"), maidMedAcc.AccountId + picExt);
@@ -93,7 +93,11 @@ namespace MS_Website.Controllers
                         maidMedAcc.FullName = fullname;
                         maidMedAcc.Phone = phone;
                         maidMedAcc.Email = email;
-                        maidMedAcc.Avatar = "../Content/Image/MaidMediator/" + maidMedAcc.AccountId.ToString() + picExt;
+                        if (avatar != null && avatar.FileName != "")
+                        {
+                            maidMedAcc.Avatar = "../Content/Image/MaidMediator/" + maidMedAcc.AccountId.ToString() +
+                                                picExt;
+                        }
                         db.SaveChanges();
                         if (maidMedAcc.Role.Equals("MaidMediator"))
                         {
@@ -237,8 +241,11 @@ namespace MS_Website.Controllers
                         maid.Address = addr;
                         maid.Married = married;
                         maid.Description = desc;
-                        maid.RateAvg = 0;
-                        maid.PersonalImage = "../Content/Image/Maid/" + maid.MaidId.ToString() + picExt;
+                        //maid.RateAvg = 0;
+                        if (avatar != null && avatar.FileName != "")
+                        {
+                            maid.PersonalImage = "../Content/Image/Maid/" + maid.MaidId.ToString() + picExt;
+                        }
                         db.SaveChanges();
                         return RedirectToAction("ManageMaidProfile", new { maidId = maid.MaidId });
                     }
@@ -913,10 +920,63 @@ namespace MS_Website.Controllers
                 {
 
                     var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
-                    recruitment.IsActive = true;
+                    if (recruitment != null) recruitment.IsActive = true;
                     db.SaveChanges();
                     //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    //Remove notifier
+                    var notifiers =
+                        db.Notifiers.Where(
+                            n =>
+                            n.Content == "Kiểm tra lại thanh toán" &&
+                            n.Link == "/Post/GetRecruitment?recruitmentId=" + recruitmentId && n.View == false).ToList();
+                    foreach (var notifier in notifiers)
+                    {
+                        notifier.View = true;
+                        db.SaveChanges();
+                    }
+                    if (notifiers.Count > 0)
+                    {
+                        var num = (int)Session["NumberNotifier"];
+                        Session["NumberNotifier"] = num - 1;
+                    }
                     return RedirectToAction("ManageRecruitment", "MaidManager");
+                }
+            }
+            return RedirectToAction("Login", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult MarkActiveRecruitmentOnRCPage(int recruitmentId)
+        {
+            if (Session["AccId"] != null)
+            {
+                var db = new MSEntities();
+
+                using (db)
+                {
+
+                    var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
+                    if (recruitment != null) recruitment.IsActive = true;
+                    db.SaveChanges();
+                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                    //Remove notifier
+                    string link = "/Post/GetRecruitment?recruitmentId=" + recruitmentId;
+                    var notifiers =
+                        db.Notifiers.Where(
+                            n =>
+                            n.Content == "Kiểm tra lại thanh toán" &&
+                            n.Link == link && n.View == false).ToList();
+                    foreach (var notifier in notifiers)
+                    {
+                        notifier.View = true;
+                        db.SaveChanges();
+                    }
+                    if (notifiers.Count > 0)
+                    {
+                        var num = (int)Session["NumberNotifier"];
+                        Session["NumberNotifier"] = num - 1;
+                    }
+                    return RedirectToAction("GetRecruitment", "Post", new { recruitmentId });
                 }
             }
             return RedirectToAction("Login", "Home");

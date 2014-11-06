@@ -574,6 +574,8 @@ a {
 }
 
 .blFooter {
+    text-align: center;
+    margin-top: 15px;
 }
 
 .blfNumber {
@@ -597,6 +599,7 @@ a {
     background: #ffffff;
     border-radius: 5px;
     min-height: 84px;
+    width: 239px;
 }
 
     .bFreeListWork > li:hover {
@@ -681,6 +684,7 @@ a {
         background: #ffffff;
         border-radius: 5px;
         min-height: 84px;
+        width: 239px;
     }
 
         .bexpiredListWork > li:hover {
