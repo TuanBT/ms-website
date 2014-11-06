@@ -531,7 +531,7 @@ namespace MS_Website.Controllers
                 }
                 jobRequest.Status = "Waiting";
                 jobRequest.PostTime = DateTime.Now;
-                jobRequest.ExpiredTime = DateTime.Now.AddDays(7 * int.Parse(time));
+                jobRequest.ExpiredTime = DateTime.Now.AddDays(1 + 7 * int.Parse(time));
                 jobRequest.MaidId = maidId;
                 jobRequest.Title = title;
                 jobRequest.IsActive = false;
