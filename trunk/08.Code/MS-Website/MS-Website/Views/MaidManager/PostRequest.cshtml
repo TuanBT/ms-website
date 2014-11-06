@@ -28,28 +28,7 @@
                                         Chọn người
                                     </button>
                                 </div>
-                                <div id="maidBoxChoosed">
-                                   
-                                    @*<div class="liImage">
-                                        <img id="maidImg" src="../Content/Image/MS-Logo.png" alt="Maid sercive" height="100%">
-                                    </div>
-                                    <div class="liMaidContent">
-                                        <div class="licoFullName">
-                                            <a href="#" id="maidName">Tên người giúp việc</a>
-                                        </div>
-                                        <div class="licoRate">
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                        </div>
-                                        <div class="ricoPost">
-                                            Đăng/nhận
-                                            <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
-                                        </div>
-                                    </div>*@
-                                </div> 
+                                <div id="maidBoxChoosed"></div> 
                             </div>
                             <div id="MaidErr"></div>
                         </div>
@@ -415,7 +394,7 @@
             errText = "";
             document.getElementById("textBlank").innerHTML = errText;
         }
-        if ($("#maidBoxChoosed").val() == "") {
+        if ($("#maidBoxChoosed").html()=="") {
             errText = "<font color='red'>Vui lòng chọn người giúp việc</font>";
             document.getElementById("MaidErr").innerHTML = errText;
             return false;
