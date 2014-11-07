@@ -4,26 +4,24 @@
     MS_Website.Models.Account account = Model;
     ViewBag.Info = true;
     List<MS_Website.Models.Maid> Maid = ViewBag.MaidList;
+    int numShowMaid = 3;
+
 }
 
 <style>
-    a.myToolTip
-    {
+    a.myToolTip {
         outline: none;
     }
 
-        a.myToolTip strong
-        {
+        a.myToolTip strong {
             line-height: 30px;
         }
 
-        a.myToolTip:hover
-        {
+        a.myToolTip:hover {
             text-decoration: none;
         }
 
-        a.myToolTip span
-        {
+        a.myToolTip span {
             z-index: 10;
             display: none;
             padding: 14px 20px;
@@ -33,8 +31,7 @@
             line-height: 16px;
         }
 
-        a.myToolTip:hover span
-        {
+        a.myToolTip:hover span {
             display: inline;
             position: absolute;
             border: 2px solid #FFF;
@@ -42,8 +39,7 @@
             background: #333 url(cssttp/css-tooltip-gradient-bg.png) repeat-x 0 0;
         }
 
-    .callout
-    {
+    .callout {
         z-index: 20;
         position: absolute;
         border: 0;
@@ -51,16 +47,14 @@
         left: 120px;
     }
 
-    a.myToolTip .maidAva2
-    {
+    a.myToolTip .maidAva2 {
         float: right;
         margin-right: -8px;
         width: 60px;
         height: 60px;
     }
     /*CSS3 extras*/
-    a.myToolTip span
-    {
+    a.myToolTip span {
         border-radius: 2px;
         box-shadow: 0px 0px 8px 4px #666;
         /*opacity: 0.8;*/
@@ -98,19 +92,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="overView">
+                    @*<div class="overView">
                         <div class="ovTitle">
                             Thống kê các yêu cầu
                         </div>
                         <div class="ovContent">
-                           @* @{
-                                //watting,expired,approved,applied
-                                int[] numStatus = ViewBag.MaidMediatorStatusStatistic;
-                                var numberStatistic = new int[5] { numStatus[0], numStatus[1], numStatus[2], numStatus[3], numStatus[4] };
-                            }
-                            @Html.Partial("_PartialStatisticPie", numberStatistic)*@
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
             <div class="col-md-4">
@@ -134,14 +122,14 @@
                             <span class="glyphicon glyphicon-chevron-up"></span>
                         </div>
                         <div class="rimaContent">
-                            <input id="currPos" type="hidden" value="4" />
+                            <input id="currPos" type="hidden" value="@(numShowMaid - 1)" />
                             <ul class="rimaMaidList">
                                 @{
                                     var counter = 0;
                                 }
                                 @foreach (var maid in Maid)
                                 {                      
-                                    <li id="@counter" style="display: @(counter > 4 ? "none" : "");">
+                                    <li id="@counter" style="display: @(counter > numShowMaid - 1 ? "none" : "");">
                                         <div class="liImage">
                                             <img src="@maid.PersonalImage">
                                         </div>
@@ -172,15 +160,15 @@
                             </ul>
                             <input id="lastPos" type="hidden" value="@(counter - 1)"/>
                         </div>
-                        @if (counter > 5)
+                        @if (counter > numShowMaid)
                         {
                             <div id="next" class="rimaMore" onclick="nextMaids()">
                                 <span class="glyphicon glyphicon-chevron-down"></span>
                             </div>
                         }
-                         <a href="@Url.Action("LoadAddMaid", "MaidManager")">
-                                <button type="button" class="btn btn-info">Thêm người giúp việc</button>
-                            </a>
+                        <a href="@Url.Action("LoadAddMaid", "MaidManager")">
+                            <button type="button" class="btn btn-info">Thêm người giúp việc</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -220,6 +208,8 @@
         }
     }
 
+    var numShowMaid = 3;
+
     function nextMaids() {
         var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
         var lastPos = parseInt(document.getElementById("lastPos").getAttribute("value"));
@@ -230,7 +220,7 @@
                     document.getElementById(i).setAttribute("style", "display: none");
                 }
             }
-            for (var j = currPos + 1; j <= currPos + 5; j++) {
+            for (var j = currPos + 1; j <= currPos + numShowMaid; j++) {
                 if (document.getElementById(j) != null) {
                     document.getElementById(j).setAttribute("style", "");
                     temp = j;
@@ -248,19 +238,19 @@
     function preMaids() {
         var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
         var temp = 0;
-        if (currPos - 9 >= 0) {
-            for (var i = currPos; i > currPos - 5; i--) {
+        if (currPos - (numShowMaid * 2 - 1) >= 0) {
+            for (var i = currPos; i > currPos - numShowMaid; i--) {
                 if (document.getElementById(i).getAttribute("style") == "") {
                     document.getElementById(i).setAttribute("style", "display: none");
                     temp = i;
                 }
             }
-            for (var j = temp - 1; j > temp - 6; j--) {
+            for (var j = temp - 1; j > temp - (numShowMaid + 1) ; j--) {
                 document.getElementById(j).setAttribute("style", "");
             }
         }
         currPos = temp - 1;
-        if (currPos <= 4) {
+        if (currPos <= (numShowMaid - 1)) {
             document.getElementById("back").setAttribute("style", "display: none");
         }
         document.getElementById("currPos").setAttribute("value", currPos);

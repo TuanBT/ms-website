@@ -1325,3 +1325,30 @@ a {
     font-weight: 700;
     float: left;
 }
+
+
+.editRightInfo {
+    text-align: center;
+font-size: 22px;
+line-height: 36px;
+width: 30px;
+height: 30px;
+margin-left: 222px;
+border-radius: 10px;
+}
+
+.editRightInfo>a {
+    color: green;
+}
+
+.editRightInfo>a:hover {
+    color: green;
+}
+
+.editRightInfo>a:active {
+    color: green;
+}
+
+.editRightInfo:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}

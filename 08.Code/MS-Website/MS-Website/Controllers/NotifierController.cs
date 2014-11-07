@@ -42,7 +42,7 @@ namespace MS_Website.Controllers
                     var notifiers = db.Notifiers.Where(n => n.View == false && n.AccId == accId).ToList();
                     Session["NumberNotifier"] = notifiers.Count;
                 }
-                //if accId of staff
+                /*//if accId of staff
                 if(db.Staffs.Any(s => s.AccountId==notifier.AccId))
                 {
                     if (notifier.Content == "Kiểm tra lại thanh toán")
@@ -56,7 +56,7 @@ namespace MS_Website.Controllers
                             db.SaveChanges();
                         }
                     }
-                }
+                }*/
             }
             return Json("", JsonRequestBehavior.AllowGet);
         }
