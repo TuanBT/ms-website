@@ -18,13 +18,13 @@
             <li class="iscurent">
                 <a class="hChContent">Thông tin người giúp việc</a>
             </li>
-            @if (Session["AccId"]!=null)
+            @if (Session["AccId"] != null)
             {
                 if ((int)Session["AccId"] == MaidManager.AccId)
                 {
-                    <li class>
-                        <a href="@Url.Action("MaidEdit", "MaidManager", new {maidId = maid.MaidId})" class="hChContent">Sửa thông tin người giúp việc</a>
-                    </li>
+                <li class>
+                    <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = maid.MaidId })" class="hChContent">Sửa thông tin người giúp việc</a>
+                </li>
                 }
             }
         </ul>
@@ -65,8 +65,17 @@
             </div>
             <div class="col-md-4">
                 <div class="rightInfo">
+                    @if (Session["AccId"] != null)
+                            {
+                                if ((int)Session["AccId"] == MaidManager.AccId)
+                                {
+                                    <div class="editRightInfo">
+                                    <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = maid.MaidId })" title="Sửa thông tin"><span class="glyphicon glyphicon-edit"></span></a>
+                                       </div> 
+                                        }
+                            }
                     <ul class="riDetail">
-                        @if (Session["Acc"]!=null)
+                        @if (Session["Acc"] != null)
                         {
                             if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
                             {

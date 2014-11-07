@@ -76,34 +76,34 @@
                                     {
                                         if (!RecruitmentTemp.Recruitment.IsActive)
                                         {
-                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@RecruitmentTemp.Recruitment.RecruitmentId)">Kích hoạt</button>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@RecruitmentTemp.Recruitment.RecruitmentId)">Kích hoạt</button>
                                         }
                                     }
                                 }
                             </div>
                         </div>
                         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                                <h4 class="modal-title" id="myLargeModalLabel">Xác nhận kích hoạt</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                Bạn thực sự đã nhận tiền từ khách hàng này?
-                                            </div>
-                                            <div class="modal-footer">
-                                                @using (Html.BeginForm("MarkActiveRecruitmentOnRCPage", "MaidManager", FormMethod.Get))
-                                                {
-                                                    <input type="hidden" name="recruitmentId" id="jrId2" />
-                                                    <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
-                                                }
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title" id="myLargeModalLabel">Xác nhận kích hoạt</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Bạn thực sự đã nhận tiền từ khách hàng này?
+                                    </div>
+                                    <div class="modal-footer">
+                                        @using (Html.BeginForm("MarkActiveRecruitmentOnRCPage", "MaidManager", FormMethod.Get))
+                                        {
+                                            <input type="hidden" name="recruitmentId" id="jrId2" />
+                                            <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
+                                        }
 
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
                                     </div>
                                 </div>
+                                <!-- /.modal-content -->
+                            </div>
+                        </div>
                         <div class="mmiDetail">
                             <div class="iRows">
                                 <div class="iTitle">
@@ -248,6 +248,15 @@
             </div>
             <div class="col-md-4">
                 <div class="rightInfo">
+                    @if (Session["AccId"] != null)
+                    {
+                        if (ViewBag.Manage == "true")
+                        {
+                        <div class="editRightInfo">
+                            <a href="@Url.Action("RecruitmentEdit", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId })" title="Sửa thông tin"><span class="glyphicon glyphicon-edit"></span></a>
+                        </div> 
+                        }
+                    }
                     <ul class="riDetail">
                         <li class="rideRow">
                             <div class="rideroTitle">
