@@ -453,16 +453,17 @@ a {
     }
 
 .liCuName {
-    font: 600 21px Adelle_Regular, Georgia, sans-serif;
     letter-spacing: -1px;
-    /*margin-bottom: 10px;*/
+    /* margin-bottom: 10px; */
     display: block;
     height: 40px;
+    font-size: 15px;
+    font-weight: 700;
 }
 
 .liCuPostTime {
     color: darkgrey;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
     display: block;
 }
@@ -1081,15 +1082,15 @@ a {
     float: right;
 }
 
-.postOpenButton>span {
-    cursor: pointer;
-    color: #2980b9;
-    font-size: 30px;
-}
+    .postOpenButton > span {
+        cursor: pointer;
+        color: #2980b9;
+        font-size: 30px;
+    }
 
-.postOpenButton>span:hover {
-    color: #3498db;
-}
+        .postOpenButton > span:hover {
+            color: #3498db;
+        }
 
 .boxPostJRUser {
     border: 2px solid #999;
@@ -1342,26 +1343,30 @@ a {
 
 .editRightInfo {
     text-align: center;
-font-size: 22px;
-line-height: 36px;
-width: 30px;
-height: 30px;
-margin-left: 222px;
-border-radius: 10px;
+    font-size: 22px;
+    line-height: 36px;
+    width: 30px;
+    height: 30px;
+    margin-left: 222px;
+    border-radius: 10px;
 }
 
-.editRightInfo>a {
-    color: green;
-}
+    .editRightInfo > a {
+        color: green;
+    }
 
-.editRightInfo>a:hover {
-    color: green;
-}
+        .editRightInfo > a:hover {
+            color: green;
+        }
 
-.editRightInfo>a:active {
-    color: green;
-}
+        .editRightInfo > a:active {
+            color: green;
+        }
 
-.editRightInfo:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-}
+    .editRightInfo:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .footerButton {
+        text-align: right;
+    }

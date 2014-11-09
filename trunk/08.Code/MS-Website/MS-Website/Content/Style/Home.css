@@ -479,7 +479,7 @@ ul {
     color: #646165;
     background-color: #f2f2ed;
     border-radius: 4px;
-    /*cursor: pointer;*/
+    cursor: pointer;
 }
 
     .skillText:hover {
@@ -493,6 +493,17 @@ ul {
 
         .skillText span:hover {
             color: red;
+        }
+
+        .skillText>a {
+            color: #646165;
+            text-decoration: none;
+        }
+          .skillText>a:hover {
+            color: #ecf0f1;
+        }
+            .skillText>a:active {
+            color: #646165;
         }
 
 .detailInfo {

@@ -236,7 +236,7 @@
                                             @foreach (var skill in Model.SkillList)
                                             {
                                                 <li class="childSkill">
-                                                    <span class="skillText">@skill</span>
+                                                    <span class="skillText"><a href="@Url.Action("Index","Search", new {searchString = skill.Split('-').Length>1? skill.Split('-')[1].Trim():skill.Split('-')[0].Trim()})">@skill</a></span>
                                                 </li>
                                             }
                                         </ul>
