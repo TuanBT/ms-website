@@ -76,8 +76,8 @@
                                             </label>
                                         </div>
                                     }
-                                    <input id="lastPos" type="hidden" value="@(counter - 1)"/>
-                                    @if (counter > numShowMaid)
+                                    <input id="lastPos" type="hidden" value="@counter"/>
+                                    @if (counter >= numShowMaid)
                                     {
                                         <div id="next" class="rimaMore" onclick="nextMaids()">
                                             <span class="glyphicon glyphicon-chevron-down"></span>
@@ -367,19 +367,19 @@
     function preMaids() {
         var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
         var temp = 0;
-        if (currPos - (numShowMaid*2-1) >= 0) {
-            for (var i = currPos; i > currPos - numShowMaid; i--) {
+        if (currPos - numShowMaid >= 0) {
+            for (var i = currPos; i >= currPos - numShowMaid; i--) {
                 if (document.getElementById(i).getAttribute("style") == "") {
                     document.getElementById(i).setAttribute("style", "display: none");
                     temp = i;
                 }
             }
-            for (var j = temp - 1; j > temp - (numShowMaid+1) ; j--) {
+            for (var j = temp - 1; j >= temp - numShowMaid; j--) {
                 document.getElementById(j).setAttribute("style", "");
             }
         }
         currPos = temp - 1;
-        if (currPos <= (numShowMaid-1)) {
+        if (currPos <= numShowMaid) {
             document.getElementById("back").setAttribute("style", "display: none");
         }
         document.getElementById("currPos").setAttribute("value", currPos);

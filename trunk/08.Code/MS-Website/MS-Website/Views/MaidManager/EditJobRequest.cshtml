@@ -103,7 +103,7 @@
                                             </label>
                                         </div>
                                     }
-                                    <input id="lastPos" type="hidden" value="@(counter - 1)"/>
+                                    <input id="lastPos" type="hidden" value="@counter"/>
                                     @if (counter > 5)
                                     {
                                         <div id="next" class="rimaMore" onclick="nextMaids()">
@@ -404,7 +404,9 @@
         document.getElementById("maidName").innerHTML = maidName;
         document.getElementById("chosenMaid").setAttribute("value", maidId);
     }
-    
+
+    var numShowMaid = 3;
+
     function nextMaids() {
         var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
         var lastPos = parseInt(document.getElementById("lastPos").getAttribute("value"));
@@ -415,7 +417,7 @@
                     document.getElementById(i).setAttribute("style", "display: none");
                 }
             }
-            for (var j = currPos + 1; j <= currPos + 5; j++) {
+            for (var j = currPos + 1; j <= currPos + numShowMaid; j++) {
                 if (document.getElementById(j) != null) {
                     document.getElementById(j).setAttribute("style", "");
                     temp = j;
@@ -433,19 +435,19 @@
     function preMaids() {
         var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
         var temp = 0;
-        if (currPos - 9 >= 0) {
-            for (var i = currPos; i > currPos - 5; i--) {
+        if (currPos - numShowMaid >= 0) {
+            for (var i = currPos; i >= currPos - numShowMaid; i--) {
                 if (document.getElementById(i).getAttribute("style") == "") {
                     document.getElementById(i).setAttribute("style", "display: none");
                     temp = i;
                 }
             }
-            for (var j = temp - 1; j > temp - 6; j--) {
+            for (var j = temp - 1; j >= temp - numShowMaid; j--) {
                 document.getElementById(j).setAttribute("style", "");
             }
         }
         currPos = temp - 1;
-        if (currPos <= 4) {
+        if (currPos <= numShowMaid) {
             document.getElementById("back").setAttribute("style", "display: none");
         }
         document.getElementById("currPos").setAttribute("value", currPos);

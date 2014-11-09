@@ -2,6 +2,8 @@
     ViewBag.Title = "Chi tiết yêu cầu công việc";
     Layout = "~/Views/Shared/_Layout.cshtml";
     MS_Website.Models.JobRequestTemp JobRequestTemp = Model;
+    var numShowRecruit = 3;
+    List<MS_Website.Models.Recruitment> recruitList = ViewBag.RecruitmentList;
 }
 
 <style>
@@ -91,44 +93,66 @@
                                                     <div class="modal-header chooseMaidModalTitle">
                                                         <button type="button" class="close" data-dismiss="modal">
                                                             <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                                        <h4 class="modal-title" id="mySmallModalLabel">Xin hãy chọn một đơn tuyển việc</h4>
+                                                        <h4 class="modal-title" id="mySmallModalLabel">Xin chọn một đơn tuyển việc</h4>
                                                     </div>
-                                                    @using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new { name = "ApplyForm" }))
+                                                    @if (recruitList.Any())
                                                     {
-                                                        <div class="modal-body chooseMaidModalMaid">
-                                                            @foreach (var recruit in ViewBag.RecruitmentList)
-                                                            {
-                                                                <div class="radio">
-                                                                    <label>
-                                                                        <input type="radio" name="recruitId" id="optionsRadios2" value="@recruit.RecruitmentId">
-                                                                        <div>
-                                                                            <div class="liImage">
-                                                                                <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
-                                                                            </div>
-                                                                            <div class="liMaidContent">
-                                                                                <div class="licoFullName">
-                                                                                    <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = recruit.RecruitmentId })" id="@recruit.RecruitmentId name">@recruit.Title</a>
-                                                                                </div>
-                                                                                <div class="ricoPost">
-                                                                                    <div class="blTime">
-                                                                                        <span class="blTimeTitle">Đăng: </span><span
-                                                                                            class="blTimeText">@recruit.PostTime.ToString("dd/MM/yyyy")</span>
-                                                                                    </div>
-                                                                                    <div class="blTime">
-                                                                                        <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                            class="blTimeText">@recruit.ExpiredTime.ToString("dd/MM/yyyy")</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </label>
-                                                                </div>
-                                                            }
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <input type="hidden" name="jobRequestId" value="@Model.Job.JobRequestId"/>
-                                                            <button class="btn btn-primary" data-dismiss="modal" onclick="apply()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
-                                                        </div>
+                                                        using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new {name = "ApplyForm"}))
+                                                         {
+                                                             <div class="modal-body chooseMaidModalMaid">
+                                                                 <div id="back" class="rimaMore" style="display: none;" onclick="preRecruits()">
+                                                                     <span class="glyphicon glyphicon-chevron-up"></span>
+                                                                 </div>
+                                                                 <input id="currPos" type="hidden" value="@(numShowRecruit - 1)" />
+                                                                 @{
+                                                                     var counter = -1;
+                                                                 }
+                                                                 @foreach (var recruit in recruitList)
+                                                                 {
+                                                                     counter++;
+                                                                     <div id="@counter" class="radio" style="display: @(counter > numShowRecruit - 1 ? "none" : "");">
+                                                                         <label>
+                                                                             <input type="radio" name="recruitId" id="optionsRadios2" value="@recruit.RecruitmentId">
+                                                                             <div>
+                                                                                 <div class="liImage">
+                                                                                     <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                                                                 </div>
+                                                                                 <div class="liMaidContent">
+                                                                                     <div class="licoFullName">
+                                                                                         <a href="@Url.Action("GetRecruitment", "Post", new {recruitmentId = recruit.RecruitmentId})" id="@recruit.RecruitmentId name">@recruit.Title</a>
+                                                                                     </div>
+                                                                                     <div class="ricoPost">
+                                                                                         <div class="blTime">
+                                                                                             <span class="blTimeTitle">Đăng: </span><span
+                                                                                                                                        class="blTimeText">@recruit.PostTime.ToString("dd/MM/yyyy")</span>
+                                                                                         </div>
+                                                                                         <div class="blTime">
+                                                                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                                                                                                                               class="blTimeText">@recruit.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                                                         </div>
+                                                                                     </div>
+                                                                                 </div>
+                                                                             </div>
+                                                                         </label>
+                                                                     </div>
+                                                                 }
+                                                                 <input id="lastPos" type="hidden" value="@counter"/>
+                                                                 @if (counter >= numShowRecruit)
+                                                                 {
+                                                                     <div id="next" class="rimaMore" onclick="nextRecruits()">
+                                                                         <span class="glyphicon glyphicon-chevron-down"></span>
+                                                                     </div>
+                                                                 }
+                                                             </div>
+                                                             <div class="modal-footer">
+                                                                 <input type="hidden" name="jobRequestId" value="@Model.Job.JobRequestId"/>
+                                                                 <button class="btn btn-primary" data-dismiss="modal" onclick="apply()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                                             </div>
+                                                         }
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Không có đơn tuyển việc nào</span>
                                                     }
                                                 </div>
                                             </div>
@@ -360,6 +384,55 @@
 
     function closeAlert() {
         document.getElementById("alertModal").setAttribute("class", "modal fade hide");
+    }
+
+    var numShowRecruit = 3;
+
+    function nextRecruits() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        var lastPos = parseInt(document.getElementById("lastPos").getAttribute("value"));
+        var temp = 0;
+        if (currPos < lastPos) {
+            for (var i = 0; i <= currPos; i++) {
+                if (document.getElementById(i) != null) {
+                    document.getElementById(i).setAttribute("style", "display: none");
+                }
+            }
+            for (var j = currPos + 1; j <= currPos + numShowRecruit; j++) {
+                if (document.getElementById(j) != null) {
+                    document.getElementById(j).setAttribute("style", "");
+                    temp = j;
+                }
+            }
+        }
+        currPos = temp;
+        if (currPos >= lastPos) {
+            document.getElementById("next").setAttribute("style", "display: none");
+        }
+        document.getElementById("currPos").setAttribute("value", currPos);
+        document.getElementById("back").setAttribute("style", "");
+    }
+
+    function preRecruits() {
+        var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
+        var temp = 0;
+        if (currPos - numShowRecruit >= 0) {
+            for (var i = currPos; i >= currPos - numShowRecruit; i--) {
+                if (document.getElementById(i).getAttribute("style") == "") {
+                    document.getElementById(i).setAttribute("style", "display: none");
+                    temp = i;
+                }
+            }
+            for (var j = temp - 1; j >= temp - numShowRecruit; j--) {
+                document.getElementById(j).setAttribute("style", "");
+            }
+        }
+        currPos = temp - 1;
+        if (currPos <= numShowRecruit) {
+            document.getElementById("back").setAttribute("style", "display: none");
+        }
+        document.getElementById("currPos").setAttribute("value", currPos);
+        document.getElementById("next").setAttribute("style", "");
     }
 </script>
 
