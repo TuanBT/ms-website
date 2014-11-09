@@ -19,9 +19,15 @@
             <li class="iscurent">
                 <a class="hChContent">Cá nhân</a>
             </li>
-            <li>
-                <a href="@Url.Action("CustomerEdit", "Customer", new { custId = account.AccountId })" class="hChContent">Sửa thông tin</a>
-            </li>
+            @if(Session["AccId"] != null)
+            {
+                if((int)Session["AccId"] == account.AccountId)
+                {
+                    <li>
+                        <a href="@Url.Action("CustomerEdit", "Customer", new {custId = account.AccountId})" class="hChContent">Sửa thông tin</a>
+                    </li>
+                }
+            }
         </ul>
     </div>
 </div>

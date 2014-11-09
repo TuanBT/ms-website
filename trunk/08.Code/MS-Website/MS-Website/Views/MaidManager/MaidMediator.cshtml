@@ -67,9 +67,15 @@
             <li class="iscurent">
                 <a class="hChContent">Cá nhân</a>
             </li>
-            <li class>
-                <a href="@Url.Action("MaidManagerEdit", "MaidManager")" class="hChContent">Sửa thông tin cá nhân</a>
-            </li>
+            @if(Session["AccId"] != null)
+            {
+                if((int)Session["AccId"] == account.AccountId)
+                {
+                    <li class>
+                        <a href="@Url.Action("MaidManagerEdit", "MaidManager")" class="hChContent">Sửa thông tin cá nhân</a>
+                    </li>
+                }
+            }
         </ul>
     </div>
 </div>
