@@ -71,8 +71,11 @@ namespace MS_Website.Controllers
                 using (var db = new MSEntities())
                 {
                     var customerAcc = db.Accounts.SingleOrDefault(a => a.AccountId == custId);
-                    ViewBag.CustAddr = customerAcc.Customer.Address;
-                    return View("CustomerEdit", customerAcc);
+                    if (customerAcc != null)
+                    {
+                        ViewBag.CustAddr = customerAcc.Customer.Address;
+                        return View("CustomerEdit", customerAcc);
+                    }
                 }
             }
             return RedirectToAction("Login", "Home");
