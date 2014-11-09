@@ -1032,6 +1032,7 @@ a {
 .boxPostJRSkill {
     border: 2px solid #999;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .postJRTimeTotal {
@@ -1080,11 +1081,23 @@ a {
     float: right;
 }
 
+.postOpenButton>span {
+    cursor: pointer;
+    color: #2980b9;
+    font-size: 30px;
+}
+
+.postOpenButton>span:hover {
+    color: #3498db;
+}
+
 .boxPostJRUser {
     border: 2px solid #999;
     padding: 10px;
     border-radius: 5px;
     min-height: 71px;
+    width: 100%;
+    cursor: pointer;
 }
 
 .Menu {
