@@ -58,12 +58,18 @@ namespace MS_Website.Controllers
                     if (Session["Role"].Equals("MaidMediator"))
                     {
                         var maidMediatorAcc = db.Accounts.SingleOrDefault(a => a.AccountId == maidManagerId);
-                        return View("MaidManagerEdit", maidMediatorAcc);
+                        if (maidMediatorAcc != null)
+                        {
+                            return View("MaidManagerEdit", maidMediatorAcc);
+                        }
                     }
                     if (Session["Role"].Equals("Staff"))
                     {
                         var staffAcc = db.Accounts.SingleOrDefault(a => a.AccountId == maidManagerId);
-                        return View("MaidManagerEdit", staffAcc);
+                        if (staffAcc != null)
+                        {
+                            return View("MaidManagerEdit", staffAcc);
+                        }
                     }
                 }
             }
@@ -121,19 +127,24 @@ namespace MS_Website.Controllers
                 using (var db = new MSEntities())
                 {
                     var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidId);
-                    if (maid.MaidMediatorId == loggedId || maid.StaffId == loggedId)
+                    if (maid != null)
                     {
-                        if (Session["Hometown"] == null)
+                        if (maid.MaidMediatorId == loggedId || maid.StaffId == loggedId)
                         {
-                            Session["Hometown"] = db.SkillInstances.Where(si => si.SkillName.Equals("Hometown")).ToList();
+                            if (Session["Hometown"] == null)
+                            {
+                                Session["Hometown"] =
+                                    db.SkillInstances.Where(si => si.SkillName.Equals("Hometown")).ToList();
+                            }
+                            if (Session["Address"] == null)
+                            {
+                                Session["Address"] =
+                                    db.SkillInstances.Where(si => si.SkillName.Equals("Address")).ToList();
+                            }
+                            ViewBag.Hometown = Session["Hometown"];
+                            ViewBag.Address = Session["Address"];
+                            return View("MaidEdit", maid);
                         }
-                        if (Session["Address"] == null)
-                        {
-                            Session["Address"] = db.SkillInstances.Where(si => si.SkillName.Equals("Address")).ToList();
-                        }
-                        ViewBag.Hometown = Session["Hometown"];
-                        ViewBag.Address = Session["Address"];
-                        return View("MaidEdit", maid);
                     }
                 }
             }
