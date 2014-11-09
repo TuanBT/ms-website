@@ -725,54 +725,67 @@ namespace MS_Website.Controllers
             ViewBag.SkillList = Session["SkillList"];
         }
 
-        public ActionResult ApplyJobRequest(int jobRequestId, int recruitId)
+        public ActionResult ApplyJobRequest(int jobRequestId, string recruitIdStr)
         {
+            if(recruitIdStr == null)
+            {
+                TempData["Alert"] = "Chưa chọn đơn tuyển việc!";
+                return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
+            }
             using (var db = new MSEntities())
             {
+                var recruitId = int.Parse(recruitIdStr);
                 var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
-                if (jobRequest.Status.Equals("Waiting"))
+                if (jobRequest != null)
                 {
-                    var apply = new Apply();
-                    apply.JobRequestId = jobRequestId;
-                    apply.RecruitmentId = recruitId;
-                    db.Applies.Add(apply);
-                    var recruit = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
-                    jobRequest.Status = "Applied";
-                    jobRequest.ApplyTimes = DateTime.Now;
-                    recruit.Status = "Applied";
-                    db.SaveChanges();
-                    var function = new Function();
-                    function.SentMessage(
-                        jobRequest.Maid.Phone ?? "",
-                        jobRequest.Staff != null ? jobRequest.Staff.Account.Phone : "",
-                        jobRequest.MaidMediator != null ? jobRequest.MaidMediator.Account.Phone : "",
-                        recruit.Customer.Account.Phone ?? "");
-                    string link = "/Post/GetJobRequest?jobId=" + jobRequestId;
-                    //People post jobrequest
-                    var notifier = new MS_Website.Models.Notifier
-                                       {
-                                           AccId = jobRequest.MaidMediatorId != null ? (int)jobRequest.MaidMediatorId : (int)jobRequest.StaffId,
-                                           Date = DateTime.Now,
-                                           Content = "Yêu cầu của bạn đã được thuê",
-                                           Link = link,
-                                           View = false
-                                       };
-                    db.Notifiers.Add(notifier);
-                    db.SaveChanges();
+                    if (jobRequest.Status.Equals("Waiting"))
+                    {
+                        var recruit = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
+                        var apply = new Apply();
+                        apply.JobRequestId = jobRequestId;
+                        apply.RecruitmentId = recruitId;
+                        db.Applies.Add(apply); 
+                        jobRequest.Status = "Applied";
+                        jobRequest.ApplyTimes = DateTime.Now;
+                        recruit.Status = "Applied";
+                        db.SaveChanges();
+                        var function = new Function();
+                        function.SentMessage(
+                            jobRequest.Maid.Phone ?? "",
+                            jobRequest.Staff != null ? jobRequest.Staff.Account.Phone : "",
+                            jobRequest.MaidMediator != null ? jobRequest.MaidMediator.Account.Phone : "",
+                            recruit.Customer.Account.Phone ?? "");
+                        string link = "/Post/GetJobRequest?jobId=" + jobRequestId;
+                        //People post jobrequest
+                        var notifier = new MS_Website.Models.Notifier
+                            {
+                                AccId =
+                                    jobRequest.MaidMediatorId != null
+                                        ? (int) jobRequest.MaidMediatorId
+                                        : (int) jobRequest.StaffId,
+                                Date = DateTime.Now,
+                                Content = "Yêu cầu của bạn đã được thuê",
+                                Link = link,
+                                View = false
+                            };
+                        db.Notifiers.Add(notifier);
+                        db.SaveChanges();
+                    }
+                    else if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
+                    {
+                        TempData["Alert"] = "Công việc đã được thuê bởi khách hàng khác";
+                    }
+                    else if (jobRequest.Status.Equals("Expired"))
+                    {
+                        TempData["Alert"] = "Công việc đã hết hạn";
+                    }
+                    else if (jobRequest.Status.Equals("Hide") || !jobRequest.IsActive)
+                    {
+                        TempData["Alert"] = "Công việc không tồn tại";
+                    }
+                    return RedirectToAction("GetJobRequest", "Post", new {jobId = jobRequestId});
                 }
-                else if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
-                {
-                    TempData["Alert"] = "Công việc đã được thuê bởi khách hàng khác";
-                }
-                else if (jobRequest.Status.Equals("Expired"))
-                {
-                    TempData["Alert"] = "Công việc đã hết hạn";
-                }
-                else if (jobRequest.Status.Equals("Hide") || !jobRequest.IsActive)
-                {
-                    TempData["Alert"] = "Công việc không tồn tại";
-                }
-                return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
+                return RedirectToAction("GetCustomer", "Customer", new {custId = Session["AccId"]});
             }
         }
     }

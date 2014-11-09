@@ -42,14 +42,6 @@ namespace MS_Website.Controllers
 
                     if (job != null)
                     {
-                        if (job.ExpiredTime < DateTime.Now)
-                        {
-                            if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved") && !job.Status.Equals("Expired"))
-                            {
-                                job.Status = "Expired";
-                                db.SaveChanges();
-                            }
-                        }
                         var ratingRow = db.Ratings.FirstOrDefault(r => r.JobRequestId == job.JobRequestId);
                         ViewBag.jrRate = 0;
                         if (ratingRow != null)
@@ -125,14 +117,6 @@ namespace MS_Website.Controllers
                     var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
                     if (recruitment != null)
                     {
-                        if (recruitment.ExpiredTime < DateTime.Now)
-                        {
-                            if (!recruitment.Status.Equals("Applied") && !recruitment.Status.Equals("Approved") && !recruitment.Status.Equals("Expired"))
-                            {
-                                recruitment.Status = "Expired";
-                                db.SaveChanges();
-                            }
-                        }
                         var customer = db.Customers.SingleOrDefault(m => m.AccountId == recruitment.CustomerId);
                         var account = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId);
                         var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId);
