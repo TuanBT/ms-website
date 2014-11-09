@@ -3,6 +3,7 @@
     ViewBag.Title = "Đăng yêu cầu kiếm việc";
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.AddJob = true;
+    int numShowMaid = 3;
 }
 
 <div class="Menu">
@@ -22,15 +23,15 @@
                             Đăng cho
                         </div>
                         <div class="col-md-8">
-                            <div class="boxPostJRUser">
+                            <div class="boxPostJRUser" onclick="return cancel()" data-toggle="modal" data-target=".chooseMaidModel">
                                 <div class="postOpenButton">
-                                    <button class="btn btn-primary" data-toggle="modal" data-target=".chooseMaidModel" onclick="return cancel()">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                   @* <button class="btn btn-primary" data-toggle="modal" data-target=".chooseMaidModel" onclick="return cancel()">
                                         Chọn người
-                                    </button>
+                                    </button>*@
                                 </div>
                                 <div id="maidBoxChoosed"></div> 
                             </div>
-                            <div id="MaidErr"></div>
                         </div>
                     </div>
                     <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -48,12 +49,12 @@
                                     <div id="back" class="rimaMore" style="display: none;" onclick="preMaids()">
                                         <span class="glyphicon glyphicon-chevron-up"></span>
                                     </div>
-                                    <input id="currPos" type="hidden" value="4" />
+                                    <input id="currPos" type="hidden" value="@(numShowMaid-1)" />
                                     @{int counter = -1;}
                                     @foreach (var maid in (List<Maid>)ViewBag.MaidList)
                                     {
                                         counter++;
-                                        <div id="@counter" class="radio" style="display: @(counter > 4 ? "none" : "");">
+                                        <div id="@counter" class="radio" style="display: @(counter > (numShowMaid-1) ? "none" : "");">
                                             <label>
                                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId">
                                                 <div class="chooseMaid@(counter)">
@@ -76,7 +77,7 @@
                                         </div>
                                     }
                                     <input id="lastPos" type="hidden" value="@(counter - 1)"/>
-                                    @if (counter > 5)
+                                    @if (counter > numShowMaid)
                                     {
                                         <div id="next" class="rimaMore" onclick="nextMaids()">
                                             <span class="glyphicon glyphicon-chevron-down"></span>
@@ -107,12 +108,13 @@
                             Các kỹ năng
                         </div>
                         <div class="col-md-8">
-                            <div class="boxPostJRSkill">
+                            <div class="boxPostJRSkill" onclick="return cancel()" data-toggle="modal" data-target=".chooseSkillModel">
                                 <div class="skillPost">
                                     <div class="postOpenButton">
-                                        <button class="btn btn-primary" data-toggle="modal" data-target=".chooseSkillModel" onclick="return cancel()">
+                                        <span class="glyphicon glyphicon-plus-sign"></span>
+                                        @*<button class="btn btn-primary" data-toggle="modal" data-target=".chooseSkillModel" onclick="return cancel()">
                                             Thêm kỹ năng
-                                        </button>
+                                        </button>*@
                                     </div>
                                     <ul id="chosenSkills"></ul>
                                     <div id="SkillErr"></div>
@@ -334,6 +336,8 @@
     function cancel() {
         return false;
     }
+    
+    var numShowMaid = 3;
 
     function nextMaids() {
         var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
@@ -345,7 +349,7 @@
                     document.getElementById(i).setAttribute("style", "display: none");
                 }
             }
-            for (var j = currPos + 1; j <= currPos + 5; j++) {
+            for (var j = currPos + 1; j <= currPos + numShowMaid; j++) {
                 if (document.getElementById(j) != null) {
                     document.getElementById(j).setAttribute("style", "");
                     temp = j;
@@ -363,19 +367,19 @@
     function preMaids() {
         var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
         var temp = 0;
-        if (currPos - 9 >= 0) {
-            for (var i = currPos; i > currPos - 5; i--) {
+        if (currPos - (numShowMaid*2-1) >= 0) {
+            for (var i = currPos; i > currPos - numShowMaid; i--) {
                 if (document.getElementById(i).getAttribute("style") == "") {
                     document.getElementById(i).setAttribute("style", "display: none");
                     temp = i;
                 }
             }
-            for (var j = temp - 1; j > temp - 6; j--) {
+            for (var j = temp - 1; j > temp - (numShowMaid+1) ; j--) {
                 document.getElementById(j).setAttribute("style", "");
             }
         }
         currPos = temp - 1;
-        if (currPos <= 4) {
+        if (currPos <= (numShowMaid-1)) {
             document.getElementById("back").setAttribute("style", "display: none");
         }
         document.getElementById("currPos").setAttribute("value", currPos);
