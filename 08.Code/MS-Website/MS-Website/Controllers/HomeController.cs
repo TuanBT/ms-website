@@ -39,6 +39,23 @@ namespace MS_Website.Controllers
             JreRcr jreRcr;
             using (_db)
             {
+                var currDate = DateTime.Now;
+                var expiredJobList = _db.JobRequests.Where(j => j.ExpiredTime < currDate).ToList();
+                var expiredRecruitList = _db.Recruitments.Where(r => r.ExpiredTime < currDate).ToList();
+                foreach (var job in expiredJobList)
+                {
+                    if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved") && !job.Status.Equals("Expired"))
+                    {
+                        job.Status = "Expired";
+                    }
+                }
+                foreach (var recruitment in expiredRecruitList)
+                {
+                    if (!recruitment.Status.Equals("Applied") && !recruitment.Status.Equals("Approved") && !recruitment.Status.Equals("Expired"))
+                    {
+                        recruitment.Status = "Expired";
+                    }
+                }
                 var limitDate = DateTime.Now.AddDays(-3);
                 var invalidJobList = _db.JobRequests.Where(jr => !jr.IsActive && jr.PostTime < limitDate).ToList();
                 var invalidRecruitList = _db.Recruitments.Where(r => !r.IsActive && r.PostTime < limitDate).ToList();
