@@ -182,27 +182,34 @@
                                 @{string color = "default";
                                   string status = "Tạm ẩn";
                                 }
-                                @if (Model.Job.Status == "Waiting")
-                                {
-                                    color = "primary";
-                                    status = "Đang chờ được thuê";
-                                }
-                                else if (Model.Job.Status == "Applied")
-                                {
-                                    color = "success";
-                                    status = "Đã được thuê";
-                                }
-                                else if (Model.Job.Status == "Approved")
+                                @if (!Model.Job.IsActive)
                                 {
                                     color = "warning";
-                                    status = "Đã hoàn tất";
+                                    status = "Chưa kích hoạt";
                                 }
-                                else if (Model.Job.Status == "Expired")
+                                else
                                 {
-                                    color = "danger";
-                                    status = "Hết hạn";
+                                    if (Model.Job.Status == "Waiting")
+                                    {
+                                        color = "primary";
+                                        status = "Đang chờ được thuê";
+                                    }
+                                    else if (Model.Job.Status == "Applied")
+                                    {
+                                        color = "success";
+                                        status = "Đã được thuê";
+                                    }
+                                    else if (Model.Job.Status == "Approved")
+                                    {
+                                        color = "warning";
+                                        status = "Đã hoàn tất";
+                                    }
+                                    else if (Model.Job.Status == "Expired")
+                                    {
+                                        color = "danger";
+                                        status = "Hết hạn";
+                                    }
                                 }
-
                                 <span class="labelStatus label label-@color">@status</span>
                                 @if (Model.Job.Status == "Applied" || Model.Job.Status == "Approved")
                                 {
