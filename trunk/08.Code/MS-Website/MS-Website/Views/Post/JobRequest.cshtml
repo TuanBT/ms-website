@@ -97,58 +97,58 @@
                                                     </div>
                                                     @if (recruitList.Any())
                                                     {
-                                                        using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new {name = "ApplyForm"}))
-                                                         {
-                                                             <div class="modal-body chooseMaidModalMaid">
-                                                                 <div id="back" class="rimaMore" style="display: none;" onclick="preRecruits()">
-                                                                     <span class="glyphicon glyphicon-chevron-up"></span>
-                                                                 </div>
-                                                                 <input id="currPos" type="hidden" value="@(numShowRecruit - 1)" />
-                                                                 @{
-                                                                     var counter = -1;
-                                                                 }
-                                                                 @foreach (var recruit in recruitList)
-                                                                 {
-                                                                     counter++;
-                                                                     <div id="@counter" class="radio" style="display: @(counter > numShowRecruit - 1 ? "none" : "");">
-                                                                         <label>
-                                                                             <input type="radio" name="recruitId" id="optionsRadios2" value="@recruit.RecruitmentId">
-                                                                             <div>
-                                                                                 <div class="liImage">
-                                                                                     <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
-                                                                                 </div>
-                                                                                 <div class="liMaidContent">
-                                                                                     <div class="licoFullName">
-                                                                                         <a href="@Url.Action("GetRecruitment", "Post", new {recruitmentId = recruit.RecruitmentId})" id="@recruit.RecruitmentId name">@recruit.Title</a>
-                                                                                     </div>
-                                                                                     <div class="ricoPost">
-                                                                                         <div class="blTime">
-                                                                                             <span class="blTimeTitle">Đăng: </span><span
-                                                                                                                                        class="blTimeText">@recruit.PostTime.ToString("dd/MM/yyyy")</span>
-                                                                                         </div>
-                                                                                         <div class="blTime">
-                                                                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                                                                                               class="blTimeText">@recruit.ExpiredTime.ToString("dd/MM/yyyy")</span>
-                                                                                         </div>
-                                                                                     </div>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </label>
-                                                                     </div>
-                                                                 }
-                                                                 <input id="lastPos" type="hidden" value="@counter"/>
-                                                                 @if (counter >= numShowRecruit)
-                                                                 {
-                                                                     <div id="next" class="rimaMore" onclick="nextRecruits()">
-                                                                         <span class="glyphicon glyphicon-chevron-down"></span>
-                                                                     </div>
-                                                                 }
-                                                             </div>
-                                                             <div class="modal-footer">
-                                                                 <input type="hidden" name="jobRequestId" value="@Model.Job.JobRequestId"/>
-                                                                 <button class="btn btn-primary" data-dismiss="modal" onclick="apply()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
-                                                             </div>
-                                                         }
+                                                        using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new { name = "ApplyForm" }))
+                                                        {
+                                                        <div class="modal-body chooseMaidModalMaid">
+                                                            <div id="back" class="rimaMore" style="display: none;" onclick="preRecruits()">
+                                                                <span class="glyphicon glyphicon-chevron-up"></span>
+                                                            </div>
+                                                            <input id="currPos" type="hidden" value="@(numShowRecruit - 1)" />
+                                                            @{
+                                                            var counter = -1;
+                                                            }
+                                                            @foreach (var recruit in recruitList)
+                                                            {
+                                                                counter++;
+                                                                <div id="@counter" class="radio" style="display: @(counter > numShowRecruit - 1 ? "none" : "");">
+                                                                    <label>
+                                                                        <input type="radio" name="recruitId" id="optionsRadios2" value="@recruit.RecruitmentId">
+                                                                        <div>
+                                                                            <div class="liImage">
+                                                                                <img src="~/Content/Image/rc.png" alt="Maid sercive" height="100%">
+                                                                            </div>
+                                                                            <div class="liMaidContent">
+                                                                                <div class="licoFullName">
+                                                                                    <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = recruit.RecruitmentId })" id="@recruit.RecruitmentId name">@recruit.Title</a>
+                                                                                </div>
+                                                                                <div class="ricoPost">
+                                                                                    <div class="blTime">
+                                                                                        <span class="blTimeTitle">Đăng: </span><span
+                                                                                            class="blTimeText">@recruit.PostTime.ToString("dd/MM/yyyy")</span>
+                                                                                    </div>
+                                                                                    <div class="blTime">
+                                                                                        <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
+                                                                                            class="blTimeText">@recruit.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+                                                            }
+                                                            <input id="lastPos" type="hidden" value="@counter"/>
+                                                            @if (counter >= numShowRecruit)
+                                                            {
+                                                                <div id="next" class="rimaMore" onclick="nextRecruits()">
+                                                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <input type="hidden" name="jobRequestId" value="@Model.Job.JobRequestId"/>
+                                                            <button class="btn btn-primary" data-dismiss="modal" onclick="apply()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                                        </div>
+                                                        }
                                                     }
                                                     else
                                                     {
@@ -187,12 +187,12 @@
                                     color = "primary";
                                     status = "Đang chờ được thuê";
                                 }
-                                @if (Model.Job.Status == "Applied")
+                                else if (Model.Job.Status == "Applied")
                                 {
                                     color = "success";
                                     status = "Đã được thuê";
                                 }
-                                @if (Model.Job.Status == "Approved")
+                                else if (Model.Job.Status == "Approved")
                                 {
                                     color = "warning";
                                     status = "Đã hoàn tất";
@@ -236,7 +236,7 @@
                                             @foreach (var skill in Model.SkillList)
                                             {
                                                 <li class="childSkill">
-                                                    <span class="skillText"><a href="@Url.Action("Index","Search", new {searchString = skill.Split('-').Length>1? skill.Split('-')[1].Trim():skill.Split('-')[0].Trim()})">@skill</a></span>
+                                                    <span class="skillText"><a href="@Url.Action("Index", "Search", new { searchString = skill.Split('-').Length > 1 ? skill.Split('-')[1].Trim() : skill.Split('-')[0].Trim() })">@skill</a></span>
                                                 </li>
                                             }
                                         </ul>
