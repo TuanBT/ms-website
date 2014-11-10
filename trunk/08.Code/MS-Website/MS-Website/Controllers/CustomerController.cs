@@ -189,19 +189,24 @@ namespace MS_Website.Controllers
             string SickCare, string OldCare, string BabySister, string DisabilityCare, string BonsaiCare,
             string Cooking, string Washing, string CleanHouse, string time)
         {
-          
-                var custId = (int)Session["AccId"];
+            if (Session["AccId"] != null)
+            {
+                var custId = (int) Session["AccId"];
                 using (var db = new MSEntities())
                 {
                     var skillRef = new SkillReference();
                     skillRef.Type = 2;
                     if (!gender.Equals("null"))
                     {
-                        skillRef.Gender = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(gender) && si.SkillName.Equals("Gender")).SkillId;
+                        skillRef.Gender =
+                            db.SkillInstances.SingleOrDefault(
+                                si => si.SkillString.Equals(gender) && si.SkillName.Equals("Gender")).SkillId;
                     }
                     if (!age.Equals("null"))
                     {
-                        skillRef.Age = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(age) && si.SkillName.Equals("Age")).SkillId;
+                        skillRef.Age =
+                            db.SkillInstances.SingleOrDefault(
+                                si => si.SkillString.Equals(age) && si.SkillName.Equals("Age")).SkillId;
                     }
                     if (LanguageEnglish != null)
                     {
@@ -216,7 +221,8 @@ namespace MS_Website.Controllers
                     if (LanguageJapanese != null)
                     {
                         skillRef.LanguageJapanese =
-                            db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(LanguageJapanese)).SkillId;
+                            db.SkillInstances.SingleOrDefault(si => si.SkillNameVietnam.Equals(LanguageJapanese)).
+                                SkillId;
                     }
                     if (LanguageKorean != null)
                     {
@@ -225,31 +231,47 @@ namespace MS_Website.Controllers
                     }
                     if (!exp.Equals("null"))
                     {
-                        skillRef.Experience = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(exp) && si.SkillName.Equals("Experience")).SkillId;
+                        skillRef.Experience =
+                            db.SkillInstances.SingleOrDefault(
+                                si => si.SkillString.Equals(exp) && si.SkillName.Equals("Experience")).SkillId;
                     }
                     if (!hometown.Equals("null"))
                     {
-                        skillRef.Hometown = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(hometown) && si.SkillName.Equals("Hometown")).SkillId;
+                        skillRef.Hometown =
+                            db.SkillInstances.SingleOrDefault(
+                                si => si.SkillString.Equals(hometown) && si.SkillName.Equals("Hometown")).SkillId;
                     }
                     if (!addr.Equals("null"))
                     {
-                        skillRef.Address = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(addr) && si.SkillName.Equals("Address")).SkillId;
+                        skillRef.Address =
+                            db.SkillInstances.SingleOrDefault(
+                                si => si.SkillString.Equals(addr) && si.SkillName.Equals("Address")).SkillId;
                     }
                     if (!married.Equals("null"))
                     {
-                        skillRef.Married = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(married) && si.SkillName.Equals("Married")).SkillId;
+                        skillRef.Married =
+                            db.SkillInstances.SingleOrDefault(
+                                si => si.SkillString.Equals(married) && si.SkillName.Equals("Married")).SkillId;
                     }
                     if (!stay.Equals("null"))
                     {
-                        skillRef.Stay = db.SkillInstances.SingleOrDefault(si => si.SkillName.Equals("Stay") && si.SkillString.Equals(stay) && si.SkillName.Equals("Stay")).SkillId;
+                        skillRef.Stay =
+                            db.SkillInstances.SingleOrDefault(
+                                si =>
+                                si.SkillName.Equals("Stay") && si.SkillString.Equals(stay) &&
+                                si.SkillName.Equals("Stay")).SkillId;
                     }
                     if (!salary.Equals("null"))
                     {
-                        skillRef.Salary = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(salary) && si.SkillName.Equals("Salary")).SkillId;
+                        skillRef.Salary =
+                            db.SkillInstances.SingleOrDefault(
+                                si => si.SkillString.Equals(salary) && si.SkillName.Equals("Salary")).SkillId;
                     }
                     if (!work.Equals("null"))
                     {
-                        skillRef.Work = db.SkillInstances.SingleOrDefault(si => si.SkillString.Equals(work) && si.SkillName.Equals("Work")).SkillId;
+                        skillRef.Work =
+                            db.SkillInstances.SingleOrDefault(
+                                si => si.SkillString.Equals(work) && si.SkillName.Equals("Work")).SkillId;
                     }
                     if (SickCare != null)
                     {
@@ -301,14 +323,17 @@ namespace MS_Website.Controllers
                     recruitment.CustomerId = custId;
                     recruitment.Status = "Waiting";
                     recruitment.PostTime = DateTime.Now;
-                    recruitment.ExpiredTime = DateTime.Now.AddDays(7 * int.Parse(time));
+                    recruitment.ExpiredTime = DateTime.Now.AddDays(7*int.Parse(time));
                     recruitment.Title = title;
                     skillRef.Type = 1;
                     db.Recruitments.Add(recruitment);
                     db.SaveChanges();
-                    var newRecruitId = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId).RecruitmentId;
-                    return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = newRecruitId });
+                    var newRecruitId =
+                        db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId).RecruitmentId;
+                    return RedirectToAction("GetRecruitment", "Post", new {recruitmentId = newRecruitId});
                 }
+            }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult RecruitmentEdit(int recruitId)

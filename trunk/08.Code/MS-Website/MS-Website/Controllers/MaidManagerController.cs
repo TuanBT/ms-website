@@ -407,6 +407,10 @@ namespace MS_Website.Controllers
             string OldCare, string BabySister, string DisabilityCare, string BonsaiCare, string Cooking,
             string Washing, string CleanHouse, int maidId, string time)
         {
+            if (Session["AccId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             using (var db = new MSEntities())
             {
                 var skillRef = new SkillReference();
