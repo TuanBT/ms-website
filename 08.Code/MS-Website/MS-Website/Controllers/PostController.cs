@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -721,7 +722,8 @@ namespace MS_Website.Controllers
         public ActionResult RatingJobRequest(string rate, string jrId)
         {
             var jobId = Convert.ToInt32(jrId);
-            var numrate = Convert.ToDouble(rate) * 2;
+            rate = rate.Replace('.', ',');
+            var numrate = double.Parse(rate) * 2;
             bool statusNew = false;
             float MaidRateAvg = 0;
             using (var db = new MSEntities())
