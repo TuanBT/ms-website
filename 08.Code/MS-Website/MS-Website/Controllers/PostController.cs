@@ -85,7 +85,7 @@ namespace MS_Website.Controllers
                             {
                                 var custId = (int)Session["AccId"];
                                 ViewBag.RecruitmentList =
-                                    db.Recruitments.Where(r => r.CustomerId == custId && r.Status.Equals("Waiting")).ToList();
+                                    db.Recruitments.Where(r => r.CustomerId == custId && r.Status.Equals("Waiting") && r.IsActive).ToList();
                             }
                         }
                         if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
