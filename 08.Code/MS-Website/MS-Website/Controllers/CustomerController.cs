@@ -25,13 +25,17 @@ namespace MS_Website.Controllers
                     var account = db.Accounts.SingleOrDefault(a => a.AccountId == custId);
                     var customer = db.Customers.SingleOrDefault(c => c.AccountId == custId);
                     var notApplRecList =
-                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Waiting") && r.IsActive).ToList();
+                        db.Recruitments.Where(
+                            r => r.Customer.AccountId == custId && r.Status.Equals("Waiting") && r.IsActive).ToList();
                     var applRecList =
-                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Applied") && r.IsActive).ToList();
+                        db.Recruitments.Where(
+                            r => r.Customer.AccountId == custId && r.Status.Equals("Applied") && r.IsActive).ToList();
                     var expiredRecList =
-                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Expired") && r.IsActive).ToList();
+                        db.Recruitments.Where(
+                            r => r.Customer.AccountId == custId && r.Status.Equals("Expired") && r.IsActive).ToList();
                     var hideList =
-                        db.Recruitments.Where(r => r.Customer.AccountId == custId && r.Status.Equals("Hide") && r.IsActive).ToList();
+                        db.Recruitments.Where(
+                            r => r.Customer.AccountId == custId && r.Status.Equals("Hide") && r.IsActive).ToList();
                     var notActiveList =
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && !r.IsActive).ToList();
                     ViewBag.NotApplList =
@@ -39,11 +43,12 @@ namespace MS_Website.Controllers
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
                     ViewBag.ApplList = (from recruitment in applRecList
                                         let apply =
-                                            db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitment.RecruitmentId)
+                                            db.Applies.SingleOrDefault(
+                                                a => a.RecruitmentId == recruitment.RecruitmentId)
                                         let jobRequest =
                                             db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId)
-                                        select new RecruitmentTemp(recruitment, customer, account, jobRequest, null)).
-                        ToList();
+                                        select new RecruitmentTemp(recruitment, customer, account, jobRequest, null))
+                        .ToList();
                     ViewBag.ExpiredList =
                         expiredRecList.Select(
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
@@ -51,12 +56,9 @@ namespace MS_Website.Controllers
                         hideList.Select(
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
                     ViewBag.NotActiveList =
-                       notActiveList.Select(
-                           recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                    if ((int)Session["AccId"] == custId)
-                    {
-                        ViewBag.Manage = "true";
-                    }
+                        notActiveList.Select(
+                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                    ViewBag.Manage = "true";
                     return View("CustomerProfile", account);
                 }
             }
@@ -142,7 +144,7 @@ namespace MS_Website.Controllers
                     }
                 }
             }
-            return RedirectToAction("GetRecruitment","Post", new { recruitmentId = recruitId });
+            return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
         }
 
         public ActionResult PublicRecruitment(int recruitId)
@@ -191,7 +193,7 @@ namespace MS_Website.Controllers
         {
             if (Session["AccId"] != null)
             {
-                var custId = (int) Session["AccId"];
+                var custId = (int)Session["AccId"];
                 using (var db = new MSEntities())
                 {
                     var skillRef = new SkillReference();
@@ -323,14 +325,14 @@ namespace MS_Website.Controllers
                     recruitment.CustomerId = custId;
                     recruitment.Status = "Waiting";
                     recruitment.PostTime = DateTime.Now;
-                    recruitment.ExpiredTime = DateTime.Now.AddDays(7*int.Parse(time));
+                    recruitment.ExpiredTime = DateTime.Now.AddDays(7 * int.Parse(time));
                     recruitment.Title = title;
                     skillRef.Type = 1;
                     db.Recruitments.Add(recruitment);
                     db.SaveChanges();
                     var newRecruitId =
                         db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId).RecruitmentId;
-                    return RedirectToAction("GetRecruitment", "Post", new {recruitmentId = newRecruitId});
+                    return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = newRecruitId });
                 }
             }
             return RedirectToAction("Login", "Home");
@@ -752,7 +754,7 @@ namespace MS_Website.Controllers
 
         public ActionResult ApplyJobRequest(int jobRequestId, string recruitIdStr)
         {
-            if(recruitIdStr == null)
+            if (recruitIdStr == null)
             {
                 TempData["Alert"] = "Chưa chọn đơn tuyển việc!";
                 return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
@@ -769,7 +771,7 @@ namespace MS_Website.Controllers
                         var apply = new Apply();
                         apply.JobRequestId = jobRequestId;
                         apply.RecruitmentId = recruitId;
-                        db.Applies.Add(apply); 
+                        db.Applies.Add(apply);
                         jobRequest.Status = "Applied";
                         jobRequest.ApplyTimes = DateTime.Now;
                         recruit.Status = "Applied";
@@ -786,8 +788,8 @@ namespace MS_Website.Controllers
                             {
                                 AccId =
                                     jobRequest.MaidMediatorId != null
-                                        ? (int) jobRequest.MaidMediatorId
-                                        : (int) jobRequest.StaffId,
+                                        ? (int)jobRequest.MaidMediatorId
+                                        : (int)jobRequest.StaffId,
                                 Date = DateTime.Now,
                                 Content = "Yêu cầu của bạn đã được thuê",
                                 Link = link,
@@ -808,9 +810,9 @@ namespace MS_Website.Controllers
                     {
                         TempData["Alert"] = "Công việc không tồn tại";
                     }
-                    return RedirectToAction("GetJobRequest", "Post", new {jobId = jobRequestId});
+                    return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
                 }
-                return RedirectToAction("GetCustomer", "Customer", new {custId = Session["AccId"]});
+                return RedirectToAction("GetCustomer", "Customer", new { custId = Session["AccId"] });
             }
         }
     }
