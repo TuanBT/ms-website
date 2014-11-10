@@ -774,12 +774,11 @@ namespace MS_Website.Controllers
                     }
                     var Maid = db.Maids.FirstOrDefault(m => m.MaidId == maidId);
                     Maid.RateAvg = (int)total / count;
-                    MaidRateAvg = (int)total / count;
                     db.SaveChanges();
                 }
             }
             //return Json("{MaidRateAvg:" + MaidRateAvg + ",numrate:" + numrate + "}", JsonRequestBehavior.AllowGet);
-            return RedirectToAction("GetJobRequest", new { jobId = jobId });
+            return RedirectToAction("GetJobRequest", new { jobId});
         }
 
         [HttpPost]
