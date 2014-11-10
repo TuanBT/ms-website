@@ -1995,6 +1995,96 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\pace.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Admin\AddStaff.cshtml" />
+    <Content Include="Views\Admin\AdminConfig.cshtml" />
+    <Content Include="Views\Admin\BanAccount.cshtml" />
+    <Content Include="Views\Admin\ManageComment.cshtml" />
+    <Content Include="Views\Customer\CustomerEdit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Customer\CustomerProfile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Customer\EditRecruitment.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Customer\PostRecruitment.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Home\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Home\Login.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\MaidManager\AddMaid.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\MaidManager\EditJobRequest.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\MaidManager\MaidEdit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\MaidManager\MaidManagerEdit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\MaidManager\MaidMediator.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\MaidManager\MaidProfile.cshtml" />
+    <Content Include="Views\MaidManager\ManageAppliedJobRequest.cshtml" />
+    <Content Include="Views\MaidManager\ManageJobRequest.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\MaidManager\ManageRecruitment.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\MaidManager\PostRequest.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\MaidManager\Staff.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Notifier\Notifier.cshtml" />
+    <Content Include="Views\Post\JobRequest.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Post\Recruitment.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Search\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Search\Search.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_PartialAccount.cshtml" />
+    <Content Include="Views\Shared\_PartialComment.cshtml" />
+    <Content Include="Views\Shared\_PartialExtend.cshtml" />
+    <Content Include="Views\Shared\_PartialFooter.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_PartialMenu.cshtml" />
+    <Content Include="Views\Shared\_PartialNotifier.cshtml" />
+    <Content Include="Views\Shared\_PartialPaypal.cshtml" />
+    <Content Include="Views\Shared\_PartialRating.cshtml" />
+    <Content Include="Views\Shared\_PartialSearch.cshtml" />
+    <Content Include="Views\Shared\_PartialStar.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_PartialStatisticPie.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Statistic\StatisticIncome.cshtml" />
+    <Content Include="Views\Statistic\StatisticRequest.cshtml" />
+    <Content Include="Views\Statistic\StatisticRequestCustomer.cshtml" />
+    <Content Include="Views\Statistic\StatisticRequestMaid.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2004,80 +2094,11 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\MaidMediator\MaidMediator.cshtml" />
-    <Content Include="Views\MaidMediator\MaidProfile.cshtml" />
-    <Content Include="Views\Post\JobRequest.cshtml" />
-    <Content Include="Views\Search\Search.cshtml" />
-    <Content Include="Views\MaidMediator\PostRequest.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Views\Shared\_PartialAccount.cshtml" />
-    <Content Include="Views\Shared\_PartialComment.cshtml" />
-    <Content Include="Views\Shared\_PartialRating.cshtml" />
-    <Content Include="Views\Shared\_PartialSearch.cshtml" />
-    <Content Include="Views\Customer\CustomerProfile.cshtml" />
-    <Content Include="Views\Post\Recruitment.cshtml" />
-    <Content Include="Views\Customer\PostRecruitment.cshtml" />
-    <Content Include="Views\Shared\_PartialFooter.cshtml">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Views\Shared\_PartialStatisticPie.cshtml">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Views\Shared\_PartialStar.cshtml">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Views\Shared\_PartialSearch.cshtml" />
-    <Content Include="Views\CustomerRecruiment\Details.cshtml">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Views\CustomerRecruiment\Pay.cshtml" />
-    <Content Include="Views\Customer\CustomerProfile.cshtml" />
-    <Content Include="Views\Customer\PostRecruitment.cshtml" />
-    <Content Include="Views\CustomerRecruiment\Create.cshtml" />
-    <Content Include="Views\CustomerRecruiment\_ChooseMaid.cshtml" />
-    <Content Include="Views\CustomerRecruiment\_ChooseSkill.cshtml" />
-    <Content Include="Views\CustomerRecruiment\_Details.cshtml" />
-    <Content Include="Views\CustomerRecruiment\Details2.cshtml" />
-    <Content Include="Views\CustomerRecruiment\Index.cshtml" />
-    <Content Include="Views\CustomerRecruiment\Post.cshtml" />
-    <Content Include="Views\MaidManager\MaidMediator.cshtml" />
-    <Content Include="Views\MaidManager\MaidProfile.cshtml" />
-    <Content Include="Views\MaidManager\PostRequest.cshtml" />
-    <Content Include="Views\MaidManager\AddMaid.cshtml" />
-    <Content Include="Views\MaidManager\ManageJobRequest.cshtml" />
-    <Content Include="Views\MaidManager\ManageRecruitment.cshtml">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Views\MaidManager\Staff.cshtml" />
-    <Content Include="Views\MaidManager\MaidManagerEdit.cshtml" />
-    <Content Include="Views\MaidManager\MaidEdit.cshtml" />
-    <Content Include="Views\Customer\CustomerEdit.cshtml" />
-    <Content Include="Views\MaidManager\ManageAppliedJobRequest.cshtml" />
-    <Content Include="Views\Admin\AddStaff.cshtml" />
-    <Content Include="Views\Admin\BanAccount.cshtml" />
-    <Content Include="Views\Admin\ManageComment.cshtml" />
-    <Content Include="Views\Shared\_PartialMenu.cshtml" />
-    <Content Include="Views\MaidManager\EditJobRequest.cshtml" />
-    <Content Include="Views\Customer\EditRecruitment.cshtml" />
-    <Content Include="Views\Admin\AdminConfig.cshtml" />
-    <Content Include="Views\Shared\_PartialPaypal.cshtml" />
-    <Content Include="Views\Shared\_PartialNotifier.cshtml" />
-    <Content Include="Views\Shared\_PartialExtend.cshtml" />
-    <Content Include="Views\Statistic\StatisticRequest.cshtml" />
-    <Content Include="Views\Notifier\Notifier.cshtml" />
-    <Content Include="Views\Statistic\StatisticIncome.cshtml" />
-    <Content Include="Views\Statistic\StatisticRequestCustomer.cshtml" />
-    <Content Include="Views\Statistic\StatisticRequestMaid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CustomerRecruiment\" />
+    <Folder Include="Views\MaidMediator\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
