@@ -24,6 +24,7 @@ namespace MS_Website.Controllers
         {
             Session["PriceJR"] = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceJR"]);
             Session["PriceRC"] = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceRC"]);
+            Session["MaxWeek"] = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["MaxWeek"]);
 
             int pageRec = Convert.ToInt32(Request["pageRec"]) == 0 ? 1 : Convert.ToInt32(Request["pageRec"]);
             int pageJob = Convert.ToInt32(Request["pageJob"]) == 0 ? 1 : Convert.ToInt32(Request["pageJob"]);

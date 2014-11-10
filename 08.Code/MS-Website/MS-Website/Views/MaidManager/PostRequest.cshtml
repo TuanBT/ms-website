@@ -222,11 +222,10 @@
                         </div>
                         <div class="col-md-8">
                             <select id="time" class="form-control" name="time" onchange="chooseTime(@Session["PriceJR"])">
-                                <option value="1">1 tuần</option>
-                                <option value="2">2 tuần</option>
-                                <option value="3">3 tuần</option>
-                                <option value="4">4 tuần</option>
-                                <option value="5">5 tuần</option>
+                                @for (int i = 1; i <= (int)Session["MaxWeek"];i++ )
+                                {
+                                    <option value="@i">@i tuần</option>
+                                }
                             </select>
                             <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> * <span
                                 class="postJRTimePrice"><span class="prices">@Session["PriceJR"]</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">@Session["PriceJR"]</span>.000</span> đồng</span>

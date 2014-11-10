@@ -383,5 +383,26 @@ namespace MS_Website.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
             //return RedirectToAction("AdminConfig");
         }
+
+        [HttpPost]
+        public JsonResult ManageMaxWeek(string sMaxWeek)
+        {
+            System.Configuration.Configuration config = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+
+            System.Configuration.KeyValueConfigurationElement settingMaxWeek = config.AppSettings.Settings["MaxWeek"];
+
+            if (null != settingMaxWeek)
+            {
+                config.AppSettings.Settings["MaxWeek"].Value = sMaxWeek;
+            }
+            else
+            {
+                config.AppSettings.Settings.Add("MaxWeek", sMaxWeek);
+            }
+
+            config.Save();
+            return Json("", JsonRequestBehavior.AllowGet);
+            //return RedirectToAction("AdminConfig");
+        }
     }
 }
