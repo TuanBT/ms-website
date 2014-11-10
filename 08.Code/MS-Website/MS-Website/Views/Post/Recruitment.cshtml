@@ -123,32 +123,34 @@
                                 @{
                                     string color = "default";
                                     string status = "Tạm ẩn";                                }
-                                @if (RecruitmentTemp.Recruitment.Status == "Hide")
-                                {
-                                    color = "default";
-                                    status = "Tạm ẩn";
-                                }
-                                else if (RecruitmentTemp.Recruitment.Status == "Waiting")
-                                {
-                                    color = "primary";
-                                    status = "Đang chờ người làm";
-                                }
-                                else if (RecruitmentTemp.Recruitment.Status == "Applied")
-                                {
-                                    color = "success";
-                                    status = "Đã thuê";
-                                }
-                                else if (RecruitmentTemp.Recruitment.Status == "Expired")
-                                {
-                                    color = "danger";
-                                    status = "Hết hạn";
-                                }
                                 @if (!RecruitmentTemp.Recruitment.IsActive)
                                 {
                                     color = "warning";
                                     status = "Đang chờ thanh toán";
                                 }
-
+                                else
+                                {
+                                    if (RecruitmentTemp.Recruitment.Status == "Hide")
+                                    {
+                                        color = "default";
+                                        status = "Tạm ẩn";
+                                    }
+                                    else if (RecruitmentTemp.Recruitment.Status == "Waiting")
+                                    {
+                                        color = "primary";
+                                        status = "Đang chờ người làm";
+                                    }
+                                    else if (RecruitmentTemp.Recruitment.Status == "Applied")
+                                    {
+                                        color = "success";
+                                        status = "Đã thuê";
+                                    }
+                                    else if (RecruitmentTemp.Recruitment.Status == "Expired")
+                                    {
+                                        color = "danger";
+                                        status = "Hết hạn";
+                                    }
+                                }
                                 <span class="labelStatus label label-@color">@status</span>
                                 @if (RecruitmentTemp.JobRequest != null)
                                 {
@@ -174,7 +176,7 @@
                                             @foreach (var skill in Model.SkillList)
                                             {
                                                 <li class="childSkill">
-                                                    <span class="skillText"><a href="@Url.Action("Index","Search", new {searchString = skill.Split('-').Length>1? skill.Split('-')[1].Trim():skill.Split('-')[0].Trim()})">@skill</a></span>
+                                                    <span class="skillText"><a href="@Url.Action("Index", "Search", new { searchString = skill.Split('-').Length > 1 ? skill.Split('-')[1].Trim() : skill.Split('-')[0].Trim() })">@skill</a></span>
                                                 </li>
                                             }
                                         </ul>
