@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.AddJob = true;
     int numShowMaid = 3;
+    List<Maid> maidList = ViewBag.MaidList;
 }
 
 <div class="Menu">
@@ -41,52 +42,55 @@
                                 <div class="modal-header chooseMaidModalTitle">
                                     <button type="button" class="close" data-dismiss="modal">
                                         <span aria-hidden="true">×</span><span
-                                            class="sr-only">Close</span></button>
+                                                                             class="sr-only">Close</span></button>
                                     <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
                                         lý</h4>
                                 </div>
-                                <div class="modal-body chooseMaidModalMaid">
-                                    <div id="back" class="rimaMore" style="display: none;" onclick="preMaids()">
-                                        <span class="glyphicon glyphicon-chevron-up"></span>
+                                @if(maidList.Any())
+                                {
+                                    <div class="modal-body chooseMaidModalMaid">
+                                        <div id="back" class="rimaMore" style="display: none;" onclick="preMaids()">
+                                            <span class="glyphicon glyphicon-chevron-up"></span>
+                                        </div>
+                                        <input id="currPos" type="hidden" value="@(numShowMaid - 1)" />
+                                        @{ int counter = -1; }
+                                        @foreach (var maid in maidList)
+                                        {
+                                            counter++;
+                                            <div id="@counter" class="radio" style="display: @(counter > (numShowMaid - 1) ? "none" : "");">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId">
+                                                    <div class="chooseMaid@(counter)">
+                                                        <div class="liImage">
+                                                            <img id="@maid.MaidId img" src="@maid.PersonalImage" alt="Maid sercive" height="100%">
+                                                        </div>
+                                                        <div class="liMaidContent">
+                                                            <div class="licoFullName">
+                                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new {maidId = maid.MaidId})" target="_blank" id="@maid.MaidId name">@maid.MaidName</a>
+                                                            </div>
+                                                            <div class="licoRate">
+                                                                @Html.Partial("_PartialStar", (float) maid.RateAvg)
+                                                            </div>
+                                                            <div class="blTime">
+                                                                <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender == true ? "Nam" : "Nữ")</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        }
+                                        <input id="lastPos" type="hidden" value="@counter"/>
+                                        @if (counter >= numShowMaid)
+                                        {
+                                            <div id="next" class="rimaMore" onclick="nextMaids()">
+                                                <span class="glyphicon glyphicon-chevron-down"></span>
+                                            </div>
+                                        }
                                     </div>
-                                    <input id="currPos" type="hidden" value="@(numShowMaid-1)" />
-                                    @{int counter = -1;}
-                                    @foreach (var maid in (List<Maid>)ViewBag.MaidList)
-                                    {
-                                        counter++;
-                                        <div id="@counter" class="radio" style="display: @(counter > (numShowMaid-1) ? "none" : "");">
-                                            <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId">
-                                                <div class="chooseMaid@(counter)">
-                                                    <div class="liImage">
-                                                        <img id="@maid.MaidId img" src="@maid.PersonalImage" alt="Maid sercive" height="100%">
-                                                    </div>
-                                                    <div class="liMaidContent">
-                                                        <div class="licoFullName">
-                                                            <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" target="_blank" id="@maid.MaidId name">@maid.MaidName</a>
-                                                        </div>
-                                                        <div class="licoRate">
-                                                            @Html.Partial("_PartialStar", (float)maid.RateAvg)
-                                                        </div>
-                                                        <div class="blTime">
-                                                            <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender == true ? "Nam" : "Nữ")</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    }
-                                    <input id="lastPos" type="hidden" value="@counter"/>
-                                    @if (counter >= numShowMaid)
-                                    {
-                                        <div id="next" class="rimaMore" onclick="nextMaids()">
-                                            <span class="glyphicon glyphicon-chevron-down"></span>
-                                        </div>
-                                    }
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="chooseMaid()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
-                                </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="chooseMaid()" style="margin-left: 75px; margin-bottom: 10px;">Đồng ý</button>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
