@@ -331,11 +331,10 @@
             <div class="modal-body chooseMaidModalMaid">
                 <span>Thời gian gia hạn</span>
                 <select id="week" class="form-control" name="extend" onchange="chooseWeek()">
-                    <option value="1">1 tuần</option>
-                    <option value="2">2 tuần</option>
-                    <option value="3">3 tuần</option>
-                    <option value="4">4 tuần</option>
-                    <option value="5">5 tuần</option>
+                     @for (int i = 1; i <= (int)Session["MaxWeek"];i++ )
+                                {
+                                    <option value="@i">@i tuần</option>
+                                }
                 </select>
                 <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
             </div>

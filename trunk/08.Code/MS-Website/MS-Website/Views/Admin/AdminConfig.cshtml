@@ -94,6 +94,30 @@
                     </div>
                 </div>
             }
+            @using (Html.BeginForm("ManageMaxWeek", "Admin", FormMethod.Post))
+            {
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-4 poJRTtitle">
+                            Tuần đăng tối đa
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-4" style="margin-top: 11px;">Hiện tại: <span id="maxWeek">@(Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["MaxWeek"]))</span>  tuần</div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2 poJRTtitleSmall"><span>Số mới</span></div>
+                                <div class="col-md-3">
+                                    <input type="text" id="txtMaxWeek" class="form-control" name="sMaxWeek" value="@(Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["MaxWeek"]))">
+                                <div id="errMW" style="color: red"></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" onclick="ChangeMaxWeek()" class="btn btn-success">Sửa số tuần</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -143,6 +167,24 @@
             });
         } else {
             $("#errRC").html("Phải nhập số nguyên!");
+        }
+    }
+    
+    function ChangeMaxWeek() {
+        $("#NotiSuss").fadeOut();
+        $("#errMW").html("");
+        var url = "/Admin/ManageMaxWeek";
+        var sMaxWeek = $('#txtMaxWeek').val();
+        var reg = new RegExp('^\s*-?[0-9]{1,10}\s*$');
+        if (reg.test(sMaxWeek)) {
+            $.post(url, { sMaxWeek: sMaxWeek }, function (data) {
+                $("#NotiSuss").fadeIn();
+                $("#NotiFail").fadeOut();
+                $("#contentNotiSuss").html("Cập nhập số tuần thành công.");
+                $("#maxWeek").html($('#txtMaxWeek').val());
+            });
+        } else {
+            $("#errMW").html("Phải nhập số nguyên!");
         }
     }
 
