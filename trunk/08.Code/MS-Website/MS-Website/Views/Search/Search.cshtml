@@ -32,7 +32,7 @@
                                     Giới tính
                                 </div>
                                 <div class="scContent">
-                                     <input type="radio" name="gender" value="all" onclick="search()" @(ViewBag.Gender == null || ViewBag.Gender.Equals("all") ? "checked" : "")/>Tất cả<br />
+                                    <input type="radio" name="gender" value="all" onclick="search()" @(ViewBag.Gender == null || ViewBag.Gender.Equals("all") ? "checked" : "")/>Tất cả<br />
                                     <input type="radio" name="gender" value="Nam" onclick="search()" @(ViewBag.Gender != null && ViewBag.Gender.Equals("Nam") ? "checked" : "true")/>Nam<br />
                                     <input type="radio" name="gender" value="Nữ" onclick="search()" @(ViewBag.Gender != null && ViewBag.Gender.Equals("Nữ") ? "checked" : "true")/>Nữ
                                 </div>
@@ -114,10 +114,10 @@
             <div class="col-md-9">
                 <div id="bodyCenter">
                     <div class="tab-content">
-                         <ul class="pagination pagination-sm pagingIndex" id="pagingTabMaid" style="display: block">
-                                        <li class="active"><a>1</a></li>
+                        <ul class="pagination pagination-sm pagingIndex" id="pagingTabMaid" style="display: block">
+                            <li class="active"><a>1</a></li>
 
-                            </ul>
+                        </ul>
                         <ul class="nav nav-tabs listTitle" role="tablist" id="myTab">
                             @if (ViewBag.JobRequest != null)
                             {
@@ -150,7 +150,7 @@
                                 </div>*@
                                     <div class="mainContent">
                                         <ul>
-                                            @foreach (var job in (List<MS_Website.Models.JobRequestTemp>) ViewBag.JobRequest)
+                                            @foreach (var job in (List<MS_Website.Models.JobRequestTemp>)ViewBag.JobRequest)
                                             {
                                                 <li class="childContent">
                                                     <div class="function">
@@ -172,7 +172,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="rate">
-                                                            @Html.Partial("_PartialStar",(float)job.Maid.RateAvg)
+                                                            @Html.Partial("_PartialStar", (float)job.Maid.RateAvg)
                                                         </div>
                                                         <div class="detailInfo">
                                                             <strong>Đăng ngày: </strong><span>@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
@@ -185,7 +185,9 @@
                                                             <ul>
                                                                 @foreach (var skill in job.SkillList)
                                                                 {
-                                                                    <li class="childSkill"><span class="skillText">@skill</span></li>
+                                                                    <li class="childSkill">
+                                                                        <span class="skillText"><a href="@Url.Action("Index","Search", new {searchString = skill.Split('-').Length>1? skill.Split('-')[1].Trim():skill.Split('-')[0].Trim()})">@skill</a></span>
+                                                                    </li>
                                                                 }
                                                             </ul>
                                                         </div>
@@ -219,7 +221,7 @@
                                 </div>*@
                                     <div class="mainContent">
                                         <ul>
-                                            @foreach (var recruit in (List<MS_Website.Models.RecruitmentTemp>) ViewBag.Recruitment)
+                                            @foreach (var recruit in (List<MS_Website.Models.RecruitmentTemp>)ViewBag.Recruitment)
                                             {
                                                 <li class="childContent">
                                                     <div class="function">
@@ -231,7 +233,7 @@
                                                         <div class="row">
                                                             <div class="col-md-8">
                                                                 <div class="name">
-                                                                    <a href="@Url.Action("GetRecruitment","Post",new {recruitmentId=recruit.Recruitment.RecruitmentId})">@recruit.Recruitment.Title</a>
+                                                                    <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = recruit.Recruitment.RecruitmentId })">@recruit.Recruitment.Title</a>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -249,7 +251,9 @@
                                                             <ul>
                                                                 @foreach (var skill in recruit.SkillList)
                                                                 {
-                                                                    <li class="childSkill"><span class="skillText">@skill</span></li>
+                                                                    <li class="childSkill">
+                                                                        <span class="skillText"><a href="@Url.Action("Index","Search", new {searchString = skill.Split('-').Length>1? skill.Split('-')[1].Trim():skill.Split('-')[0].Trim()})">@skill</a></span>
+                                                                    </li>
                                                                 }
                                                             </ul>
                                                         </div>
