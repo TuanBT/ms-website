@@ -137,12 +137,13 @@
                             Các kỹ năng
                         </div>
                         <div class="col-md-8">
-                            <div class="boxPostJRSkill">
+                            <div class="boxPostJRSkill" data-toggle="modal" data-target=".chooseSkillModel" onclick="return cancel()">
                                 <div class="skillPost">
                                     <div class="postOpenButton">
-                                        <button class="btn btn-primary" data-toggle="modal" data-target=".chooseSkillModel" onclick="return cancel()">
+                                         <span class="glyphicon glyphicon-plus-sign"></span>
+                                        @*<button class="btn btn-primary" data-toggle="modal" data-target=".chooseSkillModel" onclick="return cancel()">
                                             Thêm kỹ năng
-                                        </button>
+                                        </button>*@
                                     </div>
                                     <ul id="chosenSkills">
                                         @{
