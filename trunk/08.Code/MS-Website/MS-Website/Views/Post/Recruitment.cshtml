@@ -233,7 +233,7 @@
                                 @foreach (var job in Recommend)
                                 {
                                     <li id="@counter" style="display: @(counter > 1 ? "none" : "");">
-                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">
+                                        <a href="@Url.Action("GetJobRequest", "Post", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId, jobId = job.Job.JobRequestId })">
                                             <span class="listSuCuImage">
                                                 <img src="@job.Maid.PersonalImage" alt="Maid sercive" height="100%">
                                             </span>
