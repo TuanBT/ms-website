@@ -14,168 +14,192 @@ namespace MS_Website.Controllers
         [HttpPost]
         public ActionResult RunKmean(string numCluterKStr)
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                //var skillRefJrTable = db.SkillReferences.Where(s => s.Type == 0).ToList();
-                //var skillRefTable = new d
-                List<int> skillRefIds = new List<int>();
-                var jobRequests = db.JobRequests.Where(j => j.Status == "Waiting").ToList();
-                foreach (var jobRequest in jobRequests)
+                if (Session["Role"].Equals("Admin"))
                 {
-                    skillRefIds.Add(db.SkillReferences.SingleOrDefault(s => s.SkillRefId == jobRequest.SkillRefId).SkillRefId);
-                }
-                var recruitments = db.Recruitments.Where(r => r.Status == "Waiting").ToList();
-                foreach (var recruitment in recruitments)
-                {
-                    skillRefIds.Add(db.SkillReferences.SingleOrDefault(s => s.SkillRefId == recruitment.SkillRefId).SkillRefId);
-                }
-
-                string strPathServer = AppDomain.CurrentDomain.BaseDirectory;
-                string strMeansDataFile = strPathServer + "App_Data\\" + "meansData.txt";
-                //Choose max count/10
-                /*int numCluterK = (skillRefTable.Count() - skillRefJrTable.Count()) > skillRefJrTable.Count()
-                                     ? (skillRefTable.Count() - skillRefJrTable.Count())/10
-                                     : skillRefJrTable.Count()/10;
-                if (numCluterK == 0) numCluterK = 1;*/
-                var numCluterK = numCluterKStr != "" ? Convert.ToInt32(numCluterKStr) : 1;
-                var kmean = new Kmean(numCluterK, strMeansDataFile);
-                var kmeanDatas = new List<KmeanData>();
-                for (int j = 0; j < skillRefIds.Count; j++)
-                {
-                    int id = skillRefIds[j];
-                    var skillRef = db.SkillReferences.FirstOrDefault(s => s.SkillRefId == id);
-                    int gender = skillRef.Gender != null ? skillRef.Gender.Value : -1;
-                    double genderVl = gender != -1
-                                          ? db.SkillInstances.FirstOrDefault(s => s.SkillId == gender).SkillNormallized
-                                          : 0;
-                    int age = skillRef.Age != null ? skillRef.Age.Value : -1;
-                    double ageVl = age != -1
-                                       ? db.SkillInstances.FirstOrDefault(s => s.SkillId == age).SkillNormallized
-                                       : 0;
-                    int languageEnglish = skillRef.LanguageEnglish != null ? skillRef.LanguageEnglish.Value : -1;
-                    double languageEnglishVl = languageEnglish != -1
-                                                   ? db.SkillInstances.FirstOrDefault(s => s.SkillId == languageEnglish)
-                                                         .SkillNormallized
-                                                   : -1;
-                    int LanguageChinese = skillRef.LanguageChinese != null ? skillRef.LanguageChinese.Value : -1;
-                    double LanguageChineseVl = LanguageChinese != -1
-                                                   ? db.SkillInstances.FirstOrDefault(s => s.SkillId == LanguageChinese)
-                                                         .SkillNormallized
-                                                   : 0;
-                    int languageJapanese = skillRef.LanguageJapanese != null ? skillRef.LanguageJapanese.Value : -1;
-                    double languageJapaneseVl = languageJapanese != -1
-                                                    ? db.SkillInstances.FirstOrDefault(
-                                                        s => s.SkillId == languageJapanese).SkillNormallized
-                                                    : 0;
-                    int languageKorean = skillRef.LanguageKorean != null ? skillRef.LanguageKorean.Value : -1;
-                    double languageKoreanVl = languageKorean != -1
-                                                  ? db.SkillInstances.FirstOrDefault(s => s.SkillId == languageKorean).
-                                                        SkillNormallized
-                                                  : 0;
-                    int experience = skillRef.Experience != null ? skillRef.Experience.Value : -1;
-                    double experienceVl = experience != -1
-                                              ? db.SkillInstances.FirstOrDefault(s => s.SkillId == experience).
-                                                    SkillNormallized
-                                              : 0;
-                    int hometown = skillRef.Hometown != null ? skillRef.Hometown.Value : -1;
-                    double hometownVl = hometown != -1
-                                            ? db.SkillInstances.FirstOrDefault(s => s.SkillId == hometown).
-                                                  SkillNormallized
-                                            : 0;
-                    int address = skillRef.Address != null ? skillRef.Address.Value : -1;
-                    double addressVl = address != -1
-                                           ? db.SkillInstances.FirstOrDefault(s => s.SkillId == address).
-                                                 SkillNormallized
-                                           : 0;
-                    int Married = skillRef.Married != null ? skillRef.Married.Value : -1;
-                    double MarriedVl = Married != -1
-                                           ? db.SkillInstances.FirstOrDefault(s => s.SkillId == Married).
-                                                 SkillNormallized
-                                           : 0;
-                    int stay = skillRef.Stay != null ? skillRef.Stay.Value : -1;
-                    double stayVl = stay != -1
-                                        ? db.SkillInstances.FirstOrDefault(s => s.SkillId == stay).SkillNormallized
-                                        : 0;
-                    int salary = skillRef.Salary != null ? skillRef.Salary.Value : -1;
-                    double salaryVl = salary != -1
-                                          ? db.SkillInstances.FirstOrDefault(s => s.SkillId == salary).SkillNormallized
-                                          : 0;
-                    int work = skillRef.Work != null ? skillRef.Work.Value : -1;
-                    double workVl = work != -1
-                                        ? db.SkillInstances.FirstOrDefault(s => s.SkillId == work).SkillNormallized
-                                        : 0;
-                    int sickCare = skillRef.SickCare != null ? skillRef.SickCare.Value : -1;
-                    double sickCareVl = sickCare != -1
-                                            ? db.SkillInstances.FirstOrDefault(s => s.SkillId == sickCare).
-                                                  SkillNormallized
-                                            : 0;
-                    int oldCare = skillRef.OldCare != null ? skillRef.OldCare.Value : -1;
-                    double oldCareVl = oldCare != -1
-                                           ? db.SkillInstances.FirstOrDefault(s => s.SkillId == oldCare).
-                                                 SkillNormallized
-                                           : 0;
-                    int babySister = skillRef.BabySister != null ? skillRef.BabySister.Value : -1;
-                    double babySisterVl = babySister != -1
-                                              ? db.SkillInstances.FirstOrDefault(s => s.SkillId == babySister).
-                                                    SkillNormallized
-                                              : 0;
-                    int disabilityCare = skillRef.DisabilityCare != null ? skillRef.DisabilityCare.Value : -1;
-                    double disabilityCareVl = disabilityCare != -1
-                                                  ? db.SkillInstances.FirstOrDefault(s => s.SkillId == disabilityCare).
-                                                        SkillNormallized
-                                                  : 0;
-                    int bonsaiCare = skillRef.BonsaiCare != null ? skillRef.BonsaiCare.Value : -1;
-                    double bonsaiCareVl = bonsaiCare != -1
-                                              ? db.SkillInstances.FirstOrDefault(s => s.SkillId == bonsaiCare).
-                                                    SkillNormallized
-                                              : 0;
-                    int cooking = skillRef.Cooking != null ? skillRef.Cooking.Value : -1;
-                    double cookingVl = cooking != -1
-                                           ? db.SkillInstances.FirstOrDefault(s => s.SkillId == cooking).
-                                                 SkillNormallized
-                                           : 0;
-                    int washing = skillRef.Washing != null ? skillRef.Washing.Value : -1;
-                    double washingVl = washing != -1
-                                           ? db.SkillInstances.FirstOrDefault(s => s.SkillId == washing).
-                                                 SkillNormallized
-                                           : 0;
-                    int cleanHouse = skillRef.CleanHouse != null ? skillRef.CleanHouse.Value : -1;
-                    double cleanHouseVl = cleanHouse != -1
-                                              ? db.SkillInstances.FirstOrDefault(s => s.SkillId == cleanHouse).
-                                                    SkillNormallized
-                                              : 0;
-
-                    var kmeanData = new KmeanData
+                    using (var db = new MSEntities())
+                    {
+                        //var skillRefJrTable = db.SkillReferences.Where(s => s.Type == 0).ToList();
+                        //var skillRefTable = new d
+                        List<int> skillRefIds = new List<int>();
+                        var jobRequests = db.JobRequests.Where(j => j.Status == "Waiting").ToList();
+                        foreach (var jobRequest in jobRequests)
                         {
-                            dataRowId = skillRef.SkillRefId,
-                            dataRow = new double[]
+                            skillRefIds.Add(
+                                db.SkillReferences.SingleOrDefault(s => s.SkillRefId == jobRequest.SkillRefId).
+                                    SkillRefId);
+                        }
+                        var recruitments = db.Recruitments.Where(r => r.Status == "Waiting").ToList();
+                        foreach (var recruitment in recruitments)
+                        {
+                            skillRefIds.Add(
+                                db.SkillReferences.SingleOrDefault(s => s.SkillRefId == recruitment.SkillRefId).
+                                    SkillRefId);
+                        }
+
+                        string strPathServer = AppDomain.CurrentDomain.BaseDirectory;
+                        string strMeansDataFile = strPathServer + "App_Data\\" + "meansData.txt";
+                        //Choose max count/10
+                        /*int numCluterK = (skillRefTable.Count() - skillRefJrTable.Count()) > skillRefJrTable.Count()
+                                             ? (skillRefTable.Count() - skillRefJrTable.Count())/10
+                                             : skillRefJrTable.Count()/10;
+                        if (numCluterK == 0) numCluterK = 1;*/
+                        var numCluterK = numCluterKStr != "" ? Convert.ToInt32(numCluterKStr) : 1;
+                        var kmean = new Kmean(numCluterK, strMeansDataFile);
+                        var kmeanDatas = new List<KmeanData>();
+                        for (int j = 0; j < skillRefIds.Count; j++)
+                        {
+                            int id = skillRefIds[j];
+                            var skillRef = db.SkillReferences.FirstOrDefault(s => s.SkillRefId == id);
+                            int gender = skillRef.Gender != null ? skillRef.Gender.Value : -1;
+                            double genderVl = gender != -1
+                                                  ? db.SkillInstances.FirstOrDefault(s => s.SkillId == gender).
+                                                        SkillNormallized
+                                                  : 0;
+                            int age = skillRef.Age != null ? skillRef.Age.Value : -1;
+                            double ageVl = age != -1
+                                               ? db.SkillInstances.FirstOrDefault(s => s.SkillId == age).
+                                                     SkillNormallized
+                                               : 0;
+                            int languageEnglish = skillRef.LanguageEnglish != null ? skillRef.LanguageEnglish.Value : -1;
+                            double languageEnglishVl = languageEnglish != -1
+                                                           ? db.SkillInstances.FirstOrDefault(
+                                                               s => s.SkillId == languageEnglish)
+                                                                 .SkillNormallized
+                                                           : -1;
+                            int LanguageChinese = skillRef.LanguageChinese != null ? skillRef.LanguageChinese.Value : -1;
+                            double LanguageChineseVl = LanguageChinese != -1
+                                                           ? db.SkillInstances.FirstOrDefault(
+                                                               s => s.SkillId == LanguageChinese)
+                                                                 .SkillNormallized
+                                                           : 0;
+                            int languageJapanese = skillRef.LanguageJapanese != null
+                                                       ? skillRef.LanguageJapanese.Value
+                                                       : -1;
+                            double languageJapaneseVl = languageJapanese != -1
+                                                            ? db.SkillInstances.FirstOrDefault(
+                                                                s => s.SkillId == languageJapanese).SkillNormallized
+                                                            : 0;
+                            int languageKorean = skillRef.LanguageKorean != null ? skillRef.LanguageKorean.Value : -1;
+                            double languageKoreanVl = languageKorean != -1
+                                                          ? db.SkillInstances.FirstOrDefault(
+                                                              s => s.SkillId == languageKorean).
+                                                                SkillNormallized
+                                                          : 0;
+                            int experience = skillRef.Experience != null ? skillRef.Experience.Value : -1;
+                            double experienceVl = experience != -1
+                                                      ? db.SkillInstances.FirstOrDefault(s => s.SkillId == experience).
+                                                            SkillNormallized
+                                                      : 0;
+                            int hometown = skillRef.Hometown != null ? skillRef.Hometown.Value : -1;
+                            double hometownVl = hometown != -1
+                                                    ? db.SkillInstances.FirstOrDefault(s => s.SkillId == hometown).
+                                                          SkillNormallized
+                                                    : 0;
+                            int address = skillRef.Address != null ? skillRef.Address.Value : -1;
+                            double addressVl = address != -1
+                                                   ? db.SkillInstances.FirstOrDefault(s => s.SkillId == address).
+                                                         SkillNormallized
+                                                   : 0;
+                            int Married = skillRef.Married != null ? skillRef.Married.Value : -1;
+                            double MarriedVl = Married != -1
+                                                   ? db.SkillInstances.FirstOrDefault(s => s.SkillId == Married).
+                                                         SkillNormallized
+                                                   : 0;
+                            int stay = skillRef.Stay != null ? skillRef.Stay.Value : -1;
+                            double stayVl = stay != -1
+                                                ? db.SkillInstances.FirstOrDefault(s => s.SkillId == stay).
+                                                      SkillNormallized
+                                                : 0;
+                            int salary = skillRef.Salary != null ? skillRef.Salary.Value : -1;
+                            double salaryVl = salary != -1
+                                                  ? db.SkillInstances.FirstOrDefault(s => s.SkillId == salary).
+                                                        SkillNormallized
+                                                  : 0;
+                            int work = skillRef.Work != null ? skillRef.Work.Value : -1;
+                            double workVl = work != -1
+                                                ? db.SkillInstances.FirstOrDefault(s => s.SkillId == work).
+                                                      SkillNormallized
+                                                : 0;
+                            int sickCare = skillRef.SickCare != null ? skillRef.SickCare.Value : -1;
+                            double sickCareVl = sickCare != -1
+                                                    ? db.SkillInstances.FirstOrDefault(s => s.SkillId == sickCare).
+                                                          SkillNormallized
+                                                    : 0;
+                            int oldCare = skillRef.OldCare != null ? skillRef.OldCare.Value : -1;
+                            double oldCareVl = oldCare != -1
+                                                   ? db.SkillInstances.FirstOrDefault(s => s.SkillId == oldCare).
+                                                         SkillNormallized
+                                                   : 0;
+                            int babySister = skillRef.BabySister != null ? skillRef.BabySister.Value : -1;
+                            double babySisterVl = babySister != -1
+                                                      ? db.SkillInstances.FirstOrDefault(s => s.SkillId == babySister).
+                                                            SkillNormallized
+                                                      : 0;
+                            int disabilityCare = skillRef.DisabilityCare != null ? skillRef.DisabilityCare.Value : -1;
+                            double disabilityCareVl = disabilityCare != -1
+                                                          ? db.SkillInstances.FirstOrDefault(
+                                                              s => s.SkillId == disabilityCare).
+                                                                SkillNormallized
+                                                          : 0;
+                            int bonsaiCare = skillRef.BonsaiCare != null ? skillRef.BonsaiCare.Value : -1;
+                            double bonsaiCareVl = bonsaiCare != -1
+                                                      ? db.SkillInstances.FirstOrDefault(s => s.SkillId == bonsaiCare).
+                                                            SkillNormallized
+                                                      : 0;
+                            int cooking = skillRef.Cooking != null ? skillRef.Cooking.Value : -1;
+                            double cookingVl = cooking != -1
+                                                   ? db.SkillInstances.FirstOrDefault(s => s.SkillId == cooking).
+                                                         SkillNormallized
+                                                   : 0;
+                            int washing = skillRef.Washing != null ? skillRef.Washing.Value : -1;
+                            double washingVl = washing != -1
+                                                   ? db.SkillInstances.FirstOrDefault(s => s.SkillId == washing).
+                                                         SkillNormallized
+                                                   : 0;
+                            int cleanHouse = skillRef.CleanHouse != null ? skillRef.CleanHouse.Value : -1;
+                            double cleanHouseVl = cleanHouse != -1
+                                                      ? db.SkillInstances.FirstOrDefault(s => s.SkillId == cleanHouse).
+                                                            SkillNormallized
+                                                      : 0;
+
+                            var kmeanData = new KmeanData
                                 {
-                                    genderVl, ageVl, languageEnglishVl, LanguageChineseVl, languageJapaneseVl,
-                                    languageKoreanVl,
-                                    experienceVl, hometownVl, addressVl, MarriedVl, stayVl, salaryVl, workVl, sickCareVl
-                                    , oldCareVl, babySisterVl, disabilityCareVl,
-                                    bonsaiCareVl, cookingVl, washingVl, cleanHouseVl
-                                },
-                            group = -1,
-                            distance = -1
-                        };
-                    kmeanDatas.Add(kmeanData);
-                }
-                //Run alg and write group
-                kmeanDatas = kmean.GetKmeanData(kmeanDatas);
+                                    dataRowId = skillRef.SkillRefId,
+                                    dataRow = new double[]
+                                        {
+                                            genderVl, ageVl, languageEnglishVl, LanguageChineseVl, languageJapaneseVl,
+                                            languageKoreanVl,
+                                            experienceVl, hometownVl, addressVl, MarriedVl, stayVl, salaryVl, workVl,
+                                            sickCareVl
+                                            , oldCareVl, babySisterVl, disabilityCareVl,
+                                            bonsaiCareVl, cookingVl, washingVl, cleanHouseVl
+                                        },
+                                    group = -1,
+                                    distance = -1
+                                };
+                            kmeanDatas.Add(kmeanData);
+                        }
+                        //Run alg and write group
+                        kmeanDatas = kmean.GetKmeanData(kmeanDatas);
 
-                var means = kmean.GetMeansFile();
+                        var means = kmean.GetMeansFile();
 
-                for (var j = 0; j < skillRefIds.Count; j++)
-                {
-                    int id = skillRefIds[j];
-                    var skillRef = db.SkillReferences.FirstOrDefault(s => s.SkillRefId == id);
-                    skillRef.Group = kmeanDatas[j].group;
-                    skillRef.Distance = kmean.GetDistanceRowData(kmeanDatas[j].dataRow, kmeanDatas[j].group, means);
+                        for (var j = 0; j < skillRefIds.Count; j++)
+                        {
+                            int id = skillRefIds[j];
+                            var skillRef = db.SkillReferences.FirstOrDefault(s => s.SkillRefId == id);
+                            skillRef.Group = kmeanDatas[j].group;
+                            skillRef.Distance = kmean.GetDistanceRowData(kmeanDatas[j].dataRow, kmeanDatas[j].group,
+                                                                         means);
+                        }
+                        db.SaveChanges();
+                    }
+                    return RedirectToAction("AdminConfig", "Admin");
                 }
-                db.SaveChanges();
             }
-            return RedirectToAction("AdminConfig", "Admin");
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult AdminConfig()
@@ -216,42 +240,45 @@ namespace MS_Website.Controllers
 
         public ActionResult AddStaff(Account acc, string account)
         {
-            if (Session["AccId"] != null && Session["IsAdmin"].Equals(true))
+            if (Session["AccId"] != null)
             {
-                using (var db = new MSEntities())
+                if (Session["Role"].Equals("Admin"))
                 {
-                    try
+                    using (var db = new MSEntities())
                     {
-                        var error = db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
-                        if (error != null)
+                        try
                         {
-                            ViewBag.Err = "Tên đăng nhập đã tồn tại";
+                            var error = db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                            if (error != null)
+                            {
+                                ViewBag.Err = "Tên đăng nhập đã tồn tại";
+                                return View("AddStaff");
+                            }
+                            var newStaff = db.Accounts.Create();
+                            newStaff.Username = acc.Username;
+                            newStaff.Password = acc.Password;
+                            newStaff.IsActive = true;
+                            newStaff.JoinDate = DateTime.Now;
+                            newStaff.Role = "Staff";
+                            newStaff.IsWebmaster = false;
+                            newStaff.Email = null;
+                            newStaff.Phone = null;
+                            newStaff.FullName = null;
+                            newStaff.Avatar = null;
+                            db.Accounts.Add(newStaff);
+                            db.SaveChanges();
+
+                            var addedAcc = db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                            var newStaffs = new Staff { AccountId = addedAcc.AccountId };
+                            db.Staffs.Add(newStaffs);
+                            db.SaveChanges();
+                            return RedirectToAction("BanAccount", "Admin", acc);
+
+                        }
+                        catch (Exception)
+                        {
                             return View("AddStaff");
                         }
-                        var newStaff = db.Accounts.Create();
-                        newStaff.Username = acc.Username;
-                        newStaff.Password = acc.Password;
-                        newStaff.IsActive = true;
-                        newStaff.JoinDate = DateTime.Now;
-                        newStaff.Role = "Staff";
-                        newStaff.IsWebmaster = false;
-                        newStaff.Email = null;
-                        newStaff.Phone = null;
-                        newStaff.FullName = null;
-                        newStaff.Avatar = null;
-                        db.Accounts.Add(newStaff);
-                        db.SaveChanges();
-
-                        var addedAcc = db.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
-                        var newStaffs = new Staff { AccountId = addedAcc.AccountId };
-                        db.Staffs.Add(newStaffs);
-                        db.SaveChanges();
-                        return RedirectToAction("BanAccount", "Admin", acc);
-
-                    }
-                    catch (Exception)
-                    {
-                        return View("AddStaff");
                     }
                 }
             }
@@ -261,15 +288,14 @@ namespace MS_Website.Controllers
         public ActionResult BanAccount()
         {
 
-            if (Session["AccId"] != null && Session["IsAdmin"].Equals(true))
+            if (Session["AccId"] != null)
             {
-
-                var db = new MSEntities();
-                var acc = db.Accounts.Where(a => a.IsActive.Equals(true) && a.IsWebmaster.Equals(false)).ToList();
-
-
-
-                return View("BanAccount", acc);
+                if (Session["Role"].Equals("Admin"))
+                {
+                    var db = new MSEntities();
+                    var acc = db.Accounts.Where(a => a.IsActive.Equals(true) && a.IsWebmaster.Equals(false)).ToList();
+                    return View("BanAccount", acc);
+                }
             }
             return RedirectToAction("Login", "Home");
 
@@ -278,18 +304,21 @@ namespace MS_Website.Controllers
         [HttpGet]
         public ActionResult MarkActive(int accountId)
         {
-            if (Session["AccId"] != null && Session["IsAdmin"].Equals(true))
+            if (Session["AccId"] != null)
             {
-                var db = new MSEntities();
-
-                using (db)
+                if (Session["Role"].Equals("Admin"))
                 {
+                    var db = new MSEntities();
 
-                    var acc = db.Accounts.SingleOrDefault(j => j.AccountId == accountId);
-                    acc.IsActive = false;
-                    db.SaveChanges();
-                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                    return RedirectToAction("BanAccount", "Admin");
+                    using (db)
+                    {
+
+                        var acc = db.Accounts.SingleOrDefault(j => j.AccountId == accountId);
+                        acc.IsActive = false;
+                        db.SaveChanges();
+                        //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                        return RedirectToAction("BanAccount", "Admin");
+                    }
                 }
             }
             return RedirectToAction("Login", "Home");
@@ -298,26 +327,29 @@ namespace MS_Website.Controllers
         public ActionResult ManageComment()
         {
 
-            if (Session["AccId"] != null && Session["IsAdmin"].Equals(true))
+            if (Session["AccId"] != null)
             {
-                List<CommentTemp> commentTemps = new List<CommentTemp>();
-                using (var db = new MSEntities())
+                if (Session["Role"].Equals("Admin"))
                 {
-                    var comments = db.Comments.Where(c => c.CommentId != null).ToList();
-                    foreach (var comment in comments)
+                    List<CommentTemp> commentTemps = new List<CommentTemp>();
+                    using (var db = new MSEntities())
                     {
+                        var comments = db.Comments.Where(c => c.CommentId != null).ToList();
+                        foreach (var comment in comments)
+                        {
 
-                        var commentTemp = new CommentTemp
-                            {
-                                Comment = comment,
-                                Account = db.Accounts.FirstOrDefault(j => j.AccountId == comment.CustomerId),
-                                Job = db.JobRequests.FirstOrDefault(j => j.JobRequestId == comment.JobRequestId),
-                            };
-                        commentTemps.Add(commentTemp);
+                            var commentTemp = new CommentTemp
+                                {
+                                    Comment = comment,
+                                    Account = db.Accounts.FirstOrDefault(j => j.AccountId == comment.CustomerId),
+                                    Job = db.JobRequests.FirstOrDefault(j => j.JobRequestId == comment.JobRequestId),
+                                };
+                            commentTemps.Add(commentTemp);
+                        }
+                        //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                        //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                        return View(commentTemps);
                     }
-                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                    //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                    return View(commentTemps);
                 }
             }
             return RedirectToAction("Login", "Home");
@@ -328,16 +360,19 @@ namespace MS_Website.Controllers
         {
             if (Session["AccId"] != null)
             {
-                var db = new MSEntities();
-
-                using (db)
+                if (Session["Role"].Equals("Admin"))
                 {
+                    var db = new MSEntities();
 
-                    var comment = db.Comments.SingleOrDefault(j => j.CommentId == commentId);
-                    db.Comments.Remove(comment);
-                    db.SaveChanges();
-                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                    return RedirectToAction("ManageComment", "Admin");
+                    using (db)
+                    {
+
+                        var comment = db.Comments.SingleOrDefault(j => j.CommentId == commentId);
+                        db.Comments.Remove(comment);
+                        db.SaveChanges();
+                        //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                        return RedirectToAction("ManageComment", "Admin");
+                    }
                 }
             }
             return RedirectToAction("Login", "Home");
@@ -346,9 +381,11 @@ namespace MS_Website.Controllers
         [HttpPost]
         public JsonResult ManageFeeJR(string SpriceJR)
         {
-            System.Configuration.Configuration config = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+            System.Configuration.Configuration config =
+                System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
 
-            System.Configuration.KeyValueConfigurationElement settingPriceJR = config.AppSettings.Settings["PriceJR"];
+            System.Configuration.KeyValueConfigurationElement settingPriceJR =
+                config.AppSettings.Settings["PriceJR"];
 
             if (null != settingPriceJR)
             {
