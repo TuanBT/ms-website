@@ -66,28 +66,28 @@
             <div class="col-md-4">
                 <div class="rightInfo">
                     @if (Session["AccId"] != null)
-                            {
-                                if ((int)Session["AccId"] == MaidManager.AccId)
-                                {
-                                    <div class="editRightInfo">
-                                    <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = maid.MaidId })" title="Sửa thông tin"><span class="glyphicon glyphicon-edit"></span></a>
-                                       </div> 
-                                        }
-                            }
+                    {
+                        if ((int)Session["AccId"] == MaidManager.AccId)
+                        {
+                        <div class="editRightInfo">
+                            <a href="@Url.Action("MaidEdit", "MaidManager", new { maidId = maid.MaidId })" title="Sửa thông tin"><span class="glyphicon glyphicon-edit"></span></a>
+                        </div> 
+                        }
+                    }
                     <ul class="riDetail">
                         @if (Session["Acc"] != null)
                         {
                             if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
                             {
-                                <li class="rideRow">
-                                    <div class="rideroTitle">
-                                        Điện thoại
-                                    </div>
-                                    <div class="rideroContent">
-                                        <strong>@Model.Phone
-                                        </strong>
-                                    </div>
-                                </li>
+                            <li class="rideRow">
+                                <div class="rideroTitle">
+                                    Điện thoại
+                                </div>
+                                <div class="rideroContent">
+                                    <strong>@Model.Phone
+                                    </strong>
+                                </div>
+                            </li>
                             }
                         }
                         <li class="rideRow">
@@ -113,7 +113,18 @@
                                 Kinh nghiệm
                             </div>
                             <div class="rideroContent">
-                                <strong>@Model.Experience năm
+                                <strong>@if (Model.Experience == 0)
+                                        {
+                                    <span>< 1 năm</span>
+                                        }
+                                        else if (Model.Experience == 2)
+                                        {
+                                    <span>1 - 3 năm</span>
+                                        }
+                                        else if (Model.Experience == 4)
+                                        {
+                                    <span>> 3 năm</span>
+                                        }
                                 </strong>
                             </div>
                         </li>
@@ -621,10 +632,10 @@
                 <div class="modal-body chooseMaidModalMaid">
                     <span>Thời gian gia hạn</span>
                     <select class="form-control" name="extend">
-                         @for (int i = 1; i <= (int)Session["MaxWeek"];i++ )
-                                {
-                                    <option value="@i">@i tuần</option>
-                                }
+                        @for (int i = 1; i <= (int)Session["MaxWeek"]; i++)
+                        {
+                            <option value="@i">@i tuần</option>
+                        }
                     </select>
                     <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
                 </div>
