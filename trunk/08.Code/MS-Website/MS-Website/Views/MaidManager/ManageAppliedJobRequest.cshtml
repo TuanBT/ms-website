@@ -16,7 +16,7 @@
                 <a href="@Url.Action("ManageRecruitment","MaidManager")" class="hChContent">Yêu cầu tìm người giúp việc</a>
             </li>
             <li class="iscurent">
-                <a href="@Url.Action("ManageAppliedJobRequest","MaidManager")" class="hChContent">Xác nhận yêu cầu tìm việc</a>
+                <a href="@Url.Action("ManageAppliedJobRequest","MaidManager")" class="hChContent">Xác nhận hoàn tất công việc</a>
             </li>
         </ul>
     </div>
@@ -89,10 +89,10 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myLargeModalLabel">Xác nhận chuyển trạng thái</h4>
+                                <h4 class="modal-title" id="myLargeModalLabel">Xác nhận hoàn tất</h4>
                             </div>
                             <div class="modal-body">
-                               Bạn đã nhận được tiền và chấp nhận chuyển trạng thái? 
+                               Bạn xác nhận là công việc này đã hoàn tất?
                             </div>
                             <div class="modal-footer">
                                 @using (Html.BeginForm("MarkApproved","MaidManager",FormMethod.Get))
