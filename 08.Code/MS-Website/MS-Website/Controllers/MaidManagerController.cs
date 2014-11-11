@@ -153,20 +153,28 @@ namespace MS_Website.Controllers
 
         public ActionResult LoadAddMaid()
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                if (Session["Hometown"] == null)
+                if (Session["Role"].Equals("Staff") || Session["Role"].Equals("MaidMediator"))
                 {
-                    Session["Hometown"] = db.SkillInstances.Where(si => si.SkillName.Equals("Hometown")).ToList();
+                    using (var db = new MSEntities())
+                    {
+                        if (Session["Hometown"] == null)
+                        {
+                            Session["Hometown"] =
+                                db.SkillInstances.Where(si => si.SkillName.Equals("Hometown")).ToList();
+                        }
+                        if (Session["Address"] == null)
+                        {
+                            Session["Address"] = db.SkillInstances.Where(si => si.SkillName.Equals("Address")).ToList();
+                        }
+                        ViewBag.Hometown = Session["Hometown"];
+                        ViewBag.Address = Session["Address"];
+                        return View("AddMaid");
+                    }
                 }
-                if (Session["Address"] == null)
-                {
-                    Session["Address"] = db.SkillInstances.Where(si => si.SkillName.Equals("Address")).ToList();
-                }
-                ViewBag.Hometown = Session["Hometown"];
-                ViewBag.Address = Session["Address"];
-                return View("AddMaid");
             }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult AddMaid(string fullname, Nullable<double> exp, string phone, string birthdate, bool gender,
