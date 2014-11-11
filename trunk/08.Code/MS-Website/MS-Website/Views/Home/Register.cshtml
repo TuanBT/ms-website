@@ -41,6 +41,7 @@
                         <article class="oSignupHelp oSignupHelpContractor "></article>
                         <div class="oFormField">
                             @Html.TextBoxFor(m => m.FullName, new { @class = "oInputText oFormMed", @id = "txtFullName", @placeholder = "Họ và tên",@maxlength="50"})
+                            <div id="FullErr"></div>
                         </div>
                         <div class="oFormField">
                             @Html.TextBoxFor(m => m.Email, new { @class = "oInputText oFormMed", @placeholder = "Email", @id = "txtEmail",@name="email" })
@@ -94,13 +95,13 @@
         var errText = "";
         var phone = new RegExp('^[0-9]+$');
         var email = new RegExp('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$');
-        if (phone.test($("#txtPhone").val()) == false) {
-            errText = "<font color='red'>Vui lòng nhập số</font>";
-            document.getElementById("PhoneErr").innerHTML = errText;
+        if ($("#txtFullName").val().trim() == "") {
+            errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
+            document.getElementById("FullErr").innerHTML = errText;
             return false;
         } else {
             errText = "";
-            document.getElementById("PhoneErr").innerHTML = errText;
+            document.getElementById("FullErr").innerHTML = errText;
         }
         if (email.test($("#txtEmail").val()) == false) {
             errText = "<font color='red'>Vui lòng nhập đúng định dạng abc@abc.abc</font>";
@@ -110,6 +111,15 @@
             errText = "";
             document.getElementById("ExpErr").innerHTML = errText;
         }
+        if (phone.test($("#txtPhone").val()) == false) {
+            errText = "<font color='red'>Vui lòng nhập số</font>";
+            document.getElementById("PhoneErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("PhoneErr").innerHTML = errText;
+        }
+        
         if ($("#txtUsername").val().trim() == "") {
             errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
             document.getElementById("textBlank").innerHTML = errText;
