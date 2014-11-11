@@ -286,7 +286,7 @@
                             </div>
                         </div>
                     </div>
-                    @if (JobRequestTemp.Job.Status == "Applied" || JobRequestTemp.Job.Status == "Approved")
+                    @if (JobRequestTemp.Job.Status == "Approved")
                     {
                         ViewBag.CusId = (int)JobRequestTemp.Recruitment.CustomerId;
                         if (ViewBag.CusId != null)
