@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Sửa yêu cầu kiếm việc";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int numShowMaid = 3;
     JobRequest jobRequest = Model;
     List<Maid> maidList = ViewBag.MaidList;
 }
@@ -69,18 +70,18 @@
                                     <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
                                         lý</h4>
                                 </div>
-                                @if (maidList.Any())
+                                @if(maidList.Any())
                                 {
                                     <div class="modal-body chooseMaidModalMaid">
                                         <div id="back" class="rimaMore" style="display: none;" onclick="preMaids()">
                                             <span class="glyphicon glyphicon-chevron-up"></span>
                                         </div>
-                                        <input id="currPos" type="hidden" value="4" />
+                                        <input id="currPos" type="hidden" value="@(numShowMaid - 1)" />
                                         @{ int counter = -1; }
-                                        @foreach (var maid in (List<Maid>)ViewBag.MaidList)
+                                        @foreach (var maid in maidList)
                                         {
                                             counter++;
-                                            <div id="@counter" class="radio" style="display: @(counter > 4 ? "none" : "");">
+                                            <div id="@counter" class="radio" style="display: @(counter > (numShowMaid - 1) ? "none" : "");">
                                                 <label>
                                                     <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId">
                                                     <div class="chooseMaid@(counter)">
@@ -89,10 +90,10 @@
                                                         </div>
                                                         <div class="liMaidContent">
                                                             <div class="licoFullName">
-                                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" target="_blank" id="@maid.MaidId name">@maid.MaidName</a>
+                                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new {maidId = maid.MaidId})" target="_blank" id="@maid.MaidId name">@maid.MaidName</a>
                                                             </div>
                                                             <div class="licoRate">
-                                                                @Html.Partial("_PartialStar", (float)maid.RateAvg)
+                                                                @Html.Partial("_PartialStar", (float) maid.RateAvg)
                                                             </div>
                                                             <div class="blTime">
                                                                 <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender == true ? "Nam" : "Nữ")</span>
@@ -103,7 +104,7 @@
                                             </div>
                                         }
                                         <input id="lastPos" type="hidden" value="@counter"/>
-                                        @if (counter > 5)
+                                        @if (counter >= numShowMaid)
                                         {
                                             <div id="next" class="rimaMore" onclick="nextMaids()">
                                                 <span class="glyphicon glyphicon-chevron-down"></span>
