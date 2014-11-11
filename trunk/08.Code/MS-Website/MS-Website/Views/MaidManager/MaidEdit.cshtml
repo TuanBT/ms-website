@@ -91,9 +91,9 @@
                         </div>
                         <div class="col-md-8">
                             <select class="form-control" name="gender">
-                                <option selected="@(maid.Gender == null ? "selected" : "")">--</option>
-                                <option value="true" selected="@(maid.Gender != null && (bool)maid.Gender ? "selected" : "")">Nam</option>
-                                <option value="false" selected="@(maid.Gender != null && !(bool)maid.Gender ? "selected" : "")">Nữ</option>
+                                <option @(maid.Gender == null ? "selected" : "")>--</option>
+                                <option value="true" @((maid.Gender != null && (bool)maid.Gender) ? "selected" : "")>Nam</option>
+                                <option value="false" @((maid.Gender != null && !(bool)maid.Gender) ? "selected" : "")>Nữ</option>
                             </select>
                         </div>
                     </div>
@@ -106,19 +106,19 @@
                         <div class="col-md-8">
                             <div class="checkbox">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" value="english" @(maid.English != null && (bool)maid.English ? "checked" : "")>
+                                    <input name="english" type="checkbox" value="english" @(maid.English != null && (bool)maid.English ? "checked" : "")>
                                     Tiếng Anh
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" value="korean" @(maid.Korean != null && (bool)maid.Korean ? "checked" : "")>
+                                    <input name="korean" type="checkbox" value="korean" @(maid.Korean != null && (bool)maid.Korean ? "checked" : "")>
                                     Tiếng Hàn
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" value="jap" @(maid.Japanese != null && (bool)maid.Japanese ? "checked" : "")>
+                                    <input name="jap" type="checkbox" value="jap" @(maid.Japanese != null && (bool)maid.Japanese ? "checked" : "")>
                                     Tiếng Nhật
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" value="chinese" @(maid.Chinese != null && (bool)maid.Chinese ? "checked" : "")>
+                                    <input name="chinese" type="checkbox" value="chinese" @(maid.Chinese != null && (bool)maid.Chinese ? "checked" : "")>
                                     Tiếng Trung
                                 </label>
                             </div>
@@ -131,7 +131,7 @@
                             Nguyên quán
                         </div>
                         <div class="col-md-8">
-                            <select class="form-control">
+                            <select class="form-control" name="hometown">
                                 <option selected="@(maid.Hometown == null ? "selected" : "")">--</option>
                                 @foreach (var item in ViewBag.Hometown)
                                 {
@@ -147,7 +147,7 @@
                             Đang sống tại
                         </div>
                         <div class="col-md-8">
-                            <select class="form-control">
+                            <select class="form-control" name="addr">
                                 <option selected="@(maid.Address == null ? "selected" : "")">--</option>
                                 @foreach (var item in ViewBag.Address)
                                 {
@@ -164,9 +164,9 @@
                         </div>
                         <div class="col-md-8">
                             <select class="form-control" name="married">
-                                <option selected="@(maid.Married == null ? "selected" : "")">--</option>
-                                <option value="true" selected="@(maid.Married != null && (bool)maid.Married ? "selected" : "")">Đã kết hôn</option>
-                                <option value="false" selected="@(maid.Married != null && !(bool)maid.Married ? "selected" : "")">Chưa kết hôn</option>
+                                <option @(maid.Married == null ? "selected" : "")>--</option>
+                                <option value="true" @(maid.Married != null && (bool)maid.Married ? "selected" : "")>Đã kết hôn</option>
+                                <option value="false" @(maid.Married != null && !(bool)maid.Married ? "selected" : "")>Chưa kết hôn</option>
                             </select>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                             Giới thiệu bản thân
                         </div>
                         <div class="col-md-8">
-                            <textarea class="form-control" rows="3" name="desc" value="@maid.Description" maxlength="100"></textarea>
+                            <textarea class="form-control" rows="3" name="desc" maxlength="100">@maid.Description</textarea>
                         </div>
                     </div>
                 </div>
