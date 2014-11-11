@@ -27,12 +27,13 @@
                             <div class="boxPostJRUser" onclick="return cancel()" data-toggle="modal" data-target=".chooseMaidModel">
                                 <div class="postOpenButton">
                                     <span class="glyphicon glyphicon-user"></span>
-                                   @* <button class="btn btn-primary" data-toggle="modal" data-target=".chooseMaidModel" onclick="return cancel()">
+                                    @* <button class="btn btn-primary" data-toggle="modal" data-target=".chooseMaidModel" onclick="return cancel()">
                                         Chọn người
                                     </button>*@
                                 </div>
                                 <div id="maidBoxChoosed"></div> 
                             </div>
+                            <div id="MaidErr"></div>
                         </div>
                     </div>
                     <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -120,10 +121,10 @@
                                             Thêm kỹ năng
                                         </button>*@
                                     </div>
-                                    <ul id="chosenSkills"></ul>
-                                    <div id="SkillErr"></div>
+                                    <ul id="chosenSkills"></ul>       
                                 </div>
                             </div>
+                             <div id="SkillErr"></div>
                         </div>
                     </div>
                     <div class="modal fade chooseSkillModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -393,14 +394,7 @@
     $("#btnEdit").click(function () {
         console.debug("sdf");
         var errText = "";
-        if ($("#txtTitle").val().trim() == "") {
-            errText = "<font color='red'>Vui lòng nhập tiêu đề</font>";
-            document.getElementById("textBlank").innerHTML = errText;
-            return false;
-        } else {
-            errText = "";
-            document.getElementById("textBlank").innerHTML = errText;
-        }
+        
         if ($("#maidBoxChoosed").html()=="") {
             errText = "<font color='red'>Vui lòng chọn người giúp việc</font>";
             document.getElementById("MaidErr").innerHTML = errText;
@@ -409,6 +403,14 @@
         else {
             errText = "";
             document.getElementById("MaidErr").innerHTML = errText;
+        }
+        if ($("#txtTitle").val().trim() == "") {
+            errText = "<font color='red'>Vui lòng nhập tiêu đề</font>";
+            document.getElementById("textBlank").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("textBlank").innerHTML = errText;
         }
         if ($("#chosenSkills").html() == "") {
             errText = "<font color='red'>Vui lòng chọn kĩ năng</font>";
