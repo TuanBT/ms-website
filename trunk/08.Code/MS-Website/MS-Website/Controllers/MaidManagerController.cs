@@ -78,9 +78,9 @@ namespace MS_Website.Controllers
 
         public ActionResult EditMaidMedProfile(string maidMedId, string fullname, string phone, string email)
         {
-            int maidMedIds = Convert.ToInt32(maidMedId);
             if (Session["AccId"] != null)
             {
+                int maidMedIds = Convert.ToInt32(maidMedId);
                 var loggedId = (int)Session["AccId"];
                 using (var db = new MSEntities())
                 {
@@ -230,9 +230,9 @@ namespace MS_Website.Controllers
             string english, string jap, string chinese, string korean, string hometown, string addr, bool married,
             string desc)
         {
-            int maidIds = Convert.ToInt32(maidId);
             if (Session["AccId"] != null)
             {
+                int maidIds = Convert.ToInt32(maidId);
                 var loggedId = (int)Session["AccId"];
                 using (var db = new MSEntities())
                 {
@@ -275,137 +275,186 @@ namespace MS_Website.Controllers
 
         public ActionResult ManageMaidProfile(int maidId)
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                var maid = db.Maids.FirstOrDefault(m => m.MaidId == maidId);
-                if (maid != null)
+                using (var db = new MSEntities())
                 {
-                    var notApplJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.Status.Equals("Waiting") && job.IsActive).ToList();
-                    var applJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.Status.Equals("Applied") && job.IsActive).ToList();
-                    var apprJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.Status.Equals("Approved") && job.IsActive).ToList();
-                    var expiredJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.Status.Equals("Expired") && job.IsActive).ToList();
-                    var hideJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.Status.Equals("Hide") && job.IsActive).ToList();
-                    var notActiveJobList = db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.IsActive == false).ToList();
-                    ViewBag.NotApplList = notApplJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).ToList();
-                    ViewBag.ApplList = (from jobRequest in applJobList let apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId) let recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId) select new JobRequestTemp(jobRequest, maid, null, recruit, null)).ToList();
-                    ViewBag.ApprList = (from jobRequest in apprJobList let apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId) let recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId) select new JobRequestTemp(jobRequest, maid, null, recruit, null)).ToList();
-                    ViewBag.ExpiredList = expiredJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).ToList();
-                    ViewBag.HideList = hideJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).ToList();
-                    ViewBag.NotActiveList = notActiveJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).ToList();
-                    if (Session["AccId"] != null)
+                    var maid = db.Maids.FirstOrDefault(m => m.MaidId == maidId);
+                    if (maid != null)
                     {
+                        var notApplJobList =
+                            db.JobRequests.Where(
+                                job => job.Maid.MaidId == maidId && job.Status.Equals("Waiting") && job.IsActive).ToList
+                                ();
+                        var applJobList =
+                            db.JobRequests.Where(
+                                job => job.Maid.MaidId == maidId && job.Status.Equals("Applied") && job.IsActive).ToList
+                                ();
+                        var apprJobList =
+                            db.JobRequests.Where(
+                                job => job.Maid.MaidId == maidId && job.Status.Equals("Approved") && job.IsActive).
+                                ToList();
+                        var expiredJobList =
+                            db.JobRequests.Where(
+                                job => job.Maid.MaidId == maidId && job.Status.Equals("Expired") && job.IsActive).ToList
+                                ();
+                        var hideJobList =
+                            db.JobRequests.Where(
+                                job => job.Maid.MaidId == maidId && job.Status.Equals("Hide") && job.IsActive).ToList();
+                        var notActiveJobList =
+                            db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.IsActive == false).ToList();
+                        ViewBag.NotApplList =
+                            notApplJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).
+                                ToList();
+                        ViewBag.ApplList = (from jobRequest in applJobList
+                                            let apply =
+                                                db.Applies.SingleOrDefault(
+                                                    a => a.JobRequestId == jobRequest.JobRequestId)
+                                            let recruit =
+                                                db.Recruitments.SingleOrDefault(
+                                                    r => r.RecruitmentId == apply.RecruitmentId)
+                                            select new JobRequestTemp(jobRequest, maid, null, recruit, null)).ToList();
+                        ViewBag.ApprList = (from jobRequest in apprJobList
+                                            let apply =
+                                                db.Applies.SingleOrDefault(
+                                                    a => a.JobRequestId == jobRequest.JobRequestId)
+                                            let recruit =
+                                                db.Recruitments.SingleOrDefault(
+                                                    r => r.RecruitmentId == apply.RecruitmentId)
+                                            select new JobRequestTemp(jobRequest, maid, null, recruit, null)).ToList();
+                        ViewBag.ExpiredList =
+                            expiredJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).
+                                ToList();
+                        ViewBag.HideList =
+                            hideJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).
+                                ToList();
+                        ViewBag.NotActiveList =
+                            notActiveJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null))
+                                .ToList();
+                        if (Session["AccId"] != null)
+                        {
+                            if (maid.MaidMediatorId != null)
+                            {
+                                if (maid.MaidMediatorId == (int) Session["AccId"])
+                                {
+                                    ViewBag.Manage = "true";
+                                }
+                            }
+                            else
+                            {
+                                if (maid.StaffId == (int) Session["AccId"])
+                                {
+                                    ViewBag.Manage = "true";
+                                }
+                            }
+                        }
                         if (maid.MaidMediatorId != null)
                         {
-                            if (maid.MaidMediatorId == (int)Session["AccId"])
-                            {
-                                ViewBag.Manage = "true";
-                            }
+                            var accId = maid.MaidMediatorId;
+                            var mUsername = maid.MaidMediator.Account.Username;
+                            var isActive = maid.MaidMediator.Account.IsActive;
+                            var joinDate = maid.MaidMediator.Account.JoinDate;
+                            var role = maid.MaidMediator.Account.Role;
+                            var avatar = maid.MaidMediator.Account.Avatar;
+                            var email = maid.MaidMediator.Account.Email;
+                            var phone = maid.MaidMediator.Account.Phone;
+                            var fullname = maid.MaidMediator.Account.FullName;
+                            var mm = new MaidManager(accId, mUsername, isActive, joinDate, role, avatar, email, phone,
+                                                     fullname);
+                            ViewBag.MaidManager = mm;
                         }
                         else
                         {
-                            if (maid.StaffId == (int)Session["AccId"])
-                            {
-                                ViewBag.Manage = "true";
-                            }
+                            var accId = maid.StaffId;
+                            var mUsername = maid.Staff.Account.Username;
+                            var isActive = maid.Staff.Account.IsActive;
+                            var joinDate = maid.Staff.Account.JoinDate;
+                            var role = maid.Staff.Account.Role;
+                            var avatar = maid.Staff.Account.Avatar;
+                            var email = maid.Staff.Account.Email;
+                            var phone = maid.Staff.Account.Phone;
+                            var fullname = maid.Staff.Account.FullName;
+                            var mm = new MaidManager(accId, mUsername, isActive, joinDate, role, avatar, email, phone,
+                                                     fullname);
+                            ViewBag.MaidManager = mm;
                         }
                     }
-                    if (maid.MaidMediatorId != null)
-                    {
-                        var accId = maid.MaidMediatorId;
-                        var mUsername = maid.MaidMediator.Account.Username;
-                        var isActive = maid.MaidMediator.Account.IsActive;
-                        var joinDate = maid.MaidMediator.Account.JoinDate;
-                        var role = maid.MaidMediator.Account.Role;
-                        var avatar = maid.MaidMediator.Account.Avatar;
-                        var email = maid.MaidMediator.Account.Email;
-                        var phone = maid.MaidMediator.Account.Phone;
-                        var fullname = maid.MaidMediator.Account.FullName;
-                        var mm = new MaidManager(accId, mUsername, isActive, joinDate, role, avatar, email, phone,
-                                                         fullname);
-                        ViewBag.MaidManager = mm;
-                    }
-                    else
-                    {
-                        var accId = maid.StaffId;
-                        var mUsername = maid.Staff.Account.Username;
-                        var isActive = maid.Staff.Account.IsActive;
-                        var joinDate = maid.Staff.Account.JoinDate;
-                        var role = maid.Staff.Account.Role;
-                        var avatar = maid.Staff.Account.Avatar;
-                        var email = maid.Staff.Account.Email;
-                        var phone = maid.Staff.Account.Phone;
-                        var fullname = maid.Staff.Account.FullName;
-                        var mm = new MaidManager(accId, mUsername, isActive, joinDate, role, avatar, email, phone,
-                                                         fullname);
-                        ViewBag.MaidManager = mm;
-                    }
+                    return View("MaidProfile", maid);
                 }
-                return View("MaidProfile", maid);
             }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult HideJobRequest(int jobId)
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
-                if (job != null)
+                using (var db = new MSEntities())
                 {
-                    if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
+                    var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                    if (job != null)
                     {
-                        TempData["Alert"] = "Công việc đã được thuê";
+                        if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
+                        {
+                            TempData["Alert"] = "Công việc đã được thuê";
+                        }
+                        else if (job.Status.Equals("Expired"))
+                        {
+                            TempData["Alert"] = "Công việc đã hết hạn";
+                        }
+                        else if (!job.IsActive)
+                        {
+                            TempData["Alert"] = "Công việc không tồn tại";
+                        }
+                        else
+                        {
+                            job.Status = "Hide";
+                            db.SaveChanges();
+                        }
                     }
-                    else if (job.Status.Equals("Expired"))
-                    {
-                        TempData["Alert"] = "Công việc đã hết hạn";
-                    }
-                    else if (!job.IsActive)
-                    {
-                        TempData["Alert"] = "Công việc không tồn tại";
-                    }
-                    else
-                    {
-                        job.Status = "Hide";
-                        db.SaveChanges();
-                    }
+                    return RedirectToAction("GetJobRequest", "Post", new {jobId});
                 }
-                return RedirectToAction("GetJobRequest", "Post", new { jobId });
             }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult PublicJobRequest(int jobId)
         {
-            using (var db = new MSEntities())
+            if (Session["AccId"] != null)
             {
-                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
-                if (job != null)
+                using (var db = new MSEntities())
                 {
-                    if (job.Status.Equals("Expired"))
+                    var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                    if (job != null)
                     {
-                        TempData["Alert"] = "Công việc đã hết hạn";
+                        if (job.Status.Equals("Expired"))
+                        {
+                            TempData["Alert"] = "Công việc đã hết hạn";
+                        }
+                        else if (!job.IsActive)
+                        {
+                            TempData["Alert"] = "Công việc không tồn tại";
+                        }
+                        else
+                        {
+                            job.Status = "Waiting";
+                            db.SaveChanges();
+                        }
                     }
-                    else if (!job.IsActive)
-                    {
-                        TempData["Alert"] = "Công việc không tồn tại";
-                    }
-                    else
-                    {
-                        job.Status = "Waiting";
-                        db.SaveChanges();
-                    }
+                    return RedirectToAction("GetJobRequest", "Post", new {jobId});
                 }
-                return RedirectToAction("GetJobRequest", "Post", new { jobId });
             }
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult PostRequest()
         {
+            if (Session["AccId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             using (var db = new MSEntities())
             {
-                if (Session["AccId"] == null)
-                {
-                    return RedirectToAction("Login", "Home");
-                }
                 LoadItems(db);
             }
             return View("PostRequest");
@@ -793,6 +842,10 @@ namespace MS_Website.Controllers
 
         public ActionResult ExtendJobRequest(int jobId, int extend)
         {
+            if (Session["AccId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             using (var db = new MSEntities())
             {
                 var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
