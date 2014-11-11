@@ -925,8 +925,6 @@ namespace MS_Website.Controllers
                     //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
                     return View(jobRequestTemps);
                 }
-
-
             }
             return RedirectToAction("Login", "Home");
         }
@@ -970,19 +968,13 @@ namespace MS_Website.Controllers
                             JobRequest = null,
                         };
                         recruitmentTemps.Add(recruitmentTemp);
-
-
                     }
-
-
                     //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
                     //var jobList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
                     return View(recruitmentTemps);
-
                 }
             }
             return RedirectToAction("Login", "Home");
-
         }
 
         [HttpGet]
@@ -994,7 +986,6 @@ namespace MS_Website.Controllers
 
                 using (db)
                 {
-
                     var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
                     if (recruitment != null) recruitment.IsActive = true;
                     db.SaveChanges();
@@ -1027,10 +1018,8 @@ namespace MS_Website.Controllers
             if (Session["AccId"] != null)
             {
                 var db = new MSEntities();
-
                 using (db)
                 {
-
                     var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
                     if (recruitment != null) recruitment.IsActive = true;
                     db.SaveChanges();
