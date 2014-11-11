@@ -1073,12 +1073,12 @@ namespace MS_Website.Controllers
                         {
                             Job = jobRequest,
                             SkillList = null,
-                            Account = db.Accounts.FirstOrDefault(j => j.AccountId == jobRequest.MaidMediatorId),
+                            Account = db.Accounts.FirstOrDefault(j => j.AccountId == jobRequest.MaidMediatorId || j.AccountId==jobRequest.StaffId),
 
                             Maid = null,
                             Recruitment = null,
                         };
-                        if (jobRequestTemp.Job.MaidMediatorId != null)
+                        if (jobRequestTemp.Job.MaidMediatorId != null || jobRequestTemp.Job.StaffId!=null)
                         {
                             jobRequestTemps.Add(jobRequestTemp);
                         }
