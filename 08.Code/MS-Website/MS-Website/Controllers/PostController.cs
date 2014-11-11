@@ -14,7 +14,7 @@ namespace MS_Website.Controllers
         //
         // GET: /JobRequest/
 
-        public ActionResult GetJobRequest(int jobId)
+        public ActionResult GetJobRequest(string recruitId, int jobId)
         {
             if (Session["AccId"] != null)
             {
@@ -88,6 +88,10 @@ namespace MS_Website.Controllers
                                 ViewBag.RecruitmentList =
                                     db.Recruitments.Where(r => r.CustomerId == custId && r.Status.Equals("Waiting") && r.IsActive).ToList();
                             }
+                        }
+                        if (recruitId != null)
+                        {
+                            ViewBag.Recruit = recruitId;
                         }
                         if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
                         {
