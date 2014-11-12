@@ -34,23 +34,23 @@
                         </div>
                     </div>
                 </div>
-                @using (Html.BeginForm("AddAccount", "Home", FormMethod.Post, new { @class = "oSignupForm", @name = "registerForm", @id="registerForm"}))
+                @using (Html.BeginForm("AddAccount", "Home", FormMethod.Post, new { @class = "oSignupForm", @name = "registerForm", @id = "registerForm" }))
                 {
                     <div class="oSignupHelp "></div>
                     <div class="oSignupFields">
                         <article class="oSignupHelp oSignupHelpContractor "></article>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m => m.FullName, new { @class = "oInputText oFormMed", @id = "txtFullName", @placeholder = "Họ và tên",@maxlength="50"})
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "oInputText oFormMed", @id = "txtFullName", @placeholder = "Họ và tên", @maxlength = "50" })
                             <div id="FullErr"></div>
                         </div>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "oInputText oFormMed", @placeholder = "Email", @id = "txtEmail",@name="email" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "oInputText oFormMed", @placeholder = "Email", @id = "txtEmail", @name = "email" })
                             <div id="ExpErr"></div>
                         </div>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m => m.Phone, new { @class = "oInputText oFormMed", @placeholder = "Điện thoại" , @id="txtPhone"})
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "oInputText oFormMed", @placeholder = "Điện thoại", @id = "txtPhone" })
                             <div id="PhoneErr"></div>
-                            
+
                         </div>
                         <div class="oFormField">
                             <select name="Role" class="oInputText oFormMed">
@@ -59,28 +59,30 @@
                             </select>
                         </div>
                         <div class="oFormField">
-                            @Html.TextBoxFor(m => m.Username, new { @class = "oInputText oFormMed", @placeholder = "Tên đăng nhập", @id = "txtUsername",@name="username" })
+                            @Html.TextBoxFor(m => m.Username, new { @class = "oInputText oFormMed", @placeholder = "Tên đăng nhập", @id = "txtUsername", @name = "username" })
                             <div id="textBlank"></div>
                         </div>
 
                         <div class="oFormField">
-                            @Html.PasswordFor(m => m.Password, new { @class = "oInputText oFormMed", @placeholder = "Mật khẩu", @id = "txtPassword",@name="password" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "oInputText oFormMed", @placeholder = "Mật khẩu", @id = "txtPassword", @name = "password" })
                             <div id="passwordBlank"></div>
                         </div>
                         <div class="oFormField">
                             @Html.PasswordFor(m => m.Password, new { @class = "oInputText oFormMed", @placeholder = "Nhập lại mật khẩu", @id = "txtConfirmPassword" })
-                           <div id="CPErr"></div>
+                            <div id="CPErr"></div>
                         </div>
-                        @if (ViewBag.Err != null)
-                        {
-                            <font color="red">@ViewBag.Err</font>
-                        }
+                        <span id="error">
+                            @if (ViewBag.Err != null)
+                            {
+                                <font color="red">@ViewBag.Err</font>
+                            }
+                        </span>
                         <div class="oFormField oSupportInfo txtCenter oFieldValue-terms">
                             Với việc tạo tài khoản Bạn đồng ý với các quy định và bảo mật của Maid Service.       
                         </div>
                         <div class="oFormField">
                             <div id="submit-element">
-                                <input type="submit" name="submit" id="validate" value="Đăng kí" class="oBtn oBtnVisitorPrimary oBtnLarge w100 oSignupSubmit">
+                                <input type="submit" name="submit" id="validate" value="Đăng kí" class="oBtn oBtnVisitorPrimary oBtnLarge w100 oSignupSubmit" />
                             </div>
                         </div>
                     </div>
@@ -91,12 +93,14 @@
 </body>
 <script type="text/javascript" language="javascript">
     $("#validate").click(function () {
+        document.getElementById("error").innerHTML = "";
+        $("input[type='password']").val('');
         console.debug("sdf");
         var errText = "";
         var phone = new RegExp('^[0-9]+$');
         var email = new RegExp('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$');
         if ($("#txtFullName").val().trim() == "") {
-            errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
+            errText = "<font color='red'>Vui lòng nhập tên đầy đủ</font>";
             document.getElementById("FullErr").innerHTML = errText;
             return false;
         } else {
@@ -119,7 +123,7 @@
             errText = "";
             document.getElementById("PhoneErr").innerHTML = errText;
         }
-        
+
         if ($("#txtUsername").val().trim() == "") {
             errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
             document.getElementById("textBlank").innerHTML = errText;
@@ -145,5 +149,5 @@
             document.getElementById("CPErr").innerHTML = errText;
         }
     });
-    </script>
+</script>
 </html>
