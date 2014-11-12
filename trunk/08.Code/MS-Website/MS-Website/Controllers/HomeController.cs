@@ -212,7 +212,7 @@ namespace MS_Website.Controllers
                     {
                         newUser.Username = acc.Username;
                         newUser.Password = acc.Password;
-                        newUser.Avatar = acc.Avatar;
+                        newUser.Avatar = "/Content/Image/default-avatar.png";
                         newUser.Role = acc.Role;
                         newUser.Email = acc.Email;
                         newUser.Phone = acc.Phone;

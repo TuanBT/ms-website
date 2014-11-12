@@ -14,7 +14,7 @@
             @if (!Session["Role"].Equals("Admin"))
             {
                 <li class="">
-                    <a href="#" class="hChContent">Yêu cầu cá nhân</a>
+                    <a href="@Url.Action("Statistic", "Statistic")" class="hChContent">Yêu cầu cá nhân</a>
                 </li>
             }
             <li class="iscurent">
