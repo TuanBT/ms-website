@@ -471,16 +471,19 @@
 
 <script>
     var chosenCount = 0;
+    var chosenType = 0;
     function chooseRecruit(counter, recruitId, type) {
         if (chosenCount != 0) {
-            document.getElementById(chosenCount + "" + type).setAttribute("class", "");
+            document.getElementById(chosenCount + "" + chosenType).setAttribute("class", "");
         }
         if (counter != chosenCount) {
             document.getElementById(counter + "" + type).setAttribute("class", "isCurent");
             chosenCount = counter;
+            chosenType = type;
         } else {
             document.getElementById(counter + "" + type).setAttribute("class", "");
             chosenCount = 0;
+            chosenType = 0;
             type = 0;
         }
         if (type == 1) {
