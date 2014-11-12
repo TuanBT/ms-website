@@ -586,6 +586,7 @@ a {
 
 .blfbutton {
     text-align: right;
+    /*margin-top: -242px;*/
 }
 
 .blDetail {
@@ -604,7 +605,7 @@ a {
 }
 
     .bFreeListWork > li:hover {
-        background: #ecf0f1;
+        background: rgba(66, 139, 202, 0.2);
     }
 
 .blTime {
@@ -620,14 +621,6 @@ a {
     margin-left: 20px;
     margin-top: 20px;
 }
-
-    .bFreeListWork > .isCurent {
-        background: rgba(20, 182, 231, 0.35);
-    }
-
-        .bFreeListWork > .isCurent:hover {
-            background: rgba(20, 182, 231, 0.35);
-        }
 
 .btApply {
     display: inline-block;
@@ -663,7 +656,7 @@ a {
 }
 
     .bApplyListWork > li:hover {
-        background: #e6e6e6;
+        background: rgba(92, 184, 92, 0.2);
     }
 
 .bexpiredListWork {
@@ -1367,6 +1360,53 @@ a {
         background-color: rgba(0, 0, 0, 0.2);
     }
 
-    .footerButton {
-        text-align: right;
-    }
+.footerButton {
+    text-align: right;
+}
+
+#free > ul > .isCurent {
+    background: rgba(66, 139, 202, 0.2);
+}
+#free > ul > li:hover {
+    background: rgba(66, 139, 202, 0.2);
+}
+
+#applied > ul > .isCurent {
+    background: rgba(92, 184, 92, 0.2);
+}
+#applied > ul > li:hover {
+    background: rgba(92, 184, 92, 0.2);
+}
+
+#expired > ul > .isCurent {
+    background: rgba(217, 83, 79, 0.2);
+}
+#expired > ul > li:hover {
+    background: rgba(217, 83, 79, 0.2);
+}
+
+#hide > ul > .isCurent {
+    background: rgba(0, 0, 0, 0.2);
+}
+#hide > ul > li:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#notActive > ul > .isCurent {
+    background: rgba(240, 173, 78, 0.2);
+}
+#notActive > ul > li:hover {
+    background: rgba(240, 173, 78, 0.2);
+}
+
+#approved > ul > .isCurent {
+    background: rgba(240, 173, 78, 0.2);
+}
+#approved > ul > li:hover {
+    background: rgba(240, 173, 78, 0.2);
+}
+
+.btnsFunction {
+    margin-top: -60px;
+    float: right;
+}

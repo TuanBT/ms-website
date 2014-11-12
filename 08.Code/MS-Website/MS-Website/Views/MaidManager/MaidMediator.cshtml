@@ -67,13 +67,13 @@
             <li class="iscurent">
                 <a class="hChContent">Cá nhân</a>
             </li>
-            @if(Session["AccId"] != null)
+            @if (Session["AccId"] != null)
             {
-                if((int)Session["AccId"] == account.AccountId)
+                if ((int)Session["AccId"] == account.AccountId)
                 {
-                    <li class>
-                        <a href="@Url.Action("MaidManagerEdit", "MaidManager")" class="hChContent">Sửa thông tin cá nhân</a>
-                    </li>
+                <li class>
+                    <a href="@Url.Action("MaidManagerEdit", "MaidManager")" class="hChContent">Sửa thông tin cá nhân</a>
+                </li>
                 }
             }
         </ul>
@@ -109,6 +109,15 @@
             </div>
             <div class="col-md-4">
                 <div class="rightInfo">
+                    @if (Session["AccId"] != null)
+                    {
+                        if ((int)Session["AccId"] == account.AccountId)
+                        {
+                        <div class="editRightInfo">
+                            <a href="@Url.Action("MaidManagerEdit", "MaidManager")" title="Sửa thông tin"><span class="glyphicon glyphicon-edit"></span></a>
+                        </div>
+                        }
+                    }
                     <ul class="riDetail">
                         <li class="rideRow">
                             <div class="rideroTitle">
