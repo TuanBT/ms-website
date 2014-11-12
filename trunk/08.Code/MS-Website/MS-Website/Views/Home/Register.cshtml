@@ -94,7 +94,6 @@
 <script type="text/javascript" language="javascript">
     $("#validate").click(function () {
         document.getElementById("error").innerHTML = "";
-        $("input[type='password']").val('');
         console.debug("sdf");
         var errText = "";
         var phone = new RegExp('^[0-9]+$');
@@ -102,6 +101,7 @@
         if ($("#txtFullName").val().trim() == "") {
             errText = "<font color='red'>Vui lòng nhập tên đầy đủ</font>";
             document.getElementById("FullErr").innerHTML = errText;
+            $("input[type='password']").val('');
             return false;
         } else {
             errText = "";
@@ -110,6 +110,7 @@
         if (email.test($("#txtEmail").val()) == false) {
             errText = "<font color='red'>Vui lòng nhập đúng định dạng abc@abc.abc</font>";
             document.getElementById("ExpErr").innerHTML = errText;
+            $("input[type='password']").val('');
             return false;
         } else {
             errText = "";
@@ -118,6 +119,7 @@
         if (phone.test($("#txtPhone").val()) == false) {
             errText = "<font color='red'>Vui lòng nhập số</font>";
             document.getElementById("PhoneErr").innerHTML = errText;
+            $("input[type='password']").val('');
             return false;
         } else {
             errText = "";
@@ -127,6 +129,7 @@
         if ($("#txtUsername").val().trim() == "") {
             errText = "<font color='red'>Vui lòng nhập tên đăng nhập</font>";
             document.getElementById("textBlank").innerHTML = errText;
+            $("input[type='password']").val('');
             return false;
         } else {
             errText = "";
@@ -135,6 +138,7 @@
         if ($("#txtPassword").val().trim() == "") {
             errText = "<font color='red'>Vui lòng nhập mật khẩu</font>";
             document.getElementById("passwordBlank").innerHTML = errText;
+            $("input[type='password']").val('');
             return false;
         } else {
             errText = "";
@@ -143,6 +147,7 @@
         if ($("#txtConfirmPassword").val().trim() != $("#txtPassword").val()) {
             errText = "<font color='red'>Mật khẩu không trùng khớp</font>";
             document.getElementById("CPErr").innerHTML = errText;
+            $("input[type='password']").val('');
             return false;
         } else {
             errText = "";
