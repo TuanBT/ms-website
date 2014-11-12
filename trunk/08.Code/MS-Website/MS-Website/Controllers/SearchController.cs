@@ -180,7 +180,7 @@ namespace MS_Website.Controllers
         {
             using (var db = new MSEntities())
             {
-                var searchInsList = new List<SkillInstance>(); 
+                var searchInsList = new List<SkillInstance>();
                 var skillRefList = new List<SkillReference>();
                 var jobRequestList = new List<JobRequestTemp>();
                 var recruitmentList = new List<RecruitmentTemp>();
@@ -422,12 +422,12 @@ namespace MS_Website.Controllers
                             }
                             else
                             {
-                                    for (var i = 0; i < skillRefList.Count(); i++)
-                                    {
-                                        if (skillRefList.ElementAt(i).Salary == skillId) continue;
-                                        skillRefList.RemoveAt(i);
-                                        i--;
-                                    }
+                                for (var i = 0; i < skillRefList.Count(); i++)
+                                {
+                                    if (skillRefList.ElementAt(i).Salary == skillId) continue;
+                                    skillRefList.RemoveAt(i);
+                                    i--;
+                                }
                             }
                         }
                         else if (skillName.Equals("Work"))
@@ -542,28 +542,47 @@ namespace MS_Website.Controllers
                 }
                 if (time != null && !time.Equals("all"))
                 {
-                    var now = DateTime.Now;
-                    var searchDate = now.AddDays(-int.Parse(time));
+                    var searchDate = DateTime.Now.AddDays(-int.Parse(time));
                     if (skillRefList.Any())
                     {
                         for (var i = 0; i < skillRefList.Count; i++)
                         {
+                            var skillRefId = skillRefList[i].SkillRefId;
                             if (skillRefList[i].Type == 0)
                             {
-                                if (db.JobRequests.SingleOrDefault(j => j.SkillRefId == skillRefList[i].SkillRefId).PostTime > searchDate)
+                                if (db.JobRequests.SingleOrDefault(j => j.SkillRefId == skillRefId).PostTime > searchDate)
                                 {
                                     skillRefList.RemoveAt(i);
                                     i--;
                                 }
                             }
-							else
-							{
-								if (db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRefList[i].SkillRefId).PostTime > searchDate)
+                            else
+                            {
+                                if (db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRefId).PostTime > searchDate)
                                 {
                                     skillRefList.RemoveAt(i);
                                     i--;
                                 }
-							}
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var wJobRequestList = db.JobRequests.Where(j => j.Status.Equals("Waiting") && j.PostTime <= searchDate).ToList();
+                        var wRecruitmentList = db.Recruitments.Where(r => r.Status.Equals("Waiting") && r.PostTime <= searchDate).ToList();
+                        for (var i = 0; i < wJobRequestList.Count; i++)
+                        {
+                            var skillRefId = wJobRequestList[i].SkillRefId;
+                            var skillRef = db.SkillReferences.SingleOrDefault(
+                                sr => sr.SkillRefId == skillRefId);
+                            skillRefList.Add(skillRef);
+                        }
+                        for (var i = 0; i < wRecruitmentList.Count; i++)
+                        {
+                            var skillRefId = wRecruitmentList[i].SkillRefId;
+                            var skillRef = db.SkillReferences.SingleOrDefault(
+                                sr => sr.SkillRefId == skillRefId);
+                            skillRefList.Add(skillRef);
                         }
                     }
                 }
