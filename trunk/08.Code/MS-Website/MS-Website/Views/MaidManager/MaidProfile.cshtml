@@ -206,6 +206,22 @@
                 }
                 <div class="tab-content">
                     <div class="tab-pane fade in active bFree" id="free">
+                        <div class="btnsFunction">
+                            @if (ViewBag.Manage == "true")
+                            {
+                                using (Html.BeginForm("HideJobRequest", "MaidManager"))
+                                {
+                                    <input id="hideId" type="hidden" name="jobId" />
+                                    <div id="button_1" style="display: none;" class="blfbutton">
+                                        <button type="submit" class="btn btn-danger">Tạm ẩn</button>
+                                        @if (Session["Role"].Equals("Staff"))
+                                        {
+                                            <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                        }
+                                    </div>
+                                }
+                            }
+                        </div>
                         <ul class="bFreeListWork">
                             <input id="currPos1" type="hidden" value="4" />
                             @foreach (var job in notApplList)
@@ -220,11 +236,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                                                       class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                                                                              class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -255,31 +271,12 @@
                                     </div>
                                 </ul>
                             </div>
-                            @if (ViewBag.Manage == "true")
-                            {
-                                using (Html.BeginForm("HideJobRequest", "MaidManager"))
-                                {
-                                <input id="hideId" type="hidden" name="jobId" />
-                                <div id="button_1" style="display: none;" class="blfbutton">
-                                    <button type="submit" class="btn btn-danger">Tạm ẩn</button>
-                                    @if (Session["Role"].Equals("Staff"))
-                                    {
-                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                    }
-                                </div>
-                                }
-                            }
                         </div>
                     </div>
                     <div class="tab-pane fade bApplied" id="applied">
-                        @*<div class="bTitle">
-                                    <div class="btWork">
-                                        Công việc
-                                    </div>
-                                    <div class="btApply">
-                                        Người nhận
-                                    </div>
-                                </div>*@
+                        <div class="btnsFunction">
+                            
+                        </div>
                         <ul class="bApplyListWork">
                             <input id="currPos2" type="hidden" value="@(counter + 2)" />
                             @foreach (var job in applList)
@@ -350,14 +347,9 @@
                         </div>
                     </div>
                     <div class="tab-pane fade bApplied" id="approved">
-                        @* <div class="bTitle">
-                                    <div class="btWork">
-                                        Công việc
-                                    </div>
-                                    <div class="btApply">
-                                        Người nhận
-                                    </div>
-                                </div>*@
+                       <div class="btnsFunction">
+                            
+                        </div>
                         <ul class="bApplyListWork">
                             <input id="currPos3" type="hidden" value="@(counter + 2)" />
                             @foreach (var job in apprList)
@@ -428,6 +420,17 @@
                         </div>
                     </div>
                     <div class="tab-pane fade bExprred" id="expired">
+                        <div class="btnsFunction">
+                            @if (ViewBag.Manage == "true")
+                            {
+                                <div id="button_4" style="display: none;" class="blfbutton">
+                                    @if (Session["Role"].Equals("Staff"))
+                                    {
+                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                    }
+                                </div>
+                            }
+                        </div>
                         <ul class="bexpiredListWork">
                             <input id="currPos4" type="hidden" value="@(counter + 4)" />
                             @foreach (var job in expiredList)
@@ -442,11 +445,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                                                       class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                                                                              class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -477,18 +480,25 @@
                                     </div>
                                 </ul>
                             </div>
-                            @if (ViewBag.Manage == "true")
-                            {
-                                <div id="button_4" style="display: none;" class="blfbutton">
-                                    @if (Session["Role"].Equals("Staff"))
-                                    {
-                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                    }
-                                </div>
-                            }
                         </div>
                     </div>
                     <div class="tab-pane fade bExprred" id="hide">
+                        <div class="btnsFunction">
+                            @if (ViewBag.Manage == "true")
+                            {
+                                using (Html.BeginForm("PublicJobRequest", "MaidManager"))
+                                {
+                                    <input id="publicId" type="hidden" name="jobId" />
+                                    <div id="button_5" style="display: none;" class="blfbutton">
+                                        <button type="submit" class="btn btn-danger">Công khai</button>
+                                        @if (Session["Role"].Equals("Staff"))
+                                        {
+                                            <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                        }
+                                    </div>
+                                }
+                            }
+                        </div>
                         <ul class="bexpiredListWork">
                             <input id="currPos5" type="hidden" value="@(counter + 4)" />
                             @foreach (var job in hideList)
@@ -503,11 +513,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                                                       class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                                                                              class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -538,23 +548,12 @@
                                     </div>
                                 </ul>
                             </div>
-                            @if (ViewBag.Manage == "true")
-                            {
-                                using (Html.BeginForm("PublicJobRequest", "MaidManager"))
-                                {
-                                <input id="publicId" type="hidden" name="jobId" />
-                                <div id="button_5" style="display: none;" class="blfbutton">
-                                    <button type="submit" class="btn btn-danger">Công khai</button>
-                                    @if (Session["Role"].Equals("Staff"))
-                                    {
-                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                    }
-                                </div>
-                                }
-                            }
                         </div>
                     </div>
                     <div class="tab-pane fade bExprred" id="notActive">
+                        <div class="btnsFunction">
+                            
+                        </div>
                         <ul class="bexpiredListWork">
                             <input id="currPos6" type="hidden" value="@(counter + 4)" />
                             @foreach (var job in notActiveList)
@@ -569,11 +568,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                                                       class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                                                                              class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
