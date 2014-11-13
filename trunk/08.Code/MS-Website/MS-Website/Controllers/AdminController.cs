@@ -293,8 +293,32 @@ namespace MS_Website.Controllers
                 if (Session["Role"].Equals("Admin"))
                 {
                     var db = new MSEntities();
-                    var acc = db.Accounts.Where(a => a.IsActive.Equals(true) && a.IsWebmaster.Equals(false)).ToList();
+                    var acc = db.Accounts.Where(a => a.IsWebmaster.Equals(false)).ToList();
                     return View("BanAccount", acc);
+                }
+            }
+            return RedirectToAction("Login", "Home");
+
+        }
+
+        public ActionResult ActiveAccount(int accountId)
+        {
+
+            if (Session["AccId"] != null)
+            {
+                if (Session["Role"].Equals("Admin"))
+                {
+                    var db = new MSEntities();
+
+                    using (db)
+                    {
+
+                        var acc = db.Accounts.SingleOrDefault(j => j.AccountId == accountId);
+                        acc.IsActive = true;
+                        db.SaveChanges();
+                        //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                        return RedirectToAction("BanAccount", "Admin");
+                    }
                 }
             }
             return RedirectToAction("Login", "Home");
