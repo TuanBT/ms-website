@@ -19,40 +19,71 @@
                         $('#JRTable').DataTable();
                     });
                 </script>
-<table id="JRTable" class="display" cellspacing="0" width="100%">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên đăng nhập</th>
-            <th>Xử lý</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{var count=0;}
-        @foreach(var account in accounts)
-        {
+            <table id="JRTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên đăng nhập</th>
+                        <th>Xử lý</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{var count=0;}
+                    @foreach(var account in accounts)
+                    {
                             
-            count++;
-            <tr>
-                <td>
-                    @count
-                    <input type="hidden" value="@(account.AccountId)" id="" />
-                </td>
+                        count++;
+                        <tr>
+                            <td>
+                                @count
+                                <input type="hidden" value="@(account.AccountId)" id="" />
+                            </td>
                                 
-                <td>
-                    @account.Username
-                </td>
+                            <td>
+                                @account.Username
+                            </td>
                                 
-                                
-                <td>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@account.AccountId)">Khóa</button>
-                </td>
-            </tr>
-        }
+                            @if(account.IsActive)
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg1" onclick="btnActive(@account.AccountId)">Khóa</button>
+                                </td>
+                            }
+                            @if(account.IsActive==false)
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-lg2" onclick="btnActive(@account.AccountId)">Kích hoạt</button>
+                                </td>
+                            }        
+               
+                        </tr>
+                    }
                         
-    </tbody>
-</table>
-                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                </tbody>
+            </table>
+            
+            <div class="modal fade bs-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myLargeModalLabel">Xác nhận</h4>
+                        </div>
+                        <div class="modal-body">
+                            Bạn thực sự muốn khóa tên đăng nhập này?
+                        </div>
+                        <div class="modal-footer">
+                            @using (Html.BeginForm("MarkActive","Admin",FormMethod.Get))
+                            {
+                                <input type="hidden" name="accountId" id="jrId2" />
+                                <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
+                            }
+                                
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div>
+            </div>
+            <div class="modal fade bs-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -60,15 +91,14 @@
                                 <h4 class="modal-title" id="myLargeModalLabel">Xác nhận</h4>
                             </div>
                             <div class="modal-body">
-                               Bạn thực sự muốn khóa tên đăng nhập này?
+                               Bạn thực sự muốn kích hoạt tên đăng nhập này?
                             </div>
                             <div class="modal-footer">
-                                @using (Html.BeginForm("MarkActive","Admin",FormMethod.Get))
+                                @using (Html.BeginForm("ActiveAccount","Admin",FormMethod.Get))
                                 {
-                                    <input type="hidden" name="accountId" id="jrId2" />
+                                    <input type="hidden" name="accountId" id="jrId3" />
                                     <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
-                                }
-                                
+                                }                   
                             </div>
                         </div><!-- /.modal-content -->
                     </div>
@@ -82,6 +112,7 @@
 
             function btnActive(accountId) {
                 document.getElementById('jrId2').setAttribute("value", accountId);
+                document.getElementById('jrId3').setAttribute("value", accountId);
             }
         </script>
 
