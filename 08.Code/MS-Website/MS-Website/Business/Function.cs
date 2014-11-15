@@ -12,7 +12,7 @@ namespace MS_Website.Business
 
         public void SentMessage(string phoneMaid, string phoneStaff, string phoneMaidMediator, string phoneCustomer)
         {
-            return;
+            return; //Bỏ dòng này khi chạy thật
             string phoneServer = "+14172024103";
 
             string AccountSid = "AC439137c82934e09c6e8120d9ee085b2b";

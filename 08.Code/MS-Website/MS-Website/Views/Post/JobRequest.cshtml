@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Chi tiết yêu cầu công việc";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    MS_Website.Models.JobRequestTemp JobRequestTemp = Model;
+    MS_Website.Models.JobRequestTemp jobRequestTemp = Model;
     var numShowRecruit = 3;
     List<MS_Website.Models.Recruitment> recruitList = ViewBag.RecruitmentList;
 }
@@ -24,7 +24,7 @@
                 if (ViewBag.Manage == "true")
                 {
                 <li>
-                    <a href="@Url.Action("JobRequestEdit", "MaidManager", new { jobId = JobRequestTemp.Job.JobRequestId })" class="hChContent">Sửa thông tin yêu cầu công việc</a>
+                    <a href="@Url.Action("JobRequestEdit", "MaidManager", new { jobId = jobRequestTemp.Job.JobRequestId })" class="hChContent">Sửa thông tin yêu cầu công việc</a>
                 </li>
                 }
             }
@@ -59,16 +59,16 @@
                             @if (ViewBag.Manage == "true")
                             {
                                 <div class="miButton">
-                                    @if (JobRequestTemp.Job.Status.Equals("Waiting"))
+                                    @if (jobRequestTemp.Job.Status.Equals("Waiting"))
                                     {
-                                        using (Html.BeginForm("HideJobRequest", "MaidManager", new { jobId = JobRequestTemp.Job.JobRequestId }))
+                                        using (Html.BeginForm("HideJobRequest", "MaidManager", new { jobId = jobRequestTemp.Job.JobRequestId }))
                                         {
                                         <button class="btn btn-danger">Tạm ẩn</button>
                                         }
                                     }
-                                    else if (JobRequestTemp.Job.Status.Equals("Hide"))
+                                    else if (jobRequestTemp.Job.Status.Equals("Hide"))
                                     {
-                                        using (Html.BeginForm("PublicJobRequest", "MaidManager", new { jobId = JobRequestTemp.Job.JobRequestId }))
+                                        using (Html.BeginForm("PublicJobRequest", "MaidManager", new { jobId = jobRequestTemp.Job.JobRequestId }))
                                         {
                                         <button class="btn btn-danger">Công khai</button>
                                         }
@@ -83,7 +83,7 @@
                             {
                                 if (Session["Role"].Equals("Customer"))
                                 {
-                                    if (JobRequestTemp.Job.Status.Equals("Waiting"))
+                                    if (jobRequestTemp.Job.Status.Equals("Waiting"))
                                     {
                                         <div class="miButton">
                                             @{
@@ -208,7 +208,7 @@
                                 <div class="iTitle">
                                     Tiêu đề:
                                 </div>
-                                <span class="iTitleContent">@JobRequestTemp.Job.Title</span>
+                                <span class="iTitleContent">@jobRequestTemp.Job.Title</span>
                             </div>
                             <div class="iStatus">
                                 <div class="iTitle">
@@ -293,9 +293,9 @@
                             </div>
                         </div>
                     </div>
-                    @if (JobRequestTemp.Job.Status == "Approved")
+                    @if (jobRequestTemp.Job.Status == "Approved")
                     {
-                        ViewBag.CusId = (int)JobRequestTemp.Recruitment.CustomerId;
+                        ViewBag.CusId = (int)jobRequestTemp.Recruitment.CustomerId;
                         if (ViewBag.CusId != null)
                         {
                             if (Session["AccId"] != null)
@@ -307,9 +307,9 @@
                                 Bạn có thể chấm điểm cho công việc này
                             </div>
                             <div class="ovContent">
-                                @* @{ Html.RenderAction("Rate", "Evaluate", new {id = JobRequestTemp.Job.JobRequestId}); }*@
+                                @* @{ Html.RenderAction("Rate", "Evaluate", new {id = jobRequestTemp.Job.JobRequestId}); }*@
                                 @*ViewBag.MaidRating*@
-                                @{ ViewBag.jrid = JobRequestTemp.Job.JobRequestId; }
+                                @{ ViewBag.jrid = jobRequestTemp.Job.JobRequestId; }
                                 @Html.Partial("_PartialRating")
                             </div>
                         </div>
@@ -321,7 +321,7 @@
                                 Nhận xét của người đã thuê
                             </div>
                             <div class="ovContent">
-                                @*@{ Html.RenderAction("Post", "Evaluate", new { id = JobRequestTemp.Job.JobRequestId}); }*@
+                                @*@{ Html.RenderAction("Post", "Evaluate", new { id = jobRequestTemp.Job.JobRequestId}); }*@
                                 @Html.Partial("_PartialComment", (List<MS_Website.Models.Comment>)ViewBag.Comment)
                             </div>
                         </div>
@@ -340,21 +340,19 @@
                                 </strong>
                             </div>
                         </li>
-                    </ul>
-                    <ul class="riDetail">
                         <li class="rideRow">
                             <div class="rideroTitle">
                                 Hết hạn
                             </div>
                             <div class="rideroContent">
-                                <strong>@Model.Job.ExpiredTime.ToString("dd/MM/yyyy")
+                                <strong>@jobRequestTemp.Job.ExpiredTime.ToString("dd/MM/yyyy")
                                 </strong>
                             </div>
                         </li>
                     </ul>
                     <div class="riManager">
                         <div class="rimaTitle">
-                            Công việc của
+                            Người giúp việc
                         </div>
                         <ul class="rimaListSameJobRequest">
                             <li>
@@ -367,18 +365,18 @@
                                     <div class="col-md-9">
                                         <div class="jrDetail">
                                             <div class="jrMaidFullname">
-                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = JobRequestTemp.Maid.MaidId })">@JobRequestTemp.Maid.MaidName</a>
+                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = jobRequestTemp.Maid.MaidId })">@jobRequestTemp.Maid.MaidName</a>
                                             </div>
                                             <div class="blTime">
                                                 <span class="blTimeText">Người giúp việc</span>
                                             </div>
                                             <div class="jrMaidRate">
                                                 <div class="rate">
-                                                    @Html.Partial("_PartialStar", (float)JobRequestTemp.Maid.RateAvg)
+                                                    @Html.Partial("_PartialStar", (float)jobRequestTemp.Maid.RateAvg)
                                                 </div>
                                             </div>
                                             <div class="blTime">
-                                                <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(JobRequestTemp.Maid.Gender == true ? "Nam" : "Nữ")</span>
+                                                <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(jobRequestTemp.Maid.Gender == true ? "Nam" : "Nữ")</span>
                                             </div>
                                         </div>
                                     </div>
@@ -386,6 +384,46 @@
                             </li>
                         </ul>
                     </div>
+                    <ul class="riDetail">
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Kinh nghiệm
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@if (jobRequestTemp.Maid.Experience == 0)
+                                        {
+                                    <span>< 1 năm</span>
+                                        }
+                                        else if (jobRequestTemp.Maid.Experience == 2)
+                                        {
+                                    <span>1 - 3 năm</span>
+                                        }
+                                        else if (jobRequestTemp.Maid.Experience == 4)
+                                        {
+                                    <span>> 3 năm</span>
+                                        }
+                                </strong>
+                            </div>
+                        </li>
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Quê quán
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@jobRequestTemp.Maid.Hometown
+                                </strong>
+                            </div>
+                        </li>
+                        <li class="rideRow">
+                            <div class="rideroTitle">
+                                Địa chỉ
+                            </div>
+                            <div class="rideroContent">
+                                <strong>@jobRequestTemp.Maid.Address
+                                </strong>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -402,7 +440,7 @@
             </div>
             @using (Html.BeginForm("ExtendJobRequest", "MaidManager", FormMethod.Get, new { name = "ExtendForm" }))
             {
-                <input id="extendId" type="hidden" name="jobId" value="@JobRequestTemp.Job.JobRequestId" />
+                <input id="extendId" type="hidden" name="jobId" value="@jobRequestTemp.Job.JobRequestId" />
                 <div class="modal-body chooseMaidModalMaid">
                     <span>Thời gian gia hạn</span>
                     <select class="form-control" name="extend">
