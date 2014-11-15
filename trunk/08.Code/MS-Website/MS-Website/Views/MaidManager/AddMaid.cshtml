@@ -63,7 +63,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <div class="input-group datepicker">
-                                    <input type="text"  class="form-control datepicker" name="birthdate" data-date-format="DD/MM/YYYY" readonly="readonly" />
+                                    <input id="birthdate" type="text"  class="form-control datepicker" name="birthdate" data-date-format="DD/MM/YYYY" readonly="readonly" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -74,6 +74,7 @@
                                     $(".datepicker").datetimepicker();
                                 });
                             </script>
+                            <div id="BirthDateErr"></div>
                         </div>
                     </div>
                 </div>
@@ -181,7 +182,6 @@
     $("#btnAddMaid").click(function () {
         var errText = "";
         var phone = new RegExp('^[0-9]+$');
-        var reg = new RegExp('^(?=.)([+-]?([0-9]*)(\.([0-9]+))?)$');
         if ($("#txtMaidName").val().trim() == "") {
             errText = "<font color='red'>Vui lòng nhập tên người giúp việc</font>";
             document.getElementById("AddErr").innerHTML = errText;
@@ -190,14 +190,6 @@
             errText = "";
             document.getElementById("AddErr").innerHTML = errText;
         }
-        if (reg.test($("#txtExp").val())==false) {
-            errText = "<font color='red'>Vui lòng nhập số</font>";
-            document.getElementById("ExpErr").innerHTML = errText;
-            return false;
-        } else {
-            errText = "";
-            document.getElementById("ExpErr").innerHTML = errText;
-        }
         if (phone.test($("#txtPhone").val()) == false) {
             errText = "<font color='red'>Vui lòng nhập số</font>";
             document.getElementById("PhoneErr").innerHTML = errText;
@@ -205,6 +197,14 @@
         } else {
             errText = "";
             document.getElementById("PhoneErr").innerHTML = errText;
+        }
+        if ($("#birthdate").val().trim() == "") {
+            errText = "<font color='red'>Vui lòng chọn ngày sinh</font>";
+            document.getElementById("BirthDateErr").innerHTML = errText;
+            return false;
+        } else {
+            errText = "";
+            document.getElementById("BirthDateErr").innerHTML = errText;
         }
     });
     </script>
