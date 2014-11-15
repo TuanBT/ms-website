@@ -221,7 +221,6 @@
         console.debug("sdf");
         var errText = "";
         var phone = new RegExp('^[0-9]+$');
-        var reg = new RegExp('^(?=.)([+-]?([0-9]*)(\.([0-9]+))?)$');
         if ($("#txtMaidName").val().trim() == "") {
             errText = "<font color='red'>Vui lòng nhập tên người giúp việc</font>";
             document.getElementById("AddErr").innerHTML = errText;
@@ -229,14 +228,6 @@
         } else {
             errText = "";
             document.getElementById("AddErr").innerHTML = errText;
-        }
-        if (reg.test($("#txtExp").val()) == false) {
-            errText = "<font color='red'>Vui lòng nhập số</font>";
-            document.getElementById("ExpErr").innerHTML = errText;
-            return false;
-        } else {
-            errText = "";
-            document.getElementById("ExpErr").innerHTML = errText;
         }
         if (phone.test($("#txtPhone").val()) == false) {
             errText = "<font color='red'>Vui lòng nhập số</font>";
