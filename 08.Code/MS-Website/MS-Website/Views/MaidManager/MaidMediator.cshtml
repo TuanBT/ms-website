@@ -152,19 +152,14 @@
                                             <div class="licoFullName">
                                                 <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" class="myToolTip">
                                                     @maid.MaidName
-                                                    @*<span>
-                                                        <img class="callout" src="../Content/Image/callout_black.gif" /><img class="maidAva2" src="@maid.PersonalImage" /><strong>Tên đầy đủ: </strong>@maid.MaidName<br />
-                                                        <strong>Số điện thoại: </strong>
-                                                        <br/>
-                                                    </span>*@
                                                 </a>
-                                                <div class="licoRate">
-                                                    @Html.Partial("_PartialStar", (float)maid.RateAvg)
-                                                </div>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender == true ? "Nam" : "Nữ")</span>
                                                 </div>
-                                                @*<div class="ricoPost">
+                                                @*<div class="licoRate">
+                                                    @Html.Partial("_PartialStar", (float)maid.RateAvg)
+                                                </div>
+                                                <div class="ricoPost">
                                                     Đăng/nhận <span class="ricoPostApply">80</span>/<span class="ricoPostTotal">30</span>
                                                 </div>*@
                                             </div>

@@ -34,7 +34,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Họ và tên
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <input type="text" class="form-control" value="@maid.MaidName" name="fullname" id="txtMaidName" maxlength="50">
                             <div id="AddErr"></div>
                         </div>
@@ -45,7 +45,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Kinh nghiệm (năm)
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-2">
                             <select class="form-control" name="exp">
                                 <option value="0" @(maid.Experience == 0 ? "selected":"")>< 1 năm</option>
                                 <option value="2" @(maid.Experience == 2 ? "selected":"")>1 - 3 năm</option>
@@ -59,7 +59,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Số điện thoại
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-2">
                             <input type="text" class="form-control" value="@maid.Phone" name="phone" id="txtPhone" maxlength="15">
                             <div id="PhoneErr"></div>
                         </div>
@@ -70,7 +70,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Ngày sinh
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <div class="input-group datepicker">
                                     <input type="text"  class="form-control datepicker" name="birthdate" data-date-format="DD/MM/YYYY" value="@maid.BirthDate.Value.ToString("dd/MM/yyyy")" readonly="readonly"/>
@@ -92,7 +92,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Giới tính
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-2">
                             <select class="form-control" name="gender">
                                 <option @(maid.Gender == null ? "selected" : "")>--</option>
                                 <option value="true" @((maid.Gender != null && (bool)maid.Gender) ? "selected" : "")>Nam</option>
@@ -133,7 +133,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Nguyên quán
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-2">
                             <select class="form-control" name="hometown">
                                 <option selected="@(maid.Hometown == null ? "selected" : "")">--</option>
                                 @foreach (var item in ViewBag.Hometown)
@@ -149,7 +149,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Đang sống tại
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-2">
                             <select class="form-control" name="addr">
                                 <option selected="@(maid.Address == null ? "selected" : "")">--</option>
                                 @foreach (var item in ViewBag.Address)
@@ -165,7 +165,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Kết hôn
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-2">
                             <select class="form-control" name="married">
                                 <option @(maid.Married == null ? "selected" : "")>--</option>
                                 <option value="true" @(maid.Married != null && (bool)maid.Married ? "selected" : "")>Đã kết hôn</option>
