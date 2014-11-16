@@ -24,7 +24,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Tiêu đề
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <input class="form-control input-lg text" maxlength="50" name="title" type="text" value="" placeholder="Tối đa 50 kí tự" id="txtTitle">
                             <div id="textBlank"></div>
                             <font color="red">@ViewBag.Err</font>
@@ -249,18 +249,20 @@
                     <div class="row">
                         <div class="col-md-4 poJRTtitle">
                             Thời hạn đăng
+                            <span class="postJRTimeDetail">Đơn giá <span
+                                                                                class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> đồng/Tuần</span>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-2">
                             <select class="form-control" id="time" name="time" onchange="chooseTime(@Session["PriceRC"])">
                                 @for (int i = 1; i <= (int)Session["MaxWeek"];i++ )
                                 {
                                     <option value="@i">@i tuần</option>
                                 }
                             </select>
-                           <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> * <span
-                                class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">@Session["PriceRC"]</span>.000</span> đồng</span>
-                            <span class="postJRTimeDetail">Đơn giá hiện tại <span
-                                class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> đồng/Tuần</span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> * <span
+                                                                                                    class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">@Session["PriceRC"]</span>.000</span> đồng</span>
                         </div>
                     </div>
                 </div>

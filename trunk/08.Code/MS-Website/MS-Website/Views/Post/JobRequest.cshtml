@@ -87,11 +87,11 @@
                                     {
                                         <div class="miButton">
                                             @{
-                                                if (ViewBag.Recruit != null)
-                                                {
+                                        if (ViewBag.Recruit != null)
+                                        {
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg">Thuê</button>
-                                                    using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new {name = "ApplyForm"}))
-                                                    {
+                                            using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new { name = "ApplyForm" }))
+                                            {
                                                         <input type="hidden" name="jobRequestId" value="@Model.Job.JobRequestId"/>
                                                         <input type="hidden" name="recruitIdStr" value="@ViewBag.Recruit" />
                                                         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -116,12 +116,12 @@
                                                                 <!-- /.modal-content -->
                                                             </div>
                                                         </div>
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    if (ViewBag.RecruitmentList != null)
-                                                    {
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (ViewBag.RecruitmentList != null)
+                                            {
                                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target=".chooseMaidModel">Thuê</button>
                                                         <div class="modal fade chooseMaidModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
                                                              aria-hidden="true">
@@ -134,7 +134,7 @@
                                                                     </div>
                                                                     @if (recruitList.Any())
                                                                     {
-                                                                        using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new {name = "ApplyForm"}))
+                                                                        using (Html.BeginForm("ApplyJobRequest", "Customer", FormMethod.Get, new { name = "ApplyForm" }))
                                                                         {
                                                                             <div class="modal-body chooseMaidModalMaid">
                                                                                 <div id="back" class="rimaMore" style="display: none;" onclick="preRecruits()">
@@ -142,7 +142,7 @@
                                                                                 </div>
                                                                                 <input id="currPos" type="hidden" value="@(numShowRecruit - 1)" />
                                                                                 @{
-                                                                                    var counter = -1;
+                                                                            var counter = -1;
                                                                                 }
                                                                                 @foreach (var recruit in recruitList)
                                                                                 {
@@ -156,7 +156,7 @@
                                                                                                 </div>
                                                                                                 <div class="liMaidContent">
                                                                                                     <div class="licoFullName">
-                                                                                                        <a href="@Url.Action("GetRecruitment", "Post", new {recruitmentId = recruit.RecruitmentId})" id="@recruit.RecruitmentId name">@recruit.Title</a>
+                                                                                                        <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = recruit.RecruitmentId })" id="@recruit.RecruitmentId name">@recruit.Title</a>
                                                                                                     </div>
                                                                                                     <div class="ricoPost">
                                                                                                         <div class="blTime">
@@ -194,8 +194,8 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    }
-                                                }
+                                            }
+                                        }
                                             }
                                         </div>
                                     }
@@ -266,14 +266,18 @@
                                     </div>
                                 }
                             </div>
-                            <div class="iRating">
-                                <div class="iTitle">
-                                    Đánh giá:
-                                </div>
-                                <div class="miRate">
-                                    @Html.Partial("_PartialStar", (float)ViewBag.jrRate)
-                                </div>
-                            </div>
+                             @if (Model.Job.Status == "Approved")
+                             {
+                                 <div class="iRating">
+                                     <div class="iTitle">
+                                         Đánh giá:
+                                     </div>
+                                     <div class="miRate">
+                                         @Html.Partial("_PartialStar", (float)ViewBag.jrRate)
+                                     </div>
+                                 </div>
+                                 
+                             }
                             <div class="iSkill">
                                 <div class="iTitle">
                                     Các kỹ năng:
@@ -345,7 +349,7 @@
                                 Hết hạn
                             </div>
                             <div class="rideroContent">
-                                <strong>@jobRequestTemp.Job.ExpiredTime.ToString("dd/MM/yyyy")
+                                <strong>@jobRequestTemp.Job.ExpiredTime.ToString("hh:mm dd/MM/yyyy")
                                 </strong>
                             </div>
                         </li>
@@ -370,11 +374,11 @@
                                             <div class="blTime">
                                                 <span class="blTimeText">Người giúp việc</span>
                                             </div>
-                                            <div class="jrMaidRate">
+                                            @*<div class="jrMaidRate">
                                                 <div class="rate">
                                                     @Html.Partial("_PartialStar", (float)jobRequestTemp.Maid.RateAvg)
                                                 </div>
-                                            </div>
+                                            </div>*@
                                             <div class="blTime">
                                                 <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(jobRequestTemp.Maid.Gender == true ? "Nam" : "Nữ")</span>
                                             </div>

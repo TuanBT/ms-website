@@ -71,8 +71,8 @@ namespace MS_Website.Controllers
                 _db.SaveChanges();
                 var abc = (double) _db.JobRequests.Count(r => r.Status == "Waiting")/numResultOnPage;
                 int bcd =(int) Math.Ceiling(abc);
-                int NumPageRec = (int)Math.Ceiling((double)_db.Recruitments.Count(r => r.Status == "Waiting") / numResultOnPage);
-                int NumPageJob = (int)Math.Ceiling((double)_db.JobRequests.Count(r => r.Status == "Waiting") / numResultOnPage);
+                int NumPageRec = (int)Math.Ceiling((double)_db.Recruitments.Count(r => r.Status == "Waiting" && r.IsActive) / numResultOnPage);
+                int NumPageJob = (int)Math.Ceiling((double)_db.JobRequests.Count(r => r.Status == "Waiting" && r.IsActive) / numResultOnPage);
                 ViewBag.NumPageRec = NumPageRec > 5 ? 5 : NumPageRec;
                 ViewBag.NumPageJob = NumPageJob > 5 ? 5 : NumPageJob;
 

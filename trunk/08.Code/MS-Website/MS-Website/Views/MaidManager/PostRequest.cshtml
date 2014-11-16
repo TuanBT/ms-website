@@ -69,9 +69,9 @@
                                                             <div class="licoFullName">
                                                                 <a href="@Url.Action("ManageMaidProfile", "MaidManager", new {maidId = maid.MaidId})" target="_blank" id="@maid.MaidId name">@maid.MaidName</a>
                                                             </div>
-                                                            <div class="licoRate">
+                                                            @*<div class="licoRate">
                                                                 @Html.Partial("_PartialStar", (float) maid.RateAvg)
-                                                            </div>
+                                                            </div>*@
                                                             <div class="blTime">
                                                                 <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender == true ? "Nam" : "Nữ")</span>
                                                             </div>
@@ -101,7 +101,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Tiêu đề 
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <input class="form-control input-lg text" maxlength="50" name="title" type="text" value="" placeholder="Tối đa 50 kí tự" id="txtTitle">
                              <div id="textBlank"></div>
                         </div>
@@ -220,21 +220,23 @@
                     <div class="row">
                         <div class="col-md-4 poJRTtitle">
                             Thời hạn đăng
+                            <span class="postJRTimeDetail">Đơn giá <span
+                                                                                class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> đồng/Tuần</span>
                         </div>
-                        <div class="col-md-8">
-                            <select id="time" class="form-control" name="time" onchange="chooseTime(@Session["PriceJR"])">
+                        <div class="col-md-2">
+                            <select class="form-control" id="time" name="time" onchange="chooseTime(@Session["PriceRC"])">
                                 @for (int i = 1; i <= (int)Session["MaxWeek"];i++ )
                                 {
                                     <option value="@i">@i tuần</option>
                                 }
                             </select>
+                        </div>
+                        <div class="col-md-6">
                             <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> * <span
-                                class="postJRTimePrice"><span class="prices">@Session["PriceJR"]</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">@Session["PriceJR"]</span>.000</span> đồng</span>
-                            <span class="postJRTimeDetail">Đơn giá hiện tại <span
-                                class="postJRTimePrice"><span class="prices">@Session["PriceJR"]</span>.000</span> đồng/Tuần</span>
+                                                                                                    class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">@Session["PriceRC"]</span>.000</span> đồng</span>
                         </div>
                     </div>
-                </div>                
+                </div>               
                 <div class="footerButton">
                     <input id="chosenMaid" type="hidden" name="maidId" />
                     <button class="btn btn-success btn-lg" id="btnEdit">Đăng yêu cầu</button>

@@ -181,11 +181,11 @@
                                                                     <span class="glyphicon glyphicon-heart"></span>
                                                                 </div>*@
                                                             </div>
-                                                        </div>
+                                                        </div>@*
                                                         <div class="rate">
                                                             @(jobRequestTemp.Maid.RateAvg != null ? Html.Partial("_PartialStar", (float)jobRequestTemp.Maid.RateAvg) : Html.Partial("_PartialStar", 0))
 
-                                                        </div>
+                                                        </div>s*@
                                                         <div class="detailInfo">
                                                             <strong>Đăng ngày: </strong><span>@jobRequestTemp.Job.PostTime.ToString("dd/MM/yyyy")</span>
                                                         </div>
