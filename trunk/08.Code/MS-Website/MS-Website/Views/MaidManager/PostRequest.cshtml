@@ -18,6 +18,11 @@
             <div class="titlePage">ĐĂNG YÊU CẦU CÔNG VIỆC</div>
             @using (Html.BeginForm("AddRequest", "MaidManager", FormMethod.Post))
             {
+                <div class="postRCAlertMoney">
+                                <div class="alert alert-info" role="alert">
+                                    <strong>Thông báo!</strong> Người giúp việc sẽ nhận lại 20% số tiền nếu quay lại xác nhận đã hoàn thành công việc tới nhân viên của chúng tôi.<br />
+                                         </div>
+                            </div>
                 <div class="postJRRow">
                     <div class="row">
                         <div class="col-md-4 poJRTtitle">
@@ -47,7 +52,7 @@
                                     <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
                                         lý</h4>
                                 </div>
-                                @if(maidList.Any())
+                                @if (maidList.Any())
                                 {
                                     <div class="modal-body chooseMaidModalMaid">
                                         <div id="back" class="rimaMore" style="display: none;" onclick="preMaids()">
@@ -67,7 +72,7 @@
                                                         </div>
                                                         <div class="liMaidContent">
                                                             <div class="licoFullName">
-                                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new {maidId = maid.MaidId})" target="_blank" id="@maid.MaidId name">@maid.MaidName</a>
+                                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" target="_blank" id="@maid.MaidId name">@maid.MaidName</a>
                                                             </div>
                                                             @*<div class="licoRate">
                                                                 @Html.Partial("_PartialStar", (float) maid.RateAvg)
@@ -221,11 +226,11 @@
                         <div class="col-md-4 poJRTtitle">
                             Thời hạn đăng
                             <span class="postJRTimeDetail">Đơn giá <span
-                                                                                class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> đồng/Tuần</span>
+                                                                                class="postJRTimePrice"><span class="prices">@Session["PriceJR"]</span>.000</span> đồng/Tuần</span>
                         </div>
                         <div class="col-md-2">
-                            <select class="form-control" id="time" name="time" onchange="chooseTime(@Session["PriceRC"])">
-                                @for (int i = 1; i <= (int)Session["MaxWeek"];i++ )
+                            <select class="form-control" id="time" name="time" onchange="chooseTime(@Session["PriceJR"])">
+                                @for (int i = 1; i <= (int)Session["MaxWeek"]; i++)
                                 {
                                     <option value="@i">@i tuần</option>
                                 }
@@ -233,7 +238,7 @@
                         </div>
                         <div class="col-md-6">
                             <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> * <span
-                                                                                                    class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">@Session["PriceRC"]</span>.000</span> đồng</span>
+                                                                                                    class="postJRTimePrice"><span class="prices">@Session["PriceJR"]</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">@Session["PriceJR"]</span>.000</span> đồng</span>
                         </div>
                     </div>
                 </div>               
