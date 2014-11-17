@@ -446,6 +446,27 @@ namespace MS_Website.Controllers
         }
 
         [HttpPost]
+        public JsonResult ManageFeeSPW(string SSPW)
+        {
+            System.Configuration.Configuration config = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+
+            System.Configuration.KeyValueConfigurationElement settingPriceRC = config.AppSettings.Settings["SubPriceWeek"];
+
+            if (null != settingPriceRC)
+            {
+                config.AppSettings.Settings["SubPriceWeek"].Value = SSPW;
+            }
+            else
+            {
+                config.AppSettings.Settings.Add("SubPriceWeek", SSPW);
+            }
+
+            config.Save();
+            return Json("", JsonRequestBehavior.AllowGet);
+            //return RedirectToAction("AdminConfig");
+        }
+
+        [HttpPost]
         public JsonResult ManageMaxWeek(string sMaxWeek)
         {
             System.Configuration.Configuration config = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
