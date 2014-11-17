@@ -25,6 +25,7 @@ namespace MS_Website.Models
         public string Status { get; set; }
         public System.DateTime PostTime { get; set; }
         public System.DateTime ExpiredTime { get; set; }
+        public int Price { get; set; }
         public string Title { get; set; }
         public bool IsActive { get; set; }
     

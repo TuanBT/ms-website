@@ -326,6 +326,10 @@ namespace MS_Website.Controllers
                     recruitment.Status = "Waiting";
                     recruitment.PostTime = DateTime.Now;
                     recruitment.ExpiredTime = DateTime.Now.AddDays(7 * int.Parse(time));
+                    int price  = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceRC"]);
+                    int SubPriceWeek = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["SubPriceWeek"]);
+                    int week = int.Parse(time);
+                    recruitment.Price = price * week - (SubPriceWeek / 2) * week * (week - 1);
                     recruitment.Title = title;
                     skillRef.Type = 1;
                     db.Recruitments.Add(recruitment);

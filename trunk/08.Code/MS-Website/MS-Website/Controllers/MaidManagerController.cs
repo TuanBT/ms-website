@@ -211,7 +211,7 @@ namespace MS_Website.Controllers
                         maid.Address = addr;
                         maid.Married = married;
                         maid.Description = desc;
-                        maid.RateAvg = 0;
+                        //maid.RateAvg = 0;
                         maid.PersonalImage = "../Content/Image/default-avatar.png";
                         db.Maids.Add(maid);
                         db.SaveChanges();
@@ -611,6 +611,8 @@ namespace MS_Website.Controllers
                 jobRequest.Status = "Waiting";
                 jobRequest.PostTime = DateTime.Now;
                 jobRequest.ExpiredTime = DateTime.Now.AddDays(1 + 7 * int.Parse(time));
+                int price = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceJR"]);
+                jobRequest.Price = price * int.Parse(time);
                 jobRequest.MaidId = maidId;
                 jobRequest.Title = title;
                 jobRequest.IsActive = false;

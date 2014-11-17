@@ -26,7 +26,6 @@ namespace MS_Website.Models
         public string PersonalImage { get; set; }
         public Nullable<double> Experience { get; set; }
         public string Description { get; set; }
-        public Nullable<double> RateAvg { get; set; }
         public string Phone { get; set; }
         public Nullable<bool> Gender { get; set; }
         public Nullable<System.DateTime> BirthDate { get; set; }
