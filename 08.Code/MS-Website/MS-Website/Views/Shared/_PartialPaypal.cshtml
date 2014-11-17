@@ -1,7 +1,9 @@
 ﻿@{ MS_Website.Models.RecruitmentTemp RecruitmentTemp = Model;}
 @{
     int week = (int)(RecruitmentTemp.Recruitment.ExpiredTime - RecruitmentTemp.Recruitment.PostTime).TotalDays / 7;
-    int amount = week * ((int)Session["PriceRC"]/20);
+    int price = (int) Session["PriceRC"];
+    int SubPriceWeek = (int)Session["SubPriceWeek"];
+    var amount = (price * week - (SubPriceWeek / 2) * week * (week - 1))/20;
 }
 @if (Session["AccId"] != null)
 {

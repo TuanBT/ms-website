@@ -15,10 +15,10 @@
             @using (Html.BeginForm("AddRecruitment", "Customer", FormMethod.Post))
             {
                 <div class="postRCAlertMoney">
-                                <div class="alert alert-info" role="alert">
-                                    <strong>Thông báo!</strong> Bạn cần phải thanh toán qua Paypal, trước khi tin tuyển việc này được công khai.<br />
-                                         </div>
-                            </div>
+                    <div class="alert alert-info" role="alert">
+                        <strong>Thông báo!</strong> Bạn cần phải thanh toán qua Paypal, trước khi tin tuyển việc này được công khai. Tuần đăng càng lâu tổng số tiền thanh toán càng giảm.<br />
+                    </div>
+                </div>
                 <div class="postJRRow">
                     <div class="row">
                         <div class="col-md-4 poJRTtitle">
@@ -28,7 +28,7 @@
                             <input class="form-control input-lg text" maxlength="50" name="title" type="text" value="" placeholder="Tối đa 50 kí tự" id="txtTitle">
                             <div id="textBlank"></div>
                             <font color="red">@ViewBag.Err</font>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                             Các kỹ năng
                         </div>
                         <div class="col-md-8">
-                            <div class="boxPostJRSkill"  data-toggle="modal" data-target=".chooseSkillModel" onclick="return cancel()">
+                            <div class="boxPostJRSkill" data-toggle="modal" data-target=".chooseSkillModel" onclick="return cancel()">
                                 <div class="skillPost">
                                     <div class="postOpenButton">
                                         <span class="glyphicon glyphicon-plus-sign"></span>
@@ -249,20 +249,28 @@
                     <div class="row">
                         <div class="col-md-4 poJRTtitle">
                             Thời hạn đăng
-                            <span class="postJRTimeDetail">Đơn giá <span
-                                                                                class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> đồng/Tuần</span>
+                            <span class="postJRTimeDetail">Đơn giá tuần đầu<br/>
+                                <span class="postJRTimePrice">
+                                    <span class="prices">@Session["PriceRC"]</span>.000
+                                </span> đồng/Tuần</span>
                         </div>
                         <div class="col-md-2">
-                            <select class="form-control" id="time" name="time" onchange="chooseTime(@Session["PriceRC"])">
-                                @for (int i = 1; i <= (int)Session["MaxWeek"];i++ )
+                            <select class="form-control" id="time" name="time" onchange="chooseTime(@Session["PriceRC"],@Session["SubPriceWeek"])">
+                                @for (int i = 1; i <= (int)Session["MaxWeek"]; i++)
                                 {
                                     <option value="@i">@i tuần</option>
                                 }
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> * <span
-                                                                                                    class="postJRTimePrice"><span class="prices">@Session["PriceRC"]</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">@Session["PriceRC"]</span>.000</span> đồng</span>
+                            <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> tuần là 
+                                @*<span class="postJRTimePrice">
+                                    <span class="prices">@Session["PriceRC"]</span>.000
+                                </span> = *@
+                                <span class="postJRTimePriceTotal">
+                                    <span id="pricesTotal">@Session["PriceRC"]</span>.000
+                                </span> đồng
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -390,16 +398,19 @@
             document.getElementById("chosenSkills").innerHTML = chosenSkills;
         }
     }
-    
-    function chooseTime(prices) {
+
+    function chooseTime(prices, SubPriceWeek) {
         var price = parseInt(prices);
         var week = parseInt($("#time").val());
-        var total = price * week;
+        var total = price * week - (SubPriceWeek / 2) * week * (week - 1);
+        /*for (var i = 1; i <= week;i++) {
+            total += (price - SubPriceWeek * (i - 1));
+        }*/
         $("#WeekChoose").html(week);
         $(".prices").html(price);
         $("#pricesTotal").html(total);
     }
-    
+
     function cancel() {
         return false;
     }
@@ -417,7 +428,7 @@
             errText = "";
             document.getElementById("textBlank").innerHTML = errText;
         }
-        if ($("#chosenSkills").html()=="" ) {
+        if ($("#chosenSkills").html() == "") {
             errText = "<font color='red'>Vui lòng chọn kĩ năng</font>";
             document.getElementById("SkillErr").innerHTML = errText;
             return false;
@@ -427,4 +438,4 @@
             document.getElementById("SkillErr").innerHTML = errText;
         }
     });
-    </script>
+</script>

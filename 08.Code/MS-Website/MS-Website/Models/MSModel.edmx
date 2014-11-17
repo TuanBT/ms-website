@@ -194,9 +194,9 @@
           <Property Name="Role" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="IsWebmaster" Type="bit" Nullable="false" />
           <Property Name="Avatar" Type="nvarchar" MaxLength="50" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Apply">
           <Key>
@@ -235,6 +235,7 @@
           <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="PostTime" Type="datetime" Nullable="false" />
           <Property Name="ExpiredTime" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
           <Property Name="ApplyTimes" Type="datetime" />
           <Property Name="MaidId" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
@@ -251,8 +252,7 @@
           <Property Name="PersonalImage" Type="nvarchar" MaxLength="100" />
           <Property Name="Experience" Type="float" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
-          <Property Name="RateAvg" Type="float" />
-          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="Gender" Type="bit" />
           <Property Name="BirthDate" Type="date" />
           <Property Name="English" Type="bit" />
@@ -299,6 +299,7 @@
           <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="PostTime" Type="datetime" Nullable="false" />
           <Property Name="ExpiredTime" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
@@ -1041,9 +1042,9 @@
           <Property Name="Role" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="IsWebmaster" Type="Boolean" Nullable="false" />
           <Property Name="Avatar" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="FullName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Customer" Relationship="MSModel.FK_Customer_Account" FromRole="Account" ToRole="Customer" />
           <NavigationProperty Name="MaidMediator" Relationship="MSModel.FK_MaidRepresentation_Account" FromRole="Account" ToRole="MaidMediator" />
           <NavigationProperty Name="Notifiers" Relationship="MSModel.FK_Notifier_Account" FromRole="Account" ToRole="Notifier" />
@@ -1094,6 +1095,7 @@
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="PostTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ExpiredTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="ApplyTimes" Type="DateTime" Precision="3" />
           <Property Name="MaidId" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
@@ -1117,8 +1119,7 @@
           <Property Name="PersonalImage" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Experience" Type="Double" />
           <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
-          <Property Name="RateAvg" Type="Double" />
-          <Property Name="Phone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
           <Property Name="Gender" Type="Boolean" />
           <Property Name="BirthDate" Type="DateTime" Precision="0" />
           <Property Name="English" Type="Boolean" />
@@ -1174,6 +1175,7 @@
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="PostTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ExpiredTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Applies" Relationship="MSModel.FK_Apply_Recruitment" FromRole="Recruitment" ToRole="Apply" />
@@ -1835,6 +1837,7 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="PostTime" ColumnName="PostTime" />
                 <ScalarProperty Name="ExpiredTime" ColumnName="ExpiredTime" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ApplyTimes" ColumnName="ApplyTimes" />
                 <ScalarProperty Name="MaidId" ColumnName="MaidId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -1852,7 +1855,6 @@
                 <ScalarProperty Name="PersonalImage" ColumnName="PersonalImage" />
                 <ScalarProperty Name="Experience" ColumnName="Experience" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="RateAvg" ColumnName="RateAvg" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
@@ -1904,6 +1906,7 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="PostTime" ColumnName="PostTime" />
                 <ScalarProperty Name="ExpiredTime" ColumnName="ExpiredTime" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
@@ -1993,7 +1996,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

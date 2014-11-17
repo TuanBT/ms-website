@@ -40,6 +40,7 @@
                     <th>Tiêu đề yêu cầu</th>
                     <th>Người đại diện</th>
                     <th>Thời gian đăng</th>
+                    <th>Tiền trả (ngàn đồng)</th>
                     <th>Xử lý</th>
                 </tr>
                 </thead>
@@ -55,7 +56,6 @@
                                     @count
                                     <input type="hidden" value="@(jobRequest.Job.JobRequestId)" id="" />
                                 </td>
-                                
                                 <td>
                                     <a href="@Url.Action("GetJobRequest", "Post", new { jobId = jobRequest.Job.JobRequestId })">@jobRequest.Job.Title</a>
                                 </td>
@@ -76,7 +76,12 @@
                                     }
                                     <a href="@Url.Action("GetMaidManager","MaidManager", new {accId=managerId,role=roles})">@jobRequest.Account.FullName</a>
                                 </td>
-                                <td>@jobRequest.Job.PostTime.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    @jobRequest.Job.PostTime.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @(jobRequest.Job.Price*0.2)
+                                </td>
                                 <td>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@jobRequest.Job.JobRequestId)">Hoàn tất</button>
                                 </td>

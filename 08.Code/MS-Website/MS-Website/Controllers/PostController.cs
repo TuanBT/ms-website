@@ -57,7 +57,7 @@ namespace MS_Website.Controllers
                     {
                         LoadSkillList(skillRef, skillList, db);
                     }
-                    ViewBag.MaidRating = maid.RateAvg;
+                    //ViewBag.MaidRating = maid.RateAvg;
                     if (Session["AccId"] != null)
                     {
                         if (job.Maid.MaidMediatorId != null)
@@ -757,7 +757,7 @@ namespace MS_Website.Controllers
                 }
                 if (statusNew)
                 {
-                    var maidId = db.JobRequests.FirstOrDefault(j => j.JobRequestId == jobId).MaidId;
+                   /* var maidId = db.JobRequests.FirstOrDefault(j => j.JobRequestId == jobId).MaidId;
                     var Ratings = db.Ratings.Select(r => r).ToList();
                     var jobRequests =
                         db.JobRequests.Where(
@@ -777,7 +777,7 @@ namespace MS_Website.Controllers
                     }
                     var Maid = db.Maids.FirstOrDefault(m => m.MaidId == maidId);
                     Maid.RateAvg = (int)total / count;
-                    db.SaveChanges();
+                    db.SaveChanges();*/
                 }
             }
             //return Json("{MaidRateAvg:" + MaidRateAvg + ",numrate:" + numrate + "}", JsonRequestBehavior.AllowGet);
