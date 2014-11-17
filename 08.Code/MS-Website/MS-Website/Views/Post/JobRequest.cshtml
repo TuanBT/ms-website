@@ -299,27 +299,30 @@
                     </div>
                     @if (jobRequestTemp.Job.Status == "Approved")
                     {
-                        ViewBag.CusId = (int)jobRequestTemp.Recruitment.CustomerId;
+                        ViewBag.CusId = (int) jobRequestTemp.Recruitment.CustomerId;
                         if (ViewBag.CusId != null)
                         {
                             if (Session["AccId"] != null)
                             {
-                                if ((int)Session["AccId"] == (int)ViewBag.CusId)
+                                if ((int) Session["AccId"] == (int) ViewBag.CusId)
                                 {
-                        <div class="overView">
-                            <div class="ovTitle">
-                                Bạn có thể chấm điểm cho công việc này
-                            </div>
-                            <div class="ovContent">
-                                @* @{ Html.RenderAction("Rate", "Evaluate", new {id = jobRequestTemp.Job.JobRequestId}); }*@
-                                @*ViewBag.MaidRating*@
-                                @{ ViewBag.jrid = jobRequestTemp.Job.JobRequestId; }
-                                @Html.Partial("_PartialRating")
-                            </div>
-                        </div>
+                                    <div class="overView">
+                                        <div class="ovTitle">
+                                            Bạn có thể chấm điểm cho công việc này
+                                        </div>
+                                        <div class="ovContent">
+                                            @* @{ Html.RenderAction("Rate", "Evaluate", new {id = jobRequestTemp.Job.JobRequestId}); }*@
+                                            @*ViewBag.MaidRating*@
+                                            @{ ViewBag.jrid = jobRequestTemp.Job.JobRequestId; }
+                                            @Html.Partial("_PartialRating")
+                                        </div>
+                                    </div>
                                 }
                             }
                         }
+                    }
+                     @if (jobRequestTemp.Job.Status == "Applied" || jobRequestTemp.Job.Status == "Approved")
+                    {
                         <div class="overView">
                             <div class="ovTitle">
                                 Nhận xét của người đã thuê
