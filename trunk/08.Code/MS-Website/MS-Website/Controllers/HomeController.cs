@@ -53,20 +53,25 @@ namespace MS_Website.Controllers
                         recruitment.Status = "Expired";
                     }
                 }
-                var limitDate = DateTime.Now.AddDays(-3);
-                var invalidJobList = _db.JobRequests.Where(jr => !jr.IsActive && jr.PostTime < limitDate).ToList();
-                var invalidRecruitList = _db.Recruitments.Where(r => !r.IsActive && r.PostTime < limitDate).ToList();
-                foreach (var jobRequest in invalidJobList)
+                var notActivteJobs = _db.JobRequests.Where(jr => !jr.IsActive).ToList();
+                var notActiveRecruits = _db.Recruitments.Where(r => !r.IsActive).ToList();
+                foreach (var jobRequest in notActivteJobs)
                 {
-                    _db.JobRequests.Remove(jobRequest);
+                    if (DateTime.Now - jobRequest.PostTime > jobRequest.ExpiredTime - jobRequest.PostTime)
+                    {
+                        _db.JobRequests.Remove(jobRequest);
+                    }
                 }
-                foreach (var recruitment in invalidRecruitList)
+                foreach (var recruitment in notActiveRecruits)
                 {
-                    _db.Recruitments.Remove(recruitment);
+                    if (DateTime.Now - recruitment.PostTime > recruitment.ExpiredTime - recruitment.PostTime)
+                    {
+                        _db.Recruitments.Remove(recruitment);
+                    }
                 }
                 _db.SaveChanges();
-                var abc = (double) _db.JobRequests.Count(r => r.Status == "Waiting")/numResultOnPage;
-                int bcd =(int) Math.Ceiling(abc);
+                var abc = (double)_db.JobRequests.Count(r => r.Status == "Waiting") / numResultOnPage;
+                int bcd = (int)Math.Ceiling(abc);
                 int NumPageRec = (int)Math.Ceiling((double)_db.Recruitments.Count(r => r.Status == "Waiting" && r.IsActive) / numResultOnPage);
                 int NumPageJob = (int)Math.Ceiling((double)_db.JobRequests.Count(r => r.Status == "Waiting" && r.IsActive) / numResultOnPage);
                 ViewBag.NumPageRec = NumPageRec > 5 ? 5 : NumPageRec;
@@ -164,12 +169,12 @@ namespace MS_Website.Controllers
                         ms.Accounts.FirstOrDefault(
                             a => a.Username.Equals(acc.Username) && a.Password.Equals(acc.Password));
                     var d = ms.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
-                    if (d==null)
+                    if (d == null)
                     {
                         ViewBag.Error = "Tên đăng nhập hoặc mật khẩu không đúng";
                     }
-                    
-                    else 
+
+                    else
                     {
                         if (!d.IsActive)
                         {
@@ -190,7 +195,7 @@ namespace MS_Website.Controllers
                             Session["NumberNotifier"] = notifier.Count;
                             return RedirectToAction("Index", "Home");
                         }
-                        
+
                     }
                 }
             }
@@ -249,16 +254,16 @@ namespace MS_Website.Controllers
                             _db.SaveChanges();
                         }
                     }
-                    
+
                     return RedirectToAction("Login", "Home", acc);
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return View("Register");
             }
 
-            }
+        }
 
         public ActionResult Redirect()
         {
@@ -266,7 +271,7 @@ namespace MS_Website.Controllers
             {
                 if (Session["Role"].Equals("Customer"))
                 {
-                    return RedirectToAction("GetCustomer", "Customer", new { custId = (int) Session["AccId"]});
+                    return RedirectToAction("GetCustomer", "Customer", new { custId = (int)Session["AccId"] });
                 }
                 if (Session["Role"].Equals("MaidMediator") || Session["Role"].Equals("Staff"))
                 {

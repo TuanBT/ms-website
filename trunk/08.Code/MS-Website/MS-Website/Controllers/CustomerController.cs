@@ -352,7 +352,7 @@ namespace MS_Website.Controllers
             {
                 LoadItems(db);
                 var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
-                if (recruitment.PostTime.AddDays(3) < DateTime.Now)
+                if (recruitment.IsActive)
                 {
                     TempData["Alert"] = "Công việc đã hết hạn cho sửa";
                     return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
@@ -476,7 +476,7 @@ namespace MS_Website.Controllers
             using (var db = new MSEntities())
             {
                 var recruitment = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
-                if (recruitment.PostTime.AddDays(3) < DateTime.Now)
+                if (recruitment.IsActive)
                 {
                     TempData["Alert"] = "Công việc đã hết hạn cho sửa";
                 }
