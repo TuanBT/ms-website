@@ -12,7 +12,7 @@ namespace MS_Website.Controllers
         //
         // GET: /Admin/
         [HttpPost]
-        public ActionResult RunKmean(string numCluterKStr)
+        public JsonResult RunKmean(string numCluterKStr)
         {
             if (Session["AccId"] != null)
             {
@@ -196,10 +196,12 @@ namespace MS_Website.Controllers
                         }
                         db.SaveChanges();
                     }
-                    return RedirectToAction("AdminConfig", "Admin");
+                    return Json("", JsonRequestBehavior.AllowGet);
+                    //return RedirectToAction("AdminConfig", "Admin");
                 }
             }
-            return RedirectToAction("Login", "Home");
+            return Json("fail", JsonRequestBehavior.AllowGet);
+            //return RedirectToAction("Login", "Home");
         }
 
         public ActionResult AdminConfig()
