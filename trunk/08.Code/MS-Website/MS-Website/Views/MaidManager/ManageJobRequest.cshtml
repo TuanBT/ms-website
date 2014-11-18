@@ -99,7 +99,7 @@
                                Bạn thực sự đã nhận tiền từ người đại diện cho người giúp việc?
                             </div>
                             <div class="modal-footer">
-                                @using (Html.BeginForm("MarkActive","MaidManager",FormMethod.Get))
+                                @using (Html.BeginForm("MarkActiveJobRequest","MaidManager",FormMethod.Get))
                                 {
                                     <input type="hidden" name="jobRequestId" id="jrId2" />
                                     <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
