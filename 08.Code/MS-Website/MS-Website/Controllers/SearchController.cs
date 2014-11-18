@@ -118,7 +118,7 @@ namespace MS_Website.Controllers
                     {
                         var skillList = new List<string>();
                         PostController.LoadSkillList(skillRef, skillList, db);
-                        var jobRequest = db.JobRequests.SingleOrDefault(jr => jr.SkillRefId == skillRef.SkillRefId && jr.Status.Equals("Waiting"));
+                        var jobRequest = db.JobRequests.SingleOrDefault(jr => jr.SkillRefId == skillRef.SkillRefId && jr.Status.Equals("Waiting") && jr.IsActive);
                         if (jobRequest != null)
                         {
                             var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
@@ -127,7 +127,7 @@ namespace MS_Website.Controllers
                         }
                         else
                         {
-                            var recruitment = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId && r.Status.Equals("Waiting"));
+                            var recruitment = db.Recruitments.SingleOrDefault(r => r.SkillRefId == skillRef.SkillRefId && r.Status.Equals("Waiting") && r.IsActive);
                             if (recruitment != null)
                             {
                                 var customer = db.Customers.SingleOrDefault(c => c.AccountId == recruitment.CustomerId);
@@ -252,8 +252,8 @@ namespace MS_Website.Controllers
                 }
                 if (searchInsList.Any())
                 {
-                    var wJobRequestList = db.JobRequests.Where(j => j.Status.Equals("Waiting")).ToList();
-                    var wRecruitmentList = db.Recruitments.Where(r => r.Status.Equals("Waiting")).ToList();
+                    var wJobRequestList = db.JobRequests.Where(j => j.Status.Equals("Waiting") && j.IsActive).ToList();
+                    var wRecruitmentList = db.Recruitments.Where(r => r.Status.Equals("Waiting") && r.IsActive).ToList();
                     foreach (var jobRequest in wJobRequestList)
                     {
                         skillRefList.Add(db.SkillReferences.SingleOrDefault(r => r.SkillRefId == jobRequest.SkillRefId));
