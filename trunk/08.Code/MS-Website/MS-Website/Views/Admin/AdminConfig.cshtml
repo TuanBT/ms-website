@@ -7,7 +7,6 @@
 <div class="Menu">
     @Html.Partial("_PartialMenu")
 </div>
-
 <div class="body">
     <div class="rows">
         <div class="row">
@@ -27,7 +26,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="row">
-                                <div class="col-md-4" style="margin-top: 11px;">Số K hiện tại: @ViewBag.numCluterKCurrent</div>
+                                <div class="col-md-4" style="margin-top: 11px;">Số K hiện tại: <span class="NumberKCurent">@ViewBag.numCluterKCurrent</span></div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-2 poJRTtitleSmall"><span>Gợi ý số K</span></div>
                                 <div class="col-md-3">
@@ -35,7 +34,7 @@
                                     <div id="errKmean" style="color: red"></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="submit" id="btnRunKmean" class="btn btn-success">Chạy Kmean</button>
+                                    <button type="button" id="btnRunKmean" onclick="RunKmean()" class="btn btn-success">Chạy Kmean</button>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +60,7 @@
                                     <div id="errJR" style="color: red"></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" onclick="ChangePriceJR()" class="btn btn-success">Sửa giá</button>
+                                    <button type="button" id="btnEditJR" onclick="ChangePriceJR()" class="btn btn-success">Sửa giá</button>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +86,7 @@
                                 <div id="errRC" style="color: red"></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" onclick="ChangePriceRC()" class="btn btn-success">Sửa giá</button>
+                                    <button type="button" id="btnEditRC" onclick="ChangePriceRC()" class="btn btn-success">Sửa giá</button>
                                 </div>
                             </div>
                         </div>
@@ -99,20 +98,20 @@
                 <div class="postJRRow">
                     <div class="row">
                         <div class="col-md-4 poJRTtitle">
-                            Trừ mỗi tuần<br />
+                            Giảm mỗi tuần<br />
                             ngàn đồng
                         </div>
                         <div class="col-md-8">
                             <div class="row">
-                                <div class="col-md-4" style="margin-top: 11px;">Tiền trừ hiện tại: <span id="SPW">@(Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["SubPriceWeek"]))</span>  ngàn đồng</div>
+                                <div class="col-md-4" style="margin-top: 11px;">Tiền giảm hiện tại: <span id="SPW">@(Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["SubPriceWeek"]))</span>  ngàn đồng</div>
                                 <div class="col-md-1"></div>
-                                <div class="col-md-2 poJRTtitleSmall"><span>Tiền trừ mới</span></div>
+                                <div class="col-md-2 poJRTtitleSmall"><span>Tiền giảm mới</span></div>
                                 <div class="col-md-3">
                                     <input type="text" id="txtSPW" class="form-control" name="SSPW" value="@(Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["SubPriceWeek"]))">
                                 <div id="errSPW" style="color: red"></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" onclick="ChangeSPW()" class="btn btn-success">Sửa giá</button>
+                                    <button type="button" id="btnEditSPW" onclick="ChangeSPW()" class="btn btn-success">Sửa giá</button>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +135,7 @@
                                 <div id="errMW" style="color: red"></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" onclick="ChangeMaxWeek()" class="btn btn-success">Sửa số tuần</button>
+                                    <button type="button" id="btnMaxWeek" onclick="ChangeMaxWeek()" class="btn btn-success">Sửa số tuần</button>
                                 </div>
                             </div>
                         </div>
@@ -159,18 +158,43 @@
         }
     })
     
+    function RunKmean() {
+        $("#NotiSuss").fadeOut();
+        $("#errJR").html("");
+        var url = "/Admin/RunKmean";
+        var number = $('#txtNumCluterK').val();
+        var reg = new RegExp('^\s*-?[0-9]{1,10}\s*$');
+        if (reg.test(number)) {
+            $('#btnRunKmean').html('Đang xử lý...');
+            $.post(url, { numCluterKStr: number }, function (data) {
+                if (data == "fail") {
+                }
+                $("#NotiSuss").fadeIn();
+                $("#NotiFail").fadeOut();
+                $("#contentNotiSuss").html("Cập nhập số K thành công.");
+                $("#NumberKCurent").html(number);
+                $('#btnRunKmean').html('Chạy Kmean');
+            });
+        } else {
+            $("#errJR").html("Phải nhập số nguyên!");
+        }
+    }
+    
     function ChangePriceJR() {
+        
         $("#NotiSuss").fadeOut();
         $("#errJR").html("");
         var url = "/Admin/ManageFeeJR";
         var price = $('#txtPriceJR').val();
         var reg = new RegExp('^\s*-?[0-9]{1,10}\s*$');
         if (reg.test(price)) {
+            $('#btnEditJR').html('Đang xử lý...');
             $.post(url, { SpriceJR: price }, function (data) {
                 $("#NotiSuss").fadeIn();
                 $("#NotiFail").fadeOut();
                 $("#contentNotiSuss").html("Cập nhập đơn giá cho yêu cầu công việc thành công.");
                 $("#priceJR").html($('#txtPriceJR').val());
+                $('#btnEditJR').html('Sửa giá');
             });
         } else {
             $("#errJR").html("Phải nhập số nguyên!");
@@ -184,11 +208,13 @@
         var price = $('#txtPriceRC').val();
         var reg = new RegExp('^\s*-?[0-9]{1,10}\s*$');
         if (reg.test(price)) {
+            $('#btnEditRC').html('Đang xử lý...');
             $.post(url, { SpriceRC: price }, function (data) {
                 $("#NotiSuss").fadeIn();
                 $("#NotiFail").fadeOut();
                 $("#contentNotiSuss").html("Cập nhập đơn giá cho yêu cầu tìm người thành công.");
                 $("#priceRC").html($('#txtPriceRC').val());
+                $('#btnEditRC').html('Sửa giá');
             });
         } else {
             $("#errRC").html("Phải nhập số nguyên!");
@@ -202,11 +228,13 @@
         var price = $('#txtSPW').val();
         var reg = new RegExp('^\s*-?[0-9]{1,10}\s*$');
         if (reg.test(price)) {
+            $('#btnEditSPW').html('Đang xử lý...');
             $.post(url, { SPW: price }, function (data) {
                 $("#NotiSuss").fadeIn();
                 $("#NotiFail").fadeOut();
-                $("#contentNotiSuss").html("Cập nhập số tiền trừ hàng tuần thành công.");
+                $("#contentNotiSuss").html("Cập nhập số tiền giảm hàng tuần thành công.");
                 $("#SPW").html($('#txtSPW').val());
+                $('#btnEditSPW').html('Sửa giá');
             });
         } else {
             $("#errSPW").html("Phải nhập số nguyên!");
@@ -220,11 +248,13 @@
         var sMaxWeek = $('#txtMaxWeek').val();
         var reg = new RegExp('^\s*-?[0-9]{1,10}\s*$');
         if (reg.test(sMaxWeek)) {
+            $('#btnMaxWeek').html('Đang xử lý...');
             $.post(url, { sMaxWeek: sMaxWeek }, function (data) {
                 $("#NotiSuss").fadeIn();
                 $("#NotiFail").fadeOut();
                 $("#contentNotiSuss").html("Cập nhập số tuần thành công.");
                 $("#maxWeek").html($('#txtMaxWeek').val());
+                $('#btnMaxWeek').html('Sửa số tuần');
             });
         } else {
             $("#errMW").html("Phải nhập số nguyên!");
