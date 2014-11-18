@@ -634,7 +634,7 @@ namespace MS_Website.Controllers
             {
                 LoadItems(db);
                 var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
-                if (jobRequest.PostTime.AddDays(3) < DateTime.Now)
+                if (jobRequest.IsActive)
                 {
                     TempData["Alert"] = "Công việc đã hết hạn cho sửa";
                     return RedirectToAction("GetJobRequest", "Post", new { jobId });
@@ -720,7 +720,7 @@ namespace MS_Website.Controllers
             using (var db = new MSEntities())
             {
                 var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
-                if (jobRequest.PostTime.AddDays(3) < DateTime.Now)
+                if (jobRequest.IsActive)
                 {
                     TempData["Alert"] = "Công việc đã hết hạn cho sửa";
                 }
@@ -932,7 +932,7 @@ namespace MS_Website.Controllers
         }
 
         [HttpGet]
-        public ActionResult MarkActive(int jobRequestId)
+        public ActionResult MarkActiveJobRequest(int jobRequestId)
         {
             if (Session["AccId"] != null)
             {
@@ -940,12 +940,15 @@ namespace MS_Website.Controllers
 
                 using (db)
                 {
-
                     var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
-                    jobRequest.IsActive = true;
-                    db.SaveChanges();
-                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                    return RedirectToAction("ManageJobRequest", "MaidManager");
+                    if (jobRequest != null)
+                    {
+                        jobRequest.IsActive = true;
+                        jobRequest.ExpiredTime += DateTime.Now - jobRequest.PostTime;
+                        db.SaveChanges();
+                        //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                        return RedirectToAction("ManageJobRequest", "MaidManager");
+                    }
                 }
             }
             return RedirectToAction("Login", "Home");
@@ -989,26 +992,31 @@ namespace MS_Website.Controllers
                 using (db)
                 {
                     var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitmentId);
-                    if (recruitment != null) recruitment.IsActive = true;
-                    db.SaveChanges();
-                    //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
-                    //Remove notifier
-                    var notifiers =
-                        db.Notifiers.Where(
-                            n =>
-                            n.Content == "Kiểm tra lại thanh toán" &&
-                            n.Link == "/Post/GetRecruitment?recruitmentId=" + recruitmentId && n.View == false).ToList();
-                    foreach (var notifier in notifiers)
+                    if (recruitment != null)
                     {
-                        notifier.View = true;
+                        recruitment.IsActive = true;
+                        recruitment.ExpiredTime += DateTime.Now - recruitment.PostTime;
                         db.SaveChanges();
+                        //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
+                        //Remove notifier
+                        var notifiers =
+                            db.Notifiers.Where(
+                                n =>
+                                n.Content == "Kiểm tra lại thanh toán" &&
+                                n.Link == "/Post/GetRecruitment?recruitmentId=" + recruitmentId && n.View == false).
+                                ToList();
+                        foreach (var notifier in notifiers)
+                        {
+                            notifier.View = true;
+                            db.SaveChanges();
+                        }
+                        if (notifiers.Count > 0)
+                        {
+                            var num = (int) Session["NumberNotifier"];
+                            Session["NumberNotifier"] = num - 1;
+                        }
+                        return RedirectToAction("ManageRecruitment", "MaidManager");
                     }
-                    if (notifiers.Count > 0)
-                    {
-                        var num = (int)Session["NumberNotifier"];
-                        Session["NumberNotifier"] = num - 1;
-                    }
-                    return RedirectToAction("ManageRecruitment", "MaidManager");
                 }
             }
             return RedirectToAction("Login", "Home");
