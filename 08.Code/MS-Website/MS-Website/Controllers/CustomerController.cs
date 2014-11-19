@@ -354,12 +354,7 @@ namespace MS_Website.Controllers
                 var recruitment = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
                 if (recruitment.IsActive)
                 {
-                    TempData["Alert"] = "Công việc đã hết hạn cho sửa";
-                    return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
-                }
-                if (recruitment.Status.Equals("Applied"))
-                {
-                    TempData["Alert"] = "Công việc đã được thuê";
+                    TempData["Alert"] = "Tuyển việc đã hết hạn cho sửa";
                     return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
                 }
                 var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == recruitment.SkillRefId);
@@ -478,11 +473,7 @@ namespace MS_Website.Controllers
                 var recruitment = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
                 if (recruitment.IsActive)
                 {
-                    TempData["Alert"] = "Công việc đã hết hạn cho sửa";
-                }
-                else if (recruitment.Status.Equals("Applied"))
-                {
-                    TempData["Alert"] = "Công việc đã được thuê";
+                    TempData["Alert"] = "Tuyển việc đã hết hạn cho sửa";
                 }
                 else
                 {
