@@ -321,8 +321,8 @@
                             }
                         }
                     }
-                     @if (jobRequestTemp.Job.Status == "Applied" || jobRequestTemp.Job.Status == "Approved")
-                    {
+                   @*  @if (jobRequestTemp.Job.Status == "Applied" || jobRequestTemp.Job.Status == "Approved")
+                    {*@
                         <div class="overView">
                             <div class="ovTitle">
                                 Nhận xét của người đã thuê
@@ -332,7 +332,7 @@
                                 @Html.Partial("_PartialComment", (List<MS_Website.Models.Comment>)ViewBag.Comment)
                             </div>
                         </div>
-                    }
+                   @* }*@
                 </div>
             </div>
             <div class="col-md-4">
