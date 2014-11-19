@@ -639,11 +639,6 @@ namespace MS_Website.Controllers
                     TempData["Alert"] = "Công việc đã hết hạn cho sửa";
                     return RedirectToAction("GetJobRequest", "Post", new { jobId });
                 }
-                if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
-                {
-                    TempData["Alert"] = "Công việc đã được thuê";
-                    return RedirectToAction("GetJobRequest", "Post", new { jobId });
-                }
                 var skillRef = db.SkillReferences.SingleOrDefault(sr => sr.SkillRefId == jobRequest.SkillRefId);
                 skillRef.Gender = null;
                 skillRef.Age = null;
@@ -723,10 +718,6 @@ namespace MS_Website.Controllers
                 if (jobRequest.IsActive)
                 {
                     TempData["Alert"] = "Công việc đã hết hạn cho sửa";
-                }
-                else if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
-                {
-                    TempData["Alert"] = "Công việc đã được thuê";
                 }
                 else
                 {
