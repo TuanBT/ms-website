@@ -402,7 +402,8 @@
     function chooseTime(prices, SubPriceWeek) {
         var price = parseInt(prices);
         var week = parseInt($("#time").val());
-        var total = price * week - (SubPriceWeek / 2) * week * (week - 1);
+        // var total = price * week - (SubPriceWeek / 2) * week * (week - 1);
+        var total = price*week - SubPriceWeek*(week - 1);
         /*for (var i = 1; i <= week;i++) {
             total += (price - SubPriceWeek * (i - 1));
         }*/
