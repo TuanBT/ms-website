@@ -329,7 +329,7 @@ namespace MS_Website.Controllers
                     int price  = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceRC"]);
                     int SubPriceWeek = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["SubPriceWeek"]);
                     int week = int.Parse(time);
-                    recruitment.Price = price * week - (week - 1) * SubPriceWeek;
+                    recruitment.Price = price * week - SubPriceWeek * (week - 1);
                     recruitment.Title = title;
                     skillRef.Type = 1;
                     db.Recruitments.Add(recruitment);
