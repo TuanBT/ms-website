@@ -226,17 +226,16 @@ namespace MS_Website.Controllers
             return RedirectToAction("Login", "Home");
         }
 
-        public ActionResult EditMaidProfile(string maidId, string fullname, double exp, string phone, string birthdate, bool gender,
+        public ActionResult EditMaidProfile(int maidId, string fullname, double exp, string phone, string birthdate, bool gender,
             string english, string jap, string chinese, string korean, string hometown, string addr, bool married,
             string desc)
         {
             if (Session["AccId"] != null)
             {
-                int maidIds = Convert.ToInt32(maidId);
                 var loggedId = (int)Session["AccId"];
                 using (var db = new MSEntities())
                 {
-                    var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidIds);
+                    var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidId);
                     HttpPostedFileBase avatar = Request.Files["avatar"];
                     string picExt = ".png";
                     if (avatar != null)
@@ -266,7 +265,7 @@ namespace MS_Website.Controllers
                             maid.PersonalImage = "../Content/Image/Maid/" + maid.MaidId.ToString() + picExt;
                         }
                         db.SaveChanges();
-                        return RedirectToAction("ManageMaidProfile", new { maidId = maid.MaidId });
+                        return RedirectToAction("ManageMaidProfile", new { maidId });
                     }
                 }
             }
