@@ -452,6 +452,10 @@ namespace MS_Website.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+            if (!Session["Role"].Equals("MaidMediator") && !Session["Role"].Equals("Staff"))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             using (var db = new MSEntities())
             {
                 LoadItems(db);
