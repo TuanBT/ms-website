@@ -19,7 +19,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Tên đăng ký
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-4">
                             @Html.TextBoxFor(a => a.Username, new { @id = "txtUsername", @class = "form-control input-lg text", @placeholder = "", maxlength = "50" })
                             <div id="textBlank"></div>
                             <div>
@@ -36,7 +36,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Mật khẩu
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-4">
                             @Html.PasswordFor(a => a.Password, new { @id = "txtPassword", @class = "form-control input-lg text", @placeholder = "", maxlength = "50" })
                             <div id="passwordBlank"></div>
                         </div>
@@ -47,15 +47,22 @@
                         <div class="col-md-4 poJRTtitle">
                             Nhập lại mật khẩu
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-4">
                             @Html.PasswordFor(a => a.Password, new { @id = "txtConfirmPassword", @class = "form-control input-lg text", @placeholder = "", maxlength = "50" })
                             <div id="CPErr"></div>
                         </div>
                     </div>
                 </div>
-                <div>
+                <div class="postJRRow">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div>
                     <button id="btnLogin" type="submit" class="btn btn-success" name="Login" style="float: right">Thêm nhân viên</button>
                 </div>
+                        </div>
+                    </div>
+                </div>
+                
             }
         </div>
     </div>
