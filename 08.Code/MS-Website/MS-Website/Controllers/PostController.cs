@@ -820,7 +820,6 @@ namespace MS_Website.Controllers
                 var recruitment = db.Recruitments.FirstOrDefault(r => r.RecruitmentId == recruitmentId);
                 if (recruitment != null)
                 {
-                    recruitment.Status = "Waiting";
                     recruitment.IsActive = true;
                     db.SaveChanges();
                 }
