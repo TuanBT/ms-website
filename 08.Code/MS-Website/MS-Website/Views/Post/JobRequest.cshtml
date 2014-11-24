@@ -449,12 +449,15 @@
                 <input id="extendId" type="hidden" name="jobId" value="@jobRequestTemp.Job.JobRequestId" />
                 <div class="modal-body chooseMaidModalMaid">
                     <span>Thời gian gia hạn</span>
-                    <select class="form-control" name="extend">
-                        @for (int i = 1; i <= (int)Session["MaxWeek"]; i++)
-                        {
-                            <option value="@i">@i tuần</option>
-                        }
-                    </select>
+                    @if (Session["AccId"] != null)
+                    {
+                        <select class="form-control" name="extend">
+                            @for (int i = 1; i <= (int) Session["MaxWeek"]; i++)
+                            {
+                                <option value="@i">@i tuần</option>
+                            }
+                        </select>
+                    }
                     <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
                 </div>
                 <div class="modal-footer">

@@ -321,28 +321,32 @@
 <div class="modal fade extendModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header chooseMaidModalTitle">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="mySmallModalLabel">Gia hạn đơn tuyển việc</h4>
+        @if (Session["AccId"] != null)
+        {
+            <div class="modal-content">
+                <div class="modal-header chooseMaidModalTitle">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="mySmallModalLabel">Gia hạn đơn tuyển việc</h4>
+                </div>
+                <input id="extendId" type="hidden" name="recruitId" value="@RecruitmentTemp.Recruitment.RecruitmentId"/>
+                <div class="modal-body chooseMaidModalMaid">
+                    <span>Thời gian gia hạn</span>
+
+                    <select id="week" class="form-control" name="extend" onchange="chooseWeek()">
+                        @for (int i = 1; i <= (int) Session["MaxWeek"]; i++)
+                        {
+                            <option value="@i">@i tuần</option>
+                        }
+                    </select>
+                    <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
+                </div>
+                <div class="modal-footer">
+                    @Html.Partial("_PartialExtend")
+                    <input type="hidden" id="PriceRC" value="@((int) Session["PriceRC"]/20)"/>
+                </div>
             </div>
-            <input id="extendId" type="hidden" name="recruitId" value="@RecruitmentTemp.Recruitment.RecruitmentId"/>
-            <div class="modal-body chooseMaidModalMaid">
-                <span>Thời gian gia hạn</span>
-                <select id="week" class="form-control" name="extend" onchange="chooseWeek()">
-                     @for (int i = 1; i <= (int)Session["MaxWeek"];i++ )
-                                {
-                                    <option value="@i">@i tuần</option>
-                                }
-                </select>
-                <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
-            </div>
-            <div class="modal-footer">
-                @Html.Partial("_PartialExtend")
-                <input type="hidden" id="PriceRC" value="@((int)Session["PriceRC"] / 20)"/>
-            </div>
-        </div>
+        }
     </div>
 </div>
 <script>
