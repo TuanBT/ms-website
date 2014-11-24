@@ -393,23 +393,26 @@ namespace MS_Website.Controllers
                     var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
                     if (job != null)
                     {
-                        if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
-                        {
-                            TempData["Alert"] = "Công việc đã được thuê";
-                        }
-                        else if (job.Status.Equals("Expired"))
-                        {
-                            TempData["Alert"] = "Công việc đã hết hạn";
-                        }
-                        else if (!job.IsActive)
-                        {
-                            TempData["Alert"] = "Công việc không tồn tại";
-                        }
-                        else
-                        {
-                            job.Status = "Hide";
-                            db.SaveChanges();
-                        }
+                        if (!job.IsActive)
+						{
+							TempData["Alert"] = "Công việc không tồn tại";
+						}
+						else
+						{
+							if (job.Status.Equals("Expired"))
+							{
+								TempData["Alert"] = "Công việc đã hết hạn";
+							}
+							else if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
+							{
+								TempData["Alert"] = "Công việc đã được thuê";
+							}
+							else if (job.Status.Equals("Waiting"))
+							{
+								job.Status = "Hide";
+								db.SaveChanges();
+							}
+						}
                     }
                     return RedirectToAction("GetJobRequest", "Post", new {jobId});
                 }
@@ -426,19 +429,26 @@ namespace MS_Website.Controllers
                     var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
                     if (job != null)
                     {
-                        if (job.Status.Equals("Expired"))
-                        {
-                            TempData["Alert"] = "Công việc đã hết hạn";
-                        }
-                        else if (!job.IsActive)
-                        {
-                            TempData["Alert"] = "Công việc không tồn tại";
-                        }
-                        else
-                        {
-                            job.Status = "Waiting";
-                            db.SaveChanges();
-                        }
+						if (!job.IsActive)
+						{
+							TempData["Alert"] = "Công việc không tồn tại";
+						}
+						else
+						{
+							if (job.Status.Equals("Expired"))
+							{
+								TempData["Alert"] = "Công việc đã hết hạn";
+							}
+							else if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
+							{
+								TempData["Alert"] = "Công việc đã được thuê";
+							}
+							else if (job.Status.Equals("Hide"))
+							{
+								job.Status = "Waiting";
+								db.SaveChanges();
+							}
+						}
                     }
                     return RedirectToAction("GetJobRequest", "Post", new {jobId});
                 }
