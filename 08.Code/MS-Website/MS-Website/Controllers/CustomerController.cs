@@ -30,6 +30,9 @@ namespace MS_Website.Controllers
                     var applRecList =
                         db.Recruitments.Where(
                             r => r.Customer.AccountId == custId && r.Status.Equals("Applied") && r.IsActive).ToList();
+                    var apprRecList =
+                        db.Recruitments.Where(
+                            r => r.Customer.AccountId == custId && r.Status.Equals("Approved") && r.IsActive).ToList();
                     var expiredRecList =
                         db.Recruitments.Where(
                             r => r.Customer.AccountId == custId && r.Status.Equals("Expired") && r.IsActive).ToList();
@@ -42,6 +45,14 @@ namespace MS_Website.Controllers
                         notApplRecList.Select(
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
                     ViewBag.ApplList = (from recruitment in applRecList
+                                        let apply =
+                                            db.Applies.SingleOrDefault(
+                                                a => a.RecruitmentId == recruitment.RecruitmentId)
+                                        let jobRequest =
+                                            db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId)
+                                        select new RecruitmentTemp(recruitment, customer, account, jobRequest, null))
+                        .ToList();
+                    ViewBag.ApprList = (from recruitment in apprRecList
                                         let apply =
                                             db.Applies.SingleOrDefault(
                                                 a => a.RecruitmentId == recruitment.RecruitmentId)
