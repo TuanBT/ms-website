@@ -150,8 +150,18 @@
             background: #fff;
             color: #7bd454;
         }
+         .hefaContent.iscurent:focus {
+            background: #fff;
+            color: #7bd454;
+        }
+
 
     .hefaContent:hover {
+        background: rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+        color: #fff;
+    }
+    .hefaContent:focus {
         background: rgba(255, 255, 255, 0.2);
         text-decoration: none;
         color: #fff;
