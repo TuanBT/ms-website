@@ -168,7 +168,7 @@ namespace MS_Website.Controllers
                     var b =
                         ms.Accounts.FirstOrDefault(
                             a => a.Username.Equals(acc.Username) && a.Password.Equals(acc.Password));
-                    var d = ms.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username));
+                    var d = ms.Accounts.SingleOrDefault(a => a.Username.Equals(acc.Username) && a.Password.Equals(acc.Password));
                     if (d == null)
                     {
                         ViewBag.Error = "Tên đăng nhập hoặc mật khẩu không đúng";
