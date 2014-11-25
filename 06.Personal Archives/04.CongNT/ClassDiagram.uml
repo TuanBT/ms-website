@@ -3524,20 +3524,20 @@
 <XPD:REF name="Views[3]">njipN+psjUG+CNNCRXSCTwAA</XPD:REF>
 <XPD:ATTR name="#Operations" type="integer">1</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="MXK4zQfRv0yl9u1wyoD2IQAA">
-<XPD:ATTR name="Name" type="string">RatingJobRequest</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">RateJobRequest</XPD:ATTR>
 <XPD:REF name="Owner">cs/yPw+fNUGHKCaJgXBEvgAA</XPD:REF>
 <XPD:ATTR name="#Parameters" type="integer">3</XPD:ATTR>
-<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="YcW1UMiF3kOvU4zICWjhpAAA">
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="bgg/ugZ1PUazKsTdp6fQcQAA">
 <XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">ActionResult</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">MXK4zQfRv0yl9u1wyoD2IQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="8QnCuJEgmku2L1Qvvk87/AAA">
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="MtDFdWPBSkKiUnDvfF2SegAA">
 <XPD:ATTR name="Name" type="string">rate</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">MXK4zQfRv0yl9u1wyoD2IQAA</XPD:REF>
 </XPD:OBJ>
-<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="dPvdn3m/yEq5Gb44N0ngrAAA">
+<XPD:OBJ name="Parameters[2]" type="UMLParameter" guid="iPvIDUq6t06QJSlo68bVJQAA">
 <XPD:ATTR name="Name" type="string">jrId</XPD:ATTR>
 <XPD:ATTR name="TypeExpression" type="string">string</XPD:ATTR>
 <XPD:REF name="BehavioralFeature">MXK4zQfRv0yl9u1wyoD2IQAA</XPD:REF>
