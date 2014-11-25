@@ -1809,7 +1809,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="vE58tCZl6EWNpDF9WHDZzAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="3sQV7kcIuk6V99a4piYxswAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">IsWebmaster</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Webmaster</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="gkWB2dB+SEGmyzkkRipD6gAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -4444,7 +4444,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[33]" type="UMLClass" guid="kGVmyXOIKEedLTQD+jtwdAAA">
-<XPD:ATTR name="Name" type="string">IsWebmaster</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Webmaster</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">TC2Ep1nDCkyU71ibKyBgGgAA</XPD:REF>
@@ -4747,8 +4747,8 @@
 <XPD:REF name="Participant">8S3bXEmut0eI9Nky5WjwlwAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">rNEIr6ZQTkaf5Ju40ys/RwAA</XPD:REF>
-<XPD:REF name="Views[1]">0X/+lZr+fEmkCYTa5/xMsAAA</XPD:REF>
-<XPD:REF name="Views[2]">xno8uuCJf0ibay3lzBHScgAA</XPD:REF>
+<XPD:REF name="Views[1]">xno8uuCJf0ibay3lzBHScgAA</XPD:REF>
+<XPD:REF name="Views[2]">0X/+lZr+fEmkCYTa5/xMsAAA</XPD:REF>
 <XPD:REF name="Views[3]">3JNwzzevzkasFAHG31jkfQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Connections[1]" type="UMLAssociationEnd" guid="3Hw0KO/62UiInVSSvd881wAA">
@@ -4757,8 +4757,8 @@
 <XPD:REF name="Participant">0Ck8xkP3d02xmhkSg+QpKgAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">Qs74w5iy+kKkp0zQhj+7nwAA</XPD:REF>
-<XPD:REF name="Views[1]">fTXdiZThbU+ylNJ80gfIXwAA</XPD:REF>
-<XPD:REF name="Views[2]">wVJE5Iif0U+m8CYJPFfpZwAA</XPD:REF>
+<XPD:REF name="Views[1]">wVJE5Iif0U+m8CYJPFfpZwAA</XPD:REF>
+<XPD:REF name="Views[2]">fTXdiZThbU+ylNJ80gfIXwAA</XPD:REF>
 <XPD:REF name="Views[3]">7fYCz5j6PE203UB1MhL2UQAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
