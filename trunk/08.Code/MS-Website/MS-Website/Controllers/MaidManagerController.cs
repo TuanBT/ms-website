@@ -21,6 +21,30 @@ namespace MS_Website.Controllers
             {
                 using (var db = new MSEntities())
                 {
+                    //var accId = (int)Session["AccId"];
+                    if (db.MaidMediators.Count(m => m.AccountId == accId) > 0)
+                    {
+                        int numWating = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Waiting"));
+                        int numApplied = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Applied"));
+                        int numApproved = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Approved"));
+                        int numExpired = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Expired"));
+                        int numHide = db.JobRequests.Count(j => (j.MaidMediatorId == accId && j.Status == "Hide"));
+                        ViewBag.MaidStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied, numHide };
+                    }
+                    else if (db.Staffs.Count(s => s.AccountId == accId) > 0)
+                    {
+                        int numWating = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Waiting"));
+                        int numApplied = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Applied"));
+                        int numApproved = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Approved"));
+                        int numExpired = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Expired"));
+                        int numHide = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Hide"));
+                        ViewBag.MaidStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied, numHide };
+                    }
+                    else
+                    {
+                        ViewBag.MaidStatusStatistic = new int[] { 0, 0, 0, 0, 0 };
+                    }
+
                     if (role.Equals("MaidMediator"))
                     {
 
@@ -42,7 +66,7 @@ namespace MS_Website.Controllers
                         Session["MaidManager"] = staff;
                         return View("Staff", staff);
                     }
-                    return RedirectToAction("Login", "Home");
+            return RedirectToAction("Login", "Home");
                 }
             }
             return RedirectToAction("Login", "Home");
