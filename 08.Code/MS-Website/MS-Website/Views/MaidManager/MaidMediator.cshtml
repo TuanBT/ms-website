@@ -98,13 +98,96 @@
                             </div>
                         </div>
                     </div>
-                    @*<div class="overView">
+                    <div class="overView">
                         <div class="ovTitle">
                             Thống kê các yêu cầu
                         </div>
                         <div class="ovContent">
+                            @{
+                                int[] numStatus = ViewBag.MaidStatusStatistic;
+                              var numberStatistic = new int[5] { numStatus[0], numStatus[1], numStatus[2], numStatus[3], numStatus[4] };
+                            }
+                            <script src="~/Content/Chart.js/src/Chart.min.js"></script>
+                            <input value=@numberStatistic[0] type="number" id="wattingInput" hidden/>
+                            <input value=@numberStatistic[1] type="number" id="expiredInput" hidden/>
+                            <input value=@numberStatistic[2] type="number" id="approvedInput" hidden/>
+                            <input value=@numberStatistic[3] type="number" id="appliedInput" hidden/>
+                            <input value=@numberStatistic[4] type="number" id="hideInput" hidden/>
+                            
+                            <div id="canvas-holder" style="display: inline-block">
+                                <canvas id="chart-area" height="400" width="400" />
+                            </div>
+                            <div style="display: inline-block">
+                            <ul class="legend">
+                        @{
+                            if (numberStatistic[0] != 0)
+                            {
+                            <li><span style="background-color: #428bca"></span>Chờ nhận</li>
+                            }
+                            if (numberStatistic[1] != 0)
+                            {
+                            <li><span style="background-color: #d9534f"></span>Hết hạn</li>
+                            }
+                            if (numberStatistic[2] != 0)
+                            {
+                            <li><span style="background-color: #f0ad4e"></span>Hoàn tất</li>
+                            }
+                            if (numberStatistic[3] != 0)
+                            {
+                            <li><span style="background-color: #5cb85c"></span>Được nhận</li>
+                            }
+                            if (numberStatistic[4] != 0)
+                            {
+                            <li><span style="background-color: #777"></span>Tạm ẩn</li>
+                            }
+                        }
+                    </ul>
+                                <ul class="legend">
+                                    <span style="font-weight: 700">Đơn vị:</span> Yêu cầu
+                                </ul>
+                                </div>
+                            <script>
+                                var pieData = [
+                                        {
+                                            value: parseInt($('#wattingInput').val()),
+                                            color: "#428bca",
+                                            highlight: "#428bca",
+                                            label: "Chờ nhận"
+                                        },
+                                        {
+                                            value: parseInt($('#expiredInput').val()),
+                                            color: "#d9534f",
+                                            highlight: "#d9534f",
+                                            label: "Hết hạn"
+                                        },
+                                        {
+                                            value: parseInt($('#approvedInput').val()),
+                                            color: "#f0ad4e",
+                                            highlight: "#f0ad4e",
+                                            label: "Hoàn tất"
+                                        },
+                                        {
+                                            value: parseInt($('#appliedInput').val()),
+                                            color: "#5cb85c",
+                                            highlight: "#5cb85c",
+                                            label: "Được nhận"
+                                        },
+                                        {
+                                            value: parseInt($('#hideInput').val()),
+                                            color: "#777",
+                                            highlight: "#777",
+                                            label: "Tạm ẩn"
+                                        }
+
+                                ];
+
+                                window.onload = function () {
+                                    var ctx = document.getElementById("chart-area").getContext("2d");
+                                    window.myPie = new Chart(ctx).Pie(pieData);
+                                };
+                            </script>
                         </div>
-                    </div>*@
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
