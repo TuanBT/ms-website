@@ -11,7 +11,6 @@
     @Html.Partial("_PartialMenu")
 </div>
 
-
 <div class="body">
     <div class="rows">
         <div class="row">
@@ -19,10 +18,10 @@
             @using (Html.BeginForm("AddRequest", "MaidManager", FormMethod.Post))
             {
                 <div class="postRCAlertMoney">
-                                <div class="alert alert-info" role="alert">
-                                    <strong>Thông báo!</strong> Người giúp việc sẽ nhận lại 20% số tiền nếu quay lại xác nhận đã hoàn thành công việc tới nhân viên của chúng tôi.<br />
-                                         </div>
-                            </div>
+                    <div class="alert alert-info" role="alert">
+                        <strong>Thông báo!</strong> Người giúp việc sẽ nhận lại 20% số tiền nếu quay lại xác nhận đã hoàn thành công việc tới nhân viên của chúng tôi.<br />
+                    </div>
+                </div>
                 <div class="postJRRow">
                     <div class="row">
                         <div class="col-md-4 poJRTtitle">
@@ -36,7 +35,7 @@
                                         Chọn người
                                     </button>*@
                                 </div>
-                                <div id="maidBoxChoosed"></div> 
+                                <div id="maidBoxChoosed"></div>
                             </div>
                             <div id="MaidErr"></div>
                         </div>
@@ -48,7 +47,7 @@
                                 <div class="modal-header chooseMaidModalTitle">
                                     <button type="button" class="close" data-dismiss="modal">
                                         <span aria-hidden="true">×</span><span
-                                                                             class="sr-only">Close</span></button>
+                                            class="sr-only">Close</span></button>
                                     <h4 class="modal-title" id="mySmallModalLabel">Chọn một trong số những người mà bạn đang quản
                                         lý</h4>
                                 </div>
@@ -65,7 +64,7 @@
                                             counter++;
                                             <div id="@counter" class="radio" style="display: @(counter > (numShowMaid - 1) ? "none" : "");">
                                                 <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId">
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId" onclick="chooseMaid()">
                                                     <div class="chooseMaid@(counter)">
                                                         <div class="liImage">
                                                             <img id="@maid.MaidId img" src="@maid.PersonalImage" alt="Maid sercive" height="100%">
@@ -108,7 +107,7 @@
                         </div>
                         <div class="col-md-6">
                             <input class="form-control input-lg text" maxlength="50" name="title" type="text" value="" placeholder="Tối đa 50 kí tự" id="txtTitle">
-                             <div id="textBlank"></div>
+                            <div id="textBlank"></div>
                         </div>
                     </div>
                 </div>
@@ -126,10 +125,10 @@
                                             Thêm kỹ năng
                                         </button>*@
                                     </div>
-                                    <ul id="chosenSkills"></ul>       
+                                    <ul id="chosenSkills"></ul>
                                 </div>
                             </div>
-                             <div id="SkillErr"></div>
+                            <div id="SkillErr"></div>
                         </div>
                     </div>
                     <div class="modal fade chooseSkillModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -153,7 +152,7 @@
                                                     Lưu trú
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="stay" name="stay">
+                                                    <select class="form-control" id="stay" name="stay" onchange="addSkill()">
                                                         <option id="stay_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.StayList)
                                                         {
@@ -167,7 +166,7 @@
                                                     Mức lương
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="salary" name="salary">
+                                                    <select class="form-control" id="salary" name="salary" onchange="addSkill()">
                                                         <option id="salary_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.SalaryList)
                                                         {
@@ -181,7 +180,7 @@
                                                     Kiểu công việc
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="work" name="work">
+                                                    <select class="form-control" id="work" name="work" onchange="addSkill()">
                                                         <option id="work_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.WorkList)
                                                         {
@@ -201,7 +200,7 @@
                                             {
                                                 <div class="moskSkill">
                                                     <div class="moskSkillName">
-                                                        <div class="checkbox">
+                                                        <div class="checkbox" onchange="addSkill()">
                                                             <label>
                                                                 <input id="@item.SkillNameVietnam" class="skill" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName"/>
                                                                 @item.SkillNameVietnam
@@ -226,7 +225,7 @@
                         <div class="col-md-4 poJRTtitle">
                             Thời hạn đăng
                             <span class="postJRTimeDetail">Đơn giá <span
-                                                                                class="postJRTimePrice"><span class="prices">@Session["PriceJR"]</span>.000</span> đồng/Tuần</span>
+                                class="postJRTimePrice"><span class="prices">@Session["PriceJR"]</span>.000</span> đồng/Tuần</span>
                         </div>
                         <div class="col-md-2">
                             <select class="form-control" id="time" name="time" onchange="chooseTime(@Session["PriceJR"])">
@@ -238,7 +237,7 @@
                         </div>
                         <div class="col-md-6">
                             <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> * <span
-                                                                                                    class="postJRTimePrice"><span class="prices">@Session["PriceJR"]</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">@Session["PriceJR"]</span>.000</span> đồng</span>
+                                class="postJRTimePrice"><span class="prices">@Session["PriceJR"]</span>.000</span> = <span class="postJRTimePriceTotal"><span id="pricesTotal">@Session["PriceJR"]</span>.000</span> đồng</span>
                         </div>
                     </div>
                 </div>               
@@ -253,7 +252,6 @@
 <script>
     var chosenList = new Array();
     var chosenSkills = "";
-
 
     function addSkill() {
         chosenList = new Array();
@@ -288,26 +286,26 @@
             }
         }
         for (var i = 0; i < chosenList.length; i++) {
-            chosenSkills += "<li class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
+            chosenSkills += "<li id='" + i + "' class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
         }
         document.getElementById("chosenSkills").innerHTML = chosenSkills;
     }
 
     function removeSkill(skillNo) {
         if (chosenList.length > 0) {
-            if (chosenList[skillNo].search("Ngủ lại") != -1) {
+            if (chosenList[skillNo].search("Lưu trú") != -1) {
                 document.getElementById("stay_null").setAttribute("selected", "");
             } else if (chosenList[skillNo].search("Mức lương") != -1) {
                 document.getElementById("salary_null").setAttribute("selected", "");
             } else if (chosenList[skillNo].search("Kiểu công việc") != -1) {
                 document.getElementById("work_null").setAttribute("selected", "");
             } else {
-                document.getElementById(chosenList[skillNo]).checked = false;;
+                document.getElementById(chosenList[skillNo]).checked = false;
             }
             chosenList.splice(skillNo, 1);
             chosenSkills = "";
             for (var i = 0; i < chosenList.length; i++) {
-                chosenSkills += "<li class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
+                chosenSkills += "<li id='" + i + "' class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
             }
             document.getElementById("chosenSkills").innerHTML = chosenSkills;
         }
@@ -325,7 +323,7 @@
             }
         }
         div = new $(".chooseMaid" + numChoose).clone();
-        if(div.size()==1) {
+        if (div.size() == 1) {
             $("#maidBoxChoosed").html(div);
         }
         /*var maidImg = document.getElementById(maidId + " img").getAttribute("src");
@@ -347,7 +345,7 @@
     function cancel() {
         return false;
     }
-    
+
     var numShowMaid = 3;
 
     function nextMaids() {
@@ -401,8 +399,8 @@
     $("#btnEdit").click(function () {
         console.debug("sdf");
         var errText = "";
-        
-        if ($("#maidBoxChoosed").html()=="") {
+
+        if ($("#maidBoxChoosed").html() == "") {
             errText = "<font color='red'>Vui lòng chọn người giúp việc</font>";
             document.getElementById("MaidErr").innerHTML = errText;
             return false;
@@ -429,4 +427,4 @@
             document.getElementById("SkillErr").innerHTML = errText;
         }
     });
-    </script>
+</script>

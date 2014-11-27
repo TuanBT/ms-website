@@ -80,7 +80,7 @@
                                             counter++;
                                             <div id="@counter" class="radio" style="display: @(counter > (numShowMaid - 1) ? "none" : "");">
                                                 <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId">
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="@maid.MaidId" onclick="chooseMaid()">
                                                     <div class="chooseMaid@(counter)">
                                                         <div class="liImage">
                                                             <img id="@maid.MaidId img" src="@maid.PersonalImage" alt="Maid sercive" height="100%">
@@ -177,7 +177,7 @@
                                                     Lưu trú
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="stay" name="stay">
+                                                    <select class="form-control" id="stay" name="stay" onchange="addSkill()">
                                                         <option id="stay_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.StayList)
                                                         {
@@ -191,7 +191,7 @@
                                                     Mức lương
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="salary" name="salary">
+                                                    <select class="form-control" id="salary" name="salary" onchange="addSkill()">
                                                         <option id="salary_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.SalaryList)
                                                         {
@@ -205,7 +205,7 @@
                                                     Kiểu công việc
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="work" name="work">
+                                                    <select class="form-control" id="work" name="work" onchange="addSkill()">
                                                         <option id="work_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.WorkList)
                                                         {
@@ -225,7 +225,7 @@
                                                 <div class="moskSkillName">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input id="Chăm sóc người bệnh" class="skill" type="checkbox" value="Chăm sóc người bệnh" name="SickCare" @(ViewBag.SickCareValue != null ? "checked" : "")/>
+                                                            <input id="Chăm sóc người bệnh" class="skill" type="checkbox" value="Chăm sóc người bệnh" name="SickCare" @(ViewBag.SickCareValue != null ? "checked" : "") onchange="addSkill()"/>
                                                             Chăm sóc người bệnh
                                                         </label>
                                                     </div>
@@ -235,7 +235,7 @@
                                                 <div class="moskSkillName">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input id="Chăm sóc người già" class="skill" type="checkbox" value="Chăm sóc người già" name="OldCare" @(ViewBag.OldCareValue != null ? "checked" : "")/>
+                                                            <input id="Chăm sóc người già" class="skill" type="checkbox" value="Chăm sóc người già" name="OldCare" @(ViewBag.OldCareValue != null ? "checked" : "") onchange="addSkill()"/>
                                                             Chăm sóc người già
                                                         </label>
                                                     </div>
@@ -245,7 +245,7 @@
                                                 <div class="moskSkillName">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input id="Chăm sóc trẻ em" class="skill" type="checkbox" value="Chăm sóc trẻ em" name="BabySister" @(ViewBag.BabySisterValue != null ? "checked" : "")/>
+                                                            <input id="Chăm sóc trẻ em" class="skill" type="checkbox" value="Chăm sóc trẻ em" name="BabySister" @(ViewBag.BabySisterValue != null ? "checked" : "") onchange="addSkill()"/>
                                                             Chăm sóc trẻ em
                                                         </label>
                                                     </div>
@@ -255,7 +255,7 @@
                                                 <div class="moskSkillName">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input id="Chăm sóc người khuyết tật" class="skill" type="checkbox" value="Chăm sóc người khuyết tật" name="DisabilityCare" @(ViewBag.DisabilityCareValue != null ? "checked" : "")/>
+                                                            <input id="Chăm sóc người khuyết tật" class="skill" type="checkbox" value="Chăm sóc người khuyết tật" name="DisabilityCare" @(ViewBag.DisabilityCareValue != null ? "checked" : "") onchange="addSkill()"/>
                                                             Chăm sóc người khuyết tật
                                                         </label>
                                                     </div>
@@ -265,7 +265,7 @@
                                                 <div class="moskSkillName">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input id="Chăm sóc cây cảnh" class="skill" type="checkbox" value="Chăm sóc cây cảnh" name="BonsaiCare" @(ViewBag.BonsaiCareValue != null ? "checked" : "")/>
+                                                            <input id="Chăm sóc cây cảnh" class="skill" type="checkbox" value="Chăm sóc cây cảnh" name="BonsaiCare" @(ViewBag.BonsaiCareValue != null ? "checked" : "") onchange="addSkill()"/>
                                                             Chăm sóc cây cảnh
                                                         </label>
                                                     </div>
@@ -275,7 +275,7 @@
                                                 <div class="moskSkillName">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input id="Biết nấu ăn" class="skill" type="checkbox" value="Biết nấu ăn" name="Cooking" @(ViewBag.CookingValue != null ? "checked" : "")/>
+                                                            <input id="Biết nấu ăn" class="skill" type="checkbox" value="Biết nấu ăn" name="Cooking" @(ViewBag.CookingValue != null ? "checked" : "") onchange="addSkill()"/>
                                                             Biết nấu ăn
                                                         </label>
                                                     </div>
@@ -285,7 +285,7 @@
                                                 <div class="moskSkillName">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input id="Biết giặt giũ" class="skill" type="checkbox" value="Biết giặt giũ" name="Washing" @(ViewBag.WashingValue != null ? "checked" : "")/>
+                                                            <input id="Biết giặt giũ" class="skill" type="checkbox" value="Biết giặt giũ" name="Washing" @(ViewBag.WashingValue != null ? "checked" : "") onchange="addSkill()"/>
                                                             Biết giặt giũ
                                                         </label>
                                                     </div>
@@ -295,7 +295,7 @@
                                                 <div class="moskSkillName">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input id="Biết dọn nhà" class="skill" type="checkbox" value="Biết dọn nhà" name="CleanHouse" @(ViewBag.CleanHouseValue != null ? "checked" : "")/>
+                                                            <input id="Biết dọn nhà" class="skill" type="checkbox" value="Biết dọn nhà" name="CleanHouse" @(ViewBag.CleanHouseValue != null ? "checked" : "") onchange="addSkill()"/>
                                                             Biết dọn nhà
                                                         </label>
                                                     </div>
@@ -379,7 +379,7 @@
             chosenList.splice(skillNo, 1);
             chosenSkills = "";
             for (var i = 0; i < chosenList.length; i++) {
-                chosenSkills += "<li class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
+                chosenSkills += "<li id='" + i + "' class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
             }
             document.getElementById("chosenSkills").innerHTML = chosenSkills;
         }
