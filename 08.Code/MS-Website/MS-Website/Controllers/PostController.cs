@@ -90,6 +90,10 @@ namespace MS_Website.Controllers
                                         r => r.CustomerId == custId && r.Status.Equals("Waiting") && r.IsActive).ToList();
                             }
                         }
+                        else
+                        {
+                            ViewBag.Edit = "true";
+                        }
                     }
                     if (recruitId != null)
                     {
@@ -138,6 +142,10 @@ namespace MS_Website.Controllers
                                     ViewBag.Manage = "true";
                                 }
                             }
+                        }
+                        else
+                        {
+                            ViewBag.Edit = "true";
                         }
                     }
                     if (skillRef != null)
