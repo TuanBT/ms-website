@@ -335,7 +335,7 @@
 <XPD:ATTR name="Left" type="integer">362</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">163</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">66</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">154</XPD:ATTR>
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[8]" type="UMLSeqStimulusView" guid="f4T0nAKkvkG7VezhqnulhwAA">
@@ -371,7 +371,7 @@
 <XPD:ATTR name="Left" type="integer">521</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">206</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">108</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">95</XPD:ATTR>
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[9]" type="UMLSeqStimulusView" guid="efwfV5EEZ0uGr1u5akyGFQAA">
@@ -517,7 +517,7 @@
 <XPD:ATTR name="Left" type="integer">362</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">334</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">62</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">183</XPD:ATTR>
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[13]" type="UMLSeqStimulusView" guid="Xf4aXmP+h0qQPA3wvNqbmgAA">
