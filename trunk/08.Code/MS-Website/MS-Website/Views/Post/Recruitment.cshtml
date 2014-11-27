@@ -14,7 +14,7 @@
             </li>
             @if (Session["AccId"] != null)
             {
-                if (ViewBag.Manage == "true")
+                if (ViewBag.Edit == "true")
                 {
                 <li>
                     <a href="@Url.Action("RecruitmentEdit", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId })" class="hChContent">Sửa thông tin tuyển người giúp việc</a>
