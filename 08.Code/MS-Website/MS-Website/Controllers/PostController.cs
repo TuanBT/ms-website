@@ -60,31 +60,35 @@ namespace MS_Website.Controllers
                     //ViewBag.MaidRating = maid.RateAvg;
                     if (Session["AccId"] != null)
                     {
-                        if (job.Maid.MaidMediatorId != null)
+                        if (job.IsActive)
                         {
-                            if (job.Maid.MaidMediatorId == (int)Session["AccId"])
+                            if (job.Maid.MaidMediatorId != null)
                             {
-                                if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
+                                if (job.Maid.MaidMediatorId == (int) Session["AccId"])
                                 {
-                                    ViewBag.Manage = "true";
+                                    if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
+                                    {
+                                        ViewBag.Manage = "true";
+                                    }
                                 }
                             }
-                        }
-                        else
-                        {
-                            if (job.Maid.StaffId == (int)Session["AccId"])
+                            else
                             {
-                                if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
+                                if (job.Maid.StaffId == (int) Session["AccId"])
                                 {
-                                    ViewBag.Manage = "true";
+                                    if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
+                                    {
+                                        ViewBag.Manage = "true";
+                                    }
                                 }
                             }
-                        }
-                        if (Session["Role"].Equals("Customer"))
-                        {
-                            var custId = (int)Session["AccId"];
-                            ViewBag.RecruitmentList =
-                                db.Recruitments.Where(r => r.CustomerId == custId && r.Status.Equals("Waiting") && r.IsActive).ToList();
+                            if (Session["Role"].Equals("Customer"))
+                            {
+                                var custId = (int) Session["AccId"];
+                                ViewBag.RecruitmentList =
+                                    db.Recruitments.Where(
+                                        r => r.CustomerId == custId && r.Status.Equals("Waiting") && r.IsActive).ToList();
+                            }
                         }
                     }
                     if (recruitId != null)
@@ -125,11 +129,14 @@ namespace MS_Website.Controllers
                     var recJobReqList = new List<JobRequestTemp>();
                     if (Session["AccId"] != null)
                     {
-                        if (recruitment.CustomerId == (int)Session["AccId"])
+                        if (recruitment.IsActive)
                         {
-                            if (!recruitment.Status.Equals("Applied"))
+                            if (recruitment.CustomerId == (int)Session["AccId"])
                             {
-                                ViewBag.Manage = "true";
+                                if (!recruitment.Status.Equals("Applied") && !recruitment.Status.Equals("Approved"))
+                                {
+                                    ViewBag.Manage = "true";
+                                }
                             }
                         }
                     }
@@ -140,26 +147,29 @@ namespace MS_Website.Controllers
                             db.SkillReferences.Where(sr => sr.Type == 0 && sr.Group == skillRef.Group).OrderBy(sr => sr.Distance).ToList();
                         if (Session["AccId"] != null)
                         {
-                            if (recruitment.Status.Equals("Waiting"))
+                            if (recruitment.CustomerId == (int)Session["AccId"])
                             {
-                                foreach (var skillReference in recSkillRefList)
+                                if (recruitment.Status.Equals("Waiting") && recruitment.IsActive)
                                 {
-                                    var jobRequest =
-                                        db.JobRequests.SingleOrDefault(
-                                            j =>
-                                            j.SkillRefId == skillReference.SkillRefId && j.Status.Equals("Waiting") &&
-                                            j.IsActive);
-                                    if (jobRequest != null)
+                                    foreach (var skillReference in recSkillRefList)
                                     {
-                                        var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                                        var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null, null);
-                                        recJobReqList.Add(jobRequestTmp);
+                                        var jobRequest =
+                                            db.JobRequests.SingleOrDefault(
+                                                j =>
+                                                j.SkillRefId == skillReference.SkillRefId && j.Status.Equals("Waiting") &&
+                                                j.IsActive);
+                                        if (jobRequest != null)
+                                        {
+                                            var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
+                                            var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null, null);
+                                            recJobReqList.Add(jobRequestTmp);
+                                        }
                                     }
-                                }
-                                if (recJobReqList.Any())
-                                {
-                                    ViewBag.Recommend = recJobReqList;
-                                    ViewBag.RecommendNum = recJobReqList.Count;
+                                    if (recJobReqList.Any())
+                                    {
+                                        ViewBag.Recommend = recJobReqList;
+                                        ViewBag.RecommendNum = recJobReqList.Count;
+                                    }
                                 }
                             }
                         }
