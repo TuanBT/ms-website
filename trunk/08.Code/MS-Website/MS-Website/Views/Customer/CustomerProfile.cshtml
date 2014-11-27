@@ -333,7 +333,7 @@
                         <div class="btnsFunction">
                             @if (ViewBag.Manage == "true")
                             {
-                                <div id="button_3" style="display: none;" class="blfbutton">
+                                <div id="button_4" style="display: none;" class="blfbutton">
                                     <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
                                 </div>
                             }
@@ -342,7 +342,7 @@
                             <input id="currPos4" type="hidden" value="@(counter + 4)" />
                             @foreach (var recruitment in expiredList)
                             {
-                                <li id="@(counter + 1)4" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 3)" style="display: @(counter - total > 3 ? "none" : "")">
+                                <li id="@(counter + 1)4" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 4)" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
@@ -396,7 +396,7 @@
                                 using (Html.BeginForm("PublicRecruitment", "Customer"))
                                 {
                                     <input id="publicId" type="hidden" name="recruitId" />
-                                    <div id="button_4" style="display: none;" class="blfbutton">
+                                    <div id="button_5" style="display: none;" class="blfbutton">
                                         <button type="submit" class="btn btn-danger">Công khai</button>
                                         <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
                                     </div>
@@ -407,7 +407,7 @@
                             <input id="currPos5" type="hidden" value="@(counter + 4)" />
                             @foreach (var recruitment in hideList)
                             {
-                                <li id="@(counter + 1)5" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 4)" style="display: @(counter - total > 3 ? "none" : "")">
+                                <li id="@(counter + 1)5" onclick="chooseRecruit(@(counter + 1), @recruitment.Recruitment.RecruitmentId, 5)" style="display: @(counter - total > 3 ? "none" : "")">
                                     <div class="blImage">
                                         <img src="~/Content/Image/rc.png" alt="Maid service" height="100%">
                                     </div>
@@ -570,25 +570,25 @@
             document.getElementById("extendId").setAttribute("value", recruitId);
             document.getElementById("recruitId").setAttribute("value", recruitId);
             document.getElementById("button_1").setAttribute("style", "");
-            document.getElementById("button_3").setAttribute("style", "display: none;");
             document.getElementById("button_4").setAttribute("style", "display: none;");
-        } else if (type == 3) {
+            document.getElementById("button_5").setAttribute("style", "display: none;");
+        } else if (type == 4) {
             document.getElementById("extendId").setAttribute("value", recruitId);
             document.getElementById("recruitId").setAttribute("value", recruitId);
             document.getElementById("button_1").setAttribute("style", "display: none;");
-            document.getElementById("button_3").setAttribute("style", "");
-            document.getElementById("button_4").setAttribute("style", "display: none;");
-        } else if (type == 4) {
+            document.getElementById("button_4").setAttribute("style", "");
+            document.getElementById("button_5").setAttribute("style", "display: none;");
+        } else if (type == 5) {
             document.getElementById("extendId").setAttribute("value", recruitId);
             document.getElementById("recruitId").setAttribute("value", recruitId);
             document.getElementById("publicId").setAttribute("value", recruitId);
             document.getElementById("button_1").setAttribute("style", "display: none;");
-            document.getElementById("button_3").setAttribute("style", "display: none;");
-            document.getElementById("button_4").setAttribute("style", "");
+            document.getElementById("button_4").setAttribute("style", "display: none;");
+            document.getElementById("button_5").setAttribute("style", "");
         } else if (type == 0) {
             document.getElementById("button_1").setAttribute("style", "display: none;");
-            document.getElementById("button_3").setAttribute("style", "display: none;");
             document.getElementById("button_4").setAttribute("style", "display: none;");
+            document.getElementById("button_5").setAttribute("style", "display: none;");
         }
         document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=1");
     }

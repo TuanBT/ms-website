@@ -48,9 +48,6 @@
                                         <div class="licoFullName">
                                             <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = jobRequest.Maid.MaidId })" target="_blank" id="@jobRequest.Maid.MaidId name">@jobRequest.Maid.MaidName</a>
                                         </div>
-                                        <div class="licoRate">
-                                            @Html.Partial("_PartialStar", (float)jobRequest.Maid.RateAvg)
-                                        </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(jobRequest.Maid.Gender == true ? "Nam" : "Nữ")</span>
                                         </div>
@@ -91,9 +88,6 @@
                                                         <div class="liMaidContent">
                                                             <div class="licoFullName">
                                                                 <a href="@Url.Action("ManageMaidProfile", "MaidManager", new {maidId = maid.MaidId})" target="_blank" id="@maid.MaidId name">@maid.MaidName</a>
-                                                            </div>
-                                                            <div class="licoRate">
-                                                                @Html.Partial("_PartialStar", (float) maid.RateAvg)
                                                             </div>
                                                             <div class="blTime">
                                                                 <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender == true ? "Nam" : "Nữ")</span>
