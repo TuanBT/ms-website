@@ -74,7 +74,7 @@
                                                     Giới tính
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="gender" name="gender">
+                                                    <select class="form-control" id="gender" name="gender" onchange="addSkill()">
                                                         <option id="gender_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Gender)
                                                         {
@@ -88,7 +88,7 @@
                                                     Nhóm tuổi
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="age" name="age">
+                                                    <select class="form-control" id="age" name="age" onchange="addSkill()">
                                                         <option id="age_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Age)
                                                         {
@@ -102,7 +102,7 @@
                                                     Kinh nghiệm
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="exp" name="exp">
+                                                    <select class="form-control" id="exp" name="exp" onchange="addSkill()">
                                                         <option id="exp_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Experience)
                                                         {
@@ -116,7 +116,7 @@
                                                     Nguyên quán
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="hometown" name="hometown">
+                                                    <select class="form-control" id="hometown" name="hometown" onchange="addSkill()">
                                                         <option id="hometown_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Hometown)
                                                         {
@@ -131,7 +131,7 @@
                                                     <div class="moskSkillName">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input id="@item.SkillNameVietnam" class="language" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName">
+                                                                <input id="@item.SkillNameVietnam" class="language" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName" onchange="addSkill()">
                                                                 @item.SkillNameVietnam
                                                             </label>
                                                         </div>
@@ -143,7 +143,7 @@
                                                     Đang ở tại
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="addr" name="addr">
+                                                    <select class="form-control" id="addr" name="addr" onchange="addSkill()">
                                                         <option id="address_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Address)
                                                         {
@@ -157,7 +157,7 @@
                                                     Kết hôn
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="married" name="married">
+                                                    <select class="form-control" id="married" name="married" onchange="addSkill()">
                                                         <option id="married_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.Married)
                                                         {
@@ -288,6 +288,7 @@
     var chosenSkills = "";
 
     function addSkill() {
+        chosenList = new Array();
         chosenSkills = "";
         var genderDr = document.getElementById("gender");
         var gender = "Giới tính - " + genderDr.options[genderDr.selectedIndex].value;
@@ -362,7 +363,7 @@
             }
         }
         for (var i = 0; i < chosenList.length; i++) {
-            chosenSkills += "<li class='childSkillNear'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
+            chosenSkills += "<li id='" + i + "' class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
         }
         document.getElementById("chosenSkills").innerHTML = chosenSkills;
     }
@@ -393,7 +394,7 @@
             chosenList.splice(skillNo, 1);
             chosenSkills = "";
             for (var i = 0; i < chosenList.length; i++) {
-                chosenSkills += "<li class='childSkillNear'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
+                chosenSkills += "<li id='" + i + "' class='childSkill'><span class='skillText'>" + chosenList[i] + "<span class='glyphicon glyphicon-remove' onclick='removeSkill(" + i + ")'></span></span></li>";
             }
             document.getElementById("chosenSkills").innerHTML = chosenSkills;
         }
