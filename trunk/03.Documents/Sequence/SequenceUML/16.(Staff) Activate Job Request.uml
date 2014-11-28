@@ -19483,7 +19483,7 @@
 <XPD:REF name="Context">eB8bf2WrPUGTUhS2+noyiwAA</XPD:REF>
 <XPD:ATTR name="#OwnedDiagrams" type="integer">1</XPD:ATTR>
 <XPD:OBJ name="OwnedDiagrams[0]" type="UMLSequenceDiagram" guid="EVMxghNXd0i33JGnXkSIywAA">
-<XPD:ATTR name="Name" type="string">&lt;Staff&gt; Activate Recruitment</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">&lt;Staff&gt; Activate JobRequest</XPD:ATTR>
 <XPD:REF name="DiagramOwner">VCy60zM3Y0+he2AH66k56gAA</XPD:REF>
 <XPD:OBJ name="DiagramView" type="UMLSequenceDiagramView" guid="NglVFgU2Wkqhgw8zi5zMXwAA">
 <XPD:REF name="Diagram">EVMxghNXd0i33JGnXkSIywAA</XPD:REF>
@@ -19497,7 +19497,7 @@
 <XPD:ATTR name="Height" type="integer">428</XPD:ATTR>
 <XPD:REF name="Model">2elAkyf58EytDgW2qNQt/QAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="LabelView" guid="pd/dyG6hgU2Mdf85RA97JAAA">
-<XPD:ATTR name="Text" type="string">ActivateRecruitment</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">ActivateJobRequest</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="FrameTypeLabel" type="LabelView" guid="g+0mo1+uyUOa/+4Nnki90gAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
@@ -19539,7 +19539,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="RyWMXSvaYkOMT1prahJ+QQAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="WSfLGv7n0k6isF995nQGdwAA">
 <XPD:ATTR name="FontStyle" type="integer">4</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">ManageRecruitmentPage</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">ManageJobRequestPage</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="BQuHssAM6UOIqKmRv6Nq2AAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -19745,7 +19745,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="3LWd1Nc8nUqptJUNqAzwEAAA">
 <XPD:ATTR name="Alpha" type="real">1,5707963267949</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">10</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">4 : MarkActiveRecruitment()</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">4 : MarkActiveJobRequest()</XPD:ATTR>
 <XPD:REF name="Model">IP8TgftM9UmkriNgw5EhvAAA</XPD:REF>
 <XPD:REF name="HostEdge">2CXEZtZaYEqIqNir8FsGaQAA</XPD:REF>
 </XPD:OBJ>
@@ -19781,7 +19781,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="vFwFLi1zQUq+zddvHMmfJAAA">
 <XPD:ATTR name="Alpha" type="real">0,694737866360839</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">15,6204993518133</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">5 : MarkActiveRecruitment()</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">5 : MarkActiveJobRequest()</XPD:ATTR>
 <XPD:REF name="Model">7HWKjvGYp0Sz3YKMA1/oyAAA</XPD:REF>
 <XPD:REF name="HostEdge">yT+WbXpjh02Nj08ZT4fUSAAA</XPD:REF>
 </XPD:OBJ>
@@ -19926,7 +19926,7 @@
 <XPD:REF name="Views[3]">ylbvMf0jAEWfVmbymXnKewAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[3]" type="UMLStimulus" guid="IP8TgftM9UmkriNgw5EhvAAA">
-<XPD:ATTR name="Name" type="string">MarkActiveRecruitment</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">MarkActiveJobRequest</XPD:ATTR>
 <XPD:REF name="Sender">QOqS9JjpmE+fARU7+ld8xwAA</XPD:REF>
 <XPD:REF name="Receiver">P1LOZIbqEE+JHWj6/iUTVQAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="dZ/Op4BtVkixMOvli8qwmQAA">
@@ -19940,7 +19940,7 @@
 <XPD:REF name="Views[3]">l/hKxct5YUOuHOl0kQEX8AAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[4]" type="UMLStimulus" guid="7HWKjvGYp0Sz3YKMA1/oyAAA">
-<XPD:ATTR name="Name" type="string">MarkActiveRecruitment</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">MarkActiveJobRequest</XPD:ATTR>
 <XPD:REF name="Sender">P1LOZIbqEE+JHWj6/iUTVQAA</XPD:REF>
 <XPD:REF name="Receiver">M4lSAnmy60C44SqV6EFkZwAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLCallAction" guid="Ap9iCQB6/0Oj2QwcF4IpSwAA">
@@ -19983,7 +19983,7 @@
 </XPD:OBJ>
 <XPD:ATTR name="#OwnedFrames" type="integer">1</XPD:ATTR>
 <XPD:OBJ name="OwnedFrames[0]" type="UMLFrame" guid="2elAkyf58EytDgW2qNQt/QAA">
-<XPD:ATTR name="Name" type="string">ActivateRecruitment</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">ActivateJobRequest</XPD:ATTR>
 <XPD:ATTR name="FrameKind" type="string">sd</XPD:ATTR>
 <XPD:REF name="InteractionInstanceSet">VCy60zM3Y0+he2AH66k56gAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">1</XPD:ATTR>
@@ -20326,7 +20326,7 @@
 <XPD:REF name="CollaborationInstanceSet">eB8bf2WrPUGTUhS2+noyiwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingInstances[82]" type="UMLObject" guid="QOqS9JjpmE+fARU7+ld8xwAA">
-<XPD:ATTR name="Name" type="string">ManageRecruitmentPage</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">ManageJobRequestPage</XPD:ATTR>
 <XPD:REF name="CollaborationInstanceSet">eB8bf2WrPUGTUhS2+noyiwAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">2</XPD:ATTR>
 <XPD:REF name="Views[0]">0sxDthzLx0qh6hbR9DT9QgAA</XPD:REF>
