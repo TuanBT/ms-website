@@ -65,7 +65,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="bvq94WYNfEylDgpFcGyGZQAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="p5JXb3oMxkWQI22tWDWgAAAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Account</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">AccountModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="Y2HwNmIYTEemCX+js95lzwAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -96,7 +96,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="/Z+ROP6bYEWyDkj0gOIaJwAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="GiKCy9D/4UiqZLTiDcuskQAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Customer</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">CustomerModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="SOvoZdXpNUmUjcwb37WU3gAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -127,7 +127,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="2v3a27EU9Em3XoAtGzWsHgAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="LG6792vKC0ONqMBZBoL9sQAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Apply</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">ApplyModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="KhMoUu03AUCcASxO6WaazgAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -158,7 +158,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="4yqiMyCs8E6pbHd7w8o8iAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="CjOxVj5l5E+rz7GBfi8oeAAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Comment</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">CommentModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="2dPN1wBUs0Oc447VUWbKDAAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -189,7 +189,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="FJ6e3nuegkOZdeJ2RNX41QAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="33OKx5CQ8EWdDLeYcHq+PgAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">JobRequest</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">JobRequestModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="6kgWl5VNB0iDX7D4CVJ/mwAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -220,7 +220,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="T15WtxCSb0+rRAvOoUiM2gAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="rGg8Yg5RRUGE4RpMot+CbQAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Maid</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">MaidModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="2z9xdl92Ike5OO/qnN7C5AAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -251,7 +251,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="GkMF11wi2UWW+QXnfaICMgAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="xcf1dPxXvkqllTuyJeW07wAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Rating</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">RatingModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="3IaT3oYUu0mAfKFOxJOJSAAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -282,7 +282,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="FQ/+f44LDUiZkOTgh/ptGAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="UdT8noLDKEKFYe6dzHLUkQAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Recruitment</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">RecruitmentModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="iY+hdIb22USXSEjImD1KRgAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -313,7 +313,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="MElWBAorYk6o2smZ+vNt2gAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="zjZUDnwtDE+oggFf/6b/7AAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">SkillCategory</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">SkillCategoryModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="PYOaWnUa40GCyKraqzckEwAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -344,7 +344,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="xwPsOetevkurvveiwfM4mwAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="c0jPUTvGNUSD5SwX5LA+0gAA">
 <XPD:ATTR name="FontStyle" type="integer">3</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">SkillInstance</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">SkillInstanceModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="up1wjeifwEyVdr+T2oNmFwAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -375,7 +375,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="gjnvRzQ/REeVkGqVFMyaywAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="pTyURhVFXUyUP2c3mgZ7TAAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">SkillReference</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">SkillReferenceModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="v3h0teQ3K02kGTF8SEZ64QAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -406,7 +406,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="UIadv0vYdkuvGPoBDv6gEgAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="JGRtrjKFfkaK2QnaEKpeHwAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">System</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">SystemModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="cuA+1TeFiUOOEp9Y9WFKOQAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -1812,7 +1812,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="vE58tCZl6EWNpDF9WHDZzAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="3sQV7kcIuk6V99a4piYxswAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Webmaster</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">WebmasterModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="gkWB2dB+SEGmyzkkRipD6gAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -1927,7 +1927,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="o7xQuzAaxUSC4UN6JRq3xQAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="cbjfJpQWzUy18JdI1FGAqAAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Notifier</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">NotifierModel</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="2BdUZ8RRiUyGipyvpULCbAAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -2035,7 +2035,7 @@
 </XPD:OBJ>
 <XPD:ATTR name="#OwnedElements" type="integer">37</XPD:ATTR>
 <XPD:OBJ name="OwnedElements[0]" type="UMLClass" guid="0Ck8xkP3d02xmhkSg+QpKgAA">
-<XPD:ATTR name="Name" type="string">Account</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">AccountModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">VDGA65pWfEK0XJ/MFBHYlQAA</XPD:REF>
@@ -2208,14 +2208,14 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[1]" type="UMLClass" guid="Sjrxa7XLNU2Mvum0lt0pUwAA">
-<XPD:ATTR name="Name" type="string">Customer</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">CustomerModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">4mS2nDrYwki8Mq56Gm105wAA</XPD:REF>
 <XPD:REF name="Views[1]">QSlET8NCN0enUvip68hhnwAA</XPD:REF>
 <XPD:REF name="Views[2]">sASxWnmNvk2An3KOIhusfwAA</XPD:REF>
 <XPD:REF name="Views[3]">P8Go/TvQfU2iaAhuZaCSgQAA</XPD:REF>
-<XPD:ATTR name="#Operations" type="integer">13</XPD:ATTR>
+<XPD:ATTR name="#Operations" type="integer">14</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="6X+r54ZVO06xD2Fsk7GanwAA">
 <XPD:ATTR name="Name" type="string">StatisticRequestCustomer</XPD:ATTR>
 <XPD:REF name="Owner">Sjrxa7XLNU2Mvum0lt0pUwAA</XPD:REF>
@@ -2452,6 +2452,21 @@
 <XPD:REF name="BehavioralFeature">+lG29r+6Qk2nGkrmwYMBAgAA</XPD:REF>
 </XPD:OBJ>
 </XPD:OBJ>
+<XPD:OBJ name="Operations[13]" type="UMLOperation" guid="oC0IguWLV06d1JG4E4HhiwAA">
+<XPD:ATTR name="Name" type="string">ReportMaid</XPD:ATTR>
+<XPD:REF name="Owner">Sjrxa7XLNU2Mvum0lt0pUwAA</XPD:REF>
+<XPD:ATTR name="#Parameters" type="integer">2</XPD:ATTR>
+<XPD:OBJ name="Parameters[0]" type="UMLParameter" guid="x5q1ALSkdUy+hZ0dpU4D+gAA">
+<XPD:ATTR name="DirectionKind" type="UMLParameterDirectionKind">pdkReturn</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">ActionResult</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">oC0IguWLV06d1JG4E4HhiwAA</XPD:REF>
+</XPD:OBJ>
+<XPD:OBJ name="Parameters[1]" type="UMLParameter" guid="zrDPF777hESsjshKbC28EAAA">
+<XPD:ATTR name="Name" type="string">maidId</XPD:ATTR>
+<XPD:ATTR name="TypeExpression" type="string">int</XPD:ATTR>
+<XPD:REF name="BehavioralFeature">oC0IguWLV06d1JG4E4HhiwAA</XPD:REF>
+</XPD:OBJ>
+</XPD:OBJ>
 <XPD:ATTR name="#Associations" type="integer">4</XPD:ATTR>
 <XPD:REF name="Associations[0]">gjbXH/Kz80+vBjIJWdvA3AAA</XPD:REF>
 <XPD:REF name="Associations[1]">n3WoOAVxnk+gAaYBzjwa5wAA</XPD:REF>
@@ -2470,7 +2485,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[2]" type="UMLClass" guid="jASIZz4H5Eibvqya0YCh6gAA">
-<XPD:ATTR name="Name" type="string">Apply</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">ApplyModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">mqI5me0NuUGsVKEF5Z/lDwAA</XPD:REF>
@@ -2493,7 +2508,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[3]" type="UMLClass" guid="Se6RtVtDzUOCGmBGEKbr2gAA">
-<XPD:ATTR name="Name" type="string">Comment</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">CommentModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">skZfLcnsWUyGShNeXcAOoAAA</XPD:REF>
@@ -2557,7 +2572,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[4]" type="UMLClass" guid="Y2vUM1Tq0ESlE3kXSnjHNwAA">
-<XPD:ATTR name="Name" type="string">JobRequest</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">JobRequestModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">xOKhXFbO+kCI3yDR47ZymwAA</XPD:REF>
@@ -3120,7 +3135,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[5]" type="UMLClass" guid="Oy8dKjc5HUSCv8Ybd6jxcAAA">
-<XPD:ATTR name="Name" type="string">Maid</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">MaidModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">8ApJG40z2ECJYPHlkvzaxAAA</XPD:REF>
@@ -3213,7 +3228,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[6]" type="UMLClass" guid="E969HOJqB0K6tECklCSmYwAA">
-<XPD:ATTR name="Name" type="string">MaidMediator</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">MaidMediatorModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Operations" type="integer">15</XPD:ATTR>
 <XPD:OBJ name="Operations[0]" type="UMLOperation" guid="HWkUTlyFVU+ZkQqfYuawJQAA">
@@ -3518,7 +3533,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[7]" type="UMLClass" guid="cs/yPw+fNUGHKCaJgXBEvgAA">
-<XPD:ATTR name="Name" type="string">Rating</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">RatingModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">v9EDN69DDEqAa8Rd/U/DhwAA</XPD:REF>
@@ -3572,7 +3587,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[8]" type="UMLClass" guid="LRHH6J4cwE6FoBDY8rhGdwAA">
-<XPD:ATTR name="Name" type="string">Recruitment</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">RecruitmentModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">2gOdapYf2EWTAgxcBo0ZEwAA</XPD:REF>
@@ -3662,7 +3677,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[9]" type="UMLClass" guid="c2xreYs9uUmK+PSq3p77ZgAA">
-<XPD:ATTR name="Name" type="string">SkillCategory</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">SkillCategoryModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">00g9Jm4WfkGXrL9CrQkzGwAA</XPD:REF>
@@ -3684,7 +3699,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[10]" type="UMLClass" guid="dqjKuonjyUWPuJxyeyCaLQAA">
-<XPD:ATTR name="Name" type="string">SkillInstance</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">SkillInstanceModel</XPD:ATTR>
 <XPD:ATTR name="IsAbstract" type="boolean">True</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
@@ -3733,7 +3748,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[11]" type="UMLClass" guid="kTY3f63L0kWzTjx9siunZwAA">
-<XPD:ATTR name="Name" type="string">SkillReference</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">SkillReferenceModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">S5KvEiN4pkejkw2NrEkx5gAA</XPD:REF>
@@ -3872,7 +3887,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[12]" type="UMLClass" guid="ry/ylrleVU+/+HzdDtOlpQAA">
-<XPD:ATTR name="Name" type="string">System</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">SystemModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">7V1cSXFQrEyMSphcgNJ3tAAA</XPD:REF>
@@ -4447,7 +4462,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[33]" type="UMLClass" guid="kGVmyXOIKEedLTQD+jtwdAAA">
-<XPD:ATTR name="Name" type="string">Webmaster</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">WebmasterModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">TC2Ep1nDCkyU71ibKyBgGgAA</XPD:REF>
@@ -4649,7 +4664,7 @@
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[35]" type="UMLClass" guid="8S3bXEmut0eI9Nky5WjwlwAA">
-<XPD:ATTR name="Name" type="string">Notifier</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">NotifierModel</XPD:ATTR>
 <XPD:REF name="Namespace">RwGK5Pv/U0yYWbubPymxrQAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">nHyA7Mz3FE+I8s+RrGh+cQAA</XPD:REF>
