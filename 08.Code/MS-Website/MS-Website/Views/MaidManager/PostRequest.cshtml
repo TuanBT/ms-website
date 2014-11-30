@@ -71,7 +71,7 @@
                                                         </div>
                                                         <div class="liMaidContent">
                                                             <div class="licoFullName">
-                                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" target="_blank" id="@maid.MaidId name">@maid.MaidName</a>
+                                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" target="_blank" id="@maid.MaidId name"><font color="@(maid.ReportDate != null ? "red":"")">@maid.MaidName</font></a>
                                                             </div>
                                                             @*<div class="licoRate">
                                                                 @Html.Partial("_PartialStar", (float) maid.RateAvg)

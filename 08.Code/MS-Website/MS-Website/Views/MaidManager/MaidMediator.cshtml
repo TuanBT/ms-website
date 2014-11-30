@@ -234,7 +234,7 @@
                                         <div class="liMaidContent">
                                             <div class="licoFullName">
                                                 <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" class="myToolTip">
-                                                    @maid.MaidName
+                                                    <font color="@(maid.ReportDate != null ? "red":"")">@maid.MaidName</font>
                                                 </a>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender == true ? "Nam" : "Nữ")</span>
