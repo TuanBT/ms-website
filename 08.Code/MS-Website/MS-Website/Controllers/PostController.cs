@@ -20,25 +20,9 @@ namespace MS_Website.Controllers
             {
                 bool flag = false;
                 var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
-                /*if (job.Status.Equals("Approved"))
-                {
-                    var recruits = db.Recruitments.Where(r => r.CustomerId == (int)Session["AccId"]);
-                    var apply = db.Applies.FirstOrDefault(a => a.JobRequestId == jobId);
-                    //if (recruits != null)
-                    //{
-                    //    foreach (var item in recruits)
-                    //    {
-                    //        if (item.RecruitmentId == apply.RecruitmentId)
-                    //        {
-                    //            flag = true;
-                    //        }
-                    //    }
-                    //}
-                }*/
                 ViewBag.JobReqId = jobId;
                 Session["flag"] = flag;
                 Session["jobId"] = jobId;
-
                 if (job != null)
                 {
                     var ratingRow = db.Ratings.FirstOrDefault(r => r.JobRequestId == job.JobRequestId);
@@ -57,14 +41,13 @@ namespace MS_Website.Controllers
                     {
                         LoadSkillList(skillRef, skillList, db);
                     }
-                    //ViewBag.MaidRating = maid.RateAvg;
                     if (Session["AccId"] != null)
                     {
                         if (job.IsActive)
                         {
                             if (job.Maid.MaidMediatorId != null)
                             {
-                                if (job.Maid.MaidMediatorId == (int) Session["AccId"])
+                                if (job.Maid.MaidMediatorId == (int)Session["AccId"])
                                 {
                                     if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
                                     {
@@ -74,7 +57,7 @@ namespace MS_Website.Controllers
                             }
                             else
                             {
-                                if (job.Maid.StaffId == (int) Session["AccId"])
+                                if (job.Maid.StaffId == (int)Session["AccId"])
                                 {
                                     if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved"))
                                     {
@@ -84,7 +67,7 @@ namespace MS_Website.Controllers
                             }
                             if (Session["Role"].Equals("Customer"))
                             {
-                                var custId = (int) Session["AccId"];
+                                var custId = (int)Session["AccId"];
                                 ViewBag.RecruitmentList =
                                     db.Recruitments.Where(
                                         r => r.CustomerId == custId && r.Status.Equals("Waiting") && r.IsActive).ToList();
@@ -106,6 +89,22 @@ namespace MS_Website.Controllers
                         ViewBag.Customer =
                             db.Accounts.SingleOrDefault(a => a.AccountId == recruitment.CustomerId);
                         var jobRequestTmp = new JobRequestTemp(job, maid, null, recruitment, skillList);
+                        if (Session["Role"] != null)
+                        {
+                            if (Session["Role"].Equals("Customer"))
+                            {
+                                if (recruitment.CustomerId == (int)Session["AccId"])
+                                {
+                                    if (recruitment.Status.Equals("Approved"))
+                                    {
+                                        if (job.Maid.ReportDate == null)
+                                        {
+                                            ViewBag.Report = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         return View("JobRequest", jobRequestTmp);
                     }
                     else
@@ -115,7 +114,7 @@ namespace MS_Website.Controllers
                     }
                 }
             }
-            return RedirectToAction("Login","Home");
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult GetRecruitment(int recruitmentId)
@@ -182,6 +181,10 @@ namespace MS_Website.Controllers
                             }
                         }
                     }
+                    if (customer.isSaleOff)
+                    {
+                        ViewBag.SaleOff = System.Configuration.ConfigurationManager.AppSettings["SaleOff"].Replace(",", ".");
+                    }
                     if (recruitment.Status.Equals("Applied") || recruitment.Status.Equals("Approved"))
                     {
                         var apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitmentId);
@@ -189,6 +192,19 @@ namespace MS_Website.Controllers
                         ViewBag.Maid =
                             db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
                         var recruitmentTmp = new RecruitmentTemp(recruitment, customer, account, jobRequest, skillList);
+                        if (recruitment.Status.Equals("Applied"))
+                        {
+                            if (Session["Role"] != null)
+                            {
+                                if (Session["Role"].Equals("Customer"))
+                                {
+                                    if (recruitment.CustomerId == (int)Session["AccId"])
+                                    {
+                                        ViewBag.Approve = true;
+                                    }
+                                }
+                            }
+                        }
                         return View("Recruitment", recruitmentTmp);
                     }
                     else
@@ -775,27 +791,27 @@ namespace MS_Website.Controllers
                 }
                 if (statusNew)
                 {
-                   /* var maidId = db.JobRequests.FirstOrDefault(j => j.JobRequestId == jobId).MaidId;
-                    var Ratings = db.Ratings.Select(r => r).ToList();
-                    var jobRequests =
-                        db.JobRequests.Where(
-                            j => (j.Status == "Applied" || j.Status == "Approved") && j.MaidId == maidId).ToList();
-                    int count = 0;
-                    double total = 0;
-                    foreach (var Rating in Ratings)
-                    {
-                        foreach (var jobRequest in jobRequests)
-                        {
-                            if (Rating.JobRequestId == jobRequest.JobRequestId)
-                            {
-                                count++;
-                                total += Rating.Rate;
-                            }
-                        }
-                    }
-                    var Maid = db.Maids.FirstOrDefault(m => m.MaidId == maidId);
-                    Maid.RateAvg = (int)total / count;
-                    db.SaveChanges();*/
+                    /* var maidId = db.JobRequests.FirstOrDefault(j => j.JobRequestId == jobId).MaidId;
+                     var Ratings = db.Ratings.Select(r => r).ToList();
+                     var jobRequests =
+                         db.JobRequests.Where(
+                             j => (j.Status == "Applied" || j.Status == "Approved") && j.MaidId == maidId).ToList();
+                     int count = 0;
+                     double total = 0;
+                     foreach (var Rating in Ratings)
+                     {
+                         foreach (var jobRequest in jobRequests)
+                         {
+                             if (Rating.JobRequestId == jobRequest.JobRequestId)
+                             {
+                                 count++;
+                                 total += Rating.Rate;
+                             }
+                         }
+                     }
+                     var Maid = db.Maids.FirstOrDefault(m => m.MaidId == maidId);
+                     Maid.RateAvg = (int)total / count;
+                     db.SaveChanges();*/
                 }
             }
             //return Json("{MaidRateAvg:" + MaidRateAvg + ",numrate:" + numrate + "}", JsonRequestBehavior.AllowGet);

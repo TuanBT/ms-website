@@ -70,6 +70,10 @@ namespace MS_Website.Controllers
                         notActiveList.Select(
                             recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
                     ViewBag.Manage = "true";
+                    if (customer.isSaleOff)
+                    {
+                        ViewBag.SaleOff = System.Configuration.ConfigurationManager.AppSettings["SaleOff"].Replace(",", ".");
+                    }
                     return View("CustomerProfile", account);
                 }
             }
@@ -136,26 +140,26 @@ namespace MS_Website.Controllers
                 var recruitment = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
                 if (recruitment != null)
                 {
-					if (!recruitment.IsActive)
+                    if (!recruitment.IsActive)
                     {
                         TempData["Alert"] = "Công việc không tồn tại";
                     }
-					else
-					{
-						if (recruitment.Status.Equals("Applied") || recruitment.Status.Equals("Approved"))
-						{
-							TempData["Alert"] = "Công việc đã thuê được người";
-						}
-						else if (recruitment.Status.Equals("Expired"))
-						{
-							TempData["Alert"] = "Công việc đã hết hạn";
-						}
-						else if (recruitment.Status.Equals("Waiting"))
-						{
-							recruitment.Status = "Hide";
-							db.SaveChanges();
-						}
-					}
+                    else
+                    {
+                        if (recruitment.Status.Equals("Applied") || recruitment.Status.Equals("Approved"))
+                        {
+                            TempData["Alert"] = "Công việc đã thuê được người";
+                        }
+                        else if (recruitment.Status.Equals("Expired"))
+                        {
+                            TempData["Alert"] = "Công việc đã hết hạn";
+                        }
+                        else if (recruitment.Status.Equals("Waiting"))
+                        {
+                            recruitment.Status = "Hide";
+                            db.SaveChanges();
+                        }
+                    }
                 }
             }
             return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
@@ -172,22 +176,22 @@ namespace MS_Website.Controllers
                     {
                         TempData["Alert"] = "Công việc không tồn tại";
                     }
-					else
-					{
-						if (recruitment.Status.Equals("Applied") || recruitment.Status.Equals("Approved"))
-						{
-							TempData["Alert"] = "Công việc đã thuê được người";
-						}
-						else if (recruitment.Status.Equals("Expired"))
-						{
-							TempData["Alert"] = "Công việc đã hết hạn";
-						}
-						else if (recruitment.Status.Equals("Hide"))
-						{
-							recruitment.Status = "Waiting";
-							db.SaveChanges();
-						}
-					}
+                    else
+                    {
+                        if (recruitment.Status.Equals("Applied") || recruitment.Status.Equals("Approved"))
+                        {
+                            TempData["Alert"] = "Công việc đã thuê được người";
+                        }
+                        else if (recruitment.Status.Equals("Expired"))
+                        {
+                            TempData["Alert"] = "Công việc đã hết hạn";
+                        }
+                        else if (recruitment.Status.Equals("Hide"))
+                        {
+                            recruitment.Status = "Waiting";
+                            db.SaveChanges();
+                        }
+                    }
                 }
             }
             return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
@@ -201,9 +205,19 @@ namespace MS_Website.Controllers
                 {
                     return RedirectToAction("Login", "Home");
                 }
-                LoadItems(db);
+                if (Session["Role"].Equals("Customer"))
+                {
+                    var custId = (int) Session["AccId"];
+                    var cust = db.Customers.SingleOrDefault(c => c.AccountId == custId);
+                    if (cust.isSaleOff)
+                    {
+                        ViewBag.SaleOff = System.Configuration.ConfigurationManager.AppSettings["SaleOff"].Replace(",",".");
+                    }
+                    LoadItems(db);
+                    return View("PostRecruitment");
+                }
             }
-            return View("PostRecruitment");
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult AddRecruitment(string title, string gender, string age, string LanguageEnglish,
@@ -347,10 +361,17 @@ namespace MS_Website.Controllers
                     recruitment.Status = "Waiting";
                     recruitment.PostTime = DateTime.Now;
                     recruitment.ExpiredTime = DateTime.Now.AddDays(7 * int.Parse(time));
-                    int price  = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceRC"]);
+                    int price = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["PriceRC"]);
                     int SubPriceWeek = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["SubPriceWeek"]);
                     int week = int.Parse(time);
+                    var cust = db.Customers.SingleOrDefault(c => c.AccountId == custId);
                     recruitment.Price = price * week - SubPriceWeek * (week - 1);
+                    if (cust.isSaleOff)
+                    {
+                        var saleOff = float.Parse(System.Configuration.ConfigurationManager.AppSettings["SaleOff"]);
+                        recruitment.Price -= (int)(recruitment.Price * saleOff);
+                        cust.isSaleOff = false;
+                    }
                     recruitment.Title = title;
                     skillRef.Type = 1;
                     db.Recruitments.Add(recruitment);
@@ -710,6 +731,10 @@ namespace MS_Website.Controllers
 
         public ActionResult ExtendRecruitment(int recruitId, int extend)
         {
+            if (Session["AccId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             using (var db = new MSEntities())
             {
                 var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
@@ -733,6 +758,8 @@ namespace MS_Website.Controllers
                     {
                         recruit.Status = "Waiting";
                     }
+                    var cust = db.Customers.SingleOrDefault(c => c.AccountId == recruit.CustomerId);
+                    cust.isSaleOff = false;
                     db.SaveChanges();
                 }
                 return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
@@ -770,6 +797,10 @@ namespace MS_Website.Controllers
 
         public ActionResult ApplyJobRequest(int jobRequestId, string recruitIdStr)
         {
+            if (Session["AccId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (recruitIdStr == null)
             {
                 TempData["Alert"] = "Chưa chọn đơn tuyển việc!";
@@ -781,32 +812,32 @@ namespace MS_Website.Controllers
                 var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
                 if (jobRequest != null)
                 {
-					if (!jobRequest.IsActive)
-					{
-						TempData["Alert"] = "Công việc không tồn tại";
-					}
-					else
-					{
-						if (jobRequest.Status.Equals("Waiting"))
-						{
-							var recruit = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
-							var apply = new Apply();
-							apply.JobRequestId = jobRequestId;
-							apply.RecruitmentId = recruitId;
-							db.Applies.Add(apply);
-							jobRequest.Status = "Applied";
-							jobRequest.ApplyTimes = DateTime.Now;
-							recruit.Status = "Applied";
-							db.SaveChanges();
-							var function = new Function();
-							function.SentMessage(
+                    if (!jobRequest.IsActive)
+                    {
+                        TempData["Alert"] = "Công việc không tồn tại";
+                    }
+                    else
+                    {
+                        if (jobRequest.Status.Equals("Waiting"))
+                        {
+                            var recruit = db.Recruitments.SingleOrDefault(j => j.RecruitmentId == recruitId);
+                            var apply = new Apply();
+                            apply.JobRequestId = jobRequestId;
+                            apply.RecruitmentId = recruitId;
+                            db.Applies.Add(apply);
+                            jobRequest.Status = "Applied";
+                            jobRequest.ApplyTimes = DateTime.Now;
+                            recruit.Status = "Applied";
+                            db.SaveChanges();
+                            var function = new Function();
+                            function.SentMessage(
                             jobRequest.Maid.Phone ?? "",
                             jobRequest.Staff != null ? jobRequest.Staff.Account.Phone : "",
                             jobRequest.MaidMediator != null ? jobRequest.MaidMediator.Account.Phone : "",
                             recruit.Customer.Account.Phone ?? "");
-							string link = "/Post/GetJobRequest?jobId=" + jobRequestId;
-							//People post jobrequest
-							var notifier = new MS_Website.Models.Notifier
+                            string link = "/Post/GetJobRequest?jobId=" + jobRequestId;
+                            //People post jobrequest
+                            var notifier = new MS_Website.Models.Notifier
                             {
                                 AccId =
                                     jobRequest.MaidMediatorId != null
@@ -817,25 +848,57 @@ namespace MS_Website.Controllers
                                 Link = link,
                                 View = false
                             };
-							db.Notifiers.Add(notifier);
-							db.SaveChanges();
-						}
-						else if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
-						{
-							TempData["Alert"] = "Công việc đã được thuê bởi khách hàng khác";
-						}
-						else if (jobRequest.Status.Equals("Expired"))
-						{
-							TempData["Alert"] = "Công việc đã hết hạn";
-						}
-						else if (jobRequest.Status.Equals("Hide"))
-						{
-							TempData["Alert"] = "Công việc không tồn tại";
-						}
-					}
-					return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
+                            db.Notifiers.Add(notifier);
+                            db.SaveChanges();
+                        }
+                        else if (jobRequest.Status.Equals("Applied") || jobRequest.Status.Equals("Approved"))
+                        {
+                            TempData["Alert"] = "Công việc đã được thuê bởi khách hàng khác";
+                        }
+                        else if (jobRequest.Status.Equals("Expired"))
+                        {
+                            TempData["Alert"] = "Công việc đã hết hạn";
+                        }
+                        else if (jobRequest.Status.Equals("Hide"))
+                        {
+                            TempData["Alert"] = "Công việc không tồn tại";
+                        }
+                    }
+                    return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
                 }
                 return RedirectToAction("GetCustomer", "Customer", new { custId = Session["AccId"] });
+            }
+        }
+
+        public ActionResult ReportMaid(int maidId, int jobId)
+        {
+            if (Session["AccId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            using (var db = new MSEntities())
+            {
+                var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidId);
+                maid.ReportDate = DateTime.Now.Date;
+                db.SaveChanges();
+                return RedirectToAction("GetJobRequest", "Post", new { jobId });
+            }
+        }
+
+        public ActionResult ApproveRecruitment(int recruitId)
+        {
+            if (Session["AccId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            using (var db = new MSEntities())
+            {
+                var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
+                recruit.Status = "Approved";
+                var cust = db.Customers.SingleOrDefault(c => c.AccountId == recruit.CustomerId);
+                cust.isSaleOff = true;
+                db.SaveChanges();
+                return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
             }
         }
     }

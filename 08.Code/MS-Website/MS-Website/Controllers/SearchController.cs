@@ -159,7 +159,7 @@ namespace MS_Website.Controllers
                     {
                         ViewBag.Recruitment = null;
                     }
-                    else if (Session["Role"].Equals("Staff"))
+                    else if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin"))
                     {
                         ViewBag.Recruitment = recruitmentList;
                         ViewBag.JobRequest = jobRequestList;
@@ -619,7 +619,7 @@ namespace MS_Website.Controllers
                     {
                         ViewBag.JobRequest = jobRequestList;
                     }
-                    else if (Session["Role"].Equals("Staff"))
+                    else if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin"))
                     {
                         ViewBag.Recruitment = recruitmentList;
                         ViewBag.JobRequest = jobRequestList;
