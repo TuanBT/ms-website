@@ -1133,10 +1133,7 @@ namespace MS_Website.Controllers
                 using (db)
                 {
                     var jobRequest = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobRequestId);
-                    var apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobRequest.JobRequestId);
-                    var recruitment = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == apply.RecruitmentId);
                     jobRequest.Status = "Approved";
-                    recruitment.Status = "Approved";
                     db.SaveChanges();
                     //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();
                     return RedirectToAction("ManageAppliedJobRequest", "MaidManager");

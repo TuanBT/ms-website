@@ -69,6 +69,14 @@ namespace MS_Website.Controllers
                         _db.Recruitments.Remove(recruitment);
                     }
                 }
+                var reportedMaids = _db.Maids.Where(m => m.ReportDate != null).ToList();
+                foreach (var reportedMaid in reportedMaids)
+                {
+                    if (DateTime.Now.AddDays(-7).Date > reportedMaid.ReportDate)
+                    {
+                        reportedMaid.ReportDate = null;
+                    }
+                }
                 _db.SaveChanges();
                 var abc = (double)_db.JobRequests.Count(r => r.Status == "Waiting") / numResultOnPage;
                 int bcd = (int)Math.Ceiling(abc);
