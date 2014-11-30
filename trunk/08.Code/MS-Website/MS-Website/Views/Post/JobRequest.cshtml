@@ -7,7 +7,8 @@
 }
 
 <style>
-    .modal.in {
+    .modal.in
+    {
         display: block;
     }
 </style>
@@ -104,12 +105,8 @@
                                                         Bạn thực sự muốn thuê công việc này?
                                                     </div>
                                                     <div class="modal-footer">
-                                                        @using (Html.BeginForm("MarkActive", "MaidManager", FormMethod.Get))
-                                                        {
-                                                            <input type="hidden" name="jobRequestId" id="jrId2" />
-                                                            <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
-                                                        }
-
+                                                        <input type="hidden" name="jobRequestId" id="jrId2" />
+                                                        <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
                                                     </div>
                                                 </div>
                                                 <!-- /.modal-content -->
@@ -371,7 +368,7 @@
                                     <div class="col-md-9">
                                         <div class="jrDetail">
                                             <div class="jrMaidFullname">
-                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = jobRequestTemp.Maid.MaidId })">@jobRequestTemp.Maid.MaidName</a>
+                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = jobRequestTemp.Maid.MaidId })"><font color="@(jobRequestTemp.Maid.ReportDate != null ? "red" : "")">@jobRequestTemp.Maid.MaidName</font></a>
                                             </div>
                                             <div class="blTime">
                                                 <span class="blTimeText">Người giúp việc</span>
@@ -384,6 +381,29 @@
                                             <div class="blTime">
                                                 <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(jobRequestTemp.Maid.Gender == true ? "Nam" : "Nữ")</span>
                                             </div>
+                                            @if (ViewBag.Report != null)
+                                            {
+                                                <button class="btn btn-danger" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-rp">Báo xấu</button>
+                                                <div class="modal fade bs-example-modal-rp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                                <h4 class="modal-title" id="myLargeModalLabel">Xác nhận báo xấu</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Bạn thực sự muốn báo xấu người giúp việc này?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a href="@Url.Action("ReportMaid", "Customer", new { maidId = jobRequestTemp.Maid.MaidId, jobId = jobRequestTemp.Job.JobRequestId })">
+                                                                    <button class="btn btn-success" id="btnAccept">Chấp nhận</button>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -452,7 +472,7 @@
                     @if (Session["AccId"] != null)
                     {
                         <select class="form-control" name="extend">
-                            @for (int i = 1; i <= (int) Session["MaxWeek"]; i++)
+                            @for (int i = 1; i <= (int)Session["MaxWeek"]; i++)
                             {
                                 <option value="@i">@i tuần</option>
                             }

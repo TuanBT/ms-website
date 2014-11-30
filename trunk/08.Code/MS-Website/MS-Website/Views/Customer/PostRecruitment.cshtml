@@ -178,7 +178,7 @@
                                                     Lưu trú
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="stay" name="stay">
+                                                    <select class="form-control" id="stay" name="stay" onchange="addSkill()">
                                                         <option id="stay_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.StayList)
                                                         {
@@ -192,7 +192,7 @@
                                                     Mức lương
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="salary" name="salary">
+                                                    <select class="form-control" id="salary" name="salary" onchange="addSkill()">
                                                         <option id="salary_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.SalaryList)
                                                         {
@@ -206,7 +206,7 @@
                                                     Kiểu công việc
                                                 </div>
                                                 <div class="moskSkillContent">
-                                                    <select class="form-control" id="work" name="work">
+                                                    <select class="form-control" id="work" name="work" onchange="addSkill()">
                                                         <option id="work_null" value="null">--</option>
                                                         @foreach (var item in ViewBag.WorkList)
                                                         {
@@ -228,7 +228,7 @@
                                                     <div class="moskSkillName">
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input id="@item.SkillNameVietnam" class="skill" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName"/>
+                                                                <input id="@item.SkillNameVietnam" class="skill" type="checkbox" value="@item.SkillNameVietnam" name="@item.SkillName" onchange="addSkill()"/>
                                                                 @item.SkillNameVietnam
                                                             </label>
                                                         </div>
@@ -249,18 +249,25 @@
                     <div class="row">
                         <div class="col-md-4 poJRTtitle">
                             Thời hạn đăng
-                            <span class="postJRTimeDetail">Đơn giá tuần đầu<br/>
+                            <span class="postJRTimeDetail">Đơn giá tuần đầu<br />
                                 <span class="postJRTimePrice">
                                     <span class="prices">@Session["PriceRC"]</span>.000
-                                </span> đồng/Tuần</span>
+                                </span>đồng/Tuần</span>
                         </div>
                         <div class="col-md-2">
-                            <select class="form-control" id="time" name="time" onchange="chooseTime(@Session["PriceRC"],@Session["SubPriceWeek"])">
-                                @for (int i = 1; i <= (int)Session["MaxWeek"]; i++)
-                                {
-                                    <option value="@i">@i tuần</option>
-                                }
-                            </select>
+                            @{
+                                            var saleOff = "0";
+                                            if (ViewBag.SaleOff != null)
+                                            {
+                                                saleOff = ViewBag.SaleOff;
+                                            }
+                                <select class="form-control" id="time" name="time" onchange="chooseTime(@Session["PriceRC"], @Session["SubPriceWeek"], @saleOff)">
+                                    @for (int i = 1; i <= (int)Session["MaxWeek"]; i++)
+                                    {
+                                        <option value="@i">@i tuần</option>
+                                    }
+                                </select>
+                            }
                         </div>
                         <div class="col-md-6">
                             <span class="postJRTimeTotal">Tổng <span id="WeekChoose">1</span> tuần là 
@@ -268,8 +275,19 @@
                                     <span class="prices">@Session["PriceRC"]</span>.000
                                 </span> = *@
                                 <span class="postJRTimePriceTotal">
-                                    <span id="pricesTotal">@Session["PriceRC"]</span>.000
-                                </span> đồng
+                                    @{
+                                    var oneWeekPrice = (int)Session["PriceRC"];
+                                    if (ViewBag.SaleOff != null)
+                                    {
+                                        oneWeekPrice -= (int)(float.Parse(saleOff.Replace(".",",")) * oneWeekPrice);
+                                    }
+                                    }
+                                    <span id="pricesTotal">@oneWeekPrice</span>.000
+                                </span>đồng
+                                @if(ViewBag.SaleOff != null)
+                                {
+                                    <span> (Đã giảm @(float.Parse(saleOff.Replace(".",",")) * 100)%)</span>
+                                }
                             </span>
                         </div>
                     </div>
@@ -400,11 +418,13 @@
         }
     }
 
-    function chooseTime(prices, SubPriceWeek) {
+    function chooseTime(prices, SubPriceWeek, saleOff) {
         var price = parseInt(prices);
         var week = parseInt($("#time").val());
+        var saleOffAmount = parseFloat(saleOff);
         // var total = price * week - (SubPriceWeek / 2) * week * (week - 1);
-        var total = price*week - SubPriceWeek*(week - 1);
+        var total = price * week - SubPriceWeek * (week - 1);
+        total -= total * saleOffAmount;
         /*for (var i = 1; i <= week;i++) {
             total += (price - SubPriceWeek * (i - 1));
         }*/

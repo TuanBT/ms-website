@@ -2,11 +2,11 @@
 
 @if (Session["AccId"] != null)
 {
-    int week = (int)(RecruitmentTemp.Recruitment.ExpiredTime - RecruitmentTemp.Recruitment.PostTime).TotalDays / 7;
-    int price = (int)Session["PriceRC"];
-    int SubPriceWeek = (int)Session["SubPriceWeek"];
-    var amount = (price * week - (SubPriceWeek / 2) * week * (week - 1)) / 20;
-
+    var amount = RecruitmentTemp.Recruitment.Price / 20f;
+    if (ViewBag.SaleOff != null)
+    {
+        amount -= (int)(amount*Convert.ToDouble(Session["SaleOff"]));
+    }
     if (!RecruitmentTemp.Recruitment.IsActive && RecruitmentTemp.Recruitment.CustomerId == (int)Session["AccId"])
     {
     <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" style="display: inline-block">

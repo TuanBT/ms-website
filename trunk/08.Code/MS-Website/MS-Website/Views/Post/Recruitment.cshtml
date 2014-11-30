@@ -110,6 +110,29 @@
                                     Tiều đề:
                                 </div>
                                 <span class="iTitleContent">@RecruitmentTemp.Recruitment.Title</span>
+                                @if (ViewBag.Approve != null)
+                                {
+                                    <button class="btn btn-danger" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-ap">Hoàn tất</button>
+                                    <div class="modal fade bs-example-modal-ap" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title" id="myLargeModalLabel">Xác nhận hoàn tất</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Bạn thực sự muốn xác nhận hoàn tất công việc này?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="@Url.Action("ApproveRecruitment", "Customer", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId })">
+                                                        <button class="btn btn-success" id="btnAccept">Chấp nhận</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                    </div>
+                                }
                             </div>
                             <div class="iStatus">
                                 <div class="iTitle">
@@ -144,6 +167,11 @@
                                     {
                                         color = "success";
                                         status = "Đã thuê";
+                                    }
+                                    else if (RecruitmentTemp.Recruitment.Status == "Approved")
+                                    {
+                                        color = "success";
+                                        status = "Đã hoàn tất";
                                     }
                                     else if (RecruitmentTemp.Recruitment.Status == "Expired")
                                     {
@@ -330,11 +358,18 @@
                     <h4 class="modal-title" id="mySmallModalLabel">Gia hạn đơn tuyển việc</h4>
                 </div>
                 <input id="extendId" type="hidden" name="recruitId" value="@RecruitmentTemp.Recruitment.RecruitmentId"/>
+                <input id="subPrice" type="hidden" value="@Session["SubPriceWeek"]"/>
                 <div class="modal-body chooseMaidModalMaid">
                     <span>Thời gian gia hạn</span>
-
-                    <select id="week" class="form-control" name="extend" onchange="chooseWeek()">
-                        @for (int i = 1; i <= (int) Session["MaxWeek"]; i++)
+                    @{
+            var saleOff = "0";
+            if (ViewBag.SaleOff != null)
+            {
+                saleOff = ViewBag.SaleOff;
+            }
+                    }
+                    <select id="week" class="form-control" name="extend" onchange="chooseWeek(@saleOff)">
+                        @for (int i = 1; i <= (int)Session["MaxWeek"]; i++)
                         {
                             <option value="@i">@i tuần</option>
                         }
@@ -343,7 +378,7 @@
                 </div>
                 <div class="modal-footer">
                     @Html.Partial("_PartialExtend")
-                    <input type="hidden" id="PriceRC" value="@((int) Session["PriceRC"]/20)"/>
+                    <input type="hidden" id="PriceRC" value="@((int)Session["PriceRC"])"/>
                 </div>
             </div>
         }
@@ -409,11 +444,15 @@
         document.getElementById("result").setAttribute("style", "");
     }
 
-    function chooseWeek() {
+    function chooseWeek(saleOff) {
         var recruitId = document.getElementById("extendId").getAttribute("value");
         var weekDr = document.getElementById("week");
         var week = weekDr.options[weekDr.selectedIndex].value;
-        document.getElementById("amount").setAttribute("value", parseInt(week) * parseInt($("#PriceRC").val()));
+        var amount = parseInt(week) * parseInt($("#PriceRC").val()) - parseInt($("#subPrice").val()) * (parseInt(week) - 1);
+        var saleOffAmount = parseFloat(saleOff);
+        amount -= amount * saleOffAmount;
+        amount /= 20;
+        document.getElementById("amount").setAttribute("value", amount);
         document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=" + week);
     }
 

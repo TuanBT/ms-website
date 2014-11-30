@@ -20,13 +20,13 @@
             <li class="iscurent">
                 <a class="hChContent">Cá nhân</a>
             </li>
-            @if(Session["AccId"] != null)
+            @if (Session["AccId"] != null)
             {
-                if((int)Session["AccId"] == account.AccountId)
+                if ((int)Session["AccId"] == account.AccountId)
                 {
-                    <li>
-                        <a href="@Url.Action("CustomerEdit", "Customer", new {custId = account.AccountId})" class="hChContent">Sửa thông tin</a>
-                    </li>
+                <li>
+                    <a href="@Url.Action("CustomerEdit", "Customer", new { custId = account.AccountId })" class="hChContent">Sửa thông tin</a>
+                </li>
                 }
             }
         </ul>
@@ -56,38 +56,38 @@
             <div class="col-md-4">
                 <div class="rightInfo">
                     <ul class="riDetail">
-                        @if (Session["Acc"]!=null)
+                        @if (Session["Acc"] != null)
                         {
                             if (Session["Role"].Equals("Staff") || Session["Role"].Equals("Admin") || ViewBag.Manage != null)
-                             {
-                                 <li class="rideRow">
-                                     <div class="rideroTitle">
-                                         Điện thoại
-                                     </div>
-                                     <div class="rideroContent">
-                                         <strong>@account.Phone
-                                         </strong>
-                                     </div>
-                                 </li>
-                                 <li class="rideRow">
-                                     <div class="rideroTitle">
-                                         Email
-                                     </div>
-                                     <div class="rideroContent">
-                                         <strong>@account.Email
-                                         </strong>
-                                     </div>
-                                 </li>
-                                 <li class="rideRow">
-                                     <div class="rideroTitle">
-                                         Địa chỉ
-                                     </div>
-                                     <div class="rideroContent">
-                                         <strong>@account.Customer.Address
-                                         </strong>
-                                     </div>
-                                 </li>
-                             }
+                            {
+                            <li class="rideRow">
+                                <div class="rideroTitle">
+                                    Điện thoại
+                                </div>
+                                <div class="rideroContent">
+                                    <strong>@account.Phone
+                                    </strong>
+                                </div>
+                            </li>
+                            <li class="rideRow">
+                                <div class="rideroTitle">
+                                    Email
+                                </div>
+                                <div class="rideroContent">
+                                    <strong>@account.Email
+                                    </strong>
+                                </div>
+                            </li>
+                            <li class="rideRow">
+                                <div class="rideroTitle">
+                                    Địa chỉ
+                                </div>
+                                <div class="rideroContent">
+                                    <strong>@account.Customer.Address
+                                    </strong>
+                                </div>
+                            </li>
+                            }
                         }
                         <li class="rideRow">
                             <div class="rideroTitle">
@@ -124,11 +124,11 @@
                             {
                                 using (Html.BeginForm("HideRecruitment", "Customer"))
                                 {
-                                    <input id="hideId" type="hidden" name="recruitId" />
-                                    <div id="button_1" style="display: none;" class="blfbutton">
-                                        <button type="submit" class="btn btn-danger">Tạm ẩn</button>
-                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                    </div>
+                                <input id="hideId" type="hidden" name="recruitId" />
+                                <div id="button_1" style="display: none;" class="blfbutton">
+                                    <button type="submit" class="btn btn-danger">Tạm ẩn</button>
+                                    <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                </div>
                                 }
                             }
                         </div>
@@ -146,11 +146,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                                                       class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                                              class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -185,7 +185,6 @@
                     </div>
                     <div class="tab-pane fade bApplied" id="applied">
                         <div class="btnsFunction">
-                            
                         </div>
                         <ul class="bApplyListWork">
                             <input id="currPos2" type="hidden" value="@(counter + 2)" />
@@ -204,7 +203,7 @@
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Đăng: </span><span
-                                                                                                   class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
+                                                            class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -220,7 +219,7 @@
                                                     </div>
                                                     <div class="blTime">
                                                         <span class="blTimeTitle">Nhận: </span><span
-                                                                                                   class="blTimeText">@recruitment.JobRequest.ApplyTimes.Value.ToString("dd/MM/yyyy")</span>
+                                                            class="blTimeText">@recruitment.JobRequest.ApplyTimes.Value.ToString("dd/MM/yyyy")</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,7 +257,6 @@
                     </div>
                     <div class="tab-pane fade bApplied" id="approved">
                         <div class="btnsFunction">
-                            
                         </div>
                         <ul class="bApplyListWork">
                             <input id="currPos3" type="hidden" value="@(counter + 2)" />
@@ -352,11 +350,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                                                       class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                                              class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -395,11 +393,11 @@
                             {
                                 using (Html.BeginForm("PublicRecruitment", "Customer"))
                                 {
-                                    <input id="publicId" type="hidden" name="recruitId" />
-                                    <div id="button_5" style="display: none;" class="blfbutton">
-                                        <button type="submit" class="btn btn-danger">Công khai</button>
-                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                    </div>
+                                <input id="publicId" type="hidden" name="recruitId" />
+                                <div id="button_5" style="display: none;" class="blfbutton">
+                                    <button type="submit" class="btn btn-danger">Công khai</button>
+                                    <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                </div>
                                 }
                             }
                         </div>
@@ -417,11 +415,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                                                       class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                                              class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -456,7 +454,6 @@
                     </div>
                     <div class="tab-pane fade bExprred" id="notActive">
                         <div class="btnsFunction">
-                            
                         </div>
                         <ul class="bexpiredListWork">
                             <input id="currPos6" type="hidden" value="@(counter + 4)" />
@@ -472,11 +469,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                                                       class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@recruitment.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                                              class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@recruitment.Recruitment.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -521,7 +518,7 @@
     </div>
 </div>
 <div class="modal fade extendModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header chooseMaidModalTitle">
@@ -530,19 +527,27 @@
                 <h4 class="modal-title" id="mySmallModalLabel">Gia hạn đơn tuyển việc</h4>
             </div>
             <input id="extendId" type="hidden" name="recruitId" />
+            <input id="subPrice" type="hidden" value="@Session["SubPriceWeek"]"/>
             <div class="modal-body chooseMaidModalMaid">
                 <span>Thời gian gia hạn</span>
-                <select id="week" class="form-control" name="extend" onchange="chooseWeek()">
-                    @for (int i = 1; i <= (int)Session["MaxWeek"];i++ )
-                                {
-                                    <option value="@i">@i tuần</option>
-                                }
+                @{
+                    var saleOff = "0";
+                    if (ViewBag.SaleOff != null)
+                    {
+                        saleOff = ViewBag.SaleOff;
+                    }
+                }
+                <select id="week" class="form-control" name="extend" onchange="chooseWeek(@saleOff)">
+                    @for (int i = 1; i <= (int)Session["MaxWeek"]; i++)
+                    {
+                        <option value="@i">@i tuần</option>
+                    }
                 </select>
                 <span id="result" style="display: none;">Bạn đã nạp tiền thành công</span>
             </div>
             <div class="modal-footer">
                 @Html.Partial("_PartialExtend")
-                <input type="hidden" id="PriceRC" value="@((int)Session["PriceRC"]/20)"/>
+                <input type="hidden" id="PriceRC" value="@((int)Session["PriceRC"])"/>
             </div>
         </div>
     </div>
@@ -597,11 +602,15 @@
         document.forms["ExtendForm"].submit();
     }
 
-    function chooseWeek() {
+    function chooseWeek(saleOff) {
         var recruitId = document.getElementById("extendId").getAttribute("value");
         var weekDr = document.getElementById("week");
         var week = weekDr.options[weekDr.selectedIndex].value;
-        document.getElementById("amount").setAttribute("value", parseInt(week) * parseInt($("#PriceRC").val()));
+        var amount = parseInt(week) * parseInt($("#PriceRC").val()) - parseInt($("#subPrice").val()) * (parseInt(week) - 1);
+        var saleOffAmount = parseFloat(saleOff);
+        amount -= amount * saleOffAmount;
+        amount /= 20;
+        document.getElementById("amount").setAttribute("value", amount);
         document.getElementById("return").setAttribute("value", "http://localhost:7197/Customer/ExtendRecruitment?recruitId=" + recruitId + "&extend=" + week);
     }
 
