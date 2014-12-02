@@ -56,29 +56,32 @@
                     <div class="mainInfo">
                         <div class="miPic">
                             <img src="../Content/Image/jr.png" alt="Maid sercive" width="100%">
-                            @if (ViewBag.Manage == "true")
-                            {
-                                <div class="miButton">
-                                    @if (jobRequestTemp.Job.Status.Equals("Waiting"))
-                                    {
-                                        using (Html.BeginForm("HideJobRequest", "MaidManager", new { jobId = jobRequestTemp.Job.JobRequestId }))
-                                        {
-                                        <button class="btn btn-danger">Tạm ẩn</button>
-                                        }
-                                    }
-                                    else if (jobRequestTemp.Job.Status.Equals("Hide"))
-                                    {
-                                        using (Html.BeginForm("PublicJobRequest", "MaidManager", new { jobId = jobRequestTemp.Job.JobRequestId }))
-                                        {
-                                        <button class="btn btn-danger">Công khai</button>
-                                        }
-                                    }
-                                    @if (Session["Role"].Equals("Staff"))
+                            <div class="miButton">
+                                @if (ViewBag.Manage == "true")
+                                {
+                                    if (jobRequestTemp.Job.Status.Equals("Waiting"))
+                                     {
+                                         using (Html.BeginForm("HideJobRequest", "MaidManager", new {jobId = jobRequestTemp.Job.JobRequestId}))
+                                         {
+                                             <button class="btn btn-danger">Tạm ẩn</button>
+                                         }
+                                     }
+                                     else if (jobRequestTemp.Job.Status.Equals("Hide"))
+                                     {
+                                         using (Html.BeginForm("PublicJobRequest", "MaidManager", new {jobId = jobRequestTemp.Job.JobRequestId}))
+                                         {
+                                             <button class="btn btn-danger">Công khai</button>
+                                         }
+                                     }
+                                }
+                                @if (Session["Role"] != null)
+                                {
+                                    if (Session["Role"].Equals("Staff"))
                                     {
                                         <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
                                     }
-                                </div>
-                            }
+                                }
+                            </div>
                             @if (Session["AccId"] != null)
                             {
                                 if (Session["Role"].Equals("Customer"))
