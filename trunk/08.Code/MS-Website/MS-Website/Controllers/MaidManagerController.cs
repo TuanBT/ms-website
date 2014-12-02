@@ -891,6 +891,7 @@ namespace MS_Website.Controllers
                 {
                     var expiredTime = job.ExpiredTime.AddDays(7 * extend);
                     job.ExpiredTime = expiredTime;
+                    job.Price += (int)Session["PriceJR"] * extend;
                     if (job.Status.Equals("Expired"))
                     {
                         job.Status = "Waiting";
