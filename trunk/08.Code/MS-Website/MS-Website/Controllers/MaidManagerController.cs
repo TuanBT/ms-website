@@ -654,6 +654,7 @@ namespace MS_Website.Controllers
                 jobRequest.Title = title;
                 jobRequest.IsActive = false;
                 skillRef.Type = 0;
+				skillRef.Distance = 1;
                 db.JobRequests.Add(jobRequest);
                 db.SaveChanges();
                 var newJobId = db.JobRequests.SingleOrDefault(j => j.SkillRefId == skillRef.SkillRefId).JobRequestId;
