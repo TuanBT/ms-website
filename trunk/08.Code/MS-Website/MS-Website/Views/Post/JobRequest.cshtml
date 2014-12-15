@@ -60,25 +60,25 @@
                                 @if (ViewBag.Manage == "true")
                                 {
                                     if (jobRequestTemp.Job.Status.Equals("Waiting"))
-                                     {
-                                         using (Html.BeginForm("HideJobRequest", "MaidManager", new {jobId = jobRequestTemp.Job.JobRequestId}))
-                                         {
-                                             <button class="btn btn-danger">Tạm ẩn</button>
-                                         }
-                                     }
-                                     else if (jobRequestTemp.Job.Status.Equals("Hide"))
-                                     {
-                                         using (Html.BeginForm("PublicJobRequest", "MaidManager", new {jobId = jobRequestTemp.Job.JobRequestId}))
-                                         {
-                                             <button class="btn btn-danger">Công khai</button>
-                                         }
-                                     }
+                                    {
+                                        using (Html.BeginForm("HideJobRequest", "MaidManager", new { jobId = jobRequestTemp.Job.JobRequestId }))
+                                        {
+                                    <button class="btn btn-danger">Tạm ẩn</button>
+                                        }
+                                    }
+                                    else if (jobRequestTemp.Job.Status.Equals("Hide"))
+                                    {
+                                        using (Html.BeginForm("PublicJobRequest", "MaidManager", new { jobId = jobRequestTemp.Job.JobRequestId }))
+                                        {
+                                    <button class="btn btn-danger">Công khai</button>
+                                        }
+                                    }
                                 }
                                 @if (Session["Role"] != null)
                                 {
                                     if (Session["Role"].Equals("Staff"))
                                     {
-                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                    <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
                                     }
                                 }
                             </div>
@@ -265,7 +265,7 @@
                                     </div>
                                 }
                             </div>
-                            @if (Model.Job.Status == "Approved")
+                            @if (Model.Recruitment != null && Model.Recruitment.Status == "Approved")
                             {
                                 <div class="iRating">
                                     <div class="iTitle">
@@ -274,8 +274,7 @@
                                     <div class="miRate">
                                         @Html.Partial("_PartialStar", (float)ViewBag.jrRate)
                                     </div>
-                                </div>
-                                 
+                                </div>     
                             }
                             <div class="iSkill">
                                 <div class="iTitle">
@@ -296,7 +295,7 @@
                             </div>
                         </div>
                     </div>
-                    @if (jobRequestTemp.Job.Status == "Approved")
+                    @if (jobRequestTemp.Recruitment != null && jobRequestTemp.Recruitment.Status == "Approved")
                     {
                         ViewBag.CusId = (int)jobRequestTemp.Recruitment.CustomerId;
                         if (ViewBag.CusId != null)
@@ -320,7 +319,7 @@
                             }
                         }
                     }
-                    @if (jobRequestTemp.Job.Status == "Approved")
+                    @if (jobRequestTemp.Recruitment != null && jobRequestTemp.Recruitment.Status == "Approved")
                     {
                         <div class="overView">
                             <div class="ovTitle">
