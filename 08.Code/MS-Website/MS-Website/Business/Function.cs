@@ -12,7 +12,7 @@ namespace MS_Website.Business
 
         public void SentMessage(string phoneMaid, string phoneStaff, string phoneMaidMediator, string phoneCustomer)
         {
-            return; //Bỏ dòng này khi chạy thật
+            //return; //Bỏ dòng này khi chạy thật
             string phoneServer = "+14172024103";
 
             string AccountSid = "AC439137c82934e09c6e8120d9ee085b2b";
@@ -27,19 +27,19 @@ namespace MS_Website.Business
             var message = new Message();
             if(phoneMaid!="")
             {
-                message = twilio.SendMessage(phoneServer, phoneMaid, "Người giúp việc: Có người thuê yêu cầu của bạn. Sau khi kết thúc hãy đến trung tâm để nhận lại tiền báo việc.");
+                message = twilio.SendMessage(phoneServer, phoneMaid, "Nguoi giup viec: So 0978754416 da thue ban.");
             }
             if (phoneStaff != "")
             {
-                message = twilio.SendMessage(phoneServer, phoneStaff, "Nhân viên: Có người đã thuê người mà bạn đại diện. Hãy báo với họ ngay để bắt đầu làm việc.");
+                message = twilio.SendMessage(phoneServer, phoneStaff, "Nhan vien: Da co nguoi thue.");
             }
             if (phoneMaidMediator != "")
             {
-                message = twilio.SendMessage(phoneServer, phoneMaidMediator, "Người đại diện: Có người đã thuê người mà bạn đại diện. Hãy báo với họ ngay để bắt đầu làm việc.");
+                message = twilio.SendMessage(phoneServer, phoneMaidMediator, "Nguoi dai dien: So 0978754416 da thue nguoi giup viec ban dai dien.");
             }
             if (phoneCustomer != "")
             {
-                message = twilio.SendMessage(phoneServer, phoneCustomer, "Khách hàng: Bạn đã thuê thành công người giúp việc. Sau khi kết thúc hãy đánh giá người mà bạn thuê.");
+                message = twilio.SendMessage(phoneServer, phoneCustomer, "Khach hang: So 0978754416 la nguoi giup viec ban da thue.");
             }
             
 
