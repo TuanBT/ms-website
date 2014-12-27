@@ -458,7 +458,7 @@
 <XPD:OBJ name="NameLabel" type="EdgeLabelView" guid="NYp9pIZ6o0SPJ4R64v+BPwAA">
 <XPD:ATTR name="Alpha" type="real">4,71238741770399</XPD:ATTR>
 <XPD:ATTR name="Distance" type="real">11</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">6 : Return Recruitment</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">6 : Return</XPD:ATTR>
 <XPD:REF name="Model">XPWBgR6JtkiMMeli8w90MAAA</XPD:REF>
 <XPD:REF name="HostEdge">igymQNqoRUiztVIKs/ZUmAAA</XPD:REF>
 </XPD:OBJ>
@@ -595,7 +595,7 @@
 <XPD:REF name="Views[3]">QExl/TEQI0+tvwg1IOuB6AAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="ParticipatingStimuli[5]" type="UMLStimulus" guid="XPWBgR6JtkiMMeli8w90MAAA">
-<XPD:ATTR name="Name" type="string">Return Recruitment</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Return</XPD:ATTR>
 <XPD:REF name="Sender">i9/nz+hTpUml7WBVI58wpwAA</XPD:REF>
 <XPD:REF name="Receiver">F7NK6Tsn5kCcFPT/NnAnRQAA</XPD:REF>
 <XPD:OBJ name="Action" type="UMLReturnAction" guid="YzJGh32fp0eCkBXY6GLE8gAA">

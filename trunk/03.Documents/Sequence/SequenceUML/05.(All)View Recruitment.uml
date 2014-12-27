@@ -19682,7 +19682,7 @@
 <XPD:ATTR name="Left" type="integer">216</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">168</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">205</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">141</XPD:ATTR>
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[8]" type="UMLSeqStimulusView" guid="tyBvKtPnRkCPLgNMLcJ2wAAA">
