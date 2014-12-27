@@ -19495,7 +19495,7 @@
 <XPD:ATTR name="Left" type="integer">12</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">12</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">904</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">452</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">381</XPD:ATTR>
 <XPD:REF name="Model">k4DZcHgEmEqY3DtbRcC7YgAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="LabelView" guid="Y9HfB8h5dkmeUyRBYaIeYwAA">
 <XPD:ATTR name="Text" type="string">ViewCustomer</XPD:ATTR>
@@ -19511,7 +19511,7 @@
 <XPD:ATTR name="Left" type="integer">48</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">60</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">112</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">337</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">321</XPD:ATTR>
 <XPD:REF name="Model">T0QmoWJgtky/jVQCtxrF4gAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="UNUzmRNzhU6xjg6rDIJAfAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="lLuXfHN0yESS8wE7yE58zAAA">
@@ -19535,7 +19535,7 @@
 <XPD:ATTR name="Left" type="integer">184</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">92</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">101</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">313</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">289</XPD:ATTR>
 <XPD:REF name="Model">ifIgvQY9iU+JJQqLxvoY9wAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="rQl8B0+H6kKnvs1dpBtbzgAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="ya9L4cmQQUGmw0ltdjwJgAAA">
@@ -19559,7 +19559,7 @@
 <XPD:ATTR name="Left" type="integer">312</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">92</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">131</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">313</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">293</XPD:ATTR>
 <XPD:REF name="Model">xE9o6H+MjESHfwFTiVlBkQAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="wjOLcljrYUWIrGkx6ORDPAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="QgdAHvIqD0KIbxbK2J3mSQAA">
@@ -19583,7 +19583,7 @@
 <XPD:ATTR name="Left" type="integer">464</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">92</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">112</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">321</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">285</XPD:ATTR>
 <XPD:REF name="Model">mejdK0J9WkeomW4IjZl3IgAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="tzwwdBJHikmLONsQALFisAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="wcmjd/zNYkyL+hG5ofCEUwAA">
@@ -19607,7 +19607,7 @@
 <XPD:ATTR name="Left" type="integer">616</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">92</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">91</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">317</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">289</XPD:ATTR>
 <XPD:REF name="Model">3U0bdv/cukGIyvVLAMPrfwAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="ywQyYS5eQ0SVr+3svJvz7gAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="sBLm2iMUd0uZdt/urGrq4wAA">
@@ -19631,7 +19631,7 @@
 <XPD:ATTR name="Left" type="integer">760</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">88</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">110</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">313</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">285</XPD:ATTR>
 <XPD:REF name="Model">OCUuaHtP6Eu61z7LZ/EeYwAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="WztRYCibjkSBOhfQATm+NAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="0JdoW7ZOWEyNuVYr/vpkrQAA">
@@ -19682,7 +19682,7 @@
 <XPD:ATTR name="Left" type="integer">227</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">159</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
-<XPD:ATTR name="Height" type="integer">214</XPD:ATTR>
+<XPD:ATTR name="Height" type="integer">154</XPD:ATTR>
 </XPD:OBJ>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedViews[8]" type="UMLSeqStimulusView" guid="eaC2MncEO0GMBiyr33uXYQAA">
