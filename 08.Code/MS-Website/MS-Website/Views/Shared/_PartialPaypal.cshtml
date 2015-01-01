@@ -2,10 +2,11 @@
 
 @if (Session["AccId"] != null)
 {
-    var amount = RecruitmentTemp.Recruitment.Price / 20f;
+    var amount = RecruitmentTemp.Recruitment.Price;
     if (ViewBag.SaleOff != null)
     {
-        amount -= (int)(amount*Convert.ToDouble(Session["SaleOff"]));
+        var saleOff = ViewBag.SaleOff;
+        amount -= (int)(amount * float.Parse(saleOff.Replace(".", ",")));
     }
     if (!RecruitmentTemp.Recruitment.IsActive && RecruitmentTemp.Recruitment.CustomerId == (int)Session["AccId"])
     {
@@ -14,7 +15,7 @@
         <input type="hidden" name="business" value="ms_website@gmail.com">
         <input type="hidden" name="item_name" value="Recruitment">
         <input type="hidden" name="item_number" value="@RecruitmentTemp.Recruitment.RecruitmentId">
-        <input type="hidden" name="amount" value="@amount">
+        <input type="hidden" name="amount" value="@((amount / 20f).ToString().Replace(",","."))">
         <input type="hidden" name="no_shipping" value="0">
         <input type="hidden" name="no_note" value="1">
         <input type="hidden" name="currency_code" value="USD">

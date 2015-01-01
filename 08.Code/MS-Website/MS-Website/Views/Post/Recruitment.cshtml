@@ -4,7 +4,8 @@
     MS_Website.Models.RecruitmentTemp RecruitmentTemp = Model;
     var Recommend = (List<MS_Website.Models.JobRequestTemp>)ViewBag.Recommend;
 }
-
+<link rel="stylesheet" type="text/css" href="../Content/TableJquery/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="../Content/TableJquery/js/jquery.dataTables.min.js"></script>
 <div class="Menu">
     @Html.Partial("_PartialMenu")
     <div class="hChildMenu">
@@ -70,19 +71,120 @@
                                     <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="chooseExtend()">Gia hạn</button>
                                     }
                                 }
-                                @if (Session["AccId"] != null)
+                                @if (ViewBag.Cancel != null)
                                 {
-                                    if (Session["Role"].Equals("Staff"))
+                                    <button class="btn btn-danger" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-cancel">Hủy thuê</button>
+                                    <div class="modal fade bs-example-modal-cancel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title" id="myLargeModalLabel">Xác nhận hủy thuê</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Bạn thực sự muốn hủy thuê công việc này?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="@Url.Action("CancelApply", "Customer", new { jobId = RecruitmentTemp.JobRequest.JobRequestId, recruitId = RecruitmentTemp.Recruitment.RecruitmentId })">
+                                                        <button class="btn btn-success" id="btnAccept">Chấp nhận</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                    </div>
+                                }
+                                @if (ViewBag.Register != null)
+                                {
+                                    if (ViewBag.RegisterJob != null)
                                     {
-                                        if (!RecruitmentTemp.Recruitment.IsActive)
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target=".register">Đăng kí</button>
+                                        using (Html.BeginForm("Register", "MaidManager", new { jobId = ViewBag.RegisterJob, recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
                                         {
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="btnActive(@RecruitmentTemp.Recruitment.RecruitmentId)">Kích hoạt</button>
+                                    <div class="modal fade register" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title" id="myLargeModalLabel1">Xác nhận đăng kí</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Bạn thực sự muốn đăng kí ứng tuyển công việc này?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="hidden" name="jobRequestId" id="jrId2" />
+                                                    <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                    </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target=".register">Đăng kí</button>
+                                        using (Html.BeginForm("RegisterMultiple", "MaidManager", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId }))
+                                        {
+                                    <div class="modal fade register" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title" id="myLargeModalLabel2">Xin chọn một trong các đơn xin việc</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <script type="text/javascript" language="javascript" class="init">
+                                                        $(document).ready(function () {
+                                                            $('#JRTable').DataTable();
+                                                        });
+                                                    </script>
+                                                    <table id="JRTable" style="text-align: left" class="display" cellspacing="0" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Tiêu đề yêu cầu</th>
+                                                                <th>Người giúp việc</th>
+                                                                <th>Thời gian đăng</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            @foreach (var jobRequest in ViewBag.JobList)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        <input type="checkbox" name="jobIdList" value="@jobRequest.Job.JobRequestId" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="@Url.Action("GetJobRequest", "Post", new { jobId = jobRequest.Job.JobRequestId })">@jobRequest.Job.Title</a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = jobRequest.Maid.MaidId })">@jobRequest.Maid.MaidName</a>
+                                                                    </td>
+                                                                    <td>
+                                                                        @jobRequest.Job.PostTime.ToString("dd/MM/yyyy")
+                                                                    </td>
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="hidden" name="jobRequestId" id="jrId2" />
+                                                    <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                    </div>
                                         }
                                     }
                                 }
                                 @if (ViewBag.Approve != null)
                                 {
-                                    <button class="btn btn-danger" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-ap">Hoàn tất</button>
+                                    <button class="btn btn-success" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-ap">Hoàn tất</button>
                                     <div class="modal fade bs-example-modal-ap" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-sm">
                                             <div class="modal-content">
@@ -103,28 +205,6 @@
                                         </div>
                                     </div>
                                 }
-                            </div>
-                        </div>
-                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title" id="myLargeModalLabel">Xác nhận kích hoạt</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        Bạn thực sự đã nhận tiền từ khách hàng này?
-                                    </div>
-                                    <div class="modal-footer">
-                                        @using (Html.BeginForm("MarkActiveRecruitmentOnRCPage", "MaidManager", FormMethod.Get))
-                                        {
-                                            <input type="hidden" name="recruitmentId" id="jrId2" />
-                                            <button type="submit" class="btn btn-success" id="btnAccept">Chấp nhận</button>
-                                        }
-
-                                    </div>
-                                </div>
-                                <!-- /.modal-content -->
                             </div>
                         </div>
                         <div class="mmiDetail">
@@ -230,6 +310,68 @@
                             }
                         }
                     }
+                    @if (ViewBag.RegisterList != null)
+                    {
+                        <div class="maidlistApply">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="suTitle">
+                                        Những người đang chờ bạn đồng ý
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="maliArrow">
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <span class="maliPreNex glyphicon glyphicon-chevron-up" onclick="loadRegBack()"></span>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="suNumber">
+                                            <span id="currPageReg">1</span>/@(Math.Ceiling((double)ViewBag.RegisterNum / 4))
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <input type="hidden" id="currPosReg" value="4" />
+                                <ul class="maliApply">
+                                    @{
+                        var counterReg = 0;
+                                    }
+                                    @foreach (var job in ViewBag.RegisterList)
+                                    {
+                                        counterReg++;
+                                        <li id="@(counterReg)reg" style="display: @(counterReg > 4 ? "none" : "");">
+                                            <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="jrImage">
+                                                            <img src="@job.Maid.PersonalImage" alt="Maid sercive" width="100%">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="mAppTitle">
+                                                            <span>@job.Job.Title</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                                <input type="hidden" id="lastPosReg" value="@(Math.Ceiling((double)ViewBag.RegisterNum / 4) * 4)"/>
+                            </div>
+                            <div class="maliArrow">
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <span class="maliPreNex glyphicon glyphicon-chevron-down" onclick="loadRegNext()"></span>
+                                    </div>
+                                    <div class="col-md-1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
                     @if (ViewBag.Recommend != null)
                     {
                         <div class="suggestCus">
@@ -260,7 +402,7 @@
                                 }
                                 @foreach (var job in Recommend)
                                 {
-                                    <li id="@counter" style="display: @(counter > 1 ? "none" : "");">
+                                    <li id="@(counter)rec" style="display: @(counter > 1 ? "none" : "");">
                                         <a href="@Url.Action("GetJobRequest", "Post", new { recruitId = RecruitmentTemp.Recruitment.RecruitmentId, jobId = job.Job.JobRequestId })">
                                             <span class="listSuCuImage">
                                                 <img src="@job.Maid.PersonalImage" alt="Maid sercive" height="100%">
@@ -385,23 +527,58 @@
     </div>
 </div>
 <script>
+    function loadRegNext() {
+        var currPos = parseInt(document.getElementById("currPosReg").getAttribute("value"));
+        var lastPos = parseInt(document.getElementById("lastPosReg").getAttribute("value"));
+        if (currPos < lastPos) {
+            var currPage = parseInt(document.getElementById("currPageReg").innerHTML) + 1;
+            document.getElementById("currPageReg").innerHTML = currPage;
+            for (var i = currPos; i < currPos + 4; i++) {
+                if (document.getElementById(i + 1 + "reg") != null) {
+                    document.getElementById(i + 1 + "reg").setAttribute("style", "");
+                }
+                if (document.getElementById(i - 3 + "reg") != null) {
+                    document.getElementById(i - 3 + "reg").setAttribute("style", "display: none;");
+                }
+            }
+            document.getElementById("currPosReg").setAttribute("value", currPos + 4);
+        }
+    }
+
+    function loadRegBack() {
+        var currPos = parseInt(document.getElementById("currPosReg").getAttribute("value"));
+        if (currPos > 4) {
+            var currPage = parseInt(document.getElementById("currPageReg").innerHTML) - 1;
+            document.getElementById("currPageReg").innerHTML = currPage;
+            for (var i = currPos; i > currPos - 4; i--) {
+                if (document.getElementById(i + "reg") != null) {
+                    document.getElementById(i + "reg").setAttribute("style", "display: none;");
+                }
+                if (document.getElementById(i - 4 + "reg") != null) {
+                    document.getElementById(i - 4 + "reg").setAttribute("style", "");
+                }
+            }
+            document.getElementById("currPosReg").setAttribute("value", currPos - 4);
+        }
+    }
+
     function loadNext() {
         var currPos = parseInt(document.getElementById("currPos").getAttribute("value"));
         var lastPos = parseInt(document.getElementById("lastPos").getAttribute("value"));
         if (currPos < lastPos) {
             var currPage = parseInt(document.getElementById("currPage").innerHTML) + 1;
             document.getElementById("currPage").innerHTML = currPage;
-            if (document.getElementById(currPos) != null) {
-                document.getElementById(currPos).setAttribute("style", "display: none;");
+            if (document.getElementById(currPos + "rec") != null) {
+                document.getElementById(currPos + "rec").setAttribute("style", "display: none;");
             }
-            if (document.getElementById(currPos - 1) != null) {
-                document.getElementById(currPos - 1).setAttribute("style", "display: none;");
+            if (document.getElementById(currPos - 1 + "rec") != null) {
+                document.getElementById(currPos - 1 + "rec").setAttribute("style", "display: none;");
             }
-            if (document.getElementById(currPos + 1) != null) {
-                document.getElementById(currPos + 1).setAttribute("style", "");
+            if (document.getElementById(currPos + 1 + "rec") != null) {
+                document.getElementById(currPos + 1 + "rec").setAttribute("style", "");
             }
-            if (document.getElementById(currPos + 2) != null) {
-                document.getElementById(currPos + 2).setAttribute("style", "");
+            if (document.getElementById(currPos + 2 + "rec") != null) {
+                document.getElementById(currPos + 2 + "rec").setAttribute("style", "");
             }
             document.getElementById("currPos").setAttribute("value", currPos + 2);
         }
@@ -412,17 +589,17 @@
         if (currPos - 2 > 0) {
             var currPage = parseInt(document.getElementById("currPage").innerHTML) - 1;
             document.getElementById("currPage").innerHTML = currPage;
-            if (document.getElementById(currPos) != null) {
-                document.getElementById(currPos).setAttribute("style", "display: none;");
+            if (document.getElementById(currPos + "rec") != null) {
+                document.getElementById(currPos + "rec").setAttribute("style", "display: none;");
             }
-            if (document.getElementById(currPos - 1) != null) {
-                document.getElementById(currPos - 1).setAttribute("style", "display: none;");
+            if (document.getElementById(currPos - 1 + "rec") != null) {
+                document.getElementById(currPos - 1 + "rec").setAttribute("style", "display: none;");
             }
-            if (document.getElementById(currPos - 2) != null) {
-                document.getElementById(currPos - 2).setAttribute("style", "");
+            if (document.getElementById(currPos - 2 + "rec") != null) {
+                document.getElementById(currPos - 2 + "rec").setAttribute("style", "");
             }
-            if (document.getElementById(currPos - 3) != null) {
-                document.getElementById(currPos - 3).setAttribute("style", "");
+            if (document.getElementById(currPos - 3 + "rec") != null) {
+                document.getElementById(currPos - 3 + "rec").setAttribute("style", "");
             }
             document.getElementById("currPos").setAttribute("value", currPos - 2);
         }
