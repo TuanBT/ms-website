@@ -122,7 +122,7 @@ namespace MS_Website.Controllers
                         if (jobRequest != null)
                         {
                             var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                            var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null, skillList);
+                            var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null, null, skillList);
                             jobRequestList.Add(jobRequestTmp);
                         }
                         else
@@ -132,7 +132,7 @@ namespace MS_Website.Controllers
                             {
                                 var customer = db.Customers.SingleOrDefault(c => c.AccountId == recruitment.CustomerId);
                                 var account = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId);
-                                var recruitmentTemp = new RecruitmentTemp(recruitment, customer, account, null, skillList);
+                                var recruitmentTemp = new RecruitmentTemp(recruitment, customer, account, null, null, skillList);
                                 recruitmentList.Add(recruitmentTemp);
                             }
                         }
@@ -594,7 +594,7 @@ namespace MS_Website.Controllers
                     if (jobRequest != null)
                     {
                         var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                        var jobRequestTemp = new JobRequestTemp(jobRequest, maid, null, null, skillList);
+                        var jobRequestTemp = new JobRequestTemp(jobRequest, maid, null, null, null, skillList);
                         jobRequestList.Add(jobRequestTemp);
                     }
                     else
@@ -604,7 +604,7 @@ namespace MS_Website.Controllers
                         {
                             var customer = db.Customers.SingleOrDefault(c => c.AccountId == recruitment.CustomerId);
                             var account = db.Accounts.SingleOrDefault(a => a.AccountId == customer.AccountId);
-                            var recruitmentTemp = new RecruitmentTemp(recruitment, customer, account, null, skillList);
+                            var recruitmentTemp = new RecruitmentTemp(recruitment, customer, account, null, null, skillList);
                             recruitmentList.Add(recruitmentTemp);
                         }
                     }

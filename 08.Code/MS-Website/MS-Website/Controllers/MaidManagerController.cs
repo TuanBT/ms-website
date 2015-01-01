@@ -327,7 +327,7 @@ namespace MS_Website.Controllers
                         var notActiveJobList =
                             db.JobRequests.Where(job => job.Maid.MaidId == maidId && job.IsActive == false).ToList();
                         ViewBag.NotApplList =
-                            notApplJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).
+                            notApplJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null, null)).
                                 ToList();
                         ViewBag.ApplList = (from jobRequest in applJobList
                                             let apply =
@@ -336,7 +336,7 @@ namespace MS_Website.Controllers
                                             let recruit =
                                                 db.Recruitments.SingleOrDefault(
                                                     r => r.RecruitmentId == apply.RecruitmentId)
-                                            select new JobRequestTemp(jobRequest, maid, null, recruit, null)).ToList();
+                                            select new JobRequestTemp(jobRequest, maid, null, recruit, apply, null)).ToList();
                         ViewBag.ApprList = (from jobRequest in apprJobList
                                             let apply =
                                                 db.Applies.SingleOrDefault(
@@ -344,15 +344,15 @@ namespace MS_Website.Controllers
                                             let recruit =
                                                 db.Recruitments.SingleOrDefault(
                                                     r => r.RecruitmentId == apply.RecruitmentId)
-                                            select new JobRequestTemp(jobRequest, maid, null, recruit, null)).ToList();
+                                            select new JobRequestTemp(jobRequest, maid, null, recruit, apply, null)).ToList();
                         ViewBag.ExpiredList =
-                            expiredJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).
+                            expiredJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null, null)).
                                 ToList();
                         ViewBag.HideList =
-                            hideJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null)).
+                            hideJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null, null)).
                                 ToList();
                         ViewBag.NotActiveList =
-                            notActiveJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null))
+                            notActiveJobList.Select(jobRequest => new JobRequestTemp(jobRequest, maid, null, null, null, null))
                                 .ToList();
                         if (Session["AccId"] != null)
                         {
@@ -434,6 +434,12 @@ namespace MS_Website.Controllers
 							else if (job.Status.Equals("Waiting"))
 							{
 								job.Status = "Hide";
+                                var register = db.Registers.SingleOrDefault(r => r.JobRequestId == job.JobRequestId);
+                                if (register != null)
+                                {
+                                    db.Registers.Remove(register);
+                                    job.IsRegistered = false;
+                                }
 								db.SaveChanges();
 							}
 						}
@@ -653,6 +659,7 @@ namespace MS_Website.Controllers
                 jobRequest.MaidId = maidId;
                 jobRequest.Title = title;
                 jobRequest.IsActive = false;
+                jobRequest.IsRegistered = false;
                 skillRef.Type = 0;
 				skillRef.Distance = 1;
                 db.JobRequests.Add(jobRequest);
@@ -903,6 +910,49 @@ namespace MS_Website.Controllers
             }
         }
 
+        public ActionResult Register(int jobId, int recruitId)
+        {
+            if (Session["AccId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            using (var db = new MSEntities())
+            {
+                var register = new Register();
+                register.JobRequestId = jobId;
+                register.RecruitmentId = recruitId;
+                register.RegisteredDate = DateTime.Now.Date;
+                db.Registers.Add(register);
+                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                job.IsRegistered = true;
+                db.SaveChanges();
+                return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });  
+            }
+        }
+
+        public ActionResult RegisterMultiple(int[] jobIdList, int recruitId)
+        {
+            if (Session["AccId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            using (var db = new MSEntities())
+            {
+                foreach (var i in jobIdList)
+                {
+                    var register = new Register();
+                    register.JobRequestId = i;
+                    register.RecruitmentId = recruitId;
+                    register.RegisteredDate = DateTime.Now.Date;
+                    db.Registers.Add(register);
+                    var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == i);
+                    job.IsRegistered = true;
+                }
+                db.SaveChanges();
+            }
+            return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });   
+        }
+
         public void LoadItems(MSEntities db)
         {
             var maidManagerId = (int)Session["AccId"];
@@ -941,15 +991,11 @@ namespace MS_Website.Controllers
                     var jobRequests = db.JobRequests.Where(j => !j.IsActive).ToList();
                     foreach (var jobRequest in jobRequests)
                     {
-                        var jobRequestTemp = new JobRequestTemp
-                        {
-                            Job = jobRequest,
-                            SkillList = null,
-                            Account = db.Accounts.FirstOrDefault(a => a.AccountId == jobRequest.MaidMediatorId || a.AccountId == jobRequest.StaffId),
-
-                            Maid = null,
-                            Recruitment = null,
-                        };
+                        var acc =
+                            db.Accounts.SingleOrDefault(
+                                a => a.AccountId == jobRequest.StaffId || a.AccountId == jobRequest.MaidMediatorId);
+                        var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
+                        var jobRequestTemp = new JobRequestTemp(jobRequest, maid, acc, null, null, null);
                         jobRequestTemps.Add(jobRequestTemp);
 
                     }
@@ -994,14 +1040,9 @@ namespace MS_Website.Controllers
                     var recruiments = db.Recruitments.Where(j => j.IsActive == false).ToList();
                     foreach (var recruitment in recruiments)
                     {
-
-                        var recruitmentTemp = new RecruitmentTemp
-                        {
-                            Recruitment = recruitment,
-                            SkillList = null,
-                            Account = db.Accounts.FirstOrDefault(j => j.AccountId == recruitment.CustomerId),
-                            JobRequest = null,
-                        };
+                        var acc = db.Accounts.SingleOrDefault(a => a.AccountId == recruitment.RecruitmentId);
+                        var recruitmentTemp = new RecruitmentTemp(recruitment, null, acc, null, null, null);
+                        
                         recruitmentTemps.Add(recruitmentTemp);
                     }
                     //jobRequestList = db.JobRequests.Where(j => j.Status == "NotActive").ToList();

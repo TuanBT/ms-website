@@ -43,14 +43,14 @@ namespace MS_Website.Controllers
                         db.Recruitments.Where(r => r.Customer.AccountId == custId && !r.IsActive).ToList();
                     ViewBag.NotApplList =
                         notApplRecList.Select(
-                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null, null)).ToList();
                     ViewBag.ApplList = (from recruitment in applRecList
                                         let apply =
                                             db.Applies.SingleOrDefault(
                                                 a => a.RecruitmentId == recruitment.RecruitmentId)
                                         let jobRequest =
                                             db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId)
-                                        select new RecruitmentTemp(recruitment, customer, account, jobRequest, null))
+                                        select new RecruitmentTemp(recruitment, customer, account, jobRequest, apply, null))
                         .ToList();
                     ViewBag.ApprList = (from recruitment in apprRecList
                                         let apply =
@@ -58,18 +58,21 @@ namespace MS_Website.Controllers
                                                 a => a.RecruitmentId == recruitment.RecruitmentId)
                                         let jobRequest =
                                             db.JobRequests.SingleOrDefault(r => r.JobRequestId == apply.JobRequestId)
-                                        select new RecruitmentTemp(recruitment, customer, account, jobRequest, null))
+                                        select new RecruitmentTemp(recruitment, customer, account, jobRequest, apply, null))
                         .ToList();
                     ViewBag.ExpiredList =
                         expiredRecList.Select(
-                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null, null)).ToList();
                     ViewBag.HideList =
                         hideList.Select(
-                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
+                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null, null)).ToList();
                     ViewBag.NotActiveList =
                         notActiveList.Select(
-                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null)).ToList();
-                    ViewBag.Manage = "true";
+                            recruitment => new RecruitmentTemp(recruitment, customer, account, null, null, null)).ToList();
+                    if (custId == (int)Session["AccId"])
+                    {
+                        ViewBag.Manage = "true";
+                    }
                     if (customer.isSaleOff)
                     {
                         ViewBag.SaleOff = System.Configuration.ConfigurationManager.AppSettings["SaleOff"].Replace(",", ".");
@@ -157,6 +160,13 @@ namespace MS_Website.Controllers
                         else if (recruitment.Status.Equals("Waiting"))
                         {
                             recruitment.Status = "Hide";
+                            var registerList = db.Registers.Where(r => r.RecruitmentId == recruitId).ToList();
+                            foreach (var register in registerList)
+                            {
+                                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == register.JobRequestId);
+                                job.IsRegistered = false;
+                                db.Registers.Remove(register);
+                            }
                             db.SaveChanges();
                         }
                     }
@@ -207,11 +217,11 @@ namespace MS_Website.Controllers
                 }
                 if (Session["Role"].Equals("Customer"))
                 {
-                    var custId = (int) Session["AccId"];
+                    var custId = (int)Session["AccId"];
                     var cust = db.Customers.SingleOrDefault(c => c.AccountId == custId);
                     if (cust.isSaleOff)
                     {
-                        ViewBag.SaleOff = System.Configuration.ConfigurationManager.AppSettings["SaleOff"].Replace(",",".");
+                        ViewBag.SaleOff = System.Configuration.ConfigurationManager.AppSettings["SaleOff"].Replace(",", ".");
                     }
                     LoadItems(db);
                     return View("PostRecruitment");
@@ -824,11 +834,17 @@ namespace MS_Website.Controllers
                             var apply = new Apply();
                             apply.JobRequestId = jobRequestId;
                             apply.RecruitmentId = recruitId;
+                            apply.AppliedTime = DateTime.Now;
                             db.Applies.Add(apply);
                             jobRequest.Status = "Applied";
-                            jobRequest.ApplyTimes = DateTime.Now;
                             recruit.Status = "Applied";
-                            db.SaveChanges();
+                            var registerList = db.Registers.Where(r => r.RecruitmentId == recruitId).ToList();
+                            foreach (var register in registerList)
+                            {
+                                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == register.JobRequestId);
+                                job.IsRegistered = false;
+                                db.Registers.Remove(register);
+                            }
                             var function = new Function();
                             function.SentMessage(
                             jobRequest.Maid.Phone ?? "",
@@ -867,6 +883,32 @@ namespace MS_Website.Controllers
                     return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
                 }
                 return RedirectToAction("GetCustomer", "Customer", new { custId = Session["AccId"] });
+            }
+        }
+
+        public ActionResult CancelApply(int jobId, int recruitId)
+        {
+            if (Session["AccId"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            using (var db = new MSEntities())
+            {
+                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                if (job.ExpiredTime > DateTime.Now)
+                {
+                    job.Status = "Waiting";
+                }
+                else
+                {
+                    job.Status = "Expired";
+                }
+                var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
+                recruit.Status = "Waiting";
+                var apply = db.Applies.SingleOrDefault(a => a.JobRequestId == jobId && a.RecruitmentId == recruitId);
+                db.Applies.Remove(apply);
+                db.SaveChanges();
+                return RedirectToAction("GetJobRequest", "Post", new { jobId });
             }
         }
 
