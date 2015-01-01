@@ -43,6 +43,12 @@ namespace MS_Website.Controllers
                 {
                     if (!job.Status.Equals("Applied") && !job.Status.Equals("Approved") && !job.Status.Equals("Expired"))
                     {
+                        var register = _db.Registers.SingleOrDefault(r => r.JobRequestId == job.JobRequestId);
+                        if (register != null)
+                        {
+                            _db.Registers.Remove(register);
+                            job.IsRegistered = false;
+                        }
                         job.Status = "Expired";
                     }
                 }
@@ -51,6 +57,13 @@ namespace MS_Website.Controllers
                     if (!recruitment.Status.Equals("Applied") && !recruitment.Status.Equals("Approved") && !recruitment.Status.Equals("Expired"))
                     {
                         recruitment.Status = "Expired";
+                        var registerList = _db.Registers.Where(r => r.RecruitmentId == recruitment.RecruitmentId).ToList();
+                        foreach (var register in registerList)
+                        {
+                            var job = _db.JobRequests.SingleOrDefault(j => j.JobRequestId == register.JobRequestId);
+                            job.IsRegistered = false;
+                            _db.Registers.Remove(register);
+                        }
                     }
                 }
                 var notActivteJobs = _db.JobRequests.Where(jr => !jr.IsActive).ToList();
