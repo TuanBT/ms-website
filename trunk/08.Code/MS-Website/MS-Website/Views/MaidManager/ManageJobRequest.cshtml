@@ -37,6 +37,7 @@
                     <th>STT</th>
                     <th>Tiêu đề yêu cầu</th>
                     <th>Người đại diện</th>
+                    <th>Người giúp việc</th>
                     <th>Thời gian đăng</th>
                     <th>Tiền thu (Ngàn đồng)</th>
                     <th>Xử lý</th>
@@ -73,6 +74,9 @@
                                         }
                                     }
                                     <a href="@Url.Action("GetMaidManager","MaidManager", new {accId=managerId,role=roles})">@jobRequest.Account.FullName</a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("ManageMaidProfile","MaidManager", new {maidId = jobRequest.Maid.MaidId})">@jobRequest.Maid.MaidName</a>
                                 </td>
                                 <td>
                                     @jobRequest.Job.PostTime.ToString("dd/MM/yyyy")
