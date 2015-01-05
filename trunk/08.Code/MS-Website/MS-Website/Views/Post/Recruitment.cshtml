@@ -342,7 +342,7 @@
                                     {
                                         counterReg++;
                                         <li id="@(counterReg)reg" style="display: @(counterReg > 4 ? "none" : "");">
-                                            <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">
+                                            <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId, recruitId = RecruitmentTemp.Recruitment.RecruitmentId })">
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="jrImage">
@@ -353,6 +353,14 @@
                                                         <div class="mAppTitle">
                                                             <span>@job.Job.Title</span>
                                                         </div>
+                                                        <div class="blTime">
+                                                            <span class="blTimeTitle">Đăng: </span><span
+                                                                                                       class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                        </div>
+                                                        <div class="blTime">
+                                                            <span class="blTimeTitle">Người giúp việc: </span><span
+                                                                class="blTimeText">@job.Job.Maid.MaidName</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </a>
@@ -360,6 +368,76 @@
                                     }
                                 </ul>
                                 <input type="hidden" id="lastPosReg" value="@(Math.Ceiling((double)ViewBag.RegisterNum / 4) * 4)"/>
+                            </div>
+                            <div class="maliArrow">
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <span class="maliPreNex glyphicon glyphicon-chevron-down" onclick="loadRegNext()"></span>
+                                    </div>
+                                    <div class="col-md-1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else if (ViewBag.RegisteredList != null)
+                    {
+                        <div class="maidlistApply">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="suTitle">
+                                        Những yêu cầu công việc đã đăng kí
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="maliArrow">
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <span class="maliPreNex glyphicon glyphicon-chevron-up" onclick="loadRegBack()"></span>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="suNumber">
+                                            <span id="currPageReg">1</span>/@(Math.Ceiling((double)ViewBag.RegisteredNum / 4))
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <input type="hidden" id="currPosReg" value="4" />
+                                <ul class="maliApply">
+                                    @{
+                        var counterReg = 0;
+                                    }
+                                    @foreach (var job in ViewBag.RegisteredList)
+                                    {
+                                        counterReg++;
+                                        <li id="@(counterReg)reg" style="display: @(counterReg > 4 ? "none" : "");">
+                                            <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId, recruitId = RecruitmentTemp.Recruitment.RecruitmentId })">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="jrImage">
+                                                            <img src="@job.Maid.PersonalImage" alt="Maid sercive" width="100%">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="mAppTitle">
+                                                            <span>@job.Job.Title</span>
+                                                        </div>
+                                                        <div class="blTime">
+                                                            <span class="blTimeTitle">Đăng: </span><span
+                                                                                                       class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                        </div>
+                                                        <div class="blTime">
+                                                            <span class="blTimeTitle">Người giúp việc: </span><span
+                                                                class="blTimeText">@job.Job.Maid.MaidName</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                                <input type="hidden" id="lastPosReg" value="@(Math.Ceiling((double)ViewBag.RegisteredNum / 4) * 4)"/>
                             </div>
                             <div class="maliArrow">
                                 <div class="row">

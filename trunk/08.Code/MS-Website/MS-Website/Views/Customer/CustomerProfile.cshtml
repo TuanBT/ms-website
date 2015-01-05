@@ -142,7 +142,16 @@
                                     </div>
                                     <div class="blDetail">
                                         <div class="blName">
-                                            <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = recruitment.Recruitment.RecruitmentId })">@recruitment.Recruitment.Title</a>
+                                            <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = recruitment.Recruitment.RecruitmentId })">
+                                                @if(recruitment.Recruitment.NumOfReg > 0)
+                                                {
+                                                    <font color="green">@(recruitment.Recruitment.Title) (Có @recruitment.Recruitment.NumOfReg người đăng kí)</font>
+                                                }
+                                                else
+                                                {
+                                                    @recruitment.Recruitment.Title
+                                                }
+                                            </a>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span

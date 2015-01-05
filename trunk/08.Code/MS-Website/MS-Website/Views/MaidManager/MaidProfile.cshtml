@@ -42,7 +42,7 @@
                         </div>
                         <div class="mmiDetail">
                             <div class="miFullName">
-                                <font color="@(maid.ReportDate != null ? "red":"")">@maid.MaidName</font>
+                                <font color="@(maid.ReportDate != null ? "red" : "")">@maid.MaidName</font>
                             </div>
                             <div class="miAccount">
                                 Người giúp việc
@@ -211,14 +211,14 @@
                             {
                                 using (Html.BeginForm("HideJobRequest", "MaidManager"))
                                 {
-                                    <input id="hideId" type="hidden" name="jobId" />
-                                    <div id="button_1" style="display: none;" class="blfbutton">
-                                        <button type="submit" class="btn btn-danger">Tạm ẩn</button>
-                                        @if (Session["Role"].Equals("Staff"))
-                                        {
-                                            <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                        }
-                                    </div>
+                                <input id="hideId" type="hidden" name="jobId" />
+                                <div id="button_1" style="display: none;" class="blfbutton">
+                                    <button type="submit" class="btn btn-danger">Tạm ẩn</button>
+                                    @if (Session["Role"].Equals("Staff"))
+                                    {
+                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                    }
+                                </div>
                                 }
                             }
                         </div>
@@ -232,22 +232,31 @@
                                     </div>
                                     <div class="blDetail">
                                         <div class="blName">
-                                            <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">@job.Job.Title</a>
+                                            <a href="@Url.Action("GetJobRequest", "Post", new { jobId = job.Job.JobRequestId })">
+                                                @if (job.Job.IsRegistered)
+                                                {
+                                                    <font color="green">@(job.Job.Title) (Đã đăng kí)</font>
+                                                }
+                                                else
+                                                {
+                                                    @job.Job.Title
+                                                }
+                                            </a>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                                                       class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                                              class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
-                                if (counter < notApplList.Count)
-                                {
-                                    counter++;
-                                }
+                                                if (counter < notApplList.Count)
+                                                {
+                                                    counter++;
+                                                }
                             }
                             @{
                                 total += notApplList.Count;
@@ -275,7 +284,6 @@
                     </div>
                     <div class="tab-pane fade bApplied" id="applied">
                         <div class="btnsFunction">
-                            
                         </div>
                         <ul class="bApplyListWork">
                             <input id="currPos2" type="hidden" value="@(counter + 2)" />
@@ -347,8 +355,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade bApplied" id="approved">
-                       <div class="btnsFunction">
-                            
+                        <div class="btnsFunction">
                         </div>
                         <ul class="bApplyListWork">
                             <input id="currPos3" type="hidden" value="@(counter + 2)" />
@@ -445,11 +452,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                                                       class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                                              class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -488,14 +495,14 @@
                             {
                                 using (Html.BeginForm("PublicJobRequest", "MaidManager"))
                                 {
-                                    <input id="publicId" type="hidden" name="jobId" />
-                                    <div id="button_5" style="display: none;" class="blfbutton">
-                                        <button type="submit" class="btn btn-danger">Công khai</button>
-                                        @if (Session["Role"].Equals("Staff"))
-                                        {
-                                            <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
-                                        }
-                                    </div>
+                                <input id="publicId" type="hidden" name="jobId" />
+                                <div id="button_5" style="display: none;" class="blfbutton">
+                                    <button type="submit" class="btn btn-danger">Công khai</button>
+                                    @if (Session["Role"].Equals("Staff"))
+                                    {
+                                        <button class="btn btn-info" data-toggle="modal" data-target=".extendModel" onclick="return false">Gia hạn</button>
+                                    }
+                                </div>
                                 }
                             }
                         </div>
@@ -513,11 +520,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                                                       class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                                              class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
@@ -552,7 +559,6 @@
                     </div>
                     <div class="tab-pane fade bExprred" id="notActive">
                         <div class="btnsFunction">
-                            
                         </div>
                         <ul class="bexpiredListWork">
                             <input id="currPos6" type="hidden" value="@(counter + 4)" />
@@ -568,11 +574,11 @@
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Đăng: </span><span
-                                                                                       class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@job.Job.PostTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                         <div class="blTime">
                                             <span class="blTimeTitle">Tới&nbsp;&nbsp;&nbsp;&nbsp;: </span><span
-                                                                                                              class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
+                                                class="blTimeText">@job.Job.ExpiredTime.ToString("dd/MM/yyyy")</span>
                                         </div>
                                     </div>
                                 </li>
