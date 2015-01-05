@@ -437,6 +437,9 @@ namespace MS_Website.Controllers
                                 var register = db.Registers.SingleOrDefault(r => r.JobRequestId == job.JobRequestId);
                                 if (register != null)
                                 {
+                                    var recruit =
+                                        db.Recruitments.SingleOrDefault(r => r.RecruitmentId == register.RecruitmentId);
+                                    recruit.NumOfReg -= 1;
                                     db.Registers.Remove(register);
                                     job.IsRegistered = false;
                                 }
@@ -924,6 +927,8 @@ namespace MS_Website.Controllers
                 register.RegisteredDate = DateTime.Now.Date;
                 db.Registers.Add(register);
                 var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
+                recruit.NumOfReg += 1;
                 job.IsRegistered = true;
                 db.SaveChanges();
                 return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });  
@@ -938,6 +943,8 @@ namespace MS_Website.Controllers
             }
             using (var db = new MSEntities())
             {
+                var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
+                recruit.NumOfReg += jobIdList.Length;
                 foreach (var i in jobIdList)
                 {
                     var register = new Register();

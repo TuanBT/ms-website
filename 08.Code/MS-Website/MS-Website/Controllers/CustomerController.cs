@@ -160,6 +160,7 @@ namespace MS_Website.Controllers
                         else if (recruitment.Status.Equals("Waiting"))
                         {
                             recruitment.Status = "Hide";
+                            recruitment.NumOfReg = 0;
                             var registerList = db.Registers.Where(r => r.RecruitmentId == recruitId).ToList();
                             foreach (var register in registerList)
                             {
@@ -383,6 +384,7 @@ namespace MS_Website.Controllers
                         cust.isSaleOff = false;
                     }
                     recruitment.Title = title;
+                    recruitment.NumOfReg = 0;
                     skillRef.Type = 1;
                     db.Recruitments.Add(recruitment);
                     db.SaveChanges();
@@ -838,6 +840,7 @@ namespace MS_Website.Controllers
                             db.Applies.Add(apply);
                             jobRequest.Status = "Applied";
                             recruit.Status = "Applied";
+                            recruit.NumOfReg = 0;
                             var registerList = db.Registers.Where(r => r.RecruitmentId == recruitId).ToList();
                             foreach (var register in registerList)
                             {

@@ -46,6 +46,9 @@ namespace MS_Website.Controllers
                         var register = _db.Registers.SingleOrDefault(r => r.JobRequestId == job.JobRequestId);
                         if (register != null)
                         {
+                            var recruit =
+                                _db.Recruitments.SingleOrDefault(r => r.RecruitmentId == register.RecruitmentId);
+                            recruit.NumOfReg -= 1;
                             _db.Registers.Remove(register);
                             job.IsRegistered = false;
                         }
@@ -57,6 +60,7 @@ namespace MS_Website.Controllers
                     if (!recruitment.Status.Equals("Applied") && !recruitment.Status.Equals("Approved") && !recruitment.Status.Equals("Expired"))
                     {
                         recruitment.Status = "Expired";
+                        recruitment.NumOfReg = 0;
                         var registerList = _db.Registers.Where(r => r.RecruitmentId == recruitment.RecruitmentId).ToList();
                         foreach (var register in registerList)
                         {
