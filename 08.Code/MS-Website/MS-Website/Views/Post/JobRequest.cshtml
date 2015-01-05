@@ -331,7 +331,7 @@
                             </div>
                         </div>
                     }
-                    @if (ViewBag.RegisterList != null)
+                    @if (ViewBag.RegisteredRecruit != null)
                     {
                         <div class="maidlistApply">
                             <div class="row">
@@ -341,20 +341,33 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-1"><span class="maliPreNex glyphicon glyphicon-chevron-left"></span></div>
-                                <div class="col-md-10">
-                                    <ul class="maliApply">
-                                        <li>
-                                            <div class="jrImage">
-                                                <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = ViewBag.RegisterList.Recruitment.RecruitmentId })">
-                                                    <img src="@ViewBag.RegisterList.Account.Avatar" alt="Maid sercive" width="100%">
-                                                </a>
+                            <div>
+                                <ul class="maliApply">
+                                    <li>
+                                        <a href="@Url.Action("GetRecruitment", "Post", new { recruitmentId = ViewBag.RegisteredRecruit.Recruitment.RecruitmentId })">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="jrImage">
+                                                        <img src="@ViewBag.RegisteredRecruit.Account.Avatar" alt="Maid sercive" width="100%">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="mAppTitle">
+                                                        <span>@ViewBag.RegisteredRecruit.Recruitment.Title</span>
+                                                    </div>
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Đăng: </span><span
+                                                            class="blTimeText">@ViewBag.RegisteredRecruit.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
+                                                    </div>
+                                                    <div class="blTime">
+                                                        <span class="blTimeTitle">Khách hàng: </span><span
+                                                            class="blTimeText">@ViewBag.RegisteredRecruit.Account.FullName</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-1"><span class="maliPreNex glyphicon glyphicon-chevron-right"></span></div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     }
