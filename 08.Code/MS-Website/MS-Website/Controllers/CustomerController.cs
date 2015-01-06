@@ -925,6 +925,33 @@ namespace MS_Website.Controllers
             {
                 var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidId);
                 maid.ReportDate = DateTime.Now.Date;
+                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                job.IsReported = true;
+                if (maid.NumOfReport == 3)
+                {
+                    var jobList = db.JobRequests.Where(j => j.MaidId == maidId).ToList();
+                    foreach (var jobRequest in jobList)
+                    {
+                        if (!jobRequest.Status.Equals("Applied") && !jobRequest.Status.Equals("Approved"))
+                        {
+                            jobRequest.IsActive = false;
+                        }
+                    }
+                    var notify = new Notifier();
+                    if (maid.StaffId != null)
+                    {
+                        notify.AccId = (int)maid.StaffId;
+                    }
+                    else if (maid.MaidMediatorId != null)
+                    {
+                        notify.AccId = (int)maid.MaidMediatorId;
+                    }
+                    notify.Date = DateTime.Now;
+                    notify.Content = "Người giúp việc " + maid.MaidName + " đã bị báo xấu hơn 3 lần và bị xóa vĩnh viễn";
+                    notify.View = false;
+                    db.Notifiers.Add(notify);
+                }
+                maid.NumOfReport += 1;
                 db.SaveChanges();
                 return RedirectToAction("GetJobRequest", "Post", new { jobId });
             }
