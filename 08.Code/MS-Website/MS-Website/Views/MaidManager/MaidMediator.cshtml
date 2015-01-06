@@ -234,7 +234,14 @@
                                         <div class="liMaidContent">
                                             <div class="licoFullName">
                                                 <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" class="myToolTip">
-                                                    <font color="@(maid.ReportDate != null ? "red":"")">@maid.MaidName</font>
+                                                    @if (jobRequestTemp.Maid.ReportDate != null)
+                                                    {
+                                                        <font color="red">@maid.MaidName (Bị báo xấu)</font>
+                                                    }
+                                                    else
+                                                    {
+                                                        @maid.MaidName
+                                                    }
                                                 </a>
                                                 <div class="blTime">
                                                     <span class="blTimeTitle">Giới tính: </span><span class="blTimeText">@(maid.Gender == true ? "Nam" : "Nữ")</span>

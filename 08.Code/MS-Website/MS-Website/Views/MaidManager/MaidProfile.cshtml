@@ -42,7 +42,23 @@
                         </div>
                         <div class="mmiDetail">
                             <div class="miFullName">
-                                <font color="@(maid.ReportDate != null ? "red" : "")">@maid.MaidName</font>
+                                @if (maid.ReportDate != null)
+                                {
+                                    <font color="red">@maid.MaidName 
+                                    @if (maid.NumOfReport < 4)
+                                    {
+                                         <span> (Bị báo xấu)</span>
+                                    }
+                                    else
+                                    {
+                                         <span> (Bị khóa vĩnh viễn)</span>
+                                    }
+                                    </font>
+                                }
+                                else
+                                {
+                                    @maid.MaidName
+                                }
                             </div>
                             <div class="miAccount">
                                 Người giúp việc
