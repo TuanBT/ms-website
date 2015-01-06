@@ -97,7 +97,7 @@ namespace MS_Website.Controllers
                                 {
                                     if (recruitment.Status.Equals("Approved"))
                                     {
-                                        if (job.Maid.ReportDate == null)
+                                        if (!job.IsReported)
                                         {
                                             ViewBag.Report = true;
                                         }

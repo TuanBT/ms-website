@@ -49,7 +49,7 @@ namespace MS_Website.Controllers
                     {
 
                         var maidMediator = db.Accounts.SingleOrDefault(mm => mm.AccountId == accId);
-                        ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId).ToList();
+                        ViewBag.MaidList = db.Maids.Where(m => m.MaidMediator.Account.AccountId == accId && m.NumOfReport < 4).ToList();
                         Session["MaidManager"] = maidMediator;
                         return View("MaidMediator", maidMediator);
                     }
@@ -62,7 +62,7 @@ namespace MS_Website.Controllers
                         int numHide = db.JobRequests.Count(j => (j.StaffId == accId && j.Status == "Hide"));
                         ViewBag.StaffStatusStatistic = new int[] { numWating, numExpired, numApproved, numApplied, numHide };
                         var staff = db.Accounts.SingleOrDefault(s => s.AccountId == accId);
-                        ViewBag.MaidList = db.Maids.Where(m => m.Staff.Account.AccountId == accId).ToList();
+                        ViewBag.MaidList = db.Maids.Where(m => m.Staff.Account.AccountId == accId && m.NumOfReport < 4).ToList();
                         Session["MaidManager"] = staff;
                         return View("Staff", staff);
                     }
@@ -211,6 +211,12 @@ namespace MS_Website.Controllers
                 {
                     using (var db = new MSEntities())
                     {
+                        var bannedMaid = db.Maids.SingleOrDefault(m => m.Phone.Equals(phone) && m.NumOfReport > 3);
+                        if (bannedMaid != null)
+                        {
+                            ViewBag.BannedMaid = "Người giúp việc có số điện thoại này đã bị khóa vĩnh viễn";
+                            return RedirectToAction("LoadAddMaid", "MaidManager");
+                        }
                         var maid = new Maid();
                         var managerId = (int)Session["AccId"];
                         if (Session["Role"].Equals("MaidMediator"))
@@ -235,7 +241,6 @@ namespace MS_Website.Controllers
                         maid.Address = addr;
                         maid.Married = married;
                         maid.Description = desc;
-                        //maid.RateAvg = 0;
                         maid.PersonalImage = "../Content/Image/default-avatar.png";
                         db.Maids.Add(maid);
                         db.SaveChanges();
@@ -259,6 +264,12 @@ namespace MS_Website.Controllers
                 var loggedId = (int)Session["AccId"];
                 using (var db = new MSEntities())
                 {
+                    var bannedMaid = db.Maids.SingleOrDefault(m => m.Phone.Equals(phone) && m.NumOfReport > 3);
+                    if (bannedMaid != null)
+                    {
+                        ViewBag.BannedMaid = "Người giúp việc có số điện thoại này đã bị khóa vĩnh viễn";
+                        return RedirectToAction("MaidEdit", "MaidManager", new { maidId });
+                    }
                     var maid = db.Maids.SingleOrDefault(m => m.MaidId == maidId);
                     HttpPostedFileBase avatar = Request.Files["avatar"];
                     string picExt = ".png";
@@ -973,12 +984,12 @@ namespace MS_Website.Controllers
             }
             if (role.Equals("MaidMediator"))
             {
-                var maidList = db.Maids.Where(m => m.MaidMediatorId == maidManagerId).ToList();
+                var maidList = db.Maids.Where(m => m.MaidMediatorId == maidManagerId && m.NumOfReport < 4).ToList();
                 Session["MaidList"] = maidList;
             }
             else if (role.Equals("Staff"))
             {
-                var maidList = db.Maids.Where(m => m.StaffId == maidManagerId).ToList();
+                var maidList = db.Maids.Where(m => m.StaffId == maidManagerId && m.NumOfReport < 4).ToList();
                 Session["MaidList"] = maidList;
             }
             ViewBag.StayList = Session["StayList"];
@@ -995,7 +1006,7 @@ namespace MS_Website.Controllers
                 List<JobRequestTemp> jobRequestTemps = new List<JobRequestTemp>();
                 using (var db = new MSEntities())
                 {
-                    var jobRequests = db.JobRequests.Where(j => !j.IsActive).ToList();
+                    var jobRequests = db.JobRequests.Where(j => !j.IsActive && j.Maid.NumOfReport < 4).ToList();
                     foreach (var jobRequest in jobRequests)
                     {
                         var acc =
