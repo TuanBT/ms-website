@@ -459,7 +459,27 @@
                                     <div class="col-md-9">
                                         <div class="jrDetail">
                                             <div class="jrMaidFullname">
-                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = jobRequestTemp.Maid.MaidId })"><font color="@(jobRequestTemp.Maid.ReportDate != null ? "red" : "")">@jobRequestTemp.Maid.MaidName</font></a>
+                                                <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = jobRequestTemp.Maid.MaidId })">
+                                                    @if (jobRequestTemp.Maid.ReportDate != null)
+                                                    {
+                                                        <font color="red">@jobRequestTemp.Maid.MaidName 
+                                                            @if (jobRequestTemp.Maid.NumOfReport < 4)
+                                                            {
+                                                                <span> (Bị
+                                                                báo xấu)</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span> (Bị
+                                                                khóa vĩnh viễn)</span>
+                                                            }
+                                                        </font>
+                                                    }
+                                                    else
+                                                    {
+                                                        @jobRequestTemp.Maid.MaidName
+                                                    }
+                                                </a>
                                             </div>
                                             <div class="blTime">
                                                 <span class="blTimeText">Người giúp việc</span>

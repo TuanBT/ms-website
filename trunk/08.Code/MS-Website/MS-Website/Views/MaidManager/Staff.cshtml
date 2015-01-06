@@ -192,12 +192,14 @@
                                         <div class="liMaidContent">
                                             <div class="licoFullName">
                                                 <a href="@Url.Action("ManageMaidProfile", "MaidManager", new { maidId = maid.MaidId })" class="myToolTip">
-                                                    <font color="@(maid.ReportDate != null ? "red":"")">@maid.MaidName</font>
-                                                    @*<span>
-                                                        <img class="callout" src="../Content/Image/callout_black.gif" /><img class="maidAva2" src="@maid.PersonalImage" /><strong>Tên đầy đủ: </strong>@maid.MaidName<br />
-                                                        <strong>Số điện thoại: </strong>
-                                                        <br/>
-                                                    </span>*@
+                                                    @if (maid.ReportDate != null)
+                                                    {
+                                                        <font color="red">@maid.MaidName (Bị báo xấu)</font>
+                                                    }
+                                                    else
+                                                    {
+                                                        @maid.MaidName
+                                                    }
                                                 </a>
                                                @* <div class="licoRate">
                                                     @Html.Partial("_PartialStar", (float)maid.RateAvg)
