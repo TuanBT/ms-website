@@ -242,6 +242,7 @@ namespace MS_Website.Controllers
                         maid.Married = married;
                         maid.Description = desc;
                         maid.PersonalImage = "../Content/Image/default-avatar.png";
+						maid.NumOfReport = 0;
                         db.Maids.Add(maid);
                         db.SaveChanges();
                         maid = Session["Role"].Equals("MaidMediator") ? db.Maids.OrderByDescending(m => m.MaidId).FirstOrDefault(m => m.MaidMediatorId == managerId) : db.Maids.OrderByDescending(m => m.MaidId).FirstOrDefault(m => m.StaffId == managerId);
@@ -674,6 +675,7 @@ namespace MS_Website.Controllers
                 jobRequest.Title = title;
                 jobRequest.IsActive = false;
                 jobRequest.IsRegistered = false;
+				jobRequest.IsReported = false;
                 skillRef.Type = 0;
 				skillRef.Distance = 1;
                 db.JobRequests.Add(jobRequest);
