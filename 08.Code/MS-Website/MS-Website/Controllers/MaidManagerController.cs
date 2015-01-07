@@ -934,16 +934,31 @@ namespace MS_Website.Controllers
             }
             using (var db = new MSEntities())
             {
-                var register = new Register();
-                register.JobRequestId = jobId;
-                register.RecruitmentId = recruitId;
-                register.RegisteredDate = DateTime.Now.Date;
-                db.Registers.Add(register);
-                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
-                var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
-                recruit.NumOfReg += 1;
-                job.IsRegistered = true;
-                db.SaveChanges();
+				var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
+				if (recruit.Status.Equals("Applied") || recruit.Status.Equals("Approved"))
+				{
+					TempData["Alert"] = "Đơn tuyển việc đã thuê được người";
+				}
+				else if (recruit.Status.Equals("Expired"))
+				{
+					TempData["Alert"] = "Đơn tuyển việc đã hết hạn";
+				}
+				else if (recruit.Status.Equals("Hide") || !recruit.IsActive)
+				{
+					TempData["Alert"] = "Đơn tuyển việc không tồn tại";
+				}
+				else
+				{
+					var register = new Register();
+					register.JobRequestId = jobId;
+					register.RecruitmentId = recruitId;
+					register.RegisteredDate = DateTime.Now.Date;
+					db.Registers.Add(register);
+					var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+					recruit.NumOfReg += 1;
+					job.IsRegistered = true;
+					db.SaveChanges();
+				}
                 return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });  
             }
         }
@@ -957,18 +972,34 @@ namespace MS_Website.Controllers
             using (var db = new MSEntities())
             {
                 var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
-                recruit.NumOfReg += jobIdList.Length;
-                foreach (var i in jobIdList)
-                {
-                    var register = new Register();
-                    register.JobRequestId = i;
-                    register.RecruitmentId = recruitId;
-                    register.RegisteredDate = DateTime.Now.Date;
-                    db.Registers.Add(register);
-                    var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == i);
-                    job.IsRegistered = true;
-                }
-                db.SaveChanges();
+				var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
+				if (recruit.Status.Equals("Applied") || recruit.Status.Equals("Approved"))
+				{
+					TempData["Alert"] = "Đơn tuyển việc đã thuê được người";
+				}
+				else if (recruit.Status.Equals("Expired"))
+				{
+					TempData["Alert"] = "Đơn tuyển việc đã hết hạn";
+				}
+				else if (recruit.Status.Equals("Hide") || !recruit.IsActive)
+				{
+					TempData["Alert"] = "Đơn tuyển việc không tồn tại";
+				}
+				else
+				{
+					recruit.NumOfReg += jobIdList.Length;
+					foreach (var i in jobIdList)
+					{
+						var register = new Register();
+						register.JobRequestId = i;
+						register.RecruitmentId = recruitId;
+						register.RegisteredDate = DateTime.Now.Date;
+						db.Registers.Add(register);
+						var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == i);
+						job.IsRegistered = true;
+					}
+					db.SaveChanges();
+				}
             }
             return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });   
         }
