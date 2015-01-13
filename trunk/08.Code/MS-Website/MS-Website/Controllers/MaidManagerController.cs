@@ -972,7 +972,6 @@ namespace MS_Website.Controllers
             using (var db = new MSEntities())
             {
                 var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
-				var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
 				if (recruit.Status.Equals("Applied") || recruit.Status.Equals("Approved"))
 				{
 					TempData["Alert"] = "Đơn tuyển việc đã thuê được người";
