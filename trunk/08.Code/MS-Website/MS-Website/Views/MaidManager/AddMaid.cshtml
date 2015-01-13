@@ -13,6 +13,10 @@
 <div class="Menu">
     @Html.Partial("_PartialMenu")
 </div>
+@if (TempData["Alert"] != null)
+{
+    @Html.Partial("_PartialNotifier", "4;Chú ý!;" + TempData["Alert"])
+}
 <div class="body">
     <div class="rows">
         <div class="row">
@@ -55,10 +59,6 @@
                         </div>
                     </div>
                 </div>
-                if (ViewBag.BannedMaid != null)
-                {
-                    <font color="red">ViewBag.BannedMaid</font>
-                }
                 <div class="postJRRow">
                     <div class="row">
                         <div class="col-md-4 poJRTtitle">
