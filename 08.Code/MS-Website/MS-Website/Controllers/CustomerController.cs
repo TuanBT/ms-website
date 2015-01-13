@@ -936,6 +936,14 @@ namespace MS_Website.Controllers
                         {
                             jobRequest.IsActive = false;
                         }
+                        var register = db.Registers.SingleOrDefault(r => r.JobRequestId == jobRequest.JobRequestId);
+                        if (register != null)
+                        {
+                            db.Registers.Remove(register);
+                            jobRequest.IsRegistered = false;
+                            var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == register.RecruitmentId);
+                            recruit.NumOfReg -= 1;
+                        }
                     }
                     var notify = new Notifier();
                     if (maid.StaffId != null)
