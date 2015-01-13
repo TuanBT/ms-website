@@ -102,8 +102,8 @@ namespace MS_Website.Controllers
                 ViewBag.NumPageRec = NumPageRec > 5 ? 5 : NumPageRec;
                 ViewBag.NumPageJob = NumPageJob > 5 ? 5 : NumPageJob;
 
-                var recruitments = _db.Recruitments.Where(r => r.Status == "Waiting").OrderByDescending(r => r.RecruitmentId).Skip((pageRec - 1) * numResultOnPage).Take(numResultOnPage).ToList();
-                var jobRequests = _db.JobRequests.Where(j => j.Status == "Waiting").OrderByDescending(r => r.JobRequestId).Skip((pageJob - 1) * numResultOnPage).Take(numResultOnPage).ToList();
+                var recruitments = _db.Recruitments.Where(r => r.Status == "Waiting" && j.IsActive).OrderByDescending(r => r.RecruitmentId).Skip((pageRec - 1) * numResultOnPage).Take(numResultOnPage).ToList();
+                var jobRequests = _db.JobRequests.Where(j => j.Status == "Waiting" && j.IsActive).OrderByDescending(r => r.JobRequestId).Skip((pageJob - 1) * numResultOnPage).Take(numResultOnPage).ToList();
 
                 foreach (var recruitment in recruitments)
                 {
