@@ -125,17 +125,25 @@ namespace MS_Website.Controllers
                                                 j =>
                                                 j.SkillRefId == skillReference.SkillRefId && j.Status.Equals("Waiting") &&
                                                 j.IsActive);
-                                        var register =
-                                            db.Registers.SingleOrDefault(
-                                                r => r.JobRequestId == jobId && r.RecruitmentId == recruitment.RecruitmentId);
-                                        if (register != null)
+                                        if (recruitment != null)
                                         {
-                                            var cust =
-                                                db.Customers.SingleOrDefault(c => c.AccountId == recruitment.CustomerId);
-                                            var account = db.Accounts.SingleOrDefault(a => a.AccountId == cust.AccountId);
-                                            var recruitmentTmp = new RecruitmentTemp(recruitment, cust, account, null,
-                                                                                     null, null);
-                                            recRecruitList.Add(recruitmentTmp);
+                                            var register =
+                                                db.Registers.SingleOrDefault(
+                                                    r =>
+                                                    r.JobRequestId == jobId &&
+                                                    r.RecruitmentId == recruitment.RecruitmentId);
+                                            if (register != null)
+                                            {
+                                                var cust =
+                                                    db.Customers.SingleOrDefault(
+                                                        c => c.AccountId == recruitment.CustomerId);
+                                                var account =
+                                                    db.Accounts.SingleOrDefault(a => a.AccountId == cust.AccountId);
+                                                var recruitmentTmp = new RecruitmentTemp(recruitment, cust, account,
+                                                                                         null,
+                                                                                         null, null);
+                                                recRecruitList.Add(recruitmentTmp);
+                                            }
                                         }
                                     }
                                     if (recRecruitList.Any())
