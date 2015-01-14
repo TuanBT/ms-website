@@ -132,7 +132,7 @@ namespace MS_Website.Controllers
                                                     r =>
                                                     r.JobRequestId == jobId &&
                                                     r.RecruitmentId == recruitment.RecruitmentId);
-                                            if (register != null)
+                                            if (register == null)
                                             {
                                                 var cust =
                                                     db.Customers.SingleOrDefault(
