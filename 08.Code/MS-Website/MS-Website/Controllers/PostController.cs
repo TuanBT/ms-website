@@ -321,17 +321,14 @@ namespace MS_Website.Controllers
                                         var jobList =
                                             db.JobRequests.Where(j => j.MaidMediatorId == accId || j.StaffId == accId && j.Status.Equals("Waiting") && j.IsActive && !j.IsRegistered).ToList();
                                         var jobRequestTmpList = new List<JobRequestTemp>();
-                                        if (jobList.Any())
+                                        foreach (var jobRequest in jobList)
                                         {
-                                            foreach (var jobRequest in jobList)
-                                            {
-                                                var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
-                                                var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null,
-                                                                                       null, null);
-                                                jobRequestTmpList.Add(jobRequestTmp);
-                                            }
-                                            ViewBag.JobList = jobRequestTmpList;
+                                            var maid = db.Maids.SingleOrDefault(m => m.MaidId == jobRequest.MaidId);
+                                            var jobRequestTmp = new JobRequestTemp(jobRequest, maid, null, null,
+                                                                                    null, null);
+                                            jobRequestTmpList.Add(jobRequestTmp);
                                         }
+                                        ViewBag.JobList = jobRequestTmpList;
                                     }
                                     ViewBag.Register = true;
                                 }
