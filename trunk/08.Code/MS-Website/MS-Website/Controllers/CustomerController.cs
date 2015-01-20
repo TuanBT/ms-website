@@ -883,7 +883,7 @@ namespace MS_Website.Controllers
                             TempData["Alert"] = "Công việc không tồn tại";
                         }
                     }
-                    return RedirectToAction("GetJobRequest", "Post", new { jobId = jobRequestId });
+                    return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
                 }
                 return RedirectToAction("GetCustomer", "Customer", new { custId = Session["AccId"] });
             }
