@@ -5,9 +5,9 @@
         <a href="@Url.Action("Redirect", "Home")">@Session["Fullname"].ToString()</a>
     </div>
     <ul class="hUserFuncList">
-        <li>
+        @*<li>
             <a href="#"><span class="glyphicon glyphicon-cog"></span></a>
-        </li>
+        </li>*@
         <li>
             <a href="@Url.Action("Notifier","Notifier")"><span class="glyphicon glyphicon-exclamation-sign"></span>
                 @if(Session["NumberNotifier"]!=null)
