@@ -319,7 +319,7 @@ namespace MS_Website.Controllers
                                     else
                                     {
                                         var jobList =
-                                            db.JobRequests.Where(j => j.MaidMediatorId == accId || j.StaffId == accId && j.Status.Equals("Waiting") && j.IsActive && !j.IsRegistered).ToList();
+                                            db.JobRequests.Where(j => (j.MaidMediatorId == accId || j.StaffId == accId) && j.Status.Equals("Waiting") && j.IsActive && !j.IsRegistered).ToList();
                                         var jobRequestTmpList = new List<JobRequestTemp>();
                                         foreach (var jobRequest in jobList)
                                         {
