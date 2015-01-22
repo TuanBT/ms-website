@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Index";
     Layout = "";
     MS_Website.Controllers.JreRcr JreRcr = ViewBag.JreRcr;
@@ -37,20 +37,20 @@
     <div class="banner">
         <div class="rows">
             <div class="heading">
-                <span class="firstHeading">Cuộc sống hiệu quả...</span>
+                <span class="firstHeading">Cu?c s?ng hi?u qu?...</span>
                 <br />
-                <span class="secondHeading">khi sử dụng dịch vụ người giúp việc</span>
+                <span class="secondHeading">khi s? d?ng d?ch v? ng??i gi�p vi?c</span>
             </div>
         </div>
         <div class="rows">
             <div class="welcom">
-                <p class="textWelcom">Chào mừng tới trang web <strong>dịch vụ người giúp việc</strong>, hiện có <strong>hơn 100</strong> người giúp việc và công việc yêu cầu hằng ngày.</p>
+                <p class="textWelcom">Ch�o m?ng t?i trang web <strong>d?ch v? ng??i gi�p vi?c</strong>, hi?n c� <strong>h?n 100</strong> ng??i gi�p vi?c v� c�ng vi?c y�u c?u h?ng ng�y.</p>
             </div>
         </div>
         <div class="rows">
             <div class="shotcutButton">
-                <a href="@Url.Action("PostRecruitRedirect", "Home")" class="sb sb1 btn btn-default">Yêu cầu người giúp việc</a>
-                <a href="@Url.Action("PostJobRedirect", "Home")" class="sb sb2 btn btn-default">Làm sao để có việc</a>
+                <a href="@Url.Action("PostRecruitRedirect", "Home")" class="sb sb1 btn btn-default">Y�u c?u ng??i gi�p vi?c</a>
+                <a href="@Url.Action("PostJobRedirect", "Home")" class="sb sb2 btn btn-default">L�m sao ?? c� vi?c</a>
             </div>
         </div>
         <div class="background">
@@ -70,36 +70,36 @@
                         <div class="shortCutLink">
                             <div class="scContentBox">
                                 <div class="scTitle">
-                                    Bạn muốn có việc làm?
+                                    B?n mu?n c� vi?c l�m?
                                 </div>
                                 <div class="scContent" style="text-align: center">
                                     <a href="@Url.Action("PostJobRedirect", "Home")">
                                     <img src="../Content/Image/jr.png" style="width: 100%;">
-                                    <button type="button" class="btn btn-info">Đăng tin tìm việc</button></a>
+                                    <button type="button" class="btn btn-info">??ng tin t�m vi?c</button></a>
                                 </div>
                             </div>
                         </div>
                         <div class="shortCutLink">
                             <div class="scContentBox">
                                 <div class="scTitle">
-                                    Bạn muốn tìm người giúp việc?
+                                    B?n mu?n t�m ng??i gi�p vi?c?
                                 </div>
                                 <div class="scContent" style="text-align: center">
                                     <a href="@Url.Action("PostRecruitRedirect", "Home")">
                                     <img src="../Content/Image/rc.png" style="width: 100%;">
-                                    <button type="button" class="btn btn-success">Đăng tin tìm người</button></a>
+                                    <button type="button" class="btn btn-success">??ng tin t�m ng??i</button></a>
                                 </div>
                             </div>
                         </div>
                         <div class="shortCutLink">
                             <div class="scContentBox">
                                 <div class="scTitle">
-                                    Thông báo
+                                    Th�ng b�o
                                 </div>
                                 <div class="scContent">
                                     <span>
-                                        <strong>MS - Thông báo</strong><br />
-                                        Bạn phải đăng nhập để đăng tin trong MS Website. Dịch vụ chúng tôi là dịch vụ thu phí, bạn có thể liên hệ trực tiếp với nhân viên hoặc thanh toán trực tuyến.
+                                        <strong>MS - Th�ng b�o</strong><br />
+                                        B?n ph?i ??ng nh?p ?? ??ng tin trong MS Website. D?ch v? ch�ng t�i l� d?ch v? thu ph�, b?n c� th? li�n h? tr?c ti?p v?i nh�n vi�n ho?c thanh to�n tr?c tuy?n.
                                     </span>
                                 </div>
                             </div>
@@ -153,8 +153,8 @@
                                 }
                                </ul>
                             <ul class="nav nav-tabs listTitle" role="tablist" id="myTab">
-                                <li class="@cssActiveTabMaid" id="tabMaidsLi"><a href="#tabMaids" role="tab" data-toggle="tab">Việc tìm người</a></li>
-                                <li class="@cssActiveTabCus" id="tabCustomerLi"><a href="#tabCustomer" role="tab" data-toggle="tab">Người tìm việc</a></li>
+                                <li class="@cssActiveTabMaid" id="tabMaidsLi"><a href="#tabMaids" role="tab" data-toggle="tab">Ng??i t�m vi?c</a></li>
+                                <li class="@cssActiveTabCus" id="tabCustomerLi"><a href="#tabCustomer" role="tab" data-toggle="tab">Vi?c t�m ng??i</a></li>
                             </ul>
 
                             <div class="tab-pane fade @cssActiveTabMaid" id="tabMaids">
@@ -187,7 +187,7 @@
 
                                                         </div>s*@
                                                         <div class="detailInfo">
-                                                            <strong>Đăng ngày: </strong><span>@jobRequestTemp.Job.PostTime.ToString("dd/MM/yyyy")</span>
+                                                            <strong>??ng ng�y: </strong><span>@jobRequestTemp.Job.PostTime.ToString("dd/MM/yyyy")</span>
                                                         </div>
                                                         <div class="description">
                                                             @jobRequestTemp.Maid.Description
@@ -235,7 +235,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="detailInfo">
-                                                            <strong>Đăng ngày: </strong><span>@recruitmentTemp.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
+                                                            <strong>??ng ng�y: </strong><span>@recruitmentTemp.Recruitment.PostTime.ToString("dd/MM/yyyy")</span>
                                                         </div>
                                                         <div class="skill">
                                                             <ul>
