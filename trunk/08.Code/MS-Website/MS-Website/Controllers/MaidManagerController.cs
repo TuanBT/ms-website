@@ -935,6 +935,7 @@ namespace MS_Website.Controllers
             using (var db = new MSEntities())
             {
                 var recruit = db.Recruitments.SingleOrDefault(r => r.RecruitmentId == recruitId);
+                var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
                 if (recruit.Status.Equals("Applied") || recruit.Status.Equals("Approved"))
                 {
                     TempData["Alert"] = "Đơn tuyển việc đã thuê được người";
@@ -947,6 +948,10 @@ namespace MS_Website.Controllers
                 {
                     TempData["Alert"] = "Đơn tuyển việc không tồn tại";
                 }
+                else if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
+                {
+                    TempData["Alert"] = "Đơn xin việc đã có người thuê";
+                }
                 else
                 {
                     var register = new Register();
@@ -954,9 +959,9 @@ namespace MS_Website.Controllers
                     register.RecruitmentId = recruitId;
                     register.RegisteredDate = DateTime.Now.Date;
                     db.Registers.Add(register);
-                    var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
+                    var registeredjJob = db.JobRequests.SingleOrDefault(j => j.JobRequestId == jobId);
                     recruit.NumOfReg += 1;
-                    job.IsRegistered = true;
+                    registeredjJob.IsRegistered = true;
                     db.SaveChanges();
                 }
                 return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
@@ -986,16 +991,21 @@ namespace MS_Website.Controllers
                 }
                 else
                 {
-                    recruit.NumOfReg += jobIdList.Length;
                     foreach (var i in jobIdList)
                     {
+                        var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == i);
+                        if (job.Status.Equals("Applied") || job.Status.Equals("Approved"))
+                        {
+                            TempData["Alert"] = "Đơn xin việc " + '"' + job.Title + '"' + " đã có người thuê";
+                            break;
+                        }
                         var register = new Register();
                         register.JobRequestId = i;
                         register.RecruitmentId = recruitId;
                         register.RegisteredDate = DateTime.Now.Date;
                         db.Registers.Add(register);
-                        var job = db.JobRequests.SingleOrDefault(j => j.JobRequestId == i);
                         job.IsRegistered = true;
+                        recruit.NumOfReg += 1;
                     }
                     db.SaveChanges();
                 }

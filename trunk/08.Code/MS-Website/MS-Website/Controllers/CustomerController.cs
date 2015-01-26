@@ -978,7 +978,8 @@ namespace MS_Website.Controllers
                 var cust = db.Customers.SingleOrDefault(c => c.AccountId == recruit.CustomerId);
                 cust.isSaleOff = true;
                 db.SaveChanges();
-                return RedirectToAction("GetRecruitment", "Post", new { recruitmentId = recruitId });
+                var apply = db.Applies.SingleOrDefault(a => a.RecruitmentId == recruitId);
+                return RedirectToAction("GetJobRequest", "Post", new { jobId = apply.JobRequestId });
             }
         }
     }
